@@ -1,0 +1,73 @@
+{% load i18n static wagtailuserbar webpack_loader %}
+{% get_current_language as LANGUAGE_CODE %}
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>{% block title %}Homepage{% endblock %} | Opin.me</title>
+        <meta name="description" content="" />
+        {% block meta_viewport %}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {% endblock %}
+        <meta name="apple-mobile-web-app-title" content="Opin.me">
+        <meta name="application-name" content="Opin.me">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" href="/static/icons/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="/static/icons/favicon-16x16.png" sizes="16x16">
+        <link rel="manifest" href="/static/icons/manifest.json">
+        <link rel="shortcut icon" href="/static/icons/favicon.ico">
+
+        {% block extra_css %}
+            {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+
+        {% render_bundle 'vendor' 'css' %}
+        {% render_bundle 'adhocracy4' 'css' %}
+
+        {# Global javascript #}
+        <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
+        <script>
+            var django = window.django || (window.django = {});
+            django.languageCode = '{{ request.LANGUAGE_CODE }}';
+        </script>
+
+        {% render_bundle 'vendor' 'js' %}
+        {% render_bundle 'adhocracy4' 'js' %}
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}">
+        {% wagtailuserbar %}
+
+        {% block menu %}
+        {% include "includes/top_menu.html" %}
+        {% endblock %}
+
+        {% for message in messages %}
+            <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">
+                <div class="container-narrow alert-text">
+                {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+
+        <div>
+            {% block content %}{% endblock %}
+        </div>
+
+        {% block footer %}
+        {% include "includes/footer.html" %}
+        {% endblock %}
+
+        {% block extra_js %}
+            {# Override this in templates to add extra javascript #}
+        {% endblock %}
+
+    </body>
+</html>
