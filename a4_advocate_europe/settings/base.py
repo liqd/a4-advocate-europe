@@ -64,7 +64,8 @@ INSTALLED_APPS = [
     'adhocracy4.comments.apps.CommentsConfig',
     'adhocracy4.organisations.apps.OrganisationsConfig',
 
-    'cms.home.apps.HomeConfig'
+    'cms.home.apps.HomeConfig',
+    'cms.snippets.apps.SnippetsConfig'
 ]
 
 MIDDLEWARE_CLASSES = [
