@@ -83,7 +83,7 @@ MIDDLEWARE_CLASSES = [
 
 SITE_ID = 1
 
-ROOT_URLCONF = 'a4-advocate-europe.urls'
+ROOT_URLCONF = 'a4_advocate_europe.urls'
 
 LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
@@ -105,7 +105,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'a4-advocate-europe.wsgi.application'
+WSGI_APPLICATION = 'a4_advocate_europe.wsgi.application'
 
 
 # Database
@@ -226,7 +226,7 @@ MEDIA_URL = '/media/'
 # Wagtail settings
 
 
-WAGTAIL_SITE_NAME = "a4-advocate-europe"
+WAGTAIL_SITE_NAME = "a4_advocate_europe"
 
 
 # Authentification

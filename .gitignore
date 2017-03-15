@@ -17,4 +17,4 @@ venv
 /bin
 /pyvenv.cfg
 /webpack-stats.json
-/a4-advocate-europe/settings/local.py
+/a4_advocate_europe/settings/local.py

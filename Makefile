@@ -1,7 +1,7 @@
 all: help
 
 VIRTUAL_ENV ?= .
-SOURCE_DIRS = apps a4-advocate-europe tests
+SOURCE_DIRS = apps a4_advocate_europe tests
 
 help:
 	@echo a4-advocate-europe development tools
@@ -34,10 +34,3 @@ test-lastfailed:
 
 coverage:
 	$(VIRTUAL_ENV)/bin/py.test --reuse-db --cov --cov-report=html
-
-lint:
-	EXIT_STATUS=0; \
-	$(VIRTUAL_ENV)/bin/isort -rc -c $(SOURCE_DIRS) ||  EXIT_STATUS=$$?; \
-	$(VIRTUAL_ENV)/bin/flake8 $(SOURCE_DIRS) --exclude migrations,settings ||  EXIT_STATUS=$$?; \
-	npm run lint --silent ||  EXIT_STATUS=$$?; \
-	exit $${EXIT_STATUS}
