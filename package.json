@@ -48,5 +48,13 @@
     "husky": "0.11.4",
     "stylelint": "^7.5.0"
   },
-  "license": "AGPL-3.0+"
+  "license": "AGPL-3.0+",
+  "scripts": {
+    "webpack:build": "webpack --config ./webpack.config.js --progress --colors",
+    "heroku-postbuild": "npm run webpack:build",
+    "build": "npm run webpack:build",
+    "watch": "webpack --config ./webpack.config.js --progress --colors --watch",
+    "lint": "eslint a4_advocate_europe/assets -c ./.eslintrc --ext .js,.jsx && stylelint 'a4_advocate_europe/assets/scss/**/*.scss' --syntax scss",
+    "precommit": "make lint"
+  }
 }
