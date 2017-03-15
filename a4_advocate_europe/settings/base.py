@@ -62,7 +62,9 @@ INSTALLED_APPS = [
     'adhocracy4.reports.apps.ReportsConfig',
     'adhocracy4.modules.apps.ModulesConfig',
     'adhocracy4.comments.apps.CommentsConfig',
-    'adhocracy4.organisations.apps.OrganisationsConfig'
+    'adhocracy4.organisations.apps.OrganisationsConfig',
+
+    'cms.home.apps.HomeConfig'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -75,10 +77,8 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
-    
 ]
 
 SITE_ID = 1
