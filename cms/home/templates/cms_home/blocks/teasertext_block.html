@@ -1,0 +1,5 @@
+<h3>{{ value.headline }}</h3>
+<p>{{ value.text }}</p>
+{% if value.link %}
+<a href="{{ value.link.url }}" class="btn btn-primary">{{ value.link.title }}</a>
+{% endif %}
