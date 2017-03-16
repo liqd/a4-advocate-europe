@@ -65,7 +65,8 @@ INSTALLED_APPS = [
     'adhocracy4.organisations.apps.OrganisationsConfig',
 
     'cms.home.apps.HomeConfig',
-    'cms.snippets.apps.SnippetsConfig'
+    'cms.snippets.apps.SnippetsConfig',
+    'apps.users.apps.UsersConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -247,6 +248,8 @@ ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300  # seconds
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
 
+
+AUTH_USER_MODEL = 'advocate_europe_users.User'
 # Rest framework
 
 REST_FRAMEWORK = {
