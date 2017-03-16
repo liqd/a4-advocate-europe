@@ -14,6 +14,8 @@ class HomePage(Page):
     title_de = models.CharField(
         max_length=255, blank=True, verbose_name="Header Title")
 
+    description_en = models.TextField()
+    description_de = models.TextField(blank=True, null=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
