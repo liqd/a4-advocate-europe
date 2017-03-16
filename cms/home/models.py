@@ -1,5 +1,7 @@
 from django.db import models
-from wagtail.wagtailadmin import edit_handlers
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel, ObjectList,
+                                                StreamFieldPanel,
+                                                TabbedInterface)
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
@@ -15,6 +17,8 @@ class HomePage(Page):
         ('columns', blocks.ThreeColumnTextBlock()),
         ('call_to_action', blocks.CallToActionBlock())
     ]
+
+    # translated fields
     title_en = models.CharField(
         max_length=255, blank=True, verbose_name="Header Title")
     title_de = models.CharField(
@@ -22,6 +26,15 @@ class HomePage(Page):
 
     description_en = models.TextField()
     description_de = models.TextField(blank=True, null=True)
+
+    body_en = StreamField(block_types, null=True)
+    body_de = StreamField(block_types, null=True, blank=True)
+
+    body = translations.TranslatedField('body')
+    description = translations.TranslatedField('description')
+    translated_title = translations.TranslatedField('title')
+
+    # shared fields
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -32,38 +45,28 @@ class HomePage(Page):
         help_text="The Image that is shown on top of the page"
     )
 
-    videoplayer_url = models.URLField()
-
-    block_types = []
-
-    body_en = StreamField(block_types, null=True)
-    body_de = StreamField(block_types, null=True, blank=True)
-
-    body = translations.TranslatedField('body')
-    translated_title = translations.TranslatedField('title')
-
-    general_panels = [
-        edit_handlers.FieldPanel('title', classname='title'),
-        edit_handlers.FieldPanel('slug'),
-        ImageChooserPanel('image'),
-        edit_handlers.FieldPanel('videoplayer_url'),
-    ]
+    videoplayer_url = models.URLField(blank=True, verbose_name='Video URL')
 
     content_panels = [
-        edit_handlers.MultiFieldPanel(
-            [
-                edit_handlers.FieldPanel('title_en'),
-                edit_handlers.StreamFieldPanel('body_en')
-            ],
-            heading='EN',
-            classname="collapsible collapsed"
-        ),
-        edit_handlers.MultiFieldPanel(
-            [
-                edit_handlers.FieldPanel('title_de'),
-                edit_handlers.StreamFieldPanel('body_de')
-            ],
-            heading='DE',
-            classname="collapsible collapsed"
-        )
+        ImageChooserPanel('image'),
+        FieldPanel('videoplayer_url')
     ]
+
+    en_panels = [
+        FieldPanel('title_en'),
+        FieldPanel('description_en'),
+        StreamFieldPanel('body_en')
+    ]
+
+    de_panels = [
+        FieldPanel('title_de'),
+        FieldPanel('description_de'),
+        StreamFieldPanel('body_de')
+    ]
+
+    edit_handler = TabbedInterface([
+        ObjectList(en_panels, heading='English'),
+        ObjectList(de_panels, heading='German'),
+        ObjectList(content_panels, heading='Media'),
+        ObjectList(Page.promote_panels, heading='Promote')
+    ])
