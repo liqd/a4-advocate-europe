@@ -6,9 +6,15 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from cms.contrib import translations
 
+from . import blocks
+
 
 class HomePage(Page):
 
+    block_types = [
+        ('columns', blocks.ThreeColumnTextBlock()),
+        ('call_to_action', blocks.CallToActionBlock())
+    ]
     title_en = models.CharField(
         max_length=255, blank=True, verbose_name="Header Title")
     title_de = models.CharField(

@@ -4,5 +4,8 @@
 
         {% include "cms_home/includes/home_hero_unit.html" with image=page.image title=page.translated_title videoplayer_url=page.videoplayer_url description=page.description %}
 
+        {% for block in page.body %}
+            {{ block }}
+        {% endfor %}
 
 {% endblock %}
