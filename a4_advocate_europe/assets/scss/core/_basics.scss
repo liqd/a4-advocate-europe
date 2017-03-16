@@ -1,0 +1,27 @@
+.content {
+    margin-top: $navbar-height;
+}
+
+.centered_text {
+    text-align: center;
+}
+
+.container-small,
+.container-narrow,
+.container-medium {
+    float: none;
+    margin: 0 auto;
+    position: relative;
+}
+
+.container-small {
+    @extend .col-md-4;
+}
+
+.container-narrow {
+    @extend .col-md-8;
+}
+
+.container-medium {
+    @extend .col-md-10;
+}
