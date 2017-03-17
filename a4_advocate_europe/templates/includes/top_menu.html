@@ -1,4 +1,4 @@
-{% load i18n wagtailcore_tags snippet_tags %}
+{% load i18n wagtailcore_tags userindicator snippet_tags %}
 {% get_current_language as LANGUAGE_CODE %}
 {% load_site_menu "topmenu" as top_menu_items %}
 <nav class="navbar navbar-default navbar-fixed-top main-menu" id="main-menu">
@@ -13,6 +13,7 @@
             </button>
         </div>
         <div id="navbar-collapse" class="navbar-collapse collapse">
+            {% userindicator_menu %}
             <ul class="nav navbar-nav navbar-right">
                 {% for menuitem in top_menu_items %}
                 <li><a href="{{ menuitem.url }}"{% if request.path == menuitem.url %} class="is-active"{% endif %}>{{ menuitem.translated_menu_title }}</a></li>
