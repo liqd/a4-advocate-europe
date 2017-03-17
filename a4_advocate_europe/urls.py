@@ -23,6 +23,10 @@ urlpatterns += i18n_patterns(
         js_info_dict, name='javascript-catalog'),
 )
 
+urlpatterns += [
+    url(r'^accounts/', include('allauth.urls')),
+]
+
 if settings.DEBUG:
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
