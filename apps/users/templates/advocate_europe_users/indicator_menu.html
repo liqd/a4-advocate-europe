@@ -1,0 +1,41 @@
+{% load i18n thumbnail %}
+
+<ul class="nav navbar-nav navbar-right user-indicator" id="user-indicator">
+    <li class="dropdown">
+    {% if request.user.is_authenticated %}
+        <div class="btngroup btngroup-primary">
+            <a href="" class="btn userindicator-profile">
+                {{ request.user.username }}
+            </a>
+            <a href="#" class="dropdown-toggle btn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                {% if request.user.is_superuser %}
+                    <li>
+                        <a href="{% url 'admin:index' %}"><i class="fa fa-hand-spock-o"></i> <span class="dropdown-text">{% trans "Admin" %}</span></a>
+                    </li>
+                {% endif %}
+                <li>
+                    <form class="logout-button-form" action="{% url 'account_logout' %}" method="post" >
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ redirect_field_value }}">
+                        <button type="submit" value="Register"><i class="fa fa-sign-out"></i> <span class="dropdown-text">{% trans "logout" %}</span></button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    {% else %}
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="inner">{% trans "Login / Register"%}<span class="caret"></span></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{% url 'account_login' %}?next={{ redirect_field_value }}">{% trans "login" %}</a>
+            </li>
+            <li>
+                <a href="{% url 'account_signup' %}?next={{ redirect_field_value }}">{% trans "register" %}</a>
+            </li>
+        </ul>
+    {% endif %}
+    </li>
+</ul>
