@@ -44,3 +44,17 @@ class CallToActionBlock(StructBlock):
         icon = 'pick'
         label = 'Call to Action'
         help_text = 'Call to action with button and text'
+
+
+class CarouselBlock(StructBlock):
+    headline = CharBlock(required=False)
+    ideas = ChoiceBlock(choices=[
+        ('2015', '2015'),
+        ('2016', '2016'),
+    ], required=True)
+
+    class Meta:
+        template = 'cms_home/blocks/carousel_block.html'
+        icon = 'folder-inverse'
+        label = 'Carousel Block'
+        help_text = 'Carousel of Proposals'
