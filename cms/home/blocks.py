@@ -1,4 +1,5 @@
-from wagtail.wagtailcore.blocks import (CharBlock, PageChooserBlock,
+from wagtail.wagtailcore.blocks import (CharBlock, ChoiceBlock,
+                                        PageChooserBlock,
                                         StructBlock, TextBlock,
                                         URLBlock)
 
@@ -20,7 +21,7 @@ class TeasertextBlock(StructBlock):
 
 class ThreeColumnTextBlock(StructBlock):
 
-    title = CharBlock(required=True, length=256)
+    title = CharBlock(required=False, length=256)
 
     col1 = TeasertextBlock(required=True)
     col2 = TeasertextBlock(required=True)
