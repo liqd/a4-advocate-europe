@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-20 16:00+0000\n"
+"PO-Revision-Date: 2017-03-20 17:11+0100\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.12\n"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/Comment.jsx:91
+msgid "Do you really want to delete this comment?"
+msgstr "Do you really want to delete this comment?"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/Comment.jsx:93
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/CommentManageDropdown.jsx:19
+msgid "Delete"
+msgstr "Delete"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/Comment.jsx:94
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/static/Modal.jsx:51
+msgid "Abort"
+msgstr "Abort"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/Comment.jsx:107
+msgid "Latest edit on"
+msgstr "Latest edit on"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/Comment.jsx:112
+msgid "Moderator"
+msgstr "Moderator"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/Comment.jsx:119
+msgid "Are you sure you want to report this item?"
+msgstr "Are you sure you want to report this item?"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/Comment.jsx:161
+msgid "Your reply here"
+msgstr "Your reply here"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/CommentBox.jsx:80
+msgid "comment"
+msgid_plural "comments"
+msgstr[0] "comment"
+msgstr[1] "comments"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/CommentBox.jsx:83
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/CommentEditForm.jsx:26
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/CommentForm.jsx:32
+msgid "Your comment here"
+msgstr "Your comment here"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/CommentEditForm.jsx:29
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/CommentForm.jsx:35
+msgid "post"
+msgstr "post"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/CommentEditForm.jsx:30
+msgid "cancel"
+msgstr "cancel"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/CommentForm.jsx:41
+msgid "Please login to comment"
+msgstr "Please login to comment"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/CommentForm.jsx:47
+msgid "The currently active phase doesn't allow to comment."
+msgstr "The currently active phase doesn't allow to comment."
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/CommentManageDropdown.jsx:15
+msgid "Edit"
+msgstr "Edit"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/CommentManageDropdown.jsx:23
+msgid "Report"
+msgstr "Report"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/CommentReplyBar.jsx:5
+#, javascript-format
+msgid "view %s reply"
+msgid_plural "view %s replies"
+msgstr[0] "view %s reply"
+msgstr[1] "view %s replies"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/comments/static/comments/CommentReplyBar.jsx:25
+msgid "Answer"
+msgstr "Answer"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/reports/static/reports/react_reports.jsx:63
+msgid "Your message here"
+msgstr "Your message here"
+
+#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/reports/static/reports/react_reports.jsx:75
+msgid "Send Report"
+msgstr "Send Report"

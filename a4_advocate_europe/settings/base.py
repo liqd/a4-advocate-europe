@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'cms.settings.apps.SettingsConfig',
     'cms.snippets.apps.SnippetsConfig',
 
+    'apps.contrib',
     'apps.users.apps.UsersConfig',
 ]
 
