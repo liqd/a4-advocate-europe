@@ -25,7 +25,7 @@ module.exports = {
   entry: {
     adhocracy4: [
       './a4_advocate_europe/assets/scss/all.scss',
-      './a4_advocate_europe/assets/js/app.js'
+      './apps/contrib/static/app.js'
     ],
     vendor: [
       'jquery',
