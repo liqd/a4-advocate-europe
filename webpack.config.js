@@ -94,5 +94,12 @@ module.exports = {
     new BundleTracker({filename: './webpack-stats.json'}),
     new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.js"),
     new ExtractTextPlugin('[name].css'),
+    new CopyWebpackPlugin([
+      {
+        from: './a4_advocate_europe/assets/images/**/*',
+        to: 'images/',
+        flatten: true
+      }
+    ])
   ]
 }
