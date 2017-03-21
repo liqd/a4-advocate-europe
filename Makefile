@@ -4,7 +4,7 @@ VIRTUAL_ENV ?= .
 SOURCE_DIRS = apps advocate_europe cms tests
 
 help:
-	@echo a4-advocate-europe development tools
+	@echo advocate-europe development tools
 	@echo
 	@echo It will either use a exisiting virtualenv if it was entered
 	@echo before or create a new one in the same directory.
