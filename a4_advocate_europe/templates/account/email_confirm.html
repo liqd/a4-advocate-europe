@@ -9,7 +9,7 @@
 <div class="container">
 {% if confirmation %}
     {% user_display confirmation.email_address.user as user_display %}
-    <form class="skinny-form-inner" id="ActivateForm" method="post">
+    <form id="ActivateForm" method="post">
         {% csrf_token %}
         <h2>{% trans 'Welcome to Advocate Europe!' %}</h2>
         <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
