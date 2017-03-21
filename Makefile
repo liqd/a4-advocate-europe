@@ -1,7 +1,7 @@
 all: help
 
 VIRTUAL_ENV ?= .
-SOURCE_DIRS = apps a4_advocate_europe cms tests
+SOURCE_DIRS = apps advocate_europe cms tests
 
 help:
 	@echo a4-advocate-europe development tools

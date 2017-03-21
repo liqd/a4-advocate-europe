@@ -54,7 +54,7 @@
     "heroku-postbuild": "npm run webpack:build",
     "build": "npm run webpack:build",
     "watch": "webpack --config ./webpack.config.js --progress --colors --watch",
-    "lint": "eslint a4_advocate_europe/assets -c ./.eslintrc --ext .js,.jsx && stylelint 'a4_advocate_europe/assets/scss/**/*.scss' --syntax scss",
+    "lint": "eslint advocate_europe/assets -c ./.eslintrc --ext .js,.jsx && stylelint 'advocate_europe/assets/scss/**/*.scss' --syntax scss",
     "precommit": "make lint"
   }
 }
