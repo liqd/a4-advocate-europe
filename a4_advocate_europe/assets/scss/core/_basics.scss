@@ -2,13 +2,12 @@
     margin-top: $navbar-height;
 }
 
-.centered_text {
+.centered-text {
     text-align: center;
 }
 
 .container-small,
-.container-narrow,
-.container-medium {
+.container-narrow {
     float: none;
     margin: 0 auto;
     position: relative;
@@ -20,8 +19,4 @@
 
 .container-narrow {
     @extend .col-md-8;
-}
-
-.container-medium {
-    @extend .col-md-10;
 }
