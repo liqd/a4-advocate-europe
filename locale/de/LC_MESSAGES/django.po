@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-20 16:00+0000\n"
+"POT-Creation-Date: 2017-03-21 10:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,18 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/images/templates/a4images/image_upload_widget.html.py:8
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/images/templates/a4images/image_upload_widget.html.py:8
+#: adhocracy4.js/images/templates/a4images/image_upload_widget.html.py:8
+#: adhocracy4.py/images/templates/a4images/image_upload_widget.html.py:8
 msgid "Remove the picture"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/images/templates/a4images/image_upload_widget.html.py:12
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/images/templates/a4images/image_upload_widget.html.py:12
+#: adhocracy4.js/images/templates/a4images/image_upload_widget.html.py:12
+#: adhocracy4.py/images/templates/a4images/image_upload_widget.html.py:12
 msgid "Upload a picture"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/node_modules/adhocracy4/adhocracy4/images/templates/a4images/image_upload_widget.html.py:19
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/images/templates/a4images/image_upload_widget.html.py:19
+#: adhocracy4.js/images/templates/a4images/image_upload_widget.html.py:19
+#: adhocracy4.py/images/templates/a4images/image_upload_widget.html.py:19
 msgid ""
 "\n"
 "            Your image will be uploaded/removed once you save your changes\n"
@@ -37,19 +37,19 @@ msgid ""
 "            "
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/comments/models.py:35
+#: adhocracy4.py/comments/models.py:35
 msgid "Comment"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/comments/models.py:36
+#: adhocracy4.py/comments/models.py:36
 msgid "Comments"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/comments/serializers.py:24
+#: adhocracy4.py/comments/serializers.py:24
 msgid "unknown user"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/images/fields.py:60
+#: adhocracy4.py/images/fields.py:60
 #, python-brace-format
 msgid ""
 "{help_prefix} It must be min. {min_resolution[0]} pixel wide and "
@@ -57,122 +57,423 @@ msgid ""
 "The file size should be max. {max_size_mb} MB."
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/images/validators.py:19
+#: adhocracy4.py/images/validators.py:19
 msgid "Unsupported file format. Supported formats are {}."
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/images/validators.py:25
+#: adhocracy4.py/images/validators.py:25
 #, python-brace-format
 msgid "Image should be at most {max_size} MB"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/images/validators.py:28
+#: adhocracy4.py/images/validators.py:28
 #, python-brace-format
 msgid "Image must be at least {min_width} pixels wide"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/images/validators.py:31
+#: adhocracy4.py/images/validators.py:31
 #, python-brace-format
 msgid "Image must be at least {min_height} pixels high"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/images/validators.py:41
+#: adhocracy4.py/images/validators.py:41
 #, python-brace-format
 msgid "Image aspect ratio should be {aspect_width}:{aspect_height}"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/images/widgets.py:27
+#: adhocracy4.py/images/widgets.py:27
 msgid "Select a picture from your local folder."
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/phases/models.py:56
+#: adhocracy4.py/phases/models.py:56
 msgid "End date can not be smallerthan the start date."
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/projects/models.py:27
+#: adhocracy4.py/projects/models.py:27
 msgid "Title of your project"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/projects/models.py:28
+#: adhocracy4.py/projects/models.py:28
 msgid ""
 "This title will appear on the teaser card and on top of the project detail "
 "page. It should be max. 120 characters long"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/projects/models.py:37
+#: adhocracy4.py/projects/models.py:37
 msgid "Short description of your project"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/projects/models.py:38
+#: adhocracy4.py/projects/models.py:38
 msgid ""
 "This short description will appear on the header of the project and in the "
 "teaser. It should briefly state the goal of the project in max. 250 chars."
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/projects/models.py:45
+#: adhocracy4.py/projects/models.py:45
 msgid "Description of your project"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/projects/models.py:46
+#: adhocracy4.py/projects/models.py:46
 msgid ""
 "This description should tell participants what the goal of the project is, "
 "how the project’s participation will look like. It will be always visible in "
 "the „Info“ tab on your project’s page."
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/projects/models.py:54
+#: adhocracy4.py/projects/models.py:54
 msgid ""
 "Here you should explain what the expected outcome of the project will be and "
 "how you are planning to use the results. If the project is finished you "
 "should add a summary of the results."
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/projects/models.py:61
+#: adhocracy4.py/projects/models.py:61
 msgid "Access to the project"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/projects/models.py:62
+#: adhocracy4.py/projects/models.py:62
 msgid ""
 "Please indicate who should be able to participate in your project. Teasers "
 "for your project including title and short description will always be "
 "visible to everyone"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/projects/models.py:69
+#: adhocracy4.py/projects/models.py:69
 msgid "Header image"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/projects/models.py:71
+#: adhocracy4.py/projects/models.py:71
 msgid "The image will be shown as a decorative background image."
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/projects/models.py:87
+#: adhocracy4.py/projects/models.py:87
 msgid "Project is archived"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/projects/models.py:88
+#: adhocracy4.py/projects/models.py:88
 msgid "Set to archive the project"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/projects/models.py:92
+#: adhocracy4.py/projects/models.py:92
 msgid "Type of the project"
 msgstr ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/projects/templatetags/project_tags.py:12
+#: adhocracy4.py/projects/templatetags/project_tags.py:12
 #, python-format
 msgid "%(number)d day left"
 msgid_plural "%(number)d days left"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /Users/magdalenanoffke/Documents/dev/a4-advocate-europe/lib/python3.4/site-packages/adhocracy4/projects/templatetags/project_tags.py:19
+#: adhocracy4.py/projects/templatetags/project_tags.py:19
 msgid "a few hours left"
 msgstr ""
 
-#: a4_advocate_europe/settings/base.py:174
-msgid "English"
+#: apps/users/__init__.py:6
+msgid ""
+"Enter a valid username. This value may contain only letters, digits, spaces "
+"and @/./+/-/_ characters. It must start with a digit or a letter."
+msgstr ""
+
+#: apps/users/admin.py:10
+msgid "Permissions"
+msgstr ""
+
+#: apps/users/admin.py:11
+msgid "Important dates"
+msgstr ""
+
+#: apps/users/models.py:12
+msgid "username"
+msgstr ""
+
+#: apps/users/models.py:16
+msgid ""
+"Required. 60 characters or fewer. Letters, digits, spaces and @/./+/-/_ only."
+msgstr ""
+
+#: apps/users/models.py:22
+msgid "A user with that username already exists."
+msgstr ""
+
+#: apps/users/models.py:26
+msgid "email address"
+msgstr ""
+
+#: apps/users/models.py:29
+msgid "A user with that email address already exists."
+msgstr ""
+
+#: apps/users/models.py:33
+msgid "staff status"
+msgstr ""
+
+#: apps/users/models.py:36
+msgid "Designates whether the user can log into this admin site."
+msgstr ""
+
+#: apps/users/models.py:40
+msgid "active"
+msgstr ""
+
+#: apps/users/models.py:43
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+
+#: apps/users/templates/advocate_europe_users/indicator_menu.html.py:10
+msgid "toggle user menu"
+msgstr ""
+
+#: apps/users/templates/advocate_europe_users/indicator_menu.html.py:16
+msgid "Admin"
+msgstr ""
+
+#: apps/users/templates/advocate_europe_users/indicator_menu.html.py:23
+msgid "logout"
+msgstr ""
+
+#: apps/users/templates/advocate_europe_users/indicator_menu.html.py:29
+msgid "Login / Register"
+msgstr ""
+
+#: apps/users/templates/advocate_europe_users/indicator_menu.html.py:33
+#: a4_advocate_europe/templates/account/login.html.py:15
+#: a4_advocate_europe/templates/account/login.html.py:57
+#: a4_advocate_europe/templates/account/signup.html.py:11
+msgid "login"
+msgstr ""
+
+#: apps/users/templates/advocate_europe_users/indicator_menu.html.py:36
+#: a4_advocate_europe/templates/account/login.html.py:16
+#: a4_advocate_europe/templates/account/signup.html.py:12
+#: a4_advocate_europe/templates/account/signup.html.py:88
+msgid "register"
+msgstr ""
+
+#: cms/home/templates/cms_home/includes/home_hero_unit.html.py:23
+msgid "video"
+msgstr ""
+
+#: cms/home/templates/cms_home/includes/home_hero_unit.html.py:26
+msgid "close"
 msgstr ""
 
 #: a4_advocate_europe/settings/base.py:175
+msgid "English"
+msgstr ""
+
+#: a4_advocate_europe/settings/base.py:176
 msgid "German"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/account_inactive.html.py:5
+#: a4_advocate_europe/templates/account/account_inactive.html.py:9
+msgid "Account Inactive"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/account_inactive.html.py:10
+msgid "This account is inactive."
+msgstr ""
+
+#: a4_advocate_europe/templates/account/email.html.py:6
+#: a4_advocate_europe/templates/account/email.html.py:10
+msgid "E-mail Addresses"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/email.html.py:22
+msgid "Primary"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/email.html.py:25
+msgid "Verified"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/email.html.py:27
+msgid "Unverified"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/email.html.py:32
+msgid "Make Primary"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/email.html.py:33
+msgid "Re-send Verification"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/email.html.py:34
+msgid "Remove"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/email.html.py:48
+msgid "Add another Email"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/email.html.py:52
+msgid "Add Email"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/email.html.py:61
+msgid "Do you really want to remove the selected e-mail address?"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/email_confirm.html.py:6
+msgid "Activate your account"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/email_confirm.html.py:14
+#: a4_advocate_europe/templates/account/email_confirm.html.py:26
+msgid "Welcome to Advocate Europe!"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/email_confirm.html.py:15
+#, python-format
+msgid ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
+"address for user %(user_display)s."
+msgstr ""
+
+#: a4_advocate_europe/templates/account/email_confirm.html.py:23
+msgid "Activate account"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/email_confirm.html.py:28
+#, python-format
+msgid ""
+"This e-mail confirmation link expired or is invalid. Please <a href="
+"\"%(email_url)s\">issue a new e-mail confirmation request</a>."
+msgstr ""
+
+#: a4_advocate_europe/templates/account/login.html.py:8
+msgid "Login"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/login.html.py:35
+#: a4_advocate_europe/templates/account/password_reset.html.py:24
+msgid "Email"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/login.html.py:44
+#: a4_advocate_europe/templates/account/password_change.html.py:27
+#: a4_advocate_europe/templates/account/password_change.html.py:34
+#: a4_advocate_europe/templates/account/password_reset_from_key.html.py:33
+msgid "Password"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/login.html.py:54
+msgid "reset password"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/login.html.py:62
+#: a4_advocate_europe/templates/account/signup.html.py:94
+msgid "Login with social account"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/login.html.py:72
+#, python-format
+msgid "You are already logged in as %(user_display)s."
+msgstr ""
+
+#: a4_advocate_europe/templates/account/password_change.html.py:6
+#: a4_advocate_europe/templates/account/password_change.html.py:45
+msgid "Change Password"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/password_change.html.py:10
+msgid "Change your password"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/password_change.html.py:41
+#: a4_advocate_europe/templates/account/password_reset_from_key.html.py:39
+msgid "Repeat password"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/password_reset.html.py:7
+#: a4_advocate_europe/templates/account/password_reset_from_key.html.py:6
+msgid "Reset your password"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/password_reset.html.py:12
+msgid ""
+"Enter your e-mail address below, and we'll send you an e-mail allowing you "
+"to reset your password."
+msgstr ""
+
+#: a4_advocate_europe/templates/account/password_reset.html.py:28
+msgid "Reset"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/password_reset_done.html.py:6
+#: a4_advocate_europe/templates/account/password_reset_done.html.py:10
+msgid "Password reset"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/password_reset_done.html.py:11
+msgid ""
+"We have sent you an e-mail. Please contact us if you do not receive it "
+"within a few minutes."
+msgstr ""
+
+#: a4_advocate_europe/templates/account/password_reset_from_key.html.py:11
+msgid "Bad Token"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/password_reset_from_key.html.py:14
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
+"a>."
+msgstr ""
+
+#: a4_advocate_europe/templates/account/password_reset_from_key.html.py:44
+msgid "Reset password"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/password_reset_from_key.html.py:47
+#: a4_advocate_europe/templates/account/password_reset_from_key_done.html.py:5
+#: a4_advocate_europe/templates/account/password_reset_from_key_done.html.py:9
+#: a4_advocate_europe/templates/account/password_set.html.py:5
+#: a4_advocate_europe/templates/account/password_set.html.py:9
+msgid "Change password"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/password_reset_from_key.html.py:48
+#: a4_advocate_europe/templates/account/password_reset_from_key_done.html.py:10
+#: a4_advocate_europe/templates/account/password_set.html.py:10
+msgid "Your password is now changed."
+msgstr ""
+
+#: a4_advocate_europe/templates/account/signup.html.py:5
+msgid "Register an account"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/signup.html.py:81
+#, python-format
+msgid ""
+"\n"
+"                I accept the <a href=\"%(terms_of_use_url)s\" target=\"blank"
+"\">terms of use</a>.\n"
+"                "
+msgstr ""
+
+#: a4_advocate_europe/templates/account/verification_sent.html.py:5
+#: a4_advocate_europe/templates/account/verification_sent.html.py:9
+msgid "Verify Your E-mail Address"
+msgstr ""
+
+#: a4_advocate_europe/templates/account/verification_sent.html.py:10
+msgid ""
+"We have sent an e-mail to you for verification. Follow the link provided to "
+"finalize the signup process. Please contact us if you do not receive it "
+"within a few minutes."
+msgstr ""
+
+#: a4_advocate_europe/templates/includes/top_menu.html.py:4
+msgid "main menu"
+msgstr ""
+
+#: a4_advocate_europe/templates/includes/top_menu.html.py:8
+msgid "navigation on/off"
 msgstr ""
