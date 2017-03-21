@@ -8,7 +8,7 @@
 {% block title %}{% trans 'Login' %}{% endblock %}
 
 {% block content %}
-<div class="container">
+<main class="container">
 {% if not request.user.is_authenticated %}
     <div>
         <header>
@@ -73,5 +73,5 @@
     {% user_display user as user_display %}
     {% blocktrans %}You are already logged in as {{ user_display }}.{% endblocktrans %}
 {% endif %}
-</div>
+</main>
 {% endblock %}
