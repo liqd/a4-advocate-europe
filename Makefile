@@ -41,6 +41,12 @@ test-lastfailed:
 coverage:
 	$(VIRTUAL_ENV)/bin/py.test --reuse-db --cov --cov-report=html
 
+locales-collect:
+	$(VIRTUAL_ENV)/bin/python manage.py makemessages -d djangojs
+	$(VIRTUAL_ENV)/bin/python manage.py makemessages -d django
+	sed -i 's%#: .*/node_modules.*/adhocracy4%#: adhocracy4.js%' locale/*/LC_MESSAGES/django*.po
+	sed -i 's%#: .*/adhocracy4%#: adhocracy4.py%' locale/*/LC_MESSAGES/django*.po
+
 lint:
 	EXIT_STATUS=0; \
 	$(VIRTUAL_ENV)/bin/isort -rc -c $(SOURCE_DIRS) ||  EXIT_STATUS=$$?; \
