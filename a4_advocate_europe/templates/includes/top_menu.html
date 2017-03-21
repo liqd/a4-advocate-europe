@@ -1,12 +1,11 @@
 {% load i18n wagtailcore_tags userindicator snippet_tags %}
 {% get_current_language as LANGUAGE_CODE %}
 {% load_site_menu "topmenu" as top_menu_items %}
-<nav class="navbar navbar-default navbar-fixed-top main-menu" id="main-menu">
+<nav class="navbar navbar-default navbar-fixed-top" aria-label="{% trans 'main menu' %}">
     <div class="container">
         <a class="navbar-brand" href="/{{ LANGUAGE_CODE }}/">Advocate Europe</a>
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
-                <span class="sr-only">Navigation an/aus</span>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-label="{% trans 'navigation on/off' %}">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>

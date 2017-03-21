@@ -6,7 +6,7 @@
 {% block title %}{% trans 'Activate your account' %}{% endblock %}
 
 {% block content %}
-<div class="container">
+<main class="container">
 {% if confirmation %}
     {% user_display confirmation.email_address.user as user_display %}
     <form id="ActivateForm" method="post">
@@ -27,5 +27,5 @@
     {% url 'account_email' as email_url %}
     <p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
 {% endif %}
-</div>
+</main>
 {% endblock %}

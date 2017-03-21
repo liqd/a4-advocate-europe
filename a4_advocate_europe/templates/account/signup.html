@@ -5,7 +5,7 @@
 {% block title %}{% trans 'Register an account' %}{% endblock %}
 
 {% block content %}
-<div class="container">
+<main class="container">
     <header>
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation"><a href="{% url 'account_login' %}?next={{redirect_field_value}}">{% trans "login" %}</a></li>
@@ -104,5 +104,5 @@
         {% endif %}
     </div>
     {% endblock %}
-</div>
+</main>
 {% endblock %}
