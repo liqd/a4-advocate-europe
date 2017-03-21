@@ -24,8 +24,8 @@ var autoprefixer = require('autoprefixer');
 module.exports = {
   entry: {
     adhocracy4: [
-      './a4_advocate_europe/assets/scss/all.scss',
-      './apps/contrib/static/app.js'
+      './advocate_europe/assets/scss/all.scss',
+      './advocate_europe/assets/js/app.js',
     ],
     vendor: [
       'jquery',
@@ -36,17 +36,17 @@ module.exports = {
       'classnames',
       'moment',
       'font-awesome/scss/font-awesome.scss',
-      './a4_advocate_europe/assets/js/jquery-fix.js',
+      './advocate_europe/assets/js/jquery-fix.js',
       'bootstrap-sass',
       'slick-carousel/slick/slick.min.js',
-      'slick-carousel/slick/slick.css'
+      'slick-carousel/slick/slick.css',
     ]
   },
   devtool: 'eval',
   output: {
     libraryTarget: 'var',
     library: '[name]',
-    path: './a4_advocate_europe/static/',
+    path: './advocate_europe/static/',
     publicPath: "/static/",
     filename: '[name].js'
   },
