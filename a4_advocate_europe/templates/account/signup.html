@@ -13,10 +13,7 @@
         </ul>
     </header>
 
-    {% block form %}
     <form role="form" name="RegisterForm" action="{% url 'account_signup' %}" method="post" >
-    {% endblock %}
-
         {% csrf_token %}
 
         {% block help_text %}
@@ -91,7 +88,6 @@
         <button type="submit" value="Register" class="btn btn-primary">{% trans "register" %}</button>
     </form>
 
-    {% block socialaccounts %}
     <div class="socialaccounts">
         {% get_providers as socialaccount_providers %}
         {% if socialaccount_providers %}
@@ -103,6 +99,5 @@
         </div>
         {% endif %}
     </div>
-    {% endblock %}
 </main>
 {% endblock %}
