@@ -1,0 +1,23 @@
+language: python
+python:
+- '3.5'
+cache: pip
+install:
+- nvm install 6
+- npm install --production
+- npm run build
+- pip install -r requirements/dev.txt
+- pip install coveralls
+script:
+- py.test --cov
+after_success:
+- coveralls
+deploy:
+- provider: script
+  script: scripts/deploy.sh
+  on:
+    branch: master
+env:
+  global:
+  - secure: ZRSRDtcML9R0oFsacmXEQmJtzKBfj3q6ev3CLqkOezdLCP7eTlrQFESaSCWnRaVG+0rNnA1k97FvhT8yb50XIpJyaQyx0L0ic1RVW0mAUITPOnVCjTyZClu+YNazpXep+lzYLOJbVkBowWF06RVuFIziBKQ00dpBPLG2Cw+2W2v2/e+e7/zQuR9HlMBrqfdgyqlf//lE91xzC92DIRMyIKnHn7+XrYNRg6VgGYTlpDdI2LEb9ha5JcXLEtV1tBs6OlJShUHbFhY+P+ElWHez20cH9jZFt5OzpCBNto5aRKBe+cYPpxELMT5JWLzWmnrt0m0zfZOtT5MPQhijgW/r8bJ10Bw1V7E/zaX4j114nPAm37eSpErFZ2ocbAMwgILtI2ECtfucmya2MSRJvne3KuQSwha2oRhGGL2s5+1h0Pux8gE5ooqo3N2dHnekbPuGrQof7ROYTU2jn9copGVE/g8sjVmv9+QjVJ/GjxVVlLvFhlT7PYlAnX85vnVPnQKFGdFpkSZo0CpLuCDGxlch0lFU+zbn3Q0Rkji+6IIRm2xriI4c/Cmywv+E0P+A4re8bvZ0nElY9CIYE6qMSxMl7Kv9joqJpPwOLIoCJ4ihH5py9AmuCDbloXmLJP1v5rU/EpJzi8mSHQCq0W3iTm4W8OwJ9eVw4O2Dptix/8ChCwE=
+  - secure: MXmzoW9cQlumK4GyZF9skNNhUpXAGTMY/MzhjDtjJpp30r5xTh5uchXo89YZgkE94+lLfRdXjeLgTjWNdM4XzVh+PhBVl9HrIKoWqCWVrA9HPKG4zepwRukarK5jp4f210FxDvX7OK4gadKbDBhq6rXEkbitSScRaoS3oGZTjz7qiBPmHfRFyRqIuHUF389D75y21/QPbMoFP2tPGWc3bL7fU4dWh74edXO5vWtK2JHVNqLxZGeTP1bqRC9BpQehHD1elbbsfb+KV3kfG+MOL/85QOKkYl4yLCzv7WN7WnSNnY/uNC5rWcjVph2FBk4DyCIki81d1epSxChDFioi3kjae0+OiQqRIh8buAtJ9tqAMO8cb79APmqeXevICfAUS9up/4t9mcgsSye67VHSCVAZGLH70hKhhd2ITUSiqHby76XujtzTGPaSPB6qc3emQidPGiIz5ekcLaGdNCth93ekVb+KvDqUlUVtVY3CQxDBqBPTUPC7So9/2GiXKb0wgcOyKtIyzzWRgOs6bgF+VvrXn84tvmvBzie5K2jYp4cBsz7rxuDBvR8iwgi8q3C2gAYuA1XMchJqkfvj1SxGVFwzFfVK597VD7KPdCKSre3NrJ8OaD3cXn1l3jzhfMpx/W4URMoiNIvtzwurqEd3VRN6se+He1zgEnphf4qbeCs=
