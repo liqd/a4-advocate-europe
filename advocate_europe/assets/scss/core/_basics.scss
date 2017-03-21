@@ -1,5 +1,31 @@
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
 body {
-    margin-top: $navbar-height;
+    position: relative;
+    margin: 0;
+    padding-bottom: $navbar-height;
+    padding-top: $navbar-height;
+    min-height: 100%;
+}
+
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    .navbar {
+        margin-bottom: 0;
+    }
 }
 
 .container-small,
