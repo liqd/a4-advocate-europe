@@ -20,10 +20,10 @@
 </header>
 
 {% if videoplayer_url %}
-<div class="modal fade herounit-video" id="video" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade herounit-video" id="video" tabindex="-1" role="dialog" aria-label="{% trans 'video' %}" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="{% trans 'close' %}"><span aria-hidden="true">&times;</span></button>
             <div class="embed-responsive embed-responsive-16by9">
                 {% embed videoplayer_url %}
             </div>
