@@ -96,7 +96,7 @@ module.exports = {
     new ExtractTextPlugin('[name].css'),
     new CopyWebpackPlugin([
       {
-        from: './a4_advocate_europe/assets/images/**/*',
+        from: './advocate_europe/assets/images/**/*',
         to: 'images/',
         flatten: true
       }

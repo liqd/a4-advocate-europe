@@ -1,5 +1,5 @@
 {
-  "name": "a4_advocate_europe",
+  "name": "advocate_europe",
   "dependencies": {
     "adhocracy4": "liqd/adhocracy4#master",
     "autoprefixer": "^6.5.2",

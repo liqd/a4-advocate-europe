@@ -30,7 +30,7 @@ class Command(makemessages.Command):
         apps_paths = super().find_files(path.relpath(get_module_dir('apps')))
         cms_paths = super().find_files(path.relpath(get_module_dir('cms')))
         ae_paths = super().find_files(
-            path.relpath(get_module_dir('a4_advocate_europe'))
+            path.relpath(get_module_dir('advocate_europe'))
         )
 
         return a4js_paths + a4_paths + apps_paths + cms_paths + ae_paths

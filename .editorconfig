@@ -16,4 +16,4 @@ indent_size = 2
 # isort configruation
 [*.py]
 skip=migrations
-known_first_party=adhocracy4, tests, a4_advocate_europe
+known_first_party=adhocracy4, tests, advocate_europe
