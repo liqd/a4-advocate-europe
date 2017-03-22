@@ -19,3 +19,4 @@ venv
 /webpack-stats.json
 /advocate_europe/settings/local.py
 /advocate_europe/static
+.coverage
