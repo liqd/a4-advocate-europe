@@ -1,0 +1,9 @@
+[run]
+source =
+    advocate_europe
+    apps
+omit =
+    */migrations/*
+    */tests.py
+    */test_*.py
+    */autofixtures.py
