@@ -1,0 +1,11 @@
+{% load static i18n thumbnail %}
+<div class="project-tile no-image">
+    <a href="{{ value.url }}" class="project-tile-image-link"
+       style="background-image: url('/static/images/placeholder.png');">
+        <img src="{% static 'images/placeholder.png' %}" class="project-tile-image img-responsive">
+    </a>
+    <div class="project-tile-body">
+        <h2 class="project-tile-title"><a href="{{ value.url }}">{{ value.title }}</a></h2>
+        <p class="project-tile-teaser">{{ value.text }}</p>
+    </div>
+</div>

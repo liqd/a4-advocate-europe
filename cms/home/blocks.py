@@ -1,7 +1,10 @@
-from wagtail.wagtailcore.blocks import (CharBlock, ChoiceBlock,
-                                        PageChooserBlock,
-                                        StructBlock, TextBlock,
-                                        URLBlock)
+from wagtail.wagtailcore.blocks import (CharBlock, ChoiceBlock, ListBlock,
+                                        PageChooserBlock, StructBlock,
+                                        TextBlock, URLBlock)
+from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
+
+from cms.snippets.models import Category
 
 
 class LinkBlock(StructBlock):
@@ -10,7 +13,6 @@ class LinkBlock(StructBlock):
 
 
 class TeasertextBlock(StructBlock):
-
     headline = CharBlock(required=True, length=256)
     text = TextBlock(required=True)
     link = PageChooserBlock(required=False)
@@ -20,7 +22,6 @@ class TeasertextBlock(StructBlock):
 
 
 class ThreeColumnTextBlock(StructBlock):
-
     title = CharBlock(required=False, length=256)
 
     col1 = TeasertextBlock(required=True)
@@ -35,7 +36,6 @@ class ThreeColumnTextBlock(StructBlock):
 
 
 class CallToActionBlock(StructBlock):
-
     headline = CharBlock(required=True)
     link = LinkBlock(required=True)
     text = TextBlock(required=True)
@@ -47,12 +47,35 @@ class CallToActionBlock(StructBlock):
         help_text = 'Call to action with button and text'
 
 
-class CarouselBlock(StructBlock):
+class ProposalCarouselBlock(StructBlock):
     headline = CharBlock(required=False)
     ideas = ChoiceBlock(choices=[
         ('2015', '2015'),
         ('2016', '2016'),
     ], required=True)
+
+    class Meta:
+        template = 'cms_home/blocks/carousel_block.html'
+        icon = 'folder-inverse'
+        label = 'Carousel Block'
+        help_text = 'Carousel of Proposals'
+
+
+class ItemBlock(StructBlock):
+    image = ImageChooserBlock(required=False)
+    label = CharBlock(required=False)
+    category = SnippetChooserBlock(required=False, target_model=Category)
+    title = CharBlock()
+    text = TextBlock()
+    url = URLBlock()
+
+    class Meta:
+        template = 'cms_home/blocks/includes/proposal_tile.html'
+
+
+class CustomCarouselBlock(StructBlock):
+    headline = CharBlock(required=False)
+    items = ListBlock(ItemBlock)
 
     class Meta:
         template = 'cms_home/blocks/carousel_block.html'

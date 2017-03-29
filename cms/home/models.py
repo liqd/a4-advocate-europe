@@ -16,7 +16,7 @@ class HomePage(Page):
     block_types = [
         ('columns', blocks.ThreeColumnTextBlock()),
         ('call_to_action', blocks.CallToActionBlock()),
-        ('carousel', blocks.CarouselBlock())
+        ('carousel', blocks.CustomCarouselBlock())
     ]
 
     # translated fields
