@@ -1,11 +1,23 @@
-{% load static i18n thumbnail %}
-<div class="project-tile no-image">
-    <a href="{{ value.url }}" class="project-tile-image-link"
-       style="background-image: url('/static/images/placeholder.png');">
-        <img src="{% static 'images/placeholder.png' %}" class="project-tile-image img-responsive">
+{% load static i18n thumbnail wagtailimages_tags %}
+<div class="proposal-tile {% if not value.image %} no-image {% endif %}">
+    {% if value.image %}
+    {% image value.image fill-520x330 as image %}
+    <a href="{{ value.url }}" target="_blank" class="proposal-tile-image-link"
+   style="background-image: url('{{ image.url }}');">
+        <img src="{{ image.url }}" class="proposal-tile-image img-responsive">
     </a>
-    <div class="project-tile-body">
-        <h2 class="project-tile-title"><a href="{{ value.url }}">{{ value.title }}</a></h2>
-        <p class="project-tile-teaser">{{ value.text }}</p>
+    {% else %}
+    <a href="{{ value.url }}" target="_blank" class="proposal-tile-image-link"
+   style="background-image: url('/static/images/placeholder.png');">
+        <img src="{% static 'images/placeholder.png' %}" class="proposal-tile-image img-responsive">
+    </a>
+    {% endif %}
+
+
+
+    <div class="proposal-tile-body">
+        <p class="proposal-tile-category">{{ value.category.translated_name }}</p>
+        <h2 class="proposal-tile-title"><a href="{{ value.url }}">{{ value.title }}</a></h2>
+        <p class="proposal-tile-teaser">{{ value.text }}</p>
     </div>
 </div>

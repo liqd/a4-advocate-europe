@@ -17,4 +17,65 @@
 
 .block-carousel {
     overflow-x: hidden;
+
+    .proposal-tile {
+        margin: rem(0 13px 13px 0);
+        overflow: hidden;
+        text-align: left;
+
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+
+        img {
+            margin: 0;
+        }
+    }
+
+    .proposal-tile-image-link {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-blend-mode: multiply;
+        display: block;
+        position: relative;
+        box-sizing: content-box;
+    }
+
+    .proposal-tile-title {
+        font-size: rem(18px);
+        font-weight: bold;
+        margin-top: rem(4px);
+        line-height: 1.33;
+
+        a {
+            color: $gray-dark;
+        }
+        flex: 1 0 auto;
+    }
+
+    .proposal-tile-category {
+        text-transform: uppercase;
+        font-weight: 900;
+        letter-spacing: 0.8px;
+        color: $brand-primary;
+        font-size: rem(12px);
+        margin-bottom: 0;
+    }
+
+    .proposal-tile-body {
+        padding: rem(10px);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        flex: 1 1 auto;
+        background-color: $ae-light-gray;
+
+        .row {
+            margin: 0;
+        }
+    }
+
+    .proposal-tile-teaser {
+        flex: 1 0 auto;
+    }
 }
