@@ -1,9 +1,11 @@
 <div class="container block">
+    {% if value.title %}
     <div class="row">
         <div class="col-md-12">
             <h2>{{ value.title }}</h2>
         </div>
     </div>
+    {% endif %}
     <div class="row">
         <div class="col-md-4">
             {{ value.col1 }}

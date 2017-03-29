@@ -3,9 +3,16 @@
 }
 
 .block-cta {
-    background-color: $gray-lighter;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    color: #fff;
+    background-color: $brand-primary;
+
+    &-headline {
+        margin: rem(20px 0 10px 0);
+    }
+
+    &-text {
+        margin: rem(10px 0 20px 0);
+    }
 }
 
 .block-carousel {
