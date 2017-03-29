@@ -61,3 +61,12 @@ body {
 .container-narrow {
     @extend .col-md-8;
 }
+
+.navbar-brand.navbar-brand {
+
+    padding: rem(10px 0 10px 0);
+
+    .navbar-brand-logo {
+        height: rem(50px);
+    }
+}
