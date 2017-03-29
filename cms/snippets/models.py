@@ -2,7 +2,9 @@ from django.db import models
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 from wagtail.wagtailadmin import edit_handlers
+from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailcore.models import Orderable
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
 from cms.contrib import translations
@@ -68,5 +70,27 @@ NavigationMenu.panels = [
     edit_handlers.InlinePanel('menu_items', label="Menu Items")
 ]
 
-
 register_snippet(NavigationMenu)
+
+
+class Category(models.Model):
+    name_en = models.CharField(max_length=255)
+    name_de = models.CharField(max_length=255, blank=True, null=True)
+    icon = models.ForeignKey(
+        'wagtailimages.Image', null=True, blank=True,
+        on_delete=models.SET_NULL, related_name='+'
+    )
+    translated_name = translations.TranslatedField('name')
+    panels = [
+        FieldPanel('name_en'),
+        FieldPanel('name_de'),
+        ImageChooserPanel('icon'),
+    ]
+
+    def __str__(self):
+        return self.name_en
+
+    class Meta:
+        verbose_name_plural = 'categories'
+
+register_snippet(Category)
