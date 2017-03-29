@@ -7,25 +7,25 @@
             <div class="pull-right">
                 <ul class="nav navbar-nav">
                     {% for menuitem in footer_menu_items %}
-                    <li><a href="{{ menuitem.url }}">{{ menuitem.translated_menu_title }}</a></li>
+                    <li><a href="{{ menuitem.url }}"class="footer-entry">{{ menuitem.translated_menu_title }}</a></li>
                     {% endfor %}
                 </ul>
             </div>
             <ul class="nav navbar-nav">
                 {% if settings.cms_settings.SocialMediaSettings.facebook %}
-                <li><a href="{{ settings.cms_settings.SocialMediaSettings.facebook }}" target="_blank"><i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook</a></li>
+                <li><a href="{{ settings.cms_settings.SocialMediaSettings.facebook }}" target="_blank" class="footer-entry"><i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook</a></li>
                 {% endif %}
 
                 {% if settings.cms_settings.SocialMediaSettings.twitter %}
-                <li><a href="https://twitter.com/{{ settings.cms_settings.SocialMediaSettings.twitter }}" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+                <li><a href="https://twitter.com/{{ settings.cms_settings.SocialMediaSettings.twitter }}" target="_blank" class="footer-entry"><i class="fa fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
                 {% endif %}
 
                 {% if settings.cms_settings.SocialMediaSettings.youtube %}
-                <li><a href="{{ settings.cms_settings.SocialMediaSettings.youtube }}" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+                <li><a href="{{ settings.cms_settings.SocialMediaSettings.youtube }}" target="_blank" class="footer-entry"><i class="fa fa-youtube" aria-hidden="true"></i> Youtube</a></li>
                 {% endif %}
 
                 {% if settings.cms_settings.SocialMediaSettings.flickr %}
-                <li><a href="{{ settings.cms_settings.SocialMediaSettings.flickr }}" target="_blank"><i class="fa fa-flickr" aria-hidden="true"></i> Flickr</a></li>
+                <li><a href="{{ settings.cms_settings.SocialMediaSettings.flickr }}" target="_blank" class="footer-entry"><i class="fa fa-flickr" aria-hidden="true"></i> Flickr</a></li>
                 {% endif %}
             </ul>
          </div>
