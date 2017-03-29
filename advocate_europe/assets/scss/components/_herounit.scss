@@ -3,7 +3,7 @@
     text-align: center;
     min-height: 500px;
     position: relative;
-    @include rem(padding, 40px 0);
+    padding: rem(40px) 0;
 
     // centering the container vertically and horizontally
     display: flex;
@@ -13,7 +13,7 @@
 
     @media only screen and (max-width: $screen-xs) {
         min-height: 200px;
-        @include rem(padding, 40px 0);
+        padding: rem(40px) 0;
     }
 
     &:after {
@@ -51,7 +51,7 @@
     z-index: 1;
 
     .button {
-        @include rem(margin-top, 13px);
+        margin-top: rem(13px);
     }
 
     a:not(.btn) {
@@ -65,20 +65,20 @@
 
 .herounit-title {
     font-size: rem($ae-font-size-extra-large);
-    @include rem(margin, 0 0 10px 0);
+    margin: rem(0 0 10px 0);
 
     @media screen and (max-width: $screen-md-max) {
-        @include rem(padding, 0 40px);
+        padding: rem(0 40px);
     }
 
     @media screen and (max-width: $screen-xs) {
-        @include rem(font-size, $font-size-base);
-        @include rem(padding, 0 10px);
+        font-size: rem($font-size-base);
+        padding: rem(0 10px);
     }
 
     font-weight: normal;
     color: #fff;
-    @include rem(margin-bottom, 10px);
+    margin-bottom: rem(10px);
 
     &:after {
         background: rgba(0, 0, 0, 0.5);
@@ -93,7 +93,7 @@
 
 .herounit-description {
     padding: 0 rem(90px);
-    @include rem(margin-bottom, 15px);
+    margin-bottom: rem(15px);
     font-size: 16px;
     font-weight: bold;
     line-height: 1.38;
