@@ -15,6 +15,10 @@ body {
     padding-bottom: $footer-height;
     padding-top: $navbar-height;
     min-height: 100%;
+
+    @media (max-width: $screen-sm) {
+        padding-bottom: $footer-screen-sm-hight;
+    }
 }
 
 .footer {
@@ -23,13 +27,17 @@ body {
     bottom: 0;
     left: 0;
     height: $footer-height;
+    background-color: $ae-light-gray;
+
+    @media (max-width: $screen-sm) {
+        height: $footer-screen-sm-hight;
+    }
 
     .navbar {
         margin-bottom: 0;
         border-bottom: none;
         border-color: #fff;
         background-color: $ae-light-gray;
-        height: 100%;
     }
 
     .footer-entry {
