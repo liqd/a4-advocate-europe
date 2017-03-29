@@ -1,9 +1,11 @@
-{% load i18n wagtailcore_tags userindicator snippet_tags %}
+{% load i18n wagtailcore_tags userindicator snippet_tags static %}
 {% get_current_language as LANGUAGE_CODE %}
 {% load_site_menu "topmenu" as top_menu_items %}
 <nav class="navbar navbar-default navbar-fixed-top" aria-label="{% trans 'main menu' %}">
     <div class="container">
-        <a class="navbar-brand" href="/{{ LANGUAGE_CODE }}/">Advocate Europe</a>
+        <a class="navbar-brand" href="/{{ LANGUAGE_CODE }}/">
+            <img class="navbar-brand-logo" alt="Avocate Europe" src="{% get_static_prefix %}images/logos/logo_0{{ '12345' | random }}.svg">
+        </a>
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-label="{% trans 'navigation on/off' %}">
                 <span class="icon-bar"></span>
