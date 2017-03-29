@@ -12,9 +12,13 @@ html {
 body {
     position: relative;
     margin: 0;
-    padding-bottom: $navbar-height;
+    padding-bottom: $footer-height;
     padding-top: $navbar-height;
     min-height: 100%;
+
+    @media (max-width: $screen-sm) {
+        padding-bottom: $footer-screen-sm-hight;
+    }
 }
 
 .footer {
@@ -22,9 +26,24 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
+    height: $footer-height;
+    background-color: $ae-light-gray;
+
+    @media (max-width: $screen-sm) {
+        height: $footer-screen-sm-hight;
+    }
 
     .navbar {
         margin-bottom: 0;
+        border-bottom: none;
+        border-color: #fff;
+        background-color: $ae-light-gray;
+    }
+
+    .footer-entry {
+        padding-top: 20px;
+        padding-bottom: 0;
+        line-height: 1.43;
     }
 }
 
