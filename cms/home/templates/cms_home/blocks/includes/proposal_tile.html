@@ -1,20 +1,14 @@
 {% load static i18n thumbnail wagtailimages_tags %}
 <div class="proposal-tile {% if not value.image %} no-image {% endif %}">
     {% if value.image %}
-    {% image value.image fill-520x330 as image %}
-    <a href="{{ value.url }}" target="_blank" class="proposal-tile-image-link"
-   style="background-image: url('{{ image.url }}');">
-        <img src="{{ image.url }}" class="proposal-tile-image img-responsive">
-    </a>
-    {% else %}
-    <a href="{{ value.url }}" target="_blank" class="proposal-tile-image-link"
-   style="background-image: url('/static/images/placeholder.png');">
-        <img src="{% static 'images/placeholder.png' %}" class="proposal-tile-image img-responsive">
-    </a>
+    {% image value.image fill-285x150 as image %}
     {% endif %}
-
-
-
+    <a href="{{ value.url }}" target="_blank" class="proposal-tile-image-link">
+        <img src="{% if image %} {{ image.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" class="proposal-tile-image img-responsive">
+        {% if value.label %}
+        <p class="label proposal-tile-label">{{ value.label }}</p>
+        {% endif %}
+    </a>
     <div class="proposal-tile-body">
         <p class="proposal-tile-category">{{ value.category.translated_name }}</p>
         <h2 class="proposal-tile-title"><a href="{{ value.url }}">{{ value.title }}</a></h2>
