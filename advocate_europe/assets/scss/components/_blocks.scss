@@ -24,21 +24,20 @@
         text-align: left;
 
         min-height: 400px;
-        display: flex;
-        flex-direction: column;
 
         img {
             margin: 0;
         }
+
+        .label {
+            position: absolute;
+            left: rem(10px);
+            bottom: 0;
+        }
     }
 
     .proposal-tile-image-link {
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-blend-mode: multiply;
-        display: block;
         position: relative;
-        box-sizing: content-box;
     }
 
     .proposal-tile-title {
@@ -50,7 +49,11 @@
         a {
             color: $gray-dark;
         }
-        flex: 1 0 auto;
+    }
+
+    .proposal-tile-label {
+        background-color: $brand-secondary;
+        color: $gray-dark;
     }
 
     .proposal-tile-category {
@@ -64,18 +67,11 @@
 
     .proposal-tile-body {
         padding: rem(10px);
-        display: flex;
-        flex-direction: column;
         height: 100%;
-        flex: 1 1 auto;
         background-color: $ae-light-gray;
 
         .row {
             margin: 0;
         }
-    }
-
-    .proposal-tile-teaser {
-        flex: 1 0 auto;
     }
 }
