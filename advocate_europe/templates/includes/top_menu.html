@@ -1,4 +1,4 @@
-{% load i18n wagtailcore_tags userindicator snippet_tags static %}
+{% load i18n wagtailcore_tags userindicator snippet_tags url_translations static %}
 {% get_current_language as LANGUAGE_CODE %}
 {% load_site_menu "topmenu" as top_menu_items %}
 <nav class="navbar navbar-default navbar-fixed-top" aria-label="{% trans 'main menu' %}">
@@ -23,6 +23,15 @@
             <ul class="nav navbar-nav navbar-right">
                 {% for menuitem in top_menu_items %}
                 <li><a href="{{ menuitem.url }}"{% if request.path == menuitem.url %} class="is-active"{% endif %}>{{ menuitem.translated_menu_title }}</a></li>
+                {% endfor %}
+
+                {% get_available_languages as languages %}
+                {% for lang_code, lang_name in languages %}
+                {% if lang_code != LANGUAGE_CODE %}
+                <li>
+                    <a href="{% translate_url lang_code %}">{{ lang_code }}</a>
+                </li>
+                {% endif %}
                 {% endfor %}
             </ul>
         </div>
