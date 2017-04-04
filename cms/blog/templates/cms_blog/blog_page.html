@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-blogpage{% endblock %}
+
+{% block content %}
+    <h1>{{ page.title_blog }}</h1>
+
+    {% with categories=page.categories.all %}
+        {% if categories %}
+          {% for category in categories %}
+            {{ category.name_en }}
+          {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    Create date: {{ page.create_date }}
+    Update date: {{ page.update_date }}
+
+    {{ page.body|richtext }}
+
+    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-blogindexpage{% endblock %}
+
+{% block content %}
+
+    {% for post in blogs %}
+        <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+
+    {% endfor %}
+
+{% endblock %}
