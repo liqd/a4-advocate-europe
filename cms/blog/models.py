@@ -11,6 +11,9 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 class BlogIndexPage(Page):
 
+    title_blog_index = models.CharField(
+        max_length=255, blank=True, verbose_name="Blog Index Title")
+
     subpage_types = ['cms_blog.BlogPage']
 
     @property
@@ -33,6 +36,17 @@ class BlogIndexPage(Page):
         context = super(BlogIndexPage, self).get_context(request)
         context['blogs'] = blogs
         return context
+
+    content_panels = [
+        FieldPanel('title_blog_index'),
+    ]
+
+    promote_panels = Page.content_panels + Page.promote_panels
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(promote_panels, heading='Promote')
+    ])
 
 
 class BlogPage(Page):
