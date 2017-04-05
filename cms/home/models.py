@@ -71,3 +71,35 @@ class HomePage(Page):
         ObjectList(content_panels, heading='Media'),
         ObjectList(Page.promote_panels, heading='Promote')
     ])
+class SimplePage(Page):
+    # translated fields
+    title_en = models.CharField(
+        max_length=255, verbose_name="Title")
+    title_de = models.CharField(
+        max_length=255, blank=True, verbose_name="Title")
+
+    body_en = StreamField(block_types, null=True)
+    body_de = StreamField(block_types, null=True, blank=True)
+
+    body = translations.TranslatedField('body')
+    translated_title = translations.TranslatedField('title')
+
+    en_panels = [
+        FieldPanel('title_en'),
+        StreamFieldPanel('body_en')
+    ]
+
+    de_panels = [
+        FieldPanel('title_de'),
+        StreamFieldPanel('body_de')
+    ]
+
+    Page.promote_panels[0].children.insert(0,
+                                           FieldPanel('title')
+                                           )
+
+    edit_handler = TabbedInterface([
+        ObjectList(en_panels, heading='English'),
+        ObjectList(de_panels, heading='German'),
+        ObjectList(Page.promote_panels, heading='Promote')
+    ])
