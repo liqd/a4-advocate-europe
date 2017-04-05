@@ -2,21 +2,21 @@ from django.db import models
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, ObjectList,
                                                 StreamFieldPanel,
                                                 TabbedInterface)
+from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from cms.contrib import translations
 
-from . import blocks
+from . import blocks as custom_blocks
 
 
 class HomePage(Page):
-
     block_types = [
-        ('columns', blocks.ThreeColumnTextBlock()),
-        ('call_to_action', blocks.CallToActionBlock()),
-        ('carousel', blocks.CustomCarouselBlock())
+        ('columns', custom_blocks.ThreeColumnTextBlock()),
+        ('call_to_action', custom_blocks.CallToActionBlock()),
+        ('carousel', custom_blocks.CustomCarouselBlock())
     ]
 
     # translated fields
@@ -48,6 +48,8 @@ class HomePage(Page):
 
     videoplayer_url = models.URLField(blank=True, verbose_name='Video URL')
 
+    subpage_types = ['cms_home.SimplePage']
+
     content_panels = [
         ImageChooserPanel('image'),
         FieldPanel('videoplayer_url')
@@ -71,7 +73,14 @@ class HomePage(Page):
         ObjectList(content_panels, heading='Media'),
         ObjectList(Page.promote_panels, heading='Promote')
     ])
+
+
 class SimplePage(Page):
+    block_types = [
+        ('text', blocks.RichTextBlock()),
+        ('FAQs', custom_blocks.FAQBlock())
+    ]
+
     # translated fields
     title_en = models.CharField(
         max_length=255, verbose_name="Title")
