@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading{{ number }}">
+        <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ number }}"
+               aria-expanded="true" aria-controls="collapse{{ number }}">
+                {{ value.question }}
+            </a>
+        </h4>
+    </div>
+    <div id="collapse{{ number }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{ number }}">
+        <div class="panel-body">
+            {{ value.answer }}
+        </div>
+    </div>
+</div>
