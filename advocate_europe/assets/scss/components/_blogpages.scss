@@ -1,0 +1,59 @@
+.blogpage {
+    background-size: cover;
+    text-align: left;
+    margin-top: rem(40px);
+}
+
+.blogpage-narrower {
+    margin-left: rem(100px);
+    margin-right: rem(100px);
+
+    @media screen and (max-width: $screen-xs) {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+.btn-blogpage {
+    background-color: #f3f3f3;
+    border-radius: rem(5px);
+
+    a {
+        color: #000;
+        font-size: rem(16px);
+        font-weight: bold;
+    }
+}
+
+.blogpage-category {
+    margin-top: rem(40px);
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: rem(.8px);
+    color: #999;
+    text-transform: uppercase;
+}
+
+.blogpage-taesertext {
+    font-size: rem(18px);
+}
+
+.blogpage-createdates {
+    margin-top: rem(10px);
+    font-size: 14px;
+    color: #999;
+}
+
+.blogpage-image {
+    margin-top: rem(30px);
+    margin-bottom: rem(30px);
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.blogpage-body {
+    font-size: rem(16px);
+}

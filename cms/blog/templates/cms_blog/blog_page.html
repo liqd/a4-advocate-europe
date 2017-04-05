@@ -1,25 +1,49 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-blogpage{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title_blog }}</h1>
 
-    {% with categories=page.categories.all %}
-        {% if categories %}
-          {% for category in categories %}
-            {{ category.name_en }}
-          {% endfor %}
-        {% endif %}
-    {% endwith %}
+    <div class="container blogpage">
+        <div class="container-narrow">
+            <div class="btn btn-blogpage">
+                <a href="{{ page.get_parent.url }}" role="button">< Back to overview</a>
+            </div>
+            <div class="blogpage-narrower">
+                <div class="blogpage-category">
+                    {% with categories=page.categories.all %}
+                        {% if categories %}
+                            {% for category in categories %}
+                                {% if forloop.first %}
+                                    {{ category.name_en }}
+                                {% else %}
+                                    &nbsp; | &nbsp; {{ category.name_en }}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <div class="blogpage-title">
+                    <h1>{{ page.title_blog }}</h1>
+                </div>
+                <div class="blogpage-taesertext">
+                    {{ page.teasertext }}
+                </div>
+                <div class="blogpage-createdates">
+                    by {{ page.author }} at {{ page.create_date }}
+                </div>
+            </div>
 
-    Create date: {{ page.create_date }}
-    Update date: {{ page.update_date }}
-
-    {{ page.body|richtext }}
-
-    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
-
+            <div class="blogpage-image">
+                {% image page.image width-770 %}
+            </div>
+            <div class="blogpage-narrower">
+                <div class="blogpage-body">
+                    {{ page.body|richtext }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
