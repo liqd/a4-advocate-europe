@@ -1,10 +1,87 @@
+//blog_index_page and blog_page
+
+.blog-category {
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: rem(.8px);
+    color: #999;
+    text-transform: uppercase;
+}
+
+.blog-createdates {
+    font-size: 14px;
+    color: #999;
+}
+
+.blog-image {
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+//blog_index_page
+
+.equal {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.blogindexentry {
+    .row {
+        margin: 0;
+        padding: 0;
+    }
+
+    .blogindex-featured {
+        margin-bottom: rem(30px);
+    }
+
+    .blogindex-all {
+        margin-bottom: rem(10px);
+    }
+
+    .blogindex-text {
+        margin-left: -15px;
+        padding: rem(15px) rem(15px) 0 0;
+        background-color: $ae-light-gray;
+        box-shadow: 0 1px 0 0 #ccc;
+    }
+
+    .blog-image {
+        background-color: $ae-light-gray;
+        box-shadow: 0 1px 0 0 #ccc;
+
+        img {
+            margin-left: -15px;
+        }
+    }
+
+    a {
+        color: #000;
+    }
+}
+
+
+// blog_page
+
 .blogpage {
-    background-size: cover;
-    text-align: left;
-    margin-top: rem(40px);
+    .blog-image {
+        margin-top: rem(30px);
+        margin-bottom: rem(30px);
+    }
+
+    .blog-category {
+        margin-top: rem(40px);
+    }
+
+    .blog-createdates {
+        margin-top: rem(10px);
+    }
 }
 
 .blogpage-narrower {
+
     margin-left: rem(100px);
     margin-right: rem(100px);
 
@@ -15,7 +92,8 @@
 }
 
 .btn-blogpage {
-    background-color: #f3f3f3;
+
+    background-color: $ae-light-gray;
     border-radius: rem(5px);
 
     a {
@@ -25,33 +103,8 @@
     }
 }
 
-.blogpage-category {
-    margin-top: rem(40px);
-    font-size: 12px;
-    font-weight: 900;
-    letter-spacing: rem(.8px);
-    color: #999;
-    text-transform: uppercase;
-}
-
-.blogpage-taesertext {
+.blogpage-taeser {
     font-size: rem(18px);
-}
-
-.blogpage-createdates {
-    margin-top: rem(10px);
-    font-size: 14px;
-    color: #999;
-}
-
-.blogpage-image {
-    margin-top: rem(30px);
-    margin-bottom: rem(30px);
-
-    img {
-        width: 100%;
-        height: auto;
-    }
 }
 
 .blogpage-body {
