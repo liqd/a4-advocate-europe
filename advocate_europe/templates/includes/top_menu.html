@@ -22,7 +22,18 @@
         <div id="navbar-collapse" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 {% for menuitem in top_menu_items %}
+                {% if menuitem.subpages %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ menuitem.translated_menu_title }} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        {% for subpage in menuitem.subpages %}
+                        <li><a href="{{ subpage.value.link.url }}">{% get_translated_field subpage 'link_text'%}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% else %}
                 <li><a href="{{ menuitem.url }}"{% if request.path == menuitem.url %} class="is-active"{% endif %}>{{ menuitem.translated_menu_title }}</a></li>
+                {% endif %}
                 {% endfor %}
             </ul>
         </div>
