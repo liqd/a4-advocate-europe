@@ -5,13 +5,17 @@
 {% block body_class %}template-blogindexpage{% endblock %}
 
 {% block content %}
-    <div class="container blogindex">
+<div class="blogindex">
+    <div class="container">
+        <div class="blogindex-title">
+            <h1>Media</h1>
+        </div>
         <div class="blogindexentry">
             <div class="row equal blogindex-featured">
-                <div class="blog-image col-md-9">
+                <div class="blog-image col-xs-12 col-sm-6 col-md-9">
                     {% image blogs.0.image fill-870x500 %}
                 </div>
-                <div class="blogindex-text col-md-3">
+                <div class="blogindex-text col-xs-12 col-sm-6 col-md-3">
                     <div class="blog-category">
                         {% with categories=blogs.0.categories.all %}
                             {% if categories %}
@@ -26,8 +30,17 @@
                         {% endwith %}
                     </div>
                     <h4><a href="{% pageurl blogs.0 %}">{{ blogs.0.title }}</a></h4>
-                    <div class="blogindex-teaser">
+                    <!--lg-->
+                    <div class="blogindex-teaser hidden-md hidden-sm hidden-xs">
+                        {{ blogs.0.teasertext|truncatechars:450 }}
+                    </div>
+                    <!--md and xs-->
+                    <div class="blogindex-teaser hidden-lg hidden-sm">
                         {{ blogs.0.teasertext|truncatechars:300 }}
+                    </div>
+                    <!--sm-->
+                    <div class="blogindex-teaser hidden-lg hidden-md hidden-xs">
+                        {{ blogs.0.teasertext|truncatechars:140 }}
                     </div>
                     <div class="blog-createdates">
                         on {{ blogs.0.create_date }}
@@ -35,42 +48,95 @@
                 </div>
             </div>
         </div>
-            {% for post in blogs %}
-                <div class="blogindexentry">
-                    <div class="row equal blogindex-all">
-                        <div class="blog-image col-md-5 col-md-offset-2">
-                            {% image post.image fill-870x500 %}
+        <div class="blogindex-topics-all">
+            <div class="blogindex-topics-xs hidden-sm hidden-md hidden-lg">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h4>Popular Topics</h4>
+                        <div class="btn btn-sm btn-topic">
+                            <a href="#" role="button">Science</a>
                         </div>
-                        <div class="blogindex-text col-md-3">
-                            <div class="blog-category">
-                                {% with categories=post.categories.all %}
-                                    {% if categories %}
-                                        {% for category in categories %}
-                                            {% if forloop.first %}
-                                                {{ category.name_en }}
-                                            {% else %}
-                                                &nbsp; | &nbsp; {{ category.name_en }}
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endif %}
-                                {% endwith %}
-                            </div>
-                            <div class="blogindex_title">
-                                <h4><a href="{% pageurl post %}">{{ post.title }}</a></h4>
-                            </div>
-                            <div class="blogindex-teaser">
-                                {{ post.teasertext|truncatechars:275 }}
-                            </div>
-                            <div class="blog-createdates">
-                                on {{ post.create_date }}
-                            </div>
+                        <br>
+                        <div class="btn btn-sm btn-topic">
+                            <a href="#" role="button">Quite Long Category</a>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="blogindex-topics hidden-xs">
+                        <h4>Popular Topics</h4>
+                        <div class="btn btn-sm btn-topic">
+                            <a href="#" role="button">Science</a>
+                        </div>
+                        <br>
+                        <div class="btn btn-sm btn-topic">
+                            <a href="#" role="button">Quite Long Category</a>
+                        </div>
+            </div>
+
+            {% for post in blogs %}
+                {% if forloop.first %}
+                {% else %}
+                    <div class="blogindexentry">
+                        <div class="row equal blogindex-all">
+                            <div class="blog-image col-xs-12 col-sm-5 col-sm-offset-3 col-md-5 col-md-offset-2">
+                                {% image post.image fill-870x500 %}
+                            </div>
+                            <div class="blogindex-text col-xs-12 col-sm-4 col-md-3">
+                                <div class="blog-category">
+                                    {% with categories=post.categories.all %}
+                                        {% if categories %}
+                                            {% for category in categories %}
+                                                {% if forloop.first %}
+                                                    {{ category.name_en }}
+                                                {% else %}
+                                                    &nbsp; | &nbsp; {{ category.name_en }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endwith %}
+                                </div>
+                                <div class="blogindex_title">
+                                    <h4><a href="{% pageurl post %}">{{ post.title }}</a></h4>
+                                </div>
+                                <!--lg and xs-->
+                                <div class="blogindex-teaser hidden-md hidden-sm">
+                                    {{ post.teasertext|truncatechars:150 }}
+                                </div>
+                                <!--md-->
+                                <div class="blogindex-teaser hidden-lg hidden-sm hidden-xs">
+                                    {{ post.teasertext|truncatechars:80 }}
+                                </div>
+                                <!--sm-->
+                                <div class="blogindex-teaser hidden-lg hidden-md hidden-xs">
+                                    {{ post.teasertext|truncatechars:60 }}
+                                </div>
+                                <div class="blog-createdates">
+                                    on {{ post.create_date }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
             {% endfor %}
-        <div class="blogindex-topics">
-            <h4>Popular Topics</h4>
+        </div>
+        <div class="blogindex-pagination">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
+</div>
 
 {% endblock %}
