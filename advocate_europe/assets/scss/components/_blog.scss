@@ -84,7 +84,7 @@
     margin-bottom: rem(30px);
 }
 
-.blogindex-topics {
+.blogindex-topics-first {
     position: absolute;
     top: rem(700px);
 
@@ -95,6 +95,11 @@
     @media screen and (max-width: $screen-md-min) {
         top: rem(417px);
     }
+}
+
+.blogindex-topics {
+    position: absolute;
+    top: rem(250px);
 }
 
 .btn-topic {
