@@ -8,6 +8,8 @@ from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
+from cms.snippets.models import Category
+
 
 class BlogIndexPage(Page):
 
@@ -24,6 +26,11 @@ class BlogIndexPage(Page):
 
     def get_context(self, request):
         blogs = self.blogs
+
+        category = request.GET.get('category')
+        if category:
+            blogs = blogs.filter(categories__name_en=category)
+
         page = request.GET.get('page')
         paginator = Paginator(blogs, 5)
         try:
@@ -35,6 +42,8 @@ class BlogIndexPage(Page):
 
         context = super(BlogIndexPage, self).get_context(request)
         context['blogs'] = blogs
+        context['categories'] = Category.objects.all()
+        context['category'] = category
         return context
 
     content_panels = [
