@@ -23,13 +23,7 @@
 //blog_index_page
 
 .blogindex {
-    // background: -moz-linear-gradient(top,  $brand-primary rem(162px), #fff 0%); /* FF3.6+ */
-    // background: -webkit-gradient(linear, left top, left bottom, color-stop(rem(162px),$brand-primary), color-stop(0,#fff)); /* Chrome,Safari4+ */
-    // background: -webkit-linear-gradient(top,  $brand-primary rem(162px),#fff 0%); /* Chrome10+,Safari5.1+ */
-    // background: -o-linear-gradient(top,  $brand-primary rem(162px),#fff 0%); /* Opera 11.10+ */
-    // background: -ms-linear-gradient(top,  $brand-primary rem(162px),#fff 0%); /* IE10+ */
-    background: linear-gradient(to bottom, $brand-primary rem(162px), #fff 0%); /* W3C */
-    // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$brand-primary', endColorstr='#fff',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(to bottom, $brand-primary rem(162px), #fff 0%);
 }
 
 .equal {
@@ -137,17 +131,6 @@
 
     .blog-createdates {
         margin-top: rem(10px);
-    }
-}
-
-.blogpage-narrower {
-
-    margin-left: rem(100px);
-    margin-right: rem(100px);
-
-    @media screen and (max-width: $screen-xs) {
-        margin-left: 0;
-        margin-right: 0;
     }
 }
 

@@ -3,7 +3,6 @@
         {% for category in categories %}
             {% if forloop.first %}
                 {{ category.translated_name }}
-                }
             {% else %}
                 &nbsp; | &nbsp; {{ category.translated_name }}
             {% endif %}
