@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block body_class %}  {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="col-md-2">
+            <ul id="side-nav" class="nav nav-pills">
+                {% for block in page.body %}
+                    <li role="presentation"><a href="#section{{ forloop.counter }}">{{ block.value.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-8 sections-container" data-spy="scroll" data-target="#side-nav" data-offset="1400">
+            {% for block in page.body %}
+                <div class="section" id="section{{ forloop.counter }}">
+                    <h2>{{ block.value.title }}</h2>
+                    {% for block_content in block.value.content %}
+                        {{ block_content }}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
