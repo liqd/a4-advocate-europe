@@ -79,3 +79,53 @@
         }
     }
 }
+
+.structured-page {
+    padding-left: 0;
+
+    .col-md-3 {
+        padding-left: 0;
+    }
+}
+
+.structured-page-sections-container {
+    margin-top: 48px;
+    padding-left: 0;
+}
+
+.structured-page-section {
+    padding-top: $navbar-height + 48px;
+    margin-top: -$navbar-height - 48px;
+    padding-bottom: 48px;
+
+    h2 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: rem(36px);
+        font-weight: bold;
+    }
+}
+
+.structured-page-side-nav {
+    position: fixed;
+    margin-top: 60px;
+
+    li {
+        font-size: 16px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 2;
+        letter-spacing: normal;
+    }
+}
+
+.structured-page-side-nav-link {
+    padding: 0 !important;
+
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: transparent !important;
+    }
+}

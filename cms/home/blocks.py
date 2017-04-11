@@ -1,6 +1,7 @@
 from wagtail.wagtailcore.blocks import (CharBlock, ChoiceBlock, ListBlock,
                                         PageChooserBlock, RichTextBlock,
-                                        StructBlock, TextBlock, URLBlock)
+                                        StreamBlock, StructBlock, TextBlock,
+                                        URLBlock)
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 
@@ -98,3 +99,13 @@ class FAQBlock(StructBlock):
 
     class Meta:
         template = 'cms_home/blocks/faq_block.html'
+
+
+class SectionBlock(StructBlock):
+    title = CharBlock()
+    content = StreamBlock(
+        [
+            ('text', RichTextBlock(required=False)),
+            ('FAQ', FAQBlock(required=False))
+        ]
+    )
