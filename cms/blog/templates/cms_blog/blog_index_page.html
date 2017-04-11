@@ -16,48 +16,24 @@
             <div class="blogindex-topics-xs hidden-sm hidden-md hidden-lg">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h4>Popular Topics</h4>
-                        {% for category in categories %}
-                            <div class="btn btn-sm btn-topic">
-                                <a href="?category={{ category }}" role="button">{{ category }}</a>
-                            </div>
-                            <br>
-                        {% endfor %}
+                        {% include 'cms_blog/blog_index_category_buttons.html' %}
                     </div>
                 </div>
             </div>
             <div class="blogindex-topics-first hidden-xs">
-                <h4>Popular Topics</h4>
-                {% for category in categories %}
-                    <div class="btn btn-sm btn-topic">
-                        <a href="?category={{ category }}" role="button">{{ category }}</a>
-                    </div>
-                    <br>
-                {% endfor %}
+                {% include 'cms_blog/blog_index_category_buttons.html' %}
             </div>
         {% else %}
             <!-- The popular topics have to be moved when on other (not first) pages -->
             <div class="blogindex-topics-xs hidden-sm hidden-md hidden-lg">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h4>Popular Topics</h4>
-                        {% for category in categories %}
-                            <div class="btn btn-sm btn-topic">
-                                <a href="?category={{ category }}" role="button">{{ category }}</a>
-                            </div>
-                            <br>
-                        {% endfor %}
+                        {% include 'cms_blog/blog_index_category_buttons.html' %}
                     </div>
                 </div>
             </div>
             <div class="blogindex-topics hidden-xs">
-                <h4>Popular Topics</h4>
-                {% for category in categories %}
-                    <div class="btn btn-sm btn-topic">
-                        <a href="?category={{ category }}" role="button">{{ category }}</a>
-                    </div>
-                    <br>
-                {% endfor %}
+                {% include 'cms_blog/blog_index_category_buttons.html' %}
             </div>
         {% endif %}
 
@@ -71,19 +47,7 @@
                             {% image post.image fill-870x500 %}
                         </div>
                         <div class="blogindex-text col-xs-12 col-sm-4 col-md-3">
-                            <div class="blog-category">
-                                {% with categories=post.categories.all %}
-                                    {% if categories %}
-                                        {% for category in categories %}
-                                            {% if forloop.first %}
-                                                {{ category.name_en }}
-                                            {% else %}
-                                                &nbsp; | &nbsp; {{ category.name_en }}
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endif %}
-                                {% endwith %}
-                            </div>
+                            {% include 'cms_blog/blog_categories.html' with categories=post.categories.all %}
                             <div class="blogindex_title">
                                 <h4><a href="{% pageurl post %}">{{ post.title }}</a></h4>
                             </div>

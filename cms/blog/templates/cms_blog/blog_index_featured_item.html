@@ -6,19 +6,7 @@
             {% image blogs.0.image fill-870x500 %}
         </div>
         <div class="blogindex-text col-xs-12 col-sm-6 col-md-3">
-            <div class="blog-category">
-                {% with categories=blogs.0.categories.all %}
-                    {% if categories %}
-                        {% for category in categories %}
-                            {% if forloop.first %}
-                                {{ category.name_en }}
-                            {% else %}
-                                &nbsp; | &nbsp; {{ category.name_en }}
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-            </div>
+            {% include 'cms_blog/blog_categories.html' with categories=blogs.0.categories.all %}
             <h4><a href="{% pageurl blogs.0 %}">{{ blogs.0.title }}</a></h4>
             <!--lg-->
             <div class="blogindex-teaser hidden-md hidden-sm hidden-xs">

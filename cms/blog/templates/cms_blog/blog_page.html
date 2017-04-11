@@ -13,19 +13,7 @@
             </div>
         </div>
         <div class="container-medium">
-            <div class="blog-category">
-                {% with categories=page.categories.all %}
-                    {% if categories %}
-                        {% for category in categories %}
-                            {% if forloop.first %}
-                                {{ category.name_en }}
-                            {% else %}
-                                &nbsp; | &nbsp; {{ category.name_en }}
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-            </div>
+            {% include 'cms_blog/blog_categories.html' with categories=page.categories.all %}
             <div class="blogpage-title">
                 <h1>{{ page.title_blog }}</h1>
             </div>
