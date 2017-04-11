@@ -7,7 +7,7 @@
         </div>
         <div class="blogindex-text col-xs-12 col-sm-6 col-md-3">
             {% include 'cms_blog/blog_categories.html' with categories=blogs.0.categories.all %}
-            <h4><a href="{% pageurl blogs.0 %}">{{ blogs.0.title }}</a></h4>
+            <h4><a href="{% pageurl blogs.0 %}">{{ blogs.0.title_blog }}</a></h4>
             <!--lg-->
             <div class="blogindex-teaser hidden-md hidden-sm hidden-xs">
                 {{ blogs.0.teasertext|truncatechars:450 }}
@@ -21,7 +21,7 @@
                 {{ blogs.0.teasertext|truncatechars:140 }}
             </div>
             <div class="blog-createdates">
-                on {{ blogs.0.create_date }}
+                on {{ blogs.0.create_date|date:"d.m.Y" }}
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@
 <div class="blogindex">
     <div class="container">
         <div class="blogindex-title">
-            <h1>Media</h1>
+            <h1>{{ page.title_blog_index }}</h1>
         </div>
         <!-- On the first page will be a featured blog entry -->
         {% if not blogs.has_previous %}
@@ -49,7 +49,7 @@
                         <div class="blogindex-text col-xs-12 col-sm-4 col-md-3">
                             {% include 'cms_blog/blog_categories.html' with categories=post.categories.all %}
                             <div class="blogindex_title">
-                                <h4><a href="{% pageurl post %}">{{ post.title }}</a></h4>
+                                <h4><a href="{% pageurl post %}">{{ post.title_blog }}</a></h4>
                             </div>
                             <!--lg and xs-->
                             <div class="blogindex-teaser hidden-md hidden-sm">
@@ -64,7 +64,7 @@
                                 {{ post.teasertext|truncatechars:60 }}
                             </div>
                             <div class="blog-createdates">
-                                on {{ post.create_date }}
+                                on {{ post.create_date|date:"d.m.Y" }}
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                     {% if blogs.has_previous %}
                         <li><a href="?page={{ blogs.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"><i class="fa fa-angle-left"></i></a></li>
                     {% endif %}
-                    {% for page_num in blogs.paginator.page_range %}
+                    {% for page_num in page_range %}
                         <li {% if page_num == blogs.number %}class="active"{% endif %}><a href="?page={{ page_num }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ page_num }}</a></li>
                     {% endfor %}
                     {% if blogs.has_next %}
