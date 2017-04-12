@@ -20,22 +20,28 @@
                     </div>
                 </div>
             </div>
-            <div class="blogindex-topics-first hidden-xs">
-                {% include 'cms_blog/blog_index_category_buttons.html' %}
+            <div class="row blogindex-dummy-row hidden-xs">
+                <div class="blogindex-topics">
+                    {% include 'cms_blog/blog_index_category_buttons.html' %}
+                </div>
             </div>
         {% else %}
-            <!-- The popular topics have to be moved when on other (not first) pages -->
-            <div class="blogindex-topics-xs hidden-sm hidden-md hidden-lg">
+            <!-- The category buttons have to be moved when on other (not first) pages -->
+            <div class="blogindex-topics-xs-second hidden-sm hidden-md hidden-lg">
                 <div class="row">
                     <div class="col-xs-12">
                         {% include 'cms_blog/blog_index_category_buttons.html' %}
                     </div>
                 </div>
             </div>
-            <div class="blogindex-topics hidden-xs">
-                {% include 'cms_blog/blog_index_category_buttons.html' %}
+            <div class="row blogindex-dummy-row hidden-xs">
+                <div class="blogindex-topics-second">
+                    {% include 'cms_blog/blog_index_category_buttons.html' %}
+                </div>
             </div>
         {% endif %}
+
+
 
         <!-- All Blog Entries -->
         {% for post in blogs %}
@@ -43,8 +49,10 @@
             {% else %}
                 <div class="blogindexentry">
                     <div class="row equal blogindex-all">
-                        <div class="blog-image col-xs-12 col-sm-5 col-sm-offset-3 col-md-5 col-md-offset-2">
-                            {% image post.image fill-870x500 %}
+                        {% if post.image %}
+                            {% image post.image fill-470x300 as image%}
+                        {% endif %}
+                        <div class="blog-index-image col-xs-12 col-sm-5 col-sm-offset-3 col-md-5 col-md-offset-2" style="background-image: url({% if image %} {{ image.url }} {% else %} {% static 'images/placeholder_870x500.png' %} {% endif %});">
                         </div>
                         <div class="blogindex-text col-xs-12 col-sm-4 col-md-3">
                             {% include 'cms_blog/blog_categories.html' with categories=post.categories.all %}
@@ -64,7 +72,7 @@
                                 {{ post.teasertext|truncatechars:60 }}
                             </div>
                             <div class="blog-createdates">
-                                on {{ post.create_date|date:"d.m.Y" }}
+                                on {{ post.create_date|date }}
                             </div>
                         </div>
                     </div>

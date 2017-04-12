@@ -1,7 +1,13 @@
 <h4>Categories</h4>
-{% for category in categories %}
-    <div class="btn btn-sm btn-topic">
-        <a href="?category={{ category }}" role="button">{{ category }}</a>
-    </div>
+{% for categ in categories %}
+    {% if categ.name_en == category %}
+        <div class="btn btn-sm btn-topic active">
+            <a href="?category=" role="button">{{ categ }} &nbsp; X</a>
+        </div>
+    {% else %}
+        <div class="btn btn-sm btn-topic">
+            <a href="?category={{ categ }}" role="button">{{ categ }}</a>
+        </div>
+    {% endif %}
     <br>
 {% endfor %}

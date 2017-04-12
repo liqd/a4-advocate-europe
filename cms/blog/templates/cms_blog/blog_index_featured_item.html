@@ -2,8 +2,10 @@
 
 <div class="blogindexentry">
     <div class="row equal blogindex-featured">
-        <div class="blog-image col-xs-12 col-sm-6 col-md-9">
-            {% image blogs.0.image fill-870x500 %}
+        {% if blogs.0.image %}
+            {% image blogs.0.image fill-870x500 as image%}
+        {% endif %}
+        <div class="blog-index-feature-image col-xs-12 col-sm-6 col-md-9" style="background-image: url({% if image %} {{ image.url }} {% else %} {% static 'images/placeholder_870x500.png' %} {% endif %});">
         </div>
         <div class="blogindex-text col-xs-12 col-sm-6 col-md-3">
             {% include 'cms_blog/blog_categories.html' with categories=blogs.0.categories.all %}
