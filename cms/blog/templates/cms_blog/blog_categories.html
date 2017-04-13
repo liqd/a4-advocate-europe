@@ -1,11 +1,5 @@
 <div class="blog-category">
     {% if categories %}
-        {% for category in categories %}
-            {% if forloop.first %}
-                {{ category.translated_name|upper }}
-            {% else %}
-                &nbsp; | &nbsp; {{ category.translated_name|upper }}
-            {% endif %}
-        {% endfor %}
+        {{ categories|join:" | "|upper }}
     {% endif %}
 </div>

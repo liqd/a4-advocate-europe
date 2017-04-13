@@ -66,6 +66,12 @@
         background-color: $ae-light-gray;
         box-shadow: 0 1px 0 0 $ae-light-gray-shadow;
     }
+
+    .blogindexentry-title {
+        a {
+            color: $gray-dark;
+        }
+    }
 }
 
 .blog-index-image {

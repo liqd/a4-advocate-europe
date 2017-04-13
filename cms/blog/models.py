@@ -15,7 +15,8 @@ from cms.snippets.models import Category
 class BlogIndexPage(Page):
 
     title_blog_index = models.CharField(
-        max_length=255, blank=True, verbose_name="Blog Index Title")
+        max_length=255, blank=True, verbose_name="Blog Index Title"
+    )
     featured_page = models.ForeignKey(
         'cms_blog.BlogPage',
         null=True,
