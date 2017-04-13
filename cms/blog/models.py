@@ -3,6 +3,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from modelcluster.fields import ParentalManyToManyField
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, ObjectList,
+                                                PageChooserPanel,
                                                 TabbedInterface)
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
@@ -15,6 +16,13 @@ class BlogIndexPage(Page):
 
     title_blog_index = models.CharField(
         max_length=255, blank=True, verbose_name="Blog Index Title")
+    featured_page = models.ForeignKey(
+        'cms_blog.BlogPage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+    )
 
     subpage_types = ['cms_blog.BlogPage']
 
@@ -63,6 +71,7 @@ class BlogIndexPage(Page):
 
     content_panels = [
         FieldPanel('title_blog_index'),
+        PageChooserPanel('featured_page'),
     ]
 
     promote_panels = Page.content_panels + Page.promote_panels
@@ -94,7 +103,7 @@ class BlogPage(Page):
         related_name='+',
         verbose_name="Blog Image",
         help_text="The Image that is shown on the blog page " +
-        "and in the blog index page"
+        "and the blog index page"
     )
 
     subpage_types = []

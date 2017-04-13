@@ -10,8 +10,8 @@
         <div class="blogindex-title">
             <h1>{{ page.title_blog_index }}</h1>
         </div>
-        <!-- On the first page will be a featured blog entry -->
-        {% if not blogs.has_previous %}
+        <!-- Featured blog entry will be on first index page only -->
+        {% if not blogs.has_previous and page.featured_page %}
             {% include 'cms_blog/blog_index_featured_item.html' %}
             <div class="blogindex-topics-xs hidden-sm hidden-md hidden-lg">
                 <div class="row">
@@ -41,11 +41,10 @@
             </div>
         {% endif %}
 
-
-
         <!-- All Blog Entries -->
         {% for post in blogs %}
-            {% if forloop.first and not blogs.has_previous %}
+            <!-- Featured blog entry shouldn't be shown twice on the first index page -->
+            {% if not blogs.has_previous and page.featured_page == post %}
             {% else %}
                 <div class="blogindexentry">
                     <div class="row equal blogindex-all">
@@ -96,6 +95,7 @@
                 </ul>
             </nav>
         </div>
+
     </div>
 </div>
 
