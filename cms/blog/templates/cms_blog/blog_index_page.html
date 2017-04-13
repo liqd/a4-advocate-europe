@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-blogindexpage{% endblock %}
+
+{% block content %}
+<div class="blogindex">
+    <div class="container">
+        <div class="blogindex-title">
+            <h1>{{ page.title_blog_index }}</h1>
+        </div>
+        <!-- Featured blog entry will be on first index page only -->
+        {% if not blogs.has_previous and page.featured_page %}
+            {% include 'cms_blog/blog_index_featured_item.html' %}
+            <div class="blogindex-topics-xs hidden-sm hidden-md hidden-lg">
+                <div class="row">
+                    <div class="col-xs-12">
+                        {% include 'cms_blog/blog_index_category_buttons.html' %}
+                    </div>
+                </div>
+            </div>
+            <div class="row blogindex-dummy-row hidden-xs">
+                <div class="blogindex-topics">
+                    {% include 'cms_blog/blog_index_category_buttons.html' %}
+                </div>
+            </div>
+        {% else %}
+            <!-- The category buttons have to be moved when on other (not first) pages -->
+            <div class="blogindex-topics-xs-second hidden-sm hidden-md hidden-lg">
+                <div class="row">
+                    <div class="col-xs-12">
+                        {% include 'cms_blog/blog_index_category_buttons.html' %}
+                    </div>
+                </div>
+            </div>
+            <div class="row blogindex-dummy-row hidden-xs">
+                <div class="blogindex-topics-second">
+                    {% include 'cms_blog/blog_index_category_buttons.html' %}
+                </div>
+            </div>
+        {% endif %}
+
+        <!-- No blog entry might exist for the category -->
+        {% if not blogs %}
+            <div class="blogindex-no-entry row">
+                <h4>Sorry, no blog entries exist for the chosen category.</h4>
+            </div>
+        {% endif %}
+
+        <!-- All Blog Entries -->
+        {% for post in blogs %}
+            <!-- Featured blog entry shouldn't be shown twice on the first index page -->
+            {% if not blogs.has_previous and page.featured_page == post %}
+            {% else %}
+                <div class="blogindexentry">
+                    <div class="row equal blogindex-all">
+                        {% if post.image %}
+                            {% image post.image fill-470x300 as image%}
+                        {% endif %}
+                        <div class="blog-index-image col-xs-12 col-sm-5 col-sm-offset-3 col-md-5 col-md-offset-2" style="background-image: url({% if image %} {{ image.url }} {% else %} {% static 'images/placeholder_870x500.png' %} {% endif %});">
+                        </div>
+                        <div class="blogindex-text col-xs-12 col-sm-4 col-md-3">
+                            {% include 'cms_blog/blog_categories.html' with categories=post.categories.all %}
+                            <div class="blogindexentry-title">
+                                <h4><a href="{% pageurl post %}">{{ post.title_blog }}</a></h4>
+                            </div>
+                            <!--lg and xs-->
+                            <div class="blogindex-teaser hidden-md hidden-sm">
+                                {{ post.teasertext|truncatechars:150 }}
+                            </div>
+                            <!--md-->
+                            <div class="blogindex-teaser hidden-lg hidden-sm hidden-xs">
+                                {{ post.teasertext|truncatechars:80 }}
+                            </div>
+                            <!--sm-->
+                            <div class="blogindex-teaser hidden-lg hidden-md hidden-xs">
+                                {{ post.teasertext|truncatechars:60 }}
+                            </div>
+                            <div class="blog-createdates">
+                                on {{ post.create_date|date }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        <!-- All Blog Entries END -->
+
+        <div class="blogindex-pagination">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    {% if blogs.has_previous %}
+                        <li><a href="?page={{ blogs.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"><i class="fa fa-angle-left"></i></a></li>
+                    {% endif %}
+                    {% if blogs.has_previous or blogs.has_next %}
+                        {% for page_num in page_range %}
+                            <li {% if page_num == blogs.number %}class="active"{% endif %}><a href="?page={{ page_num }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ page_num }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+                    {% if blogs.has_next %}
+                        <li><a href="?page={{ blogs.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"><i class="fa fa-angle-right"></i></a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

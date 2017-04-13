@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-blogpage{% endblock %}
+
+{% block content %}
+
+    <div class="container blogpage">
+        <div class="container-narrow">
+            <div class="btn blogpage-btn">
+                <a href="{{ page.get_parent.url }}" role="button">< Back to overview</a>
+            </div>
+        </div>
+        <div class="container-medium">
+            {% include 'cms_blog/blog_categories.html' with categories=page.categories.all %}
+            <div class="blogpage-title">
+                <h1>{{ page.title_blog }}</h1>
+            </div>
+            <div class="blogpage-taeser">
+                {{ page.teasertext }}
+            </div>
+            <div class="blog-createdates">
+                by {{ page.author }} at {{ page.create_date|date }}
+            </div>
+        </div>
+
+        <div class="blog-image container-narrow">
+            {% image page.image width-770 %}
+        </div>
+        <div class="container-medium">
+            <div class="blogpage-body">
+                {{ page.body|richtext }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

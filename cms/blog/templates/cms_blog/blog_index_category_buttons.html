@@ -1,0 +1,13 @@
+<h4>Categories</h4>
+{% for categ in categories %}
+    {% if categ.name_en == category %}
+        <div class="btn btn-sm blogindex-category-btn active">
+            <a href="?category=" role="button">{{ categ }} &nbsp; X</a>
+        </div>
+    {% else %}
+        <div class="btn btn-sm blogindex-category-btn">
+            <a href="?category={{ categ }}" role="button">{{ categ }}</a>
+        </div>
+    {% endif %}
+    <br>
+{% endfor %}

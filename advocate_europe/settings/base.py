@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'cms.home.apps.HomeConfig',
     'cms.settings.apps.SettingsConfig',
     'cms.snippets.apps.SnippetsConfig',
+    'cms.blog.apps.BlogConfig',
 
     'apps.contrib',
     'apps.users.apps.UsersConfig',

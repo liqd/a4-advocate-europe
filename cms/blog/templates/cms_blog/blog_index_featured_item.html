@@ -1,0 +1,32 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<div class="blogindexentry">
+    <div class="row equal blogindex-featured">
+        {% if page.featured_page.image %}
+            {% image page.featured_page.image fill-870x500 as image%}
+        {% endif %}
+        <div class="blog-index-feature-image col-xs-12 col-sm-6 col-md-9" style="background-image: url({% if image %} {{ image.url }} {% else %} {% static 'images/placeholder_870x500.png' %} {% endif %});">
+        </div>
+        <div class="blogindex-text col-xs-12 col-sm-6 col-md-3">
+            {% include 'cms_blog/blog_categories.html' with categories=page.featured_page.categories.all %}
+            <div class="blogindexentry-title">
+                <h4><a href="{% pageurl page.featured_page %}">{{ page.featured_page.title_blog }}</a></h4>
+            </div>
+            <!--lg-->
+            <div class="blogindex-teaser hidden-md hidden-sm hidden-xs">
+                {{ page.featured_page.teasertext|truncatechars:450 }}
+            </div>
+            <!--md and xs-->
+            <div class="blogindex-teaser hidden-lg hidden-sm">
+                {{ page.featured_page.teasertext|truncatechars:300 }}
+            </div>
+            <!--sm-->
+            <div class="blogindex-teaser hidden-lg hidden-md hidden-xs">
+                {{ page.featured_page.teasertext|truncatechars:140 }}
+            </div>
+            <div class="blog-createdates">
+                on {{ page.featured_page.create_date|date:"d.m.Y" }}
+            </div>
+        </div>
+    </div>
+</div>

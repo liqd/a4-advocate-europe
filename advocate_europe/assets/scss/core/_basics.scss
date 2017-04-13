@@ -48,6 +48,7 @@ body {
 }
 
 .container-small,
+.container-medium,
 .container-narrow {
     float: none;
     margin: 0 auto;
@@ -56,6 +57,10 @@ body {
 
 .container-small {
     @extend .col-md-4;
+}
+
+.container-medium {
+    @extend .col-md-6;
 }
 
 .container-narrow {
@@ -69,4 +74,31 @@ body {
     .navbar-brand-logo {
         height: rem(50px);
     }
+}
+
+// wagtail videos without padding
+
+.responsive-object {
+    position: relative;
+    padding-bottom: 67.5%;
+    height: 0;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.responsive-object iframe,
+.responsive-object object,
+.responsive-object embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+// wagtail images in rich text shouldn't be wider than the container
+
+.richtext-image {
+    max-width: 100%;
+    height: auto;
 }
