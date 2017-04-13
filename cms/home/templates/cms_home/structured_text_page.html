@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container structured-page">
+        <div class="col-md-3 hidden-sm hidden-xs">
+            <ul id="structured-page-side-nav" class="nav nav-stacked structured-page-side-nav">
+                {% for block in page.body %}
+                    <li role="presentation"><a href="#section{{ forloop.counter }}" class="structured-page-side-nav-link"><i class="fa fa-angle-right" aria-hidden="true"></i> {{ block.value.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12 structured-page-sections-container" data-spy="scroll" data-target="#structured-page-side-nav" data-offset="70">
+            {% for block in page.body %}
+                <div class="structured-page-section" id="section{{ forloop.counter }}">
+                    <h2>{{ block.value.title }}</h2>
+                    {% for block_content in block.value.content %}
+                        {{ block_content }}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

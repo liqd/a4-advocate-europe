@@ -79,3 +79,40 @@
         }
     }
 }
+
+.block-qa {
+    margin-bottom: rem(10px);
+
+    .panel-default {
+        border-radius: 5px;
+        box-shadow: none;
+    }
+
+    .panel-heading {
+        background-color: $ae-light-gray;
+        border-color: $ae-dark-gray;
+    }
+
+    .panel-title {
+        font-size: rem(18px);
+        line-height: 1.33;
+        font-weight: normal;
+    }
+
+    .panel-title-link {
+        &:hover,
+        &:focus {
+            text-decoration: none;
+        }
+    }
+
+    .collapsed {
+        .fa {
+            transform: rotateZ(180deg);
+        }
+    }
+
+    .panel-body {
+        border-top: none !important;
+    }
+}
