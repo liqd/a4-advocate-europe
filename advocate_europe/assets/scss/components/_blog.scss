@@ -4,12 +4,12 @@
     font-size: 12px;
     font-weight: 900;
     letter-spacing: rem(.8px);
-    color: #999;
+    color: $ae-middle-gray;
 }
 
 .blog-createdates {
     font-size: 14px;
-    color: #999;
+    color: $ae-middle-gray;
 }
 
 .blog-image {
@@ -20,7 +20,7 @@
 }
 
 
-//blog_index_page
+// ---------------------- blog_index_page -------------------------------
 
 .blogindex {
     background: linear-gradient(to bottom, $brand-primary rem(162px), #fff 0%);
@@ -39,6 +39,14 @@
     }
 }
 
+.blogindex-no-entry {
+    margin-top: rem(50px);
+    text-align: center;
+    min-height: rem(250px);
+}
+
+// blog index page entries
+
 .blogindexentry {
     .row {
         margin: 0;
@@ -56,21 +64,7 @@
     .blogindex-text {
         padding: rem(15px);
         background-color: $ae-light-gray;
-        box-shadow: 0 1px 0 0 #ccc;
-    }
-
-    .blog-image {
-        background-color: $ae-light-gray;
-        box-shadow: 0 1px 0 0 #ccc;
-        padding: 0;
-
-        img {
-            margin: 0;
-        }
-    }
-
-    a {
-        color: #000;
+        box-shadow: 0 1px 0 0 $ae-light-gray-shadow;
     }
 }
 
@@ -107,6 +101,8 @@
     position: relative;
 }
 
+// blogindex category buttons
+
 .blogindex-topics {
     position: absolute;
 }
@@ -141,21 +137,23 @@
         background-color: $ae-light-gray;
 
         a {
-            color: #000;
+            color: $gray-base;
         }
     }
 }
+
+// blogindex pagination
 
 .blogindex-pagination {
     text-align: center;
 
     li > a {
-        color: #333;
+        color: $gray-dark;
     }
 }
 
 
-// blog_page
+// ---------------------- blog_page --------------------------
 
 .blogpage {
     .blog-image {
@@ -178,7 +176,7 @@
     border-radius: rem(5px);
 
     a {
-        color: #000;
+        color: $gray-base;
         font-size: rem(16px);
         font-weight: bold;
     }

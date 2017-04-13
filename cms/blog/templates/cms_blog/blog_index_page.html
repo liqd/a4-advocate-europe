@@ -41,6 +41,13 @@
             </div>
         {% endif %}
 
+        <!-- No blog entry might exist for the category -->
+        {% if not blogs %}
+            <div class="blogindex-no-entry row">
+                <h4>Sorry, no blog entries exist for the chosen category.</h4>
+            </div>
+        {% endif %}
+
         <!-- All Blog Entries -->
         {% for post in blogs %}
             <!-- Featured blog entry shouldn't be shown twice on the first index page -->
@@ -86,9 +93,11 @@
                     {% if blogs.has_previous %}
                         <li><a href="?page={{ blogs.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"><i class="fa fa-angle-left"></i></a></li>
                     {% endif %}
-                    {% for page_num in page_range %}
-                        <li {% if page_num == blogs.number %}class="active"{% endif %}><a href="?page={{ page_num }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ page_num }}</a></li>
-                    {% endfor %}
+                    {% if blogs.has_previous or blogs.has_next %}
+                        {% for page_num in page_range %}
+                            <li {% if page_num == blogs.number %}class="active"{% endif %}><a href="?page={{ page_num }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ page_num }}</a></li>
+                        {% endfor %}
+                    {% endif %}
                     {% if blogs.has_next %}
                         <li><a href="?page={{ blogs.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"><i class="fa fa-angle-right"></i></a></li>
                     {% endif %}
