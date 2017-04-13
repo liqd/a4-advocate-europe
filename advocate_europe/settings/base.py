@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django_countries',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -70,6 +71,7 @@ INSTALLED_APPS = [
 
     'apps.contrib',
     'apps.users.apps.UsersConfig',
+    'apps.ideas.apps.IdeasConfig'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -184,13 +186,13 @@ FIXTURE_DIRS = [ os.path.join(PROJECT_DIR, 'fixtures') ]
 
 IMAGE_ALIASES = {
     '*': {
-        'max_size': 5*10**6,
+        'max_size': 3*10**6,
         'fileformats': ('image/png', 'image/jpeg', 'image/gif')
     },
     'heroimage': {'min_resolution': (1300, 600)},
     'logo': {'min_resolution': (200, 200), 'aspect_ratio': (1, 1)},
     'avatar': {'min_resolution': (200, 200)},
-    'idea_image': {'min_resolution': (800, 200)},
+    'idea_image': {'min_resolution': (400, 200)},
 }
 
 THUMBNAIL_ALIASES = {
