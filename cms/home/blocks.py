@@ -102,7 +102,7 @@ class FAQBlock(StructBlock):
 
 
 class SectionBlock(StructBlock):
-    title = CharBlock()
+    title = CharBlock(label="Section Title")
     content = StreamBlock(
         [
             ('text', RichTextBlock(required=False)),
