@@ -1,6 +1,7 @@
 from wagtail.wagtailcore.blocks import (CharBlock, ChoiceBlock, ListBlock,
-                                        PageChooserBlock, StructBlock,
-                                        TextBlock, URLBlock)
+                                        PageChooserBlock, RichTextBlock,
+                                        StreamBlock, StructBlock, TextBlock,
+                                        URLBlock)
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 
@@ -82,3 +83,29 @@ class CustomCarouselBlock(StructBlock):
         icon = 'folder-inverse'
         label = 'Carousel Block'
         help_text = 'Carousel of Proposals'
+
+
+class QuestionAnswerBlock(StructBlock):
+    question = CharBlock()
+    answer = RichTextBlock()
+
+    class Meta:
+        template = 'cms_home/blocks/question_answer_block.html'
+
+
+class FAQBlock(StructBlock):
+    title = CharBlock(required=False)
+    faqs = ListBlock(QuestionAnswerBlock)
+
+    class Meta:
+        template = 'cms_home/blocks/faq_block.html'
+
+
+class SectionBlock(StructBlock):
+    title = CharBlock(label="Section Title")
+    content = StreamBlock(
+        [
+            ('text', RichTextBlock(required=False)),
+            ('FAQ', FAQBlock(required=False))
+        ]
+    )

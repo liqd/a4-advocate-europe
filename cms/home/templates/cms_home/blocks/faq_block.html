@@ -1,0 +1,13 @@
+{% load wagtailcore_tags %}
+<div class="faq-block">
+    {% if value.title %}
+        <h2>{{ value.title }}</h2>
+    {% endif %}
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        {% for faq in value.faqs %}
+        {% include_block faq with number=forloop.counter %}
+        {% endfor %}
+    </div>
+
+</div>
