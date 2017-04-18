@@ -132,11 +132,13 @@
     background-color: $brand-primary;
     margin-bottom: rem(5px);
     border-radius: rem(5px);
+    max-width: rem(150px);
 
     a {
         color: #fff;
         font-size: rem(12px);
         font-weight: bold;
+        word-wrap: break-word;
     }
 
     &.active {
@@ -162,6 +164,9 @@
 // ---------------------- blog_page --------------------------
 
 .blogpage {
+    margin-top: rem(40px);
+    margin-bottom: rem(60px);
+
     .blog-image {
         margin-top: rem(30px);
         margin-bottom: rem(30px);

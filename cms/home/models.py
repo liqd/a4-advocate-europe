@@ -47,7 +47,9 @@ class HomePage(Page):
     )
 
     videoplayer_url = models.URLField(blank=True, verbose_name='Video URL')
-    subpage_types = ['cms_blog.BlogIndexPage', 'cms_home.SimplePage', 'cms_home.StructuredTextPage']
+    subpage_types = ['cms_blog.BlogIndexPage',
+                     'cms_home.SimplePage',
+                     'cms_home.StructuredTextPage']
 
     content_panels = [
         ImageChooserPanel('image'),
