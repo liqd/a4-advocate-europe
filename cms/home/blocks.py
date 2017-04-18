@@ -109,3 +109,14 @@ class SectionBlock(StructBlock):
             ('FAQ', FAQBlock(required=False))
         ]
     )
+
+
+class ThreeBlogEntriesBlock(StructBlock):
+    title = CharBlock(required=False,
+                      help_text="Heading to show above the blog entries"
+                      )
+
+    class Meta:
+        template = 'cms_home/blocks/blog_block.html'
+        label = 'Blog Block'
+        help_text = 'The three newest blog entries'

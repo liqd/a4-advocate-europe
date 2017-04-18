@@ -4,10 +4,12 @@
     font-size: 12px;
     font-weight: 900;
     letter-spacing: rem(.8px);
-    color: $ae-middle-gray;
+    text-transform: uppercase;
+    color: $brand-primary;
 }
 
 .blog-createdates {
+    margin-top: rem(10px);
     font-size: 14px;
     color: $ae-middle-gray;
 }
@@ -29,6 +31,10 @@
 .equal {
     display: flex;
     flex-wrap: wrap;
+}
+
+.blogindex-category {
+    color: $ae-middle-gray;
 }
 
 .blogindex-title {
@@ -169,6 +175,7 @@
 
     .blog-category {
         margin-top: rem(40px);
+        color: $ae-middle-gray;
     }
 
     .blog-createdates {

@@ -16,7 +16,8 @@ class HomePage(Page):
     block_types = [
         ('columns', custom_blocks.ThreeColumnTextBlock()),
         ('call_to_action', custom_blocks.CallToActionBlock()),
-        ('carousel', custom_blocks.CustomCarouselBlock())
+        ('carousel', custom_blocks.CustomCarouselBlock()),
+        ('blogs', custom_blocks.ThreeBlogEntriesBlock())
     ]
 
     # translated fields
@@ -47,7 +48,9 @@ class HomePage(Page):
     )
 
     videoplayer_url = models.URLField(blank=True, verbose_name='Video URL')
-    subpage_types = ['cms_blog.BlogIndexPage', 'cms_home.SimplePage', 'cms_home.StructuredTextPage']
+    subpage_types = ['cms_blog.BlogIndexPage',
+                     'cms_home.SimplePage',
+                     'cms_home.StructuredTextPage']
 
     content_panels = [
         ImageChooserPanel('image'),

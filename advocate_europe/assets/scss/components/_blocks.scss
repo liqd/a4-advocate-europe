@@ -116,3 +116,52 @@
         border-top: none !important;
     }
 }
+
+.block-blog {
+    margin-top: rem(10px);
+    margin-bottom: rem(20px);
+
+    .blockblog-entry {
+        padding: 0;
+        background-color: $ae-light-gray;
+        box-shadow: 0 1px 0 0 $ae-light-gray-shadow;
+        height: 100%;
+    }
+
+    .blockblog-image {
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .blockblog-text {
+        padding: rem(15px);
+    }
+
+    .blockblog-title-link {
+        color: $gray-dark;
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+        }
+    }
+
+    .blockblog-createdates {
+        margin-top: rem(10px);
+        font-size: 14px;
+    }
+}
+
+.blockblog-btn {
+    margin-top: rem(20px);
+    border-radius: 5px;
+    background-color: $ae-brand-orange;
+
+    a {
+        color: $gray-dark;
+        font-size: 16px;
+        font-weight: bold;
+    }
+}

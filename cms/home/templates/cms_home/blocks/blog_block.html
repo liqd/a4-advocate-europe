@@ -1,0 +1,50 @@
+{% load i18n wagtailcore_tags wagtailimages_tags blog_tags static %}
+
+{% load_latest_blogs "blogs" as blog_items %}
+
+<div class="container">
+    {% if value.title %}
+    <div class="row text-center">
+        <div class="col-md-12">
+            <h3>{{ value.title }}</h3>
+        </div>
+    </div>
+    {% endif %}
+    <div class="block-blog">
+    {% if blog_items %}
+        <div class="row equal">
+            {% for post in blog_items %}
+                <div class="col-md-4">
+                    <div class="blockblog-entry">
+                        <div class="blockblog-image">
+                        {% if post.image %}
+                            {% image post.image fill-370x200 as image%}
+                        {% endif %}
+                        <a href="{% pageurl post %}">
+                            <img src="{% if image %} {{ image.url }} {% else %} {% static 'images/placeholder_370x200.png' %} {% endif %}">
+                        </a>
+                        </div>
+                        <div class="blockblog-text">
+                            {% include 'cms_blog/blog_categories.html' with categories=post.categories.all %}
+                            <h4><a href="{% pageurl post %}" class="blockblog-title-link">{{ post.title_blog }}</a></h4>
+                            <div>
+                                {{ post.teasertext|truncatechars:350 }}
+                            </div>
+                            <div class="blockblog-createdates">
+                                on {{ post.create_date|date }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="row text-center">
+        <div class="col-md-12">
+            <div class="btn blockblog-btn">
+                <a href="blog" role="button">More stories</a>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
