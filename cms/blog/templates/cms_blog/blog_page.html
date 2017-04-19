@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load i18n static wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-blogpage{% endblock %}
 
@@ -9,7 +9,7 @@
     <div class="container blogpage">
         <div class="container-narrow">
             <div class="btn blogpage-btn">
-                <a href="{{ page.get_parent.url }}" role="button">< Back to overview</a>
+                <a href="{{ page.get_parent.url }}" role="button">{% trans "< Back to overview" %}</a>
             </div>
         </div>
         <div class="container-medium">
@@ -21,7 +21,7 @@
                 {{ page.teasertext }}
             </div>
             <div class="blog-createdates">
-                by {{ page.author }} at {{ page.create_date|date }}
+                {% trans "by" %} {{ page.author }} {% trans "at" %} {{ page.create_date|date }}
             </div>
         </div>
 

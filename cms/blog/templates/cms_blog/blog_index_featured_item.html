@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load i18n static wagtailcore_tags wagtailimages_tags %}
 
 <div class="blogindexentry">
     <div class="row equal blogindex-featured">
@@ -25,7 +25,7 @@
                 {{ page.featured_page.teasertext|truncatechars:140 }}
             </div>
             <div class="blog-createdates">
-                on {{ page.featured_page.create_date|date:"d.m.Y" }}
+                {% trans "on" %} {{ page.featured_page.create_date|date }}
             </div>
         </div>
     </div>
