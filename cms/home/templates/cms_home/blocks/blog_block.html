@@ -26,7 +26,7 @@
                             </div>
                             <div class="blockblog-text">
                                 {% include 'cms_blog/blog_categories.html' with categories=post.categories.all %}
-                                <h4><a href="{% pageurl post %}" class="blockblog-title-link">{{ post.title_blog }}</a></h4>
+                                <h4><a href="{% pageurl post %}" class="blockblog-title-link">{{ post.title }}</a></h4>
                                 <div>
                                     {{ post.teasertext|truncatechars:350 }}
                                 </div>
