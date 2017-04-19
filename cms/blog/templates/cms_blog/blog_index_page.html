@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load i18n static wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-blogindexpage{% endblock %}
 
@@ -44,7 +44,7 @@
         <!-- No blog entry might exist for the category -->
         {% if not blogs %}
             <div class="blogindex-no-entry row">
-                <h4>Sorry, no blog entries exist for the chosen category.</h4>
+                <h4>{% trans "Sorry, no blog entries exist for the chosen category." %}</h4>
             </div>
         {% endif %}
 
@@ -78,7 +78,7 @@
                                 {{ post.teasertext|truncatechars:60 }}
                             </div>
                             <div class="blog-createdates">
-                                on {{ post.create_date|date }}
+                                {% trans "on" %} {{ post.create_date|date }}
                             </div>
                         </div>
                     </div>
