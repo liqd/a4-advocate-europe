@@ -119,5 +119,5 @@ class ThreeBlogEntriesBlock(StructBlock):
 
     class Meta:
         template = 'cms_home/blocks/blog_block.html'
-        label = 'Blog Block'
-        help_text = 'The three newest blog entries'
+        label = 'Latest Blog Post'
+        help_text = 'The three latest blog entries'
