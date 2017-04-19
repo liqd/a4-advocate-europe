@@ -1,11 +1,13 @@
 from django.db import models
+from django.utils.translation import ugettext as _
+
 from django_countries.fields import CountryField
 
-PARTNERS_MORE_INFO_HELP = ('Please use this field if you '
-                           'have more than 3 partner organisations '
-                           'or if you want to tell us more about '
-                           'your proposed partnership '
-                           'arrangements (max. 200 characters).')
+PARTNERS_MORE_INFO_HELP = _('Please use this field if you '
+                            'have more than 3 partner organisations '
+                            'or if you want to tell us more about '
+                            'your proposed partnership '
+                            'arrangements (max. 200 characters).')
 
 
 class AbstractPartnersSection(models.Model):
