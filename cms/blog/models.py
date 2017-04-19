@@ -2,8 +2,8 @@ from django import forms
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from modelcluster.fields import ParentalManyToManyField
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, ObjectList,
-                                                PageChooserPanel,
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
+                                                ObjectList, PageChooserPanel,
                                                 TabbedInterface)
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
@@ -14,9 +14,6 @@ from cms.snippets.models import Category
 
 class BlogIndexPage(Page):
 
-    title_blog_index = models.CharField(
-        max_length=255, blank=True, verbose_name="Blog Index Title"
-    )
     featured_page = models.ForeignKey(
         'cms_blog.BlogPage',
         null=True,
@@ -71,11 +68,17 @@ class BlogIndexPage(Page):
         return context
 
     content_panels = [
-        FieldPanel('title_blog_index'),
+        FieldPanel('title'),
         PageChooserPanel('featured_page'),
     ]
 
-    promote_panels = Page.content_panels + Page.promote_panels
+    promote_panels = [
+        MultiFieldPanel([
+            FieldPanel('slug'),
+            FieldPanel('seo_title'),
+            FieldPanel('search_description')
+        ])
+    ]
 
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
@@ -85,8 +88,6 @@ class BlogIndexPage(Page):
 
 class BlogPage(Page):
 
-    title_blog = models.CharField(
-        max_length=255, blank=True, verbose_name="Blog Title")
     teasertext = models.TextField(
         blank=True, null=True, verbose_name="Blog Teaser Text")
     author = models.CharField(
@@ -110,15 +111,23 @@ class BlogPage(Page):
     subpage_types = []
 
     content_panels = [
-        FieldPanel('title_blog'),
-        FieldPanel('teasertext'),
-        FieldPanel('author'),
+        MultiFieldPanel([
+            FieldPanel('title'),
+            FieldPanel('teasertext'),
+            FieldPanel('author'),
+        ]),
         FieldPanel('body', classname="full"),
         FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
-        ImageChooserPanel('image'),
+        ImageChooserPanel('image')
     ]
 
-    promote_panels = Page.content_panels + Page.promote_panels
+    promote_panels = [
+        MultiFieldPanel([
+            FieldPanel('slug'),
+            FieldPanel('seo_title'),
+            FieldPanel('search_description')
+        ])
+    ]
 
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),

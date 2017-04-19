@@ -8,7 +8,7 @@
 <div class="blogindex">
     <div class="container">
         <div class="blogindex-title">
-            <h1>{{ page.title_blog_index }}</h1>
+            <h1>{{ page.title }}</h1>
         </div>
         <!-- Featured blog entry will be on first index page only -->
         {% if not blogs.has_previous and page.featured_page %}
@@ -63,7 +63,7 @@
                         <div class="blogindex-text col-xs-12 col-sm-4 col-md-3">
                             {% include 'cms_blog/blog_categories.html' with categories=post.categories.all %}
                             <div class="blogindexentry-title">
-                                <h4><a href="{% pageurl post %}">{{ post.title_blog }}</a></h4>
+                                <h4><a href="{% pageurl post %}">{{ post.title }}</a></h4>
                             </div>
                             <!--lg and xs-->
                             <div class="blogindex-teaser hidden-md hidden-sm">
