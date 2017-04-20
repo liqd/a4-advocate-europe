@@ -118,9 +118,6 @@
 }
 
 .block-blog {
-    margin-top: rem(10px);
-    margin-bottom: rem(20px);
-
     .blockblog-entry {
         padding: 0;
         background-color: $ae-light-gray;
@@ -163,5 +160,34 @@
         color: $gray-dark;
         font-size: 16px;
         font-weight: bold;
+    }
+}
+
+.three-column-text-block {
+    background-color: $ae-light-gray;
+    margin-top: rem(30px);
+    padding-bottom: rem(40px);
+}
+
+.teasertext-block {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.teasertextblock-btn {
+    border-radius: 5px;
+    background-color: $brand-primary;
+    height: rem(30px);
+    max-width: 100%;
+
+    a {
+        color: #fff;
+        font-size: 14px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+        overflow: hidden;
     }
 }

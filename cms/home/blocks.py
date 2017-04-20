@@ -17,6 +17,11 @@ class TeasertextBlock(StructBlock):
     headline = CharBlock(required=True, length=256)
     text = TextBlock(required=True)
     link = PageChooserBlock(required=False)
+    link_text = CharBlock(required=False,
+                          help_text=("Text to be displayed on the link-button."
+                                     "Should be quite short! If not given, the"
+                                     "title of the linked page will be used.")
+                          )
 
     class Meta:
         template = 'cms_home/blocks/teasertext_block.html'

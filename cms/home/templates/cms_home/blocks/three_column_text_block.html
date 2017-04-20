@@ -1,20 +1,22 @@
-<div class="container block">
-    {% if value.title %}
-    <div class="row">
-        <div class="col-md-12">
-            <h2>{{ value.title }}</h2>
+<div class="three-column-text-block">
+    <div class="container block">
+        {% if value.title %}
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h3>{{ value.title }}</h3>
+            </div>
         </div>
-    </div>
-    {% endif %}
-    <div class="row">
-        <div class="col-md-4">
-            {{ value.col1 }}
-        </div>
-        <div class="col-md-4">
-            {{ value.col2 }}
-        </div>
-        <div class="col-md-4">
-            {{ value.col3 }}
+        {% endif %}
+        <div class="row equal">
+            <div class="col-md-4">
+                {{ value.col1 }}
+            </div>
+            <div class="col-md-4">
+                {{ value.col2 }}
+            </div>
+            <div class="col-md-4">
+                {{ value.col3 }}
+            </div>
         </div>
     </div>
 </div>

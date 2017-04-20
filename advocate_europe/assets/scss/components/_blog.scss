@@ -134,14 +134,11 @@
     margin-bottom: rem(10px);
 }
 
-.btn {
-    white-space: normal;
-}
-
 .blogindex-category-btn {
     background-color: $brand-primary;
     margin-bottom: rem(5px);
     border-radius: rem(5px);
+    white-space: normal;
 
     @media screen and (min-width: $screen-sm-min) {
         max-width: rem(150px);

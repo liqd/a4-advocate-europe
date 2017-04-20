@@ -115,10 +115,10 @@ class BlogPage(Page):
             FieldPanel('title'),
             FieldPanel('teasertext'),
             FieldPanel('author'),
+            FieldPanel('body', classname="full"),
+            FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
+            ImageChooserPanel('image')
         ]),
-        FieldPanel('body', classname="full"),
-        FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
-        ImageChooserPanel('image')
     ]
 
     promote_panels = [
