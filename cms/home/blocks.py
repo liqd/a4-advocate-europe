@@ -20,7 +20,8 @@ class TeasertextBlock(StructBlock):
     link_text = CharBlock(required=False,
                           help_text=("Text to be displayed on the link-button."
                                      "Should be quite short! If not given, the"
-                                     "title of the linked page will be used."))
+                                     "title of the linked page will be used.")
+                          )
 
     class Meta:
         template = 'cms_home/blocks/teasertext_block.html'
