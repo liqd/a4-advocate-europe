@@ -96,6 +96,15 @@ body {
     height: 100%;
 }
 
+.equal {
+    display: flex;
+    flex-flow: row wrap;
+
+    &:before {
+        display: block;
+    }
+}
+
 // wagtail images in rich text shouldn't be wider than the container
 
 .richtext-image {
