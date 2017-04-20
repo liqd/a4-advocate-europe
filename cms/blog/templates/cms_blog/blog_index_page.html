@@ -11,7 +11,7 @@
             <h1>{{ page.title }}</h1>
         </div>
         <!-- Featured blog entry will be on first index page only -->
-        {% if not blogs.has_previous and page.featured_page %}
+        {% if not blogs.has_previous and page.featured_page.live %}
             {% include 'cms_blog/blog_index_featured_item.html' %}
             <div class="blogindex-topics-xs hidden-sm hidden-md hidden-lg">
                 <div class="row">

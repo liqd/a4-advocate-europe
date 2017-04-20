@@ -1,5 +1,19 @@
-<h3>{{ value.headline }}</h3>
-<p>{{ value.text }}</p>
-{% if value.link %}
-<a href="{{ value.link.url }}" class="btn btn-default">{{ value.link.title }}</a>
-{% endif %}
+<div class="teasertext-block">
+    <div>
+        <h4>{{ value.headline }}</h4>
+        <p>{{ value.text }}</p>
+    </div>
+    <div>
+        {% if value.link.live %}
+        <div class="btn teasertextblock-btn">
+        <div class="grr">
+            {% if value.link_text %}
+                <a href="{{ value.link.url }}" role="button" class="linktext-overflow">{{ value.link_text }}</a>
+            {% else %}
+                <a href="{{ value.link.url }}" role="button" class="linktext-overflow">{{ value.link.title }}</a>
+            {% endif %}
+        </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
