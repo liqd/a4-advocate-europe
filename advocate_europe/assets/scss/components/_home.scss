@@ -22,6 +22,10 @@
 .structured-page-sections-container {
     margin-top: rem(48px);
     padding-left: 0;
+
+    @media(max-width:$screen-sm-max) {
+        padding-left: 15px;
+    }
 }
 
 .structured-page-section {
