@@ -119,10 +119,17 @@
 
 .block-blog {
     .blockblog-entry {
+        margin-bottom: rem(10px);
         padding: 0;
         background-color: $ae-light-gray;
         box-shadow: 0 1px 0 0 $ae-light-gray-shadow;
         height: 100%;
+    }
+
+    .col-md-4 {
+        @media screen and (max-width: $screen-sm-min) {
+            margin-bottom: rem(10px);
+        }
     }
 
     .blockblog-image {
@@ -165,8 +172,15 @@
 
 .three-column-text-block {
     background-color: $ae-light-gray;
-    margin-top: rem(30px);
     padding-bottom: rem(40px);
+
+    h3 {
+        margin-bottom: 0;
+    }
+
+    h4 {
+        margin-top: rem(20px);
+    }
 }
 
 .teasertext-block {
@@ -181,6 +195,10 @@
     background-color: $brand-primary;
     height: rem(30px);
     max-width: 100%;
+
+    @media screen and (max-width: $screen-sm-min) {
+        max-width: rem(200px);
+    }
 
     a {
         color: #fff;
