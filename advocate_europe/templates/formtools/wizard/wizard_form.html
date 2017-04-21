@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load widget_tweaks i18n %}
+
+{% block content %}
+    <div class="container-medium">
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ wizard.form.media }}
+        {{ wizard.management_form }}
+        {% if wizard.form.forms %}
+            {{ wizard.form.management_form }}
+            {% for form in wizard.form.forms %}
+                {{ form.as_p }}
+            {% endfor %}
+        {% else %}
+            {% for field in wizard.form %}
+            <div class="form-group">
+            <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {% if field.errors %}
+                {{ field|add_class:"form-control form-error" }}
+            {% else %}
+                {{ field|add_class:"form-control"}}
+            {% endif %}
+            {{ field.errors }}
+            </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if wizard.steps.prev %}
+        <button class="btn btn-primary" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% trans "first step" %}</button>
+        <button class="btn btn-primary" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
+        {% endif %}
+        <input class="btn btn-primary" type="submit" name="submit" value="{% trans "submit" %}" />
+        </form>
+    </div>
+{% endblock %}
