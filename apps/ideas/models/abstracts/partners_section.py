@@ -19,7 +19,8 @@ class AbstractPartnersSection(models.Model):
     partner_organisation_3_name = models.CharField(max_length=250, blank=True)
     partner_organisation_3_website = models.URLField(blank=True)
     partner_organisation_3_country = CountryField(blank=True)
-    partners_more_info = models.CharField(max_length=200,
+    partners_more_info = models.CharField(blank=True,
+                                          max_length=200,
                                           help_text=PARTNERS_MORE_INFO_HELP)
 
     class Meta:

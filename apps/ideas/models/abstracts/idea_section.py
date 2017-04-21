@@ -63,7 +63,7 @@ class AbstractIdeaSection(models.Model):
         blank=True,
         help_text=IDEA_IMAGE_HELP
     )
-    idea_topics = models.CharField(max_length=2, choices=IDEA_TOPIC_CHOICES)
+    idea_topics = models.CharField(max_length=255, choices=IDEA_TOPIC_CHOICES)
     idea_topics_other = models.CharField(max_length=250, blank=True)
     # we need to add multiselect widget here, as more then one can be added
     idea_location = models.CharField(max_length=250,
