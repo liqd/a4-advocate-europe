@@ -31,7 +31,7 @@ class IdeaSketchAutoFixture(AutoFixture):
     }
 
     follow_pk = True
-    follow_fk = True
+    generate_fk = True
 
 register(IdeaSketch, IdeaSketchAutoFixture)
 
@@ -61,7 +61,7 @@ class IdeaCompleteAutoFixture(AutoFixture):
     }
 
     follow_pk = True
-    follow_fk = True
+    generate_fk = True
 
 
 register(IdeaComplete, IdeaCompleteAutoFixture)
