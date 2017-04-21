@@ -150,6 +150,16 @@ CKEDITOR_CONFIGS = {
             ['NumberedList', 'BulletedList'],
             ['Link', 'Unlink']
         ]
+    },
+    'image-editor': {
+        'width': '100%',
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['Image'],
+            ['NumberedList', 'BulletedList'],
+            ['Link', 'Unlink']
+        ]
     }
 }
 
@@ -158,7 +168,25 @@ BLEACH_LIST = {
         'tags': ['p','strong','em','u','ol','li','ul','a'],
         'attributes': {
             'a': ['href', 'rel'],
-        }
+        },
+    },
+    'image-editor': {
+        'tags': ['p','strong','em','u','ol','li','ul','a','img'],
+        'attributes': {
+            'a': ['href', 'rel'],
+            'img': ['src', 'alt', 'style']
+        },
+        'styles': [
+            'float',
+            'margin',
+            'padding',
+            'width',
+            'height',
+            'margin-bottom',
+            'margin-top',
+            'margin-left',
+            'margin-right',
+        ],
     }
 }
 
