@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils.translation import ugettext as _
-
 from django_countries.fields import CountryField
 
 PARTNERS_MORE_INFO_HELP = _('Please use this field if you '

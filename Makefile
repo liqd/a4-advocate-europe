@@ -24,6 +24,9 @@ install:
 	$(VIRTUAL_ENV)/bin/python3 -m pip install --upgrade -r requirements/dev.txt
 	$(VIRTUAL_ENV)/bin/python3 manage.py migrate
 
+fixtures:
+	$(VIRTUAL_ENV)/bin/python3 manage.py loadtestdata advocate_europe_ideas.IdeaSketch:1
+
 watch:
 	trap 'kill %1' KILL; \
 	npm run watch & \
