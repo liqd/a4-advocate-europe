@@ -35,7 +35,7 @@ class AbstractIdea(AbstractApplicantSection,
         ordering = ['-created']
 
     def __str__(self):
-        return self.name
+        return self.slug
 
 
 class IdeaSketch(AbstractIdea, AbstractCollaborationCampSection):

@@ -32,7 +32,7 @@ class AbstractApplicantSection(models.Model):
     first_name = models.CharField(max_length=250,
                                   help_text=FIRST_LAST_NAME_HELP)
     last_name = models.CharField(max_length=250)
-    organisation_status = models.CharField(max_length=2,
+    organisation_status = models.CharField(max_length=255,
                                            choices=ORGANISATION_STATUS_CHOICES
                                            )
     organisation_status_extra = models.CharField(
