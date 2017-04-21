@@ -25,7 +25,7 @@ COLLABORATION_CAMP_BENEFIT_HELP = _("Tell us about your expectations. "
 
 class AbstractCollaborationCampSection(models.Model):
     collaboration_camp_option = models.CharField(
-        max_length=2,
+        max_length=255,
         choices=COLLABORATION_CAMP_OPTIONS_CHOICES,
         help_text=COLLABORATION_CAMP_OPTIONS_HELP)
     collaboration_camp_represent = models.TextField(

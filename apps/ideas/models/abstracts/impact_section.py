@@ -86,7 +86,7 @@ class AbstractImpactSection(models.Model):
         max_length=300,
         help_text=REACH_OUT_HELP,
         verbose_name=REACH_OUT_TITLE, blank=True)
-    how_did_you_hear = models.CharField(max_length=2,
+    how_did_you_hear = models.CharField(max_length=255,
                                         verbose_name=HOW_DID_YOU_HEAR_TITLE,
                                         choices=HOW_DID_YOU_HEAR_CHOICES)
 
