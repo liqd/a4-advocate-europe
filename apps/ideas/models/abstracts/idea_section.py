@@ -69,11 +69,11 @@ class AbstractIdeaSection(models.Model):
     idea_location = models.CharField(max_length=250,
                                      choices=IDEA_LOCATION_CHOICES,
                                      help_text=IDEA_LOCATION_HELP)
-    idea_location_specify = models.CharField(
+    idea_location_specify = models.TextField(
         max_length=100,
         blank=True,
         help_text=IDEA_LOCATION_SPECIFY_HELP)
-    idea_location_ruhr = models.CharField(
+    idea_location_ruhr = models.TextField(
         max_length=200,
         blank=True,
         help_text=IDEA_LOCATION_RUHR_HELP)

@@ -36,23 +36,6 @@ MEMBERS_HELP = _('Please introduce us to the main members'
                  ' of your project team and briefly '
                  'summariese their experience and skills. '
                  '(max. 500 characters)')
-REACH_OUT_TITLE = _('Reach out – get feedback, '
-                    'ideas and inspiration from '
-                    'the Advocate Europe Community!')
-REACH_OUT_HELP = _('What kind of advice, comments or '
-                   'feedback would you like to receive '
-                   'about your idea from others on the '
-                   'platform? (max. 300 characters)')
-HOW_DID_YOU_HEAR_TITLE = _('How did you hear about '
-                           'Advocate Europe?')
-HOW_DID_YOU_HEAR_CHOICES = (
-    ('personal_contact', _('Personal contact')),
-    ('websites', _('Websites')),
-    ('facebook', _('Facebook')),
-    ('twitter', _('Twitter')),
-    ('newsletter', _('Newsletter')),
-    ('other', _('Other'))
-)
 
 
 class AbstractImpactSection(models.Model):
@@ -76,19 +59,10 @@ class AbstractImpactSection(models.Model):
         max_length=300,
         help_text=TARGET_GROUP_HELP,
         verbose_name=TARGET_GROUP_TITLE)
-    # Comma seperated email list, each email in list is supposed
-    # to get an invittion email to join (not more then 5)
-    collaborators_emails = models.CharField(
+    members = models.TextField(
         max_length=500,
         help_text=MEMBERS_HELP,
         verbose_name=MEMBERS_TITLE)
-    reach_out = models.CharField(
-        max_length=300,
-        help_text=REACH_OUT_HELP,
-        verbose_name=REACH_OUT_TITLE, blank=True)
-    how_did_you_hear = models.CharField(max_length=255,
-                                        verbose_name=HOW_DID_YOU_HEAR_TITLE,
-                                        choices=HOW_DID_YOU_HEAR_CHOICES)
 
     class Meta:
         abstract = True

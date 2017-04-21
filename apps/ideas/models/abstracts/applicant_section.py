@@ -35,7 +35,7 @@ class AbstractApplicantSection(models.Model):
     organisation_status = models.CharField(max_length=255,
                                            choices=ORGANISATION_STATUS_CHOICES
                                            )
-    organisation_status_extra = models.CharField(
+    organisation_status_extra = models.TextField(
         max_length=200, blank=True,
         help_text=ORGANISATION_STATUS_EXTRA_HELP)
     organisation_name = models.CharField(
@@ -45,7 +45,7 @@ class AbstractApplicantSection(models.Model):
     organisation_country = CountryField(blank=True)
     organisation_city = models.CharField(max_length=250, blank=True)
     contact_email = models.CharField(max_length=250, blank=True)
-    year_of_registration = models.CharField(max_length=4, blank=True)
+    year_of_registration = models.IntegerField(blank=True)
 
     class Meta:
         abstract = True

@@ -11,6 +11,7 @@ from adhocracy4.ratings import models as rating_models
 from .abstracts.applicant_section import AbstractApplicantSection
 from .abstracts.collaboration_camp_section import \
     AbstractCollaborationCampSection
+from .abstracts.community_section import AbstractCommunitySection
 from .abstracts.finances_section import AbstractFinanceSection
 from .abstracts.idea_section import AbstractIdeaSection
 from .abstracts.impact_section import AbstractImpactSection
@@ -24,6 +25,7 @@ class AbstractIdea(AbstractApplicantSection,
                    AbstractPartnersSection,
                    AbstractIdeaSection,
                    AbstractImpactSection,
+                   AbstractCommunitySection,
                    Item):
     slug = AutoSlugField(populate_from='idea_title', unique=True)
     collaborators = models.ManyToManyField(
@@ -49,6 +51,12 @@ class IdeaSketch(AbstractIdea, AbstractCollaborationCampSection):
 
 
 class IdeaComplete(AbstractIdea, AbstractFinanceSection):
+    ratings = GenericRelation(rating_models.Rating,
+                              related_query_name='idea_complete',
+                              object_id_field='object_pk')
+    comments = GenericRelation(comment_models.Comment,
+                               related_query_name='idea_complete',
+                               object_id_field='object_pk')
     idea_sketch = models.OneToOneField(IdeaSketch)
     duration = models.IntegerField(
         verbose_name=DURATION_TITLE,

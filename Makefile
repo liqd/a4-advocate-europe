@@ -25,7 +25,8 @@ install:
 	$(VIRTUAL_ENV)/bin/python3 manage.py migrate
 
 fixtures:
-	$(VIRTUAL_ENV)/bin/python3 manage.py loadtestdata advocate_europe_ideas.IdeaSketch:1
+	$(VIRTUAL_ENV)/bin/python3 manage.py loadtestdata advocate_europe_ideas.IdeaSketch:7
+	$(VIRTUAL_ENV)/bin/python3 manage.py loadtestdata advocate_europe_ideas.IdeaComplete:5
 
 watch:
 	trap 'kill %1' KILL; \
