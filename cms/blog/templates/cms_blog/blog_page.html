@@ -21,7 +21,7 @@
                 {{ page.teasertext }}
             </div>
             <div class="blog-createdates">
-                {% trans "by" %} {{ page.author }} {% trans "at" %} {{ page.create_date|date }}
+                {% if page.author %}{% trans "by" %} {{ page.author }}{% endif %} {% trans "at" %} {{ page.create_date|date }}
             </div>
         </div>
 
