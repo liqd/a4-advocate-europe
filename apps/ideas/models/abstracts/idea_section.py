@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext as _
+
 from adhocracy4.images import fields
 
 IDEA_TITLE_HELP = _('Give your idea a short '
