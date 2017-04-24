@@ -15,7 +15,8 @@
         {% else %}
             {% for field in wizard.form %}
             <div class="form-group">
-            <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %} *{% endif %}</label>
+            <p>{{ field.help_text }}</p>
             {% if field.errors %}
                 {{ field|add_class:"form-control form-error" }}
             {% else %}
