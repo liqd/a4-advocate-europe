@@ -1,0 +1,29 @@
+.ideasketch-list {
+    background: linear-gradient(to bottom, $brand-primary rem(122px), #fff 0%);
+}
+
+.ideasketchlist-title {
+    color: #fff;
+    font-weight: bold;
+}
+
+
+.ideasketchlist-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.ideasketchlist-item {
+    flex-basis: 23%;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: $ae-light-gray;
+    box-shadow: 0 1px 0 0 $ae-dark-gray;
+}
+
+.ideasketchlist-type {
+    box-shadow: 0 1px 0 0 $ae-dark-gray;
+}
