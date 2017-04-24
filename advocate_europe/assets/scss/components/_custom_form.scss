@@ -1,0 +1,33 @@
+.custom-form {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: $gray-dark;
+
+    label {
+        font-size: 16px;
+    }
+
+    .form-control {
+        border-radius: 0;
+        border-color: $ae-dark-gray;
+        background-color: $ae-light-gray;
+        box-shadow: none;
+    }
+
+    .form-error {
+        border-color: $brand-danger;
+    }
+
+    .errorlist {
+        list-style-type: none;
+        padding-left: 0;
+        color: $brand-danger;
+        font-size: 16px;
+    }
+
+
+    & .custom-form-wizard {
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+        padding: 20px;
+    }
+}

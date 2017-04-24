@@ -2,8 +2,8 @@
 {% load widget_tweaks i18n %}
 
 {% block content %}
-    <div class="container-medium">
-        <form method="post" enctype="multipart/form-data">
+    <div class="custom-form container-medium">
+        <form class="custom-form-wizard" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ wizard.form.media }}
         {{ wizard.management_form }}
@@ -16,7 +16,7 @@
             {% for field in wizard.form %}
             <div class="form-group">
             <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %} *{% endif %}</label>
-            <p>{{ field.help_text }}</p>
+            {% if field.help_text %}<p><i>{{ field.help_text }}</i></p>{% endif %}
             {% if field.errors %}
                 {{ field|add_class:"form-control form-error" }}
             {% else %}
