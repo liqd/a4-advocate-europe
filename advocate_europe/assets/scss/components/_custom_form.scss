@@ -1,17 +1,25 @@
 .custom-form {
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: rem(50px);
+    margin-bottom: rem(50px);
     color: $gray-dark;
 
     label {
-        font-size: 16px;
+        font-size: rem(16px);
     }
 
     h1 {
         text-transform: uppercase;
-        margin-top: 10px;
-        margin-bottom: 30px;
-        font-size: 24px;
+        margin-top: rem(10px);
+        margin-bottom: rem(30px);
+        font-size: rem(24px);
+    }
+
+    select {
+        height: 40px;
+    }
+
+    input {
+        height: 40px;
     }
 
     .form-section_title {
@@ -20,6 +28,10 @@
             text-align: right;
             color: $gray-light;
         }
+    }
+
+    .last-button {
+        margin-right: rem(15px);
     }
 
     .form-control {
@@ -43,6 +55,6 @@
 
     & .custom-form-wizard {
         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
-        padding: 20px;
+        padding: rem(20px 60px 20px 60px);
     }
 }

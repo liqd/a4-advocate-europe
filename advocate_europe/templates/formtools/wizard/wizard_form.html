@@ -36,12 +36,15 @@
             </div>
             {% endfor %}
         {% endif %}
-
-        {% if wizard.steps.prev %}
-        <button class="btn btn-primary" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% trans "first step" %}</button>
-        <button class="btn btn-primary" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
-        {% endif %}
-        <input class="btn btn-primary" type="submit" name="submit" value="{% trans "submit" %}" />
+            <div class="row">
+                <div class="pull-right">
+                    {% if wizard.steps.prev %}
+                    <button class="btn btn-primary" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% trans "first step" %}</button>
+                    <button class="btn btn-primary" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
+                    {% endif %}
+                    <input class="btn btn-primary last-button" type="submit" name="submit" value="{% trans "proceed" %}" />
+                </div>
+            </div>
         </form>
     </div>
 {% endblock %}
