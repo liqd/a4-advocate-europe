@@ -7,6 +7,21 @@
         font-size: 16px;
     }
 
+    h1 {
+        text-transform: uppercase;
+        margin-top: 10px;
+        margin-bottom: 30px;
+        font-size: 24px;
+    }
+
+    .form-section_title {
+        h1 {
+            text-transform: none;
+            text-align: right;
+            color: $gray-light;
+        }
+    }
+
     .form-control {
         border-radius: 0;
         border-color: $ae-dark-gray;

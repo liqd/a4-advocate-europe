@@ -4,6 +4,16 @@
 {% block content %}
     <div class="custom-form container-medium">
         <form class="custom-form-wizard" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>{% trans 'create an idea' %} </h1>
+            </div>
+            <div class="col-md-6 form-section_title">
+                <h1>{{ form.section_name }}</h1>
+            </div>
+        </div>
+
+
         {% csrf_token %}
         {{ wizard.form.media }}
         {{ wizard.management_form }}
