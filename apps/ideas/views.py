@@ -17,7 +17,7 @@ class IdeaSketchCreateWizard(SessionWizardView):
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
 
     def done(self, form_list, **kwargs):
-        forms = [form.cleaned_data for form in form_list]
+
         idea_sketch = IdeaSketch()
         idea_sketch.creator = self.request.user
 
@@ -25,9 +25,8 @@ class IdeaSketchCreateWizard(SessionWizardView):
         mod = Module.objects.get(slug=mod_slug)
         idea_sketch.module = mod
 
-        for form in forms:
-            for key, value in form.items():
-                setattr(idea_sketch, key, value)
+        for key, value in self.get_all_cleaned_data().items():
+            setattr(idea_sketch, key, value)
 
         idea_sketch.save()
 
