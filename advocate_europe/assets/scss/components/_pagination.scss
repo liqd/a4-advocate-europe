@@ -1,0 +1,11 @@
+.ae-pagination {
+    text-align: center;
+
+    .active {
+        background-color: $ae-light-gray;
+    }
+
+    li > a {
+        color: $gray-dark;
+    }
+}

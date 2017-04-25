@@ -8,7 +8,7 @@ fake = Factory.create()
 
 class IdeaSketchAutoFixture(AutoFixture):
 
-    IMAGESIZES = ((800, 600),)
+    IMAGESIZES = ((400, 200), (600, 400), (600, 300), )
 
     field_values = {
         'first_name': generators.CallableGenerator(fake.first_name),
@@ -38,7 +38,7 @@ register(IdeaSketch, IdeaSketchAutoFixture)
 
 class IdeaCompleteAutoFixture(AutoFixture):
 
-    IMAGESIZES = ((800, 600),)
+    IMAGESIZES = ((400, 200), (600, 400), (600, 300), )
 
     field_values = {
         'first_name': generators.CallableGenerator(fake.first_name),

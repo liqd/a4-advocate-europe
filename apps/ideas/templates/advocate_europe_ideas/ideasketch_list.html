@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% load i18n static thumbnail %}
+
+{% block content %}
+<div class="ideasketch-list">
+    <div class="ideasketchlist-title text-center">
+        <h1>All ideas</h1>
+    </div>
+    <div class="container">
+        <div class="ideasketchlist-list">
+            {% for ideasketch in ideasketch_list %}
+                <div class="ideasketchlist-item">
+                    <div class="ideasketchlist-upper">
+                        <div class="ideasketchlist-image">
+                            <img src="{% if ideasketch.idea_image %} {{ ideasketch.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_ideatileimage_400x200.png' %} {% endif %}">
+                        </div>
+                        <div class="ideasketchlist-text">
+                            <div class="blog-category">
+                                {{ ideasketch.idea_topics }}
+                                {% if ideasketch.idea_topics_other %}
+                                    | {{ ideasketch.idea_topics_other }}
+                                {% endif %}
+                            </div>
+
+                            <h4>{{ ideasketch.idea_title }}</h4>
+                            {{ ideasketch.idea_pitch|truncatechars:240 }}
+                        </div>
+                    </div>
+                    <div class="ideasketchlist-lower">
+                        Idea Sketch?? - var!
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="ae-pagination text-center">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    {% if ideasketch_list.has_previous %}
+                        <li><a href="?page={{ ideasketch_list.previous_page_number }}"><i class="fa fa-angle-left"></i></a></li>
+                    {% endif %}
+                    {% if ideasketch_list.has_previous or ideasketch_list.has_next %}
+                        {% for page_num in page_range %}
+                            <li {% if page_num == ideasketch_list.number %}class="active"{% endif %}><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+                    {% if ideasketch_list.has_next %}
+                        <li><a href="?page={{ ideasketch_list.next_page_number }}"><i class="fa fa-angle-right"></i></a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

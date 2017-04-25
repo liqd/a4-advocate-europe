@@ -1,12 +1,14 @@
-.ideasketch-list {
-    background: linear-gradient(to bottom, $brand-primary rem(122px), #fff 0%);
-}
-
 .ideasketchlist-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // align-content: center;
+
+    background-color: $brand-primary;
+    height: rem(122px);
     color: #fff;
     font-weight: bold;
 }
-
 
 .ideasketchlist-list {
     display: flex;
@@ -16,14 +18,36 @@
 }
 
 .ideasketchlist-item {
-    flex-basis: 23%;
+    flex-basis: 24%;
+    display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: space-between;
 
+    margin-top: rem(10px);
     background-color: $ae-light-gray;
-    box-shadow: 0 1px 0 0 $ae-dark-gray;
-}
 
-.ideasketchlist-type {
-    box-shadow: 0 1px 0 0 $ae-dark-gray;
+    .ideasketchlist-image {
+        img {
+            width: 100%;
+        }
+    }
+
+    .ideasketchlist-text {
+        padding: rem(12px);
+
+        h4 {
+
+        }
+    }
+
+    .ideasketchlist-lower {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        padding: rem(12px);
+        box-shadow: 0 -1px 0 0 $ae-dark-gray;
+        height: rem(38px);
+    }
 }
