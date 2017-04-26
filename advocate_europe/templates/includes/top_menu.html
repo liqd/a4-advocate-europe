@@ -36,6 +36,10 @@
                 {% endif %}
                 {% endfor %}
 
+                <li>
+                    <a href="{% url 'idea-sketch-create' 'ideas2017' %}">{% trans 'add proposal'  %}</a>
+                </li>
+
                 {% get_available_languages as languages %}
                 {% for lang_code, lang_name in languages %}
                 {% if lang_code != LANGUAGE_CODE %}

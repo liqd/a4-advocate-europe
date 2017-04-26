@@ -1,0 +1,67 @@
+.form-control-upload {
+    position: relative;
+    display: block;
+
+    .form-control-file {
+        cursor: pointer;
+        float: none;
+        left: 0;
+        position: absolute;
+        opacity: 0;
+        top: 0;
+    }
+
+    .btn {
+        line-height: 40px;
+    }
+
+    .btn-default {
+        @include rem(font-size, 24px);
+        @include rem(width, 40px);
+        background: $brand-success;
+        border: 0;
+        color: #fff;
+        padding: 0;
+    }
+
+    .btn-danger {
+        @include rem(font-size, 24px);
+        @include rem(width, 48px);
+        background: $brand-danger;
+        border: 0;
+        color: #fff;
+        padding: 0;
+    }
+
+    .alert-info {
+        clear: left;
+        @include rem(margin-top, 20px);
+    }
+
+    .form-control {
+        float: none;
+    }
+
+    @media (min-width: $screen-sm) {
+        .input-group-btn {
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            right: 0;
+            width: auto;
+        }
+
+        &.col-sm-9 .input-group-btn {
+            right: 15px;
+        }
+    }
+}
+
+.clear-image {
+    display: none;
+}
+
+.clear-image:checked + img {
+    opacity: 0.2;
+    filter: grayscale(100%);
+}
