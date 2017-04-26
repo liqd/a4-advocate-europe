@@ -29,7 +29,8 @@ class AbstractIdea(AbstractApplicantSection,
                    Item):
     slug = AutoSlugField(populate_from='idea_title', unique=True)
     collaborators = models.ManyToManyField(
-        settings.AUTH_USER_MODEL
+        settings.AUTH_USER_MODEL,
+        blank=True
     )
 
     class Meta:

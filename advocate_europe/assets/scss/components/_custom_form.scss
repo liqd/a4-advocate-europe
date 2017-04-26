@@ -1,0 +1,60 @@
+.custom-form {
+    margin-top: rem(50px);
+    margin-bottom: rem(50px);
+    color: $gray-dark;
+
+    label {
+        font-size: rem(16px);
+    }
+
+    h1 {
+        text-transform: uppercase;
+        margin-top: rem(10px);
+        margin-bottom: rem(30px);
+        font-size: rem(24px);
+    }
+
+    select {
+        height: 40px;
+    }
+
+    input {
+        height: 40px;
+    }
+
+    .form-section_title {
+        h1 {
+            text-transform: none;
+            text-align: right;
+            color: $gray-light;
+        }
+    }
+
+    .last-button {
+        margin-right: rem(15px);
+    }
+
+    .form-control {
+        border-radius: 0;
+        border-color: $ae-dark-gray;
+        background-color: $ae-light-gray;
+        box-shadow: none;
+    }
+
+    .form-error {
+        border-color: $brand-danger;
+    }
+
+    .errorlist {
+        list-style-type: none;
+        padding-left: 0;
+        color: $brand-danger;
+        font-size: 16px;
+    }
+
+
+    & .custom-form-wizard {
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+        padding: rem(20px 60px 20px 60px);
+    }
+}
