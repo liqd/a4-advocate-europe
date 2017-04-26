@@ -14,6 +14,10 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+
+    @media screen and (max-width: $screen-sm-min) {
+        justify-content: center;
+    }
 }
 
 .ideasketchlist-item {
