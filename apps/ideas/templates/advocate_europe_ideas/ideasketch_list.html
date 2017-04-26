@@ -16,7 +16,7 @@
                             <img src="{% if ideasketch.idea_image %} {{ ideasketch.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_ideatileimage_400x200.png' %} {% endif %}">
                         </div>
                         <div class="ideasketchlist-text">
-                            <div class="blog-category">
+                            <div class="ideasketchlist-category">
                                 {{ ideasketch.idea_topics }}
                                 {% if ideasketch.idea_topics_other %}
                                     | {{ ideasketch.idea_topics_other }}
