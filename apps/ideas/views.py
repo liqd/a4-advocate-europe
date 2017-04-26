@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from django.views import generic
 from django.views.generic import ListView
 from formtools.wizard.views import SessionWizardView
+from rules.contrib.views import PermissionRequiredMixin
 
 from adhocracy4.modules.models import Module
 
@@ -19,7 +20,8 @@ class IdeaSketchListView(ListView):
     paginate_by = 12
 
 
-class IdeaSketchCreateWizard(SessionWizardView):
+class IdeaSketchCreateWizard(PermissionRequiredMixin, SessionWizardView):
+    permission_required = 'advocate_europe_ideas.add_ideasketch'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
 
