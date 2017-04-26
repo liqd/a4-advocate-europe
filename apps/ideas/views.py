@@ -3,6 +3,7 @@ import os
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse
+from django.forms.models import model_to_dict
 from django.http import HttpResponseRedirect
 from django.views import generic
 from formtools.wizard.views import SessionWizardView
@@ -36,3 +37,7 @@ class IdeaSketchCreateWizard(SessionWizardView):
 
 class IdeaSketchDetailView(generic.DetailView):
     model = IdeaSketch
+
+    @property
+    def idea_dict(self):
+        return model_to_dict(self.object)
