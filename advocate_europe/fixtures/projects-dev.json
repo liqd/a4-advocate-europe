@@ -1,0 +1,33 @@
+[
+  {
+    "model": "a4organisations.organisation",
+    "pk": 1,
+    "fields": {
+      "name": "Stiftung Mercator"
+    }
+  },
+  {
+    "model": "a4projects.project",
+    "pk": 1,
+    "fields": {
+      "slug": "ae2017",
+      "name": "Advocate Europe 2017",
+      "description": "lorem ipsum",
+      "information": "lorem ipsum",
+      "is_public": true,
+      "is_draft": false,
+      "organisation": 1
+    }
+  },
+  {
+    "model": "a4modules.module",
+    "pk": 1,
+    "fields": {
+      "slug": "ideas2017",
+      "name": "Ideas 2017",
+      "description": "lorem ipsum",
+      "weight": 1,
+      "project": 1
+    }
+  }
+]
