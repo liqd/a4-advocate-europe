@@ -33,9 +33,9 @@
                 </div>
             {% endfor %}
         </div>
-
-        {% include 'includes/pagination.html' with page_list=ideasketch_list %}
-
+        {% if is_paginated %}
+            {% include 'includes/pagination.html' %}
+        {% endif %}
     </div>
 </div>
 
