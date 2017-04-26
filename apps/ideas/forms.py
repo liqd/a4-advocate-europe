@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import BooleanField, ModelForm
 from django.utils.translation import ugettext as _
 
 from .models.abstracts.applicant_section import AbstractApplicantSection
@@ -9,6 +9,13 @@ from .models.abstracts.finances_section import AbstractFinanceSection
 from .models.abstracts.idea_section import AbstractIdeaSection
 from .models.abstracts.impact_section import AbstractImpactSection
 from .models.abstracts.partners_section import AbstractPartnersSection
+
+ACCEPT_CONDITIONS_LABEL = _('I hereby confirm and agree that '
+                            'my idea will be public once'
+                            ' published. I confirm that I have '
+                            'the right to share the idea and '
+                            'the visual material '
+                            'used in this proposal.')
 
 
 class ApplicantSectionForm(ModelForm):
@@ -53,6 +60,7 @@ class CollaborationCampSectionForm(ModelForm):
 
 class CommunitySectionForm(ModelForm):
     section_name = _('Community Information')
+    accept_conditions = BooleanField(label=ACCEPT_CONDITIONS_LABEL)
 
     class Meta:
         model = AbstractCommunitySection
