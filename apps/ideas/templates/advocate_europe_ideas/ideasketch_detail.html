@@ -1,12 +1,39 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-<dl>
-    {% for field, value in view.idea_dict.items %}
-    <dt>{{ field }}</dt>
-    <dd>{{ value }}</dd>
-    {% endfor %}
-</dl>
+<div class="ideadetail">
+    <div class="container">
+        <div class="ideadetail-image-part">
+            <div class="ideadetail-image" style="background-image: url({{ ideasketch.idea_image.url }});">
+                <div class="btn blogpage-btn">
+                    <a href="#" role="button">< All ideas</a>
+                </div>
+                <div>
+                    <h2>{{ ideasketch.idea_title }} - {{ ideasketch.idea_subtitle }} </h2>
+                </div>
+            </div>
+        </div>
+        <div class="ideadetail-tab-part">
+            <ul class="nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#info">Info</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#idea">Idea</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#reporting">Reporting</a>
+              </li>
+            </ul>
+        </div>
+        <div class="ideadetail-tab ideadetail-idea-tab">
+            <div class="col-md-offset-1 col-md-7">
+                {% for field, value in idea_tab_dict.items %}
+                    <h4>{{ field }}</h4>
+                    <p>{{ value }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

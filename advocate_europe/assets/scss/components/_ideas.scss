@@ -1,3 +1,5 @@
+// ------------------------ Idea Space ------------------------
+
 .ideasketchlist-title {
     display: flex;
     flex-direction: column;
@@ -60,3 +62,28 @@
     text-transform: uppercase;
     color: $brand-primary;
 }
+
+// ------------------------ Idea Detail ------------------------
+
+.ideadetail {
+    background: linear-gradient(to bottom, $brand-primary rem(500px), #fff 0%);
+
+    .ideadetail-image {
+        height: rem(350px);
+
+        @media screen and (min-width: $screen-md-min) {
+            margin-top: rem(40px);
+        }
+    }
+
+    .ideadetail-tab-part {
+        background-color: $ae-light-gray;
+    }
+
+    .ideadetail-tab {
+        background-color: #fff;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+    }
+}
+
+

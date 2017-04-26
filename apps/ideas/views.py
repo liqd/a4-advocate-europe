@@ -6,17 +6,11 @@ from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict
 from django.http import HttpResponseRedirect
 from django.views import generic
-from django.views.generic import ListView
 from formtools.wizard.views import SessionWizardView
 
 from adhocracy4.modules.models import Module
 
 from .models import IdeaSketch
-
-
-class IdeaSketchListView(ListView):
-    model = IdeaSketch
-    paginate_by = 12
 
 
 class IdeaSketchCreateWizard(SessionWizardView):
@@ -46,3 +40,20 @@ class IdeaSketchDetailView(generic.DetailView):
     @property
     def idea_dict(self):
         return model_to_dict(self.object)
+
+    def get_context_data(self, **kwargs):
+        idea_tab_dict = {}
+        idea_tab_dict['Idea pitch'] = self.object.idea_pitch
+        idea_tab_dict['Challenge'] = self.object.challenge
+        idea_tab_dict['Outcome'] = self.object.outcome
+        idea_tab_dict['Plan'] = self.object.plan
+        idea_tab_dict['Importance'] = self.object.importance
+
+        context = super().get_context_data(**kwargs)
+        context['idea_tab_dict'] = idea_tab_dict
+        return context
+
+
+class IdeaSketchListView(generic.ListView):
+    model = IdeaSketch
+    paginate_by = 12
