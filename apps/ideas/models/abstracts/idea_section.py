@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext as _
+from multiselectfield import MultiSelectField
 
 from adhocracy4.images import fields
 
@@ -63,12 +64,16 @@ class AbstractIdeaSection(models.Model):
         blank=True,
         help_text=IDEA_IMAGE_HELP
     )
-    idea_topics = models.CharField(max_length=255, choices=IDEA_TOPIC_CHOICES)
+    idea_topics = MultiSelectField(
+        max_length=255,
+        choices=IDEA_TOPIC_CHOICES,
+        max_choices=2
+    )
     idea_topics_other = models.CharField(max_length=250, blank=True)
-    # we need to add multiselect widget here, as more then one can be added
-    idea_location = models.CharField(max_length=250,
+    idea_location = MultiSelectField(max_length=250,
                                      choices=IDEA_LOCATION_CHOICES,
-                                     help_text=IDEA_LOCATION_HELP)
+                                     help_text=IDEA_LOCATION_HELP,
+                                     max_choices=3)
     idea_location_specify = models.TextField(
         max_length=100,
         blank=True,
