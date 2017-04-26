@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict
 from django.http import HttpResponseRedirect
 from django.views import generic
+from django.views.generic import ListView
 from formtools.wizard.views import SessionWizardView
 
 from adhocracy4.modules.models import Module
@@ -13,12 +14,16 @@ from adhocracy4.modules.models import Module
 from .models import IdeaSketch
 
 
+class IdeaSketchListView(ListView):
+    model = IdeaSketch
+    paginate_by = 12
+
+
 class IdeaSketchCreateWizard(SessionWizardView):
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
 
     def done(self, form_list, **kwargs):
-
         idea_sketch = IdeaSketch()
         idea_sketch.creator = self.request.user
 

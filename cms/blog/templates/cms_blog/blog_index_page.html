@@ -87,23 +87,7 @@
         {% endfor %}
         <!-- All Blog Entries END -->
 
-        <div class="blogindex-pagination">
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    {% if blogs.has_previous %}
-                        <li><a href="?page={{ blogs.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"><i class="fa fa-angle-left"></i></a></li>
-                    {% endif %}
-                    {% if blogs.has_previous or blogs.has_next %}
-                        {% for page_num in page_range %}
-                            <li {% if page_num == blogs.number %}class="active"{% endif %}><a href="?page={{ page_num }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ page_num }}</a></li>
-                        {% endfor %}
-                    {% endif %}
-                    {% if blogs.has_next %}
-                        <li><a href="?page={{ blogs.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"><i class="fa fa-angle-right"></i></a></li>
-                    {% endif %}
-                </ul>
-            </nav>
-        </div>
+        {% include 'includes/pagination.html' with page_obj=blogs %}
 
     </div>
 </div>

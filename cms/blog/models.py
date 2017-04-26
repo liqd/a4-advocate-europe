@@ -46,25 +46,11 @@ class BlogIndexPage(Page):
         except EmptyPage:
             blogs = paginator.page(paginator.num_pages)
 
-        # Only show five page numbers in pagination
-        index = blogs.number - 1
-        max_index = len(paginator.page_range)
-        if index <= 1:
-            start_index = 0
-            end_index = 4
-        elif index >= max_index - 2:
-            start_index = max_index - 5 if max_index > 5 else 0
-            end_index = max_index
-        else:
-            start_index = index - 2
-            end_index = index + 2
-        page_range = paginator.page_range[start_index:end_index+1]
-
         context = super(BlogIndexPage, self).get_context(request)
         context['blogs'] = blogs
         context['categories'] = Category.objects.all()
         context['category'] = category
-        context['page_range'] = page_range
+        # context['page_range'] = page_range
         return context
 
     content_panels = [

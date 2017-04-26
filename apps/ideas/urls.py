@@ -1,6 +1,7 @@
 from django.conf.urls import url
 
 from . import views
+
 from .forms import (ApplicantSectionForm, CollaborationCampSectionForm,
                     CommunitySectionForm, IdeaSectionForm, ImpactSectionForm,
                     PartnersSectionForm)
@@ -14,4 +15,6 @@ urlpatterns = [
              CommunitySectionForm]), name='idea-sketch-create'),
     url(r'^(?P<slug>[-\w_]+)/$',
         views.IdeaSketchDetailView.as_view(), name='idea-sketch-detail'),
+    url(r'^$',
+        views.IdeaSketchListView.as_view(), name='ideasketch-list')
 ]

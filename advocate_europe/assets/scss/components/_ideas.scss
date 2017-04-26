@@ -1,0 +1,62 @@
+.ideasketchlist-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // align-content: center;
+
+    background-color: $brand-primary;
+    height: rem(122px);
+    color: #fff;
+    font-weight: bold;
+}
+
+.ideasketchlist-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    @media screen and (max-width: $screen-sm-min) {
+        justify-content: center;
+    }
+}
+
+.ideasketchlist-item {
+    // flex-basis: 24%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin: rem(5px);
+    background-color: $ae-light-gray;
+    width: rem(270px);
+    min-height: rem(400px);
+
+    .ideasketchlist-image {
+        img {
+            width: 100%;
+        }
+    }
+
+    .ideasketchlist-text {
+        padding: rem(12px);
+    }
+
+    .ideasketchlist-lower {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        padding: rem(12px);
+        box-shadow: 0 -1px 0 0 $ae-dark-gray;
+        height: rem(38px);
+    }
+}
+
+.ideasketchlist-category {
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: rem(.8px);
+    text-transform: uppercase;
+    color: $brand-primary;
+}
