@@ -164,11 +164,20 @@
 
     .ideadetail-tab-part {
         background-color: $ae-light-gray;
+        height: rem(40px);
     }
 
-    .ideadetail-tab {
+    .ideadetail-content {
         background-color: #fff;
         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .ideadetail-collaborators {
+        background-color: $ae-light-gray;
+    }
+
+    .ideadetail-about-idea {
+        background-color: $ae-light-gray;
     }
 }
 

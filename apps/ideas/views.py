@@ -12,6 +12,14 @@ from adhocracy4.modules.models import Module
 
 from .models import IdeaSketch
 
+IDEA_PITCH_HL = ('Idea pitch')
+IDEA_LOCATION_SPECIFY_HL = ('Where does your idea take place?')
+CHALLENGE_HL = ('Why does Europe need your idea?')
+OUTCOME_HL = ('What is your impact?')
+PLAN_HL = ('How do you get there?')
+IMPORTANCE_HL = ('What is your story?')
+REACH_OUT_HL = ('What do you need from the Advocate Europe community?')
+
 
 class IdeaSketchCreateWizard(SessionWizardView):
     file_storage = FileSystemStorage(
@@ -42,15 +50,18 @@ class IdeaSketchDetailView(generic.DetailView):
         return model_to_dict(self.object)
 
     def get_context_data(self, **kwargs):
-        idea_tab_dict = {}
-        idea_tab_dict['Idea pitch'] = self.object.idea_pitch
-        idea_tab_dict['Challenge'] = self.object.challenge
-        idea_tab_dict['Outcome'] = self.object.outcome
-        idea_tab_dict['Plan'] = self.object.plan
-        idea_tab_dict['Importance'] = self.object.importance
+        idea_tab_list = []
+        idea_tab_list.append((IDEA_PITCH_HL, self.object.idea_pitch))
+        idea_tab_list.append((IDEA_LOCATION_SPECIFY_HL,
+                             self.object.idea_location_specify))
+        idea_tab_list.append((CHALLENGE_HL, self.object.challenge))
+        idea_tab_list.append((OUTCOME_HL, self.object.outcome))
+        idea_tab_list.append((PLAN_HL, self.object.plan))
+        idea_tab_list.append((IMPORTANCE_HL, self.object.importance))
+        idea_tab_list.append((REACH_OUT_HL, self.object.reach_out))
 
         context = super().get_context_data(**kwargs)
-        context['idea_tab_dict'] = idea_tab_dict
+        context['idea_tab_list'] = idea_tab_list
         return context
 
 
