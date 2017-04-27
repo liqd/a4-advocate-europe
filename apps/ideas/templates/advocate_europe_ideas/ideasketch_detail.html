@@ -3,17 +3,55 @@
 {% block content %}
 <div class="ideadetail">
     <div class="container">
-        <div class="ideadetail-image-part">
+        <div class="row">
             <div class="ideadetail-image" style="background-image: url({{ ideasketch.idea_image.url }});">
-                <div class="btn blogpage-btn">
-                    <a href="#" role="button">< All ideas</a>
+                <div class="col-md-9 col-sm-8 col-xs-12 ideadetail-image-left">
+                    <div class="btn ideadetail-btn">
+                        <a href="#" role="button">< All ideas</a>
+                    </div>
+                    <div class="ideadetail-title">
+                        <div class="btn ideadetailimage-tag">
+                            ORANGE BTN-LIKE THING ?? var!
+                        </div>
+                        <div class="ideadetail-category">
+                            {{ ideasketch.idea_topics }}
+                            {% if ideasketch.idea_topics_other %}
+                                , {{ ideasketch.idea_topics_other }}
+                            {% endif %}
+                        </div>
+                        <h3>
+                            {{ ideasketch.idea_title }}
+                            {% if ideasketch.idea_subtitle %}
+                                - {{ ideasketch.idea_subtitle }}
+                            {% endif %}
+                        </h3>
+                    </div>
                 </div>
-                <div>
-                    <h2>{{ ideasketch.idea_title }} - {{ ideasketch.idea_subtitle }} </h2>
+                <div class="col-md-3 col-sm-4 hidden-xs ideadetail-image-left">
+                    <div class="btn-group ideadetail-support-btn-group" role="group">
+                        <div class="btn">
+                            LOVE SUPPORT ?? var!
+                        </div>
+                        <div class="btn">
+                            ??!!
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="ideadetail-tab-part">
+        <div class="hidden-lg hidden-md hidden-sm row">
+            <div class="col-xs-12 text-center ideadetail-xs-support">
+                <div class="btn-group ideadetail-support-btn-group" role="group">
+                    <div class="btn">
+                        LOVE SUPPORT ?? var!
+                    </div>
+                    <div class="btn">
+                        ??!!
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ideadetail-tab-part row">
             <ul class="nav">
               <li class="nav-item">
                 <a class="nav-link" href="#info">Info</a>
@@ -26,7 +64,7 @@
               </li>
             </ul>
         </div>
-        <div class="ideadetail-tab ideadetail-idea-tab">
+        <div class="ideadetail-tab ideadetail-idea-tab row">
             <div class="col-md-offset-1 col-md-7">
                 {% for field, value in idea_tab_dict.items %}
                     <h4>{{ field }}</h4>

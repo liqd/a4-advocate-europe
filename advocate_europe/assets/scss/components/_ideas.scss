@@ -69,11 +69,97 @@
     background: linear-gradient(to bottom, $brand-primary rem(500px), #fff 0%);
 
     .ideadetail-image {
+        width: 100%;
         height: rem(350px);
 
         @media screen and (min-width: $screen-md-min) {
             margin-top: rem(40px);
         }
+    }
+
+    .ideadetail-image-left {
+        height: 100%;
+    }
+
+    .ideadetail-btn {
+
+        background-color: $ae-light-gray;
+        border-radius: rem(5px);
+        margin-top: rem(20px);
+
+        @media screen and (max-width: $screen-sm-max) {
+            margin-top: rem(10px);
+        }
+
+        a {
+            color: $gray-base;
+            font-size: rem(16px);
+            font-weight: 600;
+        }
+    }
+
+    .ideadetail-title {
+        position: absolute;
+        left: rem(15px);
+        bottom: 0;
+        color: #fff;
+    }
+
+    .ideadetailimage-tag {
+
+        padding: rem(3px) rem(6px);
+        background-color: $ae-brand-orange;
+        border-radius: rem(5px);
+        color: $gray-base;
+        font-size: rem(12px);
+        font-weight: 600;
+    }
+
+    .ideadetail-category {
+        margin-top: rem(15px);
+        margin-bottom: rem(10px);
+        font-size: rem(12px);
+        font-weight: bold;
+        letter-spacing: rem(.8px);
+        text-transform: uppercase;
+    }
+
+    h3 {
+        margin-top: 0;
+
+        @media screen and (max-width: $screen-sm-max) {
+            font-size: rem(18px);
+        }
+    }
+
+    .ideadetail-support-btn-group {
+        margin-top: rem(10px);
+        background-color: $brand-primary;
+        border-radius: rem(5px);
+        color: #fff;
+        font-size: rem(18px);
+        font-weight: 600;
+
+        .btn {
+            height: rem(40px);
+            border: 0.5px solid $brand-primary-darker;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @media screen and (min-width: $screen-sm-min) {
+            position: absolute;
+            right: rem(20px);
+            bottom: rem(20px);
+        }
+    }
+
+    .ideadetail-xs-support {
+        height: rem(60px);
+        margin: 0;
+        background-color: $brand-primary-darker;
     }
 
     .ideadetail-tab-part {
