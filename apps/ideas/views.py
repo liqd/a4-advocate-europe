@@ -33,7 +33,7 @@ class IdeaSketchExportView(ListView):
             and base_model.__name__.endswith('Section')
         ]
 
-        field_names = []
+        field_names = ['id']
         for section in abstract_sections:
             for field in section._meta.concrete_fields:
                 field_names.append(field.name)
