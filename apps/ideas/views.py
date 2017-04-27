@@ -41,8 +41,13 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin, SessionWizardView):
         return HttpResponseRedirect(
             reverse('idea-sketch-detail', kwargs={'slug': idea_sketch.slug}))
 
+    @property
+    def raise_exception(self):
+        return self.request.user.is_authenticated()
+
 
 class IdeaSketchDetailView(generic.DetailView):
+
     model = IdeaSketch
 
     @property
