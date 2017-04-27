@@ -13,54 +13,36 @@ from rules.contrib.views import PermissionRequiredMixin
 
 from adhocracy4.modules.models import Module
 
-from .models import IdeaSketch
-from .models.abstracts.applicant_section import AbstractApplicantSection
-from .models.abstracts.collaboration_camp_section import \
-    AbstractCollaborationCampSection
-from .models.abstracts.community_section import AbstractCommunitySection
-from .models.abstracts.idea_section import AbstractIdeaSection
-from .models.abstracts.impact_section import AbstractImpactSection
-from .models.abstracts.partners_section import AbstractPartnersSection
+from .models import IdeaSketch, abstracts
 
 
 class IdeaSketchExportView(ListView):
     model = IdeaSketch
 
-    def _get_model_fields(self, model):
-        excludes = ['id', 'module', 'module_id', 'creator', 'ideacomplete',
-                    'item_ptr', 'item_ptr_id', 'idea_image', 'slug',
-                    'visit_camp', 'comments', 'ratings']
-
-        field_list = [field for field in model._meta.get_all_field_names()
-                      if field not in excludes]
-        return field_list
-
     def get(self, request, *args, **kwargs):
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; ' \
-                                          'filename="ideasketches.csv"'
+        response = HttpResponse(content_type='text/csv; charset=utf-8')
+        response['Content-Disposition'] = (
+            'attachment; filename="ideasketches.csv"'
+        )
 
-        # used the sections for ordering the fields,
-        # but I am not sure if that is enough
-        applicant_fields = self._get_model_fields(AbstractApplicantSection)
-        partners_fields = self._get_model_fields(AbstractPartnersSection)
-        idea_fields = self._get_model_fields(AbstractIdeaSection)
-        impact_fields = self._get_model_fields(AbstractImpactSection)
-        collaboration_camp_fields = self._get_model_fields(
-            AbstractCollaborationCampSection)
-        community_fields = self._get_model_fields(AbstractCommunitySection)
+        # Selects all parent classes named ideas.models.abstracts.*Section
+        abstracts_module_name = abstracts.__name__ + '.'
+        abstract_sections = [
+            base_model for base_model in self.model.__mro__
+            if base_model.__module__.startswith(abstracts_module_name)
+            and base_model.__name__.endswith('Section')
+        ]
 
-        fields = applicant_fields + partners_fields + \
-            idea_fields + impact_fields + \
-            collaboration_camp_fields + community_fields
+        field_names = []
+        for section in abstract_sections:
+            for field in section._meta.concrete_fields:
+                field_names.append(field.name)
 
         writer = csv.writer(response)
-        writer.writerow(fields)
+        writer.writerow(field_names)
 
         for idea in self.get_queryset():
-            data = [str(
-                getattr(idea, field)).replace('\n', ' ').replace('\r', '')
-                    for field in fields]
+            data = [str(getattr(idea, name)) for name in field_names]
             writer.writerow(data)
 
         return response
