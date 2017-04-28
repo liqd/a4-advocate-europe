@@ -3,83 +3,36 @@
 {% block content %}
 <div class="ideadetail">
     <div class="container">
-        <div class="row">
-            <div class="ideadetail-image" style="background-image: url({{ ideasketch.idea_image.url }});">
-                <div class="col-md-9 col-sm-8 col-xs-12 ideadetail-image-left">
-                    <div class="btn ideadetail-btn">
-                        <a href="#" role="button">< All ideas</a>
-                    </div>
-                    <div class="ideadetail-title">
-                        <div class="btn ideadetailimage-tag">
-                            ORANGE BTN-LIKE THING ?? var!
-                        </div>
-                        <div class="ideadetail-category">
-                            {{ ideasketch.idea_topics }}
-                            {% if ideasketch.idea_topics_other %}
-                                , {{ ideasketch.idea_topics_other }}
-                            {% endif %}
-                        </div>
-                        <h3>
-                            {{ ideasketch.idea_title }}
-                            {% if ideasketch.idea_subtitle %}
-                                - {{ ideasketch.idea_subtitle }}
-                            {% endif %}
-                        </h3>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-4 hidden-xs ideadetail-image-left">
-                    <div class="btn-group ideadetail-support-btn-group" role="group">
-                        <div class="btn">
-                            LOVE SUPPORT ?? var!
-                        </div>
-                        <div class="btn">
-                            ??!!
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="hidden-lg hidden-md hidden-sm row">
-            <div class="col-xs-12 text-center ideadetail-xs-support">
-                <div class="btn-group ideadetail-support-btn-group" role="group">
-                    <div class="btn">
-                        LOVE SUPPORT ?? var!
-                    </div>
-                    <div class="btn">
-                        ??!!
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="ideadetail-tab-part row" role="navigation">
-            <a data-toggle="tab" class="tab" href="#creators">Creators</a>
-            <a data-toggle="tab" class="tab" href="#idea">Idea</a>
-            <a data-toggle="tab" class="tab" href="#reporting">Reporting</a>
-        </div>
-        <div class="tab-content row ideadetail-content">
-            <div id="creators" class="tab-pane">Page 1</div>
-            <div id="idea" class="tab-pane active">
-                <div class="col-md-offset-1 col-md-7">
-                    <h2>Idea</h2>
-                    {% for field in idea_tab_list %}
-                        {% if field.1 %}
-                            <h4>{{ field.0 }}</h4>
-                            <p>{{ field.1 }}</p>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-            <div id="reporting" class="tab-pane">Page 3</div>
-        </div>
+    {% include 'advocate_europe_ideas/ideasketch_detail_header.html' %}
 
-        <div class="col-md-4">
-            <div class="ideadetail-collaborators">
-                <h4>Collaborators</h4>
-            </div>
-            <div class="ideadetail-about-idea">
-                <h4>About this idea</h4>
-                {{ ideasketch.idea_pitch }}
+        <div class="ideadetail-tabs row" role="navigation">
+
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Info</a></li>
+                <li role="presentation" class="active"><a href="#idea" aria-controls="idea" role="tab" data-toggle="tab">Idea</a></li>
+                <li role="presentation"><a href="#reporting" aria-controls="reporting" role="tab" data-toggle="tab">Reporting</a></li>
+            </ul>
+
+            <div class="tab-content row ideadetail-content">
+                <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 tab-pane" id="info">
+                    {% include 'advocate_europe_ideas/ideasketch_detail_tab_info.html' %}
+                </div>
+                <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 tab-pane active" id="idea">
+                    {% include 'advocate_europe_ideas/ideasketch_detail_tab_idea.html' %}
+                </div>
+                <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 tab-pane" id="reporting">
+                    {% include 'advocate_europe_ideas/ideasketch_detail_tab_reporting.html' %}
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="ideadetail-info-box">
+                        <h4>Collaborators</h4>
+                    </div>
+                    <div class="ideadetail-info-box">
+                        <h4>About this idea</h4>
+                        {{ ideasketch.idea_pitch }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

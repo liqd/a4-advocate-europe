@@ -64,45 +64,53 @@
 }
 
 // ------------------------ Idea Detail ------------------------
+// ------------------------ Idea Detail Header ------------------------
 
 .ideadetail {
     background: linear-gradient(to bottom, $brand-primary rem(500px), #fff 0%);
+}
 
+.ideadetail-header {
     .ideadetail-image {
-        width: 100%;
-        height: rem(350px);
+        // background-image and gradient in ideasketch_detail_header.html
+        background-position: center center;
+        background-size: cover;
+        height: rem(320px);
 
         @media screen and (min-width: $screen-md-min) {
+            height: rem(350px);
             margin-top: rem(40px);
         }
     }
 
-    .ideadetail-image-left {
+    .ideadetailheader-content {
         height: 100%;
+        margin-left: rem(20px);
+
+        @media screen and (max-width: $screen-xs-max) {
+            margin-left: rem(10px);
+        }
     }
 
-    .ideadetail-btn {
+    .ideadetailheader-left {
+        height: 100%;
+        padding: 0;
+    }
 
-        background-color: $ae-light-gray;
-        border-radius: rem(5px);
-        margin-top: rem(20px);
-
-        @media screen and (max-width: $screen-sm-max) {
-            margin-top: rem(10px);
-        }
-
-        a {
-            color: $gray-base;
-            font-size: rem(16px);
-            font-weight: 600;
-        }
+    .ideadetailheader-right {
+        height: 100%;
+        padding: 0;
     }
 
     .ideadetail-title {
-        position: absolute;
-        left: rem(15px);
-        bottom: 0;
         color: #fff;
+        position: absolute;
+        left: 0;
+        bottom: rem(10px);
+
+        @media screen and (max-width: $screen-sm-max) {
+            bottom: 0;
+        }
     }
 
     .ideadetailimage-tag {
@@ -131,54 +139,85 @@
             font-size: rem(18px);
         }
     }
+}
 
-    .ideadetail-support-btn-group {
-        margin-top: rem(10px);
-        background-color: $brand-primary;
-        border-radius: rem(5px);
-        color: #fff;
-        font-size: rem(18px);
+.ideadetail-btn {
+
+    background-color: $ae-light-gray;
+    border-radius: rem(5px);
+    margin-top: rem(20px);
+
+    a {
+        color: $gray-base;
+        font-size: rem(16px);
         font-weight: 600;
+    }
 
-        .btn {
-            height: rem(40px);
-            border: 0.5px solid $brand-primary-darker;
+    @media screen and (max-width: $screen-sm-max) {
+        margin-top: rem(10px);
 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        a {
+            font-size: rem(14px);
         }
-
-        @media screen and (min-width: $screen-sm-min) {
-            position: absolute;
-            right: rem(20px);
-            bottom: rem(20px);
-        }
-    }
-
-    .ideadetail-xs-support {
-        height: rem(60px);
-        margin: 0;
-        background-color: $brand-primary-darker;
-    }
-
-    .ideadetail-tab-part {
-        background-color: $ae-light-gray;
-        height: rem(40px);
-    }
-
-    .ideadetail-content {
-        background-color: #fff;
-        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
-    }
-
-    .ideadetail-collaborators {
-        background-color: $ae-light-gray;
-    }
-
-    .ideadetail-about-idea {
-        background-color: $ae-light-gray;
     }
 }
 
+// -------------------- Idea Detail Header Support Button --------------------
+
+.ideadetail-support-btn-group {
+    margin-top: rem(10px);
+    background-color: $brand-primary;
+    border-radius: rem(5px);
+    color: #fff;
+    font-size: rem(18px);
+    font-weight: 600;
+
+    .btn {
+        height: rem(40px);
+        border: 0.5px solid $brand-primary-darker;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    @media screen and (min-width: $screen-sm-min) {
+        position: absolute;
+        right: rem(20px);
+        bottom: rem(10px);
+    }
+
+    @media screen and (min-width: $screen-md-min) {
+        bottom: rem(20px);
+    }
+}
+
+.ideadetail-xs-support {
+    height: rem(60px);
+    margin: 0;
+    background-color: $brand-primary-darker;
+}
+
+// -------------------- Idea Detail Tabs and Tab Content --------------------
+
+.ideadetail-tabs {
+    background-color: $ae-light-gray;
+    height: rem(40px);
+
+    li {
+        font-size: rem(16px);
+    }
+}
+
+.ideadetail-content {
+    background-color: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+    margin: 0;
+}
+
+.ideadetail-info-box {
+    margin-bottom: rem(10px);
+    background-color: $ae-light-gray;
+    padding: rem(10px);
+}
 

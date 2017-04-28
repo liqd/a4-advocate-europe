@@ -1,0 +1,7 @@
+<h2>Idea</h2>
+{% for field in idea_tab_list %}
+    {% if field.1 %}
+        <h4>{{ field.0 }}</h4>
+        <p>{{ field.1 }}</p>
+    {% endif %}
+{% endfor %}
