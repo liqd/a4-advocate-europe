@@ -1,0 +1,7 @@
+{% block headline %}{% endblock %}
+
+{% block content %}{% endblock %}
+
+{% block cta %}{% block cta_label %}{% endblock %}: {% block cta_url %}{% endblock %}{% endblock %}
+
+{% block reason %}{% endblock %}
