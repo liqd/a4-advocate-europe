@@ -1,9 +1,10 @@
-from django import template
+from django import forms, template
 
 
 register = template.Library()
 
 
 @register.filter(name='is_multi_select_checkbox')
-def is_checkbox(field):
-    return field.field.widget.__class__.__name__ == 'CheckboxSelectMultiple'
+def is_checkbox(bound_field):
+    widget = bound_field.field.widget.__class__
+    return widget is forms.CheckboxSelectMultiple
