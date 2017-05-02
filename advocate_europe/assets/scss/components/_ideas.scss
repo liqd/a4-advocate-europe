@@ -192,7 +192,40 @@
     background-color: $brand-primary-darker;
 }
 
+// ----------------- Idea Detail Buttons: Watch, Share, ... -----------------
+
+.ideadetail-rect-btn-group {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    background-color: $ae-light-gray;
+
+    .btn {
+        height: rem(40px);
+        border: 0;
+        border-radius: 0;
+        margin-left: rem(2px) !important;
+        background-color: $ae-light-gray-darker;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        a {
+            color: $gray-base;
+            font-size: rem(16px);
+            font-weight: 500;
+        }
+    }
+}
+
 // -------------------- Idea Detail Tabs and Tab Content --------------------
+
+.ideadetail-tab-bar {
+    background-color: $ae-light-gray;
+    height: rem(40px);
+}
 
 .ideadetail-tabs {
     .nav-tabs {
@@ -247,6 +280,10 @@
     margin-bottom: rem(10px);
     background-color: $ae-light-gray;
     padding: rem(10px);
+
+    p {
+        font-weight: 600;
+    }
 }
 
 .ideadetail-tab {
@@ -294,6 +331,8 @@
         font-weight: bold;
     }
 }
+
+// -------------------- Idea Detail Comments --------------------
 
 .ideadetail-comments {
     margin-top: rem(80px);
