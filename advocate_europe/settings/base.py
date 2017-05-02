@@ -74,7 +74,8 @@ INSTALLED_APPS = [
 
     'apps.contrib',
     'apps.users.apps.UsersConfig',
-    'apps.ideas.apps.IdeasConfig'
+    'apps.ideas.apps.IdeasConfig',
+    'apps.invites.apps.InvitesConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
