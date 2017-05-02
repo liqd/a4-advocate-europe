@@ -16,7 +16,8 @@ from adhocracy4.modules.models import Module
 from .models import IdeaSketch, abstracts
 
 
-class IdeaSketchExportView(ListView):
+class IdeaSketchExportView(PermissionRequiredMixin, ListView):
+    permission_required = 'advocate_europe_ideas.export_ideasketch'
     model = IdeaSketch
 
     def get(self, request, *args, **kwargs):

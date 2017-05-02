@@ -1,13 +1,19 @@
 {% extends "base.html" %}
 
-{% load i18n static thumbnail %}
+{% load i18n rules static thumbnail %}
 
 {% block content %}
-<div class="ideasketch-list">
+<div class="ideasketchlist">
     <div class="ideasketchlist-title text-center">
         <h1>All ideas</h1>
     </div>
     <div class="container">
+        {% has_perm 'advocate_europe_ideas.export_ideasketch' request.user as can_export %}
+        {% if can_export %}
+        <div class="ideasketchlist-controls">
+            <a class="btn btn-primary" href="{% url 'idea-sketch-export' %}">{% trans "export" %}</a>
+        </div>
+        {% endif %}
         <div class="ideasketchlist-list">
             {% for ideasketch in ideasketch_list %}
                 <div class="ideasketchlist-item">
