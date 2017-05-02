@@ -50,18 +50,33 @@ class IdeaSketchDetailView(generic.DetailView):
         return model_to_dict(self.object)
 
     def get_context_data(self, **kwargs):
-        idea_tab_list = []
-        idea_tab_list.append((IDEA_PITCH_HL, self.object.idea_pitch))
-        idea_tab_list.append((IDEA_LOCATION_SPECIFY_HL,
-                             self.object.idea_location_specify))
-        idea_tab_list.append((CHALLENGE_HL, self.object.challenge))
-        idea_tab_list.append((OUTCOME_HL, self.object.outcome))
-        idea_tab_list.append((PLAN_HL, self.object.plan))
-        idea_tab_list.append((IMPORTANCE_HL, self.object.importance))
-        idea_tab_list.append((REACH_OUT_HL, self.object.reach_out))
+        idea_list = []
+        idea_list.append((IDEA_PITCH_HL, self.object.idea_pitch))
+        idea_list.append((IDEA_LOCATION_SPECIFY_HL,
+                          self.object.idea_location_specify))
+        idea_list.append((CHALLENGE_HL, self.object.challenge))
+        idea_list.append((OUTCOME_HL, self.object.outcome))
+        idea_list.append((PLAN_HL, self.object.plan))
+        idea_list.append((IMPORTANCE_HL, self.object.importance))
+        idea_list.append((REACH_OUT_HL, self.object.reach_out))
+
+        partner_list = []
+        partner_list.append((self.object.partner_organisation_1_name,
+                             self.object.partner_organisation_1_website,
+                             self.object.
+                             get_partner_organisation_1_country_display))
+        partner_list.append((self.object.partner_organisation_2_name,
+                             self.object.partner_organisation_2_website,
+                             self.object.
+                             get_partner_organisation_2_country_display))
+        partner_list.append((self.object.partner_organisation_3_name,
+                             self.object.partner_organisation_3_website,
+                             self.object.
+                             get_partner_organisation_3_country_display))
 
         context = super().get_context_data(**kwargs)
-        context['idea_tab_list'] = idea_tab_list
+        context['idea_list'] = idea_list
+        context['partner_list'] = partner_list
         return context
 
 

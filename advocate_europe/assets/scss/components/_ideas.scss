@@ -42,6 +42,10 @@
 
     .ideasketchlist-text {
         padding: rem(12px);
+
+        a {
+            color: $gray-dark;
+        }
     }
 
     .ideasketchlist-lower {
@@ -201,18 +205,52 @@
 // -------------------- Idea Detail Tabs and Tab Content --------------------
 
 .ideadetail-tabs {
-    background-color: $ae-light-gray;
-    height: rem(40px);
+    .nav-tabs {
+        background-color: $ae-light-gray;
+        height: rem(40px);
+    }
 
     li {
-        font-size: rem(16px);
+        a:link,
+        a:visited,
+        a:hover,
+        a:active {
+            color: $gray-base;
+            background-color: $ae-light-gray;
+            border: 0;
+            font-size: rem(16px);
+            font-weight: 600;
+            padding-top: rem(7px);
+            padding-bottom: rem(7px);
+        }
+    }
+
+    li.active {
+        a:link,
+        a:visited,
+        a:hover,
+        a:active {
+            color: $brand-primary;
+            background-color: $ae-light-gray;
+            border: 0;
+            border-bottom: 3px solid $brand-primary;
+        }
     }
 }
 
 .ideadetail-content {
     background-color: #fff;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 20px 0 20px -20px rgba(0, 0, 0, 0.2), 0 20px 20px -20px rgba(0, 0, 0, 0.2), -20px 0 20px -20px rgba(0, 0, 0, 0.2);
     margin: 0;
+    padding-bottom: rem(60px);
+}
+
+.ideadetail-info-boxes {
+    margin-top: rem(20px);
+
+    @media screen and (min-width: $screen-md-min) {
+        margin-top: rem(40px);
+    }
 }
 
 .ideadetail-info-box {
@@ -221,3 +259,56 @@
     padding: rem(10px);
 }
 
+.ideadetail-tab {
+    .ideadetailtab-header {
+        font-weight: bold;
+    }
+
+    h2 {
+        margin-top: rem(40px);
+
+        @media screen and (max-width: $screen-xs-max) {
+            margin-top: rem(20px);
+        }
+    }
+
+    h4 {
+        font-weight: bold;
+        margin-bottom: rem(5px);
+        margin-top: rem(30px);
+
+        @media screen and (max-width: $screen-sm-max) {
+            margin-top: rem(20px);
+        }
+
+        @media screen and (max-width: $screen-xs-max) {
+            font-size: rem(16px);
+            margin-top: rem(10px);
+        }
+    }
+
+    .ideadetailtab-con-text {
+        font-size: rem(16px);
+
+        @media screen and (max-width: $screen-xs-max) {
+            font-size: rem(14px);
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+
+    .ideadetailtab-bold-name {
+        font-weight: bold;
+    }
+}
+
+.ideadetail-comments {
+    margin-top: rem(80px);
+
+    @media screen and (max-width: $screen-sm-max) {
+        margin-top: rem(60px);
+    }
+}
