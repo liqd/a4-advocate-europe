@@ -3,16 +3,17 @@ import os
 
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict
-from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.translation import ugettext as _
+from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.views import generic
 from formtools.wizard.views import SessionWizardView
 from rules.contrib.views import PermissionRequiredMixin
 
 from adhocracy4.modules.models import Module
 
+from apps.invites.models import IdeaSketchInvite
 from .models import IdeaSketch, abstracts
 
 
@@ -42,33 +43,50 @@ class IdeaSketchExportView(PermissionRequiredMixin, generic.ListView):
         writer = csv.writer(response)
         writer.writerow(field_names)
 
-        for idea in self.get_queryset():
+       for idea in self.get_queryset():
             data = [str(getattr(idea, name)) for name in field_names]
             writer.writerow(data)
 
         return response
 
 
-class IdeaSketchCreateWizard(PermissionRequiredMixin, SessionWizardView):
+class ModuleMixin(generic.detail.SingleObjectMixin):
+    model = Module
+
+    def dispatch(self, request, *args, **kwargs):
+        self.module = self.get_object()
+        self.object = self.module
+        return super().dispatch(request, *args, **kwargs)
+
+
+class IdeaSketchCreateWizard(PermissionRequiredMixin,
+                             ModuleMixin,
+                             SessionWizardView):
     permission_required = 'advocate_europe_ideas.add_ideasketch'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
 
     def done(self, form_list, **kwargs):
-        idea_sketch = IdeaSketch()
-        idea_sketch.creator = self.request.user
+        special_fields = ['accept_conditions', 'collaborators_emails']
 
-        mod_slug = self.kwargs['slug']
-        mod = Module.objects.get(slug=mod_slug)
-        idea_sketch.module = mod
+        data = self.get_all_cleaned_data()
+        idea_sketch = IdeaSketch.objects.create(
+            creator=self.request.user,
+            module=self.module,
+            **{
+                field: value for field, value in data.items()
+                if field not in special_fields
+            }
+        )
 
-        for key, value in self.get_all_cleaned_data().items():
-            setattr(idea_sketch, key, value)
+        for name, email in data['collaborators_emails']:
+            IdeaSketchInvite.objects.invite(
+                self.request.user,
+                idea_sketch,
+                email
+            )
 
-        idea_sketch.save()
-
-        return HttpResponseRedirect(
-            reverse('idea-sketch-detail', kwargs={'slug': idea_sketch.slug}))
+        return redirect(idea_sketch.get_absolute_url())
 
     @property
     def raise_exception(self):

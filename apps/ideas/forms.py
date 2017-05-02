@@ -1,5 +1,6 @@
-from django.forms import BooleanField, ModelForm
-from django.utils.translation import ugettext as _
+from django import forms
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
 
 from .models.abstracts.applicant_section import AbstractApplicantSection
 from .models.abstracts.collaboration_camp_section import \
@@ -17,8 +18,16 @@ ACCEPT_CONDITIONS_LABEL = _('I hereby confirm and agree that '
                             'the visual material '
                             'used in this proposal.')
 
+COLLABORATORS_TITLE = _('Please add your collaborators here.')
+COLLABORATORS_HELP = _('Here you can insert the email addresses of up to 5 '
+                       'collaborators. Each of the named collaborators will '
+                       'receive an email inviting them to register on the '
+                       'Advocate Europe website. After registering they will '
+                       'appear with their user name on your idea page and '
+                       'will be able to edit your idea. ')
 
-class ApplicantSectionForm(ModelForm):
+
+class ApplicantSectionForm(forms.ModelForm):
     section_name = _('Applicant Section')
 
     class Meta:
@@ -26,7 +35,7 @@ class ApplicantSectionForm(ModelForm):
         exclude = []
 
 
-class PartnersSectionForm(ModelForm):
+class PartnersSectionForm(forms.ModelForm):
     section_name = _('Partners')
 
     class Meta:
@@ -34,7 +43,7 @@ class PartnersSectionForm(ModelForm):
         exclude = []
 
 
-class IdeaSectionForm(ModelForm):
+class IdeaSectionForm(forms.ModelForm):
     section_name = _('Idea details')
 
     class Meta:
@@ -42,7 +51,7 @@ class IdeaSectionForm(ModelForm):
         exclude = []
 
 
-class ImpactSectionForm(ModelForm):
+class ImpactSectionForm(forms.ModelForm):
     section_name = _('Impact')
 
     class Meta:
@@ -50,7 +59,7 @@ class ImpactSectionForm(ModelForm):
         exclude = []
 
 
-class CollaborationCampSectionForm(ModelForm):
+class CollaborationCampSectionForm(forms.ModelForm):
     section_name = _('Finances')
 
     class Meta:
@@ -58,16 +67,52 @@ class CollaborationCampSectionForm(ModelForm):
         exclude = []
 
 
-class CommunitySectionForm(ModelForm):
+class CommunitySectionForm(forms.ModelForm):
     section_name = _('Community Information')
-    accept_conditions = BooleanField(label=ACCEPT_CONDITIONS_LABEL)
+    collaborators_emails = forms.CharField(
+        required=False,
+        help_text=COLLABORATORS_HELP,
+        label=COLLABORATORS_TITLE)
+    accept_conditions = forms.BooleanField(label=ACCEPT_CONDITIONS_LABEL)
 
     class Meta:
         model = AbstractCommunitySection
-        exclude = []
+        fields = [
+            'collaborators_emails',
+            'reach_out',
+            'how_did_you_hear',
+            'accept_conditions'
+        ]
+
+    def clean_collaborators_emails(self):
+        from email.utils import getaddresses
+        import re
+
+        value = self.cleaned_data['collaborators_emails'].strip(' ,')
+        addresses = getaddresses([value])
+        errors = []
+
+        for name, address in addresses:
+            if not re.match(r'^.+@[^@]+', address):
+                errors.append(
+                    ValidationError('{msg} ({addr})'.format(
+                        msg=_('Invalid email address'),
+                        addr=address
+                    ))
+                )
+
+        if len(addresses) > 5:
+            errors.append(
+                ValidationError(_('Maximum 5 collaborators allowed'))
+            )
+
+        if errors:
+            raise ValidationError(errors)
+
+        return addresses
 
 
-class FinanceSectionForm(ModelForm):
+class FinanceSectionForm(forms.ModelForm):
     section_name = _('Finances')
 
     class Meta:
