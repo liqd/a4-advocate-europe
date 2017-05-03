@@ -1,16 +1,51 @@
+import csv
 import os
 
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from formtools.wizard.views import SessionWizardView
+from rules.contrib.views import PermissionRequiredMixin
 
 from adhocracy4.modules.models import Module
 
-from .models import IdeaSketch
+from .models import IdeaSketch, abstracts
+
+
+class IdeaSketchExportView(PermissionRequiredMixin, ListView):
+    permission_required = 'advocate_europe_ideas.export_ideasketch'
+    model = IdeaSketch
+
+    def get(self, request, *args, **kwargs):
+        response = HttpResponse(content_type='text/csv; charset=utf-8')
+        response['Content-Disposition'] = (
+            'attachment; filename="ideasketches.csv"'
+        )
+
+        # Selects all parent classes named ideas.models.abstracts.*Section
+        abstracts_module_name = abstracts.__name__ + '.'
+        abstract_sections = [
+            base_model for base_model in self.model.__mro__
+            if base_model.__module__.startswith(abstracts_module_name)
+            and base_model.__name__.endswith('Section')
+        ]
+
+        field_names = ['id']
+        for section in abstract_sections:
+            for field in section._meta.concrete_fields:
+                field_names.append(field.name)
+
+        writer = csv.writer(response)
+        writer.writerow(field_names)
+
+        for idea in self.get_queryset():
+            data = [str(getattr(idea, name)) for name in field_names]
+            writer.writerow(data)
+
+        return response
 
 IDEA_PITCH_HL = ('Idea pitch')
 IDEA_LOCATION_SPECIFY_HL = ('Where does your idea take place?')
@@ -21,7 +56,8 @@ IMPORTANCE_HL = ('What is your story?')
 REACH_OUT_HL = ('What do you need from the Advocate Europe community?')
 
 
-class IdeaSketchCreateWizard(SessionWizardView):
+class IdeaSketchCreateWizard(PermissionRequiredMixin, SessionWizardView):
+    permission_required = 'advocate_europe_ideas.add_ideasketch'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
 
@@ -41,8 +77,13 @@ class IdeaSketchCreateWizard(SessionWizardView):
         return HttpResponseRedirect(
             reverse('idea-sketch-detail', kwargs={'slug': idea_sketch.slug}))
 
+    @property
+    def raise_exception(self):
+        return self.request.user.is_authenticated()
+
 
 class IdeaSketchDetailView(generic.DetailView):
+
     model = IdeaSketch
 
     @property
