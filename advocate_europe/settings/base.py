@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'wagtail.contrib.wagtailstyleguide',
     'modelcluster',
     'taggit',
+    'multiselectfield',
 
 
     'widget_tweaks',
