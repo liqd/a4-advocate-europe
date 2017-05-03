@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load widget_tweaks i18n idea_tags %}
+{% load widget_tweaks i18n idea_tags crispy_forms_tags %}
 
 {% block content %}
     <div class="custom-form container-medium">
@@ -8,51 +8,41 @@
             <div class="col-md-6">
                 <h1>{% trans 'create an idea' %} </h1>
             </div>
-            <div class="col-md-6 form-section_title">
-                <h1>{{ form.section_name }}</h1>
+            <div class="col-md-6">
+                <h1 class="form-section_title">{{ form.section_name }}</h1>
             </div>
         </div>
 
-
-        {% csrf_token %}
         {{ wizard.form.media }}
         {{ wizard.management_form }}
-        {% if wizard.form.forms %}
-            {{ wizard.form.management_form }}
-            {% for form in wizard.form.forms %}
-                {{ form.as_p }}
-            {% endfor %}
-        {% else %}
-            {% for field in wizard.form %}
-            <div class="form-group">
-            <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %} *{% endif %}</label>
-            {% if field.help_text %}<p><i>{{ field.help_text }}</i></p>{% endif %}
-            {% if field.errors %}
-                {% if not field|is_multi_select_checkbox %}
-                {{ field|add_class:"form-control form-error" }}
-                {% else %}
-                {{ field|add_class:"form-error" }}
+
+        {% crispy wizard.form %}
+
+        <div class="row">
+            <div class="col-md-12">
+                {% if wizard.steps.prev %}
+                <button class="btn btn-primary"
+                        name="wizard_goto_step"
+                        type="submit"
+                        value="{{ wizard.steps.prev }}">
+                    {% trans "back" %}</button>
                 {% endif %}
-            {% else %}
-                {% if not field|is_multi_select_checkbox %}
-                {{ field|add_class:"form-control"}}
+
+                {% if wizard.steps.next %}
+                <button class="btn btn-primary pull-right"
+                        type="submit"
+                        name="submit">
+                    {% trans "continue" %}
+                </button>
                 {% else %}
-                {{ field }}
-                {% endif %}
+                <button class="btn btn-primary pull-right"
+                        type="submit"
+                        name="submit">
+                    {% trans "send" %}
+                </button>
             {% endif %}
-            {{ field.errors }}
             </div>
-            {% endfor %}
-        {% endif %}
-            <div class="row">
-                <div class="pull-right">
-                    {% if wizard.steps.prev %}
-                    <button class="btn btn-primary" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% trans "first step" %}</button>
-                    <button class="btn btn-primary" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
-                    {% endif %}
-                    <input class="btn btn-primary last-button" type="submit" name="submit" value="{% trans "proceed" %}" />
-                </div>
-            </div>
+        </div>
         </form>
     </div>
 {% endblock %}
