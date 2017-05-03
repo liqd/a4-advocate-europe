@@ -30,29 +30,29 @@ IDEA_TOPIC_CHOICES = (
     ('education', _('Education'))
 )
 
-IDEA_LOCATION_CHOICES = (
 IDEA_TOPIC_HELP = _('Please select one or two topics for your project.')
 
+IDEA_LOCATION_CHOICES = (
     ('city', _('City, country or region')),
     ('online', _('Online')),
     ('ruhr_linkage', _('Linkage to the Ruhr area of Germany'))
 )
 
-IDEA_LOCATION_HELP = ('Please indicate the location of '
-                      'your project. Choose all options '
-                      'that apply.')
 
-IDEA_LOCATION_SPECIFY_HELP = ('Please specify the city, '
-                              'country and region, e.g. '
-                              'Berlin, Germany')
+IDEA_LOCATION_HELP = _('Please indicate the location of '
+                       'your project. Choose all options '
                        'that apply. One to three choices possible.')
 
-IDEA_LOCATION_RUHR_HELP = ('If you selected Ruhr area, please explain. '
-                           'Is your project connected to the Ruhr area of '
-                           'Germany through project partners, audiences, '
-                           'or in some other way? '
-                           'Please provide further details. '
-                           '(max. 200 characters)')
+IDEA_LOCATION_SPECIFY_HELP = _('Please specify the city, '
+                               'country and region, e.g. '
+                               'Berlin, Germany')
+
+IDEA_LOCATION_RUHR_HELP = _('If you selected Ruhr area, please explain. '
+                            'Is your project connected to the Ruhr area of '
+                            'Germany through project partners, audiences, '
+                            'or in some other way? '
+                            'Please provide further details. '
+                            '(max. 200 characters)')
 
 
 class AbstractIdeaSection(models.Model):
