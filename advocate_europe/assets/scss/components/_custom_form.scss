@@ -19,20 +19,10 @@
         font-size: rem(24px);
     }
 
-    select {
-        height: 40px;
-    }
-
     .form-section_title {
-        h1 {
-            text-transform: none;
-            text-align: right;
-            color: $gray-light;
-        }
-    }
-
-    .last-button {
-        margin-right: rem(15px);
+        text-transform: none;
+        text-align: right;
+        color: $gray-light;
     }
 
     .form-control {
