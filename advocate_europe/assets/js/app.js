@@ -7,3 +7,5 @@ module.exports = {
   'renderComment': ReactComments.renderComment,
   'renderRatings': ReactRatings.renderRatings
 }
+
+console.log('irgendwas')

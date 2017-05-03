@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load react_comments %}
+
 {% block content %}
 <div class="container">
 <dl>
@@ -8,5 +10,8 @@
     <dd>{{ value }}</dd>
     {% endfor %}
 </dl>
+<div class="container">
+{% react_comments ideasketch %}
+</div>
 </div>
 {% endblock %}

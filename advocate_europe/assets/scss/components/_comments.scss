@@ -1,0 +1,30 @@
+.comment-box {
+    @include rem(margin, 0 134px 0 134px);
+    @include rem(padding-top, 35px);
+
+    & .comments_login {
+        @include rem(margin-top, 30px);
+    }
+
+    & textarea {
+        border-radius: 5px;
+        background-color: $ae-lighter-gray;
+        border: 1px solid $ae-light-gray-shadow;
+        @include rem(font-size, 14px);
+    }
+
+    @media (max-width: $screen-sm-min) {
+        margin: 0;
+    }
+
+    .submit-button {
+        border-radius: 5px;
+        border: 0;
+        background-color: $brand-primary;
+        color: #fff;
+        font-size: rem(16px);
+        font-weight: 600;
+        padding: rem(10px) rem(18px);
+    }
+}
+
