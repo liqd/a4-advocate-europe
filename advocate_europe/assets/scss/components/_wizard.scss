@@ -1,0 +1,106 @@
+.wizard-page {
+    @media screen and (min-width: $screen-md-min) {
+        padding: rem(60px);
+    }
+
+    @media screen and (max-width: $screen-sm-max) {
+        padding: rem(10px);
+    }
+
+    background: linear-gradient(to bottom, $ae-lighter-gray rem(360px), #fff 0%);
+
+    .wizard {
+        max-width: rem(670px);
+    }
+}
+
+
+.wizard {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+
+    @media screen and (min-width: $screen-md-min) {
+        padding: rem(20px 60px);
+    }
+
+    @media screen and (max-width: $screen-sm-max) {
+        padding: rem(5px 10px);
+    }
+
+    background-color: #fff;
+    position: relative;
+}
+
+
+.wizard-progress {
+    position: absolute;
+    left: 105%;
+    top: rem(20px);
+    width: 25em;
+
+    font-size: rem(10px);
+    font-weight: bold;
+    color: $ae-dark-gray;
+
+    &-entry.active {
+        color: $gray-darker;
+    }
+
+    &-button {
+        text-transform: uppercase;
+        background: none;
+        color: inherit;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+    }
+
+    &-entry {
+        position: relative;
+        text-transform: uppercase;
+        color: $ae-middle-gray;
+
+        &:before {
+            position: absolute;
+            left: -1.4em;
+            top: 0.25em;
+
+            width: 1em;
+            height: 1em;
+
+            border-radius: 100%;
+            border: solid 2px $ae-dark-gray;
+
+            background-color: #fff;
+            margin: 0 auto;
+
+            content: '';
+        }
+
+        &.active:before {
+            border-color: $brand-primary ;
+            background-color: $brand-primary;
+        }
+
+
+        &.filled:before {
+            border-color: $brand-primary;
+        }
+    }
+
+    & &-entry {
+        padding-bottom: 1em;
+    }
+
+    &:before {
+        position: absolute;
+        top: 0.5em;
+        bottom: 1.5em;
+        left: -1em;
+
+        width: 2px;
+
+        background: $ae-dark-gray;
+        content: '';
+    }
+}

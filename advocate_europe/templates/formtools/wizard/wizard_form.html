@@ -2,8 +2,8 @@
 {% load widget_tweaks i18n idea_tags crispy_forms_tags %}
 
 {% block content %}
-    <div class="custom-form container-medium">
-        <form class="custom-form-wizard" method="post" enctype="multipart/form-data">
+<div class="wizard-page">
+    <form class="wizard custom-form container-narrow" method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-6">
                 <h1>{% trans 'create an idea' %} </h1>
@@ -40,9 +40,25 @@
                         name="submit">
                     {% trans "send" %}
                 </button>
-            {% endif %}
+                {% endif %}
             </div>
         </div>
-        </form>
-    </div>
+        <ul class="wizard-progress hidden-sm hidden-xs">
+            {% for step_id, step_form in view.get_form_list.items %}
+            <li class="wizard-progress-entry{% if step_id == wizard.steps.current %} active{% endif %}{% if step_id < wizard.steps.current %} filled{% endif %}">
+                {% if step_id < wizard.steps.current %}
+                <button name="wizard_safe_goto_step"
+                        class="wizard-progress-button"
+                        type="submit"
+                        value="{{ step_id }}">
+                    {{ step_form.section_name }}
+                </button>
+                {% else %}
+                {{ step_form.section_name }}
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </form>
+</div>
 {% endblock %}
