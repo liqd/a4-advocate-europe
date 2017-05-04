@@ -3,15 +3,9 @@
 {% load react_comments %}
 
 {% block content %}
-<div class="container">
-<dl>
-    {% for field, value in view.idea_dict.items %}
-    <dt>{{ field }}</dt>
-    <dd>{{ value }}</dd>
-    {% endfor %}
-</dl>
-<div class="container">
+
+<div class="container-medium">
 {% react_comments ideasketch %}
 </div>
-</div>
+
 {% endblock %}
