@@ -339,9 +339,5 @@
 // -------------------- Idea Detail Comments --------------------
 
 .ideadetail-comments {
-    margin-top: rem(80px);
-
-    @media screen and (max-width: $screen-sm-max) {
-        margin-top: rem(60px);
-    }
+    margin-top: rem(60px);
 }
