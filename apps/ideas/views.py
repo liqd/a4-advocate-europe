@@ -7,7 +7,6 @@ from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
-from django.views.generic import ListView
 from formtools.wizard.views import SessionWizardView
 from rules.contrib.views import PermissionRequiredMixin
 
@@ -16,7 +15,8 @@ from adhocracy4.modules.models import Module
 from .models import IdeaSketch, abstracts
 
 
-class IdeaSketchExportView(ListView):
+class IdeaSketchExportView(PermissionRequiredMixin, generic.ListView):
+    permission_required = 'advocate_europe_ideas.export_ideasketch'
     model = IdeaSketch
 
     def get(self, request, *args, **kwargs):
@@ -47,10 +47,13 @@ class IdeaSketchExportView(ListView):
 
         return response
 
-
-class IdeaSketchListView(ListView):
-    model = IdeaSketch
-    paginate_by = 12
+IDEA_PITCH_HL = ('Idea pitch')
+IDEA_LOCATION_SPECIFY_HL = ('Where does your idea take place?')
+CHALLENGE_HL = ('Why does Europe need your idea?')
+OUTCOME_HL = ('What is your impact?')
+PLAN_HL = ('How do you get there?')
+IMPORTANCE_HL = ('What is your story?')
+REACH_OUT_HL = ('What do you need from the Advocate Europe community?')
 
 
 class IdeaSketchCreateWizard(PermissionRequiredMixin, SessionWizardView):
@@ -86,3 +89,38 @@ class IdeaSketchDetailView(generic.DetailView):
     @property
     def idea_dict(self):
         return model_to_dict(self.object)
+
+    def get_context_data(self, **kwargs):
+        idea_list = []
+        idea_list.append((IDEA_PITCH_HL, self.object.idea_pitch))
+        idea_list.append((IDEA_LOCATION_SPECIFY_HL,
+                          self.object.idea_location_specify))
+        idea_list.append((CHALLENGE_HL, self.object.challenge))
+        idea_list.append((OUTCOME_HL, self.object.outcome))
+        idea_list.append((PLAN_HL, self.object.plan))
+        idea_list.append((IMPORTANCE_HL, self.object.importance))
+        idea_list.append((REACH_OUT_HL, self.object.reach_out))
+
+        partner_list = []
+        partner_list.append((self.object.partner_organisation_1_name,
+                             self.object.partner_organisation_1_website,
+                             self.object.
+                             get_partner_organisation_1_country_display))
+        partner_list.append((self.object.partner_organisation_2_name,
+                             self.object.partner_organisation_2_website,
+                             self.object.
+                             get_partner_organisation_2_country_display))
+        partner_list.append((self.object.partner_organisation_3_name,
+                             self.object.partner_organisation_3_website,
+                             self.object.
+                             get_partner_organisation_3_country_display))
+
+        context = super().get_context_data(**kwargs)
+        context['idea_list'] = idea_list
+        context['partner_list'] = partner_list
+        return context
+
+
+class IdeaSketchListView(generic.ListView):
+    model = IdeaSketch
+    paginate_by = 12

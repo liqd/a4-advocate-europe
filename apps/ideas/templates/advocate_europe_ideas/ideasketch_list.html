@@ -1,29 +1,33 @@
 {% extends "base.html" %}
 
-{% load i18n static thumbnail %}
+{% load i18n rules static thumbnail %}
 
 {% block content %}
-<div class="ideasketch-list">
+<div class="ideasketchlist">
     <div class="ideasketchlist-title text-center">
         <h1>All ideas</h1>
     </div>
     <div class="container">
+        {% has_perm 'advocate_europe_ideas.export_ideasketch' request.user as can_export %}
+        {% if can_export %}
+        <div class="ideasketchlist-controls">
+            <a class="btn btn-primary" href="{% url 'idea-sketch-export' %}">{% trans "export" %}</a>
+        </div>
+        {% endif %}
         <div class="ideasketchlist-list">
             {% for ideasketch in ideasketch_list %}
                 <div class="ideasketchlist-item">
                     <div class="ideasketchlist-upper">
                         <div class="ideasketchlist-image">
-                            <img src="{% if ideasketch.idea_image %} {{ ideasketch.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_ideatileimage_400x200.png' %} {% endif %}">
+                            <a href="{% url 'idea-sketch-detail' slug=ideasketch.slug %}"><img src="{% if ideasketch.idea_image %} {{ ideasketch.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_ideatileimage_400x200.png' %} {% endif %}"></a>
                         </div>
                         <div class="ideasketchlist-text">
                             <div class="ideasketchlist-category">
-                                {{ ideasketch.idea_topics }}
-                                {% if ideasketch.idea_topics_other %}
-                                    | {{ ideasketch.idea_topics_other }}
-                                {% endif %}
+                                <!-- {{ ideasketch.get_idea_topics_display|join:"|" }} -->
+                                {{ ideasketch.get_idea_topics_display }}
                             </div>
 
-                            <h4>{{ ideasketch.idea_title }}</h4>
+                            <h4><a href="{% url 'idea-sketch-detail' slug=ideasketch.slug %}">{{ ideasketch.idea_title }}</a></h4>
                             {{ ideasketch.idea_pitch|truncatechars:240 }}
                         </div>
                     </div>

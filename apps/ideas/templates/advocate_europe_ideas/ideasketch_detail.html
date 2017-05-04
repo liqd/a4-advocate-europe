@@ -4,8 +4,64 @@
 
 {% block content %}
 
-<div class="container-medium">
-{% react_comments ideasketch %}
+<div class="ideadetail">
+    <div class="container">
+
+        {% include 'advocate_europe_ideas/ideasketch_detail_header.html' %}
+
+        <div class="row">
+            <div class="ideadetail-tab-bar">
+                <div class="col-xs-7 ideadetail-tabs" role="navigation">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Creators</a></li>
+                        <li role="presentation" class="active"><a href="#idea" aria-controls="idea" role="tab" data-toggle="tab">Idea</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-5">
+                    <div class="btn-group ideadetail-rect-btn-group" role="group">
+                        <div class="btn hidden-xs">
+                            <a href="#" role="button">??!! Watch</a>
+                        </div>
+                        <div class="btn hidden-sm hidden-md hidden-lg">
+                            <a href="#" role="button">??!!</a>
+                        </div>
+                        <div class="btn hidden-xs">
+                            <a href="#" role="button">??!! Share</a>
+                        </div>
+                        <div class="btn hidden-sm hidden-md hidden-lg">
+                            <a href="#" role="button">??!!</a>
+                        </div>
+                        <div class="btn">
+                            <a href="#" role="button">...</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content row ideadetail-content">
+                <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane" id="info">
+                    {% include 'advocate_europe_ideas/ideasketch_detail_tab_info.html' %}
+                </div>
+                <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane active" id="idea">
+                    {% include 'advocate_europe_ideas/ideasketch_detail_tab_idea.html' %}
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12 ideadetail-info-boxes">
+                    <div class="ideadetail-info-box">
+                        <h4>Collaborators</h4>
+                        {% for collaborator in ideasketch.collaborators.all %}
+                            <p>{{ collaborator.username }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="ideadetail-info-box">
+                        <h4>About this idea</h4>
+                        {{ ideasketch.idea_pitch }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-medium">
+            {% react_comments ideasketch %}
+        </div>
+    </div>
 </div>
 
 {% endblock %}

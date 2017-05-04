@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from django_countries.fields import CountryField
 
+
 FIRST_LAST_NAME_HELP = _('Your first name '
                          'and last name will be '
                          'published together with '
@@ -33,8 +34,7 @@ class AbstractApplicantSection(models.Model):
                                   help_text=FIRST_LAST_NAME_HELP)
     last_name = models.CharField(max_length=250)
     organisation_status = models.CharField(max_length=255,
-                                           choices=ORGANISATION_STATUS_CHOICES
-                                           )
+                                           choices=ORGANISATION_STATUS_CHOICES)
     organisation_status_extra = models.TextField(
         max_length=200, blank=True,
         help_text=ORGANISATION_STATUS_EXTRA_HELP)

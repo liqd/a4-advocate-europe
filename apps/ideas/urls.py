@@ -15,8 +15,8 @@ urlpatterns = [
     url(r'^(?P<slug>[-\w_]+)/$',
         views.IdeaSketchDetailView.as_view(), name='idea-sketch-detail'),
     url(r'list/export/$', views.IdeaSketchExportView.as_view(),
-        name='ideasketch-export'),
+        name='idea-sketch-export'),
     url(r'^$',
-        views.IdeaSketchListView.as_view(), name='ideasketch-list')
+        views.IdeaSketchListView.as_view(), name='idea-sketch-list')
 
 ]
