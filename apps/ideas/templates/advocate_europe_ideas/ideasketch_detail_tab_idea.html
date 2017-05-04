@@ -1,0 +1,15 @@
+<div class="ideadetail-tab">
+    <div class="ideadetailtab-header">
+        <h2>Idea</h2>
+    </div>
+    {% for field in idea_list %}
+        {% if field.1 %}
+            <div class="ideadetailtab-con-header">
+                <h4>{{ field.0 }}</h4>
+            </div>
+            <div class="ideadetailtab-con-text">
+                <p>{{ field.1 }}</p>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>

@@ -19,17 +19,15 @@
                 <div class="ideasketchlist-item">
                     <div class="ideasketchlist-upper">
                         <div class="ideasketchlist-image">
-                            <img src="{% if ideasketch.idea_image %} {{ ideasketch.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_ideatileimage_400x200.png' %} {% endif %}">
+                            <a href="{% url 'idea-sketch-detail' slug=ideasketch.slug %}"><img src="{% if ideasketch.idea_image %} {{ ideasketch.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_ideatileimage_400x200.png' %} {% endif %}"></a>
                         </div>
                         <div class="ideasketchlist-text">
                             <div class="ideasketchlist-category">
-                                {{ ideasketch.idea_topics }}
-                                {% if ideasketch.idea_topics_other %}
-                                    | {{ ideasketch.idea_topics_other }}
-                                {% endif %}
+                                <!-- {{ ideasketch.get_idea_topics_display|join:"|" }} -->
+                                {{ ideasketch.get_idea_topics_display }}
                             </div>
 
-                            <h4>{{ ideasketch.idea_title }}</h4>
+                            <h4><a href="{% url 'idea-sketch-detail' slug=ideasketch.slug %}">{{ ideasketch.idea_title }}</a></h4>
                             {{ ideasketch.idea_pitch|truncatechars:240 }}
                         </div>
                     </div>
