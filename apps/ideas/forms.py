@@ -81,7 +81,7 @@ class ImpactSectionForm(BaseForm):
 
 
 class CollaborationCampSectionForm(BaseForm):
-    section_name = _('Finances')
+    section_name = _('Collaboration Camp')
 
     class Meta:
         model = AbstractCollaborationCampSection
