@@ -1,63 +1,67 @@
 {% extends "base.html" %}
-
+{% load i18n rules %}
 {% block content %}
 <div class="ideadetail">
     <div class="container">
 
         {% include 'advocate_europe_ideas/ideasketch_detail_header.html' %}
+        <div class="row ideadetail-tab-bar">
+            <div class="col-xs-7 ideadetail-tabs" role="navigation">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Creators</a></li>
+                    <li role="presentation" class="active"><a href="#idea" aria-controls="idea" role="tab" data-toggle="tab">Idea</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-5">
+                <div class="ideadetail-rect-btn-group pull-right" role="group">
+                    <a href="#" class="btn" role="button">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                        <span class="hidden-xs">&nbsp{% trans 'watch' %}</span>
+                    </a>
+                    <a href="#" class="btn" role="button">
+                        <i class="fa fa-share" aria-hidden="true"></i>
+                        <span class="hidden-xs">&nbsp{% trans 'share' %}</span>
+                    </a>
 
-        <div class="row">
-            <div class="ideadetail-tab-bar">
-                <div class="col-xs-7 ideadetail-tabs" role="navigation">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Creators</a></li>
-                        <li role="presentation" class="active"><a href="#idea" aria-controls="idea" role="tab" data-toggle="tab">Idea</a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-5">
-                    <div class="btn-group ideadetail-rect-btn-group" role="group">
-                        <div class="btn hidden-xs">
-                            <a href="#" role="button">??!! Watch</a>
-                        </div>
-                        <div class="btn hidden-sm hidden-md hidden-lg">
-                            <a href="#" role="button">??!!</a>
-                        </div>
-                        <div class="btn hidden-xs">
-                            <a href="#" role="button">??!! Share</a>
-                        </div>
-                        <div class="btn hidden-sm hidden-md hidden-lg">
-                            <a href="#" role="button">??!!</a>
-                        </div>
-                        <div class="btn">
-                            <a href="#" role="button">...</a>
-                        </div>
+                    {% has_perm 'advocate_europe_ideas.change_ideasketch' request.user idea as can_change %}
+                    {% if can_change %}
+                    <div class="dropdown">
+                        <button class="btn" type="button" id="dropdownEdit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownEdit">
+                            <li><a href="{% url 'idea-sketch-update' ideasketch.slug %}">{% trans "edit" %}</a></li>
+                        </ul>
                     </div>
-                </div>
-            </div>
-            <div class="tab-content row ideadetail-content">
-                <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane" id="info">
-                    {% include 'advocate_europe_ideas/ideasketch_detail_tab_info.html' %}
-                </div>
-                <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane active" id="idea">
-                    {% include 'advocate_europe_ideas/ideasketch_detail_tab_idea.html' %}
-                </div>
-                <div class="col-md-3 col-sm-4 col-xs-12 ideadetail-info-boxes">
-                    <div class="ideadetail-info-box">
-                        <h4>Collaborators</h4>
-                        {% for collaborator in ideasketch.collaborators.all %}
-                            <p>{{ collaborator.username }}</p>
-                        {% endfor %}
-                    </div>
-                    <div class="ideadetail-info-box">
-                        <h4>About this idea</h4>
-                        {{ ideasketch.idea_pitch }}
-                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
-        <div class="container-medium ideadetail-comments">
-            <h4>Write comment</h4>
+
+        <div class="row tab-content ideadetail-content">
+            <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane" id="info">
+                {% include 'advocate_europe_ideas/ideasketch_detail_tab_info.html' %}
+            </div>
+            <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane active" id="idea">
+                {% include 'advocate_europe_ideas/ideasketch_detail_tab_idea.html' %}
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-12 ideadetail-info-boxes">
+                <div class="ideadetail-info-box">
+                    <h4>Collaborators</h4>
+                    {% for collaborator in ideasketch.collaborators.all %}
+                    <p>{{ collaborator.username }}</p>
+                    {% endfor %}
+                </div>
+                <div class="ideadetail-info-box">
+                    <h4>About this idea</h4>
+                    {{ ideasketch.idea_pitch }}
+                </div>
+            </div>
         </div>
+    </div>
+    <div class="container-medium ideadetail-comments">
+        <h4>Write comment</h4>
+    </div>
     </div>
 </div>
 {% endblock %}
