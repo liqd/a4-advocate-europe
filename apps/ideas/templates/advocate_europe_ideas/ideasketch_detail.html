@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load i18n static %}
+
 {% block content %}
 <div class="ideadetail">
     <div class="container">
@@ -10,8 +12,8 @@
             <div class="ideadetail-tab-bar">
                 <div class="col-xs-7 ideadetail-tabs" role="navigation">
                     <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Creators</a></li>
-                        <li role="presentation" class="active"><a href="#idea" aria-controls="idea" role="tab" data-toggle="tab">Idea</a></li>
+                        <li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">{% trans "Creators" %}</a></li>
+                        <li role="presentation" class="active"><a href="#idea" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Idea" %}</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-5">
@@ -42,12 +44,14 @@
                     {% include 'advocate_europe_ideas/ideasketch_detail_tab_idea.html' %}
                 </div>
                 <div class="col-md-3 col-sm-4 col-xs-12 ideadetail-info-boxes">
-                    <div class="ideadetail-info-box">
-                        <h4>Collaborators</h4>
-                        {% for collaborator in ideasketch.collaborators.all %}
-                            <p>{{ collaborator.username }}</p>
-                        {% endfor %}
-                    </div>
+                    {% if ideasketch.collaborators.all %}
+                        <div class="ideadetail-info-box">
+                            <h4>Collaborators</h4>
+                            {% for collaborator in ideasketch.collaborators.all %}
+                                <p>{{ collaborator.username }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                     <div class="ideadetail-info-box">
                         <h4>About this idea</h4>
                         {{ ideasketch.idea_pitch }}
@@ -56,7 +60,7 @@
             </div>
         </div>
         <div class="container-medium ideadetail-comments">
-            <h4>Write comment</h4>
+            <h4>{% trans "Write comment" %}</h4>
         </div>
     </div>
 </div>

@@ -1,9 +1,11 @@
+{% load i18n static %}
+
 <div class="ideadetail-tab">
     <div class="ideadetailtab-header">
-        <h2>Creators</h2>
+        <h2>{% trans "Creators" %}</h2>
     </div>
     <div class="ideadetailtab-con-header">
-        <h4>Who is behind this?</h4>
+        <h4>{% trans "Who is behind this?" %}</h4>
     </div>
     <div class="ideadetailtab-con-text">
         <p class="ideadetailtab-bold-name">
@@ -13,27 +15,27 @@
         <p>
         {{ ideasketch.organisation_name }}
         </p>
-        <p>
+        <p><a href="{{ ideasketch.organisation_website }}">
         {{ ideasketch.organisation_website }}
-        </p>
+        </a></p>
         <p>
         {{ ideasketch.get_organisation_country_display }}
         </p>
     </div>
-    <div class="ideadetailtab-con-header">
-        <h4>Who is joining forces?</h4>
-    </div>
-    <div class="ideadetailtab-con-text">
-        {% for field in partner_list %}
-            {% if field.0 %}
+    {% if partner_list %}
+        <div class="ideadetailtab-con-header">
+            <h4>{% trans "Who is joining forces?" %}</h4>
+        </div>
+        <div class="ideadetailtab-con-text">
+            {% for field in partner_list %}
                 <p class="ideadetailtab-bold-name">
-                {{ field.0 }}
+                    {{ field.0 }}
                 </p>
-                <p>{{ field.1 }}</p>
+                <a href="{{ field.1 }}"><p>{{ field.1 }}</p></a>
                 <p>{{ field.2 }}</p>
                 <br>
-            {% endif %}
-        {% endfor %}
-        <p>{{ ideasketch.partners_more_info }}</p>
-    </div>
+            {% endfor %}
+            <p>{{ ideasketch.partners_more_info }}</p>
+        </div>
+    {% endif %}
 </div>
