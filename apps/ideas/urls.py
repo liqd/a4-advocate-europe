@@ -15,6 +15,11 @@ urlpatterns = [
              CommunitySectionForm]), name='idea-sketch-create'),
     url(r'^(?P<slug>[-\w_]+)/$',
         views.IdeaSketchDetailView.as_view(), name='idea-sketch-detail'),
+    url(r'^(?P<slug>[-\w_]+)/edit$',
+        views.IdeaSketchEditWizard.as_view(
+            [ApplicantSectionForm, PartnersSectionForm,
+             IdeaSectionForm, ImpactSectionForm,
+             CollaborationCampSectionForm]), name='idea-sketch-update'),
     url(r'list/export/$', views.IdeaSketchExportView.as_view(),
         name='idea-sketch-export'),
     url(r'^$',

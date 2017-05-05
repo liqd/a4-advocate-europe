@@ -12,6 +12,7 @@ from rules.contrib.views import PermissionRequiredMixin
 
 from adhocracy4.modules.models import Module
 
+from . import forms
 from .models import IdeaSketch, abstracts
 
 
@@ -80,6 +81,58 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin, SessionWizardView):
     @property
     def raise_exception(self):
         return self.request.user.is_authenticated()
+
+
+class IdeaSketchEditWizard(
+        PermissionRequiredMixin,
+        SessionWizardView,
+        generic.UpdateView
+):
+    permission_required = 'advocate_europe_ideas.add_ideasketch'
+    file_storage = FileSystemStorage(
+        location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
+    model = IdeaSketch
+    form_class = forms.IdeaSketchEditForm
+
+    @property
+    def raise_exception(self):
+        return self.request.user.is_authenticated()
+
+    def get(self, request, *args, **kwargs):
+        """
+        Set self.object to make generic.UpdateView work.
+        """
+        self.object = self.get_object()
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        """
+        Set self.object to make generic.UpdateView work.
+        """
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def get_form_instance(self, step):
+        """
+        Return same instance for all forms.
+        """
+        return self.object
+
+    def done(self, form_list, **kwargs):
+        """
+        Handover to update view with complete form once all sub forms are
+        filled.
+        """
+        form_class = self.get_form_class()
+        form_kwargs = {
+            'prefix': '',
+            'data': self.get_all_cleaned_data(),
+            'instance': self.object,
+        }
+        form = form_class(**form_kwargs)
+        if not form.is_valid():
+            print(form.errors)
+        return self.form_valid(form)
 
 
 class IdeaSketchDetailView(generic.DetailView):

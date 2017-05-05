@@ -50,6 +50,10 @@ class IdeaSketch(AbstractIdea, AbstractCollaborationCampSection):
                                object_id_field='object_pk')
     visit_camp = models.BooleanField(default=False)
 
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('idea-sketch-detail', args=[self.slug])
+
 
 class IdeaComplete(AbstractIdea, AbstractFinanceSection):
     ratings = GenericRelation(rating_models.Rating,
