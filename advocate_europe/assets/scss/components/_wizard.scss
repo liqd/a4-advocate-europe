@@ -28,6 +28,18 @@
 
     background-color: #fff;
     position: relative;
+
+
+    &-step-title {
+        text-transform: none;
+        text-align: right;
+
+        @media screen and (max-width: $screen-xs-max) {
+            text-align: left;
+        }
+
+        color: $gray-light;
+    }
 }
 
 
