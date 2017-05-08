@@ -1,3 +1,4 @@
+import crispy_forms as crisp
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
@@ -27,6 +28,14 @@ COLLABORATORS_HELP = _('Here you can insert the email addresses of up to 5 '
                        'will be able to edit your idea. ')
 
 
+class BaseForm(ModelForm):
+    @property
+    def helper(self):
+        helper = crisp.helper.FormHelper()
+        helper.form_tag = False
+        return helper
+
+
 class ApplicantSectionForm(forms.ModelForm):
     section_name = _('Applicant Section')
 
@@ -37,10 +46,31 @@ class ApplicantSectionForm(forms.ModelForm):
 
 class PartnersSectionForm(forms.ModelForm):
     section_name = _('Partners')
+    accordions = [
+        _('first partner organisation'),
+        _('second partner organisation'),
+        _('third partner organisation'),
+    ]
 
     class Meta:
         model = AbstractPartnersSection
         exclude = []
+
+    @property
+    def helper(self):
+        helper = crisp.helper.FormHelper()
+        helper.form_tag = False
+        helper.layout = crisp.bootstrap.Accordion(
+            *[
+                crisp.bootstrap.AccordionGroup(
+                    heading,
+                    'partner_organisation_{}_name'.format(index),
+                    'partner_organisation_{}_website'.format(index),
+                    'partner_organisation_{}_country'.format(index)
+                ) for index, heading in enumerate(self.accordions, 1)
+            ]
+        )
+        return helper
 
 
 class IdeaSectionForm(forms.ModelForm):
@@ -65,6 +95,7 @@ class CollaborationCampSectionForm(forms.ModelForm):
     class Meta:
         model = AbstractCollaborationCampSection
         exclude = []
+
 
 
 class CommunitySectionForm(forms.ModelForm):

@@ -66,6 +66,18 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
 
+    def render_next_step(self, form, **kwargs):
+        # Look for a wizard_safe_goto_step element in the posted data which
+        # contains a valid step name. If one was found, render the requested
+        # form. This is similar to the wizard_goto_step feature, but does
+        # validation and storing first.
+
+        wizard_goto_step = self.request.POST.get('wizard_safe_goto_step', None)
+        if wizard_goto_step and wizard_goto_step in self.get_form_list():
+            return self.render_goto_step(wizard_goto_step)
+        else:
+            return super().render_next_step(form, **kwargs)
+
     def done(self, form_list, **kwargs):
         special_fields = ['accept_conditions', 'collaborators_emails']
 
