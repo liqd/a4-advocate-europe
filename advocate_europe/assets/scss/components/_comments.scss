@@ -12,14 +12,14 @@
     }
 
     .submit-button {
-        margin-bottom: rem(30px);
-        border-radius: 5px;
-        border: 0;
-        background-color: $brand-primary;
-        color: #fff;
-        font-size: rem(16px);
-        font-weight: 600;
-        padding: rem(10px) rem(18px);
+        @extend .btn;
+        @extend .btn-default;
+        margin-right: rem(5px);
+    }
+
+    .cancel-button {
+        @extend .btn;
+        @extend .btn-danger;
     }
 }
 
