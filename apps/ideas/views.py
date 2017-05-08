@@ -6,6 +6,7 @@ from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict
 from django.http import HttpResponse, HttpResponseRedirect
+from django.utils.translation import ugettext as _
 from django.views import generic
 from formtools.wizard.views import SessionWizardView
 from rules.contrib.views import PermissionRequiredMixin
@@ -47,14 +48,6 @@ class IdeaSketchExportView(PermissionRequiredMixin, generic.ListView):
 
         return response
 
-IDEA_PITCH_HL = ('Idea pitch')
-IDEA_LOCATION_SPECIFY_HL = ('Where does your idea take place?')
-CHALLENGE_HL = ('Why does Europe need your idea?')
-OUTCOME_HL = ('What is your impact?')
-PLAN_HL = ('How do you get there?')
-IMPORTANCE_HL = ('What is your story?')
-REACH_OUT_HL = ('What do you need from the Advocate Europe community?')
-
 
 class IdeaSketchCreateWizard(PermissionRequiredMixin, SessionWizardView):
     permission_required = 'advocate_europe_ideas.add_ideasketch'
@@ -92,28 +85,35 @@ class IdeaSketchDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         idea_list = []
-        idea_list.append((IDEA_PITCH_HL, self.object.idea_pitch))
-        idea_list.append((IDEA_LOCATION_SPECIFY_HL,
-                          self.object.idea_location_specify))
-        idea_list.append((CHALLENGE_HL, self.object.challenge))
-        idea_list.append((OUTCOME_HL, self.object.outcome))
-        idea_list.append((PLAN_HL, self.object.plan))
-        idea_list.append((IMPORTANCE_HL, self.object.importance))
-        idea_list.append((REACH_OUT_HL, self.object.reach_out))
+        idea_list.append((_('Idea pitch'), self.object.idea_pitch))
+        if self.object.idea_location_specify:
+            idea_list.append((_('Where does your idea take place?'),
+                              self.object.idea_location_specify))
+        idea_list.append((_('Why does Europe need your idea?'),
+                          self.object.challenge))
+        idea_list.append((_('What is your impact?'), self.object.outcome))
+        idea_list.append((_('How do you get there?'), self.object.plan))
+        idea_list.append((_('What is your story?'), self.object.importance))
+        if self.object.reach_out:
+            idea_list.append((_('What do you need from the Advocate Europe '
+                                'community?'), self.object.reach_out))
 
         partner_list = []
-        partner_list.append((self.object.partner_organisation_1_name,
-                             self.object.partner_organisation_1_website,
-                             self.object.
-                             get_partner_organisation_1_country_display))
-        partner_list.append((self.object.partner_organisation_2_name,
-                             self.object.partner_organisation_2_website,
-                             self.object.
-                             get_partner_organisation_2_country_display))
-        partner_list.append((self.object.partner_organisation_3_name,
-                             self.object.partner_organisation_3_website,
-                             self.object.
-                             get_partner_organisation_3_country_display))
+        if (self.object.partner_organisation_1_name
+                or self.object.partner_organisation_1_website):
+            partner_list.append((self.object.partner_organisation_1_name,
+                                 self.object.partner_organisation_1_website,
+                                 self.object.partner_organisation_1_country))
+        if (self.object.partner_organisation_2_name
+                or self.object.partner_organisation_2_website):
+            partner_list.append((self.object.partner_organisation_2_name,
+                                 self.object.partner_organisation_2_website,
+                                 self.object.partner_organisation_2_country))
+        if (self.object.partner_organisation_3_name
+                or self.object.partner_organisation_3_website):
+            partner_list.append((self.object.partner_organisation_3_name,
+                                 self.object.partner_organisation_3_website,
+                                 self.object.partner_organisation_3_country))
 
         context = super().get_context_data(**kwargs)
         context['idea_list'] = idea_list

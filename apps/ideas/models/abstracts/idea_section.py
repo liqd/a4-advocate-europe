@@ -89,3 +89,15 @@ class AbstractIdeaSection(models.Model):
 
     class Meta:
         abstract = True
+
+    @property
+    def idea_topics_names(self):
+        choices = dict(IDEA_TOPIC_CHOICES)
+        return [choices[topic] for topic in self.idea_topics]
+
+    @property
+    def all_idea_topics_names(self):
+        idea_topics = self.idea_topics_names
+        if self.idea_topics_other:
+            idea_topics.append(self.idea_topics_other)
+        return idea_topics
