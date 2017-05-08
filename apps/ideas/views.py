@@ -4,16 +4,16 @@ import os
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.forms.models import model_to_dict
-from django.utils.translation import ugettext as _
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.utils.translation import ugettext as _
 from django.views import generic
 from formtools.wizard.views import SessionWizardView
 from rules.contrib.views import PermissionRequiredMixin
 
 from adhocracy4.modules.models import Module
-
 from apps.invites.models import IdeaSketchInvite
+
 from .models import IdeaSketch, abstracts
 
 
@@ -43,7 +43,7 @@ class IdeaSketchExportView(PermissionRequiredMixin, generic.ListView):
         writer = csv.writer(response)
         writer.writerow(field_names)
 
-       for idea in self.get_queryset():
+        for idea in self.get_queryset():
             data = [str(getattr(idea, name)) for name in field_names]
             writer.writerow(data)
 
