@@ -28,7 +28,15 @@ COLLABORATORS_HELP = _('Here you can insert the email addresses of up to 5 '
                        'will be able to edit your idea. ')
 
 
-class ApplicantSectionForm(forms.ModelForm):
+class BaseForm(forms.ModelForm):
+    @property
+    def helper(self):
+        helper = crisp.helper.FormHelper()
+        helper.form_tag = False
+        return helper
+
+
+class ApplicantSectionForm(BaseForm):
     section_name = _('Applicant Section')
 
     class Meta:
@@ -36,7 +44,7 @@ class ApplicantSectionForm(forms.ModelForm):
         exclude = []
 
 
-class PartnersSectionForm(forms.ModelForm):
+class PartnersSectionForm(BaseForm):
     section_name = _('Partners')
     accordions = [
         _('first partner organisation'),
@@ -65,7 +73,7 @@ class PartnersSectionForm(forms.ModelForm):
         return helper
 
 
-class IdeaSectionForm(forms.ModelForm):
+class IdeaSectionForm(BaseForm):
     section_name = _('Idea details')
 
     class Meta:
@@ -73,7 +81,7 @@ class IdeaSectionForm(forms.ModelForm):
         exclude = []
 
 
-class ImpactSectionForm(forms.ModelForm):
+class ImpactSectionForm(BaseForm):
     section_name = _('Impact')
 
     class Meta:
@@ -81,7 +89,7 @@ class ImpactSectionForm(forms.ModelForm):
         exclude = []
 
 
-class CollaborationCampSectionForm(forms.ModelForm):
+class CollaborationCampSectionForm(BaseForm):
     section_name = _('Finances')
 
     class Meta:
@@ -89,8 +97,9 @@ class CollaborationCampSectionForm(forms.ModelForm):
         exclude = []
 
 
-class CommunitySectionForm(forms.ModelForm):
+class CommunitySectionForm(BaseForm):
     section_name = _('Community Information')
+    accept_conditions = forms.BooleanField(label=ACCEPT_CONDITIONS_LABEL)
     collaborators_emails = forms.CharField(
         required=False,
         help_text=COLLABORATORS_HELP,
@@ -134,7 +143,7 @@ class CommunitySectionForm(forms.ModelForm):
         return addresses
 
 
-class FinanceSectionForm(forms.ModelForm):
+class FinanceSectionForm(BaseForm):
     section_name = _('Finances')
 
     class Meta:
