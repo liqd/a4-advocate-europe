@@ -1,3 +1,4 @@
+import crispy_forms as crisp
 from django.forms import BooleanField, ModelForm
 from django.utils.translation import ugettext as _
 
@@ -18,7 +19,15 @@ ACCEPT_CONDITIONS_LABEL = _('I hereby confirm and agree that '
                             'used in this proposal.')
 
 
-class ApplicantSectionForm(ModelForm):
+class BaseForm(ModelForm):
+    @property
+    def helper(self):
+        helper = crisp.helper.FormHelper()
+        helper.form_tag = False
+        return helper
+
+
+class ApplicantSectionForm(BaseForm):
     section_name = _('Applicant Section')
 
     class Meta:
@@ -28,13 +37,34 @@ class ApplicantSectionForm(ModelForm):
 
 class PartnersSectionForm(ModelForm):
     section_name = _('Partners')
+    accordions = [
+        _('first partner organisation'),
+        _('second partner organisation'),
+        _('third partner organisation'),
+    ]
 
     class Meta:
         model = AbstractPartnersSection
         exclude = []
 
+    @property
+    def helper(self):
+        helper = crisp.helper.FormHelper()
+        helper.form_tag = False
+        helper.layout = crisp.bootstrap.Accordion(
+            *[
+                crisp.bootstrap.AccordionGroup(
+                    heading,
+                    'partner_organisation_{}_name'.format(index),
+                    'partner_organisation_{}_website'.format(index),
+                    'partner_organisation_{}_country'.format(index)
+                ) for index, heading in enumerate(self.accordions, 1)
+            ]
+        )
+        return helper
 
-class IdeaSectionForm(ModelForm):
+
+class IdeaSectionForm(BaseForm):
     section_name = _('Idea details')
 
     class Meta:
@@ -42,7 +72,7 @@ class IdeaSectionForm(ModelForm):
         exclude = []
 
 
-class ImpactSectionForm(ModelForm):
+class ImpactSectionForm(BaseForm):
     section_name = _('Impact')
 
     class Meta:
@@ -50,15 +80,15 @@ class ImpactSectionForm(ModelForm):
         exclude = []
 
 
-class CollaborationCampSectionForm(ModelForm):
-    section_name = _('Finances')
+class CollaborationCampSectionForm(BaseForm):
+    section_name = _('Collaboration Camp')
 
     class Meta:
         model = AbstractCollaborationCampSection
         exclude = []
 
 
-class CommunitySectionForm(ModelForm):
+class CommunitySectionForm(BaseForm):
     section_name = _('Community Information')
     accept_conditions = BooleanField(label=ACCEPT_CONDITIONS_LABEL)
 
@@ -67,7 +97,7 @@ class CommunitySectionForm(ModelForm):
         exclude = []
 
 
-class FinanceSectionForm(ModelForm):
+class FinanceSectionForm(BaseForm):
     section_name = _('Finances')
 
     class Meta:
