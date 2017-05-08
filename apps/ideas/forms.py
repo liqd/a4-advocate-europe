@@ -28,14 +28,6 @@ COLLABORATORS_HELP = _('Here you can insert the email addresses of up to 5 '
                        'will be able to edit your idea. ')
 
 
-class BaseForm(ModelForm):
-    @property
-    def helper(self):
-        helper = crisp.helper.FormHelper()
-        helper.form_tag = False
-        return helper
-
-
 class ApplicantSectionForm(forms.ModelForm):
     section_name = _('Applicant Section')
 
@@ -95,7 +87,6 @@ class CollaborationCampSectionForm(forms.ModelForm):
     class Meta:
         model = AbstractCollaborationCampSection
         exclude = []
-
 
 
 class CommunitySectionForm(forms.ModelForm):
