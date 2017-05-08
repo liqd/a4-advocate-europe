@@ -247,8 +247,7 @@
             border: 0;
             font-size: rem(16px);
             font-weight: 600;
-            padding-top: rem(7px);
-            padding-bottom: rem(7px);
+            padding: rem(7px) rem(10px);
         }
     }
 
@@ -328,6 +327,10 @@
         p {
             margin-top: 0;
             margin-bottom: 0;
+        }
+
+        a {
+            color: $gray-base;
         }
     }
 

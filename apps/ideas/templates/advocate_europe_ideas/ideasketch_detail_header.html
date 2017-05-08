@@ -1,19 +1,15 @@
-{% load static %}
+{% load i18n static %}
 
 <div class="row ideadetail-header">
     <div class="ideadetail-image" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000000), url({% if ideasketch.idea_image %} {{ ideasketch.idea_image.url }} {% else %} {% static 'images/placeholder_ideadetail_768x320.png' %} {% endif %});">
         <div class="ideadetailheader-content">
             <div class="col-md-9 col-sm-8 col-xs-12 ideadetailheader-left">
                 <div class="btn ideadetail-btn">
-                    <a href="{% url 'idea-sketch-list' %}" role="button">< All ideas</a>
+                    <a href="{% url 'idea-sketch-list' %}" role="button">{% trans "< All ideas" %}</a>
                 </div>
                 <div class="ideadetail-title">
                     <div class="ideadetail-category">
-                       <!-- {{ ideasketch.get_idea_topics_display|join:"," }} -->
-                        {{ ideasketch.get_idea_topics_display }}
-                        {% if ideasketch.idea_topics_other %}
-                            , {{ ideasketch.idea_topics_other }}
-                        {% endif %}
+                        {{ ideasketch.all_idea_topics_names|join:", " }}
                     </div>
                     <h3>
                         {{ ideasketch.idea_title }}

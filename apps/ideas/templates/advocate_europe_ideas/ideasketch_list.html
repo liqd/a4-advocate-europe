@@ -5,7 +5,7 @@
 {% block content %}
 <div class="ideasketchlist">
     <div class="ideasketchlist-title text-center">
-        <h1>All ideas</h1>
+        <h1>{% trans "All ideas" %}</h1>
     </div>
     <div class="container">
         {% has_perm 'advocate_europe_ideas.export_ideasketch' request.user as can_export %}
@@ -23,8 +23,7 @@
                         </div>
                         <div class="ideasketchlist-text">
                             <div class="ideasketchlist-category">
-                                <!-- {{ ideasketch.get_idea_topics_display|join:"|" }} -->
-                                {{ ideasketch.get_idea_topics_display }}
+                                {{ ideasketch.idea_topics_names|join:" | " }}
                             </div>
 
                             <h4><a href="{% url 'idea-sketch-detail' slug=ideasketch.slug %}">{{ ideasketch.idea_title }}</a></h4>
