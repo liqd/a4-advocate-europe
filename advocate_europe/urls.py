@@ -9,7 +9,9 @@ from django.views.i18n import javascript_catalog
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
+
 from apps.ideas import urls as idea_urls
+from apps.invites import urls as invite_urls
 
 js_info_dict = {
     'packages': ('adhocracy4.comments',),
@@ -27,6 +29,7 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     url(r'^ideas/', include(idea_urls)),
+    url(r'^invites/', include(invite_urls)),
     url(r'^jsi18n/$', javascript_catalog,
         js_info_dict, name='javascript-catalog'),
     url(r'', include(wagtail_urls))
