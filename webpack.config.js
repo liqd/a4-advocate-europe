@@ -23,10 +23,11 @@ var autoprefixer = require('autoprefixer');
 
 module.exports = {
   entry: {
-    adhocracy4: [
-      './advocate_europe/assets/scss/all.scss',
+    adhocracy4:
       './advocate_europe/assets/js/app.js',
-    ],
+    adhocracy4css:
+      './advocate_europe/assets/scss/all.scss',
+
     vendor: [
       'jquery',
       'react',

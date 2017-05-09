@@ -1,0 +1,20 @@
+{% extends 'email_base.'|add:part_type %}
+
+{% block subject %}
+You have been to work on a proposal on {{ site.name }}
+{% endblock %}
+
+{% block headline %}
+You are invited to contribute to “{{ ideasketchinvite.subject.name }}” on <i>{{ site.name }}</i>
+{% endblock  %}
+
+{% block content %}
+You were invited to colaborate by <i>{{ ideasketchinvite.creator.username }}</i>. If you want to collaborate, please visit the project by clicking the {% if part_type == "txt" %}link{% else %}button{% endif %} below.
+{% endblock %}
+
+{% block cta_url %}{{ email.get_host }}{{ ideasketchinvite.get_absolute_url }}{% endblock %}
+{% block cta_label %}Accept invitation{% endblock %}
+
+{% block reason %}
+This email was sent to {{ receiver }}. If you think you were invited by mistake, you can ignore this email. You will not receive any further notifications. If you have any further questions, please contact us via info@advocate-europe.eu.
+{% endblock %}

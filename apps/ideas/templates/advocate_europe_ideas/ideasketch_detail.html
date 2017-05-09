@@ -1,6 +1,9 @@
 {% extends "base.html" %}
-{% load i18n rules %}
+
+{% load i18n react_comments rules %}
+
 {% block content %}
+
 <div class="ideadetail">
     <div class="container">
 
@@ -8,21 +11,21 @@
         <div class="row ideadetail-tab-bar">
             <div class="col-xs-7 ideadetail-tabs" role="navigation">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Creators</a></li>
-                    <li role="presentation" class="active"><a href="#idea" aria-controls="idea" role="tab" data-toggle="tab">Idea</a></li>
+                    <li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">{% trans "Creators" %}</a></li>
+                    <li role="presentation" class="active"><a href="#idea" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Idea" %}</a></li>
                 </ul>
             </div>
             <div class="col-xs-5">
                 <div class="ideadetail-rect-btn-group pull-right" role="group">
                     <a href="#" class="btn" role="button">
                         <i class="fa fa-eye" aria-hidden="true"></i>
-                        <span class="hidden-xs">&nbsp{% trans 'watch' %}</span>
+                        <span class="hidden-xs">&nbsp{% trans 'Watch' %}</span>
                     </a>
                     <a href="#" class="btn" role="button">
                         <i class="fa fa-share" aria-hidden="true"></i>
-                        <span class="hidden-xs">&nbsp{% trans 'share' %}</span>
+                        <span class="hidden-xs">&nbsp{% trans 'Share' %}</span>
                     </a>
-
+                  
                     {% has_perm 'advocate_europe_ideas.change_ideasketch' request.user idea as can_change %}
                     {% if can_change %}
                     <div class="dropdown">
@@ -52,16 +55,27 @@
                     <p>{{ collaborator.username }}</p>
                     {% endfor %}
                 </div>
-                <div class="ideadetail-info-box">
-                    <h4>About this idea</h4>
-                    {{ ideasketch.idea_pitch }}
+                <div class="col-md-3 col-sm-4 col-xs-12 ideadetail-info-boxes">
+                    {% if ideasketch.collaborators.all %}
+                        <div class="ideadetail-info-box">
+                            <h4>Collaborators</h4>
+                            {% for collaborator in ideasketch.collaborators.all %}
+                                <p>{{ collaborator.username }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="ideadetail-info-box">
+                        <h4>About this idea</h4>
+                        {{ ideasketch.idea_pitch }}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container-medium ideadetail-comments">
-        <h4>Write comment</h4>
-    </div>
+        <div class="container-medium ideadetail-comments">
+            <h4>{% trans "Write comment" %}</h4>
+            {% react_comments ideasketch %}
+        </div>
     </div>
 </div>
+
 {% endblock %}

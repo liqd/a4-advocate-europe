@@ -6,7 +6,9 @@ $bootstrap-sass-asset-helper: false !default;
 //== Custom
 $footer-height: 120px;
 $footer-screen-sm-hight: 185px;
+$ae-lighter-gray: #fafafa;
 $ae-light-gray: #f3f3f3;
+$ae-lighter-gray: #fafafa;
 $ae-light-gray-shadow: #ccc;
 $ae-light-gray-darker: #e6e6e6;
 $ae-middle-gray: #999;
@@ -14,7 +16,6 @@ $ae-dark-gray: #d8d8d8;
 $ae-font-size-extra-large: 48px;
 $ae-brand-orange: #fcb813;
 $brand-primary-darker: #007099;
-
 
 
 //== Bootstrap
@@ -31,10 +32,10 @@ $gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
 
 $brand-primary:         #00aae5 !default;
 $brand-secondary:       #fcb813 !default;
-$brand-success:         #5cb85c !default;
+$brand-success:         #73be46 !default; //was: #5cb85c
 $brand-info:            #5bc0de !default;
 $brand-warning:         #f0ad4e !default;
-$brand-danger:          #db3918 !default;
+$brand-danger:          #db3918 !default; // was: #db3918
 
 
 //== Scaffolding

@@ -9,16 +9,24 @@ from django.views.i18n import javascript_catalog
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
+
+from adhocracy4.api import routers as a4routers
+from adhocracy4.comments.api import CommentViewSet
 from apps.ideas import urls as idea_urls
+from apps.invites import urls as invite_urls
 
 js_info_dict = {
     'packages': ('adhocracy4.comments',),
 }
 
+ct_router = a4routers.ContentTypeDefaultRouter()
+ct_router.register(r'comments', CommentViewSet, base_name='comments')
+
 urlpatterns = [
     url(r'^django-admin/', include(admin.site.urls)),
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
+    url(r'^api/', include(ct_router.urls)),
     url(r'^upload/',
         login_required(ck_views.upload), name='ckeditor_upload'),
     url(r'^browse/',
@@ -27,6 +35,7 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     url(r'^ideas/', include(idea_urls)),
+    url(r'^invites/', include(invite_urls)),
     url(r'^jsi18n/$', javascript_catalog,
         js_info_dict, name='javascript-catalog'),
     url(r'', include(wagtail_urls))

@@ -35,8 +35,8 @@ INSTALLED_APPS = [
     'taggit',
     'multiselectfield',
 
-
     'widget_tweaks',
+    'crispy_forms',
     'webpack_loader',
     'easy_thumbnails',
     'ckeditor',
@@ -74,7 +74,8 @@ INSTALLED_APPS = [
 
     'apps.contrib',
     'apps.users.apps.UsersConfig',
-    'apps.ideas.apps.IdeasConfig'
+    'apps.ideas.apps.IdeasConfig',
+    'apps.invites.apps.InvitesConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -301,6 +302,7 @@ REST_FRAMEWORK = {
 A4_ORGANISATIONS_MODEL = "a4organisations.Organisation"
 
 A4_COMMENTABLES = (
+    ('advocate_europe_ideas', 'ideasketch'),
     ('a4comments', 'comment'),
 )
 
@@ -315,3 +317,6 @@ A4_REPORTABLES = (
 ACTIONABLE = [
     ('a4comments', 'comment')
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_FAIL_SILENTLY = False

@@ -3,14 +3,16 @@ import os
 
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
+from django.shortcuts import redirect
+from django.utils.translation import ugettext as _
 from django.views import generic
 from formtools.wizard.views import SessionWizardView
 from rules.contrib.views import PermissionRequiredMixin
 
 from adhocracy4.modules.models import Module
+from apps.invites.models import IdeaSketchInvite
 
 from . import forms
 from .models import IdeaSketch, abstracts
@@ -48,35 +50,56 @@ class IdeaSketchExportView(PermissionRequiredMixin, generic.ListView):
 
         return response
 
-IDEA_PITCH_HL = ('Idea pitch')
-IDEA_LOCATION_SPECIFY_HL = ('Where does your idea take place?')
-CHALLENGE_HL = ('Why does Europe need your idea?')
-OUTCOME_HL = ('What is your impact?')
-PLAN_HL = ('How do you get there?')
-IMPORTANCE_HL = ('What is your story?')
-REACH_OUT_HL = ('What do you need from the Advocate Europe community?')
+
+class ModuleMixin(generic.detail.SingleObjectMixin):
+    model = Module
+
+    def dispatch(self, request, *args, **kwargs):
+        self.module = self.get_object()
+        self.object = self.module
+        return super().dispatch(request, *args, **kwargs)
 
 
-class IdeaSketchCreateWizard(PermissionRequiredMixin, SessionWizardView):
+class IdeaSketchCreateWizard(PermissionRequiredMixin,
+                             ModuleMixin,
+                             SessionWizardView):
     permission_required = 'advocate_europe_ideas.add_ideasketch'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
 
+    def render_next_step(self, form, **kwargs):
+        # Look for a wizard_safe_goto_step element in the posted data which
+        # contains a valid step name. If one was found, render the requested
+        # form. This is similar to the wizard_goto_step feature, but does
+        # validation and storing first.
+
+        wizard_goto_step = self.request.POST.get('wizard_safe_goto_step', None)
+        if wizard_goto_step and wizard_goto_step in self.get_form_list():
+            return self.render_goto_step(wizard_goto_step)
+        else:
+            return super().render_next_step(form, **kwargs)
+
     def done(self, form_list, **kwargs):
-        idea_sketch = IdeaSketch()
-        idea_sketch.creator = self.request.user
+        special_fields = ['accept_conditions', 'collaborators_emails']
 
-        mod_slug = self.kwargs['slug']
-        mod = Module.objects.get(slug=mod_slug)
-        idea_sketch.module = mod
+        data = self.get_all_cleaned_data()
+        idea_sketch = IdeaSketch.objects.create(
+            creator=self.request.user,
+            module=self.module,
+            **{
+                field: value for field, value in data.items()
+                if field not in special_fields
+            }
+        )
 
-        for key, value in self.get_all_cleaned_data().items():
-            setattr(idea_sketch, key, value)
+        for name, email in data['collaborators_emails']:
+            IdeaSketchInvite.objects.invite(
+                self.request.user,
+                idea_sketch,
+                email
+            )
 
-        idea_sketch.save()
-
-        return HttpResponseRedirect(
-            reverse('idea-sketch-detail', kwargs={'slug': idea_sketch.slug}))
+        return redirect(idea_sketch.get_absolute_url())
 
     @property
     def raise_exception(self):
@@ -145,28 +168,35 @@ class IdeaSketchDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         idea_list = []
-        idea_list.append((IDEA_PITCH_HL, self.object.idea_pitch))
-        idea_list.append((IDEA_LOCATION_SPECIFY_HL,
-                          self.object.idea_location_specify))
-        idea_list.append((CHALLENGE_HL, self.object.challenge))
-        idea_list.append((OUTCOME_HL, self.object.outcome))
-        idea_list.append((PLAN_HL, self.object.plan))
-        idea_list.append((IMPORTANCE_HL, self.object.importance))
-        idea_list.append((REACH_OUT_HL, self.object.reach_out))
+        idea_list.append((_('Idea pitch'), self.object.idea_pitch))
+        if self.object.idea_location_specify:
+            idea_list.append((_('Where does your idea take place?'),
+                              self.object.idea_location_specify))
+        idea_list.append((_('Why does Europe need your idea?'),
+                          self.object.challenge))
+        idea_list.append((_('What is your impact?'), self.object.outcome))
+        idea_list.append((_('How do you get there?'), self.object.plan))
+        idea_list.append((_('What is your story?'), self.object.importance))
+        if self.object.reach_out:
+            idea_list.append((_('What do you need from the Advocate Europe '
+                                'community?'), self.object.reach_out))
 
         partner_list = []
-        partner_list.append((self.object.partner_organisation_1_name,
-                             self.object.partner_organisation_1_website,
-                             self.object.
-                             get_partner_organisation_1_country_display))
-        partner_list.append((self.object.partner_organisation_2_name,
-                             self.object.partner_organisation_2_website,
-                             self.object.
-                             get_partner_organisation_2_country_display))
-        partner_list.append((self.object.partner_organisation_3_name,
-                             self.object.partner_organisation_3_website,
-                             self.object.
-                             get_partner_organisation_3_country_display))
+        if (self.object.partner_organisation_1_name
+                or self.object.partner_organisation_1_website):
+            partner_list.append((self.object.partner_organisation_1_name,
+                                 self.object.partner_organisation_1_website,
+                                 self.object.partner_organisation_1_country))
+        if (self.object.partner_organisation_2_name
+                or self.object.partner_organisation_2_website):
+            partner_list.append((self.object.partner_organisation_2_name,
+                                 self.object.partner_organisation_2_website,
+                                 self.object.partner_organisation_2_country))
+        if (self.object.partner_organisation_3_name
+                or self.object.partner_organisation_3_website):
+            partner_list.append((self.object.partner_organisation_3_name,
+                                 self.object.partner_organisation_3_website,
+                                 self.object.partner_organisation_3_country))
 
         context = super().get_context_data(**kwargs)
         context['idea_list'] = idea_list

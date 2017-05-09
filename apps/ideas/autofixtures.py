@@ -19,7 +19,8 @@ class IdeaSketchAutoFixture(AutoFixture):
         'year_of_registration': generators.CallableGenerator(fake.year),
 
         'idea_pitch': generators.CallableGenerator(fake.text),
-        'idea_image': generators.ImageGenerator(sizes=IMAGESIZES),
+        'idea_image': generators.ImageGenerator(sizes=IMAGESIZES,
+                                                path='ideas/images'),
         'idea_location_specify': generators.CallableGenerator(fake.city),
         'idea_topics_other': generators.ChoicesGenerator(
             values=['', 'Cats', 'Traffic', 'Poverty']

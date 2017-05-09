@@ -1,6 +1,7 @@
 from autoslug import AutoSlugField
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext as _
 

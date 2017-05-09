@@ -1,0 +1,9 @@
+{% extends "advocate_europe_invites/ideasketchinvite_base.html" %}
+{% load i18n %}
+{% block invite_action %}
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" name="accept" class="btn btn-primary">{% trans 'Accept' %}</button>
+    <button type="submit" name="reject" class="btn btn-danger">{% trans 'Decline' %}</button>
+</form>
+{% endblock %}
