@@ -35,8 +35,8 @@ INSTALLED_APPS = [
     'taggit',
     'multiselectfield',
 
-
     'widget_tweaks',
+    'crispy_forms',
     'webpack_loader',
     'easy_thumbnails',
     'ckeditor',
@@ -74,7 +74,8 @@ INSTALLED_APPS = [
 
     'apps.contrib',
     'apps.users.apps.UsersConfig',
-    'apps.ideas.apps.IdeasConfig'
+    'apps.ideas.apps.IdeasConfig',
+    'apps.invites.apps.InvitesConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -316,3 +317,6 @@ A4_REPORTABLES = (
 ACTIONABLE = [
     ('a4comments', 'comment')
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_FAIL_SILENTLY = False
