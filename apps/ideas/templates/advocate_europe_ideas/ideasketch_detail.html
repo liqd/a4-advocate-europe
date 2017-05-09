@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
-{% load i18n static %}
+{% load i18n react_comments %}
 
 {% block content %}
+
 <div class="ideadetail">
     <div class="container">
 
@@ -61,7 +62,9 @@
         </div>
         <div class="container-medium ideadetail-comments">
             <h4>{% trans "Write comment" %}</h4>
+            {% react_comments ideasketch %}
         </div>
     </div>
 </div>
+
 {% endblock %}
