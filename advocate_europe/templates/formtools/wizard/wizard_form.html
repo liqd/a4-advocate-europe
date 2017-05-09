@@ -25,7 +25,8 @@
                         name="wizard_goto_step"
                         type="submit"
                         value="{{ wizard.steps.prev }}">
-                    {% trans "back" %}</button>
+                    {% trans "back" %}
+                </button>
                 {% endif %}
 
                 {% if wizard.steps.next %}
@@ -45,8 +46,8 @@
         </div>
         <ul class="wizard-progress hidden-sm hidden-xs">
             {% for step_id, step_form in view.get_form_list.items %}
-            <li class="wizard-progress-entry{% if step_id == wizard.steps.current %} active{% endif %}{% if step_id < wizard.steps.current %} filled{% endif %}">
-                {% if step_id < wizard.steps.current %}
+            <li class="wizard-progress-entry{% if step_id == wizard.steps.current %} active{% endif %}{% if step_id < wizard.steps.current or request.resolver_match.url_name == 'idea-sketch-update' %} filled{% endif %}">
+                {% if step_id < wizard.steps.current or request.resolver_match.url_name == "idea-sketch-update" %}
                 <button name="wizard_safe_goto_step"
                         class="wizard-progress-button"
                         type="submit"
