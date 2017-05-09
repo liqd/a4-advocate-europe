@@ -25,7 +25,7 @@
                         <i class="fa fa-share" aria-hidden="true"></i>
                         <span class="hidden-xs">&nbsp{% trans 'Share' %}</span>
                     </a>
-                  
+
                     {% has_perm 'advocate_europe_ideas.change_ideasketch' request.user idea as can_change %}
                     {% if can_change %}
                     <div class="dropdown">
@@ -49,25 +49,17 @@
                 {% include 'advocate_europe_ideas/ideasketch_detail_tab_idea.html' %}
             </div>
             <div class="col-md-3 col-sm-4 col-xs-12 ideadetail-info-boxes">
-                <div class="ideadetail-info-box">
-                    <h4>Collaborators</h4>
-                    {% for collaborator in ideasketch.collaborators.all %}
-                    <p>{{ collaborator.username }}</p>
-                    {% endfor %}
-                </div>
-                <div class="col-md-3 col-sm-4 col-xs-12 ideadetail-info-boxes">
-                    {% if ideasketch.collaborators.all %}
-                        <div class="ideadetail-info-box">
-                            <h4>Collaborators</h4>
-                            {% for collaborator in ideasketch.collaborators.all %}
-                                <p>{{ collaborator.username }}</p>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
+                {% if ideasketch.collaborators.all %}
                     <div class="ideadetail-info-box">
-                        <h4>About this idea</h4>
-                        {{ ideasketch.idea_pitch }}
+                        <h4>Collaborators</h4>
+                        {% for collaborator in ideasketch.collaborators.all %}
+                            <p>{{ collaborator.username }}</p>
+                        {% endfor %}
                     </div>
+                {% endif %}
+                <div class="ideadetail-info-box">
+                    <h4>About this idea</h4>
+                    {{ ideasketch.idea_pitch }}
                 </div>
             </div>
         </div>

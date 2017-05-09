@@ -32,12 +32,11 @@ rules.add_perm(
 
 rules.add_perm(
     'advocate_europe_ideas.comment_ideasketch',
-    mod_predicates.is_superuser |
-    mod_predicates.is_context_moderator | 
+    is_superuser |
+    mod_predicates.is_context_moderator |
     mod_predicates.is_context_initiator |
     (
-        mod_predicates.is_context_member & 
+        mod_predicates.is_context_member &
         phase_predicates.phase_allows_comment
     )
 )
-

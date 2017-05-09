@@ -152,7 +152,7 @@ class FinanceSectionForm(BaseForm):
         exclude = []
 
 
-class IdeaSketchEditForm(ModelForm):
+class IdeaSketchEditForm(BaseForm):
 
     class Meta:
         model = models.IdeaSketch
