@@ -1,11 +1,11 @@
 {% extends 'email_base.'|add:part_type %}
 
 {% block subject %}
-You have been to work on a proposal on {{ site.name }}
+You have been invited to work on a proposal on {{ site.name }}
 {% endblock %}
 
 {% block headline %}
-You are invited to contribute to “{{ ideasketchinvite.subject.name }}” on <i>{{ site.name }}</i>
+You are invited to contribute to “{{ ideasketchinvite.subject.idea_title }}” on <i>{{ site.name }}</i>
 {% endblock  %}
 
 {% block content %}

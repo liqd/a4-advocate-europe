@@ -99,7 +99,6 @@ class CollaborationCampSectionForm(BaseForm):
 
 class CommunitySectionForm(BaseForm):
     section_name = _('Community Information')
-    accept_conditions = forms.BooleanField(label=ACCEPT_CONDITIONS_LABEL)
     collaborators_emails = forms.CharField(
         required=False,
         help_text=COLLABORATORS_HELP,
