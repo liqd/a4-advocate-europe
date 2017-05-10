@@ -3,8 +3,9 @@ import os
 
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 from django.shortcuts import redirect
 from django.utils.translation import ugettext as _
 from django.views import generic
@@ -106,56 +107,47 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
         return self.request.user.is_authenticated()
 
 
-class IdeaSketchEditWizard(
+class IdeaSketchEditView(
         PermissionRequiredMixin,
-        SessionWizardView,
         generic.UpdateView
 ):
     permission_required = 'advocate_europe_ideas.add_ideasketch'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
     model = IdeaSketch
-    form_class = forms.IdeaSketchEditForm
+    template_name = 'formtools/wizard/wizard_form.html'
+    is_edit_view = True
+
+    form_classes = [
+        forms.ApplicantSectionForm,
+        forms.PartnersSectionForm,
+        forms.IdeaSectionForm,
+        forms.ImpactSectionForm,
+        forms.CollaborationCampSectionForm
+    ]
+
+    def dispatch(self, request, *args, **kwargs):
+        form_number = self.kwargs.get('form_number', '0')
+        if not form_number.isdecimal():
+            raise Http404
+
+        form_number = int(form_number)
+        self.form_number = form_number
+        if form_number < 0 or len(self.form_classes) <= form_number:
+            raise Http404
+
+        self.form_class = self.form_classes[form_number]
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('idea-sketch-update-form', kwargs={
+            'slug': self.object.slug,
+            'form_number': self.request.POST.get('next_form', self.form_number)
+        })
 
     @property
     def raise_exception(self):
         return self.request.user.is_authenticated()
-
-    def get(self, request, *args, **kwargs):
-        """
-        Set self.object to make generic.UpdateView work.
-        """
-        self.object = self.get_object()
-        return super().get(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        """
-        Set self.object to make generic.UpdateView work.
-        """
-        self.object = self.get_object()
-        return super().post(request, *args, **kwargs)
-
-    def get_form_instance(self, step):
-        """
-        Return same instance for all forms.
-        """
-        return self.object
-
-    def done(self, form_list, **kwargs):
-        """
-        Handover to update view with complete form once all sub forms are
-        filled.
-        """
-        form_class = self.get_form_class()
-        form_kwargs = {
-            'prefix': '',
-            'data': self.get_all_cleaned_data(),
-            'instance': self.object,
-        }
-        form = form_class(**form_kwargs)
-        if not form.is_valid():
-            print(form.errors)
-        return self.form_valid(form)
 
 
 class IdeaSketchDetailView(generic.DetailView):
