@@ -52,14 +52,9 @@
         }
     }
 
-    .ideasketchlist-lower {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
+    .ideasketchlist-footer {
         padding: rem(12px);
         box-shadow: 0 -1px 0 0 $ae-dark-gray;
-        height: rem(38px);
     }
 }
 

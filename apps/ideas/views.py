@@ -152,5 +152,5 @@ class IdeaSketchDetailView(generic.DetailView):
 
 
 class IdeaSketchListView(generic.ListView):
-    model = IdeaSketch
+    queryset = IdeaSketch.objects.annotate_comment_count()
     paginate_by = 12

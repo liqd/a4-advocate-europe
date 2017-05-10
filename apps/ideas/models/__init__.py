@@ -6,6 +6,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 from adhocracy4.comments import models as comment_models
+from adhocracy4.models import query
 from adhocracy4.modules.models import Item
 from adhocracy4.ratings import models as rating_models
 
@@ -42,6 +43,10 @@ class AbstractIdea(AbstractApplicantSection,
         return self.slug
 
 
+class IdeaSketchQuerySet(query.RateableQuerySet, query.CommentableQuerySet):
+    pass
+
+
 class IdeaSketch(AbstractIdea, AbstractCollaborationCampSection):
     ratings = GenericRelation(rating_models.Rating,
                               related_query_name='idea_sketch',
@@ -50,6 +55,8 @@ class IdeaSketch(AbstractIdea, AbstractCollaborationCampSection):
                                related_query_name='idea_sketch',
                                object_id_field='object_pk')
     visit_camp = models.BooleanField(default=False)
+
+    objects = IdeaSketchQuerySet.as_manager()
 
     def get_absolute_url(self):
         return reverse('idea-sketch-detail', kwargs={'slug': self.slug})
