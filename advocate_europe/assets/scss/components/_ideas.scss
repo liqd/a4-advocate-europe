@@ -162,16 +162,11 @@
     background-color: $brand-primary;
     border-radius: rem(5px);
     color: #fff;
-    font-size: rem(18px);
-    font-weight: 600;
 
     .btn {
-        height: rem(40px);
+        font-size: rem(18px);
+        font-weight: 600;
         border: 0.5px solid $brand-primary-darker;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
     }
 
     @media screen and (min-width: $screen-sm-min) {
