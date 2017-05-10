@@ -18,35 +18,29 @@
 .wizard {
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
 
-    @media screen and (min-width: $screen-md-min) {
+    @media screen and (min-width: $screen-sm-min) {
         padding: rem(20px 60px);
     }
 
-    @media screen and (max-width: $screen-sm-max) {
+    @media screen and (max-width: $screen-xs-max) {
         padding: rem(5px 10px);
     }
 
     background-color: #fff;
     position: relative;
 
-
-    &-step-title {
-        text-transform: none;
-        text-align: right;
-
-        @media screen and (max-width: $screen-xs-max) {
-            text-align: left;
+    .wizard-progress-side {
+        @media screen and (min-width: $screen-sm-min) {
+            position: absolute;
+            left: 102%;
+            top: rem(20px);
         }
-
-        color: $gray-light;
     }
 }
 
 
 .wizard-progress {
-    position: absolute;
-    left: 105%;
-    top: rem(20px);
+    position: relative;
     width: 25em;
 
     font-size: rem(10px);
@@ -72,9 +66,12 @@
         text-transform: uppercase;
         color: $ae-middle-gray;
 
+        padding-left: 1.4em;
+
+
         &:before {
             position: absolute;
-            left: -1.4em;
+            left: 0;
             top: 0.25em;
 
             width: 1em;
@@ -108,7 +105,7 @@
         position: absolute;
         top: 0.5em;
         bottom: 1.5em;
-        left: -1em;
+        left: 0.4em;
 
         width: 2px;
 
