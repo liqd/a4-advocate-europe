@@ -1,41 +1,53 @@
-{% load i18n thumbnail %}
+{% load i18n thumbnail avatar %}
 
 <ul class="nav navbar-nav navbar-right user-indicator" id="user-indicator">
     <li class="dropdown">
-    {% if request.user.is_authenticated %}
         <div class="btngroup btngroup-primary">
+
+    {% if request.user.is_authenticated %}
+
             <a href="" class="btn userindicator-profile">
                 {{ request.user.username }}
             </a>
             <a href="#" class="dropdown-toggle btn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" aria-label="{% trans 'toggle user menu' %}">
                 <span class="caret"></span>
             </a>
+
             <ul class="dropdown-menu">
                 {% if request.user.is_superuser %}
                     <li>
-                        <a href="{% url 'admin:index' %}"><i class="fa fa-hand-spock-o"></i> <span class="dropdown-text">{% trans "Admin" %}</span></a>
+                        <a href="{% url 'admin:index' %}"><i class="fa fa-hand-spock-o" aria-hidden="true"></i> <span class="dropdown-text">{% trans "Admin" %}</span></a>
                     </li>
                 {% endif %}
+                <li>
+                    <a href="{% url 'idea-sketch-create' 'ideas2017'%}"><i class="fa fa-plus" aria-hidden="true"></i> <span class="dropdown-text">{% trans 'add proposal'  %}</span></a>
+                </li>
                 <li>
                     <form class="logout-button-form" action="{% url 'account_logout' %}" method="post" >
                         {% csrf_token %}
                         <input type="hidden" name="next" value="{{ redirect_field_value }}">
-                        <button type="submit" value="Register"><i class="fa fa-sign-out"></i> <span class="dropdown-text">{% trans "logout" %}</span></button>
+                        <button type="submit" value="Register"><i class="fa fa-sign-out" aria-hidden="true"></i> <span class="dropdown-text">{% trans "logout" %}</span></button>
                     </form>
                 </li>
             </ul>
-        </div>
+
     {% else %}
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="inner">{% trans "Login / Register"%}<span class="caret"></span></span>
+
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="user-login">
+          <span class="inner">{% trans "Login / Register"%}<span class="caret"></span></span>
         </a>
+
         <ul class="dropdown-menu">
             <li>
-                <a href="{% url 'account_login' %}?next={{ redirect_field_value }}">{% trans "login" %}</a>
+                <a href="{% url 'account_login' %}?next={{redirect_field_value }}"><i class="fa fa-sign-in" aria-hidden="true"></i> <span class="dropdown-text">{% trans "login" %}</span></a>
             </li>
             <li>
-                <a href="{% url 'account_signup' %}?next={{ redirect_field_value }}">{% trans "register" %}</a>
+                <a href="{% url 'account_signup' %}?next={{redirect_field_value }}"><i class="fa fa-user-plus" aria-hidden="true"></i> <span class="dropdown-text">{% trans "register" %}</span></a>
             </li>
         </ul>
+
     {% endif %}
+
+        </div>
     </li>
 </ul>
