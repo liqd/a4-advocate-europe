@@ -194,28 +194,28 @@
 // ----------------- Idea Detail Buttons: Watch, Share, ... -----------------
 
 .ideadetail-rect-btn-group {
-    position: absolute;
-    right: 0;
-    top: 0;
-
-    background-color: $ae-light-gray;
-
     .btn {
+        display: inline-flex;
+        align-items: center;
+
         height: rem(40px);
         border: 0;
         border-radius: 0;
-        margin-left: rem(2px) !important;
+
+        color: $gray-base;
         background-color: $ae-light-gray-darker;
 
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        font-size: rem(16px);
+        font-weight: 500;
+    }
 
-        a {
-            color: $gray-base;
-            font-size: rem(16px);
-            font-weight: 500;
-        }
+    .dropdown {
+        display: inline-block;
+    }
+
+
+    @media screen and (max-width: $screen-xs-max) {
+        padding: 0
     }
 }
 
@@ -223,13 +223,18 @@
 
 .ideadetail-tab-bar {
     background-color: $ae-light-gray;
-    height: rem(40px);
+
+    > * {
+        @media screen and (max-width: $screen-xs-max) {
+            padding: 0 rem(5px);
+        }
+    }
 }
 
 .ideadetail-tabs {
     .nav-tabs {
-        background-color: $ae-light-gray;
         height: rem(40px);
+        border: none;
     }
 
     li {
@@ -262,7 +267,6 @@
 .ideadetail-content {
     background-color: #fff;
     box-shadow: 20px 0 20px -20px rgba(0, 0, 0, 0.2), 0 20px 20px -20px rgba(0, 0, 0, 0.2), -20px 0 20px -20px rgba(0, 0, 0, 0.2);
-    margin: 0;
     padding-bottom: rem(60px);
 }
 

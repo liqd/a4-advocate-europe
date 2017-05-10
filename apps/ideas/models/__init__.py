@@ -1,7 +1,6 @@
 from autoslug import AutoSlugField
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
-from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext as _
 
@@ -59,7 +58,8 @@ class IdeaSketch(AbstractIdea, AbstractCollaborationCampSection):
     objects = IdeaSketchQuerySet.as_manager()
 
     def get_absolute_url(self):
-        return reverse('idea-sketch-detail', kwargs={'slug': self.slug})
+        from django.core.urlresolvers import reverse
+        return reverse('idea-sketch-detail', args=[self.slug])
 
 
 class IdeaComplete(AbstractIdea, AbstractFinanceSection):

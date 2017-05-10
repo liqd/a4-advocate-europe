@@ -3,6 +3,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
+from . import models
 from .models.abstracts.applicant_section import AbstractApplicantSection
 from .models.abstracts.collaboration_camp_section import \
     AbstractCollaborationCampSection
@@ -148,3 +149,12 @@ class FinanceSectionForm(BaseForm):
     class Meta:
         model = AbstractFinanceSection
         exclude = []
+
+
+class IdeaSketchEditForm(BaseForm):
+
+    class Meta:
+        model = models.IdeaSketch
+        exclude = [
+            'collaborators_emails', 'how_did_you_hear', 'creator', 'module'
+        ]
