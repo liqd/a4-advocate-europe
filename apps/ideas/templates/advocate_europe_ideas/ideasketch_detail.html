@@ -26,7 +26,7 @@
                         <span class="hidden-xs">&nbsp{% trans 'Share' %}</span>
                     </a>
 
-                    {% has_perm 'advocate_europe_ideas.change_ideasketch' request.user idea as can_change %}
+                    {% has_perm 'advocate_europe_ideas.change_ideasketch' request.user ideasketch as can_change %}
                     {% if can_change %}
                     <div class="dropdown">
                         <button class="btn" type="button" id="dropdownEdit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
