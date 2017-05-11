@@ -44,7 +44,7 @@ class AbstractApplicantSection(models.Model):
     organisation_website = models.URLField(max_length=250, blank=True)
     organisation_country = CountryField(blank=True)
     organisation_city = models.CharField(max_length=250, blank=True)
-    contact_email = models.CharField(max_length=250, blank=True)
+    contact_email = models.EmailField(blank=True)
     year_of_registration = models.IntegerField(blank=True, null=True)
 
     class Meta:
