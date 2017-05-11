@@ -61,6 +61,7 @@ class PartnersSectionForm(BaseForm):
     def helper(self):
         helper = crisp.helper.FormHelper()
         helper.form_tag = False
+        helper.render_unmentioned_fields = True
         helper.layout = crisp.bootstrap.Accordion(
             *[
                 crisp.bootstrap.AccordionGroup(
