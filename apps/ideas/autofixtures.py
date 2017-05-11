@@ -35,7 +35,6 @@ class IdeaSketchAutoFixture(AutoFixture):
     }
 
     follow_pk = True
-    generate_fk = True
 
 register(IdeaSketch, IdeaSketchAutoFixture)
 
@@ -47,7 +46,5 @@ class IdeaCompleteAutoFixture(AutoFixture):
     field_values = IdeaSketchAutoFixture.field_values
 
     follow_pk = True
-    generate_fk = True
-
 
 register(IdeaComplete, IdeaCompleteAutoFixture)
