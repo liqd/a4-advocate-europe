@@ -132,6 +132,12 @@
             font-size: rem(18px);
         }
     }
+
+    h4 {
+        @media screen and (max-width: $screen-sm-max) {
+            font-size: rem(14px);
+        }
+    }
 }
 
 .ideadetail-btn {
