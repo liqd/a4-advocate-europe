@@ -186,17 +186,20 @@ class IdeaSketchDetailView(generic.DetailView):
                 or self.object.partner_organisation_1_website):
             partner_list.append((self.object.partner_organisation_1_name,
                                  self.object.partner_organisation_1_website,
-                                 self.object.partner_organisation_1_country))
+                                 self.object.
+                                 get_partner_organisation_1_country_display))
         if (self.object.partner_organisation_2_name
                 or self.object.partner_organisation_2_website):
             partner_list.append((self.object.partner_organisation_2_name,
                                  self.object.partner_organisation_2_website,
-                                 self.object.partner_organisation_2_country))
+                                 self.object.
+                                 get_partner_organisation_2_country_display))
         if (self.object.partner_organisation_3_name
                 or self.object.partner_organisation_3_website):
             partner_list.append((self.object.partner_organisation_3_name,
                                  self.object.partner_organisation_3_website,
-                                 self.object.partner_organisation_3_country))
+                                 self.object.
+                                 get_partner_organisation_3_country_display))
 
         context = super().get_context_data(**kwargs)
         context['idea_list'] = idea_list
