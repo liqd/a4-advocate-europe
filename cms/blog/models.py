@@ -50,7 +50,6 @@ class BlogIndexPage(Page):
         context['blogs'] = blogs
         context['categories'] = Category.objects.all()
         context['category'] = category
-        # context['page_range'] = page_range
         return context
 
     content_panels = [
