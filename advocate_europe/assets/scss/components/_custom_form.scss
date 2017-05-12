@@ -23,6 +23,10 @@
         background-color: $ae-light-gray;
         box-shadow: none;
         height: 40px;
+
+        &.textarea {
+            height: auto;
+        }
     }
 
     .form-error {
