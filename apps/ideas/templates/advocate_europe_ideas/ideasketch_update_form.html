@@ -23,6 +23,21 @@
             </ul>
         </div>
 
+        <div class="modal fade" id="wizardExitModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">{% trans "You have unsaved changes" %}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <a id="discard" href class="btn btn-danger">{% trans "discard" %}</a>
+                        <button id="save" type="submit" class="btn btn-primary">{% trans "save" %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {{ wizard.form.media }}
         {{ wizard.management_form }}
         {% crispy form %}

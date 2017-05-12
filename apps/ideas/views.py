@@ -2,11 +2,12 @@ import csv
 import os
 
 from django.conf import settings
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.files.storage import FileSystemStorage
-from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict
 from django.http import Http404, HttpResponse
 from django.shortcuts import redirect
+from django.utils.http import is_safe_url
 from django.utils.translation import ugettext as _
 from django.views import generic
 from formtools.wizard.views import SessionWizardView
@@ -109,13 +110,15 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
 
 class IdeaSketchEditView(
         PermissionRequiredMixin,
+        SuccessMessageMixin,
         generic.UpdateView
 ):
     permission_required = 'advocate_europe_ideas.add_ideasketch'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
     model = IdeaSketch
-    template_name = 'formtools/wizard/wizard_form.html'
+    template_name = 'advocate_europe_ideas/ideasketch_update_form.html'
+    success_message = _('Ideasketch saved')
     is_edit_view = True
 
     form_classes = [
@@ -140,10 +143,11 @@ class IdeaSketchEditView(
         return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('idea-sketch-update-form', kwargs={
-            'slug': self.object.slug,
-            'form_number': self.request.POST.get('next_form', self.form_number)
-        })
+        next = self.request.POST.get('next')
+        if (next and is_safe_url(next)):
+            return next
+        else:
+            return self.request.path
 
     @property
     def raise_exception(self):
