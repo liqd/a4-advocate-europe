@@ -1,0 +1,11 @@
+{% comment %}
+
+     src: https://github.com/django-crispy-forms/django-crispy-forms/blob/64606b457504a53013cb015dd4bac61b274876b9/crispy_forms/templates/bootstrap3/layout/field_errors.html
+
+     - Add error-block class to distinct from help texts
+{% endcomment %}
+{% if form_show_errors and field.errors %}
+    {% for error in field.errors %}
+        <span id="error_{{ forloop.counter }}_{{ field.auto_id }}" class="help-block error-block"><strong>{{ error }}</strong></span>
+    {% endfor %}
+{% endif %}
