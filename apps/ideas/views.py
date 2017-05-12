@@ -11,10 +11,9 @@ from django.views import generic
 from formtools.wizard.views import SessionWizardView
 from rules.contrib.views import PermissionRequiredMixin
 
-from adhocracy4.modules.models import Module
 from apps.invites.models import IdeaSketchInvite
 
-from . import forms
+from . import forms, mixins
 from .models import IdeaSketch, abstracts
 
 
@@ -51,17 +50,9 @@ class IdeaSketchExportView(PermissionRequiredMixin, generic.ListView):
         return response
 
 
-class ModuleMixin(generic.detail.SingleObjectMixin):
-    model = Module
-
-    def dispatch(self, request, *args, **kwargs):
-        self.module = self.get_object()
-        self.object = self.module
-        return super().dispatch(request, *args, **kwargs)
-
-
 class IdeaSketchCreateWizard(PermissionRequiredMixin,
-                             ModuleMixin,
+                             mixins.ModuleMixin,
+                             mixins.CustomWizardMixin,
                              SessionWizardView):
     permission_required = 'advocate_europe_ideas.add_ideasketch'
     file_storage = FileSystemStorage(
