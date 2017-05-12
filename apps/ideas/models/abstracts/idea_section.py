@@ -60,7 +60,10 @@ class AbstractIdeaSection(models.Model):
     idea_subtitle = models.CharField(max_length=100,
                                      help_text='(max. 100 characters)',
                                      blank=True)
-    idea_pitch = models.TextField(help_text=IDEA_PITCH_HELP)
+    idea_pitch = models.TextField(
+        max_length=500,
+        help_text=IDEA_PITCH_HELP
+    )
     idea_image = fields.ConfiguredImageField(
         'idea_image',
         upload_to='ideas/images',
