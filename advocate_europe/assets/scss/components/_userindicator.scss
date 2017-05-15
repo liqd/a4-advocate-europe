@@ -1,19 +1,22 @@
 .navbar {
-    .user-indicator {
-        height: $navbar-height;
-    }
 }
 
-#user-indicator {
-    margin-left: 40px;
+.user-indicator {
     min-width: 180px;
     position: relative;
     display: block;
 
-    .dropdown-menu {
-        padding-bottom: 1px;
+    @media screen and (max-width: $grid-float-breakpoint-max) {
+        .open .dropdown-menu button {
+            padding: 5px 15px 5px 25px;
+        }
+    }
 
-        a, button {
+    .dropdown-menu {
+        padding-bottom: 0;
+
+        a,
+        button {
             &:hover,
             &:focus,
             &.is-active {
@@ -23,67 +26,71 @@
         }
 
         button {
-          width: 100%;
-          border: 0;
-          text-align: left;
-          @include rem(padding, 7px 0 7px 15px);
-          background-color: transparent;
+            width: 100%;
+            border: 0;
+            text-align: left;
+            @include rem(padding, 7px 0 7px 15px);
+            background-color: transparent;
         }
 
         .logout-button-form {
-          background-color: $gray-lighter;
+            background-color: $gray-lighter;
         }
-
-        li {
-          position: relative;
-
-          i, img {
-            position: absolute;
-            width: 20px;
-            text-align: center;
-          }
-        }
-
-      .dropdown-text {
-          @include rem(padding-left, 30px);
-      }
-
     }
 
     .btngroup {
-      margin-top: $navbar-padding-vertical / 2;
-      display: block;
+        margin-top: $navbar-padding-vertical / 2;
+        display: block;
 
-      &.open a {
-        border: 0;
-      }
-
-      a {
-        color: $gray-dark;
-        display: inline-block;
-        @include rem(padding, 7px 15px);
-
-        &.userindicator-profile {
-          border-radius: 4px 0 0 4px;
-          background-color: $ae-light-gray;
-          margin-right: -3px;
-          border-right: 1px solid $ae-dark-gray;
+        &.open a {
+            border: 0;
         }
 
-        &.dropdown-toggle {
-          border-radius: 0 4px 4px 0;
-          background-color: $ae-light-gray;
+        a {
+            color: $gray-dark;
+            display: inline-block;
+            @include rem(padding, 7px 15px);
+
+            &.userindicator-profile {
+                border-radius: 4px 0 0 4px;
+                background-color: $ae-light-gray;
+                margin-right: -3px;
+                border-right: 1px solid $ae-dark-gray;
+            }
+
+            &.dropdown-toggle {
+                border-radius: 0 4px 4px 0;
+                background-color: $ae-light-gray;
+            }
         }
 
-      }
-
-      #user-login {
-        border-radius: 4px;
-        border: 2px solid $ae-dark-gray;
-        background-color: $navbar-default-bg;
-      }
-
-
+        .user-login {
+            border-radius: 4px;
+            border: 2px solid $ae-dark-gray;
+            background-color: $navbar-default-bg;
+        }
     }
 
+    @media screen and (max-width: $grid-float-breakpoint-max) {
+        .btngroup {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .userindicator-profile {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .dropdown-toggle {
+            flex-grow: 0;
+        }
+
+        .btngroup .dropdown-menu {
+            width: 100%;
+            border-radius: 0;
+            background: #fff;
+            margin-left: 0;
+        }
+    }
 }
