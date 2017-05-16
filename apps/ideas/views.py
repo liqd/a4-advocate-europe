@@ -4,6 +4,7 @@ import os
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.files.storage import FileSystemStorage
+from django.core.paginator import Paginator
 from django.forms.models import model_to_dict
 from django.http import Http404, HttpResponse
 from django.shortcuts import redirect
@@ -181,17 +182,20 @@ class IdeaSketchDetailView(generic.DetailView):
                 or self.object.partner_organisation_1_website):
             partner_list.append((self.object.partner_organisation_1_name,
                                  self.object.partner_organisation_1_website,
-                                 self.object.partner_organisation_1_country))
+                                 self.object.
+                                 get_partner_organisation_1_country_display))
         if (self.object.partner_organisation_2_name
                 or self.object.partner_organisation_2_website):
             partner_list.append((self.object.partner_organisation_2_name,
                                  self.object.partner_organisation_2_website,
-                                 self.object.partner_organisation_2_country))
+                                 self.object.
+                                 get_partner_organisation_2_country_display))
         if (self.object.partner_organisation_3_name
                 or self.object.partner_organisation_3_website):
             partner_list.append((self.object.partner_organisation_3_name,
                                  self.object.partner_organisation_3_website,
-                                 self.object.partner_organisation_3_country))
+                                 self.object.
+                                 get_partner_organisation_3_country_display))
 
         context = super().get_context_data(**kwargs)
         context['idea_list'] = idea_list
@@ -201,4 +205,5 @@ class IdeaSketchDetailView(generic.DetailView):
 
 class IdeaSketchListView(generic.ListView):
     queryset = IdeaSketch.objects.annotate_comment_count()
+    paginator_class = Paginator
     paginate_by = 12

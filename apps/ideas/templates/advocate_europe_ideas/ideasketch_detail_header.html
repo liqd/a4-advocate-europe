@@ -11,12 +11,12 @@
                     <div class="ideadetail-category">
                         {{ ideasketch.all_idea_topics_names|join:", " }}
                     </div>
-                    <h3>
-                        {{ ideasketch.idea_title }}
-                        {% if ideasketch.idea_subtitle %}
-                            - {{ ideasketch.idea_subtitle }}
-                        {% endif %}
-                    </h3>
+                    <h3>{{ ideasketch.idea_title }}</h3>
+                    {% if ideasketch.idea_subtitle %}
+                        <h4 class="hidden-xs">
+                            {{ ideasketch.idea_subtitle }}
+                        </h4>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-3 col-sm-4 hidden-xs ideadetailheader-right">
