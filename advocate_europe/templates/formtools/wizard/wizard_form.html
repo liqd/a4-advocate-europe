@@ -8,21 +8,9 @@
 
         <div class="wizard-progress-side">
             <ul class="wizard-progress">
-                {% if view.is_edit_view %}
-                {% for step_form in view.form_classes %}
-                <li class="wizard-progress-entry{% if view.form_number == forloop.counter0 %} active{% endif %} filled">
-                    <button name="next_form"
-                            class="wizard-progress-button"
-                            type="submit"
-                            value="{{ forloop.counter0 }}">
-                        {{ step_form.section_name }}
-                    </button>
-                </li>
-                {% endfor %}
-                {% else %}
                 {% for step_id, step_form in view.get_form_list.items %}
                 <li class="wizard-progress-entry{% if step_id == wizard.steps.current %} active{% endif %}{% if step_id < wizard.steps.current or request.resolver_match.url_name == 'idea-sketch-update' %} filled{% endif %}">
-                    {% if step_id < wizard.steps.current or view.is_edit_view %}
+                    {% if step_id < wizard.steps.current %}
                     <button name="wizard_safe_goto_step"
                             class="wizard-progress-button"
                             type="submit"
@@ -34,21 +22,15 @@
                     {% endif %}
                 </li>
                 {% endfor %}
-                {% endif %}
             </ul>
         </div>
 
         {{ wizard.form.media }}
         {{ wizard.management_form }}
 
-        {% if not view.is_edit_view %}
         {% crispy wizard.form %}
-        {% else %}
-        {% crispy form %}
-        {% endif %}
 
         <div class="clearfix">
-            {% if not view.is_edit_view %}
             {% if wizard.steps.prev %}
             <button class="btn btn-primary"
                     name="wizard_goto_step"
@@ -64,13 +46,6 @@
                     name="submit">
                 {% trans "continue" %}
             </button>
-            {% else %}
-            <button class="btn btn-primary pull-right"
-                    type="submit"
-                    name="submit">
-                {% trans "send" %}
-            </button>
-            {% endif %}
             {% else %}
             <button class="btn btn-primary pull-right"
                     type="submit"

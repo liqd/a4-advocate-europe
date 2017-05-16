@@ -119,7 +119,6 @@ class IdeaSketchEditView(
     model = IdeaSketch
     template_name = 'advocate_europe_ideas/ideasketch_update_form.html'
     success_message = _('Ideasketch saved')
-    is_edit_view = True
 
     form_classes = [
         forms.ApplicantSectionForm,
