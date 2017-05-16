@@ -1,0 +1,54 @@
+/* Extend the bootstrap dropdown to also work with buttons as entries
+
+   https://github.com/twbs/bootstrap-sass/blob/5d6b2ebba0c2a5885ce2f0e01e9218db3d3b5e47/assets/stylesheets/bootstrap/_dropdowns.scss#L65
+*/
+
+.dropdown-menu {
+    > li > button,
+    > li > form > button {
+        // same as for links in bootstrap
+        display: block;
+        padding: 3px 20px;
+        clear: both;
+        font-weight: normal;
+        line-height: $line-height-base;
+        color: $dropdown-link-color;
+        white-space: nowrap; // prevent links from randomly breaking onto new lines
+
+        // unstyle button
+        background-color: transparent;
+        border: 0;
+        text-align: left;
+
+        // fix width
+        width: 100%;
+    }
+}
+
+/* Same behaviour for buttons and links in collapsed navbar dropdowns
+
+    https://github.com/twbs/bootstrap-sass/blob/5d6b2ebba0c2a5885ce2f0e01e9218db3d3b5e47/assets/stylesheets/bootstrap/_navbar.scss#L241
+*/
+
+.navbar-nav {
+    @media (max-width: $grid-float-breakpoint-max) {
+        .open .dropdown-menu { // Dropdowns get custom display when collapsed
+
+            > li > button,
+            > li > form > button {
+                padding: 5px 15px 5px 25px;
+            }
+
+            > li > button,
+            > li > form > button {
+                line-height: $line-height-computed;
+
+                &:hover,
+                &:focus,
+                &:active {
+                    background-image: none;
+                }
+            }
+        }
+    }
+}

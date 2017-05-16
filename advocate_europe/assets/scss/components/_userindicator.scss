@@ -1,67 +1,29 @@
-.navbar {
-}
-
 .user-indicator {
     min-width: 180px;
     position: relative;
     display: block;
 
-    @media screen and (max-width: $grid-float-breakpoint-max) {
-        .open .dropdown-menu button {
-            padding: 5px 15px 5px 25px;
-        }
-    }
-
-    .dropdown-menu {
+    &-menu {
         padding-bottom: 0;
-
-        a,
-        button {
-            &:hover,
-            &:focus,
-            &.is-active {
-                background-color: transparent;
-                text-decoration: underline;
-            }
-        }
-
-        button {
-            width: 100%;
-            border: 0;
-            text-align: left;
-            @include rem(padding, 7px 0 7px 15px);
-            background-color: transparent;
-        }
-
-        .logout-button-form {
-            background-color: $gray-lighter;
-        }
     }
 
-    .btngroup {
-        margin-top: $navbar-padding-vertical / 2;
-        display: block;
+    &-logout-form {
+        background-color: $gray-lighter;
+    }
 
-        &.open a {
-            border: 0;
+    &-btn-group {
+        margin: $navbar-padding-vertical/1.5 0;
+        display: block;
+        position: static; // overwrite position relative of button group
+
+        .user-indicator-profile-btn,
+        .dropdown-toggle {
+            background-color: $ae-light-gray;
+            color: $gray-dark;
         }
 
-        a {
-            color: $gray-dark;
-            display: inline-block;
-            @include rem(padding, 7px 15px);
-
-            &.userindicator-profile {
-                border-radius: 4px 0 0 4px;
-                background-color: $ae-light-gray;
-                margin-right: -3px;
-                border-right: 1px solid $ae-dark-gray;
-            }
-
-            &.dropdown-toggle {
-                border-radius: 0 4px 4px 0;
-                background-color: $ae-light-gray;
-            }
+        .user-indicator-profile-btn {
+            border-right: 2px solid $ae-dark-gray;
         }
 
         .user-login {
@@ -72,21 +34,23 @@
     }
 
     @media screen and (max-width: $grid-float-breakpoint-max) {
-        .btngroup {
+        &-btn-group {
             display: flex;
             flex-wrap: wrap;
         }
 
-        .userindicator-profile {
+        &-profile-btn {
             flex-grow: 1;
             text-align: left;
+            border-radius: 0;
         }
 
         .dropdown-toggle {
             flex-grow: 0;
+            border-radius: 0;
         }
 
-        .btngroup .dropdown-menu {
+        &-btn-group.open &-menu {
             width: 100%;
             border-radius: 0;
             background: #fff;

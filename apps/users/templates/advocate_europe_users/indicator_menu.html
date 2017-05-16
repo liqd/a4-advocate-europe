@@ -4,15 +4,15 @@
     <li class="dropdown">
 
        {% if request.user.is_authenticated %}
-        <div class="btngroup btngroup-primary">
-            <a href="" class="btn userindicator-profile">
+        <div class="btn-group user-indicator-btn-group">
+            <a href class="btn user-indicator-profile-btn">
                 {{ request.user.username }}
             </a>
-            <a href="#" class="dropdown-toggle btn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" aria-label="{% trans 'toggle user menu' %}">
+            <button href="#" class="btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" aria-label="{% trans 'toggle user menu' %}">
                 <span class="caret"></span>
-            </a>
+            </button>
 
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu user-indicator-menu">
                 {% if request.user.is_superuser %}
                 <li>
                     <a href="{% url 'admin:index' %}"><i class="fa fa-hand-spock-o fa-fw" aria-hidden="true"></i> <span class="dropdown-text">{% trans "Admin" %}</span></a>
@@ -26,7 +26,7 @@
                 </li>
                 {% endwith %}
                 <li>
-                    <form class="logout-button-form" action="{% url 'account_logout' %}" method="post" >
+                    <form class="user-indicator-logout-form" action="{% url 'account_logout' %}" method="post" >
                         {% csrf_token %}
                         <input type="hidden" name="next" value="{{ redirect_field_value }}">
                         <button type="submit" value="Register">
