@@ -62,7 +62,7 @@ class IdeaSketch(AbstractIdea, AbstractCollaborationCampSection):
         return reverse('idea-sketch-detail', args=[self.slug])
 
 
-class IdeaComplete(AbstractIdea, AbstractFinanceSection):
+class Proposal(AbstractIdea, AbstractFinanceSection):
     ratings = GenericRelation(rating_models.Rating,
                               related_query_name='idea_complete',
                               object_id_field='object_pk')
