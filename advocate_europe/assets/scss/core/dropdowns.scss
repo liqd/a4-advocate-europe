@@ -30,6 +30,8 @@
     https://github.com/twbs/bootstrap-sass/blob/5d6b2ebba0c2a5885ce2f0e01e9218db3d3b5e47/assets/stylesheets/bootstrap/_navbar.scss#L241
 */
 
+/* stylelint-disable max-nesting-depth */
+
 .navbar-nav {
     @media (max-width: $grid-float-breakpoint-max) {
         .open .dropdown-menu { // Dropdowns get custom display when collapsed
@@ -52,3 +54,5 @@
         }
     }
 }
+
+/* stylelint-enable max-nesting-depth */
