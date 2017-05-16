@@ -19,7 +19,6 @@ class IdeaSketchPhase(phases.PhaseContent):
 
     features = {
         'crud': (models.IdeaSketch,),
-        'rate': (models.IdeaSketch,),
         'comment': (models.IdeaSketch,),
     }
 
