@@ -19,7 +19,10 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
+
         <div id="navbar-collapse" class="navbar-collapse collapse">
+            {% userindicator_menu %}
+
             <ul class="nav navbar-nav navbar-right">
                 {% for menuitem in top_menu_items %}
                 {% if menuitem.subpages %}
@@ -38,9 +41,6 @@
 
                 <li>
                     <a href="{% url 'idea-sketch-list' %}">{% trans 'ideaspace'  %}</a>
-                </li>
-                <li>
-                    <a href="{% url 'idea-sketch-create' 'ideas2017' %}">{% trans 'add proposal'  %}</a>
                 </li>
 
                 {% get_available_languages as languages %}

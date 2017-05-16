@@ -1,0 +1,60 @@
+.user-indicator {
+    min-width: 180px;
+    position: relative;
+    display: block;
+
+    &-menu {
+        padding-bottom: 0;
+    }
+
+    &-logout-form {
+        background-color: $gray-lighter;
+    }
+
+    &-btn-group {
+        margin: $navbar-padding-vertical/1.5 0;
+        display: block;
+        position: static; // overwrite position relative of button group
+
+        .user-indicator-profile-btn,
+        .dropdown-toggle {
+            background-color: $ae-light-gray;
+            color: $gray-dark;
+        }
+
+        .user-indicator-profile-btn {
+            border-right: 2px solid $ae-dark-gray;
+        }
+
+        .user-login {
+            border-radius: 4px;
+            border: 2px solid $ae-dark-gray;
+            background-color: $navbar-default-bg;
+        }
+    }
+
+    @media screen and (max-width: $grid-float-breakpoint-max) {
+        &-btn-group {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        &-profile-btn {
+            flex-grow: 1;
+            text-align: left;
+            border-radius: 0;
+        }
+
+        .dropdown-toggle {
+            flex-grow: 0;
+            border-radius: 0;
+        }
+
+        &-btn-group.open &-menu {
+            width: 100%;
+            border-radius: 0;
+            background: #fff;
+            margin-left: 0;
+        }
+    }
+}
