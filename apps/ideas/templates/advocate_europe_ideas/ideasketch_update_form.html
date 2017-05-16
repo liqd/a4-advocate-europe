@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load widget_tweaks i18n idea_tags crispy_forms_tags static %}
+
+{% block content %}
+<div class="wizard-page">
+    <div class="container-narrow breadcrumps">
+        <a href="{% url 'idea-sketch-detail' ideasketch.slug %}" data-safe-exit="wizard">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> {% trans "back to idea" %}
+        </a>
+    </div>
+    <form class="wizard custom-form container-narrow" data-safe-form="wizard" method="post" enctype="multipart/form-data" novalidate>
+        <h1>{% trans 'update idea' %} </h1>
+
+        <div class="wizard-progress-side">
+            <ul class="wizard-progress">
+                {% for step_form in view.form_classes %}
+                <li class="wizard-progress-entry{% if view.form_number == forloop.counter0 %} active{% endif %} filled">
+                    <a href="{% url 'idea-sketch-update-form' ideasketch.slug forloop.counter0 %}" data-safe-exit="wizard">
+                        {{ step_form.section_name }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="modal fade" id="wizardExitModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">{% trans "You have unsaved changes" %}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <a id="discard" href class="btn btn-danger">{% trans "discard" %}</a>
+                        <button id="save" type="submit" class="btn btn-primary">{% trans "save" %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{ wizard.form.media }}
+        {{ wizard.management_form }}
+        {% crispy form %}
+
+        <div class="clearfix">
+            <button class="btn btn-primary pull-right"
+                    type="submit">
+                {% trans "save" %}
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'advocate_europe_ideas/form.js' %}"></script>
+{% endblock %}
