@@ -1,6 +1,7 @@
 from django import forms
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.core.paginator import InvalidPage, Paginator
 from django.db import models
+from django.http import Http404
 from modelcluster.fields import ParentalManyToManyField
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
                                                 ObjectList, PageChooserPanel,
@@ -37,14 +38,13 @@ class BlogIndexPage(Page):
         if category:
             blogs = blogs.filter(categories__name_en=category)
 
-        page = request.GET.get('page')
+        page = request.GET.get('page', 1)
         paginator = Paginator(blogs, 5)
+
         try:
             blogs = paginator.page(page)
-        except PageNotAnInteger:
-            blogs = paginator.page(1)
-        except EmptyPage:
-            blogs = paginator.page(paginator.num_pages)
+        except InvalidPage:
+            raise Http404
 
         context = super(BlogIndexPage, self).get_context(request)
         context['blogs'] = blogs

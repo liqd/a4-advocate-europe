@@ -3,7 +3,7 @@ import os
 
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from django.core.paginator import EmptyPage, Paginator
+from django.core.paginator import Paginator
 from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from django.shortcuts import redirect
@@ -208,18 +208,7 @@ class IdeaSketchDetailView(generic.DetailView):
         return context
 
 
-class SafePaginator(Paginator):
-    def validate_number(self, number):
-        try:
-            return super(SafePaginator, self).validate_number(number)
-        except EmptyPage:
-            if number > 1:
-                return self.num_pages
-            else:
-                raise
-
-
 class IdeaSketchListView(generic.ListView):
     queryset = IdeaSketch.objects.annotate_comment_count()
-    paginator_class = SafePaginator
+    paginator_class = Paginator
     paginate_by = 12
