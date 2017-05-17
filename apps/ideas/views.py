@@ -18,7 +18,7 @@ from adhocracy4.modules.models import Module
 from apps.invites.models import IdeaSketchInvite
 
 from . import forms
-from .models import IdeaSketch, abstracts
+from .models import Idea, IdeaSketch, IdeaSketchArchived, Proposal, abstracts
 
 
 class IdeaSketchExportView(PermissionRequiredMixin, generic.ListView):
@@ -37,7 +37,7 @@ class IdeaSketchExportView(PermissionRequiredMixin, generic.ListView):
             base_model for base_model in self.model.__mro__
             if base_model.__module__.startswith(abstracts_module_name)
             and base_model.__name__.endswith('Section')
-        ]
+            ]
 
         field_names = ['id']
         for section in abstract_sections:
@@ -69,6 +69,7 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
     permission_required = 'advocate_europe_ideas.add_ideasketch'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
+    title = _('create an idea')
 
     def render_next_step(self, form, **kwargs):
         # Look for a wizard_safe_goto_step element in the posted data which
@@ -92,7 +93,7 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
             **{
                 field: value for field, value in data.items()
                 if field not in special_fields
-            }
+                }
         )
 
         for name, email in data['collaborators_emails']:
@@ -110,9 +111,9 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
 
 
 class IdeaSketchEditView(
-        PermissionRequiredMixin,
-        SuccessMessageMixin,
-        generic.UpdateView
+    PermissionRequiredMixin,
+    SuccessMessageMixin,
+    generic.UpdateView
 ):
     permission_required = 'advocate_europe_ideas.add_ideasketch'
     file_storage = FileSystemStorage(
@@ -154,9 +155,8 @@ class IdeaSketchEditView(
         return self.request.user.is_authenticated()
 
 
-class IdeaSketchDetailView(generic.DetailView):
-
-    model = IdeaSketch
+class IdeaDetailView(generic.DetailView):
+    model = Idea
 
     @property
     def idea_dict(self):
@@ -203,7 +203,61 @@ class IdeaSketchDetailView(generic.DetailView):
         return context
 
 
+class IdeaMixin(generic.detail.SingleObjectMixin):
+    model = Idea
+
+    def dispatch(self, request, *args, **kwargs):
+        self.idea = self.get_object()
+        self.object = self.idea
+        return super().dispatch(request, *args, **kwargs)
+
+
+class ProposalCreateWizard(PermissionRequiredMixin,
+                           SessionWizardView,
+                           IdeaMixin):
+    permission_required = 'advocate_europe_ideas.add_ideasketch'
+    file_storage = FileSystemStorage(
+        location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
+    title = _('create a proposal')
+
+    def get_form_initial(self, step):
+        initial = self.initial_dict.get(step, {})
+        form = self.form_list[step]
+        for field in form.base_fields:
+            if hasattr(self.idea, field):
+                initial[field] = getattr(self.idea, field)
+        return initial
+
+    def done(self, form_list, **kwargs):
+        idea_sketch_archive = IdeaSketchArchived(idea=self.idea)
+        for field in self.idea._meta.fields:
+            setattr(idea_sketch_archive,
+                    field.name,
+                    getattr(self.idea, field.name))
+        idea_sketch_archive.save()
+
+        special_fields = ['accept_conditions', 'collaborators_emails']
+
+        proposal_data = self.get_cleaned_data_for_step('4')
+        data = self.get_all_cleaned_data()
+
+        proposal = Proposal(
+            idea_ptr=self.idea,
+            creator=self.request.user,
+            module=self.idea.module,
+            **{
+                field: value for field, value in proposal_data.items()
+                if field not in special_fields
+            }
+        )
+        proposal.save()
+        merged_data = self.idea.__dict__.copy()
+        merged_data.update(data)
+        proposal.__dict__.update(merged_data)
+        proposal.save()
+
+
 class IdeaSketchListView(generic.ListView):
-    queryset = IdeaSketch.objects.annotate_comment_count()
+    queryset = Idea.objects.annotate_comment_count()
     paginator_class = Paginator
     paginate_by = 12
