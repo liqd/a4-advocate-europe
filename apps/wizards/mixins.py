@@ -39,6 +39,15 @@ class CustomWizardMixin:
         # get the form for the current step
         form = self.get_form(data=self.request.POST, files=self.request.FILES)
 
+        # goto while storing but not validating (unsafe!)
+        wizard_goto_step = self.request.POST.get('wizard_store_and_goto_step')
+        if wizard_goto_step and wizard_goto_step in self.get_form_list():
+            self.storage.set_step_data(self.steps.current,
+                                       self.process_step(form))
+            self.storage.set_step_files(self.steps.current,
+                                        self.process_step_files(form))
+            return self.render_goto_step(wizard_goto_step)
+
         # and try to validate
         if form.is_valid():
             # if the form is valid, store the cleaned data and files.
@@ -48,8 +57,13 @@ class CustomWizardMixin:
                                         self.process_step_files(form))
             self.max_validated = self.steps.current
 
+            wizard_goto_step = self.request.POST.get(
+                'wizard_validate_and_goto_step'
+            )
+            if wizard_goto_step and wizard_goto_step in self.get_form_list():
+                return self.render_goto_step(wizard_goto_step)
             # check if the current step is the last step
-            if self.steps.current == self.steps.last:
+            elif self.steps.current == self.steps.last:
                 # no more steps, render done view
                 return self.render_done(form, **kwargs)
             else:

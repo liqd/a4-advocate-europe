@@ -111,3 +111,69 @@ def test_max_validated_is_always_correct(view_client, test_wizard_view):
     assert response.context_data['form'].errors
     assert response.context_data['wizard']['steps'].current == '0'
     assert response.context_data['view'].max_validated == '1'
+
+
+def test_store_and_goto(view_client, test_wizard_view):
+    """
+    Store and validate first step and afterwards only store second
+    step while going back to first step.
+    """
+    view = test_wizard_view
+
+    data = {
+        'test_wizard_view-current_step': '0',
+        '0-number': '9000'
+    }
+    response = view_client.post(view, data)
+    assert response.status_code == 200
+    assert response.context_data['wizard']['steps'].current == '1'
+
+    data = {
+        'wizard_store_and_goto_step': '0',
+        'test_wizard_view-current_step': '1',
+        '1-choice': 'invalid option',
+    }
+    response = view_client.post(view, data)
+    assert response.status_code == 200
+    assert response.context_data['wizard']['steps'].current == '0'
+    storage = response.context_data['view'].storage
+    assert '1-choice' in storage.get_step_data('1')
+    assert storage.get_step_data('1')['1-choice'] == 'invalid option'
+
+
+def test_validate_and_goto(view_client, test_wizard_view):
+    """
+    Store and validate first step and afterwards store and do the same
+    for second step.
+    """
+    view = test_wizard_view
+
+    data = {
+        'test_wizard_view-current_step': '0',
+        '0-number': '9000'
+    }
+    response = view_client.post(view, data)
+    assert response.status_code == 200
+    assert response.context_data['wizard']['steps'].current == '1'
+
+    data = {
+        'wizard_validate_and_goto_step': '0',
+        'test_wizard_view-current_step': '1',
+        '1-choice': 'invalid option',
+    }
+    response = view_client.post(view, data)
+    assert response.status_code == 200
+    assert response.context_data['wizard']['steps'].current == '1'
+    assert response.context_data['form'].errors
+
+    data = {
+        'wizard_validate_and_goto_step': '0',
+        'test_wizard_view-current_step': '1',
+        '1-choice': 'test',
+    }
+    response = view_client.post(view, data)
+    assert response.status_code == 200
+    assert response.context_data['wizard']['steps'].current == '0'
+    storage = response.context_data['view'].storage
+    assert '1-choice' in storage.get_step_data('1')
+    assert storage.get_step_data('1')['1-choice'] == 'test'
