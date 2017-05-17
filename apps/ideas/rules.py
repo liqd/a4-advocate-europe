@@ -8,19 +8,19 @@ from . import models, predicates
 
 
 rules.add_perm(
-    'advocate_europe_ideas.add_ideasketch',
-    mod_predicates.is_allowed_add_item(models.IdeaSketch)
+    'advocate_europe_ideas.add_idea',
+    mod_predicates.is_allowed_add_item(models.Idea)
 )
 
 
 rules.add_perm(
-    'advocate_europe_ideas.export_ideasketch',
+    'advocate_europe_ideas.export_idea',
     is_superuser
 )
 
 
 rules.add_perm(
-    'advocate_europe_ideas.change_ideasketch',
+    'advocate_europe_ideas.change_idea',
     mod_predicates.is_project_admin |
     mod_predicates.is_context_member &
     (
@@ -31,7 +31,7 @@ rules.add_perm(
 )
 
 rules.add_perm(
-    'advocate_europe_ideas.comment_ideasketch',
+    'advocate_europe_ideas.comment_idea',
     is_superuser |
     mod_predicates.is_context_moderator |
     mod_predicates.is_context_initiator |
