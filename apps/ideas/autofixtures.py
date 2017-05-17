@@ -1,7 +1,7 @@
 from autofixture import AutoFixture, generators, register
 from faker import Factory
 
-from .models import IdeaComplete, IdeaSketch
+from .models import IdeaSketch, Proposal
 
 fake = Factory.create()
 
@@ -39,7 +39,7 @@ class IdeaSketchAutoFixture(AutoFixture):
 register(IdeaSketch, IdeaSketchAutoFixture)
 
 
-class IdeaCompleteAutoFixture(AutoFixture):
+class ProposalAutoFixture(AutoFixture):
 
     IMAGESIZES = ((400, 200), (600, 400), (600, 300), )
 
@@ -47,4 +47,4 @@ class IdeaCompleteAutoFixture(AutoFixture):
 
     follow_pk = True
 
-register(IdeaComplete, IdeaCompleteAutoFixture)
+register(Proposal, ProposalAutoFixture)
