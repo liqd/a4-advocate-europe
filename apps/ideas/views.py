@@ -12,6 +12,7 @@ from formtools.wizard.views import SessionWizardView
 from rules.contrib.views import PermissionRequiredMixin
 
 from apps.invites.models import IdeaSketchInvite
+from apps.wizards import mixins as wizard_mixins
 
 from . import forms, mixins
 from .models import IdeaSketch, abstracts
@@ -52,7 +53,7 @@ class IdeaSketchExportView(PermissionRequiredMixin, generic.ListView):
 
 class IdeaSketchCreateWizard(PermissionRequiredMixin,
                              mixins.ModuleMixin,
-                             mixins.CustomWizardMixin,
+                             wizard_mixins.CustomWizardMixin,
                              SessionWizardView):
     permission_required = 'advocate_europe_ideas.add_ideasketch'
     file_storage = FileSystemStorage(
@@ -70,7 +71,6 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
         else:
             return super().render_next_step(form, **kwargs)
 
-    def done(self, form_list, **kwargs):
         special_fields = ['accept_conditions', 'collaborators_emails']
 
         data = self.get_all_cleaned_data()
