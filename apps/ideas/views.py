@@ -257,7 +257,7 @@ class ProposalCreateWizard(PermissionRequiredMixin,
         proposal.save()
 
 
-class IdeaSketchListView(generic.ListView):
+class IdeaListView(generic.ListView):
     queryset = Idea.objects.annotate_comment_count()
     paginator_class = Paginator
     paginate_by = 12

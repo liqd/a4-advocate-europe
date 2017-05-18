@@ -28,6 +28,6 @@ urlpatterns = [
     url(r'list/export/$', views.IdeaSketchExportView.as_view(),
         name='idea-sketch-export'),
     url(r'^$',
-        views.IdeaSketchListView.as_view(), name='idea-sketch-list')
+        views.IdeaListView.as_view(), name='idea-sketch-list')
 
 ]
