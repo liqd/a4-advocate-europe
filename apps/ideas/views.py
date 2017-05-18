@@ -256,6 +256,8 @@ class ProposalCreateWizard(PermissionRequiredMixin,
         proposal.__dict__.update(merged_data)
         proposal.save()
 
+        return redirect(proposal.get_absolute_url())
+
 
 class IdeaSketchListView(generic.ListView):
     queryset = Idea.objects.annotate_comment_count()
