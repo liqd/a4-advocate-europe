@@ -53,6 +53,10 @@ class Idea(AbstractIdea):
                                object_id_field='object_pk')
     objects = IdeaSketchQuerySet.as_manager()
 
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('idea-detail', args=[self.slug])
+
     @property
     def type(self):
         try:
@@ -64,10 +68,6 @@ class Idea(AbstractIdea):
 
 class IdeaSketch(Idea, AbstractCollaborationCampSection):
     visit_camp = models.BooleanField(default=False)
-
-    def get_absolute_url(self):
-        from django.core.urlresolvers import reverse
-        return reverse('idea-detail', args=[self.slug])
 
     def __str__(self):
         return '{} (Ideasketch)'.format(self.idea_title)
