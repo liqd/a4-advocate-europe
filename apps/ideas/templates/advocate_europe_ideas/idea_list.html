@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load i18n rules static thumbnail %}
+
+{% block content %}
+<div class="idealist">
+    <div class="idealist-title text-center">
+        <h1>{% trans "All ideas" %}</h1>
+    </div>
+    <div class="container">
+        {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
+        {% if can_export %}
+        <div class="idealist-controls">
+            <a class="btn btn-primary" href="{% url 'idea-sketch-export' %}">{% trans "export" %}</a>
+        </div>
+        {% endif %}
+        <div class="idealist-list">
+            {% for idea in idea_list %}
+                <div class="idealist-item">
+                    <div class="idealist-upper">
+                        <div class="idealist-image">
+                            <a href="{% url 'idea-detail' slug=idea.slug %}"><img src="{% if idea.idea_image %} {{ idea.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_ideatileimage_400x200.png' %} {% endif %}"></a>
+                        </div>
+                        <div class="idealist-text">
+                            <div class="idealist-category">
+                                {{ idea.idea_topics_names|join:" | " }}
+                            </div>
+
+                            <h4><a href="{% url 'idea-detail' slug=idea.slug %}">{{ idea.idea_title }}</a></h4>
+                            {{ idea.idea_pitch|truncatechars:240 }}
+                        </div>
+                    </div>
+                    <div class="idealist-footer">
+                        {{ idea.type }}
+                        <span class="pull-right">
+                            <i class="fa fa-heart-o" aria-hidden="true"></i> 0
+                            <i class="fa fa-comment-o" aria-hidden="true"></i> {{ idea.comment_count }}
+                        </span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% if is_paginated %}
+            {% include 'includes/pagination.html' %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

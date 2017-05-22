@@ -28,9 +28,11 @@ OTHER_SOURCES_HELP = _('This will not be published and will only be seen'
                        'or financial aid)?')
 OTHER_SOURCES_SECURED_TITLE = _('Are these financial sources secured? Yes/no')
 OTHER_SOURCES_SECURED_HELP = _('If yes, have these already been secured?')
+DURATION_TITLE = _('Duration of project (number of months)')
+DURATION_HELP = _('How many months will it take to implement your project?')
 
 
-class AbstractFinanceSection(models.Model):
+class AbstractFinanceAndDurationSection(models.Model):
     total_budget = models.IntegerField(
         verbose_name=TOTAL_BUDGET_TITLE,
         help_text=TOTAL_BUDGET_HELP)
@@ -46,6 +48,9 @@ class AbstractFinanceSection(models.Model):
     other_sources_secured = models.NullBooleanField(
         verbose_name=OTHER_SOURCES_SECURED_TITLE,
         help_text=OTHER_SOURCES_SECURED_HELP)
+    duration = models.IntegerField(
+        verbose_name=DURATION_TITLE,
+        help_text=DURATION_HELP)
 
     class Meta:
         abstract = True

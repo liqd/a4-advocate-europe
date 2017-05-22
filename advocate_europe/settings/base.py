@@ -302,7 +302,7 @@ REST_FRAMEWORK = {
 A4_ORGANISATIONS_MODEL = "a4organisations.Organisation"
 
 A4_COMMENTABLES = (
-    ('advocate_europe_ideas', 'ideasketch'),
+    ('advocate_europe_ideas', 'idea'),
     ('a4comments', 'comment'),
 )
 

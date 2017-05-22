@@ -1,8 +1,8 @@
 from autoslug import AutoSlugField
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
-from django.utils.translation import ugettext as _
 
 from adhocracy4.comments import models as comment_models
 from adhocracy4.models import query
@@ -13,13 +13,15 @@ from .abstracts.applicant_section import AbstractApplicantSection
 from .abstracts.collaboration_camp_section import \
     AbstractCollaborationCampSection
 from .abstracts.community_section import AbstractCommunitySection
-from .abstracts.finances_section import AbstractFinanceSection
+from .abstracts.finances_duration_section import \
+    AbstractFinanceAndDurationSection
 from .abstracts.idea_section import AbstractIdeaSection
 from .abstracts.impact_section import AbstractImpactSection
 from .abstracts.partners_section import AbstractPartnersSection
 
-DURATION_TITLE = _('Duration of project (number of months)')
-DURATION_HELP = _('How many months will it take to implement your project?')
+
+class IdeaSketchQuerySet(query.RateableQuerySet, query.CommentableQuerySet):
+    pass
 
 
 class AbstractIdea(AbstractApplicantSection,
@@ -39,40 +41,50 @@ class AbstractIdea(AbstractApplicantSection,
         ordering = ['-created']
 
     def __str__(self):
-        return self.slug
+        return self.idea_title
 
 
-class IdeaSketchQuerySet(query.RateableQuerySet, query.CommentableQuerySet):
-    pass
-
-
-class IdeaSketch(AbstractIdea, AbstractCollaborationCampSection):
+class Idea(AbstractIdea):
     ratings = GenericRelation(rating_models.Rating,
                               related_query_name='idea_sketch',
                               object_id_field='object_pk')
     comments = GenericRelation(comment_models.Comment,
                                related_query_name='idea_sketch',
                                object_id_field='object_pk')
-    visit_camp = models.BooleanField(default=False)
-
     objects = IdeaSketchQuerySet.as_manager()
 
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
-        return reverse('idea-sketch-detail', args=[self.slug])
+        return reverse('idea-detail', args=[self.slug])
+
+    @property
+    def type(self):
+        try:
+            Proposal.objects.get(id=self.pk)
+            return Proposal._meta.verbose_name.title()
+        except ObjectDoesNotExist:
+            return IdeaSketch._meta.verbose_name.title()
 
 
-class Proposal(AbstractIdea, AbstractFinanceSection):
-    ratings = GenericRelation(rating_models.Rating,
-                              related_query_name='idea_complete',
-                              object_id_field='object_pk')
-    comments = GenericRelation(comment_models.Comment,
-                               related_query_name='idea_complete',
-                               object_id_field='object_pk')
-    idea_sketch = models.OneToOneField(IdeaSketch)
-    duration = models.IntegerField(
-        verbose_name=DURATION_TITLE,
-        help_text=DURATION_HELP)
+class IdeaSketch(Idea, AbstractCollaborationCampSection):
+    visit_camp = models.BooleanField(default=False)
+
+    def __str__(self):
+        return '{} (Ideasketch)'.format(self.idea_title)
+
+
+class IdeaSketchArchived(AbstractIdea, AbstractCollaborationCampSection):
+    visit_camp = models.BooleanField(default=False)
+    idea = models.ForeignKey(Idea)
+
+    def __str__(self):
+        return '{} (Archived Ideasketch)'.format(self.idea_title)
+
+
+class Proposal(Idea, AbstractFinanceAndDurationSection):
     is_winner = models.BooleanField(blank=True, default=False)
     jury_statement = models.TextField(
         verbose_name='Why this idea?', blank=True)
+
+    def __str__(self):
+        return '{} (Proposal)'.format(self.idea_title)
