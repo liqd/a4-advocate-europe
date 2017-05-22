@@ -23,10 +23,44 @@
         background-color: $ae-light-gray;
         box-shadow: none;
         height: 40px;
+
+        &.textarea {
+            height: auto;
+        }
     }
 
     .form-error {
         border-color: $brand-danger;
+    }
+
+    .form-control-danger {
+        border: solid 1px $brand-danger;
+    }
+
+    .has-error {
+        .control-label {
+            color: $text-color;
+        }
+
+        .help-block {
+            color: lighten($text-color, 25%);
+        }
+
+        .error-block {
+            position: relative;
+            background: $brand-danger;
+            color: #fff;
+            margin: 0;
+            padding: rem(2px 2px 2px) 2em;
+        }
+
+        .error-block:before {
+            position: absolute;
+            left: 0.5em;
+            display: inline;
+            font-family: "FontAwesome";
+            content: "\F071";
+        }
     }
 
     .errorlist {

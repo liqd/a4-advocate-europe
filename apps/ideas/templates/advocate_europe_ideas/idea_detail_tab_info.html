@@ -9,17 +9,17 @@
     </div>
     <div class="ideadetailtab-con-text">
         <p class="ideadetailtab-bold-name">
-        {{ ideasketch.first_name }}
-        {{ ideasketch.last_name }}
+        {{ idea.first_name }}
+        {{ idea.last_name }}
         </p>
         <p>
-        {{ ideasketch.organisation_name }}
+        {{ idea.organisation_name }}
         </p>
-        <p><a target="_blank" href="{{ ideasketch.organisation_website }}">
-        {{ ideasketch.organisation_website }}
+        <p><a target="_blank" href="{{ idea.organisation_website }}">
+        {{ idea.organisation_website }}
         </a></p>
         <p>
-        {{ ideasketch.get_organisation_country_display }}
+        {{ idea.get_organisation_country_display }}
         </p>
     </div>
     {% if partner_list %}
@@ -35,7 +35,7 @@
                 <p>{{ field.2 }}</p>
                 <br>
             {% endfor %}
-            <p>{{ ideasketch.partners_more_info }}</p>
+            <p>{{ idea.partners_more_info }}</p>
         </div>
     {% endif %}
 </div>

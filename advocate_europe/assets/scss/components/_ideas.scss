@@ -1,10 +1,10 @@
-.ideasketchlist {
-    .ideasketchlist-controls {
+.idealist {
+    .idealist-controls {
         padding: rem(5px) rem(5px) 0 rem(5px);
     }
 }
 
-.ideasketchlist-title {
+.idealist-title {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,7 +16,7 @@
     font-weight: bold;
 }
 
-.ideasketchlist-list {
+.idealist-list {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -26,7 +26,7 @@
     }
 }
 
-.ideasketchlist-item {
+.idealist-item {
     // flex-basis: 24%;
     display: flex;
     flex-wrap: wrap;
@@ -38,13 +38,13 @@
     width: rem(270px);
     min-height: rem(400px);
 
-    .ideasketchlist-image {
+    .idealist-image {
         img {
             width: 100%;
         }
     }
 
-    .ideasketchlist-text {
+    .idealist-text {
         padding: rem(12px);
 
         a {
@@ -52,13 +52,13 @@
         }
     }
 
-    .ideasketchlist-footer {
+    .idealist-footer {
         padding: rem(12px);
         box-shadow: 0 -1px 0 0 $ae-dark-gray;
     }
 }
 
-.ideasketchlist-category {
+.idealist-category {
     font-size: 12px;
     font-weight: 900;
     letter-spacing: rem(.8px);
@@ -130,6 +130,12 @@
 
         @media screen and (max-width: $screen-sm-max) {
             font-size: rem(18px);
+        }
+    }
+
+    h4 {
+        @media screen and (max-width: $screen-sm-max) {
+            font-size: rem(14px);
         }
     }
 }

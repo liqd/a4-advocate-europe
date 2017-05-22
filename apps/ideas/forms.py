@@ -8,7 +8,8 @@ from .models.abstracts.applicant_section import AbstractApplicantSection
 from .models.abstracts.collaboration_camp_section import \
     AbstractCollaborationCampSection
 from .models.abstracts.community_section import AbstractCommunitySection
-from .models.abstracts.finances_section import AbstractFinanceSection
+from .models.abstracts.finances_duration_section import \
+    AbstractFinanceAndDurationSection
 from .models.abstracts.idea_section import AbstractIdeaSection
 from .models.abstracts.impact_section import AbstractImpactSection
 from .models.abstracts.partners_section import AbstractPartnersSection
@@ -92,7 +93,7 @@ class ImpactSectionForm(BaseForm):
 
 
 class CollaborationCampSectionForm(BaseForm):
-    section_name = _('Finances')
+    section_name = _('Collaboration camp')
 
     class Meta:
         model = AbstractCollaborationCampSection
@@ -144,11 +145,11 @@ class CommunitySectionForm(BaseForm):
         return addresses
 
 
-class FinanceSectionForm(BaseForm):
-    section_name = _('Finances')
+class FinanceAndDurationSectionForm(BaseForm):
+    section_name = _('Finances and Duration')
 
     class Meta:
-        model = AbstractFinanceSection
+        model = AbstractFinanceAndDurationSection
         exclude = []
 
 
