@@ -113,6 +113,39 @@ def test_max_validated_is_always_correct(view_client, test_wizard_view):
     assert response.context_data['view'].max_validated == '1'
 
 
+def test_max_stored(view_client, test_wizard_view):
+    """
+    Submit first wizard form correctly moving max_stored to first form and
+    on second form store and go back to second form moving max_stored to
+    second form.
+    """
+    view = test_wizard_view
+
+    response = view_client.get(view)
+    assert response.status_code == 200
+    assert response.context_data['wizard']['steps'].current == '0'
+    assert response.context_data['view'].max_stored is None
+
+    data = {
+        'test_wizard_view-current_step': '0',
+        '0-number': '42'
+    }
+    response = view_client.post(view, data)
+    assert response.status_code == 200
+    assert len(response.context_data['form'].errors) == 1
+    assert response.context_data['view'].max_stored is '0'
+
+    data = {
+        'wizard_store_and_goto_step': '0',
+        'test_wizard_view-current_step': '1',
+        '1-choice': 'invalid choice'
+    }
+    response = view_client.post(view, data)
+    assert response.status_code == 200
+    assert response.context_data['wizard']['steps'].current == '0'
+    assert response.context_data['view'].max_stored == '1'
+
+
 def test_store_and_goto(view_client, test_wizard_view):
     """
     Store and validate first step and afterwards only store second

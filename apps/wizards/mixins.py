@@ -45,6 +45,7 @@ class CustomWizardMixin:
                                        self.process_step(form))
             self.storage.set_step_files(self.steps.current,
                                         self.process_step_files(form))
+            self.max_stored = self.steps.current
             return self.render_goto_step(wizard_goto_step)
 
         # and try to validate
@@ -54,6 +55,7 @@ class CustomWizardMixin:
                                        self.process_step(form))
             self.storage.set_step_files(self.steps.current,
                                         self.process_step_files(form))
+            self.max_stored = self.steps.current
             self.max_validated = self.steps.current
 
             wizard_goto_step = self.request.POST.get(
@@ -70,15 +72,35 @@ class CustomWizardMixin:
                 return self.render_next_step(form)
         return self.render(form)
 
+    def _update_if_index(self, key, new_step, old_step):
+        all_steps = self.steps.all
+        new_index = all_steps.index(new_step)
+
+        if old_step:
+            max_index = all_steps.index(old_step)
+        else:
+            max_index = -1
+
+        if new_index > max_index:
+            self.storage.extra_data[key] = new_step
+
     @property
     def max_validated(self):
         return self.storage.extra_data.get('max_validated_step')
 
     @max_validated.setter
     def max_validated(self, new_step):
-        all_steps = self.steps.all
-        new_index = all_steps.index(new_step)
+        self._update_if_index(
+            'max_validated_step', new_step, self.max_validated
+        )
 
+    @property
+    def max_stored(self):
+        return self.storage.extra_data.get('max_stored_step')
+
+    @max_stored.setter
+    def max_stored(self, new_step):
+        self._update_if_index('max_stored_step', new_step, self.max_stored)
         if self.max_validated:
             max_index = all_steps.index(self.max_validated)
         else:
