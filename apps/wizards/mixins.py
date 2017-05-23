@@ -5,18 +5,17 @@ from formtools.wizard.forms import ManagementForm
 
 
 class CustomWizardMixin:
-    """
-    Modifications:
-
-      - store the last form that already has been validated
-    """
 
     def post(self, *args, **kwargs):
         """
-        This method handles POST requests.
-        The wizard will render either the current step (if form validation
-        wasn't successful), the next step (if the current step was stored
-        successful) or the done view (if no more steps are available)
+        Change the wizard default submit behaviour.
+
+        This is a copy of the wizards post method with the following
+        modifications:
+
+        - store the last form that already has been validated
+        - add wizard_store_and_goto_step handling
+        - add wizard_validate_and_goto_step handling
         """
 
         # Check if form was refreshed
