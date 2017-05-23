@@ -101,10 +101,33 @@ class CustomWizardMixin:
     @max_stored.setter
     def max_stored(self, new_step):
         self._update_if_index('max_stored_step', new_step, self.max_stored)
-        if self.max_validated:
-            max_index = all_steps.index(self.max_validated)
-        else:
-            max_index = -1
 
-        if new_index > max_index:
-            self.storage.extra_data['max_validated_step'] = new_step
+    @property
+    def progress(self):
+        form_list = self.get_form_list()
+        all_steps = list(form_list.keys())
+        if self.max_validated:
+            max_validated_index = all_steps.index(self.max_validated)
+        else:
+            max_validated_index = -1
+        if self.max_stored:
+            max_stored_index = all_steps.index(self.max_stored)
+        else:
+            max_stored_index = -1
+        current_index = all_steps.index(self.steps.current)
+
+        progress = []
+        for index, (step_id, form) in enumerate(form_list.items()):
+            if index == current_index:
+                status = "active"
+            elif (
+                    current_index <= max_validated_index and
+                    index <= max_stored_index
+            ):
+                status = "reachable_with_validate"
+            elif index <= max_stored_index:
+                status = "reachable_with_store"
+            else:
+                status = "unreachable"
+            progress.append((step_id, form, status))
+        return progress
