@@ -11,7 +11,7 @@
         {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
         {% if can_export %}
         <div class="idealist-controls">
-            <a class="btn btn-primary" href="{% url 'idea-sketch-export' %}">{% trans "export" %}</a>
+            <a class="btn btn-primary" href="{% url 'idea-export' %}">{% trans "export" %}</a>
         </div>
         {% endif %}
         <div class="idealist-list">

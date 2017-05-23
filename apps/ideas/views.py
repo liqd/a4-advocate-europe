@@ -44,12 +44,18 @@ class IdeaExportView(PermissionRequiredMixin, generic.ListView):
         for section in abstract_sections:
             for field in section._meta.concrete_fields:
                 field_names.append(field.name)
+        field_names.append('link')
+        field_names.append('type')
 
         writer = csv.writer(response)
         writer.writerow(field_names)
 
+        del field_names[-2:]
+
         for idea in self.get_queryset():
             data = [str(getattr(idea, name)) for name in field_names]
+            data.append(idea.get_absolute_url())
+            data.append(idea.type)
             writer.writerow(data)
 
         return response
