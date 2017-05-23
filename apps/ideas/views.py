@@ -21,15 +21,15 @@ from . import forms
 from .models import Idea, IdeaSketch, IdeaSketchArchived, Proposal, abstracts
 
 
-class IdeaSketchExportView(PermissionRequiredMixin, generic.ListView):
-    permission_required = 'advocate_europe_ideas.export_ideasketch'
-    model = IdeaSketch
+class IdeaExportView(PermissionRequiredMixin, generic.ListView):
+    permission_required = 'advocate_europe_ideas.export_idea'
+    model = Idea
     raise_exception = True
 
     def get(self, request, *args, **kwargs):
         response = HttpResponse(content_type='text/csv; charset=utf-8')
         response['Content-Disposition'] = (
-            'attachment; filename="ideasketches.csv"'
+            'attachment; filename="ideas.csv"'
         )
 
         # Selects all parent classes named ideas.models.abstracts.*Section

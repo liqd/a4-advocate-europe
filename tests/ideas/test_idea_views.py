@@ -37,7 +37,7 @@ def test_idea_detail_view(rf, idea_sketch_factory, proposal_factory):
 
 @pytest.mark.django_db
 def test_idea_sketch_export_view_user(rf, user):
-    view = views.IdeaSketchExportView.as_view()
+    view = views.IdeaExportView.as_view()
     request = rf.get('/ideas/list/export')
     request.user = user
     with pytest.raises(PermissionDenied):
@@ -46,13 +46,13 @@ def test_idea_sketch_export_view_user(rf, user):
 
 
 @pytest.mark.django_db
-def test_idea_sketch_export_view_admin(rf, admin, idea_sketch_factory,
-                                       proposal_factory):
+def test_idea_export_view_admin(rf, admin, idea_sketch_factory,
+                                proposal_factory):
     idea_sketch_factory()
     idea_sketch_factory()
     proposal_factory()
 
-    view = views.IdeaSketchExportView.as_view()
+    view = views.IdeaExportView.as_view()
     request = rf.get('/ideas/list/export')
     request.user = admin
     response = view(request)
@@ -60,9 +60,10 @@ def test_idea_sketch_export_view_admin(rf, admin, idea_sketch_factory,
     assert (response._headers['content-type'] ==
             ('Content-Type', 'text/csv; charset=utf-8'))
     assert (response._headers['content-disposition'] ==
-            ('Content-Disposition', 'attachment; filename="ideasketches.csv"'))
+            ('Content-Disposition', 'attachment; filename="ideas.csv"'))
 
     content_line = response.content.split(b'\n')
-    assert content_line[0].count(b',') == 40
-    assert content_line[1].count(b',') == 40
-    assert content_line[2].count(b',') == 40
+    assert len(content_line) == 5
+    assert content_line[0].count(b',') == 37
+    assert content_line[1].count(b',') == 37
+    assert content_line[3].count(b',') == 37
