@@ -1,4 +1,5 @@
 import pytest
+from django.core.exceptions import PermissionDenied
 
 from apps.ideas import models, views
 
@@ -32,3 +33,36 @@ def test_idea_detail_view(rf, idea_sketch_factory, proposal_factory):
     assert (response.context_data['idea_list'][0] ==
             ('Idea pitch', ideasketch.idea_pitch))
     assert 'partner_list' in response.context_data
+
+
+@pytest.mark.django_db
+def test_idea_sketch_export_view_user(rf, user):
+    view = views.IdeaSketchExportView.as_view()
+    request = rf.get('/ideas/list/export')
+    request.user = user
+    with pytest.raises(PermissionDenied):
+        response = view(request)
+        assert response.status_code == 403
+
+
+@pytest.mark.django_db
+def test_idea_sketch_export_view_admin(rf, admin, idea_sketch_factory,
+                                       proposal_factory):
+    idea_sketch_factory()
+    idea_sketch_factory()
+    proposal_factory()
+
+    view = views.IdeaSketchExportView.as_view()
+    request = rf.get('/ideas/list/export')
+    request.user = admin
+    response = view(request)
+    assert response.status_code == 200
+    assert (response._headers['content-type'] ==
+            ('Content-Type', 'text/csv; charset=utf-8'))
+    assert (response._headers['content-disposition'] ==
+            ('Content-Disposition', 'attachment; filename="ideasketches.csv"'))
+
+    content_line = response.content.split(b'\n')
+    assert content_line[0].count(b',') == 40
+    assert content_line[1].count(b',') == 40
+    assert content_line[2].count(b',') == 40

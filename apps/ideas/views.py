@@ -24,6 +24,7 @@ from .models import Idea, IdeaSketch, IdeaSketchArchived, Proposal, abstracts
 class IdeaSketchExportView(PermissionRequiredMixin, generic.ListView):
     permission_required = 'advocate_europe_ideas.export_ideasketch'
     model = IdeaSketch
+    raise_exception = True
 
     def get(self, request, *args, **kwargs):
         response = HttpResponse(content_type='text/csv; charset=utf-8')
