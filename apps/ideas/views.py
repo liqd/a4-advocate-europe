@@ -95,7 +95,7 @@ class IdeaSketchEditView(
     SuccessMessageMixin,
     generic.UpdateView
 ):
-    permission_required = 'advocate_europe_ideas.add_ideasketch'
+    permission_required = 'advocate_europe_ideas.change_idea'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
     model = IdeaSketch
@@ -195,7 +195,7 @@ class IdeaMixin(generic.detail.SingleObjectMixin):
 class ProposalCreateWizard(PermissionRequiredMixin,
                            SessionWizardView,
                            IdeaMixin):
-    permission_required = 'advocate_europe_ideas.add_ideasketch'
+    permission_required = 'advocate_europe_ideas.add_proposal'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
     title = _('create a proposal')

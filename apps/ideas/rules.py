@@ -8,16 +8,15 @@ from . import models, predicates
 
 
 rules.add_perm(
-    'advocate_europe_ideas.add_idea',
-    mod_predicates.is_allowed_add_item(models.Idea)
-)
-
-
-rules.add_perm(
     'advocate_europe_ideas.export_idea',
     is_superuser
 )
 
+rules.add_perm(
+    'advocate_europe_ideas.add_ideasketch',
+    mod_predicates.is_allowed_add_item(models.IdeaSketch)  # &
+    # phase_predicates.phase_allows_change
+)
 
 rules.add_perm(
     'advocate_europe_ideas.change_idea',
@@ -26,8 +25,30 @@ rules.add_perm(
     (
         mod_predicates.is_owner |
         predicates.is_collaborator
-    ) &
-    phase_predicates.phase_allows_change
+    )  # &
+    # phase_predicates.phase_allows_change
+)
+
+rules.add_perm(  # and visit_camp?
+    'advocate_europe_ideas.add_proposal',
+    mod_predicates.is_project_admin |
+    mod_predicates.is_context_member &
+    (
+        mod_predicates.is_owner |
+        predicates.is_collaborator
+    )  # &
+    # phase_predicates.phase_allows_change
+)
+
+rules.add_perm(
+    'advocate_europe_ideas.change_proposal',
+    mod_predicates.is_project_admin |
+    mod_predicates.is_context_member &
+    (
+        mod_predicates.is_owner |
+        predicates.is_collaborator
+    )  # &
+    # phase_predicates.phase_allows_change
 )
 
 rules.add_perm(

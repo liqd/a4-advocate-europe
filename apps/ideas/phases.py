@@ -18,8 +18,8 @@ class IdeaSketchPhase(phases.PhaseContent):
     module_name = _('Advocate Europe')
 
     features = {
-        'crud': (models.IdeaSketch,),
-        'comment': (models.IdeaSketch,),
+        'crud': (models.Idea,),
+        'comment': (models.Idea,),
     }
 
 
