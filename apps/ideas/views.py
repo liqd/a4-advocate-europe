@@ -54,7 +54,7 @@ class IdeaExportView(PermissionRequiredMixin, generic.ListView):
 
         for idea in self.get_queryset():
             data = [str(getattr(idea, name)) for name in field_names]
-            data.append(idea.get_absolute_url())
+            data.append(request.build_absolute_uri(idea.get_absolute_url()))
             data.append(idea.type)
             writer.writerow(data)
 

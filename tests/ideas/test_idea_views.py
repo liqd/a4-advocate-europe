@@ -41,8 +41,7 @@ def test_idea_sketch_export_view_user(rf, user):
     request = rf.get('/ideas/list/export')
     request.user = user
     with pytest.raises(PermissionDenied):
-        response = view(request)
-        assert response.status_code == 403
+        view(request)
 
 
 @pytest.mark.django_db
