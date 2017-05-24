@@ -75,6 +75,7 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
         else:
             return super().render_next_step(form, **kwargs)
 
+    def done(self, form_list, **kwargs):
         special_fields = ['accept_conditions', 'collaborators_emails']
 
         data = self.get_all_cleaned_data()
