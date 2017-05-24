@@ -14,10 +14,10 @@ from django.views import generic
 from formtools.wizard.views import SessionWizardView
 from rules.contrib.views import PermissionRequiredMixin
 
-from adhocracy4.modules.models import Module
 from apps.invites.models import IdeaSketchInvite
+from apps.wizards import mixins as wizard_mixins
 
-from . import forms
+from . import forms, mixins
 from .models import Idea, IdeaSketch, IdeaSketchArchived, Proposal, abstracts
 
 
@@ -54,34 +54,14 @@ class IdeaSketchExportView(PermissionRequiredMixin, generic.ListView):
         return response
 
 
-class ModuleMixin(generic.detail.SingleObjectMixin):
-    model = Module
-
-    def dispatch(self, request, *args, **kwargs):
-        self.module = self.get_object()
-        self.object = self.module
-        return super().dispatch(request, *args, **kwargs)
-
-
 class IdeaSketchCreateWizard(PermissionRequiredMixin,
-                             ModuleMixin,
+                             mixins.ModuleMixin,
+                             wizard_mixins.CustomWizardMixin,
                              SessionWizardView):
     permission_required = 'advocate_europe_ideas.add_ideasketch'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
     title = _('create an idea')
-
-    def render_next_step(self, form, **kwargs):
-        # Look for a wizard_safe_goto_step element in the posted data which
-        # contains a valid step name. If one was found, render the requested
-        # form. This is similar to the wizard_goto_step feature, but does
-        # validation and storing first.
-
-        wizard_goto_step = self.request.POST.get('wizard_safe_goto_step', None)
-        if wizard_goto_step and wizard_goto_step in self.get_form_list():
-            return self.render_goto_step(wizard_goto_step)
-        else:
-            return super().render_next_step(form, **kwargs)
 
     def done(self, form_list, **kwargs):
         special_fields = ['accept_conditions', 'collaborators_emails']
