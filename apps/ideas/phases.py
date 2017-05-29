@@ -38,6 +38,7 @@ class CommunityAwardRatingPhase(phases.PhaseContent):
 
     features = {
         'rate': (models.Idea,),
+        # rating only for users, that added an idea in this or previous years
         'comment': (models.Idea,),
     }
 
@@ -58,6 +59,7 @@ class FullProposalPhase(phases.PhaseContent):
     features = {
         'crud': (models.Idea, models.IdeaSketchArchived, models.Proposal,),
         'rate': (models.Idea,),
+        # rating only for users, that added an idea in this or previous years
         'comment': (models.Idea,),
     }
 
