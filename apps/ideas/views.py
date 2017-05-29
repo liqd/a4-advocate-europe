@@ -21,14 +21,15 @@ from . import forms, mixins
 from .models import Idea, IdeaSketch, IdeaSketchArchived, Proposal, abstracts
 
 
-class IdeaSketchExportView(PermissionRequiredMixin, generic.ListView):
-    permission_required = 'advocate_europe_ideas.export_ideasketch'
-    model = IdeaSketch
+class IdeaExportView(PermissionRequiredMixin, generic.ListView):
+    permission_required = 'advocate_europe_ideas.export_idea'
+    model = Idea
+    raise_exception = True
 
     def get(self, request, *args, **kwargs):
         response = HttpResponse(content_type='text/csv; charset=utf-8')
         response['Content-Disposition'] = (
-            'attachment; filename="ideasketches.csv"'
+            'attachment; filename="ideas.csv"'
         )
 
         # Selects all parent classes named ideas.models.abstracts.*Section
@@ -43,12 +44,18 @@ class IdeaSketchExportView(PermissionRequiredMixin, generic.ListView):
         for section in abstract_sections:
             for field in section._meta.concrete_fields:
                 field_names.append(field.name)
+        field_names.append('link')
+        field_names.append('type')
 
         writer = csv.writer(response)
         writer.writerow(field_names)
 
+        del field_names[-2:]
+
         for idea in self.get_queryset():
             data = [str(getattr(idea, name)) for name in field_names]
+            data.append(request.build_absolute_uri(idea.get_absolute_url()))
+            data.append(idea.type)
             writer.writerow(data)
 
         return response

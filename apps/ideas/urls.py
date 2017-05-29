@@ -25,8 +25,8 @@ urlpatterns = [
         ), name='idea-sketch-add-proposal'),
     url(r'^(?P<slug>[-\w_]+)/edit/(?P<form_number>[\d]+)/$',
         views.IdeaSketchEditView.as_view(), name='idea-sketch-update-form'),
-    url(r'list/export/$', views.IdeaSketchExportView.as_view(),
-        name='idea-sketch-export'),
+    url(r'list/export/$', views.IdeaExportView.as_view(),
+        name='idea-export'),
     url(r'^$',
         views.IdeaListView.as_view(), name='idea-sketch-list')
 
