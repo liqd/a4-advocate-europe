@@ -25,8 +25,7 @@ def test_idea_detail_view(rf, idea_sketch_factory, proposal_factory):
     assert proposal.type == models.Proposal._meta.verbose_name.title()
 
     view = views.IdeaDetailView.as_view()
-    request = rf.get('/ideas/{}/'.format(
-        ideasketch.slug, {'slug': ideasketch.slug}))
+    request = rf.get('/ideas/')
     response = view(request, slug=ideasketch.slug)
     assert 'idea_list' in response.context_data
     assert (response.context_data['idea_list'][0] ==
