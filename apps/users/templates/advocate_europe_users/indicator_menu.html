@@ -1,4 +1,4 @@
-{% load i18n thumbnail %}
+{% load i18n thumbnail rules %}
 
 <ul class="nav navbar-nav navbar-right user-indicator" id="user-indicator">
     <li class="dropdown">
@@ -21,7 +21,7 @@
                 {% with 'ideas2017' as  module_slug %}
                 <li>
                     <a href="{% url 'idea-sketch-create' module_slug %}">
-                        <i class="fa fa-plus fa-fw" aria-hidden="true"></i>{% trans 'add proposal'  %}
+                        <i class="fa fa-plus fa-fw" aria-hidden="true"></i>{% trans 'add proposal' %}
                     </a>
                 </li>
                 {% endwith %}

@@ -18,7 +18,7 @@ class IdeaSketchPhase(phases.PhaseContent):
     module_name = _('Advocate Europe')
 
     features = {
-        'crud': (models.Idea,),
+        'crud': (models.Idea, models.IdeaSketch,),
         'comment': (models.Idea,),
     }
 
@@ -37,8 +37,8 @@ class CommunityAwardRatingPhase(phases.PhaseContent):
     module_name = _('Advocate Europe')
 
     features = {
-        'rate': (models.IdeaSketch,),
-        'comment': (models.IdeaSketch,),
+        'rate': (models.Idea,),
+        'comment': (models.Idea,),
     }
 
 
@@ -56,7 +56,9 @@ class FullProposalPhase(phases.PhaseContent):
     module_name = _('Advocate Europe')
 
     features = {
-        'crud': (models.Proposal,),
+        'crud': (models.Idea, models.Proposal,),
+        'rate': (models.Idea,),
+        'comment': (models.Idea,),
     }
 
 
@@ -74,7 +76,7 @@ class ImplementationPhase(phases.PhaseContent):
     module_name = _('Advocate Europe')
 
     features = {
-        'update': (models.Proposal,),
+        'update': (models.Idea, models.Proposal,),
     }
 
 

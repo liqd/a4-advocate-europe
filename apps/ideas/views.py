@@ -22,7 +22,7 @@ from .models import Idea, IdeaSketch, IdeaSketchArchived, Proposal, abstracts
 
 
 class IdeaSketchExportView(PermissionRequiredMixin, generic.ListView):
-    permission_required = 'advocate_europe_ideas.export_ideasketch'
+    permission_required = 'advocate_europe_ideas.export_idea'
     model = IdeaSketch
 
     def get(self, request, *args, **kwargs):

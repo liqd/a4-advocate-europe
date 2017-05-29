@@ -14,8 +14,7 @@ rules.add_perm(
 
 rules.add_perm(
     'advocate_europe_ideas.add_ideasketch',
-    mod_predicates.is_allowed_add_item(models.IdeaSketch)  # &
-    # phase_predicates.phase_allows_change
+    mod_predicates.is_allowed_add_item(models.IdeaSketch)
 )
 
 rules.add_perm(
@@ -25,8 +24,8 @@ rules.add_perm(
     (
         mod_predicates.is_owner |
         predicates.is_collaborator
-    )  # &
-    # phase_predicates.phase_allows_change
+    ) &
+    phase_predicates.phase_allows_change
 )
 
 rules.add_perm(  # and visit_camp?
@@ -40,16 +39,6 @@ rules.add_perm(  # and visit_camp?
     # phase_predicates.phase_allows_change
 )
 
-rules.add_perm(
-    'advocate_europe_ideas.change_proposal',
-    mod_predicates.is_project_admin |
-    mod_predicates.is_context_member &
-    (
-        mod_predicates.is_owner |
-        predicates.is_collaborator
-    )  # &
-    # phase_predicates.phase_allows_change
-)
 
 rules.add_perm(
     'advocate_europe_ideas.comment_idea',
