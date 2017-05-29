@@ -28,15 +28,16 @@ rules.add_perm(
     phase_predicates.phase_allows_change
 )
 
-rules.add_perm(  # and visit_camp?
+rules.add_perm(
     'advocate_europe_ideas.add_proposal',
     mod_predicates.is_project_admin |
     mod_predicates.is_context_member &
     (
         mod_predicates.is_owner |
         predicates.is_collaborator
-    )  # &
-    # phase_predicates.phase_allows_change
+    ) &
+    predicates.may_visit_camp &
+    phase_predicates.phase_allows_change
 )
 
 

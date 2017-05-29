@@ -13,12 +13,12 @@ class IdeaSketchPhase(phases.PhaseContent):
 
     name = _('Idea sketch phase')
     description = _(
-        'issue and edit ideas sketches, but also collect some early feedback'
+        'issue and edit idea sketches, but also collect some early feedback'
     )
     module_name = _('Advocate Europe')
 
     features = {
-        'crud': (models.Idea, models.IdeaSketch,),
+        'crud': (models.IdeaSketch,),
         'comment': (models.Idea,),
     }
 
@@ -52,11 +52,11 @@ class FullProposalPhase(phases.PhaseContent):
     view = None
 
     name = _('Full proposal phase')
-    description = _('extend ideas sketches to a full proposals')
+    description = _('extend idea sketches to a full proposals')
     module_name = _('Advocate Europe')
 
     features = {
-        'crud': (models.Idea, models.Proposal,),
+        'crud': (models.Idea, models.IdeaSketchArchived, models.Proposal,),
         'rate': (models.Idea,),
         'comment': (models.Idea,),
     }
