@@ -36,10 +36,6 @@ class IdeaExportView(PermissionRequiredMixin, generic.ListView):
                           'slug', 'idea_ptr', 'idea_image']
 
         field_names = []
-        for field in Idea._meta.concrete_fields:
-            if field.name not in exclude_fields:
-                field_names.append(field.name)
-
         for field in IdeaSketch._meta.concrete_fields:
             if (field.name not in exclude_fields
                     and field.name not in field_names):
