@@ -17,14 +17,14 @@ urlpatterns = [
         views.IdeaDetailView.as_view(), name='idea-detail'),
     url(r'^(?P<slug>[-\w_]+)/edit/$',
         views.IdeaSketchEditView.as_view(), name='idea-sketch-update'),
+    url(r'^(?P<slug>[-\w_]+)/edit/(?P<form_number>[\d]+)/$',
+        views.IdeaSketchEditView.as_view(), name='idea-sketch-update-form'),
     url(r'^(?P<slug>[-\w_]+)/proposal/$',
         views.ProposalCreateWizard.as_view(
             [ApplicantSectionForm, PartnersSectionForm,
              IdeaSectionForm, ImpactSectionForm,
              FinanceAndDurationSectionForm, CommunitySectionForm]
         ), name='idea-sketch-add-proposal'),
-    url(r'^(?P<slug>[-\w_]+)/edit/(?P<form_number>[\d]+)/$',
-        views.IdeaSketchEditView.as_view(), name='idea-sketch-update-form'),
     url(r'list/export/$', views.IdeaExportView.as_view(),
         name='idea-export'),
     url(r'^$',
