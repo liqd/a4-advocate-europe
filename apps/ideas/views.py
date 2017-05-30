@@ -120,7 +120,7 @@ class IdeaSketchEditView(
 ):
     permission_required = 'advocate_europe_ideas.change_idea'
     model = IdeaSketch
-    template_name = 'advocate_europe_ideas/ideasketch_update_form.html'
+    template_name = 'advocate_europe_ideas/idea_update_form.html'
     success_message = _('Ideasketch saved')
     next_view = 'idea-sketch-update-form'
 
@@ -240,7 +240,7 @@ class ProposalEditView(
 ):
     permission_required = 'advocate_europe_ideas.change_proposal'
     model = Proposal
-    template_name = 'advocate_europe_ideas/ideasketch_update_form.html'
+    template_name = 'advocate_europe_ideas/idea_update_form.html'
     success_message = _('Proposal saved')
     next_view = 'proposal-update-form'
 
