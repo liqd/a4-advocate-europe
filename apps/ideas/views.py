@@ -20,6 +20,7 @@ from apps.wizards import mixins as wizard_mixins
 from . import forms, mixins
 from .models import Idea, IdeaSketch, IdeaSketchArchived, Proposal, abstracts
 
+
 class IdeaExportView(PermissionRequiredMixin, generic.ListView):
     permission_required = 'advocate_europe_ideas.export_idea'
     model = Idea
