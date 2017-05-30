@@ -6,9 +6,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core.files.storage import FileSystemStorage
 from django.core.paginator import Paginator
 from django.forms.models import model_to_dict
-from django.http import Http404, HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.utils.http import is_safe_url
 from django.utils.translation import ugettext as _
 from django.views import generic
 from formtools.wizard.views import SessionWizardView
@@ -115,15 +114,15 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
 
 class IdeaSketchEditView(
     PermissionRequiredMixin,
+    mixins.MultiFormEditMixin,
     SuccessMessageMixin,
     generic.UpdateView
 ):
     permission_required = 'advocate_europe_ideas.change_idea'
-    file_storage = FileSystemStorage(
-        location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
     model = IdeaSketch
     template_name = 'advocate_europe_ideas/ideasketch_update_form.html'
     success_message = _('Ideasketch saved')
+    next_view = 'idea-sketch-update-form'
 
     form_classes = [
         forms.ApplicantSectionForm,
@@ -132,26 +131,6 @@ class IdeaSketchEditView(
         forms.ImpactSectionForm,
         forms.CollaborationCampSectionForm
     ]
-
-    def dispatch(self, request, *args, **kwargs):
-        form_number = self.kwargs.get('form_number', '0')
-        if not form_number.isdecimal():
-            raise Http404
-
-        form_number = int(form_number)
-        self.form_number = form_number
-        if form_number < 0 or len(self.form_classes) <= form_number:
-            raise Http404
-
-        self.form_class = self.form_classes[form_number]
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_success_url(self):
-        next = self.request.POST.get('next')
-        if (next and is_safe_url(next)):
-            return next
-        else:
-            return self.request.path
 
     @property
     def raise_exception(self):
@@ -251,6 +230,31 @@ class ProposalCreateWizard(PermissionRequiredMixin,
         proposal.save()
 
         return redirect(proposal.get_absolute_url())
+
+
+class ProposalEditView(
+    PermissionRequiredMixin,
+    mixins.MultiFormEditMixin,
+    SuccessMessageMixin,
+    generic.UpdateView
+):
+    permission_required = 'advocate_europe_ideas.change_proposal'
+    model = Proposal
+    template_name = 'advocate_europe_ideas/ideasketch_update_form.html'
+    success_message = _('Proposal saved')
+    next_view = 'proposal-update-form'
+
+    form_classes = [
+        forms.ApplicantSectionForm,
+        forms.PartnersSectionForm,
+        forms.IdeaSectionForm,
+        forms.ImpactSectionForm,
+        forms.FinanceAndDurationSectionForm,
+    ]
+
+    @property
+    def raise_exception(self):
+        return self.request.user.is_authenticated()
 
 
 class IdeaListView(generic.ListView):

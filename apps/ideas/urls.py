@@ -25,6 +25,10 @@ urlpatterns = [
              IdeaSectionForm, ImpactSectionForm,
              FinanceAndDurationSectionForm, CommunitySectionForm]
         ), name='idea-sketch-add-proposal'),
+    url(r'^(?P<slug>[-\w_]+)/proposal/edit/$',
+        views.ProposalEditView.as_view(), name='proposal-update'),
+    url(r'^(?P<slug>[-\w_]+)/proposal/edit/(?P<form_number>[\d]+)/$',
+        views.ProposalEditView.as_view(), name='proposal-update-form'),
     url(r'list/export/$', views.IdeaExportView.as_view(),
         name='idea-export'),
     url(r'^$',
