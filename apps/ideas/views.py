@@ -206,18 +206,9 @@ class IdeaDetailView(generic.DetailView):
         return context
 
 
-class IdeaMixin(generic.detail.SingleObjectMixin):
-    model = Idea
-
-    def dispatch(self, request, *args, **kwargs):
-        self.idea = self.get_object()
-        self.object = self.idea
-        return super().dispatch(request, *args, **kwargs)
-
-
 class ProposalCreateWizard(PermissionRequiredMixin,
                            SessionWizardView,
-                           IdeaMixin):
+                           mixins.IdeaMixin):
     permission_required = 'advocate_europe_ideas.add_proposal'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
