@@ -18,7 +18,7 @@ from apps.invites.models import IdeaSketchInvite
 from apps.wizards import mixins as wizard_mixins
 
 from . import forms, mixins
-from .models import Idea, IdeaSketch, IdeaSketchArchived, Proposal, abstracts
+from .models import Idea, IdeaSketch, IdeaSketchArchived, Proposal
 
 
 class IdeaExportView(PermissionRequiredMixin, generic.ListView):
@@ -32,28 +32,44 @@ class IdeaExportView(PermissionRequiredMixin, generic.ListView):
             'attachment; filename="ideas.csv"'
         )
 
-        # Selects all parent classes named ideas.models.abstracts.*Section
-        abstracts_module_name = abstracts.__name__ + '.'
-        abstract_sections = [
-            base_model for base_model in self.model.__mro__
-            if base_model.__module__.startswith(abstracts_module_name)
-            and base_model.__name__.endswith('Section')
-            ]
+        exclude_fields = ['module', 'item_ptr', 'members',
+                          'slug', 'idea_ptr', 'idea_image']
 
-        field_names = ['id']
-        for section in abstract_sections:
-            for field in section._meta.concrete_fields:
+        field_names = []
+        for field in IdeaSketch._meta.concrete_fields:
+            if (field.name not in exclude_fields
+                    and field.name not in field_names):
                 field_names.append(field.name)
+
+        for field in Proposal._meta.concrete_fields:
+            if (field.name not in exclude_fields
+                    and field.name not in field_names):
+                field_names.append(field.name)
+
         field_names.append('link')
         field_names.append('type')
 
-        writer = csv.writer(response)
+        writer = csv.writer(response, lineterminator='\n',
+                            quotechar='"', quoting=csv.QUOTE_ALL)
         writer.writerow(field_names)
 
         del field_names[-2:]
 
-        for idea in self.get_queryset():
-            data = [str(getattr(idea, name)) for name in field_names]
+        for idea_base in self.get_queryset():
+            has_proposal = hasattr(idea_base, 'proposal')
+            idea = idea_base.proposal if has_proposal else idea_base.ideasketch
+            data = []
+            for name in field_names:
+                if hasattr(idea, name):
+                    value = getattr(idea, name)
+                    if type(value) is list:
+                        data.append(str(', '.join(value)))
+                    else:
+                        data.append(str(value)
+                                    .replace('\r', '')
+                                    .replace('\n', ''))
+                else:
+                    data.append('')
             data.append(request.build_absolute_uri(idea.get_absolute_url()))
             data.append(idea.type)
             writer.writerow(data)
@@ -235,7 +251,7 @@ class ProposalCreateWizard(PermissionRequiredMixin,
             **{
                 field: value for field, value in proposal_data.items()
                 if field not in special_fields
-            }
+                }
         )
         proposal.save()
         merged_data = self.idea.__dict__.copy()
