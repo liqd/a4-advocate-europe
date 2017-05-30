@@ -58,6 +58,8 @@ def test_proposal_admin_create_wizard(client,
     wizard = response.context['wizard']
     assert wizard['steps'].step1 == 3
     for field, value in wizard['form'].initial.items():
+        if type(value) is list:
+            value = ','.join(value)
         assert value == getattr(idea_sketch, field)
     data = {
         'proposal_create_wizard-current_step': '2'
@@ -69,8 +71,12 @@ def test_proposal_admin_create_wizard(client,
     response = client.post(url, data)
     assert response.status_code == 200
     wizard = response.context['wizard']
+
     assert wizard['steps'].step1 == 4
+
     for field, value in wizard['form'].initial.items():
+        if type(value) is list:
+            value = ','.join(value)
         assert value == getattr(idea_sketch, field)
     data = {
         'proposal_create_wizard-current_step': '3'
