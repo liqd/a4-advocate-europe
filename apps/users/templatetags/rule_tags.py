@@ -6,5 +6,5 @@ register = template.Library()
 
 
 @register.assignment_tag
-def get_module(module_slug):
-    return Module.objects.get(slug=module_slug)
+def get_modules():
+    return Module.objects.all()
