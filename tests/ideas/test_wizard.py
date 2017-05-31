@@ -124,4 +124,15 @@ def test_proposal_admin_create_wizard(client,
     assert IdeaSketchArchived.objects.all().count() == 1
     assert IdeaSketch.objects.all().count() == 1
 
+    new_proposal = Proposal.objects.all().first()
+    idea_archive = new_proposal.idea_sketch_archived
+
+    for field in IdeaSketchArchived._meta.get_all_field_names():
+        if hasattr(idea_archive, field) and field != 'modified':
+            archive_field = getattr(idea_archive, field)
+            if type(archive_field) is list:
+                archive_field = (',').join(archive_field)
+            idea_sketch_field = getattr(idea_sketch, field)
+            assert str(archive_field) == str(idea_sketch_field)
+
     assert Proposal.objects.all().first().idea_title == idea_sketch.idea_title

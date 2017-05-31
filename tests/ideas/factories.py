@@ -1,7 +1,7 @@
 import factory
 
 from adhocracy4.test.factories import ModuleFactory
-from apps.ideas.models import IdeaSketch, Proposal
+from apps.ideas.models import Idea, IdeaSketch, IdeaSketchArchived, Proposal
 from tests.factories import UserFactory
 
 
@@ -40,6 +40,19 @@ class IdeaSketchFactory(factory.django.DjangoModelFactory):
                 self.collaborators.add(user)
 
 
+class IdeaFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Idea
+
+
+class IdeaSketchArchivedFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = IdeaSketchArchived
+
+    creator = factory.SubFactory(UserFactory)
+    module = factory.SubFactory(ModuleFactory)
+
+
 class ProposalFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Proposal
@@ -52,6 +65,7 @@ class ProposalFactory(factory.django.DjangoModelFactory):
     other_sources = 0
     other_sources_secured = 0
     duration = factory.Faker('random_number')
+    idea_sketch_archived = factory.SubFactory(IdeaSketchArchivedFactory)
 
     @factory.post_generation
     def initiators(self, create, extracted, **kwargs):
