@@ -13,13 +13,13 @@ class IdeaSketchPhase(phases.PhaseContent):
 
     name = _('Idea sketch phase')
     description = _(
-        'issue and edit ideas sketches, but also collect some early feedback'
+        'issue and edit idea sketches, but also collect some early feedback'
     )
     module_name = _('Advocate Europe')
 
     features = {
         'crud': (models.IdeaSketch,),
-        'comment': (models.IdeaSketch,),
+        'comment': (models.Idea,),
     }
 
 
@@ -37,8 +37,9 @@ class CommunityAwardRatingPhase(phases.PhaseContent):
     module_name = _('Advocate Europe')
 
     features = {
-        'rate': (models.IdeaSketch,),
-        'comment': (models.IdeaSketch,),
+        'rate': (models.Idea,),
+        # rating only for users, that added an idea in this or previous years
+        'comment': (models.Idea,),
     }
 
 
@@ -52,11 +53,14 @@ class FullProposalPhase(phases.PhaseContent):
     view = None
 
     name = _('Full proposal phase')
-    description = _('extend ideas sketches to a full proposals')
+    description = _('extend idea sketches to a full proposals')
     module_name = _('Advocate Europe')
 
     features = {
-        'crud': (models.Proposal,),
+        'crud': (models.Idea, models.IdeaSketchArchived, models.Proposal,),
+        'rate': (models.Idea,),
+        # rating only for users, that added an idea in this or previous years
+        'comment': (models.Idea,),
     }
 
 
@@ -74,7 +78,7 @@ class ImplementationPhase(phases.PhaseContent):
     module_name = _('Advocate Europe')
 
     features = {
-        'update': (models.Proposal,),
+        'update': (models.Idea, models.Proposal,),
     }
 
 
