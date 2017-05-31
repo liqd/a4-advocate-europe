@@ -13,6 +13,8 @@ COLLABORATION_CAMP_REPRESENT_TITLE = _('Who will represent your idea '
                                        'at the Collaboration Camp and why?')
 COLLABORATION_CAMP_REPRESENT_HELP = _('(Specify one person only. '
                                       '(max 150 characters))')
+COLLABORATION_CAMP_EMAIL_TITLE = _('Email address for contacting your '
+                                   'representative on the collaboration camp.')
 COLLABORATION_CAMP_BENEFIT_TITLE = _('How could you contribute to and'
                                      ' benefit from participating in the '
                                      'Collaboration Camp?')
@@ -32,6 +34,8 @@ class AbstractCollaborationCampSection(models.Model):
         max_length=150,
         verbose_name=COLLABORATION_CAMP_REPRESENT_TITLE,
         help_text=COLLABORATION_CAMP_REPRESENT_HELP)
+    collaboration_camp_email = models.EmailField(
+        verbose_name=COLLABORATION_CAMP_EMAIL_TITLE)
     collaboration_camp_benefit = models.TextField(
         max_length=300,
         verbose_name=COLLABORATION_CAMP_BENEFIT_TITLE,
