@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('advocate_europe_ideas', '0001_initial'),
+        ('advocate_europe_ideas', '0002_add_camp_representative_email'),
     ]
 
     operations = [
