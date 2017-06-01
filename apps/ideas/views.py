@@ -32,17 +32,18 @@ class IdeaExportView(PermissionRequiredMixin, generic.ListView):
         )
 
         exclude_fields = ['module', 'item_ptr', 'members',
-                          'slug', 'idea_ptr', 'idea_image']
+                          'slug', 'idea_ptr', 'idea_image',
+                          'idea_sketch_archived']
 
         field_names = []
         for field in IdeaSketch._meta.concrete_fields:
-            if (field.name not in exclude_fields
-                    and field.name not in field_names):
+            if (field.name not in exclude_fields and
+                    field.name not in field_names):
                 field_names.append(field.name)
 
         for field in Proposal._meta.concrete_fields:
-            if (field.name not in exclude_fields
-                    and field.name not in field_names):
+            if (field.name not in exclude_fields and
+                    field.name not in field_names):
                 field_names.append(field.name)
 
         field_names.append('link')
@@ -138,6 +139,7 @@ class IdeaSketchEditView(
 
 
 class IdeaDetailView(generic.DetailView):
+    display_type = 'idea'
     model = Idea
 
     @property
@@ -185,6 +187,13 @@ class IdeaDetailView(generic.DetailView):
         return context
 
 
+class IdeaSketchArchivedDetailView(IdeaDetailView):
+    display_type = 'idea_sketch_archive'
+    model = IdeaSketchArchived
+    template_name = 'advocate_europe_ideas/idea_detail.html'
+    context_object_name = 'idea'
+
+
 class ProposalCreateWizard(PermissionRequiredMixin,
                            SessionWizardView,
                            mixins.IdeaMixin):
@@ -202,11 +211,14 @@ class ProposalCreateWizard(PermissionRequiredMixin,
         return initial
 
     def done(self, form_list, **kwargs):
-        idea_sketch_archive = IdeaSketchArchived(idea=self.idea)
+        idea_sketch_archive = IdeaSketchArchived()
         for field in self.idea._meta.fields:
             setattr(idea_sketch_archive,
                     field.name,
                     getattr(self.idea, field.name))
+        idea_sketch_archive.save()
+        idea_sketch_archive.created = self.idea.created
+        idea_sketch_archive.visit_camp = self.idea.ideasketch.visit_camp
         idea_sketch_archive.save()
 
         special_fields = ['accept_conditions', 'collaborators_emails']
@@ -215,6 +227,7 @@ class ProposalCreateWizard(PermissionRequiredMixin,
         data = self.get_all_cleaned_data()
 
         proposal = Proposal(
+            idea_sketch_archived=idea_sketch_archive,
             idea_ptr=self.idea,
             creator=self.request.user,
             module=self.idea.module,

@@ -75,13 +75,13 @@ class IdeaSketch(Idea, AbstractCollaborationCampSection):
 
 class IdeaSketchArchived(AbstractIdea, AbstractCollaborationCampSection):
     visit_camp = models.BooleanField(default=False)
-    idea = models.ForeignKey(Idea)
 
     def __str__(self):
         return '{} (Archived Ideasketch)'.format(self.idea_title)
 
 
 class Proposal(Idea, AbstractFinanceAndDurationSection):
+    idea_sketch_archived = models.OneToOneField(IdeaSketchArchived)
     is_winner = models.BooleanField(blank=True, default=False)
     jury_statement = models.TextField(
         verbose_name='Why this idea?', blank=True)
