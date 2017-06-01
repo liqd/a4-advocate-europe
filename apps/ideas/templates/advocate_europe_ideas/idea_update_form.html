@@ -4,7 +4,7 @@
 {% block content %}
 <div class="wizard-page">
     <div class="container-narrow breadcrumps">
-        <a href="{% url 'idea-detail' ideasketch.slug %}" data-safe-exit="wizard">
+        <a href="{% url 'idea-detail' object.slug %}" data-safe-exit="wizard">
             <i class="fa fa-arrow-left" aria-hidden="true"></i> {% trans "back to idea" %}
         </a>
     </div>
@@ -15,7 +15,7 @@
             <ul class="wizard-progress">
                 {% for step_form in view.form_classes %}
                 <li class="wizard-progress-entry{% if view.form_number == forloop.counter0 %} active{% endif %} filled">
-                    <a href="{% url 'idea-sketch-update-form' ideasketch.slug forloop.counter0 %}" data-safe-exit="wizard">
+                    <a href="{% url view.next_view object.slug forloop.counter0 %}" data-safe-exit="wizard">
                         {{ step_form.section_name }}
                     </a>
                 </li>
