@@ -199,7 +199,7 @@
         display: inline-flex;
         align-items: center;
 
-        height: rem(40px);
+        height: rem(51px);
         border: 0;
         border-radius: 0;
 
@@ -225,6 +225,10 @@
 .ideadetail-tab-bar {
     background-color: $ae-light-gray;
 
+    .col-xs-5 {
+        padding-right: 0;
+    }
+
     > * {
         @media screen and (max-width: $screen-xs-max) {
             padding: 0 rem(5px);
@@ -234,7 +238,7 @@
 
 .ideadetail-tabs {
     .nav-tabs {
-        height: rem(40px);
+        height: rem(50px);
         border: none;
     }
 
@@ -248,8 +252,11 @@
             border: 0;
             font-size: rem(16px);
             font-weight: 600;
-            padding: rem(7px) rem(10px);
+            padding-right: 30px;
+            padding-left: 30px;
         }
+        margin-top: rem(10px);
+        border-bottom: 1px solid white;
     }
 
     li.active {
@@ -258,9 +265,8 @@
         a:hover,
         a:active {
             color: $brand-primary;
-            background-color: $ae-light-gray;
+            background-color: white;
             border: 0;
-            border-bottom: 3px solid $brand-primary;
         }
     }
 }
@@ -289,9 +295,25 @@
     }
 }
 
+.ideadetailtab-header-content-switcher {
+    a {
+        color: $gray-dark;
+    }
+
+    .active {
+        color: $brand-primary;
+    }
+}
+
 .ideadetail-tab {
     .ideadetailtab-header {
         font-weight: bold;
+        margin-top: 40px;
+
+        h2 {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
     }
 
     h2 {

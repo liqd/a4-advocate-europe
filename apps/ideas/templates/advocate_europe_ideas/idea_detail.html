@@ -16,29 +16,35 @@
                 </ul>
             </div>
             <div class="col-xs-5">
+
                 <div class="ideadetail-rect-btn-group pull-right" role="group">
-                    <a href="#" class="btn" role="button" aria-label="{% trans 'share' %}">
+                    {% if view.display_type == 'idea' %}
+                    <a href="#" class="btn" role="button" aria-label="{% trans 'watch' %}">
                         <i class="fa fa-eye" aria-hidden="true"></i>
                         <span class="hidden-xs">&nbsp{% trans 'watch' %}</span>
                     </a>
+                    {% endif %}
+
                     <a href="#" class="btn" role="button" aria-label="{% trans 'share' %}">
                         <i class="fa fa-share" aria-hidden="true"></i>
                         <span class="hidden-xs">&nbsp{% trans 'share' %}</span>
                     </a>
+
                     {% if idea.ideasketch %}
                         {% has_perm 'advocate_europe_ideas.change_idea' request.user idea.ideasketch as can_change %}
                         {% has_perm 'advocate_europe_ideas.add_proposal' request.user idea as can_add_proposal %}
                     {% endif %}
-                    {% if can_change or can_add_proposal %}
+                    {% if can_change or can_add_proposal and view.display_type == 'idea' %}
                     <div class="dropdown">
                         <button class="btn" type="button" id="dropdownEdit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                            <span class="hidden-xs">&nbsp{% trans 'more' %}</span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownEdit">
                             {% if can_change %}
                             <li><a href="{% url 'idea-sketch-update' idea.slug %}">{% trans "edit" %}</a></li>
                             {% endif %}
-                            {% if can_add_proposal %}
+                            {% if can_add_proposal and not idea.proposal %}
                             <li><a href="{% url 'idea-sketch-add-proposal' idea.slug %}">{% trans 'add full proposal' %}</a></li>
                             {% endif %}
                         </ul>
@@ -66,10 +72,12 @@
                 {% endif %}
             </div>
         </div>
+        {% if view.display_type == 'idea' %}
         <div class="container-medium ideadetail-comments">
             <h4>{% trans "Write comment" %}</h4>
             {% react_comments idea %}
         </div>
+        {% endif %}
     </div>
 </div>
 
