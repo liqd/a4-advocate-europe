@@ -1,4 +1,4 @@
-{% load i18n thumbnail %}
+{% load i18n thumbnail rules rule_tags %}
 
 <ul class="nav navbar-nav navbar-right user-indicator" id="user-indicator">
     <li class="dropdown">
@@ -18,13 +18,17 @@
                     <a href="{% url 'admin:index' %}"><i class="fa fa-hand-spock-o fa-fw" aria-hidden="true"></i> <span class="dropdown-text">{% trans "Admin" %}</span></a>
                 </li>
                 {% endif %}
-                {% with 'ideas2017' as  module_slug %}
-                <li>
-                    <a href="{% url 'idea-sketch-create' module_slug %}">
-                        <i class="fa fa-plus fa-fw" aria-hidden="true"></i>{% trans 'add proposal' %}
-                    </a>
-                </li>
-                {% endwith %}
+                {% get_modules as modules %}
+                {% for module in modules %}
+                    {% has_perm 'advocate_europe_ideas.add_ideasketch' request.user module as can_add %}
+                    {% if can_add %}
+                    <li>
+                        <a href="{% url 'idea-sketch-create' module.slug %}">
+                            <i class="fa fa-plus fa-fw" aria-hidden="true"></i>{% trans 'add proposal' %}
+                        </a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
                 <li>
                     <form class="user-indicator-logout-form" action="{% url 'account_logout' %}" method="post" >
                         {% csrf_token %}
