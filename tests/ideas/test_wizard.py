@@ -11,10 +11,7 @@ def test_proposal_anonymous_cannot_create_wizard(client, idea_sketch_factory):
     idea_sketch = idea_sketch_factory(visit_camp=True)
     url = reverse('idea-sketch-add-proposal',
                   kwargs={'slug': idea_sketch.slug})
-
-    with active_phase(idea_sketch.module, FullProposalPhase):
-        response = client.get(url)
-
+    response = client.get(url)
     assert response.status_code == 302
 
 
@@ -65,8 +62,7 @@ def test_proposal_no_phase_cannot_create_wizard(client, user,
 
 @pytest.mark.django_db
 def test_proposal_collaborator_create_wizard(client,
-                                             idea_sketch_factory,
-                                             user, image):
+                                             idea_sketch_factory, user, image):
     idea_sketch = idea_sketch_factory(visit_camp=True, idea_image=image)
     idea_sketch.collaborators.add(user)
     client.login(username=user.email,
@@ -74,11 +70,11 @@ def test_proposal_collaborator_create_wizard(client,
     url = reverse('idea-sketch-add-proposal',
                   kwargs={'slug': idea_sketch.slug})
 
-    assert IdeaSketchArchived.objects.all().count() == 0
-    assert IdeaSketch.objects.all().count() == 1
-    assert Proposal.objects.all().count() == 0
-
     with active_phase(idea_sketch.module, FullProposalPhase):
+
+        assert IdeaSketchArchived.objects.all().count() == 0
+        assert IdeaSketch.objects.all().count() == 1
+        assert Proposal.objects.all().count() == 0
 
         # Form 1 (Applicant)
         response = client.get(url)
@@ -179,5 +175,16 @@ def test_proposal_collaborator_create_wizard(client,
         assert IdeaSketchArchived.objects.all().count() == 1
         assert IdeaSketch.objects.all().count() == 1
 
-        assert (Proposal.objects.all().first().idea_title
-                == idea_sketch.idea_title)
+        new_proposal = Proposal.objects.all().first()
+        idea_archive = new_proposal.idea_sketch_archived
+
+        for field in IdeaSketchArchived._meta.get_all_field_names():
+            if hasattr(idea_archive, field) and field != 'modified':
+                archive_field = getattr(idea_archive, field)
+                if type(archive_field) is list:
+                    archive_field = (',').join(archive_field)
+                idea_sketch_field = getattr(idea_sketch, field)
+                assert str(archive_field) == str(idea_sketch_field)
+
+        assert Proposal.objects.all() \
+            .first().idea_title == idea_sketch.idea_title
