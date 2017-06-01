@@ -1,5 +1,6 @@
 import pytest
 from django.core.urlresolvers import reverse
+from apps.ideas.models import IdeaSketch
 from apps.ideas.phases import IdeaSketchPhase
 
 from tests.helpers import active_phase
@@ -79,6 +80,7 @@ def test_ideasketch_create_wizard(client, user,
         # Form 6 (Collaboration camp)
         response = client.post(url, data)
         assert response.status_code == 200
+        assert IdeaSketch.objects.all().count() == 1
 
         data = {
             'idea_sketch_create_wizard-current_step': '5',
@@ -86,3 +88,14 @@ def test_ideasketch_create_wizard(client, user,
             '5-how_did_you_hear': 'personal_contact',
             '5-accept_conditions': True
         }
+
+        response = client.post(url, data)
+        my_idea_sketch = IdeaSketch.objects.get(idea_title='My very good idea')
+
+        assert response.status_code == 302
+        assert IdeaSketch.objects.all().count() == 2
+        assert my_idea_sketch.first_name == 'Qwertz'
+        assert (my_idea_sketch.get_idea_location_display() ==
+                'Linkage to the Ruhr area of Germany')
+        assert my_idea_sketch.target_group == 'Children'
+        assert my_idea_sketch.collaboration_camp_option == 'not_sure'
