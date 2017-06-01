@@ -251,7 +251,7 @@ class ProposalEditView(
     SuccessMessageMixin,
     generic.UpdateView
 ):
-    permission_required = 'advocate_europe_ideas.change_proposal'
+    permission_required = 'advocate_europe_ideas.change_idea'
     model = Proposal
     template_name = 'advocate_europe_ideas/idea_update_form.html'
     success_message = _('Proposal saved')
