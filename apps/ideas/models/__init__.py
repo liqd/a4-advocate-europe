@@ -18,6 +18,8 @@ from .abstracts.finances_duration_section import \
 from .abstracts.idea_section import AbstractIdeaSection
 from .abstracts.impact_section import AbstractImpactSection
 from .abstracts.partners_section import AbstractPartnersSection
+from .abstracts.selection_criteria_section import \
+    AbstractSelectionCriteriaSection
 
 
 class IdeaSketchQuerySet(query.RateableQuerySet, query.CommentableQuerySet):
@@ -80,7 +82,8 @@ class IdeaSketchArchived(AbstractIdea, AbstractCollaborationCampSection):
         return '{} (Archived Ideasketch)'.format(self.idea_title)
 
 
-class Proposal(Idea, AbstractFinanceAndDurationSection):
+class Proposal(Idea, AbstractFinanceAndDurationSection,
+               AbstractSelectionCriteriaSection):
     idea_sketch_archived = models.OneToOneField(IdeaSketchArchived)
     is_winner = models.BooleanField(blank=True, default=False)
     jury_statement = models.TextField(
