@@ -265,6 +265,7 @@ class ProposalEditView(
         forms.IdeaSectionForm,
         forms.ImpactSectionForm,
         forms.FinanceAndDurationSectionForm,
+        forms.CommunitySectionForm
     ]
 
     @property
