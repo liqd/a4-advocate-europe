@@ -74,6 +74,7 @@ def test_ideasketch_create_wizard(client, user,
 
             '4-collaboration_camp_option': 'not_sure',
             '4-collaboration_camp_represent': 'Mr. Not So Sure',
+            '4-collaboration_camp_email': 'email@example.com',
             '4-collaboration_camp_benefit': 'We will be very sure afterwards',
         }
 
