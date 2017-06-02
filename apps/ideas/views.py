@@ -195,8 +195,10 @@ class IdeaSketchArchivedDetailView(IdeaDetailView):
 
 
 class ProposalCreateWizard(PermissionRequiredMixin,
+                           mixins.IdeaMixin,
+                           wizard_mixins.CustomWizardMixin,
                            SessionWizardView,
-                           mixins.IdeaMixin):
+                           ):
     permission_required = 'advocate_europe_ideas.add_proposal'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
@@ -264,6 +266,7 @@ class ProposalEditView(
         forms.ImpactSectionForm,
         forms.SelectionCriteriaSectionForm,
         forms.FinanceAndDurationSectionForm,
+        forms.CommunitySectionForm
     ]
 
     @property
