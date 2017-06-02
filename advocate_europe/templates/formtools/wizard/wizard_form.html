@@ -44,7 +44,7 @@
                         name="wizard_store_and_goto"
                         type="submit"
                         value="{{ wizard.steps.prev }}">
-                    {% trans "back" %}
+                    {% trans "Back" %}
                 </button>
                 {% endif %}
 
@@ -52,13 +52,13 @@
                 <button class="btn btn-primary pull-right"
                         type="submit"
                         name="submit">
-                    {% trans "continue" %}
+                    {% trans "Continue" %}
                 </button>
                 {% else %}
-                <button class="btn btn-primary pull-right"
+                <button class="btn btn-primary pull-right wizard-submit-btn"
                         type="submit"
                         name="submit">
-                    {% trans "send" %}
+                    {% trans "Submit!" %}
                 </button>
                 {% endif %}
         </div>
