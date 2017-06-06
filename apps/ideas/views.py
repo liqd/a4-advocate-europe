@@ -225,7 +225,7 @@ class ProposalCreateWizard(PermissionRequiredMixin,
 
         special_fields = ['accept_conditions', 'collaborators_emails']
 
-        proposal_data = self.get_cleaned_data_for_step('4')
+        proposal_data = self.get_cleaned_data_for_step('5')
         data = self.get_all_cleaned_data()
 
         proposal = Proposal(
@@ -264,6 +264,7 @@ class ProposalEditView(
         forms.PartnersSectionForm,
         forms.IdeaSectionForm,
         forms.ImpactSectionForm,
+        forms.SelectionCriteriaSectionForm,
         forms.FinanceAndDurationSectionForm,
         forms.CommunitySectionForm
     ]

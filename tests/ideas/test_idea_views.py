@@ -63,6 +63,6 @@ def test_idea_export_view_admin(rf, admin, idea_sketch_factory,
     content_line = response.content.split(b'\n')
     assert len(content_line) == 5
 
-    assert len(str(content_line[0]).split('","')) == 54
-    assert len(str(content_line[1]).split('","')) == 54
-    assert len(str(content_line[3]).split('","')) == 54
+    assert len(str(content_line[0]).split('","')) == 57
+    assert len(str(content_line[1]).split('","')) == 57
+    assert len(str(content_line[3]).split('","')) == 57
