@@ -3,7 +3,7 @@ from django.conf.urls import url
 from . import views
 from .forms import (ApplicantSectionForm, CollaborationCampSectionForm,
                     CommunitySectionForm, FinanceAndDurationSectionForm,
-                    IdeaSectionForm,
+                    FinishForm, IdeaSectionForm,
                     ImpactSectionForm, PartnersSectionForm)
 
 urlpatterns = [
@@ -12,7 +12,7 @@ urlpatterns = [
             [ApplicantSectionForm, PartnersSectionForm,
              IdeaSectionForm, ImpactSectionForm,
              CollaborationCampSectionForm,
-             CommunitySectionForm]), name='idea-sketch-create'),
+             CommunitySectionForm, FinishForm]), name='idea-sketch-create'),
     url(r'^archived/(?P<slug>[-\w_]+)/$',
         views.IdeaSketchArchivedDetailView.as_view(),
         name='idea-sketch-archived-detail'),

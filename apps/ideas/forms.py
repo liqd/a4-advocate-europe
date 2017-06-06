@@ -153,6 +153,14 @@ class FinanceAndDurationSectionForm(BaseForm):
         exclude = []
 
 
+class FinishForm(BaseForm):
+    section_name = _('Finish')
+
+    class Meta:
+        model = AbstractCommunitySection
+        exclude = ['reach_out', 'how_did_you_hear']
+
+
 class IdeaSketchEditForm(BaseForm):
 
     class Meta:
