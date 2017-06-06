@@ -56,12 +56,12 @@
                 </button>
                 {% else %}
                 <div class="text-center wizard-submit-form">
-                    <p class="wizard-bold">You're done!</p>
-                    <p>You can add data or edit your idea later.</p>
+                    <p class="wizard-bold">{% trans "You're done!" %}</p>
+                    <p>{{ view.finish_section_text }}</p>
                     <button class="btn btn-primary wizard-submit-btn"
                             type="submit"
                             name="submit">
-                        {% trans "Submit!" %}
+                        {{ view.finish_section_btn }}
                     </button>
                 </div>
                 {% endif %}

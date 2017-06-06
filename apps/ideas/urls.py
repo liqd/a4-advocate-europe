@@ -26,7 +26,7 @@ urlpatterns = [
         views.ProposalCreateWizard.as_view(
             [ApplicantSectionForm, PartnersSectionForm,
              IdeaSectionForm, ImpactSectionForm,
-             FinanceAndDurationSectionForm, CommunitySectionForm]
+             FinanceAndDurationSectionForm, CommunitySectionForm, FinishForm]
         ), name='idea-sketch-add-proposal'),
     url(r'^(?P<slug>[-\w_]+)/proposal/edit/$',
         views.ProposalEditView.as_view(), name='proposal-update'),
