@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 
 from adhocracy4.models import base
-from apps.ideas.models import IdeaSketch
+from apps.ideas.models import Idea
 
 from . import emails
 
@@ -61,4 +61,4 @@ def invite_factory(module, model):
     )
 
 
-IdeaSketchInvite = invite_factory(__name__, IdeaSketch)
+IdeaInvite = invite_factory(__name__, Idea)
