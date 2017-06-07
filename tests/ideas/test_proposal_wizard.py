@@ -143,30 +143,43 @@ def test_proposal_collaborator_create_wizard(client,
 
         data = {
             'proposal_create_wizard-current_step': '4',
-            '4-total_budget': 6000,
-            '4-budget_requested': 5000,
-            '4-major_expenses': 'Lorem ipsum ...',
-            '4-other_sources': 1,
-            '4-other_sources_secured': 1,
-            '4-duration': 24
+            '4-selection_cohesion': 'Lorem ipsum ...',
+            '4-selection_apart': 'Lorem ipsum ...',
+            '4-selection_relevance': 'Lorem ipsum ...',
         }
 
-        # Form 6 (Community)
+        # Form 6 (Finances and Duration)
         response = client.post(url, data)
         assert response.status_code == 200
         wizard = response.context['wizard']
         assert wizard['steps'].step1 == 6
 
+        data = {
+            'proposal_create_wizard-current_step': '5',
+            '5-total_budget': 6000,
+            '5-budget_requested': 5000,
+            '5-major_expenses': 'Lorem ipsum ...',
+            '5-other_sources': 1,
+            '5-other_sources_secured': 1,
+            '5-duration': 24
+        }
+
+        # Form 7 (Community)
+        response = client.post(url, data)
+        assert response.status_code == 200
+        wizard = response.context['wizard']
+        assert wizard['steps'].step1 == 7
+
         for field, value in wizard['form'].initial.items():
             assert value == getattr(idea_sketch, field)
 
         data = {
-            'proposal_create_wizard-current_step': '5',
-            '5-accept_conditions': 'on'
+            'proposal_create_wizard-current_step': '6',
+            '6-accept_conditions': 'on'
         }
 
         for key, value in wizard['form'].initial.items():
-            data['5-{}'.format(key)] = value
+            data['6-{}'.format(key)] = value
 
         # Form 7 (Finish)
         response = client.post(url, data)

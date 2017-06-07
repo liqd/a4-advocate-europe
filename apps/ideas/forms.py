@@ -13,6 +13,8 @@ from .models.abstracts.finances_duration_section import \
 from .models.abstracts.idea_section import AbstractIdeaSection
 from .models.abstracts.impact_section import AbstractImpactSection
 from .models.abstracts.partners_section import AbstractPartnersSection
+from .models.abstracts.selection_criteria_section import \
+    AbstractSelectionCriteriaSection
 
 ACCEPT_CONDITIONS_LABEL = _('I hereby confirm and agree that '
                             'my idea will be public once'
@@ -143,6 +145,14 @@ class CommunitySectionForm(BaseForm):
             raise ValidationError(errors)
 
         return addresses
+
+
+class SelectionCriteriaSectionForm(BaseForm):
+    section_name = _('Selection Criteria')
+
+    class Meta:
+        model = AbstractSelectionCriteriaSection
+        exclude = []
 
 
 class FinanceAndDurationSectionForm(BaseForm):
