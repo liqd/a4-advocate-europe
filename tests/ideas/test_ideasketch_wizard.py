@@ -78,7 +78,7 @@ def test_ideasketch_create_wizard(client, user,
             '4-collaboration_camp_benefit': 'We will be very sure afterwards',
         }
 
-        # Form 6 (Collaboration camp)
+        # Form 6 (Community)
         response = client.post(url, data)
         assert response.status_code == 200
 

@@ -80,7 +80,7 @@ def test_proposal_collaborator_create_wizard(client,
         response = client.get(url)
         wizard = response.context['wizard']
         assert response.status_code == 200
-        assert wizard['steps'].count == 7
+        assert wizard['steps'].count == 8
         assert wizard['steps'].step1 == 1
         for field, value in wizard['form'].initial.items():
             assert str(value) == getattr(idea_sketch, field)
@@ -181,17 +181,17 @@ def test_proposal_collaborator_create_wizard(client,
         for key, value in wizard['form'].initial.items():
             data['6-{}'.format(key)] = value
 
-        # Form 7 (Finish)
+        # Form 8 (Finish)
         response = client.post(url, data)
         assert response.status_code == 200
         wizard = response.context['wizard']
-        assert wizard['steps'].step1 == 7
+        assert wizard['steps'].step1 == 8
 
         for field, value in wizard['form'].initial.items():
             assert value == getattr(idea_sketch, field)
 
         data = {
-            'proposal_create_wizard-current_step': '6'
+            'proposal_create_wizard-current_step': '7'
         }
 
         # Final Post

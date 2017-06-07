@@ -3,7 +3,7 @@ from django.conf.urls import url
 from . import views
 from .forms import (ApplicantSectionForm, CollaborationCampSectionForm,
                     CommunitySectionForm, FinanceAndDurationSectionForm,
-                    FinishForm, IdeaSectionForm, ImpactSectionForm, 
+                    FinishForm, IdeaSectionForm, ImpactSectionForm,
                     PartnersSectionForm, SelectionCriteriaSectionForm)
 
 urlpatterns = [
