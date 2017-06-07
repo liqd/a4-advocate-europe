@@ -45,7 +45,18 @@ class ApplicantSectionForm(BaseForm):
 
     class Meta:
         model = AbstractApplicantSection
-        exclude = []
+        fields = [
+            'first_name',
+            'last_name',
+            'organisation_status',
+            'organisation_status_extra',
+            'organisation_name',
+            'organisation_website',
+            'organisation_country',
+            'organisation_city',
+            'contact_email',
+            'year_of_registration'
+        ]
 
 
 class PartnersSectionForm(BaseForm):
@@ -58,7 +69,23 @@ class PartnersSectionForm(BaseForm):
 
     class Meta:
         model = AbstractPartnersSection
-        exclude = []
+        fields = [
+            'partner_organisation_1_name',
+            'partner_organisation_1_website',
+            'partner_organisation_1_country',
+            'partner_organisation_2_name',
+            'partner_organisation_2_website',
+            'partner_organisation_2_country',
+            'partner_organisation_3_name',
+            'partner_organisation_3_website',
+            'partner_organisation_3_country',
+            # (
+            #     'partner_organisation_{}_name'.format(index),
+            #     'partner_organisation_{}_website'.format(index),
+            #     'partner_organisation_{}_country'.format(index)
+            # ) for index in range(1, 4)
+        ]
+        fields.append('partners_more_info')
 
     @property
     def helper(self):
@@ -83,7 +110,17 @@ class IdeaSectionForm(BaseForm):
 
     class Meta:
         model = AbstractIdeaSection
-        exclude = []
+        fields = [
+            'idea_title',
+            'idea_subtitle',
+            'idea_pitch',
+            'idea_image',
+            'idea_topics',
+            'idea_topics_other',
+            'idea_location',
+            'idea_location_specify',
+            'idea_location_ruhr'
+        ]
 
 
 class ImpactSectionForm(BaseForm):
@@ -91,7 +128,14 @@ class ImpactSectionForm(BaseForm):
 
     class Meta:
         model = AbstractImpactSection
-        exclude = []
+        fields = [
+            'challenge',
+            'outcome',
+            'plan',
+            'importance',
+            'target_group',
+            'members'
+        ]
 
 
 class CollaborationCampSectionForm(BaseForm):
@@ -99,7 +143,12 @@ class CollaborationCampSectionForm(BaseForm):
 
     class Meta:
         model = AbstractCollaborationCampSection
-        exclude = []
+        fields = [
+            'collaboration_camp_option',
+            'collaboration_camp_represent',
+            'collaboration_camp_email',
+            'collaboration_camp_benefit'
+        ]
 
 
 class CommunitySectionForm(BaseForm):
@@ -152,7 +201,11 @@ class SelectionCriteriaSectionForm(BaseForm):
 
     class Meta:
         model = AbstractSelectionCriteriaSection
-        exclude = []
+        fields = [
+            'selection_cohesion',
+            'selection_apart',
+            'selection_relevance',
+        ]
 
 
 class FinanceAndDurationSectionForm(BaseForm):
@@ -160,7 +213,14 @@ class FinanceAndDurationSectionForm(BaseForm):
 
     class Meta:
         model = AbstractFinanceAndDurationSection
-        exclude = []
+        fields = [
+            'total_budget',
+            'budget_requested',
+            'major_expenses',
+            'other_sources',
+            'other_sources_secured',
+            'duration'
+        ]
 
 
 class IdeaSketchEditForm(BaseForm):
@@ -168,5 +228,8 @@ class IdeaSketchEditForm(BaseForm):
     class Meta:
         model = models.IdeaSketch
         exclude = [
-            'collaborators_emails', 'how_did_you_hear', 'creator', 'module'
+            'collaborators_emails',
+            'how_did_you_hear',
+            'creator',
+            'module'
         ]
