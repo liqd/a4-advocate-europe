@@ -85,7 +85,7 @@ class IdeaSketchArchived(AbstractIdea, AbstractCollaborationCampSection):
 class Proposal(Idea, AbstractFinanceAndDurationSection,
                AbstractSelectionCriteriaSection):
     idea_sketch_archived = models.OneToOneField(IdeaSketchArchived)
-    is_winner = models.BooleanField(blank=True, default=False)
+    is_winner = models.BooleanField(default=False)
     jury_statement = models.TextField(
         verbose_name='Why this idea?', blank=True)
 
