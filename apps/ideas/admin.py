@@ -4,7 +4,6 @@ from . import models
 
 
 admin.site.register(models.IdeaSketchArchived)
-admin.site.register(models.Proposal)
 admin.site.register(models.Idea)
 
 
@@ -41,3 +40,24 @@ class IdeaSketchAdmin(admin.ModelAdmin):
     ]
 
 admin.site.register(models.IdeaSketch, IdeaSketchAdmin)
+
+
+def set_is_winner_true(modeladmin, request, queryset):
+    queryset.update(is_winner=True)
+set_is_winner_true.short_description = 'Set to winner'
+
+
+def set_is_winner_false(modeladmin, request, queryset):
+    queryset.update(is_winner=False)
+set_is_winner_false.short_description = 'Unset winner'
+
+
+class ProposalAdmin(admin.ModelAdmin):
+    list_display = ['idea_title', 'is_winner']
+    ordering = ['-is_winner', 'idea_title']
+    actions = [
+        set_is_winner_true,
+        set_is_winner_false
+    ]
+
+admin.site.register(models.Proposal, ProposalAdmin)
