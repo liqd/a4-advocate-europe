@@ -13,6 +13,8 @@ from django.views import generic
 from formtools.wizard.views import SessionWizardView
 from rules.contrib.views import PermissionRequiredMixin
 
+from adhocracy4.filters import views as filter_views
+from apps.contrib import filters
 from apps.invites.models import IdeaSketchInvite
 from apps.wizards import mixins as wizard_mixins
 
@@ -274,7 +276,8 @@ class ProposalEditView(
         return self.request.user.is_authenticated()
 
 
-class IdeaListView(generic.ListView):
+class IdeaListView(filter_views.FilteredListView):
     queryset = Idea.objects.annotate_comment_count()
+    filter_set = filters.TopicFilter
     paginator_class = Paginator
     paginate_by = 12
