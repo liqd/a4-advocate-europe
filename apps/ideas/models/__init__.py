@@ -70,6 +70,7 @@ class Idea(AbstractIdea):
 
 class IdeaSketch(Idea, AbstractCollaborationCampSection):
     visit_camp = models.BooleanField(default=False)
+    community_award_winner = models.BooleanField(default=False)
 
     def __str__(self):
         return '{} (Ideasketch)'.format(self.idea_title)
@@ -77,6 +78,7 @@ class IdeaSketch(Idea, AbstractCollaborationCampSection):
 
 class IdeaSketchArchived(AbstractIdea, AbstractCollaborationCampSection):
     visit_camp = models.BooleanField(default=False)
+    community_award_winner = models.BooleanField(default=False)
 
     def __str__(self):
         return '{} (Archived Ideasketch)'.format(self.idea_title)
