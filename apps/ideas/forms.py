@@ -163,6 +163,16 @@ class FinanceAndDurationSectionForm(BaseForm):
         exclude = []
 
 
+class FinishForm(forms.Form):
+    section_name = _('Finish')
+
+    @property
+    def helper(self):
+        helper = crisp.helper.FormHelper()
+        helper.form_tag = False
+        return helper
+
+
 class IdeaSketchEditForm(BaseForm):
 
     class Meta:
