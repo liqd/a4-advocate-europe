@@ -212,4 +212,13 @@ class FinanceAndDurationSectionForm(BaseForm):
             'other_sources',
             'other_sources_secured',
             'duration'
-        ]
+
+
+class FinishForm(forms.Form):
+    section_name = _('Finish')
+
+    @property
+    def helper(self):
+        helper = crisp.helper.FormHelper()
+        helper.form_tag = False
+        return helper

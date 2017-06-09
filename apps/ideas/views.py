@@ -85,6 +85,8 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
     title = _('create an idea')
+    finish_section_text = _('You can add data or edit your idea later.')
+    finish_section_btn = _('Submit your idea!')
 
     def done(self, form_list, **kwargs):
         special_fields = ['accept_conditions', 'collaborators_emails']
@@ -203,6 +205,8 @@ class ProposalCreateWizard(PermissionRequiredMixin,
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
     title = _('create a proposal')
+    finish_section_text = _('You can add data or edit your proposal later.')
+    finish_section_btn = _('Submit your proposal!')
 
     def get_form_initial(self, step):
         initial = self.initial_dict.get(step, {})

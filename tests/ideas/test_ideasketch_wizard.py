@@ -78,16 +78,24 @@ def test_ideasketch_create_wizard(client, user,
             '4-collaboration_camp_benefit': 'We will be very sure afterwards',
         }
 
-        # Form 6 (Collaboration camp)
+        # Form 6 (Community)
         response = client.post(url, data)
         assert response.status_code == 200
-        assert IdeaSketch.objects.all().count() == 1
 
         data = {
             'idea_sketch_create_wizard-current_step': '5',
 
             '5-how_did_you_hear': 'personal_contact',
             '5-accept_conditions': True
+        }
+
+        # Form 7 (Finish)
+        response = client.post(url, data)
+        assert response.status_code == 200
+        assert IdeaSketch.objects.all().count() == 1
+
+        data = {
+            'idea_sketch_create_wizard-current_step': '6',
         }
 
         response = client.post(url, data)
