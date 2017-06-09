@@ -212,6 +212,7 @@ class FinanceAndDurationSectionForm(BaseForm):
             'other_sources',
             'other_sources_secured',
             'duration'
+        ]
 
 
 class FinishForm(forms.Form):
