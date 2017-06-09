@@ -53,6 +53,30 @@ class BaseForm(forms.ModelForm):
         return helper
 
 
+class CollaboratorsEmailsFormMixin:
+    def clean_collaborators_emails(self):
+        from email.utils import getaddresses
+        import re
+
+        value = self.cleaned_data['collaborators_emails'].strip(' ,')
+        addresses = getaddresses([value])
+        errors = []
+
+        for name, address in addresses:
+            if not re.match(r'^.+@[^@]+', address):
+                errors.append(
+                    ValidationError('{msg} ({addr})'.format(
+                        msg=_('Invalid email address'),
+                        addr=address
+                    ))
+                )
+
+        if errors:
+            raise ValidationError(errors)
+
+        return addresses
+
+
 class ApplicantSectionForm(BaseForm):
     section_name = _('Applicant Section')
 
@@ -114,7 +138,7 @@ class CollaborationCampSectionForm(BaseForm):
         exclude = []
 
 
-class CommunitySectionForm(BaseForm):
+class CommunitySectionForm(CollaboratorsEmailsFormMixin, BaseForm):
     section_name = _('Community Information')
     collaborators_emails = forms.CharField(
         required=False,
@@ -132,29 +156,10 @@ class CommunitySectionForm(BaseForm):
         ]
 
     def clean_collaborators_emails(self):
-        from email.utils import getaddresses
-        import re
-
-        value = self.cleaned_data['collaborators_emails'].strip(' ,')
-        addresses = getaddresses([value])
-        errors = []
-
-        for name, address in addresses:
-            if not re.match(r'^.+@[^@]+', address):
-                errors.append(
-                    ValidationError('{msg} ({addr})'.format(
-                        msg=_('Invalid email address'),
-                        addr=address
-                    ))
-                )
+        addresses = super().clean_collaborators_emails()
 
         if len(addresses) > 5:
-            errors.append(
-                ValidationError(_('Maximum 5 collaborators allowed'))
-            )
-
-        if errors:
-            raise ValidationError(errors)
+                raise ValidationError(_('Maximum 5 collaborators allowed'))
 
         return addresses
 
