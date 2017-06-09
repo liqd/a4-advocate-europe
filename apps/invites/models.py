@@ -12,7 +12,7 @@ from . import emails
 
 class InviteManager(models.Manager):
     def invite(self, creator, subject, email):
-        invite = super().create(subject=subject, creator=creator, email=email)
+        invite = self.create(subject=subject, creator=creator, email=email)
         emails.InviteEmail.send(invite)
         return invite
 
