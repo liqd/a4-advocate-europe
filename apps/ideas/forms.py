@@ -35,7 +35,7 @@ COLLABORATORS_HELP = _('Here you can insert the email addresses of up to 5 '
 class BaseForm(forms.ModelForm):
     @property
     def helper(self):
-        helper = crisp.helper.FormHelper()
+        helper = crisp.helper.FormHelper(self)
         helper.form_tag = False
         return helper
 
@@ -62,8 +62,7 @@ class PartnersSectionForm(BaseForm):
 
     @property
     def helper(self):
-        helper = crisp.helper.FormHelper()
-        helper.form_tag = False
+        helper = super().helper
         helper.render_unmentioned_fields = True
         helper.layout = crisp.bootstrap.Accordion(
             *[
