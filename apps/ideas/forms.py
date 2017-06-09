@@ -266,6 +266,7 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
 
     def clean(self):
         super().clean()
+
         addresses = self.cleaned_data.get('collaborators_emails', [])
         invites = self.cleaned_data.get('invites', [])
         collaborators = self.cleaned_data.get('collaborators', [])
@@ -291,7 +292,7 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
         if collaborator_count > 5:
             raise ValidationError(_('Maximum 5 collaborators allowed'))
 
-    def save(self):
+    def save(self, commit=True):
         """
         Deletes invites and collaborators and adds new invites of instance.
 
@@ -299,6 +300,7 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
         current user as creator for the invites. There for no user needs to
         passed and it can be used in the edit view, just as all other forms.
         """
+        super().save(commit)
 
         collaborators = self.instance.collaborators.exclude(
             username__in=self.cleaned_data.get('collaborators', [])
