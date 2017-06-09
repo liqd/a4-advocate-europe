@@ -8,7 +8,7 @@ from . import widgets
 
 
 class TopicFilterWidget(widgets.DropdownLinkWidget):
-    label = _('topic')
+    label = _('organisation_status')
 
     def __init__(self, attrs=None):
         choices = (models.abstracts.applicant_section.
@@ -34,7 +34,7 @@ class TopicFilter(DefaultsFilterSet):
     }
 
     topic = django_filters.ChoiceFilter(
-                    name='topics',
+                    name='organisation_status',
                     widget=TopicFilterWidget
                 )
 
