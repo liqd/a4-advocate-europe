@@ -11,18 +11,9 @@ class TopicFilterWidget(widgets.DropdownLinkWidget):
     label = _('topic')
 
     def __init__(self, attrs=None):
-        choices = (
-            ('all', _('all'))
-            ('democracy_participation', _('Democracy and participation')),
-            ('arts_cultural_activities',
-                _('Arts and (inter-)cultural activities')),
-            ('environment', _('Environment')),
-            ('social_inclusion', _('Social inclusion')),
-            ('migration', _('Migration')),
-            ('communities', _('Communities')),
-            ('urban_development', _('Urban development')),
-            ('education', _('Education'))
-        )
+        choices = (models.abstracts.applicant_section.
+                   ORGANISATION_STATUS_CHOICES)
+
         super().__init__(attrs, choices)
 
 
@@ -38,7 +29,8 @@ class DefaultsFilterSet(django_filters.FilterSet):
 class TopicFilter(DefaultsFilterSet):
 
     defaults = {
-        'idea_topics': 'environment'
+        # 'idea_topics': 'environment'
+        'organisation_status': 'non_profit'
     }
 
     topic = django_filters.ChoiceFilter(
@@ -48,4 +40,5 @@ class TopicFilter(DefaultsFilterSet):
 
     class Meta:
         model = models.Idea
-        fields = ['idea_topics']
+        # fields = ['idea_topics']
+        fields = ['organisation_status']
