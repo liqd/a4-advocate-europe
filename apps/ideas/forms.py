@@ -46,6 +46,8 @@ INVITES_EDIT_HELP = _('These email addresses have received invites to '
 
 
 class BaseForm(forms.ModelForm):
+    do_not_call_in_templates = True  # important when reading section name
+
     @property
     def helper(self):
         helper = crisp.helper.FormHelper(self)
