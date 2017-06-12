@@ -1,44 +1,42 @@
 import django_filters
-from django.http import QueryDict
 from django.utils.translation import ugettext_lazy as _
 
+from adhocracy4.filters.filters import DefaultsFilterSet
 from apps.ideas import models
 
 from . import widgets
 
 
+class OrgaFilterWidget(widgets.DropdownLinkWidget):
+    label = _('bli bla blub')
+
+
 class TopicFilterWidget(widgets.DropdownLinkWidget):
-    label = _('organisation_status')
+    label = _('idea_topics')
 
     def __init__(self, attrs=None):
-        choices = (models.abstracts.applicant_section.
-                   ORGANISATION_STATUS_CHOICES)
+        choices = (('', _('Any')),)
+        choices += (models.abstracts.idea_section.
+                    IDEA_TOPIC_CHOICES)
 
         super().__init__(attrs, choices)
 
 
-class DefaultsFilterSet(django_filters.FilterSet):
+class IdeaFilterSet(DefaultsFilterSet):
 
-    def __init__(self, query_data, *args, **kwargs):
-        data = QueryDict(mutable=True)
-        data.update(self.defaults)
-        data.update(query_data)
-        super().__init__(data, *args, **kwargs)
+    defaults = {}
 
+    idea_topics = django_filters.CharFilter(
+        lookup_expr='icontains',
+        widget=TopicFilterWidget
+    )
 
-class TopicFilter(DefaultsFilterSet):
-
-    defaults = {
-        # 'idea_topics': 'environment'
-        'organisation_status': 'non_profit'
-    }
-
-    topic = django_filters.ChoiceFilter(
-                    name='organisation_status',
-                    widget=TopicFilterWidget
-                )
+    organisation_status = django_filters.ChoiceFilter(
+        choices=(models.abstracts.applicant_section.
+                 ORGANISATION_STATUS_CHOICES),
+        widget=OrgaFilterWidget
+    )
 
     class Meta:
         model = models.Idea
-        # fields = ['idea_topics']
-        fields = ['organisation_status']
+        fields = ['idea_topics', 'organisation_status']
