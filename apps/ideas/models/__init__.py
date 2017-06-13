@@ -23,7 +23,9 @@ from .abstracts.selection_criteria_section import \
 
 
 class IdeaSketchQuerySet(query.RateableQuerySet, query.CommentableQuerySet):
-    pass
+
+    def annotate_visit_camp(self):
+        return self.annotate(visit_camp=self.ideasketch.visit_camp)
 
 
 class AbstractIdea(AbstractApplicantSection,
