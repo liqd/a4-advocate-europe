@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import django_filters
 from django.utils.translation import ugettext_lazy as _
 
@@ -23,8 +25,21 @@ class TopicFilterWidget(widgets.DropdownLinkWidget):
         super().__init__(attrs, choices)
 
 
-class ProjectFilterWidget(widgets.DropdownLinkWidget):
+class YearFilterWidget(widgets.DropdownLinkWidget):
     label = _('Year')
+
+    def __init__(self, attrs=None):
+        choices = (('', _('Any')),)
+        now = datetime.now().year
+        years = []
+        try:
+            for project in Project.objects.all():
+                years += [project.created.year]
+        except Project.DoesNotExist:
+            years = [now]
+        for year in years:
+            choices += (year, year),
+        super().__init__(attrs, choices)
 
 
 class IdeaFilterSet(DefaultsFilterSet):
@@ -33,12 +48,13 @@ class IdeaFilterSet(DefaultsFilterSet):
 
     idea_topics = django_filters.CharFilter(
         lookup_expr='icontains',
-        widget=TopicFilterWidget
+        widget=TopicFilterWidget,
     )
 
-    project_year = django_filters.ModelChoiceFilter(
-        queryset=Project.objects.order_by('name'),
-        widget=ProjectFilterWidget,
+    project_year = django_filters.NumberFilter(
+        name='created',
+        lookup_expr='year',
+        widget=YearFilterWidget,
     )
 
     def what_status(self, queryset, name, value):
@@ -48,8 +64,6 @@ class IdeaFilterSet(DefaultsFilterSet):
             qs = queryset.filter(proposal__isnull=True)
         elif value == 'proposal':
             qs = queryset.filter(proposal__isnull=False)
-        elif value == 'camp':
-            qs = queryset.filter(visit_camp=True)
         else:
             qs = queryset.all()
         return qs
