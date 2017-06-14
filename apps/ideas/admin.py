@@ -5,7 +5,7 @@ from . import models
 
 admin.site.register(models.IdeaSketchArchived)
 admin.site.register(models.Proposal)
-admin.site.register(models.Idea)
+admin.site.register(models.IdeaSketch)
 
 
 def set_visit_camp_true(modeladmin, request, queryset):
@@ -18,9 +18,9 @@ def set_visit_camp_false(modeladmin, request, queryset):
 set_visit_camp_false.short_description = 'Disallow to add proposal'
 
 
-class IdeaSketchAdmin(admin.ModelAdmin):
-    list_display = ['idea_title', 'visit_camp']
-    ordering = ['-visit_camp', 'idea_title']
-    actions = [set_visit_camp_true, set_visit_camp_false]
+class IdeaAdmin(admin.ModelAdmin):
+    list_display = ['idea_title']
+    ordering = ['idea_title']
+    actions = []
 
-admin.site.register(models.IdeaSketch, IdeaSketchAdmin)
+admin.site.register(models.Idea, IdeaAdmin)
