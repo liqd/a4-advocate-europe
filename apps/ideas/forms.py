@@ -1,9 +1,10 @@
+from itertools import chain
+
 import crispy_forms as crisp
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from . import models
 from .models.abstracts.applicant_section import AbstractApplicantSection
 from .models.abstracts.collaboration_camp_section import \
     AbstractCollaborationCampSection
@@ -45,7 +46,18 @@ class ApplicantSectionForm(BaseForm):
 
     class Meta:
         model = AbstractApplicantSection
-        exclude = []
+        fields = [
+            'first_name',
+            'last_name',
+            'organisation_status',
+            'organisation_status_extra',
+            'organisation_name',
+            'organisation_website',
+            'organisation_country',
+            'organisation_city',
+            'contact_email',
+            'year_of_registration'
+        ]
 
 
 class PartnersSectionForm(BaseForm):
@@ -58,7 +70,14 @@ class PartnersSectionForm(BaseForm):
 
     class Meta:
         model = AbstractPartnersSection
-        exclude = []
+        fields = list(
+            chain.from_iterable((
+                'partner_organisation_{}_name'.format(index),
+                'partner_organisation_{}_website'.format(index),
+                'partner_organisation_{}_country'.format(index)
+            ) for index in range(1, 4))
+        )
+        fields.append('partners_more_info')
 
     @property
     def helper(self):
@@ -83,7 +102,17 @@ class IdeaSectionForm(BaseForm):
 
     class Meta:
         model = AbstractIdeaSection
-        exclude = []
+        fields = [
+            'idea_title',
+            'idea_subtitle',
+            'idea_pitch',
+            'idea_image',
+            'idea_topics',
+            'idea_topics_other',
+            'idea_location',
+            'idea_location_specify',
+            'idea_location_ruhr'
+        ]
 
 
 class ImpactSectionForm(BaseForm):
@@ -91,7 +120,14 @@ class ImpactSectionForm(BaseForm):
 
     class Meta:
         model = AbstractImpactSection
-        exclude = []
+        fields = [
+            'challenge',
+            'outcome',
+            'plan',
+            'importance',
+            'target_group',
+            'members'
+        ]
 
 
 class CollaborationCampSectionForm(BaseForm):
@@ -99,7 +135,12 @@ class CollaborationCampSectionForm(BaseForm):
 
     class Meta:
         model = AbstractCollaborationCampSection
-        exclude = []
+        fields = [
+            'collaboration_camp_option',
+            'collaboration_camp_represent',
+            'collaboration_camp_email',
+            'collaboration_camp_benefit'
+        ]
 
 
 class CommunitySectionForm(BaseForm):
@@ -152,7 +193,11 @@ class SelectionCriteriaSectionForm(BaseForm):
 
     class Meta:
         model = AbstractSelectionCriteriaSection
-        exclude = []
+        fields = [
+            'selection_cohesion',
+            'selection_apart',
+            'selection_relevance',
+        ]
 
 
 class FinanceAndDurationSectionForm(BaseForm):
@@ -160,7 +205,14 @@ class FinanceAndDurationSectionForm(BaseForm):
 
     class Meta:
         model = AbstractFinanceAndDurationSection
-        exclude = []
+        fields = [
+            'total_budget',
+            'budget_requested',
+            'major_expenses',
+            'other_sources',
+            'other_sources_secured',
+            'duration'
+        ]
 
 
 class FinishForm(forms.Form):
@@ -171,12 +223,3 @@ class FinishForm(forms.Form):
         helper = crisp.helper.FormHelper()
         helper.form_tag = False
         return helper
-
-
-class IdeaSketchEditForm(BaseForm):
-
-    class Meta:
-        model = models.IdeaSketch
-        exclude = [
-            'collaborators_emails', 'how_did_you_hear', 'creator', 'module'
-        ]
