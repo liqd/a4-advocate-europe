@@ -1,5 +1,3 @@
-from datetime import datetime
-
 import django_filters
 from django.utils.translation import ugettext_lazy as _
 
@@ -15,31 +13,31 @@ class StatusFilterWidget(widgets.DropdownLinkWidget):
 
 
 class TopicFilterWidget(widgets.DropdownLinkWidget):
-    label = _('Topics')
+    label = _('Topic')
 
     def __init__(self, attrs=None):
-        choices = (('', _('Any')),)
+        choices = (('', _('All')),)
         choices += (models.abstracts.idea_section.
                     IDEA_TOPIC_CHOICES)
 
         super().__init__(attrs, choices)
 
 
-class YearFilterWidget(widgets.DropdownLinkWidget):
-    label = _('Year')
+class ProjectFilterWidget(widgets.DropdownLinkWidget):
+    label = _('Project')
 
-    def __init__(self, attrs=None):
-        choices = (('', _('Any')),)
-        now = datetime.now().year
-        years = []
-        try:
-            for project in Project.objects.all():
-                years += [project.created.year]
-        except Project.DoesNotExist:
-            years = [now]
-        for year in years:
-            choices += (year, year),
-        super().__init__(attrs, choices)
+
+def make_project_choices():
+    choices = []
+    projects = []
+    try:
+        for project in Project.objects.all():
+            projects += [project.name]
+    except Project.DoesNotExist:
+        pass
+    for project in projects:
+        choices += (project, project),
+    return choices
 
 
 class IdeaFilterSet(DefaultsFilterSet):
@@ -51,30 +49,37 @@ class IdeaFilterSet(DefaultsFilterSet):
         widget=TopicFilterWidget,
     )
 
-    project_year = django_filters.NumberFilter(
-        name='created',
-        lookup_expr='year',
-        widget=YearFilterWidget,
+    def what_project(self, queryset, name, value):
+        qs = queryset.filter(module__project__name=value)
+        return qs
+
+    project = django_filters.ChoiceFilter(
+        method='what_project',
+        choices=make_project_choices(),
+        widget=ProjectFilterWidget,
     )
 
     def what_status(self, queryset, name, value):
-        if value == 'all':
-            qs = queryset.all()
-        elif value == 'idea_sketch':
-            qs = queryset.filter(proposal__isnull=True)
+        if value == 'idea_sketch':
+            qs = queryset.filter(is_proposal=False)
         elif value == 'proposal':
-            qs = queryset.filter(proposal__isnull=False)
+            qs = queryset.filter(is_proposal=True)
+        elif value == 'community_award':
+            qs = queryset.filter(community_award_winner=True)
+        elif value == 'camp':
+            qs = queryset.filter(visit_camp=True)
+        elif value == 'winner':
+            qs = queryset.filter(is_winner=True)
         else:
             qs = queryset.all()
         return qs
 
     status = django_filters.ChoiceFilter(
-        name='idea_subtitle',
         method='what_status',
         choices=(
             ('idea_sketch', _('Idea Sketch')),
             ('community_award', _('Community Award Winner')),
-            ('camp', _('Invited to Camp')),
+            ('camp', _('Invited to Collaboration Camp')),
             ('proposal', _('Proposal')),
             ('winner', _('Winner'))
         ),
@@ -83,4 +88,4 @@ class IdeaFilterSet(DefaultsFilterSet):
 
     class Meta:
         model = models.Idea
-        fields = ['status', 'idea_topics', 'project_year']
+        fields = ['project', 'status', 'idea_topics']
