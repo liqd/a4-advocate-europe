@@ -224,8 +224,10 @@ class ProposalCreateWizard(PermissionRequiredMixin,
                     getattr(self.idea, field.name))
         idea_sketch_archive.save()
         idea_sketch_archive.created = self.idea.created
-        idea_sketch_archive.visit_camp = self.idea.ideasketch.visit_camp
         idea_sketch_archive.save()
+
+        self.idea.is_proposal = True
+        self.idea.save()
 
         special_fields = ['accept_conditions', 'collaborators_emails']
 
