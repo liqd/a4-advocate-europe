@@ -8,12 +8,19 @@
         <h1>{% trans "All ideas" %}</h1>
     </div>
     <div class="container">
-        {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
-        {% if can_export %}
         <div class="idealist-controls">
-            <a class="btn btn-primary" href="{% url 'idea-export' %}">{% trans "export" %}</a>
+            <div class="filter-bar">
+                {% for field in view.filter.form %}
+                {% if field.name != 'ordering' %}
+                {{ field }}
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
+            {% if can_export %}
+                <a class="btn btn-primary" href="{% url 'idea-export' %}">{% trans "export" %}</a>
+            {% endif %}
         </div>
-        {% endif %}
         <div class="idealist-list">
             {% for idea in idea_list %}
                 <div class="idealist-item">
