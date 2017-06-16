@@ -153,7 +153,8 @@
     }
 
     &.active {
-        background-color: $ae-light-gray;
+        background-color: $ae-light-blue;
+        box-shadow: none;
 
         a {
             color: $gray-base;
