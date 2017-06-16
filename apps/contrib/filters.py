@@ -40,6 +40,10 @@ def make_project_choices():
     return choices
 
 
+class OrderingFilterWidget(widgets.DropdownLinkWidget):
+    label = _('Order by')
+
+
 class IdeaFilterSet(DefaultsFilterSet):
 
     defaults = {}
@@ -86,6 +90,20 @@ class IdeaFilterSet(DefaultsFilterSet):
         widget=StatusFilterWidget
     )
 
+    ordering = django_filters.OrderingFilter(
+        fields=(
+            ('-created', 'newest'),
+            ('comment_count', 'comments'),
+            ('idea_title', 'title'),
+        ),
+        choices=(
+            ('newest', _('Newest')),
+            ('comments', _('Comments')),
+            ('title', _('Idea Title')),
+        ),
+        widget=OrderingFilterWidget
+    )
+
     class Meta:
         model = models.Idea
-        fields = ['project', 'status', 'idea_topics']
+        fields = ['project', 'status', 'idea_topics', 'ordering']

@@ -11,9 +11,7 @@
         <div class="idealist-controls">
             <div class="filter-bar">
                 {% for field in view.filter.form %}
-                {% if field.name != 'ordering' %}
                 {{ field }}
-                {% endif %}
                 {% endfor %}
             </div>
             {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
