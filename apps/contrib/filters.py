@@ -42,6 +42,7 @@ def make_project_choices():
 
 class OrderingFilterWidget(widgets.DropdownLinkWidget):
     label = _('Sorting')
+    right = True
 
 
 class IdeaFilterSet(DefaultsFilterSet):
@@ -90,42 +91,19 @@ class IdeaFilterSet(DefaultsFilterSet):
         widget=StatusFilterWidget
     )
 
-    def order(self, queryset, name, value):
-        qs = queryset.annotate_comment_count()
-        if value[0] == 'comment_count':
-            qs = qs.order_by('-comment_count')
-        else:
-            qs = qs.order_by(value[0])
-        return qs
-
     ordering = django_filters.OrderingFilter(
-        method='order',
         fields=(
-            ('created', 'created'),
-            ('comment_count', 'comment_count'),
-            ('idea_title', 'idea_title'),
+            ('-created', 'newest'),
+            ('-comment_count', 'comments'),
+            ('idea_title', 'title'),
         ),
         choices=(
-            ('created', _('Newest')),
-            ('comment_count', _('Comments')),
-            ('idea_title', _('Idea Title')),
+            ('newest', _('Newest')),
+            ('comments', _('Comments')),
+            ('title', _('Idea Title')),
         ),
         widget=OrderingFilterWidget
     )
-
-    # ordering = django_filters.OrderingFilter(
-    #     fields=(
-    #         ('-created', 'newest'),
-    #         ('comment_count', 'comments'),
-    #         ('idea_title', 'title'),
-    #     ),
-    #     choices=(
-    #         ('newest', _('Newest')),
-    #         ('comments', _('Comments')),
-    #         ('title', _('Idea Title')),
-    #     ),
-    #     widget=OrderingFilterWidget
-    # )
 
     class Meta:
         model = models.Idea

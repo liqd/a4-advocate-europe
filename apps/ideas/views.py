@@ -283,7 +283,11 @@ class ProposalEditView(
 
 
 class IdeaListView(filter_views.FilteredListView):
-    queryset = Idea.objects.annotate_comment_count()
+    model = Idea
     paginator_class = Paginator
     paginate_by = 12
     filter_set = filters.IdeaFilterSet
+
+    def get_queryset(self):
+        queryset = super().get_queryset().annotate_comment_count()
+        return queryset
