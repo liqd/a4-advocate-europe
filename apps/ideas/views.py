@@ -16,7 +16,7 @@ from rules.contrib.views import PermissionRequiredMixin
 from adhocracy4.filters import views as filter_views
 
 from apps.contrib import filters
-from apps.invites.models import IdeaSketchInvite
+from apps.invites.models import IdeaInvite
 from apps.wizards import mixins as wizard_mixins
 
 from . import forms, mixins
