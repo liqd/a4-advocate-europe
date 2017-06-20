@@ -270,19 +270,6 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
         super().__init__(*args, **kwargs)
 
         if self.instance:
-            collaborators = self.collaborator_names
-            if collaborators:
-                self.fields['collaborators'] = forms.MultipleChoiceField(
-                    required=False,
-                    help_text=COLLABORATORS_EDIT_HELP,
-                    label=COLLABORATORS_EDIT_TITLE,
-                    choices=[
-                        (c, c) for c in collaborators
-                    ],
-                    initial=collaborators,
-                    widget=forms.CheckboxSelectMultiple
-                )
-
             invites = self.invite_emails
             if invites:
                 self.fields['invites'] = forms.MultipleChoiceField(
@@ -295,8 +282,22 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
                     initial=invites,
                     widget=forms.CheckboxSelectMultiple
                 )
-            self.fields.move_to_end('invites', last=False)
-            self.fields.move_to_end('collaborators', last=False)
+                self.fields.move_to_end('invites', last=False)
+
+            collaborators = self.collaborator_names
+            if collaborators:
+                self.fields['collaborators'] = forms.MultipleChoiceField(
+                    required=False,
+                    help_text=COLLABORATORS_EDIT_HELP,
+                    label=COLLABORATORS_EDIT_TITLE,
+                    choices=[
+                        (c, c) for c in collaborators
+                    ],
+                    initial=collaborators,
+                    widget=forms.CheckboxSelectMultiple
+                )
+                self.fields.move_to_end('collaborators', last=False)
+
             self.fields.move_to_end('collaborators_emails', last=False)
 
     @property
