@@ -9,10 +9,21 @@
     </div>
     <div class="container">
         <div class="idealist-controls">
-            <div class="filter-bar">
+            <div class="filter-bar idealist-filter">
+                <div>
                 {% for field in view.filter.form %}
-                {{ field }}
+                {% if field.name != 'ordering' %}
+                    {{ field }}
+                {% endif %}
                 {% endfor %}
+                </div>
+                <div>
+                {% for field in view.filter.form %}
+                {% if field.name == 'ordering' %}
+                    {{ field }}
+                {% endif %}
+                {% endfor %}
+                </div>
             </div>
             {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
             {% if can_export %}

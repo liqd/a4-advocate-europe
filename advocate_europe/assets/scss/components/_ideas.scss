@@ -1,12 +1,63 @@
 .idealist {
     .idealist-controls {
-        padding: rem(5px) rem(5px) 0 rem(5px);
+        // padding: rem(5px) rem(5px) 0 rem(5px);
+    }
+}
+
+.idealist-filter {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+
+    @media screen and (max-width: $screen-sm-min) {
+        justify-content: center;
+    }
+
+    .filter-group {
+        margin: rem(5px);
+    }
+
+    label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: $gray-dark;
+    }
+
+    .btn {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+
+        i {
+            margin-left: rem(8px);
+        }
+
+        min-width: rem(170px);
+        height: rem(30px);
+        border-radius: 5px;
+        background-color: #fff;
+        border: solid 1px $ae-light-gray-shadow;
+        color: $gray-dark;
+
+        @media screen and (max-width: $screen-sm-min) {
+            min-width: rem(130px);
+        }
+    }
+
+    .pull-right {
+
     }
 }
 
 .idealist-no-entry {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     margin-top: rem(50px);
-    text-align: center;
     min-height: rem(150px);
 }
 

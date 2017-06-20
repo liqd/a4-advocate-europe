@@ -47,7 +47,9 @@ class OrderingFilterWidget(widgets.DropdownLinkWidget):
 
 class IdeaFilterSet(DefaultsFilterSet):
 
-    defaults = {}
+    defaults = {
+        'ordering': 'newest'
+    }
 
     idea_topics = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -98,7 +100,7 @@ class IdeaFilterSet(DefaultsFilterSet):
             ('idea_title', 'title'),
         ),
         choices=(
-            ('newest', _('Newest')),
+            ('newest', _('Most Recent')),
             ('comments', _('Comments')),
             ('title', _('Idea Title')),
         ),
