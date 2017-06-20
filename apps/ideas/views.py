@@ -268,7 +268,6 @@ class ProposalEditView(
         forms.SelectionCriteriaSectionForm,
         forms.FinanceAndDurationSectionForm,
         forms.CommunitySectionEditForm,
-        forms.CommunitySectionEditForm,
     ]
 
     @property
