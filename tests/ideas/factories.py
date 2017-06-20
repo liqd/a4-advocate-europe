@@ -29,7 +29,10 @@ class IdeaSketchFactory(factory.django.DjangoModelFactory):
     module = factory.SubFactory(ModuleFactory)
 
     @factory.post_generation
-    def initiators(self, create, extracted, **kwargs):
+    def collaborators(self, create, extracted, **kwargs):
+        if extracted == []:
+            return
+
         if not extracted:
             user = UserFactory()
             self.collaborators.add(user)
