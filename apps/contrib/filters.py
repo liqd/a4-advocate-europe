@@ -27,19 +27,6 @@ class ProjectFilterWidget(widgets.DropdownLinkWidget):
     label = _('Project')
 
 
-def make_project_choices():
-    choices = []
-    projects = []
-    try:
-        for project in Project.objects.all():
-            projects += [project.name]
-    except Project.DoesNotExist:
-        pass
-    for project in projects:
-        choices += (project, project),
-    return choices
-
-
 class OrderingFilterWidget(widgets.DropdownLinkWidget):
     label = _('Sorting')
     right = True
@@ -56,13 +43,9 @@ class IdeaFilterSet(DefaultsFilterSet):
         widget=TopicFilterWidget,
     )
 
-    def what_project(self, queryset, name, value):
-        qs = queryset.filter(module__project__name=value)
-        return qs
-
-    project = django_filters.ChoiceFilter(
-        method='what_project',
-        choices=make_project_choices(),
+    project = django_filters.ModelChoiceFilter(
+        name='module__project__name',
+        queryset=Project.objects.all(),
         widget=ProjectFilterWidget,
     )
 
