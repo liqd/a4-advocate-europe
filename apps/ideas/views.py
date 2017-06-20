@@ -13,7 +13,10 @@ from django.views import generic
 from formtools.wizard.views import SessionWizardView
 from rules.contrib.views import PermissionRequiredMixin
 
-from apps.invites.models import IdeaInvite
+from adhocracy4.filters import views as filter_views
+
+from apps.contrib import filters
+from apps.invites.models import IdeaSketchInvite
 from apps.wizards import mixins as wizard_mixins
 
 from . import forms, mixins
@@ -85,6 +88,8 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
     title = _('create an idea')
+    finish_section_text = _('You can add data or edit your idea later.')
+    finish_section_btn = _('Submit your idea!')
 
     def done(self, form_list, **kwargs):
         special_fields = ['accept_conditions', 'collaborators_emails']
@@ -204,6 +209,8 @@ class ProposalCreateWizard(PermissionRequiredMixin,
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
     title = _('create a proposal')
+    finish_section_text = _('You can add data or edit your proposal later.')
+    finish_section_btn = _('Submit your proposal!')
 
     def get_form_initial(self, step):
         initial = self.initial_dict.get(step, {})
@@ -221,8 +228,10 @@ class ProposalCreateWizard(PermissionRequiredMixin,
                     getattr(self.idea, field.name))
         idea_sketch_archive.save()
         idea_sketch_archive.created = self.idea.created
-        idea_sketch_archive.visit_camp = self.idea.ideasketch.visit_camp
         idea_sketch_archive.save()
+
+        self.idea.is_proposal = True
+        self.idea.save()
 
         special_fields = ['accept_conditions', 'collaborators_emails']
 
@@ -275,7 +284,8 @@ class ProposalEditView(
         return self.request.user.is_authenticated()
 
 
-class IdeaListView(generic.ListView):
+class IdeaListView(filter_views.FilteredListView):
     queryset = Idea.objects.annotate_comment_count()
+    filter_set = filters.IdeaFilterSet
     paginator_class = Paginator
     paginate_by = 12

@@ -16,6 +16,22 @@
     .breadcrumps {
         max-width: rem(670px);
     }
+
+    .wizard-submit-form {
+        font-size: rem(18px);
+
+        .wizard-bold {
+            font-weight: bold;
+        }
+    }
+
+    .wizard-submit-btn {
+        padding: rem(12px) rem(24px);
+        margin-top: rem(10px);
+        margin-bottom: rem(10px);
+        font-size: rem(18px);
+        font-weight: bold;
+    }
 }
 
 

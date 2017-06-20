@@ -3,8 +3,8 @@ from django.conf.urls import url
 from . import views
 from .forms import (ApplicantSectionForm, CollaborationCampSectionForm,
                     CommunitySectionForm, FinanceAndDurationSectionForm,
-                    IdeaSectionForm, ImpactSectionForm, PartnersSectionForm,
-                    SelectionCriteriaSectionForm)
+                    FinishForm, IdeaSectionForm, ImpactSectionForm,
+                    PartnersSectionForm, SelectionCriteriaSectionForm)
 
 urlpatterns = [
     url(r'create/module/(?P<slug>[-\w_]+)/$',
@@ -12,7 +12,7 @@ urlpatterns = [
             [ApplicantSectionForm, PartnersSectionForm,
              IdeaSectionForm, ImpactSectionForm,
              CollaborationCampSectionForm,
-             CommunitySectionForm]), name='idea-sketch-create'),
+             CommunitySectionForm, FinishForm]), name='idea-sketch-create'),
     url(r'^archived/(?P<slug>[-\w_]+)/$',
         views.IdeaSketchArchivedDetailView.as_view(),
         name='idea-sketch-archived-detail'),
@@ -26,7 +26,7 @@ urlpatterns = [
         views.ProposalCreateWizard.as_view(
             [ApplicantSectionForm, PartnersSectionForm,
              IdeaSectionForm, ImpactSectionForm, SelectionCriteriaSectionForm,
-             FinanceAndDurationSectionForm, CommunitySectionForm]
+             FinanceAndDurationSectionForm, CommunitySectionForm, FinishForm]
         ), name='idea-sketch-add-proposal'),
     url(r'^(?P<slug>[-\w_]+)/proposal/edit/$',
         views.ProposalEditView.as_view(), name='proposal-update'),

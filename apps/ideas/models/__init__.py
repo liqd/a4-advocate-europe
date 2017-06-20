@@ -47,6 +47,10 @@ class AbstractIdea(AbstractApplicantSection,
 
 
 class Idea(AbstractIdea):
+    is_proposal = models.BooleanField(default=False)
+    visit_camp = models.BooleanField(default=False)
+    is_winner = models.BooleanField(default=False)
+    community_award_winner = models.BooleanField(default=False)
     ratings = GenericRelation(rating_models.Rating,
                               related_query_name='idea_sketch',
                               object_id_field='object_pk')
@@ -69,14 +73,12 @@ class Idea(AbstractIdea):
 
 
 class IdeaSketch(Idea, AbstractCollaborationCampSection):
-    visit_camp = models.BooleanField(default=False)
 
     def __str__(self):
         return '{} (Ideasketch)'.format(self.idea_title)
 
 
 class IdeaSketchArchived(AbstractIdea, AbstractCollaborationCampSection):
-    visit_camp = models.BooleanField(default=False)
 
     def __str__(self):
         return '{} (Archived Ideasketch)'.format(self.idea_title)
@@ -85,7 +87,6 @@ class IdeaSketchArchived(AbstractIdea, AbstractCollaborationCampSection):
 class Proposal(Idea, AbstractFinanceAndDurationSection,
                AbstractSelectionCriteriaSection):
     idea_sketch_archived = models.OneToOneField(IdeaSketchArchived)
-    is_winner = models.BooleanField(blank=True, default=False)
     jury_statement = models.TextField(
         verbose_name='Why this idea?', blank=True)
 
