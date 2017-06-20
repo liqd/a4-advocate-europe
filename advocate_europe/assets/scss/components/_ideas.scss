@@ -1,21 +1,24 @@
 .idealist {
     .idealist-controls {
-        // padding: rem(5px) rem(5px) 0 rem(5px);
+        padding: rem(5px) rem(5px) 0 rem(5px);
+
+        .btn-primary {
+            margin: rem(5px) rem(5px) rem(5px) 0;
+        }
     }
 }
 
 .idealist-filter {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-
     @media screen and (max-width: $screen-sm-min) {
         justify-content: center;
     }
 
-    .filter-group {
-        margin: rem(5px);
+    .btn-group {
+        margin: rem(5px) rem(5px) rem(5px) 0;
+    }
+
+    .pull-right {
+        margin-right: rem(20px);
     }
 
     label {
@@ -26,7 +29,7 @@
         color: $gray-dark;
     }
 
-    .btn {
+    .btn-group .btn {
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
@@ -43,13 +46,14 @@
         border: solid 1px $ae-light-gray-shadow;
         color: $gray-dark;
 
-        @media screen and (max-width: $screen-sm-min) {
+        @media screen and (max-width: $screen-md-min) {
             min-width: rem(130px);
         }
     }
 
-    .pull-right {
-
+    .idealist-search .btn {
+        border-radius: 5px;
+        min-width: rem(270px);
     }
 }
 
