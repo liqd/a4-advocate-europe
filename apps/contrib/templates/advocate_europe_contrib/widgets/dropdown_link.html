@@ -1,19 +1,18 @@
-<div class="filter-group">
+<div class="filter-group btn-group {% if right %}pull-right{% endif %}">
     <label for="{{ id }}">
-        {{ label }}:
+        {{ label }}
     </label>
-    <div class="dropdown" {{ attrs }}>
-        <button
-            type="button"
-            class="dropdown-toggle btn"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            id="{{ id }}"
-        >
-            {{ value_label }}
-            <i class="fa fa-caret-down" aria-hidden="true"></i>
-        </button>
-        {{ options }}
-    </div>
+    <br>
+    <button
+        type="button"
+        class="btn btn-default btn-filter-group dropdown-toggle"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+        id="{{ id }}"
+    >
+        {{ value_label }}
+        <i class="fa fa-caret-down" aria-hidden="true"></i>
+    </button>
+    {{ options }}
 </div>

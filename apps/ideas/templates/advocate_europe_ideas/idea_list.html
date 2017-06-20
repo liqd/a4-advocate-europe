@@ -9,11 +9,22 @@
     </div>
     <div class="container">
         <div class="idealist-controls">
-            <div class="filter-bar">
+            <div class="filter-bar idealist-filter clearfix">
+                <div class="idealist-search btn-group">
+                    <label for="{{ id }}">
+                        Search
+                    </label>
+                    <br>
+                    <button
+                        type="button"
+                        class="btn btn-default btn-filter-group"
+                    >
+                        Placeholder for freetextfilter
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>
                 {% for field in view.filter.form %}
-                {% if field.name != 'ordering' %}
-                {{ field }}
-                {% endif %}
+                    {{ field }}
                 {% endfor %}
             </div>
             {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
@@ -21,6 +32,12 @@
                 <a class="btn btn-primary" href="{% url 'idea-export' %}">{% trans "export" %}</a>
             {% endif %}
         </div>
+        <!-- No idea might exist for the chosen filters -->
+        {% if not idea_list %}
+            <div class="idealist-no-entry">
+                <h4>{% trans "Sorry, no ideas exist for the chosen filters." %}</h4>
+            </div>
+        {% endif %}
         <div class="idealist-list">
             {% for idea in idea_list %}
                 <div class="idealist-item">
