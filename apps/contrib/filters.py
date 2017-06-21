@@ -5,6 +5,7 @@ from adhocracy4.filters.filters import DefaultsFilterSet
 from adhocracy4.projects.models import Project
 from apps.ideas import models
 
+
 from . import widgets
 
 
@@ -87,6 +88,7 @@ class IdeaFilterSet(DefaultsFilterSet):
             ('comments', _('Comments')),
             ('title', _('Idea Title')),
         ),
+        empty_label=None,
         widget=OrderingFilterWidget
     )
 
