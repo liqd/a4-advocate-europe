@@ -69,16 +69,17 @@
                 {% include 'advocate_europe_ideas/idea_detail_tab_idea.html' %}
             </div>
             <div class="col-md-3 col-sm-4 col-xs-12 ideadetail-info-boxes">
+                  <div class="ideadetail-info-box">
+                    <p>  {{ idea.first_name }}
+                      {{ idea.last_name }}</p>
                 {% if idea.collaborators.all %}
-                    <div class="ideadetail-info-box">
                         <h4>Collaborators</h4>
                         {% for collaborator in idea.collaborators.all %}
                             <p>{{ collaborator.username }}</p>
                         {% endfor %}
-                      <p>  {{ idea.first_name }}
-                        {{ idea.last_name }}</p>
+                     {% endif %}
                     </div>
-                {% endif %}
+
             </div>
         </div>
         {% if view.display_type == 'idea' %}
