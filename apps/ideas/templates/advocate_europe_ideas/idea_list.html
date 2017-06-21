@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n rules static thumbnail %}
+{% load i18n rules static thumbnail contrib_tags%}
 
 {% block content %}
 <div class="idealist">
@@ -29,7 +29,8 @@
             </div>
             {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
             {% if can_export %}
-                <a class="btn btn-primary" href="{% url 'idea-export' %}">{% trans "export" %}</a>
+                {% combined_url_parameter request.GET page='' as url_par %}
+                <a class="btn btn-primary" href="{% url 'idea-export' %}{{ url_par }}">{% trans "export" %}</a>
             {% endif %}
         </div>
         <!-- No idea might exist for the chosen filters -->
