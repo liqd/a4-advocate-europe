@@ -62,6 +62,7 @@ class CollaboratorsEmailsFormMixin:
 
         value = self.cleaned_data['collaborators_emails'].strip(' ,')
         addresses = getaddresses([value])
+        valid_addresses = []
         errors = []
 
         for name, address in addresses:
@@ -72,6 +73,16 @@ class CollaboratorsEmailsFormMixin:
                         addr=address
                     ))
                 )
+
+            if address in valid_addresses:
+                errors.append(
+                    ValidationError('{msg} ({addr})'.format(
+                        msg=_('Duplicate email address'),
+                        addr=address
+                    ))
+                )
+            else:
+                valid_addresses.append(address)
 
         if errors:
             raise ValidationError(errors)

@@ -163,3 +163,13 @@ def test_clean_collaborators_email():
             'Invalid email address (john)'
         ]
     }
+
+    form = TestForm(
+        data={'collaborators_emails': 'carren@test.de, carren@test.de'}
+    )
+    assert not form.is_valid()
+    assert form.errors == {
+        'collaborators_emails': [
+            'Duplicate email address (carren@test.de)',
+        ]
+    }
