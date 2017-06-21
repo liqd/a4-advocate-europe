@@ -80,12 +80,14 @@ class ProposalFactory(factory.django.DjangoModelFactory):
     idea_title = factory.Faker('name')
     creator = factory.SubFactory(UserFactory)
     module = factory.SubFactory(ModuleFactory)
+    idea_topics = 'environment'
     total_budget = factory.Faker('random_number')
     budget_requested = factory.Faker('random_number')
     other_sources = 0
     other_sources_secured = 0
     duration = factory.Faker('random_number')
     idea_sketch_archived = factory.SubFactory(IdeaSketchArchivedFactory)
+    is_proposal = True
 
     @factory.post_generation
     def initiators(self, create, extracted, **kwargs):
