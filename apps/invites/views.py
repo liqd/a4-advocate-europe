@@ -6,7 +6,7 @@ from . import forms, models
 
 
 class InviteDetailView(generic.DetailView):
-    model = models.IdeaSketchInvite
+    model = models.IdeaInvite
     slug_field = 'token'
     slug_url_kwarg = 'invite_token'
 
@@ -25,7 +25,7 @@ class InviteUpdateView(mixins.LoginRequiredMixin,
                        generic.detail.SingleObjectTemplateResponseMixin,
                        generic.edit.FormMixin,
                        generic.edit.ProcessFormView):
-    model = models.IdeaSketchInvite
+    model = models.IdeaInvite
     form_class = forms.InviteForm
     slug_field = 'token'
     slug_url_kwarg = 'invite_token'

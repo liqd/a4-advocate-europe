@@ -20,4 +20,4 @@ def invite_urls(invite_model):
     ]
 
 
-urlpatterns = invite_urls(models.IdeaSketchInvite)
+urlpatterns = invite_urls(models.IdeaInvite)

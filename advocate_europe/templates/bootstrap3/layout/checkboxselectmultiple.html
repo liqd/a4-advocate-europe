@@ -2,6 +2,7 @@
      src: https://github.com/django-crispy-forms/django-crispy-forms/blob/64606b457504a53013cb015dd4bac61b274876b9/crispy_forms/templates/bootstrap3/layout/checkboxmultislect.html
 
      - Moved errors to bottom and help text to top
+     - Wrapped choice label into span
 {% endcomment %}
 {% load crispy_forms_filters %}
 {% load l10n %}
@@ -13,7 +14,7 @@
 
       {% if not inline_class %}<div class="checkbox">{% endif %}
         <label class="{% if inline_class %}checkbox-{{ inline_class }}{% endif %}">
-            <input type="checkbox"{% if choice.0 in field.value or choice.0|stringformat:"s" in field.value or choice.0|stringformat:"s" == field.value|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {{ field.field.widget.attrs|flatatt }}>{{ choice.1|unlocalize }}
+            <input type="checkbox"{% if choice.0 in field.value or choice.0|stringformat:"s" in field.value or choice.0|stringformat:"s" == field.value|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {{ field.field.widget.attrs|flatatt }}><span>{{ choice.1|unlocalize }}</span>
         </label>
       {% if not inline_class %}</div>{% endif %}
     {% endfor %}

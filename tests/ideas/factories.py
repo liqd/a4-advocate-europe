@@ -29,7 +29,10 @@ class IdeaSketchFactory(factory.django.DjangoModelFactory):
     module = factory.SubFactory(ModuleFactory)
 
     @factory.post_generation
-    def initiators(self, create, extracted, **kwargs):
+    def collaborators(self, create, extracted, **kwargs):
+        if extracted == []:
+            return
+
         if not extracted:
             user = UserFactory()
             self.collaborators.add(user)
@@ -37,7 +40,24 @@ class IdeaSketchFactory(factory.django.DjangoModelFactory):
 
         if extracted:
             for user in extracted:
-                self.collaborators.add(user)
+                if isinstance(user, str):
+                    self.collaborators.add(
+                        UserFactory(username=user)
+                    )
+                else:
+                    self.collaborators.add(user)
+
+    @factory.post_generation
+    def invites(self, create, extracted, **kwargs):
+        if not extracted:
+            return
+
+        if extracted:
+            for email in extracted:
+                self.ideainvite_set.invite(
+                    creator=self.creator,
+                    email=email,
+                )
 
 
 class IdeaFactory(factory.django.DjangoModelFactory):

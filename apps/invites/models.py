@@ -5,14 +5,22 @@ from django.core.urlresolvers import reverse
 from django.db import models
 
 from adhocracy4.models import base
-from apps.ideas.models import IdeaSketch
+from apps.ideas.models import Idea
 
 from . import emails
 
 
 class InviteManager(models.Manager):
-    def invite(self, creator, subject, email):
-        invite = super().create(subject=subject, creator=creator, email=email)
+    use_for_related_fields = True
+
+    def invite(self, creator, email, *, subject=None):
+        """
+        Can be used from related manager without giving the subject.
+        """
+        if subject:
+            invite = self.create(creator=creator, email=email, subject=subject)
+        else:
+            invite = self.create(creator=creator, email=email)
         emails.InviteEmail.send(invite)
         return invite
 
@@ -61,4 +69,4 @@ def invite_factory(module, model):
     )
 
 
-IdeaSketchInvite = invite_factory(__name__, IdeaSketch)
+IdeaInvite = invite_factory(__name__, Idea)

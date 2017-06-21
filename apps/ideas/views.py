@@ -14,8 +14,9 @@ from formtools.wizard.views import SessionWizardView
 from rules.contrib.views import PermissionRequiredMixin
 
 from adhocracy4.filters import views as filter_views
+
 from apps.contrib import filters
-from apps.invites.models import IdeaSketchInvite
+from apps.invites.models import IdeaInvite
 from apps.wizards import mixins as wizard_mixins
 
 from . import forms, mixins
@@ -104,7 +105,7 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
         )
 
         for name, email in data['collaborators_emails']:
-            IdeaSketchInvite.objects.invite(
+            IdeaInvite.objects.invite(
                 self.request.user,
                 idea_sketch,
                 email
@@ -134,7 +135,8 @@ class IdeaSketchEditView(
         forms.PartnersSectionForm,
         forms.IdeaSectionForm,
         forms.ImpactSectionForm,
-        forms.CollaborationCampSectionForm
+        forms.CollaborationCampSectionForm,
+        forms.CommunitySectionEditForm,
     ]
 
     @property
@@ -274,7 +276,7 @@ class ProposalEditView(
         forms.ImpactSectionForm,
         forms.SelectionCriteriaSectionForm,
         forms.FinanceAndDurationSectionForm,
-        forms.CommunitySectionForm
+        forms.CommunitySectionEditForm,
     ]
 
     @property
