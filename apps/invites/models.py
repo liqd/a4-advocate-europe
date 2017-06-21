@@ -11,8 +11,16 @@ from . import emails
 
 
 class InviteManager(models.Manager):
-    def invite(self, creator, subject, email):
-        invite = self.create(subject=subject, creator=creator, email=email)
+    use_for_related_fields = True
+
+    def invite(self, creator, email, *, subject=None):
+        """
+        Can be used from related manager without giving the subject.
+        """
+        if subject:
+            invite = self.create(creator=creator, email=email, subject=subject)
+        else:
+            invite = self.create(creator=creator, email=email)
         emails.InviteEmail.send(invite)
         return invite
 

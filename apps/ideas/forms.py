@@ -5,8 +5,6 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from apps.invites.models import IdeaInvite
-
 from . import models
 from .models.abstracts.applicant_section import AbstractApplicantSection
 from .models.abstracts.collaboration_camp_section import \
@@ -374,9 +372,8 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
 
         if 'collaborators_emails' in self.cleaned_data:
             for name, email in self.cleaned_data['collaborators_emails']:
-                IdeaInvite.objects.invite(
+                self.instance.ideainvite_set.invite(
                     self.instance.creator,
-                    self.instance,
                     email
                 )
 
