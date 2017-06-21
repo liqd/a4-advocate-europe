@@ -21,7 +21,7 @@ HOW_DID_YOU_HEAR_CHOICES = (
 
 
 class AbstractCommunitySection(models.Model):
-    reach_out = models.CharField(
+    reach_out = models.TextField(
         max_length=300,
         help_text=REACH_OUT_HELP,
         verbose_name=REACH_OUT_TITLE, blank=True)
