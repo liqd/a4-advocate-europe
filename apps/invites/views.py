@@ -10,6 +10,10 @@ class InviteDetailView(generic.DetailView):
     slug_field = 'token'
     slug_url_kwarg = 'invite_token'
 
+    @property
+    def template_name(self):
+        return '{}/invite_detail.html'.format(self.model._meta.app_label)
+
     def dispatch(self, request, invite_token, *args, **kwargs):
         if request.user.is_authenticated():
             return redirect(
@@ -29,7 +33,10 @@ class InviteUpdateView(mixins.LoginRequiredMixin,
     form_class = forms.InviteForm
     slug_field = 'token'
     slug_url_kwarg = 'invite_token'
-    template_name_suffix = '_form'
+
+    @property
+    def template_name(self):
+        return '{}/invite_form.html'.format(self.model._meta.app_label)
 
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
