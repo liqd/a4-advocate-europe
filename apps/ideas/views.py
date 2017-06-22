@@ -235,9 +235,6 @@ class ProposalCreateWizard(PermissionRequiredMixin,
         idea_sketch_archive.created = self.idea.created
         idea_sketch_archive.save()
 
-        self.idea.is_proposal = True
-        self.idea.save()
-
         special_fields = ['accept_conditions', 'collaborators_emails']
 
         proposal_data = self.get_cleaned_data_for_step('5')
