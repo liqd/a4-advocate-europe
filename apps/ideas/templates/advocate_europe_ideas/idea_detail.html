@@ -70,14 +70,12 @@
             </div>
             <div class="col-md-3 col-sm-4 col-xs-12 ideadetail-info-boxes">
                   <div class="ideadetail-info-box">
-                    <p>  {{ idea.first_name }}
-                      {{ idea.last_name }}</p>
-                {% if idea.collaborators.all %}
                         <h4>Collaborators</h4>
+                        <p>  {{ idea.first_name }}
+                          {{ idea.last_name }}</p>
                         {% for collaborator in idea.collaborators.all %}
                             <p>{{ collaborator.username }}</p>
                         {% endfor %}
-                     {% endif %}
                     </div>
 
             </div>
