@@ -87,7 +87,7 @@ class ProposalFactory(factory.django.DjangoModelFactory):
     other_sources_secured = 0
     duration = factory.Faker('random_number')
     idea_sketch_archived = factory.SubFactory(IdeaSketchArchivedFactory)
-    is_proposal = True
+    visit_camp = True
 
     @factory.post_generation
     def initiators(self, create, extracted, **kwargs):
