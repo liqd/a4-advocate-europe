@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'adhocracy4.modules.apps.ModulesConfig',
     'adhocracy4.comments.apps.CommentsConfig',
     'adhocracy4.organisations.apps.OrganisationsConfig',
+    'adhocracy4.actions.apps.ActionsConfig',
 
     'cms.home.apps.HomeConfig',
     'cms.settings.apps.SettingsConfig',
@@ -76,6 +77,7 @@ INSTALLED_APPS = [
     'apps.users.apps.UsersConfig',
     'apps.ideas.apps.IdeasConfig',
     'apps.invites.apps.InvitesConfig',
+    'apps.notifications.apps.NotificationsConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -314,9 +316,10 @@ A4_REPORTABLES = (
     ('a4comments', 'comment'),
 )
 
-ACTIONABLE = [
-    ('a4comments', 'comment')
-]
+A4_ACTIONABLES = (
+    ('advocate_europe_ideas', 'ideasketch'),
+    ('advocate_europe_ideas', 'proposal'),
+)
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CRISPY_FAIL_SILENTLY = False
