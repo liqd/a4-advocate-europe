@@ -51,9 +51,9 @@ class IdeaFilterSet(DefaultsFilterSet):
 
     def what_status(self, queryset, name, value):
         if value == 'idea_sketch':
-            qs = queryset.filter(is_proposal=False)
+            qs = queryset.filter(proposal__isnull=True)
         elif value == 'proposal':
-            qs = queryset.filter(is_proposal=True)
+            qs = queryset.filter(proposal__isnull=False)
         elif value == 'community_award':
             qs = queryset.filter(community_award_winner=True)
         elif value == 'camp':

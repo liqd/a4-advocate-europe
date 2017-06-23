@@ -47,7 +47,6 @@ class AbstractIdea(AbstractApplicantSection,
 
 
 class Idea(AbstractIdea):
-    is_proposal = models.BooleanField(default=False)
     visit_camp = models.BooleanField(default=False)
     is_winner = models.BooleanField(default=False)
     community_award_winner = models.BooleanField(default=False)
