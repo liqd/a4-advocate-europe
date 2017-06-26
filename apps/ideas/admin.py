@@ -41,9 +41,9 @@ set_is_winner_false.short_description = 'Unset winner'
 
 
 class IdeaAdmin(admin.ModelAdmin):
-    list_display = ['idea_title', 'is_proposal', 'visit_camp',
+    list_display = ['idea_title', 'type', 'visit_camp',
                     'community_award_winner', 'is_winner']
-    ordering = ['-is_proposal', '-visit_camp', '-is_winner', 'idea_title']
+    ordering = ['-visit_camp', '-is_winner', 'idea_title']
     actions = [
         set_visit_camp_true,
         set_visit_camp_false,
