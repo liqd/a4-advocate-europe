@@ -73,6 +73,7 @@ INSTALLED_APPS = [
     'cms.snippets.apps.SnippetsConfig',
     'cms.blog.apps.BlogConfig',
 
+    'apps.actions',
     'apps.contrib',
     'apps.users.apps.UsersConfig',
     'apps.ideas.apps.IdeasConfig',
@@ -319,7 +320,28 @@ A4_REPORTABLES = (
 A4_ACTIONABLES = (
     ('advocate_europe_ideas', 'ideasketch'),
     ('advocate_europe_ideas', 'proposal'),
+    ('a4comments', 'comment'),
 )
+
+ACTION_TYPES = {
+    'project': [
+        ('a4projects', 'project'),
+    ],
+    'phase': [
+        ('a4phases', 'phase'),
+    ],
+    'comment': [
+        ('a4comments', 'comment'),
+        ('advocate_europe_ideas', 'idea'),
+    ],
+    'rating': [
+        ('a4ratings', 'rating'),
+    ],
+    'item': [
+        ('advocate_europe_ideas', 'proposal'),
+    ]
+}
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CRISPY_FAIL_SILENTLY = False
