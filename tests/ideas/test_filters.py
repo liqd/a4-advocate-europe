@@ -9,40 +9,18 @@ def test_idea_list_view(idea_sketch_factory, proposal_factory):
     idea_sketch_factory()
     proposal_factory()
 
+    ALL_POSSIBLE_PARAMS = [('idea_sketch', 2),
+                           ('community_award', 0),
+                           ('camp', 1),
+                           ('proposal', 1),
+                           ('winner', 0),
+                           ('', 3)]
+
     idea_filter_set = filters.IdeaFilterSet(query_data={})
 
-    filter_idea = (idea_filter_set.
-                   what_status(models.Idea.objects.all(),
-                               'some_name', 'idea_sketch')
-                   )
-    assert filter_idea.count() == 2
-
-    filter_idea = (idea_filter_set.
-                   what_status(models.Idea.objects.all(),
-                               'some_name', 'community_award')
-                   )
-    assert filter_idea.count() == 0
-
-    filter_idea = (idea_filter_set.
-                   what_status(models.Idea.objects.all(),
-                               'some_name', 'camp')
-                   )
-    assert filter_idea.count() == 1
-
-    filter_idea = (idea_filter_set.
-                   what_status(models.Idea.objects.all(),
-                               'some_name', 'proposal')
-                   )
-    assert filter_idea.count() == 1
-
-    filter_idea = (idea_filter_set.
-                   what_status(models.Idea.objects.all(),
-                               'some_name', 'winner')
-                   )
-    assert filter_idea.count() == 0
-
-    filter_idea = (idea_filter_set.
-                   what_status(models.Idea.objects.all(),
-                               'some_name', '')
-                   )
-    assert filter_idea.count() == 3
+    for param, count in ALL_POSSIBLE_PARAMS:
+        assert (lambda p: (idea_filter_set.
+                           what_status(models.Idea.objects.all(),
+                                       'some_name', p)
+                           ).count()
+                )(param) == count
