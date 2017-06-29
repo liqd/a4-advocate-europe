@@ -17,7 +17,7 @@
         margin: rem(5px) rem(5px) rem(5px) 0;
     }
 
-    .pull-right {
+    .btn-group.pull-right {
         margin-right: rem(20px);
     }
 
@@ -30,13 +30,14 @@
     }
 
     .btn-group .btn {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: space-between;
+        .value-label {
+            float: left;
+        }
+
 
         i {
             margin-left: rem(8px);
+            float: right;
         }
 
         min-width: rem(170px);
