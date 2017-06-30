@@ -3,10 +3,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from adhocracy4.filters.filters import DefaultsFilterSet
 from adhocracy4.projects.models import Project
-from apps.ideas import models
+from apps.contrib import widgets
 
-
-from . import widgets
+from . import models
 
 
 class StatusFilterWidget(widgets.DropdownLinkWidget):
