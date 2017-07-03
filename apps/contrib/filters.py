@@ -1,4 +1,5 @@
 import django_filters
+from django.forms import TextInput
 from django.utils.translation import ugettext_lazy as _
 
 from adhocracy4.filters.filters import DefaultsFilterSet
@@ -92,6 +93,13 @@ class IdeaFilterSet(DefaultsFilterSet):
         widget=OrderingFilterWidget
     )
 
+    search = django_filters.CharFilter(
+        label=_('Search'),
+        lookup_expr='icontains',
+        name='idea_pitch',
+        widget=TextInput,
+    )
+
     class Meta:
         model = models.Idea
-        fields = ['project', 'status', 'idea_topics', 'ordering']
+        fields = ['search', 'project', 'status', 'idea_topics', 'ordering']
