@@ -9,7 +9,7 @@ from . import models
 
 
 class StatusFilterWidget(widgets.DropdownLinkWidget):
-    label = _('Phase')
+    label = _('Status')
 
 
 class TopicFilterWidget(widgets.DropdownLinkWidget):
@@ -24,7 +24,7 @@ class TopicFilterWidget(widgets.DropdownLinkWidget):
 
 
 class ProjectFilterWidget(widgets.DropdownLinkWidget):
-    label = _('Project')
+    label = _('Year')
 
 
 class OrderingFilterWidget(widgets.DropdownLinkWidget):
@@ -84,8 +84,8 @@ class IdeaFilterSet(DefaultsFilterSet):
         ),
         choices=(
             ('newest', _('Most Recent')),
-            ('comments', _('Comments')),
-            ('title', _('Idea Title')),
+            ('comments', _('Most Comments')),
+            ('title', _('Alphabetical')),
         ),
         empty_label=None,
         widget=OrderingFilterWidget
