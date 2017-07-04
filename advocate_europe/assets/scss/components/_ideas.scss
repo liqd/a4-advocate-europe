@@ -29,7 +29,7 @@
         color: $gray-dark;
     }
 
-    .btn-group .btn {
+    .filter-element .btn-filter {
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
@@ -49,11 +49,6 @@
         @media screen and (max-width: $screen-md-min) {
             min-width: rem(130px);
         }
-    }
-
-    .idealist-search .btn {
-        border-radius: 5px;
-        min-width: rem(270px);
     }
 }
 

@@ -1,5 +1,5 @@
 import django_filters
-from django.forms import TextInput
+from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
 from adhocracy4.filters.filters import DefaultsFilterSet
@@ -32,6 +32,10 @@ class ProjectFilterWidget(widgets.DropdownLinkWidget):
 class OrderingFilterWidget(widgets.DropdownLinkWidget):
     label = _('Sorting')
     right = True
+
+
+class FreetextFilterWidget(widgets.TextInputWidget):
+    label = _('Search')
 
 
 class IdeaFilterSet(DefaultsFilterSet):
@@ -93,11 +97,16 @@ class IdeaFilterSet(DefaultsFilterSet):
         widget=OrderingFilterWidget
     )
 
+    def search_multi_fields(self, queryset, name, value):
+        qs = queryset.filter(Q(idea_pitch__icontains=value) |
+                             Q(idea_title__icontains=value) |
+                             Q(idea_subtitle__icontains=value)
+                             )
+        return qs
+
     search = django_filters.CharFilter(
-        label=_('Search'),
-        lookup_expr='icontains',
-        name='idea_pitch',
-        widget=TextInput,
+        method='search_multi_fields',
+        widget=FreetextFilterWidget,
     )
 
     class Meta:

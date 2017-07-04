@@ -10,21 +10,8 @@
     <div class="container">
         <div class="idealist-controls">
             <div class="filter-bar idealist-filter clearfix">
-                <div class="idealist-search btn-group">
-                    <label for="{{ id }}">
-                        Search
-                    </label>
-                    <br>
-                    <button
-                        type="button"
-                        class="btn btn-default btn-filter-group"
-                    >
-                        Placeholder for freetextfilter
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </button>
-                </div>
                 {% for field in view.filter.form %}
-                    {{ field }}
+                {{ field }}
                 {% endfor %}
             </div>
             {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
