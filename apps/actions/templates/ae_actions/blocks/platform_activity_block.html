@@ -27,9 +27,11 @@
                         {{ action }}
                     {% endif %}
                 </div>
+{% comment %}
                 <div class="action__line">
                     {% blocktrans with url=action.project.get_absolute_url name=action.project.name %}on <a href="{{ url }}">{{ name }}</a>{% endblocktrans %}
                 </div>
+{% endcomment %}
                 <div class="action__date">{{ action.timestamp|date:'d.m.Y' }}</div>
             </div>
         </div>
