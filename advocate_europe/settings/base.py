@@ -340,6 +340,7 @@ ACTION_TYPES = {
     ],
     'item': [
         ('advocate_europe_ideas', 'proposal'),
+        ('advocate_europe_ideas', 'ideasketch'),
     ],
     'blog': [
         ('cms_blog', 'blogpage'),
