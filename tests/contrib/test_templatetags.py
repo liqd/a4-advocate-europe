@@ -36,5 +36,7 @@ def test_combined_url_parameter(rf):
     context = {'request': request}
     helpers.render_template(template, context)
 
-    assert '?bla=bums&da=dings' == context['url_par_1']
-    assert '?bla=&da=dings' == context['url_par_2']
+    assert 'bla=bums' in context['url_par_1']
+    assert 'da=dings' in context['url_par_1']
+    assert 'bla=' in context['url_par_2']
+    assert 'da=dings' in context['url_par_2']

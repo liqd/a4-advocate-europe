@@ -31,13 +31,13 @@
     }
 
     .filter-element .btn-filter {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: space-between;
+        .value-label {
+            float: left;
+        }
 
         i {
             margin-left: rem(8px);
+            float: right;
         }
 
         width: rem(170px);
