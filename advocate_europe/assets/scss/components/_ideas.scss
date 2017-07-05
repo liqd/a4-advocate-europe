@@ -13,11 +13,12 @@
         justify-content: center;
     }
 
-    .btn-group {
+    .filter-element {
         margin: rem(5px) rem(5px) rem(5px) 0;
     }
 
-    .pull-right {
+    .right {
+        float: right;
         margin-right: rem(20px);
     }
 
@@ -39,7 +40,7 @@
             margin-left: rem(8px);
         }
 
-        min-width: rem(170px);
+        width: rem(170px);
         height: rem(30px);
         border-radius: 5px;
         background-color: #fff;
@@ -48,6 +49,36 @@
 
         @media screen and (max-width: $screen-md-min) {
             min-width: rem(130px);
+        }
+    }
+
+    .filter-element .search-filter {
+        min-width: rem(270px);
+        height: rem(30px);
+        border-radius: 5px;
+        background-color: #fff;
+        border: solid 1px $ae-light-gray-shadow;
+        color: $gray-dark;
+
+        @media screen and (max-width: $screen-md-min) {
+            min-width: rem(280px);
+        }
+
+        .search-filter-input {
+            border: none;
+            height: 100%;
+            padding: rem(6px) rem(12px);
+            border-radius: 5px;
+        }
+
+        .search-filter-btn {
+            border: none;
+            height: 100%;
+            background-color: $brand-primary;
+            margin-left: rem(8px);
+            float: right;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
         }
     }
 }

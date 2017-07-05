@@ -1,9 +1,9 @@
-<div class="btn-group filter-element {% if right %}pull-right{% endif %}">
+<div class="btn-group filter-element {% if right %}right{% endif %}">
 <label for="search">
     {{ label }}
 </label>
-<form class="input-form" action="" method="get">
-    <input class="input-filter" id="search" type="text" name="search" value="{{ value_label }}">
-    <button class="input-btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+<form class="search-filter" action="" method="get">
+    <input class="search-filter-input" id="search" type="text" name="search" value="{{ value_label }}">
+    <button class="search-filter-btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
 </form>
 </div>
