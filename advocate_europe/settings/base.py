@@ -321,6 +321,7 @@ A4_ACTIONABLES = (
     ('advocate_europe_ideas', 'ideasketch'),
     ('advocate_europe_ideas', 'proposal'),
     ('a4comments', 'comment'),
+    ('cms_blog', 'blogpage')
 )
 
 ACTION_TYPES = {
@@ -339,6 +340,9 @@ ACTION_TYPES = {
     ],
     'item': [
         ('advocate_europe_ideas', 'proposal'),
+    ],
+    'blog': [
+        ('cms_blog', 'blogpage'),
     ]
 }
 

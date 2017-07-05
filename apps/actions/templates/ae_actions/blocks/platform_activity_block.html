@@ -16,6 +16,8 @@
                         {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url %}<a href="{{ url }}">{{ name }}</a> added a new <a href="{{ item_url }}">item</a>{% endblocktrans%}
                     {% elif action.type == 'item' and action.verb == 'update' %}
                         {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url %}<a href="{{ url }}">{{ name }}</a> updated an <a href="{{ item_url }}">item</a>{% endblocktrans%}
+                    {% elif action.type == 'blog' and action.verb == 'create' %}
+                        {% blocktrans with blog_url=action.obj.url blog_title=action.obj name=action.actor.username %}a new <a href="{{ blog_url }}" title="{{ blog_title }}">blog entry</a> was published by {{ name }} {% endblocktrans%}
                     {% elif action.type == 'project' and action.verb == 'start' %}
                         {% trans "New participation started" %}
                     {% elif action.type == 'phase' and action.verb == 'schedule' %}
