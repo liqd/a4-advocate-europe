@@ -2,7 +2,7 @@
 <label for="search">
     {{ label }}
 </label>
-<form class="search-filter" action="" method="get">
+<form class="search-filter" action="{{ url_par }}" method="get">
     <input class="search-filter-input" id="search" type="text" name="search" value="{{ value_label }}">
     <button class="search-filter-btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
 </form>

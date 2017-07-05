@@ -99,7 +99,10 @@ class IdeaFilterSet(DefaultsFilterSet):
     def search_multi_fields(self, queryset, name, value):
         qs = queryset.filter(Q(idea_pitch__icontains=value) |
                              Q(idea_title__icontains=value) |
-                             Q(idea_subtitle__icontains=value)
+                             Q(idea_subtitle__icontains=value) |
+                             Q(first_name__icontains=value) |
+                             Q(last_name__icontains=value) |
+                             Q(organisation_name__icontains=value)
                              )
         return qs
 
