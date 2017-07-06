@@ -19,7 +19,9 @@
                         type="button"
                         class="btn btn-default btn-filter-group"
                     >
+                        <div class="value-label">
                         Placeholder for freetextfilter
+                        </div>
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -29,7 +31,7 @@
             </div>
             {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
             {% if can_export %}
-                <a class="btn btn-primary" href="{% url 'idea-export' %}">{% trans "export" %}</a>
+                <a class="btn btn-primary" href="{% url 'idea-export' %}{{ '?'|add:view.filter.data.urlencode }}">{% trans "export" %}</a>
             {% endif %}
         </div>
         <!-- No idea might exist for the chosen filters -->

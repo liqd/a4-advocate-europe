@@ -3,13 +3,13 @@ from django.utils.translation import ugettext_lazy as _
 
 from adhocracy4.filters.filters import DefaultsFilterSet
 from adhocracy4.projects.models import Project
-from apps.ideas import models
+from apps.contrib import widgets
 
-from . import widgets
+from . import models
 
 
 class StatusFilterWidget(widgets.DropdownLinkWidget):
-    label = _('Phase')
+    label = _('Status')
 
 
 class TopicFilterWidget(widgets.DropdownLinkWidget):
@@ -24,7 +24,7 @@ class TopicFilterWidget(widgets.DropdownLinkWidget):
 
 
 class ProjectFilterWidget(widgets.DropdownLinkWidget):
-    label = _('Project')
+    label = _('Year')
 
 
 class OrderingFilterWidget(widgets.DropdownLinkWidget):
@@ -51,9 +51,9 @@ class IdeaFilterSet(DefaultsFilterSet):
 
     def what_status(self, queryset, name, value):
         if value == 'idea_sketch':
-            qs = queryset.filter(is_proposal=False)
+            qs = queryset.filter(proposal__isnull=True)
         elif value == 'proposal':
-            qs = queryset.filter(is_proposal=True)
+            qs = queryset.filter(proposal__isnull=False)
         elif value == 'community_award':
             qs = queryset.filter(community_award_winner=True)
         elif value == 'camp':
@@ -84,9 +84,10 @@ class IdeaFilterSet(DefaultsFilterSet):
         ),
         choices=(
             ('newest', _('Most Recent')),
-            ('comments', _('Comments')),
-            ('title', _('Idea Title')),
+            ('comments', _('Most Comments')),
+            ('title', _('Alphabetical')),
         ),
+        empty_label=None,
         widget=OrderingFilterWidget
     )
 

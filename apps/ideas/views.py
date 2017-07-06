@@ -15,17 +15,23 @@ from rules.contrib.views import PermissionRequiredMixin
 
 from adhocracy4.filters import views as filter_views
 
+
 from apps.contrib import filters
 from apps.wizards import mixins as wizard_mixins
 
-from . import forms, mixins
+from . import filters, forms, mixins
 from .models import Idea, IdeaSketch, IdeaSketchArchived, Proposal
 
 
-class IdeaExportView(PermissionRequiredMixin, generic.ListView):
+class IdeaExportView(PermissionRequiredMixin, filter_views.FilteredListView):
     permission_required = 'advocate_europe_ideas.export_idea'
     model = Idea
     raise_exception = True
+    filter_set = filters.IdeaFilterSet
+
+    def get_queryset(self):
+        queryset = super().get_queryset().annotate_comment_count()
+        return queryset
 
     def get(self, request, *args, **kwargs):
         response = HttpResponse(content_type='text/csv; charset=utf-8')
@@ -227,9 +233,6 @@ class ProposalCreateWizard(PermissionRequiredMixin,
         idea_sketch_archive.save()
         idea_sketch_archive.created = self.idea.created
         idea_sketch_archive.save()
-
-        self.idea.is_proposal = True
-        self.idea.save()
 
         special_fields = ['accept_conditions', 'collaborators_emails']
 
