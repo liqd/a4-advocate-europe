@@ -18,8 +18,10 @@
     }
 
     .right {
-        float: right;
-        margin-right: rem(20px);
+        @media screen and (min-width: $screen-md-min) {
+            float: right;
+            margin-right: rem(20px);
+        }
     }
 
     label {
@@ -31,10 +33,6 @@
     }
 
     .filter-element .btn-filter {
-        .value-label {
-            float: left;
-        }
-
         i {
             margin-left: rem(8px);
             float: right;
@@ -48,37 +46,55 @@
         color: $gray-dark;
 
         @media screen and (max-width: $screen-md-min) {
-            min-width: rem(130px);
+            width: rem(130px);
+        }
+    }
+
+    .value-label {
+        float: left;
+        text-align: left;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: rem(128px);
+
+        @media screen and (max-width: $screen-md-min) {
+            width: rem(88px);
         }
     }
 
     .filter-element .search-filter {
-        min-width: rem(270px);
+        width: rem(270px);
         height: rem(30px);
         border-radius: 5px;
         background-color: #fff;
         border: solid 1px $ae-light-gray-shadow;
         color: $gray-dark;
 
-        @media screen and (max-width: $screen-md-min) {
-            min-width: rem(280px);
-        }
-
-        .search-filter-input {
-            border: none;
-            height: 100%;
-            padding: rem(6px) rem(12px);
-            border-radius: 5px;
+        @media screen and (max-width: $screen-sm-min) {
+            width: rem(280px);
         }
 
         .search-filter-btn {
             border: none;
             height: 100%;
             background-color: $brand-primary;
-            margin-left: rem(8px);
             float: right;
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
+        }
+    }
+
+    .search-filter-input {
+        border: none;
+        height: 100%;
+        padding: rem(6px) 0 rem(6px) rem(12px);
+        border-radius: 5px;
+        width: rem(230px);
+        float: left;
+
+        @media screen and (max-width: $screen-sm-min) {
+            width: rem(240px);
         }
     }
 }

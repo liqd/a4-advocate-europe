@@ -59,23 +59,24 @@ class TextInputWidget(TextInput):
     right = False
     template = 'advocate_europe_contrib/widgets/text_input.html'
 
-    def get_context(self, name, value, attrs=None):
-        # import pdb; pdb.set_trace()
-        context = super().get_context(name, value, attrs)
-        return context
+    def value_from_datadict(self, data, files, name):
+        value = super().value_from_datadict(data, files, name)
+        self.data = data
+        return value
 
     def render(self, name, value, attrs=None):
-
+        if not hasattr(self, 'data'):
+            self.data = {}
         if value is None:
             value = ''
 
         _id = attrs.pop('id')
 
-        # context = self.get_context(name, value, attrs)
-
         return render_to_string(self.template, {
             'id': _id,
             'value_label': value,
+            'name': self.label.lower(),
             'label': self.label,
             'right': self.right,
+            'url_par': self.data
         })
