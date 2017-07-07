@@ -1,8 +1,7 @@
 import django_filters
-from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
-from adhocracy4.filters.filters import DefaultsFilterSet
+from adhocracy4.filters.filters import DefaultsFilterSet, FreeTextFilter
 from adhocracy4.projects.models import Project
 from apps.contrib import widgets
 
@@ -33,14 +32,14 @@ class OrderingFilterWidget(widgets.DropdownLinkWidget):
     right = True
 
 
-class FreetextFilterWidget(widgets.TextInputWidget):
+class FreeTextFilterWidget(widgets.TextInputWidget):
     label = _('Search')
 
 
 class IdeaFilterSet(DefaultsFilterSet):
 
     defaults = {
-        'ordering': 'newest'
+        'ordering': 'newest',
     }
 
     idea_topics = django_filters.CharFilter(
@@ -96,19 +95,14 @@ class IdeaFilterSet(DefaultsFilterSet):
         widget=OrderingFilterWidget
     )
 
-    def search_multi_fields(self, queryset, name, value):
-        qs = queryset.filter(Q(idea_pitch__icontains=value) |
-                             Q(idea_title__icontains=value) |
-                             Q(idea_subtitle__icontains=value) |
-                             Q(first_name__icontains=value) |
-                             Q(last_name__icontains=value) |
-                             Q(organisation_name__icontains=value)
-                             )
-        return qs
-
-    search = django_filters.CharFilter(
-        method='search_multi_fields',
-        widget=FreetextFilterWidget,
+    search = FreeTextFilter(
+        widget=FreeTextFilterWidget,
+        fields=['idea_pitch',
+                'idea_title',
+                'idea_subtitle',
+                'first_name',
+                'last_name',
+                'organisation_name']
     )
 
     class Meta:
