@@ -7,21 +7,118 @@
 
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <aside class="col-sm-3">
-            {{ view.user.username }}
-        </aside>
-
-        <main class="col-sm-9">
-            <div class="idealist-list">
-                {% for idea in idea_list %}
-                {% include 'advocate_europe_ideas/includes/idealist_item.html' %}
-                {% endfor %}
+<div class="profile">
+    <div class="profile-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4 profile-image-holder">
+                    <span
+                        class="circled profile-image"
+                        style="background-image: url({{ view.user.avatar }})"
+                    ></span>
+                </div>
+                <div class="col-xs-8">
+                    <h1 class="visible-xs profile-title">
+                        {{ view.user.username }}
+                    </h1>
+                </div>
             </div>
+        </div>
+    </div>
 
-            {% if is_paginated %}{% include 'includes/pagination.html' %}{% endif %}
-        </main>
+    <div class="profile-navbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-offset-3 col-sm-9 tabs">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="visible-xs">
+                            <a href="#info" aria-controls="info" role="tab" data-toggle="tab">
+                                {% trans "info" %}
+                            </a>
+                        </li>
+                        <li role="presentation" class="active">
+                            <a href="#ideas"  aria-controls="ideas" role="tab" data-toggle="tab">
+                                {% trans "ideas" %}
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#activities"  aria-controls="activities" role="tab" data-toggle="tab">
+                                {% trans "activities" %}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row profile-sidebar-holder">
+            <main class="col-sm-offset-3 col-sm-9 tab-content profile-tab-content">
+                <div role="tabpanel" class="profile-info-pane tab-pane col-sm-3" id="info">
+                    <h1 class="profile-title">{{ view.user.username }}</h1>
+                    <div>{{ user.motto | default:'In varietate concordia.' }}</div>
+                    <ul class="profile-traits">
+                        {% with user=view.user %}
+                        {% if user.country and user.city %}
+                        <li>
+                            <i class="fa fa-map-marker fa-fw trait-icon" aria-hidden="true"></i>
+                            <span aria-label="{% trans 'location' %}">{{ user.city }}, {{ user.country }}</span>
+                        </li>
+                        {% endif %}
+                        {% if user.occupation %}
+                        <li>
+                            <i class="fa fa-{% if user.occupation.lower == 'student' %}graduation-cap
+                                            {% elif 'party' in user.occupation.lower %}beer
+                                            {% elif 'activist' in user.occupation.lower %}hand-rock-o
+                                            {% else %}briefcase{% endif %} fa-fw trait-icon" aria-hidden="true"></i>
+                            <span aria-label="{% trans 'occupation' %}">{{ user.occupation }}</span>
+                        </li>
+                        {% endif %}
+                        {% if user.twitter %}
+                        <li>
+                            <i class="fa fa-twitter fa-fw trait-icon" aria-hidden="true"></i>
+                            <span aria-label="twitter">
+                                <a href="https:/twitter.com/{{ user.twitter }}">@{{ user.twitter }}</a>
+                            </span>
+                        </li>
+                        {% endif %}
+                        {% if user.facebook %}
+                        <li>
+                            <i class="fa fa-facebook fa-fw trait-icon" aria-hidden="true"></i>
+                            <span aria-label="facebook">
+                                <a href="https:/facebook.com/{{ user.facebook }}">{{ user.facebook }}</a>
+                            </span>
+                        </li>
+                        {% endif %}
+                        {% if user.instagram %}
+                        <li>
+                            <i class="fa fa-instagram fa-fw trait-icon" aria-hidden="true"></i>
+                            <span aria-label="instagram">
+                                <a href="https:/instagram.com/{{ user.instagram }}">{{ user.instagram  }}</a>
+                            </span>
+                        </li>
+                        {% endif %}
+                        {% endwith %}
+                    </ul>
+                </div>
+
+                <div role="tabpanel" class="tab-pane active" id="ideas">
+                    <div class="idealist-list">
+                        {% for idea in idea_list %}
+                        {% include 'advocate_europe_ideas/includes/idealist_item.html' %}
+                        {% endfor %}
+                    </div>
+
+                    {% if is_paginated %}{% include 'includes/pagination.html' %}{% endif %}
+                </div>
+
+
+                <div role="tabpanel" class="tab-pane" id="activities">
+                    Nothing to see!
+                </div>
+            </main>
+        </div>
     </div>
 </div>
 {% endblock %}
