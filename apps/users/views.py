@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.views import generic
 
 from apps.ideas import models as idea_models
+from apps.actions import views as action_view
 
 from . import filters, models
 
@@ -31,7 +32,7 @@ class KwargsFilteredListView(generic.ListView):
         return qs
 
 
-class ProfileView(KwargsFilteredListView):
+class ProfileView(action_view.ActivityView, KwargsFilteredListView):
     template_name = 'advocate_europe_users/profile.html'
     paginator_class = Paginator
     paginate_by = 9
