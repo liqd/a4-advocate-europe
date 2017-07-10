@@ -7,8 +7,6 @@ from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
-from apps.actions import blocks as actions_blocks
-
 from cms.contrib import translations
 
 from . import blocks as custom_blocks
@@ -20,7 +18,6 @@ class HomePage(Page):
         ('call_to_action', custom_blocks.CallToActionBlock()),
         ('carousel', custom_blocks.CustomCarouselBlock()),
         ('blogs', custom_blocks.ThreeBlogEntriesBlock()),
-        ('activities', actions_blocks.PlatformActivityBlock()),
     ]
 
     # translated fields
