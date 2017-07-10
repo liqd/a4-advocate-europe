@@ -10,5 +10,3 @@ class ActivityView(generic.ListView):
     def actions(self):
         return Action.objects \
             .public().exclude_updates()[:self.count]
-
-

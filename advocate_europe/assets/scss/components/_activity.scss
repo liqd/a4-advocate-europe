@@ -1,0 +1,24 @@
+.action {
+    border-bottom: 1px solid $ae-dark-gray;
+    padding: 6px 0;
+    @include rem(height, 50px);
+
+    .action__icon {
+        float: left;
+        background-color: $ae-light-gray;
+        @include rem(width, 38px);
+        @include rem(height, 38px);
+        @include rem(margin-right, 5px);
+        @include rem(padding, 12.5px);
+        color: $brand-primary;
+    }
+
+    .action__main {
+        float: left;
+    }
+
+    .action__date {
+        float: right;
+        color: $ae-middle-gray;
+    }
+}
