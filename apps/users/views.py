@@ -19,4 +19,7 @@ class ProfileView(generic.ListView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
-        return super().get_queryset().filter_by_participant(self.user)
+        qs = super().get_queryset()
+        qs = qs.filter_by_participant(self.user)
+        qs = qs.annotate_comment_count()
+        return qs
