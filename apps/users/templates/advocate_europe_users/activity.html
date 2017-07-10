@@ -1,9 +1,7 @@
 {% load i18n %}
 
 <div class="block l-center-6">
-    <h2>{{ self.heading }}</h2>
-
-    {% for action in actions %}
+    {% for action in view.actions %}
         <div class="action">
             <i class="fa fa-{{ action.icon }} action__icon" aria-hidden="true"></i>
             <div class="action__main">
