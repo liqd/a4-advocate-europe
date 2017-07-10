@@ -60,3 +60,12 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     def get_full_name(self):
         full_name = '%s <%s>' % (self.username, self.email)
         return full_name.strip()
+
+    city = 'Berlin'
+    country = 'Germany'
+    occupation = 'IT Consultant'
+    twitter = 'grumpycat'
+    facebook = 'grumpycat'
+    instagram = 'grumpycat'
+    motto = 'Here are some deep phrases about my life and my personality'
+    avatar = 'https://opin.me/static/images/penguin_1.png'
