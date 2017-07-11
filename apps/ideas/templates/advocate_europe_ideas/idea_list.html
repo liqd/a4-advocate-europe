@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n rules static thumbnail %}
+{% load i18n rules static thumbnail idea_tags %}
 
 {% block content %}
 <div class="idealist">
@@ -19,7 +19,12 @@
                     <button class="btn btn-primary btn-collapse collapsed" type="button" data-toggle="collapse" data-target="#filter" aria-expanded="false" aria-controls="Filter">
                         <div class="btn-label">
                             {% trans "Filters" %}
-                            <span class="number-of-filters">2</span>
+                            {% count_active_filter view.filter.data as filter_count %}
+                            {% if filter_count > 0 %}
+                            <span class="number-of-filters">
+                                {{ filter_count }}
+                            </span>
+                            {% endif %}
                         </div>
                         <i class="fa fa-chevron-up"></i>
                     </button>
