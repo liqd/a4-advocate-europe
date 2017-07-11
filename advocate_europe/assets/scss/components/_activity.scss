@@ -1,7 +1,10 @@
 .action {
     border-bottom: 1px solid $ae-dark-gray;
     padding: 6px 0;
-    @include rem(height, 50px);
+
+    @media (min-width: $screen-sm) {
+        @include rem(height, 50px);
+    }
 
     .action__icon {
         float: left;

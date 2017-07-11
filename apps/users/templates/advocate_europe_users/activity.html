@@ -2,11 +2,11 @@
 
 <div>
     {% for action in view.actions %}
-        <div class="action">
-            <div class="action__icon">
+        <div class="action row">
+            <div class="action__icon col-xs-2">
               <i class="fa fa-{{ action.icon }}" aria-hidden="true"></i>
             </div>
-            <div class="action__main">
+            <div class="action__main col-xs-7">
                 <div class="action__line">
                     {% if action.type == 'comment' and action.verb == 'add' %}
                         {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username comment=action.obj.comment|truncatewords:3 %} <a href="{{ url }}">{{ name }}</a> commented: {{ comment}} {% endblocktrans %}
@@ -37,7 +37,7 @@
 
             </div>
 
-                <div class="action__date">{{ action.timestamp|date:'d.m.Y' }}</div>
+            <div class="action__date col-xs-3">{{ action.timestamp|date:'d.m.Y' }}</div>
         </div>
     {% endfor %}
 </div>
