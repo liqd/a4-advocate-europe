@@ -12,10 +12,10 @@
                         {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username comment=action.obj.comment|truncatewords:3 %} <a href="{{ url }}">{{ name }}</a> commented: {{ comment}} {% endblocktrans %}
                     {% elif action.type == 'comment' and action.verb == 'update' %}
                         {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username comment=action.obj.comment|truncatewords:3 %} <a href="{{ url }}">{{ name }}</a> updated comment: {{ comment}} {% endblocktrans %}
-                    {% elif action.type == 'item' and action.verb == 'add' %}
-                        {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url item=action.obj.type %}<a href="{{ url }}">{{ name }}</a> added a new <a href="{{ item_url }}">{{ item }}</a>{% endblocktrans%}
-                    {% elif action.type == 'item' and action.verb == 'update' %}
-                        {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url %}<a href="{{ url }}">{{ name }}</a> updated an <a href="{{ item_url }}">item</a>{% endblocktrans%}
+                    {% elif action.type == 'idea' and action.verb == 'add' %}
+                        {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url item=action.obj.type item_title=action.obj.idea_title|truncatewords:3 %}<a href="{{ url }}">{{ name }}</a> added a new {{ item }}  <a href="{{ item_url }}">{{ item_title }}</a>{% endblocktrans%}
+                    {% elif action.type == 'idea' and action.verb == 'update' %}
+                        {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url item=action.obj.type item_title=action.obj.idea_title|truncatewords:3 %}<a href="{{ url }}">{{ name }}</a> updated the {{ item }} <a href="{{ item_url }}">{{ item_title }}</a>{% endblocktrans%}
                     {% elif action.type == 'blog' and action.verb == 'create' %}
                         {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.url item=action.obj %}<a href="{{ url }}">{{ name }}</a> added new blog entry: <a href="{{ item_url }}">{{ item }}</a>{% endblocktrans%}
                     {% elif action.type == 'project' and action.verb == 'start' %}

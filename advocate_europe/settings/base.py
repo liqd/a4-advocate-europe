@@ -338,7 +338,7 @@ ACTION_TYPES = {
     'rating': [
         ('a4ratings', 'rating'),
     ],
-    'item': [
+    'idea': [
         ('advocate_europe_ideas', 'proposal'),
         ('advocate_europe_ideas', 'ideasketch'),
     ],
