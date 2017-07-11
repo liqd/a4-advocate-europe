@@ -4,7 +4,7 @@
 {% block title %}{% trans 'Invitation to collaborate' %}{% endblock %}
 {% block content %}
 <div class="container">
-    <h2>{% blocktrans with idea=ideasketchinvite.subject %} Do you want to collaborate on "{{ idea }}"?{% endblocktrans %}</h2>
+    <h2>{% blocktrans with object=object.subject %} Do you want to collaborate on "{{ object }}"?{% endblocktrans %}</h2>
     {{ form.non_field_errors }}
     <div class="container-narrow">
         <p>
