@@ -26,7 +26,7 @@
                         </a>
                     </li>
                     {% url 'socialaccount_connections' as social_accounts_url %}
-                    <li class="list-group-item {% if socialaccount_connections == request.get_full_path  %} active {% endif %}">
+                    <li class="list-group-item {% if social_accounts_url == request.get_full_path  %} active {% endif %}">
                         <a href="{% url 'socialaccount_connections' %}">
                             <i class="fa fa-users" aria-hidden="true"></i> {% trans 'Account Connections' %}
                         </a>
