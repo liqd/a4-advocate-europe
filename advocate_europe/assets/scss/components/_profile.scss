@@ -75,3 +75,41 @@
         position: relative;
     }
 }
+
+.profile-form {
+    margin-top: rem(60px);
+
+    .well {
+        padding-top: rem(10px);
+        padding-left: rem(15px);
+        border: none;
+        border-radius: 0;
+        margin-right: rem(15px);
+        background-color: $ae-light-gray;
+
+        .active {
+            background-color: #fff;
+            color: $gray-dark;
+        }
+
+        i {
+            margin-right: 10px;
+        }
+    }
+
+    .list-group-item {
+        border: none;
+        background-color: $ae-light-gray;
+
+        a,
+        a:hover {
+            color: $gray-darker;
+            text-decoration: none;
+        }
+    }
+
+    h2 {
+        margin-top: 0;
+        font-size: rem(24px);
+    }
+}

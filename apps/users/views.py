@@ -1,10 +1,16 @@
+import collections
+
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
+from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
+from django.utils.translation import ugettext_lazy as _
 from django.views import generic
+from rules.compat import access_mixins as mixins
 
 from apps.ideas import models as idea_models
 
-from . import models
+from . import models as user_models
 
 
 class ProfileView(generic.ListView):
@@ -15,7 +21,7 @@ class ProfileView(generic.ListView):
 
     def dispatch(self, request, *args, **kwargs):
         username = kwargs['username']
-        self.user = get_object_or_404(models.User, username=username)
+        self.user = get_object_or_404(user_models.User, username=username)
         return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
@@ -23,3 +29,53 @@ class ProfileView(generic.ListView):
         qs = qs.filter_by_participant(self.user)
         qs = qs.annotate_comment_count()
         return qs
+
+
+class EditProfileView(mixins.LoginRequiredMixin,
+                      SuccessMessageMixin,
+                      generic.UpdateView):
+    model = user_models.User
+    template_name = "advocate_europe_users/profile_form.html"
+    success_message = _('Your profile has been updated')
+    fields = ['username',
+              '_avatar',
+              'motto',
+              'occupation',
+              'city',
+              'country',
+              'birthdate',
+              'languages',
+              'gender',
+              'twitter_handle',
+              'facebook_handle',
+              'instagram_handle']
+
+    def get_object(self):
+        return get_object_or_404(user_models.User, pk=self.request.user.id)
+
+    def get_success_url(self):
+        return reverse('edit_profile')
+
+    @property
+    def raise_exception(self):
+        return self.request.user.is_authenticated()
+
+    @property
+    def formsections(self):
+        return collections.OrderedDict([
+            (_('Your Profile'), [
+                'username',
+                '_avatar',
+                'occupation',
+                'motto',
+                'city',
+                'country',
+                'birthdate',
+                'languages'
+            ]),
+            (_('Social Media Handlers'), [
+                'twitter_handle',
+                'facebook_handle',
+                'instagram_handle'
+            ])
+        ])
