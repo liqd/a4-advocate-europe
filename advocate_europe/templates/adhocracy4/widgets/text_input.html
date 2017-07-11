@@ -2,6 +2,7 @@
 <label for="{{ id }}">
     {{ label }}
 </label>
+<br>
 <form class="search-filter" action="" method="get" id="{{ id }}">
     {% for par_name, value in url_par.items %}
         {% if par_name != name %}

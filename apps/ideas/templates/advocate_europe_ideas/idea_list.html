@@ -10,9 +10,27 @@
     <div class="container">
         <div class="idealist-controls">
             <div class="filter-bar idealist-filter clearfix">
-                {% for field in view.filter.form %}
-                {{ field }}
-                {% endfor %}
+                <div class="hidden-xs">
+                    {% for field in view.filter.form %}
+                    {{ field }}
+                    {% endfor %}
+                </div>
+                <div class="hidden-sm hidden-md hidden-lg mobile-filter">
+                    <button class="btn btn-primary btn-collapse collapsed" type="button" data-toggle="collapse" data-target="#filter" aria-expanded="false" aria-controls="Filter">
+                        <div class="btn-label">
+                            {% trans "Filters" %}
+                            <span class="number-of-filters">2</span>
+                        </div>
+                        <i class="fa fa-chevron-up"></i>
+                    </button>
+                    <div class="collapse" id="filter">
+                    <div class="card card-block">
+                        {% for field in view.filter.form %}
+                        {{ field }}
+                        {% endfor %}
+                    </div>
+                    </div>
+                </div>
             </div>
             {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
             {% if can_export %}

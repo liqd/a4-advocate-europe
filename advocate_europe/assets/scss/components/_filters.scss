@@ -1,0 +1,168 @@
+.idealist {
+    .idealist-controls {
+        padding: rem(5px) rem(5px) 0 rem(5px);
+
+        .btn-primary {
+            margin: rem(5px) rem(5px) rem(5px) 0;
+        }
+    }
+}
+
+.idealist-filter {
+    .filter-element {
+        @media screen and (min-width: $screen-md-min) {
+            margin: rem(5px) rem(5px) rem(5px) 0;
+        }
+    }
+
+    // only pull right on medium and large screens
+
+    .right {
+        @media screen and (min-width: $screen-md-min) {
+            float: right;
+            margin-right: rem(100px);
+        }
+
+        @media screen and (min-width: $screen-lg-min) {
+            float: right;
+            margin-right: rem(20px);
+        }
+    }
+
+    label {
+        margin-bottom: rem(2px);
+        font-size: rem(10px);
+        font-weight: 600;
+        letter-spacing: rem(1px);
+        text-transform: uppercase;
+        color: $gray-dark;
+    }
+
+    .filter-element .btn-filter {
+        i {
+            margin-left: rem(8px);
+            float: right;
+        }
+
+        width: rem(170px);
+        height: rem(30px);
+        border-radius: 5px;
+        background-color: #fff;
+        border: solid 1px $ae-light-gray-shadow;
+        color: $gray-dark;
+
+        @media screen and (max-width: $screen-md-max) {
+            width: rem(118px);
+        }
+    }
+
+    .filter-element .value-label {
+        float: left;
+        text-align: left;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: rem(128px);
+
+        @media screen and (max-width: $screen-md-max) {
+            width: rem(76px);
+        }
+    }
+
+    .filter-element .search-filter {
+        width: rem(270px);
+        height: rem(30px);
+        border-radius: 5px;
+        background-color: #fff;
+        border: solid 1px $ae-light-gray-shadow;
+        color: $gray-dark;
+
+        @media screen and (max-width: $screen-md-max) {
+            width: rem(250px);
+        }
+
+        .search-filter-btn {
+            border: none;
+            height: 100%;
+            background-color: $brand-primary;
+            float: right;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    }
+
+    .search-filter-input {
+        border: none;
+        height: 100%;
+        padding: rem(6px) 0 rem(6px) rem(12px);
+        border-radius: 5px;
+        width: rem(230px);
+        float: left;
+
+        @media screen and (max-width: $screen-md-max) {
+            width: rem(210px);
+        }
+    }
+
+    .mobile-filter {
+        float: none;
+        margin: rem(-15px) auto rem(20px) auto;
+        width: rem(270px);
+        border-radius: 5px;
+        border: solid 1px $ae-dark-gray;
+
+        .btn-collapse {
+            width: 100%;
+            height: rem(40px);
+            margin: 0;
+            padding: rem(8px) rem(12px);
+            background-color: $gray-lighter;
+            border: none;
+            font-size: rem(18px);
+            font-weight: 600;
+        }
+
+        .btn-label {
+            float: left;
+        }
+
+        .btn-collapse .fa {
+            float: right;
+            margin-top: rem(5px);
+        }
+
+        .number-of-filters {
+            position: absolute;
+            margin-left: rem(10px);
+            padding: rem(3px);
+            width: rem(25px);
+            height: rem(25px);
+            border-radius: 50%;
+            background-color: $ae-brand-orange;
+            font-size: rem(14px);
+            text-align: center;
+        }
+
+        .collapsed .fa {
+            transform: rotateZ(180deg);
+        }
+
+        .card-block {
+            text-align: center;
+            padding: rem(15px) 0;
+        }
+
+        label {
+            float: left;
+        }
+
+        .filter-element {
+            margin: rem(5px) rem(5px);
+        }
+
+        .filter-element:nth-child(2n+3) .dropdown-menu {
+            right: 0;
+            left: auto;
+        }
+    }
+}
