@@ -1,0 +1,82 @@
+.user-picker {
+    &-checkbox {
+        border-bottom: solid $gray-lighter 1px;
+
+        &:last-child {
+            border: none;
+        }
+
+        .user-picker-label {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+
+            display: block;
+        }
+    }
+
+    &-input {
+        display: none;
+    }
+
+    &-label-content {
+        display: flex;
+        align-items: center;
+
+        padding: rem(5px);
+    }
+
+    &-label-text {
+        padding-left: 5px;
+
+        &:last-of-type {
+            flex-grow: 1;
+        }
+    }
+
+    &-label-detail {
+        color: $ae-middle-gray;
+        font-weight: normal;
+    }
+
+    &-input:not(:checked) + &-label-content {
+        background-color: $gray-lighter;
+
+        .user-picker-label-text {
+            text-decoration: line-through;
+        }
+
+        .user-picker-cta-checked {
+            display: none;
+        }
+    }
+
+    &-input:checked + &-label-content {
+        .user-picker-cta-unchecked {
+            display: none;
+        }
+    }
+
+    &-cta {
+        color: $link-color;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+            color: $link-hover-color;
+            text-decoration: $link-hover-decoration;
+        }
+
+        &:focus {
+            @include tab-focus;
+        }
+    }
+
+    &-cta-unchecked {
+        color: $gray;
+
+        &:hover {
+            color: $gray-light;
+        }
+    }
+}

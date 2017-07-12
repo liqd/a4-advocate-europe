@@ -1,0 +1,40 @@
+{% load crispy_forms_filters %}
+{% load l10n %}
+
+<div class="controls user-picker {{ field_class }}"{% if flat_attrs %} {{ flat_attrs|safe }}{% endif %}>
+    {% include 'bootstrap3/layout/help_text.html' %}
+
+    {% for value, user in field.field.choices %}
+
+    {% if not inline_class %}<div class="user-picker-checkbox">{% endif %}
+    <label class="user-picker-label {% if inline_class %}checkbox-{{ inline_class }}{% endif %}">
+        <input type="checkbox"
+               {% if value in field.value or username|stringformat:"s" in field.value or username|stringformat:"s" == field.value|stringformat:"s" %} checked="checked"{% endif %}
+               name="{{ field.html_name }}"
+               id="id_{{ field.html_name }}_{{ forloop.counter }}"
+               value="{{ value|unlocalize }}"
+               class="user-picker-input"
+               {{ field.field.widget.attrs|flatatt }}>
+        <div class="user-picker-label-content">
+            {% if user.avatar %}
+            <span class="avatar-round-small" style="background-image: url({{ user.avatar }});"></span>
+            {% endif %}
+            <span class="user-picker-label-text">{{ user.username|unlocalize }}</span>
+            {% if user.detail %}
+            <span class="user-picker-label-text user-picker-label-detail">
+                {{ user.detail|unlocalize|capfirst }}
+            </span>
+            {% endif %}
+            <div class="user-picker-cta user-picker-cta-checked btn-link">
+                {{ user.cta_checked|unlocalize|capfirst }}
+            </div>
+            <div class="user-picker-cta user-picker-cta-unchecked btn-link">
+                {{ user.cta_unchecked|unlocalize|capfirst }}
+            </div>
+        </div>
+    </label>
+    {% if not inline_class %}</div>{% endif %}
+    {% endfor %}
+
+    {% include 'bootstrap3/layout/field_errors_block.html' %}
+</div>
