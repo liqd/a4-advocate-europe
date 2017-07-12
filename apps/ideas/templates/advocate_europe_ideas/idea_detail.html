@@ -71,10 +71,18 @@
             <div class="col-md-3 col-sm-4 col-xs-12 ideadetail-info-boxes">
                   <div class="ideadetail-info-box">
                         <h4>Collaborators</h4>
-                        <p>  {{ idea.first_name }}
-                          {{ idea.last_name }}</p>
+                        <p>
+                            <a href="{% url 'profile' idea.creator.username %}">
+                                <span class="avatar-round-small" style="background-image: url({{ idea.creator.avatar }})"></span> {{ idea.creator.username }}
+                            </a>
+                        </p>
                         {% for collaborator in idea.collaborators.all %}
-                            <p>{{ collaborator.username }}</p>
+                        <p>
+                            <a href="{% url 'profile' collaborator.username %}">
+                                <span class="avatar-round-small" style="background-image: url({{ idea.creator.avatar }})"></span>
+                                {{ collaborator.username }}
+                            </a>
+                        </p>
                         {% endfor %}
                     </div>
 
