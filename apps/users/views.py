@@ -1,5 +1,3 @@
-import collections
-
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
@@ -11,6 +9,7 @@ from rules.compat import access_mixins as mixins
 from apps.ideas import models as idea_models
 
 from . import models as user_models
+from . import forms
 
 
 class ProfileView(generic.ListView):
@@ -37,18 +36,7 @@ class EditProfileView(mixins.LoginRequiredMixin,
     model = user_models.User
     template_name = "advocate_europe_users/profile_form.html"
     success_message = _('Your profile has been updated')
-    fields = ['username',
-              '_avatar',
-              'motto',
-              'occupation',
-              'city',
-              'country',
-              'birthdate',
-              'languages',
-              'gender',
-              'twitter_handle',
-              'facebook_handle',
-              'instagram_handle']
+    form_class = forms.UserProfileForm
 
     def get_object(self):
         return get_object_or_404(user_models.User, pk=self.request.user.id)
@@ -59,23 +47,3 @@ class EditProfileView(mixins.LoginRequiredMixin,
     @property
     def raise_exception(self):
         return self.request.user.is_authenticated()
-
-    @property
-    def formsections(self):
-        return collections.OrderedDict([
-            (_('Your Profile'), [
-                'username',
-                '_avatar',
-                'occupation',
-                'motto',
-                'city',
-                'country',
-                'birthdate',
-                'languages'
-            ]),
-            (_('Social Media Handlers'), [
-                'twitter_handle',
-                'facebook_handle',
-                'instagram_handle'
-            ])
-        ])
