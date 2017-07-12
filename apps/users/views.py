@@ -9,25 +9,49 @@ from rules.compat import access_mixins as mixins
 from apps.ideas import models as idea_models
 
 from . import models as user_models
-from . import forms
+from . import filters, forms
 
 
-class ProfileView(generic.ListView):
-    model = idea_models.Idea
+class KwargsFilteredListView(generic.ListView):
+    """
+    Needs to be moved to adhocracy4.
+    """
+
+    def filter_kwargs(self):
+        default_kwargs = {
+            'data': self.request.GET,
+            'request': self.request,
+            'queryset': super().get_queryset(),
+        }
+
+        return default_kwargs
+
+    def filter(self):
+        return self.filter_set(
+            **self.filter_kwargs()
+        )
+
+    def get_queryset(self):
+        qs = self.filter().qs
+        return qs
+
+
+class ProfileView(KwargsFilteredListView):
     template_name = 'advocate_europe_users/profile.html'
     paginator_class = Paginator
     paginate_by = 9
+    filter_set = filters.ProfileIdeaFilterSet
+    queryset = idea_models.Idea.objects.annotate_comment_count()
+
+    def filter_kwargs(self):
+        kwargs = super().filter_kwargs()
+        kwargs['user'] = self.user
+        return kwargs
 
     def dispatch(self, request, *args, **kwargs):
         username = kwargs['username']
         self.user = get_object_or_404(user_models.User, username=username)
         return super().dispatch(request, *args, **kwargs)
-
-    def get_queryset(self):
-        qs = super().get_queryset()
-        qs = qs.filter_by_participant(self.user)
-        qs = qs.annotate_comment_count()
-        return qs
 
 
 class EditProfileView(mixins.LoginRequiredMixin,

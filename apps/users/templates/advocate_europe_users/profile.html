@@ -104,6 +104,12 @@
                 </div>
 
                 <div role="tabpanel" class="tab-pane active" id="ideas">
+                    <div class="filter-bar idealist-filter clearfix">
+                        {% for field in view.filter.form %}
+                        {{ field }}
+                        {% endfor %}
+                    </div>
+
                     <div class="idealist-list">
                         {% for idea in idea_list %}
                         {% include 'advocate_europe_ideas/includes/idealist_item.html' %}

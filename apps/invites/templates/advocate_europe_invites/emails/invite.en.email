@@ -5,14 +5,14 @@ You have been invited to work on a proposal on {{ site.name }}
 {% endblock %}
 
 {% block headline %}
-You are invited to contribute to “{{ ideasketchinvite.subject.idea_title }}” on <i>{{ site.name }}</i>
+You are invited to contribute to “{{ invite.subject.idea_title }}” on <i>{{ site.name }}</i>
 {% endblock  %}
 
 {% block content %}
-You were invited to colaborate by <i>{{ ideasketchinvite.creator.username }}</i>. If you want to collaborate, please visit the project by clicking the {% if part_type == "txt" %}link{% else %}button{% endif %} below.
+You were invited to colaborate by <i>{{ invite.creator.username }}</i>. If you want to collaborate, please visit the project by clicking the {% if part_type == "txt" %}link{% else %}button{% endif %} below.
 {% endblock %}
 
-{% block cta_url %}{{ email.get_host }}{{ ideasketchinvite.get_absolute_url }}{% endblock %}
+{% block cta_url %}{{ email.get_host }}{{ invite.get_absolute_url }}{% endblock %}
 {% block cta_label %}Accept invitation{% endblock %}
 
 {% block reason %}
