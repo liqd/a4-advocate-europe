@@ -6,47 +6,7 @@
 {% endblock %}
 
 {% block form %}
-
     {% crispy form %}
-
-
-    <!--<form enctype="multipart/form-data" class="custom-form" action="" method="post">
-        {% csrf_token %}
-        {% for name, fields in view.formsections.items %}
-            <div class="form-section">
-                <h2>{{ name }}</h2>
-                {% for field in form %}
-                    {% if field.name in fields %}
-                        <div class="form-group {% if field.errors %} has-error{% endif %}">
-                            {% if field|widget_type == 'checkboxinput' %}
-                                {% if field.help_text %}
-                                    <p class='help-block'>{{ field.help_text }}</p>
-                                {% endif %}
-                                <label>
-                                    {% render_field field %}
-                                    {{ field.label }}
-                                </label>
-                            {% else %}
-                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                                {% if field.help_text %}
-                                    <p class='help-block'>{{ field.help_text }}</p>
-                                {% endif %}
-                                {% render_field field class="form-control" %}
-                            {% endif %}
-                            {% if field.errors %}
-                                <ul class="errorlist">
-                                    {% for error in field.errors %}
-                                        <li> {{ error }} </li>
-                                    {% endfor %}
-                                </ul>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endfor %}
-        <input class="btn btn-primary" type="submit" value="Submit"/>
-    </form>-->
 {% endblock %}
 
 
