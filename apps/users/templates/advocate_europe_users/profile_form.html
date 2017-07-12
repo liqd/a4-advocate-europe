@@ -1,12 +1,16 @@
 {% extends 'advocate_europe_users/base_accounts_settings_form.html' %}
-{% load i18n widget_tweaks static %}
+{% load i18n widget_tweaks static crispy_forms_tags %}
 
 {% block title %}
     {% trans "Edit Profile" %}
 {% endblock %}
 
 {% block form %}
-    <form enctype="multipart/form-data" class="custom-form" action="" method="post">
+
+    {% crispy form %}
+
+
+    <!--<form enctype="multipart/form-data" class="custom-form" action="" method="post">
         {% csrf_token %}
         {% for name, fields in view.formsections.items %}
             <div class="form-section">
@@ -42,7 +46,7 @@
             </div>
         {% endfor %}
         <input class="btn btn-primary" type="submit" value="Submit"/>
-    </form>
+    </form>-->
 {% endblock %}
 
 
