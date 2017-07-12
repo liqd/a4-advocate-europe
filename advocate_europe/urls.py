@@ -14,6 +14,7 @@ from adhocracy4.api import routers as a4routers
 from adhocracy4.comments.api import CommentViewSet
 from apps.ideas import urls as idea_urls
 from apps.invites import urls as invite_urls
+from apps.users import urls as user_urls
 
 js_info_dict = {
     'packages': ('adhocracy4.comments',),
@@ -34,6 +35,7 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
+    url(r'', include(user_urls)),
     url(r'^ideas/', include(idea_urls)),
     url(r'^invites/', include(invite_urls)),
     url(r'^jsi18n/$', javascript_catalog,

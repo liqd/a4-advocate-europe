@@ -244,22 +244,6 @@ class FinanceAndDurationSectionForm(BaseForm):
         ]
 
 
-class FinishForm(forms.Form):
-    section_name = _('Finish')
-
-    class Meta:
-        model = models.IdeaSketch
-        exclude = [
-            'collaborators_emails', 'how_did_you_hear', 'creator', 'module'
-        ]
-
-    @property
-    def helper(self):
-        helper = crisp.helper.FormHelper()
-        helper.form_tag = False
-        return helper
-
-
 class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
     section_name = _('Community Information')
     collaborators_emails = forms.CharField(
@@ -279,30 +263,46 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
         super().__init__(*args, **kwargs)
 
         if self.instance:
-            invites = self.invite_emails
+            invites = self.instance.ideainvite_set.all()
             if invites:
                 self.fields['invites'] = forms.MultipleChoiceField(
                     required=False,
                     help_text=INVITES_EDIT_HELP,
                     label=INVITES_EDIT_TITLE,
                     choices=[
-                        (i, i) for i in invites
+                        (
+                            i.email,
+                            {
+                                'username': i.email,
+                                'detail': _('invitation pending'),
+                                'cta_checked': _('remove'),
+                                'cta_unchecked': _('will be removed')
+                            }
+                        ) for i in invites
                     ],
-                    initial=invites,
+                    initial=[i.email for i in invites],
                     widget=forms.CheckboxSelectMultiple
                 )
                 self.fields.move_to_end('invites', last=False)
 
-            collaborators = self.collaborator_names
+            collaborators = self.instance.collaborators.all()
             if collaborators:
                 self.fields['collaborators'] = forms.MultipleChoiceField(
                     required=False,
                     help_text=COLLABORATORS_EDIT_HELP,
                     label=COLLABORATORS_EDIT_TITLE,
                     choices=[
-                        (c, c) for c in collaborators
+                        (
+                            c.username,
+                            {
+                                'username': c.username,
+                                'avatar': c.avatar,
+                                'cta_checked': _('remove'),
+                                'cta_unchecked': _('will be removed')
+                            }
+                        ) for c in collaborators
                     ],
-                    initial=collaborators,
+                    initial=[c.username for c in collaborators],
                     widget=forms.CheckboxSelectMultiple
                 )
                 self.fields.move_to_end('collaborators', last=False)
@@ -314,25 +314,13 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
         helper = super().helper
         helper['collaborators'].wrap(
             crisp.layout.Field,
-            wrapper_class='checkboxes-delete',
-            css_class='checkbox-delete'
+            template="bootstrap3/user_checkboxselectmultiple_field.html",
         )
         helper['invites'].wrap(
             crisp.layout.Field,
-            wrapper_class='checkboxes-delete',
-            css_class='checkbox-delete'
+            template="bootstrap3/user_checkboxselectmultiple_field.html",
         )
         return helper
-
-    @property
-    def collaborator_names(self):
-        return self.instance.collaborators.all().values_list(
-            'username', flat=True
-        )
-
-    @property
-    def invite_emails(self):
-        return self.instance.ideainvite_set.values_list('email', flat=True)
 
     def clean(self):
         super().clean()
@@ -389,3 +377,19 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
                 )
 
         return self.instance
+
+
+class FinishForm(forms.Form):
+    section_name = _('Finish')
+
+    class Meta:
+        model = models.IdeaSketch
+        exclude = [
+            'collaborators_emails', 'how_did_you_hear', 'creator', 'module'
+        ]
+
+    @property
+    def helper(self):
+        helper = crisp.helper.FormHelper()
+        helper.form_tag = False
+        return helper

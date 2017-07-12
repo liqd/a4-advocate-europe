@@ -17,8 +17,8 @@ def test_community_section_empty_edit(idea_sketch):
         instance=idea_sketch,
     )
 
-    assert list(form.collaborator_names) == []
-    assert list(form.invite_emails) == []
+    assert list(idea_sketch.collaborators.all()) == []
+    assert list(idea_sketch.ideainvite_set.all()) == []
 
     form = idea_forms.CommunitySectionEditForm(
         instance=idea_sketch,
@@ -53,11 +53,6 @@ def test_collaborator_edit(idea_sketch):
     form = idea_forms.CommunitySectionEditForm(
         instance=idea_sketch,
     )
-
-    assert list(form.collaborator_names) == [
-        'Jürgen', 'Erich'
-    ]
-    assert list(form.invite_emails) == ['test@test.de', 'foo@test.de']
 
     form = idea_forms.CommunitySectionEditForm(
         instance=idea_sketch,

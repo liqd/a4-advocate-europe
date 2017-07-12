@@ -290,10 +290,14 @@
 .ideadetail-info-box {
     margin-bottom: rem(10px);
     background-color: $ae-light-gray;
-    padding: rem(10px);
+    padding: rem(10px) rem(12px);
 
     p {
         font-weight: 600;
+    }
+
+    .collaborator {
+        margin-left: rem(6px);
     }
 }
 

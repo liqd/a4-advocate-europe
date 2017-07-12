@@ -118,3 +118,7 @@ class BlogPage(Page):
         ObjectList(content_panels, heading='Content'),
         ObjectList(promote_panels, heading='Promote')
     ])
+
+    @property
+    def creator(self):
+        return self.owner
