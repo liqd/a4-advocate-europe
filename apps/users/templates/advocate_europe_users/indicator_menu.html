@@ -18,6 +18,9 @@
                     <a href="{% url 'admin:index' %}"><i class="fa fa-hand-spock-o fa-fw" aria-hidden="true"></i> <span class="dropdown-text">{% trans "Admin" %}</span></a>
                 </li>
                 {% endif %}
+                <li>
+                    <a href="{% url 'edit_profile' %}"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span class="dropdown-text">{% trans "Account Settings" %}</span></a>
+                </li>
                 {% get_modules as modules %}
                 {% for module in modules %}
                     {% has_perm 'advocate_europe_ideas.add_ideasketch' request.user module as can_add %}

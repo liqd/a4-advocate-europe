@@ -1,0 +1,12 @@
+{% extends 'advocate_europe_users/base_accounts_settings_form.html' %}
+{% load i18n widget_tweaks static crispy_forms_tags %}
+
+{% block title %}
+    {% trans "Edit Profile" %}
+{% endblock %}
+
+{% block form %}
+    {% crispy form %}
+{% endblock %}
+
+

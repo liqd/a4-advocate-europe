@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block content %}
+    <div class="container">
+        <div class="row profile-form">
+            <div class="col-md-3 well">
+                <h1>{% trans 'Account settings' %}</h1>
+                <ul class="list-group">
+                    {% url 'edit_profile' as edit_profile_url %}
+                    <li class="list-group-item {% if edit_profile_url == request.get_full_path  %} active {% endif %}">
+                        <a href="{% url 'edit_profile' %}">
+                            <i class="fa fa-user" aria-hidden="true"></i> {% trans 'Your Profile' %}
+                        </a>
+                    </li>
+                    {% url 'account_change_password' as change_password_url %}
+                    <li class="list-group-item {% if change_password_url == request.get_full_path  %} active {% endif %}">
+                        <a href="{% url 'account_change_password' %}">
+                            <i class="fa fa-lock" aria-hidden="true"></i> {% trans 'Change Password' %}
+                        </a>
+                    </li>
+                    {% url 'account_email' as change_email_url %}
+                    <li class="list-group-item {% if change_email_url == request.get_full_path  %} active {% endif %}">
+                        <a href="{% url 'account_email' %}">
+                            <i class="fa fa-envelope" aria-hidden="true"></i> {% trans 'Mail adresses' %}
+                        </a>
+                    </li>
+                    {% url 'socialaccount_connections' as social_accounts_url %}
+                    <li class="list-group-item {% if social_accounts_url == request.get_full_path  %} active {% endif %}">
+                        <a href="{% url 'socialaccount_connections' %}">
+                            <i class="fa fa-users" aria-hidden="true"></i> {% trans 'Account Connections' %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+            {% block form %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'a4images/imageUploader.js' %}"></script>
+{% endblock %}

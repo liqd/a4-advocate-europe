@@ -1,11 +1,16 @@
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
+from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
+from django.utils.translation import ugettext_lazy as _
 from django.views import generic
+from rules.compat import access_mixins as mixins
 
 from apps.actions import views as action_view
 from apps.ideas import models as idea_models
 
-from . import filters, models
+from . import models as user_models
+from . import filters, forms
 
 
 class KwargsFilteredListView(generic.ListView):
@@ -46,5 +51,24 @@ class ProfileView(action_view.ActivityView, KwargsFilteredListView):
 
     def dispatch(self, request, *args, **kwargs):
         username = kwargs['username']
-        self.user = get_object_or_404(models.User, username=username)
+        self.user = get_object_or_404(user_models.User, username=username)
         return super().dispatch(request, *args, **kwargs)
+
+
+class EditProfileView(mixins.LoginRequiredMixin,
+                      SuccessMessageMixin,
+                      generic.UpdateView):
+    model = user_models.User
+    template_name = "advocate_europe_users/profile_form.html"
+    success_message = _('Your profile has been updated')
+    form_class = forms.UserProfileForm
+
+    def get_object(self):
+        return get_object_or_404(user_models.User, pk=self.request.user.id)
+
+    def get_success_url(self):
+        return reverse('edit_profile')
+
+    @property
+    def raise_exception(self):
+        return self.request.user.is_authenticated()
