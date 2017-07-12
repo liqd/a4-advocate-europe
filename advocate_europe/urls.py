@@ -35,7 +35,7 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    url(r'^users/', include(user_urls)),
+    url(r'', include(user_urls)),
     url(r'^ideas/', include(idea_urls)),
     url(r'^invites/', include(invite_urls)),
     url(r'^jsi18n/$', javascript_catalog,
