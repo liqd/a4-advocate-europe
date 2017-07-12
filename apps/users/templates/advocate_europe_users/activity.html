@@ -9,13 +9,13 @@
             <div class="action__main col-xs-7">
                 <div class="action__line">
                     {% if action.type == 'comment' and action.verb == 'add' %}
-                        {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username comment=action.obj.comment|truncatewords:3 %} <a href="{{ url }}">{{ name }}</a> commented: {{ comment}} {% endblocktrans %}
+                        {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username comment=action.obj.comment|truncatechars:50 %} <a href="{{ url }}">{{ name }}</a> commented: {{ comment}} {% endblocktrans %}
                     {% elif action.type == 'comment' and action.verb == 'update' %}
-                        {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username comment=action.obj.comment|truncatewords:3 %} <a href="{{ url }}">{{ name }}</a> updated comment: {{ comment}} {% endblocktrans %}
+                        {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username comment=action.obj.comment|truncatechars:50 %} <a href="{{ url }}">{{ name }}</a> updated comment: {{ comment}} {% endblocktrans %}
                     {% elif action.type == 'idea' and action.verb == 'add' %}
-                        {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url item=action.obj.type item_title=action.obj.idea_title|truncatewords:3 %}<a href="{{ url }}">{{ name }}</a> added a new {{ item }}  <a href="{{ item_url }}">{{ item_title }}</a>{% endblocktrans%}
+                        {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url item=action.obj.type item_title=action.obj.idea_title|truncatewords:50 %}<a href="{{ url }}">{{ name }}</a> added a new {{ item }}  <a href="{{ item_url }}">{{ item_title }}</a>{% endblocktrans%}
                     {% elif action.type == 'idea' and action.verb == 'update' %}
-                        {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url item=action.obj.type item_title=action.obj.idea_title|truncatewords:3 %}<a href="{{ url }}">{{ name }}</a> updated the {{ item }} <a href="{{ item_url }}">{{ item_title }}</a>{% endblocktrans%}
+                        {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url item=action.obj.type item_title=action.obj.idea_title|truncatewords:50 %}<a href="{{ url }}">{{ name }}</a> updated the {{ item }} <a href="{{ item_url }}">{{ item_title }}</a>{% endblocktrans%}
                     {% elif action.type == 'blog' and action.verb == 'create' %}
                         {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.url item=action.obj %}<a href="{{ url }}">{{ name }}</a> added new blog entry: <a href="{{ item_url }}">{{ item }}</a>{% endblocktrans%}
                     {% elif action.type == 'project' and action.verb == 'start' %}
@@ -37,7 +37,7 @@
 
             </div>
 
-            <div class="action__date col-xs-3">{{ action.timestamp|date:'d.m.Y' }}</div>
+            <div class="action__date">{{ action.timestamp|date:'d.m.Y' }}</div>
         </div>
     {% endfor %}
 </div>

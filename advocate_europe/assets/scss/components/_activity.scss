@@ -3,7 +3,7 @@
     padding: 6px 0;
 
     @media (min-width: $screen-sm) {
-        @include rem(height, 50px);
+        @include rem(min-height, 50px);
     }
 
     .action__icon {
@@ -23,5 +23,6 @@
     .action__date {
         float: right;
         color: $ae-middle-gray;
+        @include rem(margin-right, 5px);
     }
 }
