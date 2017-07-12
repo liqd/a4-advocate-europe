@@ -130,6 +130,11 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         verbose_name=_('Instagram name'),
     )
 
+    website = models.URLField(
+        blank=True,
+        verbose_name=_('Website')
+    )
+
     objects = auth_models.UserManager()
 
     USERNAME_FIELD = 'email'
