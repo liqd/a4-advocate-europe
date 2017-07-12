@@ -1,9 +1,0 @@
-.checkboxes-delete {
-    .checkbox-delete {
-        display: none;
-    }
-
-    .checkbox-delete:not(:checked) + span {
-        text-decoration: line-through;
-    }
-}
