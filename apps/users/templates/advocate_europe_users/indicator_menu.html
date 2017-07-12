@@ -6,7 +6,7 @@
        {% if request.user.is_authenticated %}
         <div class="btn-group user-indicator-btn-group">
             <a href="{% url 'profile' request.user.username %}" class="btn user-indicator-profile-btn">
-                {{ request.user.username }}
+                <span class="user-indicator-profile-avatar avatar-square-small" style="background-image: url({{ request.user.avatar }})"></span> {{ request.user.username }}</span>
             </a>
             <button href="#" class="btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" aria-label="{% trans 'toggle user menu' %}">
                 <span class="caret"></span>
