@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row profile-form">
             <div class="col-md-3 well">
-                <h2>{% trans 'Account settings' %}</h2>
+                <h1>{% trans 'Account settings' %}</h1>
                 <ul class="list-group">
                     {% url 'edit_profile' as edit_profile_url %}
                     <li class="list-group-item {% if edit_profile_url == request.get_full_path  %} active {% endif %}">
