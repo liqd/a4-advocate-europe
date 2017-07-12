@@ -9,7 +9,7 @@
 
         {% include 'advocate_europe_ideas/idea_detail_header.html' %}
         <div class="row ideadetail-tab-bar">
-            <div class="col-xs-7 ideadetail-tabs" role="navigation">
+            <div class="col-xs-7 tabs" role="navigation">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">{% trans "Creators" %}</a></li>
                     <li role="presentation" class="active"><a href="#idea" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Idea" %}</a></li>
@@ -69,14 +69,15 @@
                 {% include 'advocate_europe_ideas/idea_detail_tab_idea.html' %}
             </div>
             <div class="col-md-3 col-sm-4 col-xs-12 ideadetail-info-boxes">
-                {% if idea.collaborators.all %}
-                    <div class="ideadetail-info-box">
+                  <div class="ideadetail-info-box">
                         <h4>Collaborators</h4>
+                        <p>  {{ idea.first_name }}
+                          {{ idea.last_name }}</p>
                         {% for collaborator in idea.collaborators.all %}
                             <p>{{ collaborator.username }}</p>
                         {% endfor %}
                     </div>
-                {% endif %}
+
             </div>
         </div>
         {% if view.display_type == 'idea' %}

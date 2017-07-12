@@ -1,5 +1,8 @@
 import pytest
+
+from django.core import mail
 from django.core.urlresolvers import reverse
+
 from apps.ideas.models import IdeaSketch
 from apps.ideas.phases import IdeaSketchPhase
 
@@ -7,15 +10,13 @@ from tests.helpers import active_phase
 
 
 @pytest.mark.django_db
-def test_ideasketch_create_wizard(client, user,
-                                  idea_sketch_factory):
-    idea_sketch = idea_sketch_factory()
+def test_ideasketch_create_wizard(client, user, module):
     client.login(username=user.email,
                  password='password')
     url = reverse('idea-sketch-create',
-                  kwargs={'slug': idea_sketch.module.slug})
+                  kwargs={'slug': module.slug})
 
-    with active_phase(idea_sketch.module, IdeaSketchPhase):
+    with active_phase(module, IdeaSketchPhase):
 
         # Form 1 (Applicant)
         response = client.get(url)
@@ -92,7 +93,7 @@ def test_ideasketch_create_wizard(client, user,
         # Form 7 (Finish)
         response = client.post(url, data)
         assert response.status_code == 200
-        assert IdeaSketch.objects.all().count() == 1
+        assert IdeaSketch.objects.all().count() == 0
 
         data = {
             'idea_sketch_create_wizard-current_step': '6',
@@ -102,9 +103,13 @@ def test_ideasketch_create_wizard(client, user,
         my_idea_sketch = IdeaSketch.objects.get(idea_title='My very good idea')
 
         assert response.status_code == 302
-        assert IdeaSketch.objects.all().count() == 2
+        assert IdeaSketch.objects.all().count() == 1
         assert my_idea_sketch.first_name == 'Qwertz'
         assert (my_idea_sketch.get_idea_location_display() ==
                 'Linkage to the Ruhr area of Germany')
         assert my_idea_sketch.target_group == 'Children'
         assert my_idea_sketch.collaboration_camp_option == 'not_sure'
+        assert mail.outbox[0].subject.startswith(
+            'You have sucessfully submitted your Idea Sketch to'
+        )
+        assert mail.outbox[0].recipients() == [user.email]

@@ -1,0 +1,81 @@
+.profile-header {
+    background-color: $brand-primary;
+}
+
+.profile-title {
+    font-size: rem(24px);
+}
+
+@media screen and (min-width: $screen-sm-min) {
+    .profile-image-holder {
+        position: relative;
+        height: rem(120px);
+
+        .profile-image {
+            position: absolute;
+            bottom: rem(-100px);
+            width: rem(170px);
+            height: rem(170px);
+        }
+    }
+}
+
+@media screen and (max-width: $screen-xs-max) {
+    .profile-image-holder {
+        .profile-image {
+            margin: rem(10px);
+            width: rem(80px);
+            height: rem(80px);
+        }
+    }
+}
+
+.profile-image {
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2)
+}
+
+.profile-navbar {
+    background-color: $ae-light-gray;
+}
+
+.profile-traits {
+    list-style: none;
+    padding: rem(10px 0);
+
+    .trait-icon {
+        color: $ae-middle-gray;
+    }
+}
+
+.profile-info-pane {
+    font-size: rem(16px);
+}
+
+.profile {
+    .profile-navbar {
+        margin-bottom: rem(20px);
+    }
+}
+
+
+@media screen and (min-width: $screen-sm-min) {
+
+    /* Allow info tab to be only accessibale in below xs breakpoint. On
+     * bigger devices it will be displayed as side bar.
+     */
+
+    .profile-tab-content {
+        position: static;
+
+        > .profile-info-pane {
+            display: block;
+            position: absolute;
+            left: 0;
+            padding-top: rem(35px)
+        }
+    }
+
+    .profile-sidebar-holder {
+        position: relative;
+    }
+}

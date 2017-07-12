@@ -1,0 +1,23 @@
+{% load static thumbnail %}
+<div class="idealist-item">
+    <div class="idealist-upper">
+        <div class="idealist-image">
+            <a href="{% url 'idea-detail' slug=idea.slug %}"><img src="{% if idea.idea_image %} {{ idea.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_ideatileimage_400x200.png' %} {% endif %}"></a>
+        </div>
+        <div class="idealist-text">
+            <div class="idealist-category">
+                {{ idea.idea_topics_names|join:" | " }}
+            </div>
+
+            <h4><a href="{% url 'idea-detail' slug=idea.slug %}">{{ idea.idea_title }}</a></h4>
+            {{ idea.idea_pitch|truncatechars:240 }}
+        </div>
+    </div>
+    <div class="idealist-footer">
+        {{ idea.type }}
+        <span class="pull-right">
+            <i class="fa fa-heart-o" aria-hidden="true"></i> 0
+            <i class="fa fa-comment-o" aria-hidden="true"></i> {{ idea.comment_count }}
+        </span>
+    </div>
+</div>

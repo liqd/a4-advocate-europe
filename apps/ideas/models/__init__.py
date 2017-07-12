@@ -22,8 +22,11 @@ from .abstracts.selection_criteria_section import \
     AbstractSelectionCriteriaSection
 
 
-class IdeaSketchQuerySet(query.RateableQuerySet, query.CommentableQuerySet):
-    pass
+class IdeaQuerySet(query.RateableQuerySet, query.CommentableQuerySet):
+    def filter_by_participant(self, user):
+        return self.filter(
+            models.Q(creator=user) | models.Q(collaborators=user)
+        )
 
 
 class AbstractIdea(AbstractApplicantSection,
@@ -47,7 +50,6 @@ class AbstractIdea(AbstractApplicantSection,
 
 
 class Idea(AbstractIdea):
-    is_proposal = models.BooleanField(default=False)
     visit_camp = models.BooleanField(default=False)
     is_winner = models.BooleanField(default=False)
     community_award_winner = models.BooleanField(default=False)
@@ -57,7 +59,7 @@ class Idea(AbstractIdea):
     comments = GenericRelation(comment_models.Comment,
                                related_query_name='idea_sketch',
                                object_id_field='object_pk')
-    objects = IdeaSketchQuerySet.as_manager()
+    objects = IdeaQuerySet.as_manager()
 
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
