@@ -4,7 +4,7 @@ from .models import Action
 
 
 class ActivityView(generic.ListView):
-    count = 5
+    count = 10
 
     @property
     def actions(self):
