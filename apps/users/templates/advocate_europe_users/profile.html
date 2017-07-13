@@ -75,27 +75,36 @@
                             <span aria-label="{% trans 'occupation' %}">{{ user.occupation }}</span>
                         </li>
                         {% endif %}
-                        {% if user.twitter %}
+                        {% if user.twitter_handle %}
                         <li>
                             <i class="fa fa-twitter fa-fw trait-icon" aria-hidden="true"></i>
                             <span aria-label="twitter">
-                                <a href="https:/twitter.com/{{ user.twitter }}">@{{ user.twitter }}</a>
+                                <a href="https:/twitter.com/{{ user.twitter_handle }}" target="_blank">@{{ user.twitter_handle }}</a>
                             </span>
                         </li>
                         {% endif %}
-                        {% if user.facebook %}
+                        {% if user.facebook_handle %}
                         <li>
                             <i class="fa fa-facebook fa-fw trait-icon" aria-hidden="true"></i>
                             <span aria-label="facebook">
-                                <a href="https:/facebook.com/{{ user.facebook }}">{{ user.facebook }}</a>
+                                <a href="https:/facebook.com/{{ user.facebook_handle }}" target="_blank">{{ user.facebook_handle }}</a>
                             </span>
                         </li>
                         {% endif %}
-                        {% if user.instagram %}
+                        {% if user.instagram_handle %}
                         <li>
                             <i class="fa fa-instagram fa-fw trait-icon" aria-hidden="true"></i>
                             <span aria-label="instagram">
-                                <a href="https:/instagram.com/{{ user.instagram }}">{{ user.instagram  }}</a>
+                                <a href="https:/instagram.com/{{ user.instagram_handle }}" target="_blank">{{ user.instagram_handle  }}</a>
+                            </span>
+                        </li>
+                        {% endif %}
+
+                        {% if user.website %}
+                        <li>
+                            <i class="fa fa-link fa-fw trait-icon" aria-hidden="true"></i>
+                            <span aria-label="Website">
+                                <a href="{{ user.website }}" target="_blank">{% trans 'Website' %}</a>
                             </span>
                         </li>
                         {% endif %}
