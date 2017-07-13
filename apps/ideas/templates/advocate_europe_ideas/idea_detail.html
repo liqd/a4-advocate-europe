@@ -72,10 +72,8 @@
                   <div class="ideadetail-info-box">
                         <h4>Collaborators</h4>
                         <p>
-                            <a href="{% url 'profile' idea.creator.username %}">
-                                <span class="avatar-round-small" style="background-image: url({{ idea.creator.avatar }})"></span>
-                            <span class="collaborator">{{ idea.creator.username }}</span>
-                            </a>
+                            <span class="avatar-round-small" style="background-image: url({{ idea.creator.avatar.url }})"></span>
+                            <span class="collaborator"><a href="{% url 'profile' idea.creator.username %}">{{ idea.creator.username }}</a></span>
                         </p>
                         {% for collaborator in idea.collaborators.all %}
                         <p>
