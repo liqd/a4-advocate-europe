@@ -1,4 +1,4 @@
-{% load i18n thumbnail rules rule_tags %}
+{% load i18n static thumbnail rules rule_tags %}
 
 <ul class="nav navbar-nav navbar-right user-indicator" id="user-indicator">
     <li class="dropdown">
@@ -6,7 +6,7 @@
        {% if request.user.is_authenticated %}
         <div class="btn-group user-indicator-btn-group">
             <a href="{% url 'profile' request.user.username %}" class="btn user-indicator-profile-btn">
-                <span class="user-indicator-profile-avatar avatar-square-small" style="background-image: url({{ request.user.avatar }})"></span> {{ request.user.username }}</span>
+                <span class="user-indicator-profile-avatar avatar-square-small" style="background-image: url({{ request.user.avatar.url }})"></span> {{ request.user.username }}</span>
             </a>
             <button href="#" class="btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" aria-label="{% trans 'toggle user menu' %}">
                 <span class="caret"></span>
