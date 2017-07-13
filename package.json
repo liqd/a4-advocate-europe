@@ -1,7 +1,7 @@
 {
   "name": "advocate_europe",
   "dependencies": {
-    "adhocracy4": "liqd/adhocracy4#bfd615505103c1205a9f708fe6e5aef5c03b4fc8",
+    "adhocracy4": "liqd/adhocracy4#693426605037fdfb4e0a39da05dce4576bc28b1c",
     "autoprefixer": "^6.5.2",
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",

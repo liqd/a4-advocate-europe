@@ -1,7 +1,7 @@
 import django_filters
 from django.utils.translation import ugettext_lazy as _
 
-from adhocracy4.filters.filters import DefaultsFilterSet
+from adhocracy4.filters.filters import DefaultsFilterSet, FreeTextFilter
 from adhocracy4.projects.models import Project
 from apps.contrib import widgets
 
@@ -32,10 +32,14 @@ class OrderingFilterWidget(widgets.DropdownLinkWidget):
     right = True
 
 
+class FreeTextFilterWidget(widgets.TextInputWidget):
+    label = _('Search')
+
+
 class IdeaFilterSet(DefaultsFilterSet):
 
     defaults = {
-        'ordering': 'newest'
+        'ordering': 'newest',
     }
 
     idea_topics = django_filters.CharFilter(
@@ -91,6 +95,16 @@ class IdeaFilterSet(DefaultsFilterSet):
         widget=OrderingFilterWidget
     )
 
+    search = FreeTextFilter(
+        widget=FreeTextFilterWidget,
+        fields=['idea_pitch',
+                'idea_title',
+                'idea_subtitle',
+                'first_name',
+                'last_name',
+                'organisation_name']
+    )
+
     class Meta:
         model = models.Idea
-        fields = ['project', 'status', 'idea_topics', 'ordering']
+        fields = ['search', 'project', 'status', 'idea_topics', 'ordering']

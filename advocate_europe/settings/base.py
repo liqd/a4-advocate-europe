@@ -225,6 +225,7 @@ IMAGE_ALIASES = {
         'fileformats': ('image/png', 'image/jpeg', 'image/gif')
     },
     'heroimage': {'min_resolution': (1300, 600)},
+    'tileimage': {'min_resolution': (500, 300)},
     'logo': {'min_resolution': (200, 200), 'aspect_ratio': (1, 1)},
     'avatar': {'min_resolution': (200, 200)},
     'idea_image': {'min_resolution': (400, 200)},
