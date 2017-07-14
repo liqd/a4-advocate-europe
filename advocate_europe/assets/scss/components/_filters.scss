@@ -29,7 +29,7 @@
         }
     }
 
-    label {
+    .filter-label {
         margin-bottom: rem(2px);
         font-size: rem(10px);
         font-weight: 600;
@@ -45,7 +45,7 @@
         }
 
         width: rem(170px);
-        height: rem(30px);
+        //height: rem(30px);
         border-radius: 5px;
         background-color: #fff;
         border: solid 1px $ae-light-gray-shadow;
@@ -71,7 +71,7 @@
 
     .filter-element .search-filter {
         width: rem(270px);
-        height: rem(30px);
+        //height: rem(30px);
         border-radius: 5px;
         background-color: #fff;
         border: solid 1px $ae-light-gray-shadow;
