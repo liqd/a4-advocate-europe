@@ -6,7 +6,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.views import generic
 from rules.compat import access_mixins as mixins
 
-from apps.actions import views as action_view
 from apps.ideas import models as idea_models
 
 from . import models as user_models
@@ -37,12 +36,13 @@ class KwargsFilteredListView(generic.ListView):
         return qs
 
 
-class ProfileView(action_view.ActivityView, KwargsFilteredListView):
+class ProfileView(KwargsFilteredListView):
     template_name = 'advocate_europe_users/profile.html'
     paginator_class = Paginator
     paginate_by = 9
     filter_set = filters.ProfileIdeaFilterSet
     queryset = idea_models.Idea.objects.annotate_comment_count()
+    action_count = 10
 
     def filter_kwargs(self):
         kwargs = super().filter_kwargs()
@@ -53,6 +53,12 @@ class ProfileView(action_view.ActivityView, KwargsFilteredListView):
         username = kwargs['username']
         self.user = get_object_or_404(user_models.User, username=username)
         return super().dispatch(request, *args, **kwargs)
+
+    @property
+    def actions(self):
+        qs = self.user.action_set.all()
+        qs = qs.filter_public().exclude_updates()[:self.action_count]
+        return qs
 
 
 class EditProfileView(mixins.LoginRequiredMixin,
