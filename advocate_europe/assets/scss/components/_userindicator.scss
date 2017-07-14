@@ -15,19 +15,19 @@
         margin: $navbar-padding-vertical/1.5 0;
         display: block;
         position: static; // overwrite position relative of button group
+        height: rem(31px);
 
         .user-indicator-profile-btn,
         .dropdown-toggle {
             background-color: $ae-light-gray;
             color: $gray-dark;
+            border: none;
+            height: 100%;
         }
 
         .user-indicator-profile-avatar {
 
-            /* remove boostrap button paddings */
-            margin: rem(-6px 12px -6px -12px);
-
-            height: rem(31px);
+            height: 100%;
             width: rem(31px);
 
             border-top-left-radius: 4px;
@@ -38,8 +38,13 @@
             vertical-align: middle;
         }
 
+        .user-indicator-profile-username {
+            padding: rem(6px 12px);
+        }
+
         .user-indicator-profile-btn {
             border-right: 2px solid $ae-dark-gray;
+            padding: 0;
         }
 
         .user-login {
