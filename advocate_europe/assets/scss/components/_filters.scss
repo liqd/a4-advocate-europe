@@ -39,21 +39,16 @@
     }
 
     .filter-element .btn-filter {
-        i {
+        .drop-down-caret {
             margin-left: rem(8px);
             float: right;
+            line-height: rem(20px);
         }
 
-        width: rem(170px);
-        //height: rem(30px);
         border-radius: 5px;
         background-color: #fff;
         border: solid 1px $ae-light-gray-shadow;
         color: $gray-dark;
-
-        @media screen and (max-width: $screen-md-max) {
-            width: rem(118px);
-        }
     }
 
     .filter-element .value-label {
@@ -70,31 +65,24 @@
     }
 
     .filter-element .search-filter {
-        width: rem(270px);
-        //height: rem(30px);
         border-radius: 5px;
         background-color: #fff;
         border: solid 1px $ae-light-gray-shadow;
         color: $gray-dark;
 
-        @media screen and (max-width: $screen-md-max) {
-            width: rem(250px);
-        }
-
         .search-filter-btn {
             border: none;
-            height: 100%;
             background-color: $brand-primary;
-            float: right;
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
         }
     }
 
     .search-filter-input {
         border: none;
         height: 100%;
-        padding: rem(6px) 0 rem(6px) rem(12px);
+        line-height: rem(20px);
+        padding: rem(6px 12px);
         border-radius: 5px;
         width: rem(230px);
         float: left;
