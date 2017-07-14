@@ -1,0 +1,35 @@
+{% load i18n %}
+
+<div>
+    {% for action in view.actions %}
+        <div class="action clearfix">
+            <div class="action-icon">
+              <i class="fa fa-{{ action.icon }} fa-fw" aria-hidden="true"></i>
+            </div>
+            <div class="action-date">{{ action.timestamp|date:'d.m.Y' }}</div>
+            {% if action.type == 'comment' and action.verb == 'add' %}
+            {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username comment=action.obj.comment|truncatechars:50 %} <a href="{{ url }}">{{ name }}</a> commented: {{ comment}} {% endblocktrans %}
+            {% elif action.type == 'comment' and action.verb == 'update' %}
+            {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username comment=action.obj.comment|truncatechars:50 %} <a href="{{ url }}">{{ name }}</a> updated comment: {{ comment}} {% endblocktrans %}
+            {% elif action.type == 'idea' and action.verb == 'add' %}
+            {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url item=action.obj.type item_title=action.obj.idea_title|truncatewords:50 %}<a href="{{ url }}">{{ name }}</a> added a new {{ item }}  <a href="{{ item_url }}">{{ item_title }}</a>{% endblocktrans%}
+            {% elif action.type == 'idea' and action.verb == 'update' %}
+            {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url item=action.obj.type item_title=action.obj.idea_title|truncatewords:50 %}<a href="{{ url }}">{{ name }}</a> updated the {{ item }} <a href="{{ item_url }}">{{ item_title }}</a>{% endblocktrans%}
+            {% elif action.type == 'blog' and action.verb == 'create' %}
+            {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.url item=action.obj %}<a href="{{ url }}">{{ name }}</a> added new blog entry: <a href="{{ item_url }}">{{ item }}</a>{% endblocktrans%}
+            {% elif action.type == 'project' and action.verb == 'start' %}
+            {% trans "New participation started" %}
+            {% elif action.type == 'phase' and action.verb == 'schedule' %}
+            {% trans "Participation phase will end soon:" %}
+            {{ action.obj.name }}
+            {% else %}
+            {{ action }}
+            {% endif %}
+            {% if action.type == 'comment' and action.verb == 'add' %}
+                <br> {% blocktrans with url=action.obj.get_absolute_url name=action.target %}on <a href="{{ url }}">{{ name }}</a>{% endblocktrans %}
+            {% elif action.type == 'idea' and action.verb == 'add' %}
+                <br> {% blocktrans with url=action.obj.get_absolute_url name=action.target %}to <a href="{{ url }}">{{ name }}</a>{% endblocktrans %}
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
