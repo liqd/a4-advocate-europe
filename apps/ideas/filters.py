@@ -97,12 +97,30 @@ class IdeaFilterSet(DefaultsFilterSet):
 
     search = FreeTextFilter(
         widget=FreeTextFilterWidget,
-        fields=['idea_pitch',
-                'idea_title',
+        fields=['idea_title',  # idea section
                 'idea_subtitle',
-                'first_name',
+                'idea_pitch',
+                'idea_location_specify',
+                'challenge',
+                'outcome',
+                'plan',
+                'importance',
+                'reach_out',
+                'first_name',  # applicant section
                 'last_name',
-                'organisation_name']
+                'organisation_name',
+                'organisation_website',
+                'organisation_country',
+                'partner_organisation_1_name',  # partners section
+                'partner_organisation_1_website',
+                'partner_organisation_1_country',
+                'partner_organisation_2_name',
+                'partner_organisation_2_website',
+                'partner_organisation_2_country',
+                'partner_organisation_3_name',
+                'partner_organisation_3_website',
+                'partner_organisation_3_country',
+                'partners_more_info']
     )
 
     class Meta:
