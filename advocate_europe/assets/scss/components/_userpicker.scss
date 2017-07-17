@@ -22,16 +22,13 @@
     &-label-content {
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
 
         padding: rem(5px);
     }
 
     &-label-text {
         padding-left: 5px;
-
-        &:last-of-type {
-            flex-grow: 1;
-        }
     }
 
     &-label-detail {
@@ -46,7 +43,8 @@
             text-decoration: line-through;
         }
 
-        .user-picker-cta-checked {
+        .user-picker-cta-checked,
+        .user-picker-label-detail {
             display: none;
         }
     }
@@ -59,7 +57,8 @@
 
     &-cta {
         color: $link-color;
-        text-decoration: none;
+        text-align: right;
+        flex-grow: 1;
 
         &:hover,
         &:focus {
