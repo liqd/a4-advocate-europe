@@ -9,6 +9,20 @@ class UserAdmin(auth.admin.UserAdmin):
         (None, {'fields': ('username', 'email', 'password')}),
         (_('Permissions'), {'fields': ('is_staff', 'is_superuser')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+        (_('Profile data'), {'fields': (
+            '_avatar',
+            'city',
+            'country',
+            'birthdate',
+            'occupation',
+            'languages',
+            'motto',
+            'gender',
+            'twitter_handle',
+            'facebook_handle',
+            'instagram_handle',
+            'website',
+        )})
     )
     add_fieldsets = (
         (None, {
