@@ -275,8 +275,8 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
                             {
                                 'username': i.email,
                                 'detail': _('invitation pending'),
-                                'cta_checked': _('remove'),
-                                'cta_unchecked': _('will be removed')
+                                'cta_checked': _('revoke'),
+                                'cta_unchecked': _('will be revoked on save')
                             }
                         ) for i in invites
                     ],
@@ -298,7 +298,7 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
                                 'username': c.username,
                                 'avatar': c.avatar,
                                 'cta_checked': _('remove'),
-                                'cta_unchecked': _('will be removed')
+                                'cta_unchecked': _('will be removed on save')
                             }
                         ) for c in collaborators
                     ],
