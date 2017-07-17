@@ -73,14 +73,14 @@
                         <h4>Collaborators</h4>
                         <p>
                             <a href="{% url 'profile' idea.creator.username %}">
-                                <span class="avatar-round-small" style="background-image: url({{ idea.creator.avatar }})"></span>
+                                <span class="avatar-round-small" style="background-image: url({{ idea.creator.avatar_or_fallback_url }})"></span>
                             <span class="collaborator">{{ idea.creator.username }}</span>
                             </a>
                         </p>
                         {% for collaborator in idea.collaborators.all %}
                         <p>
                             <a href="{% url 'profile' collaborator.username %}">
-                                <span class="avatar-round-small" style="background-image: url({{ idea.creator.avatar }})"></span>
+                                <span class="avatar-round-small" style="background-image: url({{ collaborator.avatar_or_fallback_url }})"></span>
                                 <span class="collaborator">{{ collaborator.username }}</span>
                             </a>
                         </p>

@@ -296,7 +296,7 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
                             c.username,
                             {
                                 'username': c.username,
-                                'avatar': c.avatar,
+                                'avatar': c.avatar_or_fallback_url,
                                 'cta_checked': _('remove'),
                                 'cta_unchecked': _('will be removed')
                             }
