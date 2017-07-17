@@ -53,8 +53,8 @@
     </div>
 
     <div class="container">
-        <div class="row profile-sidebar-holder">
-            <main class="col-sm-offset-3 col-sm-9 tab-content profile-tab-content">
+        <div class="row">
+            <main class="tab-content profile-tab-content">
                 <div role="tabpanel" class="profile-info-pane tab-pane col-sm-3" id="info">
                     <h1 class="profile-title">{{ view.user.username }}</h1>
                     <div>{{ view.user.motto }}</div>
@@ -103,7 +103,7 @@
                     </ul>
                 </div>
 
-                <div role="tabpanel" class="tab-pane active" id="ideas">
+                <div role="tabpanel" class="tab-pane active col-sm-9" id="ideas">
                     <div class="filter-bar idealist-filter clearfix">
                         {% for field in view.filter.form %}
                         {{ field }}
@@ -123,7 +123,7 @@
                 </div>
 
 
-                <div role="tabpanel" class="tab-pane" id="activities">
+                <div role="tabpanel" class="tab-pane col-sm-9" id="activities">
                   {% include 'advocate_europe_users/activity.html'%}
                 </div>
             </main>
