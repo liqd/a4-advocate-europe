@@ -227,7 +227,7 @@ IMAGE_ALIASES = {
     'heroimage': {'min_resolution': (1300, 600)},
     'tileimage': {'min_resolution': (500, 300)},
     'logo': {'min_resolution': (200, 200), 'aspect_ratio': (1, 1)},
-    'avatar': {'min_resolution': (200, 200)},
+    'avatar': {'min_resolution': (340, 340)},
     'idea_image': {'min_resolution': (400, 200)},
 }
 
@@ -236,7 +236,7 @@ THUMBNAIL_ALIASES = {
         'heroimage': {'size': (1500, 500), 'crop': 'smart'},
         'ideatileimage': {'size': (400, 200), 'crop': 'smart'},
         'thumbnail': {'size': (240, 240), 'crop': 'smart'},
-        'avatar': {'size': (60, 60), 'crop': 'smart'}
+        'avatar': {'size': (340, 340), 'crop': 'smart'}
     }
 }
 # Static files (CSS, JavaScript, Images)
