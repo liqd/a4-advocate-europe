@@ -73,7 +73,7 @@ INSTALLED_APPS = [
     'cms.snippets.apps.SnippetsConfig',
     'cms.blog.apps.BlogConfig',
 
-    'apps.actions',
+    'apps.actions.apps.ActionsConfig',
     'apps.contrib',
     'apps.users.apps.UsersConfig',
     'apps.ideas.apps.IdeasConfig',
@@ -229,6 +229,7 @@ IMAGE_ALIASES = {
     'logo': {'min_resolution': (200, 200), 'aspect_ratio': (1, 1)},
     'avatar': {'min_resolution': (340, 340)},
     'idea_image': {'min_resolution': (400, 200)},
+    'tileimage': {},
 }
 
 THUMBNAIL_ALIASES = {
@@ -324,29 +325,6 @@ A4_ACTIONABLES = (
     ('a4comments', 'comment'),
     ('cms_blog', 'blogpage')
 )
-
-ACTION_TYPES = {
-    'project': [
-        ('a4projects', 'project'),
-    ],
-    'phase': [
-        ('a4phases', 'phase'),
-    ],
-    'comment': [
-        ('a4comments', 'comment'),
-        ('advocate_europe_ideas', 'idea'),
-    ],
-    'rating': [
-        ('a4ratings', 'rating'),
-    ],
-    'idea': [
-        ('advocate_europe_ideas', 'proposal'),
-        ('advocate_europe_ideas', 'ideasketch'),
-    ],
-    'blog': [
-        ('cms_blog', 'blogpage'),
-    ]
-}
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
