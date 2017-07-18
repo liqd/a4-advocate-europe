@@ -58,7 +58,7 @@
                         {% if post.image %}
                             {% image post.image fill-470x300 as image%}
                         {% endif %}
-                        <div class="blog-index-image col-xs-12 col-sm-5 col-sm-offset-3 col-md-5 col-md-offset-2" style="background-image: url({% if image %} {{ image.url }} {% else %} {% static 'images/placeholder_870x500.png' %} {% endif %});">
+                        <div class="blog-index-image col-xs-12 col-sm-5 col-sm-offset-3 col-md-5 col-md-offset-2" style="background-image: url({% if post.image %} {{ image.url }} {% else %} {% static 'images/placeholder_870x500.png' %} {% endif %});">
                         </div>
                         <div class="blogindex-text col-xs-12 col-sm-4 col-md-3">
                             {% include 'cms_blog/blog_categories.html' with categories=post.categories.all %}
