@@ -1,28 +1,33 @@
 .action {
+    padding: rem(5px 0);
+
     border-bottom: 1px solid $ae-dark-gray;
-    padding: 6px 0;
 
-    @media (min-width: $screen-sm) {
-        @include rem(min-height, 50px);
+    &:last-child {
+        border-bottom: none;
     }
 
-    .action__icon {
+    .action-icon {
         float: left;
-        background-color: $ae-light-gray;
-        @include rem(width, 38px);
-        @include rem(height, 38px);
-        @include rem(margin-right, 5px);
-        @include rem(padding, 12.5px);
+
+        width: rem(50px);
+        height: rem(50px);
+
+        margin-right: rem(5px);
+
         color: $brand-primary;
+        background-color: $ae-light-gray;
+
+        text-align: center;
+        line-height: rem(50px);
+        font-size: rem(24px);
     }
 
-    .action__main {
-        float: left;
-    }
-
-    .action__date {
+    .action-date {
         float: right;
+
+        margin-left: rem(5px);
+
         color: $ae-middle-gray;
-        @include rem(margin-right, 5px);
     }
 }

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n rules %}
+{% load i18n rules idea_tags %}
 
 {% block content %}
 <div class="idealist">
@@ -10,24 +10,32 @@
     <div class="container">
         <div class="idealist-controls">
             <div class="filter-bar idealist-filter clearfix">
-                <div class="idealist-search btn-group">
-                    <label for="{{ id }}">
-                        Search
-                    </label>
-                    <br>
-                    <button
-                        type="button"
-                        class="btn btn-default btn-filter-group"
-                    >
-                        <div class="value-label">
-                        Placeholder for freetextfilter
-                        </div>
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </button>
-                </div>
-                {% for field in view.filter.form %}
+                <div class="hidden-xs">
+                    {% for field in view.filter.form %}
                     {{ field }}
-                {% endfor %}
+                    {% endfor %}
+                </div>
+                <div class="hidden-sm hidden-md hidden-lg mobile-filter">
+                    <button class="btn btn-primary btn-collapse collapsed" type="button" data-toggle="collapse" data-target="#filter" aria-expanded="false" aria-controls="Filter">
+                        <div class="btn-label">
+                            {% trans "Filters" %}
+                            {% count_active_filter view.filter.data as filter_count %}
+                            {% if filter_count > 0 %}
+                            <span class="number-of-filters">
+                                {{ filter_count }}
+                            </span>
+                            {% endif %}
+                        </div>
+                        <i class="fa fa-chevron-up"></i>
+                    </button>
+                    <div class="collapse" id="filter">
+                    <div class="card card-block">
+                        {% for field in view.filter.form %}
+                        {{ field }}
+                        {% endfor %}
+                    </div>
+                    </div>
+                </div>
             </div>
             {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
             {% if can_export %}

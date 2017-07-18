@@ -1,7 +1,7 @@
 import django_filters
 from django.utils.translation import ugettext_lazy as _
 
-from adhocracy4.filters.filters import DefaultsFilterSet
+from adhocracy4.filters.filters import DefaultsFilterSet, FreeTextFilter
 from adhocracy4.projects.models import Project
 from apps.contrib import widgets
 
@@ -32,10 +32,14 @@ class OrderingFilterWidget(widgets.DropdownLinkWidget):
     right = True
 
 
+class FreeTextFilterWidget(widgets.TextInputWidget):
+    label = _('Search')
+
+
 class IdeaFilterSet(DefaultsFilterSet):
 
     defaults = {
-        'ordering': 'newest'
+        'ordering': 'newest',
     }
 
     idea_topics = django_filters.CharFilter(
@@ -91,6 +95,34 @@ class IdeaFilterSet(DefaultsFilterSet):
         widget=OrderingFilterWidget
     )
 
+    search = FreeTextFilter(
+        widget=FreeTextFilterWidget,
+        fields=['idea_title',  # idea section
+                'idea_subtitle',
+                'idea_pitch',
+                'idea_location_specify',
+                'challenge',
+                'outcome',
+                'plan',
+                'importance',
+                'reach_out',
+                'first_name',  # applicant section
+                'last_name',
+                'organisation_name',
+                'organisation_website',
+                'organisation_country',
+                'partner_organisation_1_name',  # partners section
+                'partner_organisation_1_website',
+                'partner_organisation_1_country',
+                'partner_organisation_2_name',
+                'partner_organisation_2_website',
+                'partner_organisation_2_country',
+                'partner_organisation_3_name',
+                'partner_organisation_3_website',
+                'partner_organisation_3_country',
+                'partners_more_info']
+    )
+
     class Meta:
         model = models.Idea
-        fields = ['project', 'status', 'idea_topics', 'ordering']
+        fields = ['search', 'project', 'status', 'idea_topics', 'ordering']
