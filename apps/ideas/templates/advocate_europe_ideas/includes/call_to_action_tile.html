@@ -1,0 +1,16 @@
+{% load static i18n rules rule_tags %}
+<div class="call-to-action-tile idealist-item">
+    <div class="call-to-action-img">
+        <img src="{% static 'images/ae_logo_white.svg' %}">
+    </div>
+    <div>
+        <h4>{% trans "Got an idea? Share it!" %}</h4>
+        <div>{% trans "Get support from the community and win funding for your project!" %}</div>
+        <a class="call-to-action-link" href="#">{% trans "Read about the criterias" %}</a>
+    </div>
+    {% get_modules as modules %}
+        {% has_perm 'advocate_europe_ideas.add_ideasketch' request.user modules.0 as can_add %}
+        {% if can_add %}
+        <a class="btn btn-primary call-to-action-btn" href="{% url 'idea-sketch-create' modules.0.slug %}">{% trans "Create proposal!" %}</a>
+        {% endif %}
+</div>

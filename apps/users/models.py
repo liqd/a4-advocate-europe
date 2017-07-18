@@ -2,9 +2,12 @@ from django.contrib.auth import models as auth_models
 from django.core import validators
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.templatetags.static import static
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django_countries import fields as countries_fields
+
+from easy_thumbnails.files import get_thumbnailer
 
 from adhocracy4.images import fields
 
@@ -145,6 +148,13 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     def avatar(self):
         if self._avatar:
             return self._avatar
+
+    def avatar_or_fallback_url(self):
+        if self._avatar:
+            return get_thumbnailer(self._avatar)['avatar'].url
+        else:
+            number = self.pk % 5
+            return static('images/avatars/avatar-{0:02d}.svg'.format(number))
 
     def get_short_name(self):
         return self.username

@@ -1,6 +1,6 @@
 git+git://github.com/liqd/adhocracy4.git@1ff2f0d267474e555ea334abb141507dbcdd0244
 Django>=1.8,<1.9
-wagtail==1.9
+wagtail==1.11.1
 feedparser==5.2.1
 python-dateutil==2.6.0
 django-allauth==0.31.0

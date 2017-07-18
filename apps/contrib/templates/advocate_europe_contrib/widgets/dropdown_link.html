@@ -1,5 +1,5 @@
 <div class="btn-group filter-element {% if right %}right{% endif %} navbar-absolute">
-    <label for="{{ id }}">
+    <label for="{{ id }}" class="filter-label">
         {{ label }}
     </label>
     <br>
@@ -12,7 +12,7 @@
         id="{{ id }}"
     >
         <div class="value-label">{{ value_label }}</div>
-        <i class="fa fa-caret-down" aria-hidden="true"></i>
+        <i class="fa fa-caret-down drop-down-caret" aria-hidden="true"></i>
     </button>
     {{ options }}
 </div>

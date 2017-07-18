@@ -39,10 +39,16 @@ class KwargsFilteredListView(generic.ListView):
 class ProfileView(KwargsFilteredListView):
     template_name = 'advocate_europe_users/profile.html'
     paginator_class = Paginator
-    paginate_by = 9
     filter_set = filters.ProfileIdeaFilterSet
     queryset = idea_models.Idea.objects.annotate_comment_count()
     action_count = 10
+
+    @property
+    def paginate_by(self):
+        if self.request.user == self.user:
+            return 8
+        else:
+            return 9
 
     def filter_kwargs(self):
         kwargs = super().filter_kwargs()
