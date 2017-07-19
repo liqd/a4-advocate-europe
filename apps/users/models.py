@@ -149,12 +149,16 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         if self._avatar:
             return self._avatar
 
+    @property
+    def fallback_avatar(self):
+        number = self.pk % 5
+        return static('images/avatars/avatar-{0:02d}.svg'.format(number))
+
     def avatar_or_fallback_url(self):
         if self._avatar:
             return get_thumbnailer(self._avatar)['avatar'].url
         else:
-            number = self.pk % 5
-            return static('images/avatars/avatar-{0:02d}.svg'.format(number))
+            return self.fallback_avatar
 
     def get_short_name(self):
         return self.username
