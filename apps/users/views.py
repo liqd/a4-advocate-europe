@@ -6,37 +6,15 @@ from django.utils.translation import ugettext_lazy as _
 from django.views import generic
 from rules.compat import access_mixins as mixins
 
+from adhocracy4.filters import views as filter_views
+
 from apps.ideas import models as idea_models
 
 from . import models as user_models
 from . import filters, forms
 
 
-class KwargsFilteredListView(generic.ListView):
-    """
-    Needs to be moved to adhocracy4.
-    """
-
-    def filter_kwargs(self):
-        default_kwargs = {
-            'data': self.request.GET,
-            'request': self.request,
-            'queryset': super().get_queryset(),
-        }
-
-        return default_kwargs
-
-    def filter(self):
-        return self.filter_set(
-            **self.filter_kwargs()
-        )
-
-    def get_queryset(self):
-        qs = self.filter().qs
-        return qs
-
-
-class ProfileView(KwargsFilteredListView):
+class ProfileView(filter_views.FilteredListView):
     template_name = 'advocate_europe_users/profile.html'
     paginator_class = Paginator
     filter_set = filters.ProfileIdeaFilterSet
