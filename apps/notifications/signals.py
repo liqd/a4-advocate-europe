@@ -14,6 +14,11 @@ def send_notification(sender, instance, created, **kwargs):
     action = instance
     if action.verb == Verbs.ADD.value and (
             action.obj_content_type.model_class() is IdeaSketch
-            or action.obj_content_type.model_class() is Proposal
     ):
+        emails.SubmitNotification.send(action.obj, idea=action.obj)
+
+    # FIXME: Workaround for non working proposal create actions
+    if (action.verb == Verbs.UPDATE.value
+            and action.obj_content_type.model_class() is Proposal
+            and action.obj.idea_title):
         emails.SubmitNotification.send(action.obj, idea=action.obj)
