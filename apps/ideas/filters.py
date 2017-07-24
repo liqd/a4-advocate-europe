@@ -33,7 +33,7 @@ class OrderingFilterWidget(widgets.DropdownLinkWidget):
     right = True
 
 
-class FreeTextFilterWidget(widgets.TextInputWidget):
+class FreeTextSearchFilterWidget(widgets.FreeTextFilterWidget):
     label = _('Search')
 
 
@@ -97,7 +97,7 @@ class IdeaFilterSet(DefaultsFilterSet):
     )
 
     search = FreeTextFilter(
-        widget=FreeTextFilterWidget,
+        widget=FreeTextSearchFilterWidget,
         fields=['idea_title',  # idea section
                 'idea_subtitle',
                 'idea_pitch',
