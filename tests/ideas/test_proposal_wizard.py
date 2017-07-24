@@ -7,70 +7,79 @@ from tests.helpers import active_phase
 
 
 @pytest.mark.django_db
-def test_proposal_anonymous_cannot_create_wizard(client, idea_sketch_factory):
-    idea_sketch = idea_sketch_factory(visit_camp=True)
+def test_proposal_anonymous_cannot_create_wizard(client,
+                                                 idea_sketch_factory,
+                                                 idea_factory):
+    idea = idea_factory(visit_camp=True)
+    idea_sketch = idea_sketch_factory(idea=idea)
     url = reverse('idea-sketch-add-proposal',
-                  kwargs={'slug': idea_sketch.slug})
+                  kwargs={'slug': idea_sketch.idea.slug})
     response = client.get(url)
     assert response.status_code == 302
 
 
 @pytest.mark.django_db
-def test_proposal_random_user_cannot_create_wizard(client, user,
+def test_proposal_random_user_cannot_create_wizard(client, user, idea_factory,
                                                    idea_sketch_factory):
-    idea_sketch = idea_sketch_factory(visit_camp=True)
+    idea = idea_factory(visit_camp=True)
+    idea_sketch = idea_sketch_factory(idea=idea)
     client.login(username=user.email,
                  password='password')
     url = reverse('idea-sketch-add-proposal',
-                  kwargs={'slug': idea_sketch.slug})
+                  kwargs={'slug': idea_sketch.idea.slug})
 
-    with active_phase(idea_sketch.module, FullProposalPhase):
+    with active_phase(idea_sketch.idea.module, FullProposalPhase):
         response = client.get(url)
 
     assert response.status_code == 302
 
 
 @pytest.mark.django_db
-def test_proposal_no_camp_cannot_create_wizard(client, user,
+def test_proposal_no_camp_cannot_create_wizard(client, user, idea_factory,
                                                idea_sketch_factory):
-    idea_sketch = idea_sketch_factory(visit_camp=False)
-    idea_sketch.collaborators.add(user)
+    idea = idea_factory(visit_camp=False)
+    idea.collaborators.add(user)
+    idea_sketch = idea_sketch_factory(idea=idea)
+
     client.login(username=user.email,
                  password='password')
     url = reverse('idea-sketch-add-proposal',
-                  kwargs={'slug': idea_sketch.slug})
+                  kwargs={'slug': idea_sketch.idea.slug})
 
-    with active_phase(idea_sketch.module, FullProposalPhase):
+    with active_phase(idea_sketch.idea.module, FullProposalPhase):
         response = client.get(url)
 
     assert response.status_code == 302
 
 
 @pytest.mark.django_db
-def test_proposal_no_phase_cannot_create_wizard(client, user,
+def test_proposal_no_phase_cannot_create_wizard(client, user, idea_factory,
                                                 idea_sketch_factory):
-    idea_sketch = idea_sketch_factory(visit_camp=True)
+    idea = idea_factory(visit_camp=True)
+    idea_sketch = idea_sketch_factory(idea=idea)
     idea_sketch.collaborators.add(user)
     client.login(username=user.email,
                  password='password')
     url = reverse('idea-sketch-add-proposal',
-                  kwargs={'slug': idea_sketch.slug})
+                  kwargs={'slug': idea_sketch.idea.slug})
 
     response = client.get(url)
     assert response.status_code == 302
 
 
 @pytest.mark.django_db
-def test_proposal_collaborator_create_wizard(client,
+def test_proposal_collaborator_create_wizard(client, idea_factory,
                                              idea_sketch_factory, user, image):
-    idea_sketch = idea_sketch_factory(visit_camp=True, idea_image=image)
-    idea_sketch.collaborators.add(user)
+    idea = idea_factory(idea_image=image, visit_camp=True)
+    idea.collaborators.add(user)
+    idea_sketch = idea_sketch_factory(idea=idea)
+
     client.login(username=user.email,
                  password='password')
     url = reverse('idea-sketch-add-proposal',
-                  kwargs={'slug': idea_sketch.slug})
+                  kwargs={'slug': idea_sketch.idea.slug})
 
-    with active_phase(idea_sketch.module, FullProposalPhase):
+    with active_phase(idea_sketch.idea.module, FullProposalPhase):
 
         assert IdeaSketchArchived.objects.all().count() == 0
         assert IdeaSketch.objects.all().count() == 1
@@ -83,7 +92,10 @@ def test_proposal_collaborator_create_wizard(client,
         assert wizard['steps'].count == 8
         assert wizard['steps'].step1 == 1
         for field, value in wizard['form'].initial.items():
-            assert str(value) == getattr(idea_sketch, field)
+            if hasattr(idea_sketch, field):
+                assert str(value) == getattr(idea_sketch, field)
+            else:
+                assert str(value) == getattr(idea, field)
         data = {
             'proposal_create_wizard-current_step': '0'
         }
@@ -96,7 +108,10 @@ def test_proposal_collaborator_create_wizard(client,
         wizard = response.context['wizard']
         assert wizard['steps'].step1 == 2
         for field, value in wizard['form'].initial.items():
-            assert str(value) == getattr(idea_sketch, field)
+            if hasattr(idea_sketch, field):
+                assert str(value) == getattr(idea_sketch, field)
+            else:
+                assert str(value) == getattr(idea, field)
         data = {
             'proposal_create_wizard-current_step': '1'
         }
@@ -111,7 +126,10 @@ def test_proposal_collaborator_create_wizard(client,
         for field, value in wizard['form'].initial.items():
             if type(value) is list:
                 value = ','.join(value)
-            assert value == getattr(idea_sketch, field)
+            if hasattr(idea_sketch, field):
+                assert value == getattr(idea_sketch, field)
+            else:
+                assert value == getattr(idea, field)
         data = {
             'proposal_create_wizard-current_step': '2'
         }
@@ -128,7 +146,10 @@ def test_proposal_collaborator_create_wizard(client,
         for field, value in wizard['form'].initial.items():
             if type(value) is list:
                 value = ','.join(value)
-            assert value == getattr(idea_sketch, field)
+                if hasattr(idea_sketch, field):
+                    assert value == getattr(idea_sketch, field)
+                else:
+                    assert value == getattr(idea, field)
         data = {
             'proposal_create_wizard-current_step': '3'
         }
@@ -171,7 +192,10 @@ def test_proposal_collaborator_create_wizard(client,
         assert wizard['steps'].step1 == 7
 
         for field, value in wizard['form'].initial.items():
-            assert value == getattr(idea_sketch, field)
+            if hasattr(idea_sketch, field):
+                assert value == getattr(idea_sketch, field)
+            else:
+                assert value == getattr(idea, field)
 
         data = {
             'proposal_create_wizard-current_step': '6',
@@ -188,7 +212,10 @@ def test_proposal_collaborator_create_wizard(client,
         assert wizard['steps'].step1 == 8
 
         for field, value in wizard['form'].initial.items():
-            assert value == getattr(idea_sketch, field)
+            if hasattr(idea_sketch, field):
+                assert value == getattr(idea_sketch, field)
+            else:
+                assert value == getattr(idea, field)
 
         data = {
             'proposal_create_wizard-current_step': '7'
@@ -199,7 +226,7 @@ def test_proposal_collaborator_create_wizard(client,
         assert response.status_code == 302
         assert Proposal.objects.all().count() == 1
         assert IdeaSketchArchived.objects.all().count() == 1
-        assert IdeaSketch.objects.all().count() == 1
+        assert IdeaSketch.objects.all().count() == 0
 
         new_proposal = Proposal.objects.all().first()
         idea_archive = new_proposal.idea_sketch_archived
@@ -209,8 +236,12 @@ def test_proposal_collaborator_create_wizard(client,
                 archive_field = getattr(idea_archive, field)
                 if type(archive_field) is list:
                     archive_field = (',').join(archive_field)
-                idea_sketch_field = getattr(idea_sketch, field)
-                assert str(archive_field) == str(idea_sketch_field)
+                    if hasattr(idea_sketch, field):
+                        value = str(getattr(idea_sketch, field))
+                        assert str(archive_field) == value
+                    else:
+                        value = str(getattr(idea_sketch.idea, field))
+                        assert str(archive_field) == value
 
         assert Proposal.objects.all() \
-            .first().idea_title == idea_sketch.idea_title
+            .first().idea.idea_title == idea_sketch.idea.idea_title

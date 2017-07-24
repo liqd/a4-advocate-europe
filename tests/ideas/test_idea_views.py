@@ -37,10 +37,10 @@ def test_idea_detail_view(rf, idea_sketch_factory, proposal_factory):
 
     view = views.IdeaDetailView.as_view()
     request = rf.get('/ideas/')
-    response = view(request, slug=ideasketch.slug)
+    response = view(request, slug=ideasketch.idea.slug)
     assert 'idea_list' in response.context_data
     assert (response.context_data['idea_list'][0] ==
-            ('Idea pitch', ideasketch.idea_pitch))
+            ('Idea pitch', ideasketch.idea.idea_pitch))
     assert 'partner_list' in response.context_data
 
 
@@ -73,6 +73,6 @@ def test_idea_export_view_admin(rf, admin, idea_sketch_factory,
     content_line = response.content.split(b'\n')
     assert len(content_line) == 5
 
-    assert len(str(content_line[0]).split('","')) == 58
-    assert len(str(content_line[1]).split('","')) == 58
-    assert len(str(content_line[3]).split('","')) == 58
+    assert len(str(content_line[0]).split('","')) == 59
+    assert len(str(content_line[1]).split('","')) == 59
+    assert len(str(content_line[3]).split('","')) == 59

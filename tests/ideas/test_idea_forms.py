@@ -6,22 +6,22 @@ from apps.ideas import forms as idea_forms
 
 
 @pytest.mark.django_db
-@pytest.mark.parametrize('idea_sketch__collaborators', [[]])
-def test_community_section_empty_edit(idea_sketch):
+@pytest.mark.parametrize('idea__collaborators', [[]])
+def test_community_section_empty_edit(idea):
     """
     Check that the CommunitySectionEdit form works if no collaborators and
     and invites are present.
     """
 
     form = idea_forms.CommunitySectionEditForm(
-        instance=idea_sketch,
+        instance=idea,
     )
 
-    assert list(idea_sketch.collaborators.all()) == []
-    assert list(idea_sketch.ideainvite_set.all()) == []
+    assert list(idea.collaborators.all()) == []
+    assert list(idea.ideainvite_set.all()) == []
 
     form = idea_forms.CommunitySectionEditForm(
-        instance=idea_sketch,
+        instance=idea,
         data={
             'collaborators_emails': 'test@test.de, test2@test.de',
             'reach_out': 'edit_reach_out',
@@ -37,25 +37,27 @@ def test_community_section_empty_edit(idea_sketch):
     new_invites = list(
         idea_sketch.ideainvite_set.values_list('email', flat=True)
     )
-    assert new_invites == invites
+    assert len(new_invites) == len(invites)
+    for entry in invites:
+        assert entry in new_invites
 
 
 @pytest.mark.django_db
-@pytest.mark.parametrize('idea_sketch__invites',
+@pytest.mark.parametrize('idea__invites',
                          [['test@test.de', 'foo@test.de']])
-@pytest.mark.parametrize('idea_sketch__collaborators', [['Jürgen', 'Erich']])
-def test_collaborator_edit(idea_sketch):
+@pytest.mark.parametrize('idea__collaborators', [['Jürgen', 'Erich']])
+def test_collaborator_edit(idea):
     """
     Remove collaborator and invite, while also adding new invite all in
     one operation.
     """
-    collaborators = list(idea_sketch.collaborators.all())
+    collaborators = list(idea.collaborators.all())
     form = idea_forms.CommunitySectionEditForm(
-        instance=idea_sketch,
+        instance=idea,
     )
 
     form = idea_forms.CommunitySectionEditForm(
-        instance=idea_sketch,
+        instance=idea,
         data={
             'collaborators_emails': 'test1@test.de, test2@test.de',
             'invites': ['test1@test.de']
@@ -64,7 +66,7 @@ def test_collaborator_edit(idea_sketch):
     assert not form.is_valid()
 
     form = idea_forms.CommunitySectionEditForm(
-        instance=idea_sketch,
+        instance=idea,
         data={
             'collaborators_emails': 'test1@test.de, test2@test.de',
             'invites': ['foo@test.de'],
@@ -82,17 +84,19 @@ def test_collaborator_edit(idea_sketch):
     new_invites = list(
         idea_sketch.ideainvite_set.values_list('email', flat=True)
     )
-    assert invites == new_invites
+    assert len(invites) == len(new_invites)
+    for entry in invites:
+        assert entry in new_invites
     assert list(idea_sketch.collaborators.all()) == collaborators[1:]
 
 
 @pytest.mark.django_db
-@pytest.mark.parametrize('idea_sketch__invites',
+@pytest.mark.parametrize('idea__invites',
                          [['test1@test.de', 'test2@test.de', 'test3@test.de']])
-@pytest.mark.parametrize('idea_sketch__collaborators', [['test4', 'test5']])
-def test_collaborator_edit_too_many(idea_sketch):
+@pytest.mark.parametrize('idea__collaborators', [['test4', 'test5']])
+def test_collaborator_edit_too_many(idea):
     form = idea_forms.CommunitySectionEditForm(
-        instance=idea_sketch,
+        instance=idea,
         data={
             'collaborators_emails': 'test6@test.de',
             'reach_out': 'edit_reach_out',
@@ -106,12 +110,12 @@ def test_collaborator_edit_too_many(idea_sketch):
 
 
 @pytest.mark.django_db
-@pytest.mark.parametrize('idea_sketch__invites',
+@pytest.mark.parametrize('idea__invites',
                          [['test1@test.de', 'test2@test.de', 'test3@test.de']])
-@pytest.mark.parametrize('idea_sketch__collaborators', [['test4', 'test5']])
-def test_collaborator_edit_replace_one(idea_sketch):
+@pytest.mark.parametrize('idea__collaborators', [['test4', 'test5']])
+def test_collaborator_edit_replace_one(idea):
     form = idea_forms.CommunitySectionEditForm(
-        instance=idea_sketch,
+        instance=idea,
         data={
             'collaborators_emails': 'test6@test.de',
             'reach_out': 'edit_reach_out',
@@ -125,10 +129,10 @@ def test_collaborator_edit_replace_one(idea_sketch):
 
 
 @pytest.mark.django_db
-@pytest.mark.parametrize('idea_sketch__invites', [['test@test.de']])
-def test_collaborters_reinvite(idea_sketch):
+@pytest.mark.parametrize('idea__invites', [['test@test.de']])
+def test_collaborters_reinvite(idea):
     form = idea_forms.CommunitySectionEditForm(
-        instance=idea_sketch,
+        instance=idea,
         data={
             'collaborators_emails': 'test@test.de',
             'reach_out': 'edit_reach_out',
