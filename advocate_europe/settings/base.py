@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'adhocracy4.comments.apps.CommentsConfig',
     'adhocracy4.organisations.apps.OrganisationsConfig',
     'adhocracy4.actions.apps.ActionsConfig',
+    'adhocracy4.filters.apps.FiltersConfig',
 
     'cms.home.apps.HomeConfig',
     'cms.settings.apps.SettingsConfig',
