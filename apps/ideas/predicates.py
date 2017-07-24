@@ -8,4 +8,4 @@ def is_collaborator(user, idea):
 
 @rules.predicate
 def may_visit_camp(user, idea):
-    return idea.ideasketch.visit_camp
+    return idea.visit_camp
