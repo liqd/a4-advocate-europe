@@ -1,8 +1,10 @@
+from datetime import datetime, timedelta
+
 import pytest
-
 from django.core.urlresolvers import reverse
-
 from faker import Faker
+
+from apps.users.forms import UserProfileForm
 
 
 @pytest.mark.django_db
@@ -66,6 +68,7 @@ def test_profile_edit_city(client, user):
 def test_profile_edit_username(client, user_factory):
     user1 = user_factory()
     user2 = user_factory()
+    fake = Faker()
 
     client.login(email=user1.email, password='password')
     url = reverse('edit_profile')
@@ -79,19 +82,32 @@ def test_profile_edit_username(client, user_factory):
     assert 'username' in response.context_data['form'].errors
 
     # new user name must work
-    usernmae = fake.name()
+    username = fake.name()
     response = client.post(url, {
         'username': username
     })
 
     assert response.status_code == 302
 
-    profile_url = reverse('profile', kwargs={'username': user.username})
+    profile_url = reverse('profile', kwargs={'username': username})
     profile_response = client.get(profile_url)
 
     assert profile_response.status_code == 200
-    assert profile_response.context['user'] == user
+    assert profile_response.context['user'] == user1
     assert profile_response.context['user'].username == username
+
+    # no user name must fail
+    request = {
+        'username': ''
+    }
+    response = client.post(url, request)
+    assert response.status_code == 200
+    assert 'username' in response.context_data['form'].errors
+
+    request = {}
+    response = client.post(url, request)
+    assert response.status_code == 200
+    assert 'username' in response.context_data['form'].errors
 
 
 @pytest.mark.django_db
@@ -100,7 +116,7 @@ def test_profile_edit_birthdate(client, user):
     url = reverse('edit_profile')
     fake = Faker()
 
-    # valid birthday should be find
+    # valid birthday should be fine
     bdate = fake.date(pattern='%Y-%m-%d')
     request = {
         'birthdate': bdate,
@@ -114,10 +130,12 @@ def test_profile_edit_birthdate(client, user):
     profile_response = client.get(profile_url)
 
     assert profile_response.status_code == 200
-    assert profile_response.context['user'] == user
-    assert profile_response.context['user'].birthdate == bdate
 
-    # non date birthday must fail
+    profile_user = profile_response.context['user']
+    assert profile_user == user
+    assert profile_user.birthdate.strftime('%Y-%m-%d') == bdate
+
+    # non-date birthday must fail
     request = {
         'birthdate': 'foobar',
         'username': user.username
@@ -128,7 +146,8 @@ def test_profile_edit_birthdate(client, user):
     assert 'birthdate' in response.context_data['form'].errors
 
     # birthday in future is valid
-    bdate = fake.future_date(end_date="+10d", pattern='%Y-%m-%d')
+    bdate = datetime.today() + timedelta(days=+10)
+    bdate = bdate.strftime('%Y-%m-%d')
     request = {
         'birthdate': bdate,
         'username': user.username
@@ -139,8 +158,27 @@ def test_profile_edit_birthdate(client, user):
 
     profile_url = reverse('profile', kwargs={'username': user.username})
     profile_response = client.get(profile_url)
-
-    #TODO refactoring tests
     assert profile_response.status_code == 200
-    assert profile_response.context['user'] == user
-    assert profile_response.context['user'].birthdate == bdate
+
+    profile_user = profile_response.context['user']
+    assert profile_user == user
+    assert profile_user.birthdate.strftime('%Y-%m-%d') == bdate
+
+
+@pytest.mark.django_db
+def test_profile_ignore_optional_fields(client, user):
+    client.login(email=user.email, password='password')
+    url = reverse('edit_profile')
+    fake = Faker()
+
+    request = {
+        'username': user.username
+    }
+
+    # It should be fine to not submit optional fields.
+    for name, field in UserProfileForm.base_fields.items():
+        if name not in ('username') and field.required:
+            request.update({name: fake.text()})
+
+    response = client.post(url, request)
+    assert response.status_code == 302
