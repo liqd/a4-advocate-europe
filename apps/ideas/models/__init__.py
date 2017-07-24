@@ -74,10 +74,28 @@ class Idea(AbstractIdea):
             return IdeaSketch._meta.verbose_name.title()
 
 
-class IdeaSketch(Idea, AbstractCollaborationCampSection):
+class IdeaSketch(AbstractCollaborationCampSection):
+
+    idea = models.OneToOneField(Idea)
+
+    @property
+    def creator(self):
+        return self.idea.creator
+
+    @property
+    def collaborators(self):
+        return self.idea.collaborators
+
+    @property
+    def type(self):
+        return IdeaSketch._meta.verbose_name.title()
 
     def __str__(self):
-        return '{} (Ideasketch)'.format(self.idea_title)
+        return '{} (Ideasketch)'.format(self.idea.idea_title)
+
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('idea-detail', args=[self.idea.slug])
 
 
 class IdeaSketchArchived(AbstractIdea, AbstractCollaborationCampSection):
@@ -86,11 +104,29 @@ class IdeaSketchArchived(AbstractIdea, AbstractCollaborationCampSection):
         return '{} (Archived Ideasketch)'.format(self.idea_title)
 
 
-class Proposal(Idea, AbstractFinanceAndDurationSection,
+class Proposal(AbstractFinanceAndDurationSection,
                AbstractSelectionCriteriaSection):
+
+    idea = models.OneToOneField(Idea)
     idea_sketch_archived = models.OneToOneField(IdeaSketchArchived)
     jury_statement = models.TextField(
         verbose_name='Why this idea?', blank=True)
 
+    @property
+    def creator(self):
+        return self.idea.creator
+
+    @property
+    def collaborators(self):
+        return self.idea.collaborators
+
+    @property
+    def type(self):
+        return Proposal._meta.verbose_name.title()
+
     def __str__(self):
-        return '{} (Proposal)'.format(self.idea_title)
+        return '{} (Proposal)'.format(self.idea.idea_title)
+
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('idea-detail', args=[self.idea.slug])
