@@ -10,28 +10,28 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('advocate_europe_ideas', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('advocate_europe_ideas', '0003_one_to_one_relation_ideasketcharchived_and_proposal'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='IdeaSketchInvite',
+            name='IdeaInvite',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
-                ('created', models.DateTimeField(default=django.utils.timezone.now, editable=False)),
-                ('modified', models.DateTimeField(blank=True, editable=False, null=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('created', models.DateTimeField(editable=False, default=django.utils.timezone.now)),
+                ('modified', models.DateTimeField(null=True, editable=False, blank=True)),
                 ('email', models.EmailField(max_length=254)),
                 ('token', models.UUIDField(default=uuid.uuid4, unique=True)),
                 ('creator', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
-                ('subject', models.ForeignKey(to='advocate_europe_ideas.IdeaSketch')),
+                ('subject', models.ForeignKey(to='advocate_europe_ideas.Idea')),
             ],
             options={
                 'abstract': False,
             },
         ),
         migrations.AlterUniqueTogether(
-            name='ideasketchinvite',
+            name='ideainvite',
             unique_together=set([('email', 'subject')]),
         ),
     ]

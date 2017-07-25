@@ -42,6 +42,11 @@ class IdeaExportView(PermissionRequiredMixin, filter_views.FilteredListView):
                           'idea_sketch_archived']
 
         field_names = []
+        for field in Idea._meta.concrete_fields:
+            if (field.name not in exclude_fields and
+                    field.name not in field_names):
+                field_names.append(field.name)
+
         for field in IdeaSketch._meta.concrete_fields:
             if (field.name not in exclude_fields and
                     field.name not in field_names):
@@ -98,12 +103,24 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
         special_fields = ['accept_conditions', 'collaborators_emails']
 
         data = self.get_all_cleaned_data()
-        idea_sketch = IdeaSketch.objects.create(
+
+        idea_fields = Idea._meta.get_all_field_names()
+        idea_sketch_fields = IdeaSketch._meta.get_all_field_names()
+
+        idea = Idea.objects.create(
             creator=self.request.user,
             module=self.module,
             **{
-                field: value for field, value in data.items()
-                if field not in special_fields
+                field: value for field, value in data.items() if
+                field in idea_fields
+                }
+        )
+
+        idea_sketch = IdeaSketch.objects.create(
+            idea=idea,
+            **{
+                field: value for field, value in data.items() if
+                field not in special_fields and field in idea_sketch_fields
                 }
         )
 
@@ -170,20 +187,20 @@ class IdeaDetailView(generic.DetailView):
                                 'community?'), self.object.reach_out))
 
         partner_list = []
-        if (self.object.partner_organisation_1_name
-                or self.object.partner_organisation_1_website):
+        if (self.object.partner_organisation_1_name or
+                self.object.partner_organisation_1_website):
             partner_list.append((self.object.partner_organisation_1_name,
                                  self.object.partner_organisation_1_website,
                                  self.object.
                                  get_partner_organisation_1_country_display))
-        if (self.object.partner_organisation_2_name
-                or self.object.partner_organisation_2_website):
+        if (self.object.partner_organisation_2_name or
+                self.object.partner_organisation_2_website):
             partner_list.append((self.object.partner_organisation_2_name,
                                  self.object.partner_organisation_2_website,
                                  self.object.
                                  get_partner_organisation_2_country_display))
-        if (self.object.partner_organisation_3_name
-                or self.object.partner_organisation_3_website):
+        if (self.object.partner_organisation_3_name or
+                self.object.partner_organisation_3_website):
             partner_list.append((self.object.partner_organisation_3_name,
                                  self.object.partner_organisation_3_website,
                                  self.object.
@@ -235,22 +252,16 @@ class ProposalCreateWizard(PermissionRequiredMixin,
         special_fields = ['accept_conditions', 'collaborators_emails']
 
         proposal_data = self.get_cleaned_data_for_step('5')
-        data = self.get_all_cleaned_data()
 
         proposal = Proposal(
             idea_sketch_archived=idea_sketch_archive,
-            idea_ptr=self.idea,
-            creator=self.request.user,
-            module=self.idea.module,
+            idea=self.idea,
             **{
                 field: value for field, value in proposal_data.items()
                 if field not in special_fields
                 }
         )
-        proposal.save()
-        merged_data = self.idea.__dict__.copy()
-        merged_data.update(data)
-        proposal.__dict__.update(merged_data)
+
         proposal.save()
 
         return redirect(proposal.get_absolute_url())

@@ -1,11 +1,9 @@
 import pytest
-
 from django.core import mail
 from django.core.urlresolvers import reverse
 
-from apps.ideas.models import IdeaSketch
+from apps.ideas.models import Idea, IdeaSketch
 from apps.ideas.phases import IdeaSketchPhase
-
 from tests.helpers import active_phase
 
 
@@ -100,15 +98,16 @@ def test_ideasketch_create_wizard(client, user, module):
         }
 
         response = client.post(url, data)
-        my_idea_sketch = IdeaSketch.objects.get(idea_title='My very good idea')
+        my_idea = Idea.objects.get(idea_title='My very good idea')
 
         assert response.status_code == 302
         assert IdeaSketch.objects.all().count() == 1
-        assert my_idea_sketch.first_name == 'Qwertz'
-        assert (my_idea_sketch.get_idea_location_display() ==
-                'Linkage to the Ruhr area of Germany')
-        assert my_idea_sketch.target_group == 'Children'
-        assert my_idea_sketch.collaboration_camp_option == 'not_sure'
+        assert my_idea.first_name == 'Qwertz'
+        assert (my_idea.get_idea_location_display() ==
+                'Linkage to the Ruhr '
+                'area of Germany')
+        assert my_idea.target_group == 'Children'
+        assert my_idea.ideasketch.collaboration_camp_option == 'not_sure'
         assert mail.outbox[0].subject.startswith(
             'You have sucessfully submitted your Idea Sketch to'
         )
