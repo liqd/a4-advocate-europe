@@ -16,7 +16,12 @@
                     {% url 'account_change_password' as change_password_url %}
                     <li class="list-group-item {% if change_password_url == request.get_full_path  %} active {% endif %}">
                         <a href="{% url 'account_change_password' %}">
-                            <i class="fa fa-lock" aria-hidden="true"></i> {% trans 'Change Password' %}
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                            {% if request.user.has_usable_password %}
+                                {% trans 'Change Password' %}
+                            {% else %}
+                                {% trans 'Set Password' %}
+                            {% endif %}
                         </a>
                     </li>
                     {% url 'account_email' as change_email_url %}
