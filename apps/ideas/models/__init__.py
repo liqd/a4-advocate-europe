@@ -6,7 +6,8 @@ from django.db import models
 
 from adhocracy4.comments import models as comment_models
 from adhocracy4.models import query
-from adhocracy4.modules.models import Item
+from adhocracy4.models.base import UserGeneratedContentModel
+from adhocracy4.modules.models import Item, Module
 from adhocracy4.ratings import models as rating_models
 
 from .abstracts.applicant_section import AbstractApplicantSection
@@ -33,11 +34,11 @@ class AbstractIdea(AbstractApplicantSection,
                    AbstractPartnersSection,
                    AbstractIdeaSection,
                    AbstractImpactSection,
-                   AbstractCommunitySection,
-                   Item):
+                   AbstractCommunitySection):
     slug = AutoSlugField(populate_from='idea_title', unique=True)
     collaborators = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
+        related_name='%(class)s_collaborators',
         blank=True
     )
 
@@ -49,7 +50,7 @@ class AbstractIdea(AbstractApplicantSection,
         return self.idea_title
 
 
-class Idea(AbstractIdea):
+class Idea(AbstractIdea, Item):
     visit_camp = models.BooleanField(default=False)
     is_winner = models.BooleanField(default=False)
     community_award_winner = models.BooleanField(default=False)
@@ -98,7 +99,11 @@ class IdeaSketch(AbstractCollaborationCampSection):
         return reverse('idea-detail', args=[self.idea.slug])
 
 
-class IdeaSketchArchived(AbstractIdea, AbstractCollaborationCampSection):
+class IdeaSketchArchived(UserGeneratedContentModel,
+                         AbstractIdea,
+                         AbstractCollaborationCampSection):
+
+    module = models.ForeignKey(Module)
 
     def __str__(self):
         return '{} (Archived Ideasketch)'.format(self.idea_title)
