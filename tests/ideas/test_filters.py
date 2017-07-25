@@ -16,7 +16,7 @@ def test_idea_list_view(idea_sketch_factory, proposal_factory):
                            ('winner', 0),
                            ('', 3)]
 
-    idea_filter_set = filters.IdeaFilterSet(query_data={})
+    idea_filter_set = filters.IdeaFilterSet(data={})
 
     for param, count in ALL_POSSIBLE_PARAMS:
         assert (lambda p: (idea_filter_set.
