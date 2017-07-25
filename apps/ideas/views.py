@@ -264,8 +264,6 @@ class ProposalCreateWizard(PermissionRequiredMixin,
 
         proposal.save()
 
-        proposal.idea.ideasketch.delete()
-
         return redirect(proposal.get_absolute_url())
 
 
