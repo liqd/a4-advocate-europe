@@ -9,8 +9,10 @@
         <a class="call-to-action-link" href="#">{% trans "Read about the criterias" %}</a>
     </div>
     {% get_modules as modules %}
-        {% has_perm 'advocate_europe_ideas.add_ideasketch' request.user modules.0 as can_add %}
-        {% if can_add %}
-        <a class="btn btn-primary call-to-action-btn" href="{% url 'idea-sketch-create' modules.0.slug %}">{% trans "Create proposal!" %}</a>
+        {% if modules %}
+          {% has_perm 'advocate_europe_ideas.add_ideasketch' request.user modules.0 as can_add %}
+          {% if can_add %}
+          <a class="btn btn-primary call-to-action-btn" href="{% url 'idea-sketch-create' modules.0.slug %}">{% trans "Create proposal!" %}</a>
+          {% endif %}
         {% endif %}
 </div>
