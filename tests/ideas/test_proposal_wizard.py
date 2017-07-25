@@ -226,7 +226,7 @@ def test_proposal_collaborator_create_wizard(client, idea_factory,
         assert response.status_code == 302
         assert Proposal.objects.all().count() == 1
         assert IdeaSketchArchived.objects.all().count() == 1
-        assert IdeaSketch.objects.all().count() == 0
+        assert IdeaSketch.objects.all().count() == 1
 
         new_proposal = Proposal.objects.all().first()
         idea_archive = new_proposal.idea_sketch_archived
