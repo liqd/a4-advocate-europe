@@ -204,7 +204,11 @@ def test_proposal_collaborator_create_wizard(client,
         new_proposal = Proposal.objects.all().first()
         idea_archive = new_proposal.idea_sketch_archived
 
-        for field in IdeaSketchArchived._meta.get_all_field_names():
+        sketch_fields = [
+            field.name for field in IdeaSketch._meta.get_fields()
+        ]
+
+        for field in sketch_fields:
             if hasattr(idea_archive, field) and field != 'modified':
                 archive_field = getattr(idea_archive, field)
                 if type(archive_field) is list:
