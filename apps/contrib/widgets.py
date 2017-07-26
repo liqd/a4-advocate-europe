@@ -2,7 +2,8 @@ from itertools import chain
 
 import django_filters
 from django.db.models.fields import BLANK_CHOICE_DASH
-from django.forms.utils import flatatt
+from django.forms import TextInput
+from django.forms.widgets import flatatt
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
 
@@ -50,4 +51,32 @@ class DropdownLinkWidget(django_filters.widgets.LinkWidget):
             'value_label': value_label,
             'label': self.label,
             'right': self.right,
+        })
+
+
+class TextInputWidget(TextInput):
+    label = None
+    right = False
+    template = 'advocate_europe_contrib/widgets/text_input.html'
+
+    def value_from_datadict(self, data, files, name):
+        value = super().value_from_datadict(data, files, name)
+        self.data = data
+        return value
+
+    def render(self, name, value, attrs=None):
+        if not hasattr(self, 'data'):
+            self.data = {}
+        if value is None:
+            value = ''
+
+        _id = attrs.pop('id')
+
+        return render_to_string(self.template, {
+            'id': _id,
+            'value_label': value,
+            'name': name,
+            'label': self.label,
+            'right': self.right,
+            'url_par': self.data
         })

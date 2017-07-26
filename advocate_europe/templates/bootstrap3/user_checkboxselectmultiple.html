@@ -1,5 +1,5 @@
 {% load crispy_forms_filters %}
-{% load l10n %}
+{% load l10n thumbnail %}
 
 <div class="controls user-picker {{ field_class }}"{% if flat_attrs %} {{ flat_attrs|safe }}{% endif %}>
     {% include 'bootstrap3/layout/help_text.html' %}
@@ -17,20 +17,14 @@
                {{ field.field.widget.attrs|flatatt }}>
         <div class="user-picker-label-content">
             {% if user.avatar %}
-            <span class="avatar-round-small" style="background-image: url({{ user.avatar }});"></span>
+            <span class="avatar-round-small" style="background-image: url({{ user.avatar | thumbnail_url:'avatar-small' }});"></span>
             {% endif %}
             <span class="user-picker-label-text">{{ user.username|unlocalize }}</span>
             {% if user.detail %}
-            <span class="user-picker-label-text user-picker-label-detail">
-                {{ user.detail|unlocalize|capfirst }}
-            </span>
+            <span class="user-picker-label-text user-picker-label-detail">{{ user.detail|unlocalize }}</span>
             {% endif %}
-            <div class="user-picker-cta user-picker-cta-checked btn-link">
-                {{ user.cta_checked|unlocalize|capfirst }}
-            </div>
-            <div class="user-picker-cta user-picker-cta-unchecked btn-link">
-                {{ user.cta_unchecked|unlocalize|capfirst }}
-            </div>
+            <div class="user-picker-cta user-picker-cta-checked btn-link">{{ user.cta_checked }}</div>
+            <div class="user-picker-cta user-picker-cta-unchecked btn-link">{{ user.cta_unchecked }}</div>
         </div>
     </label>
     {% if not inline_class %}</div>{% endif %}

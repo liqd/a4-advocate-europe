@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block title %}
-{% trans "Profile" %} {{ view.user.username }}
+    {% trans "Profile" %} {{ view.user.username }}
 {% endblock %}
 
 
@@ -14,7 +14,7 @@
                 <div class="col-xs-4 profile-image-holder">
                     <span
                         class="circled profile-image"
-                        style="background-image: url({{ view.user.avatar }})"
+                        style="background-image: url({{ view.user.avatar_or_fallback_url }})"
                     ></span>
                 </div>
                 <div class="col-xs-8">
@@ -33,17 +33,17 @@
                     <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="visible-xs">
                             <a href="#info" aria-controls="info" role="tab" data-toggle="tab">
-                                {% trans "info" %}
+                            {% trans "info" %}
                             </a>
                         </li>
                         <li role="presentation" class="active">
-                            <a href="#ideas"  aria-controls="ideas" role="tab" data-toggle="tab">
-                                {% trans "ideas" %}
+                            <a href="#ideas" aria-controls="ideas" role="tab" data-toggle="tab">
+                            {% trans "ideas" %}
                             </a>
                         </li>
                         <li role="presentation">
-                            <a href="#activities"  aria-controls="activities" role="tab" data-toggle="tab">
-                                {% trans "activities" %}
+                            <a href="#activities" aria-controls="activities" role="tab" data-toggle="tab">
+                            {% trans "activities" %}
                             </a>
                         </li>
                     </ul>
@@ -53,11 +53,11 @@
     </div>
 
     <div class="container">
-        <div class="row profile-sidebar-holder">
-            <main class="col-sm-offset-3 col-sm-9 tab-content profile-tab-content">
+        <div class="row">
+            <main class="tab-content profile-tab-content">
                 <div role="tabpanel" class="profile-info-pane tab-pane col-sm-3" id="info">
                     <h1 class="profile-title">{{ view.user.username }}</h1>
-                    <div>{{ user.motto | default:'In varietate concordia.' }}</div>
+                    <div>{{ view.user.motto }}</div>
                     <ul class="profile-traits">
                         {% with user=view.user %}
                         {% if user.country and user.city %}
@@ -75,55 +75,76 @@
                             <span aria-label="{% trans 'occupation' %}">{{ user.occupation }}</span>
                         </li>
                         {% endif %}
-                        {% if user.twitter %}
+
+                        {% if user.twitter_handle %}
                         <li>
                             <i class="fa fa-twitter fa-fw trait-icon" aria-hidden="true"></i>
                             <span aria-label="twitter">
-                                <a href="https:/twitter.com/{{ user.twitter }}">@{{ user.twitter }}</a>
+                                <a href="https:/twitter.com/{{ user.twitter_handle }}"
+                                    target="_blank">@{{ user.twitter_handle }}</a>
                             </span>
                         </li>
                         {% endif %}
-                        {% if user.facebook %}
+
+                        {% if user.facebook_handle %}
                         <li>
                             <i class="fa fa-facebook fa-fw trait-icon" aria-hidden="true"></i>
                             <span aria-label="facebook">
-                                <a href="https:/facebook.com/{{ user.facebook }}">{{ user.facebook }}</a>
+                                <a href="https:/facebook.com/{{ user.facebook_handle }}"
+                                   target="_blank">{{ user.facebook_handle }}</a>
                             </span>
                         </li>
                         {% endif %}
-                        {% if user.instagram %}
+
+                        {% if user.instagram_handle %}
                         <li>
                             <i class="fa fa-instagram fa-fw trait-icon" aria-hidden="true"></i>
                             <span aria-label="instagram">
-                                <a href="https:/instagram.com/{{ user.instagram }}">{{ user.instagram  }}</a>
+                                <a href="https:/instagram.com/{{ user.instagram_handle }}"
+                                   target="_blank">{{ user.instagram_handle }}</a>
                             </span>
                         </li>
                         {% endif %}
-                        {% endwith %}
-                    </ul>
-                </div>
 
-                <div role="tabpanel" class="tab-pane active" id="ideas">
-                    <div class="filter-bar idealist-filter clearfix">
-                        {% for field in view.filter.form %}
-                        {{ field }}
-                        {% endfor %}
+                        {% if user.website %}
+                        <li>
+                            <i class="fa fa-link fa-fw trait-icon" aria-hidden="true"></i>
+                            <span aria-label="Website">
+                                <a href="{{ user.website }}" target="_blank">{% trans 'Website' %}</a>
+                            </span>
+                        </li>
+                        {% endif %}
+
+                        {% endwith %}
+                        </ul>
                     </div>
 
-                    <div class="idealist-list">
+                    <div role="tabpanel" class="tab-pane active col-sm-9" id="ideas">
+                        <div class="profile-list-filter">
+                            <div class="filter-bar idealist-filter clearfix">
+                                {% for field in view.filter.form %}
+                                    {{ field }}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="idealist-list">
                         {% for idea in idea_list %}
                         {% include 'advocate_europe_ideas/includes/idealist_item.html' %}
                         {% endfor %}
+                        {% if view.user == request.user %}
+                            {% include 'advocate_europe_ideas/includes/call_to_action_tile.html' %}
+                        {% endif %}
+                        </div>
+
+                        {% if is_paginated %}{% include 'includes/pagination.html' %}{% endif %}
                     </div>
 
-                    {% if is_paginated %}{% include 'includes/pagination.html' %}{% endif %}
-                </div>
-
-
-                <div role="tabpanel" class="tab-pane" id="activities">
-                  {% include 'advocate_europe_users/activity.html'%}
-                </div>
+                    <div role="tabpanel" class="tab-pane col-sm-9" id="activities">
+                    {% include 'advocate_europe_users/includes/activity_list.html'%}
+                    </div>
             </main>
+
         </div>
     </div>
 </div>
