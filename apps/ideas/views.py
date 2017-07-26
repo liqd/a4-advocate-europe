@@ -225,34 +225,27 @@ class ProposalCreateWizard(PermissionRequiredMixin,
     def done(self, form_list, **kwargs):
         idea_sketch_archive = IdeaSketchArchived()
         for field in self.idea._meta.fields:
-            setattr(idea_sketch_archive,
-                    field.name,
-                    getattr(self.idea, field.name))
-        idea_sketch_archive.save()
+            setattr(
+                idea_sketch_archive,
+                field.name,
+                getattr(self.idea, field.name)
+            )
         idea_sketch_archive.created = self.idea.created
         idea_sketch_archive.save()
 
         special_fields = ['accept_conditions', 'collaborators_emails']
-
-        proposal_data = self.get_cleaned_data_for_step('5')
         data = self.get_all_cleaned_data()
-
         proposal = Proposal(
             idea_sketch_archived=idea_sketch_archive,
             idea_ptr=self.idea,
             creator=self.request.user,
             module=self.idea.module,
             **{
-                field: value for field, value in proposal_data.items()
+                field: value for field, value in data.items()
                 if field not in special_fields
-                }
+            }
         )
         proposal.save()
-        merged_data = self.idea.__dict__.copy()
-        merged_data.update(data)
-        proposal.__dict__.update(merged_data)
-        proposal.save()
-
         return redirect(proposal.get_absolute_url())
 
 
