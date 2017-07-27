@@ -2,11 +2,12 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+import django.utils.timezone
 import django_countries.fields
 from django.conf import settings
-import autoslug.fields
 import adhocracy4.images.fields
 import multiselectfield.db.fields
+import autoslug.fields
 
 
 class Migration(migrations.Migration):
@@ -20,7 +21,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Idea',
             fields=[
-                ('item_ptr', models.OneToOneField(primary_key=True, parent_link=True, auto_created=True, to='a4modules.Item', serialize=False)),
+                ('item_ptr', models.OneToOneField(to='a4modules.Item', parent_link=True, primary_key=True, serialize=False, auto_created=True)),
                 ('first_name', models.CharField(max_length=250, help_text='Your first name and last name will be published together with the proposal.')),
                 ('last_name', models.CharField(max_length=250)),
                 ('organisation_status', models.CharField(max_length=255, choices=[('non_profit', 'I am applying on behalf of a registered non-profit organisation, e.g. NGO'), ('non_profit_planned', 'Registration as a non-profit organisation is planned or is already underway'), ('no_non_profit', 'I have a really good idea, but will need help to register a non-profit organisation'), ('other', 'Other')])),
@@ -30,13 +31,13 @@ class Migration(migrations.Migration):
                 ('organisation_country', django_countries.fields.CountryField(max_length=2, blank=True)),
                 ('organisation_city', models.CharField(max_length=250, blank=True)),
                 ('contact_email', models.EmailField(max_length=254, blank=True)),
-                ('year_of_registration', models.IntegerField(blank=True, null=True)),
-                ('reach_out', models.CharField(max_length=300, blank=True, verbose_name='Reach out – get feedback, ideas and inspiration from the Advocate Europe Community!', help_text='What kind of advice, comments or feedback would you like to receive about your idea from others on the platform? (max. 300 characters)')),
+                ('year_of_registration', models.IntegerField(null=True, blank=True)),
+                ('reach_out', models.TextField(help_text='What kind of advice, comments or feedback would you like to receive about your idea from others on the platform? (max. 300 characters)', max_length=300, blank=True, verbose_name='Reach out – get feedback, ideas and inspiration from the Advocate Europe Community!')),
                 ('how_did_you_hear', models.CharField(max_length=255, verbose_name='How did you hear about Advocate Europe?', choices=[('personal_contact', 'Personal contact'), ('websites', 'Websites'), ('facebook', 'Facebook'), ('twitter', 'Twitter'), ('newsletter', 'Newsletter'), ('other', 'Other')])),
                 ('idea_title', models.CharField(max_length=50, help_text='Give your idea a short and meaningful title (max. 50 characters).')),
                 ('idea_subtitle', models.CharField(max_length=100, blank=True, help_text='(max. 100 characters)')),
                 ('idea_pitch', models.TextField(max_length=500, help_text='Present your idea in 500 characters. Share a concise and attractive text that makes the reader curious. Try to pitch your main challenge, objective, method and target group in 3-5 sentences.')),
-                ('idea_image', adhocracy4.images.fields.ConfiguredImageField('idea_image', blank=True, upload_to='ideas/images', help_text='Upload a photo or illustration that visually supports or explains your idea. Make sure that you have the property rights to share this picture. You can upload a .jpg, .png or .gif of up to 3 MB in size. The image should be in landscape (not portrait) format and have a width of at least 400 pixels.')),
+                ('idea_image', adhocracy4.images.fields.ConfiguredImageField('idea_image', upload_to='ideas/images', blank=True, help_text='Upload a photo or illustration that visually supports or explains your idea. Make sure that you have the property rights to share this picture. You can upload a .jpg, .png or .gif of up to 3 MB in size. The image should be in landscape (not portrait) format and have a width of at least 400 pixels.')),
                 ('idea_topics', multiselectfield.db.fields.MultiSelectField(max_length=255, help_text='Please select one or two topics for your project.', choices=[('democracy_participation', 'Democracy and participation'), ('arts_cultural_activities', 'Arts and (inter-)cultural activities'), ('environment', 'Environment'), ('social_inclusion', 'Social inclusion'), ('migration', 'Migration'), ('communities', 'Communities'), ('urban_development', 'Urban development'), ('education', 'Education')])),
                 ('idea_topics_other', models.CharField(max_length=250, blank=True)),
                 ('idea_location', multiselectfield.db.fields.MultiSelectField(max_length=250, help_text='Please indicate the location of your project. Choose all options that apply. One to three choices possible.', choices=[('city', 'City, country or region'), ('online', 'Online'), ('ruhr_linkage', 'Linkage to the Ruhr area of Germany')])),
@@ -50,15 +51,18 @@ class Migration(migrations.Migration):
                 ('members', models.TextField(max_length=500, help_text='Please introduce us to the main members of your project team and briefly summariese their experience and skills. (max. 500 characters)', verbose_name='Who is in your project team?')),
                 ('partner_organisation_1_name', models.CharField(max_length=250, blank=True, verbose_name='name')),
                 ('partner_organisation_1_website', models.URLField(blank=True, verbose_name='website')),
-                ('partner_organisation_1_country', django_countries.fields.CountryField(max_length=2, blank=True, verbose_name='country')),
+                ('partner_organisation_1_country', django_countries.fields.CountryField(max_length=2, verbose_name='country', blank=True)),
                 ('partner_organisation_2_name', models.CharField(max_length=250, blank=True, verbose_name='name')),
                 ('partner_organisation_2_website', models.URLField(blank=True, verbose_name='website')),
-                ('partner_organisation_2_country', django_countries.fields.CountryField(max_length=2, blank=True, verbose_name='country')),
+                ('partner_organisation_2_country', django_countries.fields.CountryField(max_length=2, verbose_name='country', blank=True)),
                 ('partner_organisation_3_name', models.CharField(max_length=250, blank=True, verbose_name='name')),
                 ('partner_organisation_3_website', models.URLField(blank=True, verbose_name='website')),
-                ('partner_organisation_3_country', django_countries.fields.CountryField(max_length=2, blank=True, verbose_name='country')),
+                ('partner_organisation_3_country', django_countries.fields.CountryField(max_length=2, verbose_name='country', blank=True)),
                 ('partners_more_info', models.TextField(max_length=200, blank=True, help_text='Please use this field if you have more than 3 partner organisations or if you want to tell us more about your proposed partnership arrangements (max. 200 characters).')),
-                ('slug', autoslug.fields.AutoSlugField(editable=False, unique=True, populate_from='idea_title')),
+                ('slug', autoslug.fields.AutoSlugField(populate_from='idea_title', unique=True, editable=False)),
+                ('visit_camp', models.BooleanField(default=False)),
+                ('is_winner', models.BooleanField(default=False)),
+                ('community_award_winner', models.BooleanField(default=False)),
             ],
             options={
                 'ordering': ['-created'],
@@ -69,7 +73,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='IdeaSketchArchived',
             fields=[
-                ('item_ptr', models.OneToOneField(primary_key=True, parent_link=True, auto_created=True, to='a4modules.Item', serialize=False)),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', primary_key=True, auto_created=True)),
+                ('created', models.DateTimeField(default=django.utils.timezone.now, editable=False)),
+                ('modified', models.DateTimeField(null=True, editable=False, blank=True)),
                 ('first_name', models.CharField(max_length=250, help_text='Your first name and last name will be published together with the proposal.')),
                 ('last_name', models.CharField(max_length=250)),
                 ('organisation_status', models.CharField(max_length=255, choices=[('non_profit', 'I am applying on behalf of a registered non-profit organisation, e.g. NGO'), ('non_profit_planned', 'Registration as a non-profit organisation is planned or is already underway'), ('no_non_profit', 'I have a really good idea, but will need help to register a non-profit organisation'), ('other', 'Other')])),
@@ -79,16 +85,13 @@ class Migration(migrations.Migration):
                 ('organisation_country', django_countries.fields.CountryField(max_length=2, blank=True)),
                 ('organisation_city', models.CharField(max_length=250, blank=True)),
                 ('contact_email', models.EmailField(max_length=254, blank=True)),
-                ('year_of_registration', models.IntegerField(blank=True, null=True)),
-                ('collaboration_camp_option', models.CharField(max_length=255, help_text='Choose one of the following options. More information about the two tracks is available here: (Link).', choices=[('single_track', 'Single track'), ('partner_track', 'Partner track'), ('not_sure', "I'm not sure yet")])),
-                ('collaboration_camp_represent', models.TextField(max_length=150, help_text='(Specify one person only. (max 150 characters))', verbose_name='Who will represent your idea at the Collaboration Camp and why?')),
-                ('collaboration_camp_benefit', models.TextField(max_length=300, help_text="Tell us about your expectations. Think about your skills, resources, networks and partners when describing what you could offer and what you'd like to take away. (max. 300 characters)", verbose_name='How could you contribute to and benefit from participating in the Collaboration Camp?')),
-                ('reach_out', models.CharField(max_length=300, blank=True, verbose_name='Reach out – get feedback, ideas and inspiration from the Advocate Europe Community!', help_text='What kind of advice, comments or feedback would you like to receive about your idea from others on the platform? (max. 300 characters)')),
+                ('year_of_registration', models.IntegerField(null=True, blank=True)),
+                ('reach_out', models.TextField(help_text='What kind of advice, comments or feedback would you like to receive about your idea from others on the platform? (max. 300 characters)', max_length=300, blank=True, verbose_name='Reach out – get feedback, ideas and inspiration from the Advocate Europe Community!')),
                 ('how_did_you_hear', models.CharField(max_length=255, verbose_name='How did you hear about Advocate Europe?', choices=[('personal_contact', 'Personal contact'), ('websites', 'Websites'), ('facebook', 'Facebook'), ('twitter', 'Twitter'), ('newsletter', 'Newsletter'), ('other', 'Other')])),
                 ('idea_title', models.CharField(max_length=50, help_text='Give your idea a short and meaningful title (max. 50 characters).')),
                 ('idea_subtitle', models.CharField(max_length=100, blank=True, help_text='(max. 100 characters)')),
                 ('idea_pitch', models.TextField(max_length=500, help_text='Present your idea in 500 characters. Share a concise and attractive text that makes the reader curious. Try to pitch your main challenge, objective, method and target group in 3-5 sentences.')),
-                ('idea_image', adhocracy4.images.fields.ConfiguredImageField('idea_image', blank=True, upload_to='ideas/images', help_text='Upload a photo or illustration that visually supports or explains your idea. Make sure that you have the property rights to share this picture. You can upload a .jpg, .png or .gif of up to 3 MB in size. The image should be in landscape (not portrait) format and have a width of at least 400 pixels.')),
+                ('idea_image', adhocracy4.images.fields.ConfiguredImageField('idea_image', upload_to='ideas/images', blank=True, help_text='Upload a photo or illustration that visually supports or explains your idea. Make sure that you have the property rights to share this picture. You can upload a .jpg, .png or .gif of up to 3 MB in size. The image should be in landscape (not portrait) format and have a width of at least 400 pixels.')),
                 ('idea_topics', multiselectfield.db.fields.MultiSelectField(max_length=255, help_text='Please select one or two topics for your project.', choices=[('democracy_participation', 'Democracy and participation'), ('arts_cultural_activities', 'Arts and (inter-)cultural activities'), ('environment', 'Environment'), ('social_inclusion', 'Social inclusion'), ('migration', 'Migration'), ('communities', 'Communities'), ('urban_development', 'Urban development'), ('education', 'Education')])),
                 ('idea_topics_other', models.CharField(max_length=250, blank=True)),
                 ('idea_location', multiselectfield.db.fields.MultiSelectField(max_length=250, help_text='Please indicate the location of your project. Choose all options that apply. One to three choices possible.', choices=[('city', 'City, country or region'), ('online', 'Online'), ('ruhr_linkage', 'Linkage to the Ruhr area of Germany')])),
@@ -102,32 +105,30 @@ class Migration(migrations.Migration):
                 ('members', models.TextField(max_length=500, help_text='Please introduce us to the main members of your project team and briefly summariese their experience and skills. (max. 500 characters)', verbose_name='Who is in your project team?')),
                 ('partner_organisation_1_name', models.CharField(max_length=250, blank=True, verbose_name='name')),
                 ('partner_organisation_1_website', models.URLField(blank=True, verbose_name='website')),
-                ('partner_organisation_1_country', django_countries.fields.CountryField(max_length=2, blank=True, verbose_name='country')),
+                ('partner_organisation_1_country', django_countries.fields.CountryField(max_length=2, verbose_name='country', blank=True)),
                 ('partner_organisation_2_name', models.CharField(max_length=250, blank=True, verbose_name='name')),
                 ('partner_organisation_2_website', models.URLField(blank=True, verbose_name='website')),
-                ('partner_organisation_2_country', django_countries.fields.CountryField(max_length=2, blank=True, verbose_name='country')),
+                ('partner_organisation_2_country', django_countries.fields.CountryField(max_length=2, verbose_name='country', blank=True)),
                 ('partner_organisation_3_name', models.CharField(max_length=250, blank=True, verbose_name='name')),
                 ('partner_organisation_3_website', models.URLField(blank=True, verbose_name='website')),
-                ('partner_organisation_3_country', django_countries.fields.CountryField(max_length=2, blank=True, verbose_name='country')),
+                ('partner_organisation_3_country', django_countries.fields.CountryField(max_length=2, verbose_name='country', blank=True)),
                 ('partners_more_info', models.TextField(max_length=200, blank=True, help_text='Please use this field if you have more than 3 partner organisations or if you want to tell us more about your proposed partnership arrangements (max. 200 characters).')),
-                ('slug', autoslug.fields.AutoSlugField(editable=False, unique=True, populate_from='idea_title')),
-                ('visit_camp', models.BooleanField(default=False)),
-                ('collaborators', models.ManyToManyField(blank=True, to=settings.AUTH_USER_MODEL)),
+                ('slug', autoslug.fields.AutoSlugField(populate_from='idea_title', unique=True, editable=False)),
+                ('collaborators', models.ManyToManyField(related_name='ideasketcharchived_collaborators', to=settings.AUTH_USER_MODEL, blank=True)),
+                ('creator', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
-                'ordering': ['-created'],
                 'abstract': False,
             },
-            bases=('a4modules.item', models.Model),
         ),
         migrations.CreateModel(
             name='IdeaSketch',
             fields=[
-                ('idea_ptr', models.OneToOneField(primary_key=True, parent_link=True, auto_created=True, to='advocate_europe_ideas.Idea', serialize=False)),
+                ('idea_ptr', models.OneToOneField(to='advocate_europe_ideas.Idea', parent_link=True, primary_key=True, serialize=False, auto_created=True)),
                 ('collaboration_camp_option', models.CharField(max_length=255, help_text='Choose one of the following options. More information about the two tracks is available here: (Link).', choices=[('single_track', 'Single track'), ('partner_track', 'Partner track'), ('not_sure', "I'm not sure yet")])),
                 ('collaboration_camp_represent', models.TextField(max_length=150, help_text='(Specify one person only. (max 150 characters))', verbose_name='Who will represent your idea at the Collaboration Camp and why?')),
+                ('collaboration_camp_email', models.EmailField(max_length=254, verbose_name='Email address for contacting your representative on the collaboration camp.')),
                 ('collaboration_camp_benefit', models.TextField(max_length=300, help_text="Tell us about your expectations. Think about your skills, resources, networks and partners when describing what you could offer and what you'd like to take away. (max. 300 characters)", verbose_name='How could you contribute to and benefit from participating in the Collaboration Camp?')),
-                ('visit_camp', models.BooleanField(default=False)),
             ],
             options={
                 'ordering': ['-created'],
@@ -138,15 +139,18 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Proposal',
             fields=[
-                ('idea_ptr', models.OneToOneField(primary_key=True, parent_link=True, auto_created=True, to='advocate_europe_ideas.Idea', serialize=False)),
+                ('idea_ptr', models.OneToOneField(to='advocate_europe_ideas.Idea', parent_link=True, primary_key=True, serialize=False, auto_created=True)),
                 ('total_budget', models.IntegerField(help_text='Please indicate your overall budget. The total budget may (but does not have to) include the applicant’s own contribution and/or external sources of funding.', verbose_name='Total Budget')),
                 ('budget_requested', models.IntegerField(help_text='Funding requested from Advocate Europe can range from 1 to 50,000 EUR. Depending on your planning, the amount entered here can be the same as the “total budget” figure entered above.', verbose_name='Funding requested from Advocate Europe')),
                 ('major_expenses', models.TextField(max_length=500, help_text='Which are the major expenses you foresee for the implementation of your idea? Please share a rough estimate by cost category (e.g. office expenses 1000 EUR, travel and accommodation costs 3000 EUR, public relations 2000 EUR, personnel costs etc.)', verbose_name='Major expenses')),
-                ('other_sources', models.BooleanField(verbose_name='Other sources of income', help_text='This will not be published and will only be seen by the Advocate Europe team and the jury. Do you anticipate receiving funding for your activity or initiative from other sources (e.g. own contribution, other grants or financial aid)?')),
-                ('other_sources_secured', models.NullBooleanField(verbose_name='Are these financial sources secured? Yes/no', help_text='If yes, have these already been secured?')),
+                ('other_sources', models.BooleanField(help_text='This will not be published and will only be seen by the Advocate Europe team and the jury. Do you anticipate receiving funding for your activity or initiative from other sources (e.g. own contribution, other grants or financial aid)?', verbose_name='Other sources of income')),
+                ('other_sources_secured', models.NullBooleanField(help_text='If yes, have these already been secured?', verbose_name='Are these financial sources secured? Yes/no')),
                 ('duration', models.IntegerField(help_text='How many months will it take to implement your project?', verbose_name='Duration of project (number of months)')),
-                ('is_winner', models.BooleanField(default=False)),
+                ('selection_cohesion', models.TextField(max_length=500, verbose_name='How will your idea strengthen connection and cohesion in Europe?')),
+                ('selection_apart', models.TextField(max_length=500, help_text='What is surprising or unconventional about your idea? What is special about your idea?', verbose_name='What makes your idea stand apart?')),
+                ('selection_relevance', models.TextField(max_length=500, help_text='How will your project connect to, or influence, people’s daily lives?', verbose_name='What is the practical relevance of your idea to people’s everyday lives?')),
                 ('jury_statement', models.TextField(blank=True, verbose_name='Why this idea?')),
+                ('idea_sketch_archived', models.OneToOneField(to='advocate_europe_ideas.IdeaSketchArchived')),
             ],
             options={
                 'ordering': ['-created'],
@@ -155,13 +159,8 @@ class Migration(migrations.Migration):
             bases=('advocate_europe_ideas.idea', models.Model),
         ),
         migrations.AddField(
-            model_name='ideasketcharchived',
-            name='idea',
-            field=models.ForeignKey(to='advocate_europe_ideas.Idea'),
-        ),
-        migrations.AddField(
             model_name='idea',
             name='collaborators',
-            field=models.ManyToManyField(blank=True, to=settings.AUTH_USER_MODEL),
+            field=models.ManyToManyField(related_name='idea_collaborators', to=settings.AUTH_USER_MODEL, blank=True),
         ),
     ]
