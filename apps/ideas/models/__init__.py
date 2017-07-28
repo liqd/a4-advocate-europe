@@ -35,7 +35,6 @@ class AbstractIdea(AbstractApplicantSection,
                    AbstractIdeaSection,
                    AbstractImpactSection,
                    AbstractCommunitySection):
-    slug = AutoSlugField(populate_from='idea_title', unique=True)
     collaborators = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         related_name='%(class)s_collaborators',
@@ -51,6 +50,7 @@ class AbstractIdea(AbstractApplicantSection,
 
 
 class Idea(AbstractIdea, Item):
+    slug = AutoSlugField(populate_from='idea_title', unique=True)
     visit_camp = models.BooleanField(default=False)
     is_winner = models.BooleanField(default=False)
     community_award_winner = models.BooleanField(default=False)
