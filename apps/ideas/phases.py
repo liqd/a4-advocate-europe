@@ -57,7 +57,7 @@ class FullProposalPhase(phases.PhaseContent):
     module_name = _('Advocate Europe')
 
     features = {
-        'crud': (models.Idea, models.IdeaSketchArchived, models.Proposal,),
+        'crud': (models.Idea, models.Proposal,),
         'rate': (models.Idea,),
         # rating only for users, that added an idea in this or previous years
         'comment': (models.Idea,),
