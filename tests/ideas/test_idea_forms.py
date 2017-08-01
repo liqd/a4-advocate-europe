@@ -37,7 +37,9 @@ def test_community_section_empty_edit(idea_sketch):
     new_invites = list(
         idea_sketch.ideainvite_set.values_list('email', flat=True)
     )
-    assert new_invites == invites
+    assert len(new_invites) == len(invites)
+    assert 'test@test.de' in new_invites
+    assert 'test2@test.de' in new_invites
 
 
 @pytest.mark.django_db
@@ -82,7 +84,9 @@ def test_collaborator_edit(idea_sketch):
     new_invites = list(
         idea_sketch.ideainvite_set.values_list('email', flat=True)
     )
-    assert invites == new_invites
+    assert len(invites) == len(new_invites)
+    for invite in invites:
+        assert invite in new_invites
     assert list(idea_sketch.collaborators.all()) == collaborators[1:]
 
 
