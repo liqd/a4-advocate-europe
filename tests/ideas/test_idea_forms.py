@@ -33,8 +33,8 @@ def test_community_section_empty_edit(idea_sketch):
     idea_sketch = form.save()
     assert idea_sketch.reach_out == 'edit_reach_out'
     assert idea_sketch.how_did_you_hear == 'other'
-    invites = ['test@test.de', 'test2@test.de']
-    new_invites = list(
+    invites = set(['test@test.de', 'test2@test.de'])
+    new_invites = set(
         idea_sketch.ideainvite_set.values_list('email', flat=True)
     )
     assert new_invites == invites
@@ -78,12 +78,12 @@ def test_collaborator_edit(idea_sketch):
     assert not form.errors
     idea_sketch = form.save()
     assert idea_sketch.reach_out == 'edit_reach_out'
-    invites = ['foo@test.de', 'test1@test.de', 'test2@test.de']
-    new_invites = list(
+    invites = set(['foo@test.de', 'test1@test.de', 'test2@test.de'])
+    new_invites = set(
         idea_sketch.ideainvite_set.values_list('email', flat=True)
     )
     assert invites == new_invites
-    assert list(idea_sketch.collaborators.all()) == collaborators[1:]
+    assert set(list(idea_sketch.collaborators.all())) == set(collaborators[1:])
 
 
 @pytest.mark.django_db
