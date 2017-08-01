@@ -43,8 +43,11 @@ class AbstractFinanceAndDurationSection(models.Model):
     major_expenses = models.TextField(
         max_length=500,
         verbose_name=MAJOR_EXPENSES_TITLE, help_text=MAJOR_EXPENSES_HELP)
-    other_sources = models.BooleanField(verbose_name=OTHER_SOURCES_TITLE,
-                                        help_text=OTHER_SOURCES_HELP)
+    other_sources = models.BooleanField(
+        verbose_name=OTHER_SOURCES_TITLE,
+        help_text=OTHER_SOURCES_HELP,
+        default=False,
+    )
     other_sources_secured = models.NullBooleanField(
         verbose_name=OTHER_SOURCES_SECURED_TITLE,
         help_text=OTHER_SOURCES_SECURED_HELP)
