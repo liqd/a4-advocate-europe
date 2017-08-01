@@ -223,14 +223,16 @@ class ProposalCreateWizard(PermissionRequiredMixin,
         return initial
 
     def done(self, form_list, **kwargs):
-        idea_sketch_archive = IdeaSketchArchived()
-        for field in self.idea._meta.fields:
-            setattr(idea_sketch_archive,
-                    field.name,
-                    getattr(self.idea, field.name))
-        idea_sketch_archive.save()
-        idea_sketch_archive.created = self.idea.created
-        idea_sketch_archive.save()
+        archive = IdeaSketchArchived(id=self.idea.id)
+        for field in archive._meta.get_fields():
+            value = getattr(self.idea.ideasketch, field.name)
+
+            if field.many_to_many or field.one_to_many:
+                value = value.all()
+
+            setattr(archive, field.name, value)
+
+        archive.save()
 
         special_fields = ['accept_conditions', 'collaborators_emails']
 
@@ -238,14 +240,13 @@ class ProposalCreateWizard(PermissionRequiredMixin,
         data = self.get_all_cleaned_data()
 
         proposal = Proposal(
-            idea_sketch_archived=idea_sketch_archive,
             idea_ptr=self.idea,
             creator=self.request.user,
             module=self.idea.module,
             **{
                 field: value for field, value in proposal_data.items()
                 if field not in special_fields
-                }
+            }
         )
         proposal.save()
         merged_data = self.idea.__dict__.copy()

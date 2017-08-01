@@ -81,8 +81,16 @@ class IdeaSketch(Idea, AbstractCollaborationCampSection):
         return '{} (Ideasketch)'.format(self.idea_title)
 
 
-class IdeaSketchArchived(UserGeneratedContentModel,
-                         AbstractIdea):
+class IdeaSketchArchived(
+        UserGeneratedContentModel,
+        AbstractCollaborationCampSection,
+        AbstractIdea,
+):
+    idea = models.OneToOneField(Idea)
+
+    @property
+    def module(self):
+        return self.idea.module
 
     def __str__(self):
         return '{} (Archived Ideasketch)'.format(self.idea_title)
@@ -90,7 +98,6 @@ class IdeaSketchArchived(UserGeneratedContentModel,
 
 class Proposal(Idea, AbstractFinanceAndDurationSection,
                AbstractSelectionCriteriaSection):
-    idea_sketch_archived = models.OneToOneField(IdeaSketchArchived)
     jury_statement = models.TextField(
         verbose_name='Why this idea?', blank=True)
 
