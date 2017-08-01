@@ -12,9 +12,9 @@ class IdeaSketchFactory(factory.django.DjangoModelFactory):
     first_name = factory.Faker('first_name_female')
     last_name = factory.Faker('last_name')
     organisation_status = 'non_profit'
-    year_of_registration = factory.Faker('year')
-    idea_location = 'online'
-    idea_topics = 'environment,social_inclusion'
+    year_of_registration = 2002
+    idea_location = ['online']
+    idea_topics = ['environment', 'social_inclusion']
     idea_pitch = factory.Faker('text')
     challenge = factory.Faker('text')
     importance = factory.Faker('text')

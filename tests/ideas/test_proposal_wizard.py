@@ -83,7 +83,7 @@ def test_proposal_collaborator_create_wizard(client,
         assert wizard['steps'].count == 8
         assert wizard['steps'].step1 == 1
         for field, value in wizard['form'].initial.items():
-            assert str(value) == getattr(idea_sketch, field)
+            assert value == getattr(idea_sketch, field)
         data = {
             'proposal_create_wizard-current_step': '0'
         }
@@ -109,8 +109,6 @@ def test_proposal_collaborator_create_wizard(client,
         wizard = response.context['wizard']
         assert wizard['steps'].step1 == 3
         for field, value in wizard['form'].initial.items():
-            if type(value) is list:
-                value = ','.join(value)
             assert value == getattr(idea_sketch, field)
         data = {
             'proposal_create_wizard-current_step': '2'
