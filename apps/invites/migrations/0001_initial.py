@@ -10,15 +10,15 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('advocate_europe_ideas', '0001_initial'),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
             name='IdeaInvite',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('created', models.DateTimeField(editable=False, default=django.utils.timezone.now)),
                 ('modified', models.DateTimeField(editable=False, blank=True, null=True)),
                 ('email', models.EmailField(max_length=254)),
