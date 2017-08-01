@@ -200,7 +200,7 @@ def test_proposal_collaborator_create_wizard(client,
         assert IdeaSketch.objects.all().count() == 1
 
         new_proposal = Proposal.objects.all().first()
-        idea_archive = new_proposal.ideasketcharchived
+        idea_archive = new_proposal.idea.idea_sketch_archived
 
         excluded_fields = [
             # is overwritten by update logic, due to explicit pk
