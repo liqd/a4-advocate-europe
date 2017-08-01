@@ -200,6 +200,7 @@ class IdeaSketchArchivedDetailView(IdeaDetailView):
     model = IdeaSketchArchived
     template_name = 'advocate_europe_ideas/idea_detail.html'
     context_object_name = 'idea'
+    slug_field = 'idea__slug'
 
 
 class ProposalCreateWizard(PermissionRequiredMixin,

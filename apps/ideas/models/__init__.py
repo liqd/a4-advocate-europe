@@ -86,7 +86,15 @@ class IdeaSketchArchived(
         AbstractCollaborationCampSection,
         AbstractIdea,
 ):
-    idea = models.OneToOneField(Idea)
+    idea = models.OneToOneField(Idea, related_name='idea_sketch_archived')
+
+    @property
+    def idea_sketch_archived(self):
+        return True
+
+    @property
+    def slug(self):
+        return self.idea.slug
 
     @property
     def module(self):
