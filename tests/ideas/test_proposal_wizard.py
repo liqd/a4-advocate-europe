@@ -83,7 +83,7 @@ def test_proposal_collaborator_create_wizard(client,
         assert wizard['steps'].count == 8
         assert wizard['steps'].step1 == 1
         for field, value in wizard['form'].initial.items():
-            assert str(value) == getattr(idea_sketch, field)
+            assert value == getattr(idea_sketch, field)
         data = {
             'proposal_create_wizard-current_step': '0'
         }
@@ -109,8 +109,6 @@ def test_proposal_collaborator_create_wizard(client,
         wizard = response.context['wizard']
         assert wizard['steps'].step1 == 3
         for field, value in wizard['form'].initial.items():
-            if type(value) is list:
-                value = ','.join(value)
             assert value == getattr(idea_sketch, field)
         data = {
             'proposal_create_wizard-current_step': '2'
@@ -207,8 +205,6 @@ def test_proposal_collaborator_create_wizard(client,
         for field in IdeaSketchArchived._meta.get_all_field_names():
             if hasattr(idea_archive, field) and field != 'modified':
                 archive_field = getattr(idea_archive, field)
-                if type(archive_field) is list:
-                    archive_field = (',').join(archive_field)
                 idea_sketch_field = getattr(idea_sketch, field)
                 assert str(archive_field) == str(idea_sketch_field)
 
