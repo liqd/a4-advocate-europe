@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     'apps.ideas.apps.IdeasConfig',
     'apps.invites.apps.InvitesConfig',
     'apps.notifications.apps.NotificationsConfig',
+    'apps.adhocracy3imports.apps.Adhocracy3ImportsConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -142,6 +143,12 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher', # adhocracy3 compat
+)
+
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_RESTRICT_BY_USER = True
