@@ -116,7 +116,6 @@ class A3ImportCommandMixin():
     def a3_get_last_version(self, resorce_path):
         return self.a3_get_sheet_field(
             resorce_path,
-            self.token,
             'adhocracy_core.sheets.tags.ITags',
             'LAST'
         )
