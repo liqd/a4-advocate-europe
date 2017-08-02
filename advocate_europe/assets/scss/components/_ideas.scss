@@ -39,6 +39,7 @@
     background-color: $ae-light-gray;
     width: rem(270px);
     min-height: rem(400px);
+    box-shadow: 0 1px 0 0 $ae-light-gray-shadow;
 
     .idealist-image {
         img {
@@ -81,6 +82,8 @@
         background-position: center center;
         background-size: cover;
         height: rem(320px);
+        border-top-left-radius: rem(5px);
+        border-top-right-radius: rem(5px);
 
         @media screen and (min-width: $screen-md-min) {
             height: rem(350px);
@@ -275,7 +278,9 @@
 
 .ideadetail-content {
     background-color: #fff;
-    box-shadow: 20px 0 20px -20px rgba(0, 0, 0, 0.2), 0 20px 20px -20px rgba(0, 0, 0, 0.2), -20px 0 20px -20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+    border-bottom-left-radius: rem(5px);
+    border-bottom-right-radius: rem(5px);
     padding-bottom: rem(60px);
 }
 
