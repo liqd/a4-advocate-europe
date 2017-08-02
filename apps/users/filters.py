@@ -63,7 +63,7 @@ class ProfileIdeaFilterSet(DefaultsFilterSet):
         ),
         choices=(
             ('newest', _('Newest')),
-            ('comments', _('Oldest')),
+            ('oldest', _('Oldest')),
         ),
         empty_label=None,
         widget=OrderingFilterWidget
