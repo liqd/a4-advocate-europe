@@ -6,9 +6,7 @@ COLLABORATION_CAMP_OPTIONS_CHOICES = (
     ('partner_track', 'Partner track'),
     ('not_sure', "I'm not sure yet")
 )
-COLLABORATION_CAMP_OPTIONS_HELP = _('Choose one of the following options. '
-                                    'More information about the two tracks '
-                                    'is available here: (Link).')
+COLLABORATION_CAMP_OPTIONS_HELP = _('Choose one of the following options.')
 COLLABORATION_CAMP_REPRESENT_TITLE = _('Who will represent your idea '
                                        'at the Collaboration Camp and why?')
 COLLABORATION_CAMP_REPRESENT_HELP = _('(Specify one person only. '
