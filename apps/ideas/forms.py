@@ -3,7 +3,10 @@ from itertools import chain
 import crispy_forms as crisp
 from django import forms
 from django.core.exceptions import ValidationError
+from django.utils.html import mark_safe
 from django.utils.translation import ugettext_lazy as _
+
+from cms.settings.models import HelpPages
 
 from . import models
 from .models.abstracts.applicant_section import AbstractApplicantSection
@@ -17,6 +20,8 @@ from .models.abstracts.impact_section import AbstractImpactSection
 from .models.abstracts.partners_section import AbstractPartnersSection
 from .models.abstracts.selection_criteria_section import \
     AbstractSelectionCriteriaSection
+
+LINK_TEXT = _('Please look {}here{} for more information.')
 
 ACCEPT_CONDITIONS_LABEL = _('I hereby confirm and agree that '
                             'my idea will be public once'
@@ -140,7 +145,7 @@ class PartnersSectionForm(BaseForm):
                     'partner_organisation_{}_website'.format(index),
                     'partner_organisation_{}_country'.format(index)
                 ) for index, heading in enumerate(self.accordions, 1)
-            ]
+                ]
         )
         return helper
 
@@ -177,6 +182,25 @@ class ImpactSectionForm(BaseForm):
             'members'
         ]
 
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super().__init__(*args, **kwargs)
+        help_pages = HelpPages.for_site(self.request.site)
+        if (help_pages.annual_theme_help_page and
+                help_pages.annual_theme_help_page.live):
+            url = help_pages.annual_theme_help_page.url
+            current_outcome_help_text = self.fields['outcome'].help_text
+            current_challenge_help_text = self.fields['challenge'].help_text
+            current_plan_help_text = self.fields['plan'].help_text
+            link_text = LINK_TEXT \
+                .format('<a href="' + url + '" target="_blank">', '</a>')
+            self.fields['outcome'].help_text = '{} {}'.format(
+                current_outcome_help_text, mark_safe(link_text))
+            self.fields['challenge'].help_text = '{} {}'.format(
+                current_challenge_help_text, mark_safe(link_text))
+            self.fields['plan'].help_text = '{} {}'.format(
+                current_plan_help_text, mark_safe(link_text))
+
 
 class CollaborationCampSectionForm(BaseForm):
     section_name = _('Collaboration camp')
@@ -189,6 +213,22 @@ class CollaborationCampSectionForm(BaseForm):
             'collaboration_camp_email',
             'collaboration_camp_benefit'
         ]
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super().__init__(*args, **kwargs)
+        help_pages = HelpPages.for_site(self.request.site)
+        if (help_pages.communication_camp_help_page and
+                help_pages.communication_camp_help_page.live):
+            url = help_pages.communication_camp_help_page.url
+            current_collaboration_camp_option_help_text = \
+                self.fields['collaboration_camp_option'].help_text
+            link_text = LINK_TEXT.format(
+                '<a href="' + url + '" target="_blank">', '</a>')
+            self.fields['collaboration_camp_option'].help_text = \
+                '{} {}'.format(
+                current_collaboration_camp_option_help_text,
+                    mark_safe(link_text))
 
 
 class CommunitySectionForm(CollaboratorsEmailsFormMixin, BaseForm):
@@ -212,7 +252,7 @@ class CommunitySectionForm(CollaboratorsEmailsFormMixin, BaseForm):
         addresses = super().clean_collaborators_emails()
 
         if len(addresses) > 5:
-                raise ValidationError(_('Maximum 5 collaborators allowed'))
+            raise ValidationError(_('Maximum 5 collaborators allowed'))
 
         return addresses
 
@@ -279,7 +319,7 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
                                 'cta_unchecked': _('will be revoked on save')
                             }
                         ) for i in invites
-                    ],
+                        ],
                     initial=[i.email for i in invites],
                     widget=forms.CheckboxSelectMultiple
                 )
@@ -301,7 +341,7 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
                                 'cta_unchecked': _('will be removed on save')
                             }
                         ) for c in collaborators
-                    ],
+                        ],
                     initial=[c.username for c in collaborators],
                     widget=forms.CheckboxSelectMultiple
                 )
@@ -333,9 +373,9 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
         for (name, address) in addresses:
             if address in invites:
                 error = ValidationError({
-                   'collaborators_emails': _(
-                       'You already invited {email}'
-                   ).format(email=address)
+                    'collaborators_emails': _(
+                        'You already invited {email}'
+                    ).format(email=address)
                 })
                 duplicate_errors.append(error)
         if duplicate_errors:
