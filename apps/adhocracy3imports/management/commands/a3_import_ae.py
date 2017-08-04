@@ -295,9 +295,6 @@ class Command(A3ImportCommandMixin, BaseCommand):
             a4proposal.save()
 
             # TODO: copy comments
-            # TODO: copy rates
-            # TODO: copy logbook
-            # TODO: read winner, shortlist, community award
 
             if created:
                 print("INIT: {}".format(url))
