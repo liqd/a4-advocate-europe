@@ -84,8 +84,13 @@ class Command(A3ImportCommandMixin, BaseCommand):
         if metadata['deleted'] == 'true' or metadata['hidden'] == 'true':
             return None, None
 
+        if metadata['creator']:
+            creator = self.a3_get_user_by_path(metadata['creator'])
+        else:
+            creator = self.fallback_creator
+
         new = item_cls(
-            creator=self.a3_get_user_by_path(metadata['creator']),
+            creator=creator,
             created=parse_dt(metadata['creation_date']),
             modified=parse_dt(metadata['modification_date']),
             **kwargs

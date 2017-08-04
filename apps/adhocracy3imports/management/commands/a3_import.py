@@ -72,6 +72,12 @@ class A3ImportCommandMixin():
 
         self.a3_login(url, username, password)
         self.default_creator = default_creator
+        fallback_creator, _created = User.objects.get_or_create(
+            username='unkown',
+            email='do-not-reply@liqd.net',
+            password='invalid',
+        )
+        self.fallback_creator = fallback_creator
 
     def a3_login(self, url, username, password):
         login_url = url + 'login_username'
