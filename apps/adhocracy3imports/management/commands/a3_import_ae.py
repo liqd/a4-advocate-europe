@@ -15,6 +15,13 @@ Organisation = get_organisation_model()
 DEFAULT_VALUE = '-'
 
 
+class Sheets:
+    DESCRIPTION = 'adhocracy_core.sheets.description.IDescription'
+    BADGEBALE = 'adhocracy_core.sheets.badge.IBadgeable'
+    BADGE_ASSIGNMENT = 'adhocracy_core.sheets.badge.IBadgeAssignment'
+    NAME = 'adhocracy_core.sheets.name.IName'
+
+
 class Command(A3ImportCommandMixin, BaseCommand):
 
     def handle(self, *args, **options):
@@ -117,6 +124,22 @@ class Command(A3ImportCommandMixin, BaseCommand):
                     sheet_mapping,
                     resources_are_versionable
                 )
+
+    def a3_get_batches(self, a3resource):
+        """
+        Extract badge name and description of the assignment if it exists.
+        """
+        result = {}
+        a_urls = a3resource['data'][Sheets.BADGEBALE]['assignments']
+
+        for assignment_url in a_urls:
+            assign = self.a3_get_resource(assignment_url)
+            description = assign['data'][Sheets.DESCRIPTION]['description']
+            badge_url = assign['data'][Sheets.BADGE_ASSIGNMENT]['badge']
+            badge = self.a3_get_resource(badge_url)
+            name = badge['data'][Sheets.NAME]['name']
+            result[name] = description
+        return result
 
     def a3_copy_sheet_data(
             self, item, a3_resource, mapping, resource_is_versionable
@@ -234,6 +257,14 @@ class Command(A3ImportCommandMixin, BaseCommand):
                     setattr(
                         archive, field_name, getattr(a4proposal, field_name)
                     )
+
+            # gather information from badges
+            badges = self.a3_get_batches(a3proposal)
+
+            a4proposal.is_winning = 'winning' in badges
+            a4proposal.jury_statement = badges.get('winning', '')
+            a4proposal.visit_camp = 'shortlist' in badges
+            a4proposal.community_award_winnter = 'community'
 
             # fill collaboration camp fields
             archive.collaboration_camp_option = 'not_sure'
