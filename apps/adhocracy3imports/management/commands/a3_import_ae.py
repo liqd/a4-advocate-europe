@@ -5,6 +5,7 @@ from urllib.parse import urlparse
 from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand
 from django.db.models import CharField
+from django.utils.text import slugify
 
 from apps.ideas import models, phases
 
@@ -183,7 +184,7 @@ class Command(A3ImportCommandMixin, BaseCommand):
 
             # parse slug and fix up differences between slugify implementations
             (_rest, slug) = path.split(path.split(urlparse(url).path)[0])
-            slug = slug.replace('.', '_').replace('–', '-').lower()[0:50]
+            slug = slugify(slug)[0:50]
 
             a4proposal, created = self.a3_item_get_or_create(
                 models.Proposal, a3proposal, slug=slug
