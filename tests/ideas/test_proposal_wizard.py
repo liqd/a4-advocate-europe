@@ -83,7 +83,7 @@ def test_proposal_collaborator_create_wizard(client,
         assert wizard['steps'].count == 8
         assert wizard['steps'].step1 == 1
         for field, value in wizard['form'].initial.items():
-            assert str(value) == getattr(idea_sketch, field)
+            assert value == getattr(idea_sketch, field)
         data = {
             'proposal_create_wizard-current_step': '0'
         }
@@ -109,8 +109,6 @@ def test_proposal_collaborator_create_wizard(client,
         wizard = response.context['wizard']
         assert wizard['steps'].step1 == 3
         for field, value in wizard['form'].initial.items():
-            if type(value) is list:
-                value = ','.join(value)
             assert value == getattr(idea_sketch, field)
         data = {
             'proposal_create_wizard-current_step': '2'
@@ -202,15 +200,27 @@ def test_proposal_collaborator_create_wizard(client,
         assert IdeaSketch.objects.all().count() == 1
 
         new_proposal = Proposal.objects.all().first()
-        idea_archive = new_proposal.idea_sketch_archived
+        idea_archive = new_proposal.idea.idea_sketch_archived
 
-        for field in IdeaSketchArchived._meta.get_all_field_names():
-            if hasattr(idea_archive, field) and field != 'modified':
-                archive_field = getattr(idea_archive, field)
-                if type(archive_field) is list:
-                    archive_field = (',').join(archive_field)
-                idea_sketch_field = getattr(idea_sketch, field)
-                assert str(archive_field) == str(idea_sketch_field)
+        excluded_fields = [
+            # is overwritten by update logic, due to explicit pk
+            'modified',
+            # only present with explicit one-to-one relations (like in archive)
+            'idea_id',
+        ]
+
+        for field in IdeaSketchArchived._meta.get_fields():
+            if field.name not in excluded_fields:
+                archive_field = getattr(idea_archive, field.name)
+                idea_sketch_field = getattr(idea_sketch, field.name)
+                if field.name == 'idea':
+                    archive_field = archive_field.proposal
+                    idea_sketch_field = idea_sketch_field.proposal
+                elif field.many_to_many or field.one_to_many:
+                    archive_field = set(archive_field.all())
+                    idea_sketch_field = set(idea_sketch_field.all())
+
+                assert archive_field == idea_sketch_field
 
         assert Proposal.objects.all() \
             .first().idea_title == idea_sketch.idea_title
