@@ -70,7 +70,7 @@ class IdeaSketchArchivedFactory(factory.django.DjangoModelFactory):
         model = IdeaSketchArchived
 
     creator = factory.SubFactory(UserFactory)
-    module = factory.SubFactory(ModuleFactory)
+    idea = factory.SubFactory(IdeaFactory)
 
 
 class ProposalFactory(factory.django.DjangoModelFactory):
@@ -86,7 +86,6 @@ class ProposalFactory(factory.django.DjangoModelFactory):
     other_sources = 0
     other_sources_secured = 0
     duration = factory.Faker('random_number')
-    idea_sketch_archived = factory.SubFactory(IdeaSketchArchivedFactory)
     visit_camp = True
 
     @factory.post_generation
@@ -99,3 +98,11 @@ class ProposalFactory(factory.django.DjangoModelFactory):
         if extracted:
             for user in extracted:
                 self.collaborators.add(user)
+
+    @factory.post_generation
+    def idea_archive(self, create, extracted, **kwargs):
+        assert not extracted
+        self.ideasketcharchived = IdeaSketchArchivedFactory(
+            creator=self.creator,
+            idea=self.idea,
+        )
