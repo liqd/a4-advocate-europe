@@ -39,11 +39,11 @@ class Command(A3ImportCommandMixin, BaseCommand):
         """
         super().handle(*args, **options)
 
-        project, module = self.create_ae_project(2016)
-        self.import_all_proposals(project, module, 2016)
-
         project, module = self.create_ae_project(2015)
         self.import_all_proposals(project, module, 2015)
+
+        project, module = self.create_ae_project(2016)
+        self.import_all_proposals(project, module, 2016)
 
     def create_ae_project(self, year):
         organisation, _created = Organisation.objects.update_or_create(
