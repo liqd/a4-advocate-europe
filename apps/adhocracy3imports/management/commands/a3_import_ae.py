@@ -87,7 +87,8 @@ class Command(A3ImportCommandMixin, BaseCommand):
         new = item_cls(
             creator=self.a3_get_user_by_path(metadata['creator']),
             created=parse_dt(metadata['creation_date']),
-            modified=parse_dt(metadata['modification_date'])
+            modified=parse_dt(metadata['modification_date']),
+            **kwargs
         )
 
         return new, True
@@ -152,10 +153,9 @@ class Command(A3ImportCommandMixin, BaseCommand):
         for url in urls:
             a3proposal = self.a3_get_resource(url + '?elements=content')
 
-            print(url)
             # parse slug and fix up differences between slugify implementations
             (_rest, slug) = path.split(path.split(urlparse(url).path)[0])
-            slug = slug.replace('.', '_').replace('–', '-')
+            slug = slug.replace('.', '_').replace('–', '-').lower()[0:50]
 
             a4proposal, created = self.a3_item_get_or_create(
                 models.Proposal, a3proposal, slug=slug
@@ -166,9 +166,6 @@ class Command(A3ImportCommandMixin, BaseCommand):
                 continue
             else:
                 print("STRT: {}".format(url))
-
-            if created:
-                a4proposal.slug = slug
 
             a4proposal.module = module
 
