@@ -94,11 +94,6 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
     finish_section_text = _('You can add data or edit your idea later.')
     finish_section_btn = _('Submit your idea!')
 
-    def get_form_kwargs(self, step):
-        if step == '3' or step == '4':
-            return {'request': self.request}
-        return {}
-
     def done(self, form_list, **kwargs):
         special_fields = ['accept_conditions', 'collaborators_emails']
 
@@ -145,13 +140,6 @@ class IdeaSketchEditView(
         forms.CollaborationCampSectionForm,
         forms.CommunitySectionEditForm,
     ]
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        if self.form_number == 3 or self.form_number == 4:
-            kwargs['request'] = self.request
-            return kwargs
-        return kwargs
 
     @property
     def raise_exception(self):
@@ -226,11 +214,6 @@ class ProposalCreateWizard(PermissionRequiredMixin,
     finish_section_text = _('You can add data or edit your proposal later.')
     finish_section_btn = _('Submit your proposal!')
 
-    def get_form_kwargs(self, step):
-        if step == '3':
-            return {'request': self.request}
-        return {}
-
     def get_form_initial(self, step):
         initial = self.initial_dict.get(step, {})
         form = self.form_list[step]
@@ -294,13 +277,6 @@ class ProposalEditView(
         forms.FinanceAndDurationSectionForm,
         forms.CommunitySectionEditForm,
     ]
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        if self.form_number == 3:
-            kwargs['request'] = self.request
-            return kwargs
-        return kwargs
 
     @property
     def raise_exception(self):

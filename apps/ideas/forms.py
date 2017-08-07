@@ -3,10 +3,9 @@ from itertools import chain
 import crispy_forms as crisp
 from django import forms
 from django.core.exceptions import ValidationError
-from django.utils.html import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
-from cms.settings.models import HelpPages
+from cms.contrib import helpers
 
 from . import models
 from .models.abstracts.applicant_section import AbstractApplicantSection
@@ -20,8 +19,6 @@ from .models.abstracts.impact_section import AbstractImpactSection
 from .models.abstracts.partners_section import AbstractPartnersSection
 from .models.abstracts.selection_criteria_section import \
     AbstractSelectionCriteriaSection
-
-LINK_TEXT = _('Please look {}here{} for more information.')
 
 ACCEPT_CONDITIONS_LABEL = _('I hereby confirm and agree that '
                             'my idea will be public once'
@@ -183,23 +180,13 @@ class ImpactSectionForm(BaseForm):
         ]
 
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
         super().__init__(*args, **kwargs)
-        help_pages = HelpPages.for_site(self.request.site)
-        if (help_pages.annual_theme_help_page and
-                help_pages.annual_theme_help_page.live):
-            url = help_pages.annual_theme_help_page.url
-            current_outcome_help_text = self.fields['outcome'].help_text
-            current_challenge_help_text = self.fields['challenge'].help_text
-            current_plan_help_text = self.fields['plan'].help_text
-            link_text = LINK_TEXT \
-                .format('<a href="' + url + '" target="_blank">', '</a>')
-            self.fields['outcome'].help_text = '{} {}'.format(
-                current_outcome_help_text, mark_safe(link_text))
-            self.fields['challenge'].help_text = '{} {}'.format(
-                current_challenge_help_text, mark_safe(link_text))
-            self.fields['plan'].help_text = '{} {}'.format(
-                current_plan_help_text, mark_safe(link_text))
+        self.fields['outcome'].help_text = helpers.add_link_to_helptext(
+            self.fields['outcome'].help_text, "annual_theme_help_page")
+        self.fields['challenge'].help_text = helpers.add_link_to_helptext(
+            self.fields['challenge'].help_text, "annual_theme_help_page")
+        self.fields['plan'].help_text = helpers.add_link_to_helptext(
+            self.fields['plan'].help_text, "annual_theme_help_page")
 
 
 class CollaborationCampSectionForm(BaseForm):
@@ -215,20 +202,11 @@ class CollaborationCampSectionForm(BaseForm):
         ]
 
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
         super().__init__(*args, **kwargs)
-        help_pages = HelpPages.for_site(self.request.site)
-        if (help_pages.communication_camp_help_page and
-                help_pages.communication_camp_help_page.live):
-            url = help_pages.communication_camp_help_page.url
-            current_collaboration_camp_option_help_text = \
-                self.fields['collaboration_camp_option'].help_text
-            link_text = LINK_TEXT.format(
-                '<a href="' + url + '" target="_blank">', '</a>')
-            self.fields['collaboration_camp_option'].help_text = \
-                '{} {}'.format(
-                current_collaboration_camp_option_help_text,
-                    mark_safe(link_text))
+        self.fields['collaboration_camp_option'].help_text \
+            = helpers.add_link_to_helptext(
+            self.fields['collaboration_camp_option'].help_text,
+            "communication_camp_help_page")
 
 
 class CommunitySectionForm(CollaboratorsEmailsFormMixin, BaseForm):

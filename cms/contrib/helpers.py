@@ -1,0 +1,24 @@
+from django.utils.html import mark_safe
+from django.utils.translation import ugettext_lazy as _
+from wagtail.wagtailcore.models import Site
+
+from cms.settings.models import HelpPages
+
+LINK_TEXT = _('Please look {}here{} for more information.')
+
+
+def add_link_to_helptext(help_text, help_page_name):
+    site = Site.objects.filter(
+        is_default_site=True
+    ).first()
+    help_pages = HelpPages.for_site(site)
+
+    if getattr(help_pages, help_page_name) and \
+       getattr(help_pages, help_page_name).live:
+        url = getattr(help_pages, help_page_name).url
+        link_text = LINK_TEXT \
+            .format('<a href="' + url + '" target="_blank">', '</a>')
+        return '{} {}'.format(
+                help_text, mark_safe(link_text))
+
+    return help_text
