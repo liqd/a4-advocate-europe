@@ -110,6 +110,20 @@ body {
 .richtext-image {
     max-width: 100%;
     height: auto;
+
+    &.full-width {
+        width: 100%;
+    }
+
+    &.left {
+        float: left;
+        margin-right: rem(15px);
+    }
+
+    &.right {
+        float: right;
+        margin-left: rem(15px);
+    }
 }
 
 .alert {
