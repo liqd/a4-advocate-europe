@@ -1,5 +1,6 @@
 import pytest
 from django.core.exceptions import PermissionDenied
+from django.core.urlresolvers import reverse
 
 from apps.ideas import models, views
 
@@ -76,3 +77,23 @@ def test_idea_export_view_admin(rf, admin, idea_sketch_factory,
     assert len(str(content_line[0]).split('","')) == 58
     assert len(str(content_line[1]).split('","')) == 58
     assert len(str(content_line[3]).split('","')) == 58
+
+
+@pytest.mark.django_db
+def test_idea_sketch_edit_form_has_request(admin, idea_sketch_factory, client):
+    client.login(email=admin.email, password='password')
+    idea_sketch = idea_sketch_factory()
+    url = reverse('idea-sketch-update-form',
+                  kwargs={'slug': idea_sketch.slug, 'form_number': '3'})
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_proposal_edit_form_has_request(admin, proposal_factory, client):
+    client.login(email=admin.email, password='password')
+    proposal = proposal_factory()
+    url = reverse('proposal-update-form',
+                  kwargs={'slug': proposal.slug, 'form_number': '3'})
+    response = client.get(url)
+    assert response.status_code == 200
