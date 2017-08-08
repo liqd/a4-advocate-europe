@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'ckeditor',
     'ckeditor_uploader',
+    'background_task',
 
     'django.contrib.sites',
     'django.contrib.admin',

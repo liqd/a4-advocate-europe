@@ -1,7 +1,6 @@
 from django.apps import AppConfig
 
 
-from adhocracy4.actions.models import configure_icon, configure_type
 from adhocracy4.actions.verbs import Verbs
 
 
@@ -10,6 +9,7 @@ class ActionsConfig(AppConfig):
     label = 'advocate_europe_actions'
 
     def ready(self):
+        from adhocracy4.actions.models import configure_icon, configure_type
         configure_type('project', ('a4projects', 'project'))
         configure_type('phase', ('a4phases', 'phase'))
         configure_type(

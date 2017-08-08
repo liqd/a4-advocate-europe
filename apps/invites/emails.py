@@ -6,5 +6,5 @@ class InviteEmail(emails.ExternalNotification):
 
     def get_context(self):
         context = super().get_context()
-        context.push(invite=self.object)
+        context['invite'] = self.object
         return context

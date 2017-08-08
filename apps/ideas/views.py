@@ -236,25 +236,17 @@ class ProposalCreateWizard(PermissionRequiredMixin,
         archive.save()
 
         special_fields = ['accept_conditions', 'collaborators_emails']
-
-        proposal_data = self.get_cleaned_data_for_step('5')
         data = self.get_all_cleaned_data()
-
         proposal = Proposal(
             idea_ptr=self.idea,
             creator=self.request.user,
             module=self.idea.module,
             **{
-                field: value for field, value in proposal_data.items()
+                field: value for field, value in data.items()
                 if field not in special_fields
             }
         )
         proposal.save()
-        merged_data = self.idea.__dict__.copy()
-        merged_data.update(data)
-        proposal.__dict__.update(merged_data)
-        proposal.save()
-
         return redirect(proposal.get_absolute_url())
 
 

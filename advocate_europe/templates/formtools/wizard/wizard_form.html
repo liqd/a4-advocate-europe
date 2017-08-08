@@ -9,7 +9,7 @@
         <div class="wizard-progress-side">
             <ul class="wizard-progress hidden-sm hidden-xs">
                 {% for step_id, form, status in view.progress %}
-                <li class="wizard-progress-entry{% if status = "active" %} active{% endif %}{% if status == "reachable_with_validate" or status == "reachable_with_store" %} filled{% endif %}">
+                <li class="wizard-progress-entry{% if status == "active" %} active{% endif %}{% if status == "reachable_with_validate" or status == "reachable_with_store" %} filled{% endif %}">
                     {% if status == "reachable_with_store" %}
                     <button name="wizard_store_and_goto_step"
                             class="wizard-progress-button"
