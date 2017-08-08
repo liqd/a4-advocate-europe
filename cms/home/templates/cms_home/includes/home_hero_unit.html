@@ -8,12 +8,14 @@
         <div class="container-narrow">
             <div class="herounit-header">
                 <h1 class="herounit-title">{{ title }}</h1>
-                <p class="herounit-description">
-                    {{ description }}
-                </p>
-                {% if videoplayer_url %}
-                <a href="#video" class="btn btn-primary btn-md" data-toggle="modal"><i class="fa fa-play" aria-hidden="true"></i> Play video</a>
-                {% endif %}
+                <div class="herounit-content">
+                    <p class="herounit-description">
+                        {{ description }}
+                    </p>
+                    {% if videoplayer_url %}
+                    <a href="#video" class="btn btn-primary btn-md" data-toggle="modal"><i class="fa fa-play" aria-hidden="true"></i> Play video</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

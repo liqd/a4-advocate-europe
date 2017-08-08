@@ -2,16 +2,11 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 CHALLENGE_TITLE = _('What problem or societal need are you working on?')
-CHALLENGE_HELP = _('Please look here for more information about the '
-                   'annual theme: (link to subpage with more '
-                   'detailed explanation of the annual theme). '
-                   '(max. 300 characters)')
+CHALLENGE_HELP = _('max. 300 characters.')
 OUTCOME_TITLE = _('What would be a successful outcome for your project?')
 OUTCOME_HELP = _('If your project is selected, what will be different '
-                 'a year from now? What will have changed? Please look '
-                 'here for more information: (link to subpage '
-                 'with explanation on impact). '
-                 '(max. 300 characters)')
+                 'a year from now? What will have changed? '
+                 '(max. 300 characters).')
 PLAN_TITLE = _('How do you plan to get there? Remember to highlight'
                ' what makes your project design or idea '
                'different and innovative.')
@@ -19,9 +14,7 @@ PLAN_HELP = _('Describe as concretely as possible the '
               'approach and / or the method '
               'you will use when implementing your idea. '
               'What are the steps you plan '
-              'to take? Please look here for more information: '
-              '(link to subpage on with explanation on implementation). '
-              '(max. 500 characters)')
+              'to take? (max. 500 characters).')
 IMPORTANCE_TITLE = _('Why is this idea important to you?')
 IMPORTANCE_HELP = _('What motivates you to bring this idea to life? '
                     'What is your story? What is your personal '

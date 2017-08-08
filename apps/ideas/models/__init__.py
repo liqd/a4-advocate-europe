@@ -4,6 +4,7 @@ from django.contrib.contenttypes.fields import GenericRelation
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
+from adhocracy4.models.base import UserGeneratedContentModel
 from adhocracy4.comments import models as comment_models
 from adhocracy4.models import query
 from adhocracy4.modules.models import Item
@@ -33,11 +34,10 @@ class AbstractIdea(AbstractApplicantSection,
                    AbstractPartnersSection,
                    AbstractIdeaSection,
                    AbstractImpactSection,
-                   AbstractCommunitySection,
-                   Item):
-    slug = AutoSlugField(populate_from='idea_title', unique=True)
+                   AbstractCommunitySection):
     collaborators = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
+        related_name='%(class)s_collaborators',
         blank=True
     )
 
@@ -49,7 +49,8 @@ class AbstractIdea(AbstractApplicantSection,
         return self.idea_title
 
 
-class Idea(AbstractIdea):
+class Idea(AbstractIdea, Item):
+    slug = AutoSlugField(populate_from='idea_title', unique=True)
     visit_camp = models.BooleanField(default=False)
     is_winner = models.BooleanField(default=False)
     community_award_winner = models.BooleanField(default=False)
@@ -80,7 +81,24 @@ class IdeaSketch(Idea, AbstractCollaborationCampSection):
         return '{} (Ideasketch)'.format(self.idea_title)
 
 
-class IdeaSketchArchived(AbstractIdea, AbstractCollaborationCampSection):
+class IdeaSketchArchived(
+        UserGeneratedContentModel,
+        AbstractCollaborationCampSection,
+        AbstractIdea,
+):
+    idea = models.OneToOneField(Idea, related_name='idea_sketch_archived')
+
+    @property
+    def idea_sketch_archived(self):
+        return True
+
+    @property
+    def slug(self):
+        return self.idea.slug
+
+    @property
+    def module(self):
+        return self.idea.module
 
     def __str__(self):
         return '{} (Archived Ideasketch)'.format(self.idea_title)
@@ -88,7 +106,6 @@ class IdeaSketchArchived(AbstractIdea, AbstractCollaborationCampSection):
 
 class Proposal(Idea, AbstractFinanceAndDurationSection,
                AbstractSelectionCriteriaSection):
-    idea_sketch_archived = models.OneToOneField(IdeaSketchArchived)
     jury_statement = models.TextField(
         verbose_name='Why this idea?', blank=True)
 

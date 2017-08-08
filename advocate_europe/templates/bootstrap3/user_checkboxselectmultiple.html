@@ -1,5 +1,5 @@
 {% load crispy_forms_filters %}
-{% load l10n thumbnail %}
+{% load l10n %}
 
 <div class="controls user-picker {{ field_class }}"{% if flat_attrs %} {{ flat_attrs|safe }}{% endif %}>
     {% include 'bootstrap3/layout/help_text.html' %}
@@ -17,7 +17,7 @@
                {{ field.field.widget.attrs|flatatt }}>
         <div class="user-picker-label-content">
             {% if user.avatar %}
-            <span class="avatar-round-small" style="background-image: url({{ user.avatar | thumbnail_url:'avatar-small' }});"></span>
+            <span class="avatar-round-small" style="background-image: url({{ user.avatar }});"></span>
             {% endif %}
             <span class="user-picker-label-text">{{ user.username|unlocalize }}</span>
             {% if user.detail %}
