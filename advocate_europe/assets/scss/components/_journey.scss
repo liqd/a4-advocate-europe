@@ -17,6 +17,12 @@
 .journey-entry {
     margin-bottom: rem(43px);
 
+    a {
+        img {
+            width: 100%;
+        }
+    }
+
     .collaborator {
         color: $ae-middle-gray;
     }
