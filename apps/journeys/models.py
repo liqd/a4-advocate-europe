@@ -38,5 +38,6 @@ class JourneyEntry(UserGeneratedContentModel):
 
     def save(self, *args, **kwargs):
         self.text = transforms.clean_html_field(
-            self.text)
+            self.text,
+            setting='image-editor')
         super().save(*args, **kwargs)
