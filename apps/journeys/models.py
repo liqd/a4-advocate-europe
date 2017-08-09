@@ -4,6 +4,8 @@ from django.utils.translation import ugettext as _
 
 from adhocracy4.models.base import UserGeneratedContentModel
 
+from apps.ideas.models import Idea
+
 
 class JourneyEntry(UserGeneratedContentModel):
     IMPACT_ROAD = 'ir'
@@ -25,6 +27,7 @@ class JourneyEntry(UserGeneratedContentModel):
         (ANYTHING, _('Anything else?'))
     )
 
+    idea = models.ForeignKey(Idea, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     category = models.CharField(
         max_length=2,
