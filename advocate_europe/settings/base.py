@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'ckeditor',
     'ckeditor_uploader',
+    'background_task',
 
     'django.contrib.sites',
     'django.contrib.admin',
@@ -78,6 +79,7 @@ INSTALLED_APPS = [
     'apps.users.apps.UsersConfig',
     'apps.ideas.apps.IdeasConfig',
     'apps.invites.apps.InvitesConfig',
+    'apps.journeys.apps.JourneysConfig',
     'apps.notifications.apps.NotificationsConfig',
     'apps.adhocracy3imports.apps.Adhocracy3ImportsConfig',
 ]

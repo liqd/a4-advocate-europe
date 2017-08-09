@@ -1,6 +1,6 @@
 .herounit {
     background-size: cover;
-    text-align: center;
+    text-align: left;
     min-height: 500px;
     position: relative;
     padding: rem(40px) 0;
@@ -90,10 +90,13 @@
     }
 }
 
+.herounit-content {
+    margin-left: rem(15px);
+}
+
 .herounit-description {
-    padding: 0 rem(90px);
     margin-bottom: rem(15px);
-    font-size: 16px;
+    font-size: rem(20px);
     font-weight: bold;
     line-height: 1.38;
 

@@ -3,7 +3,6 @@ from itertools import chain
 import django_filters
 from django.db.models.fields import BLANK_CHOICE_DASH
 from django.forms import TextInput
-from django.forms.widgets import flatatt
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
 
@@ -36,7 +35,6 @@ class DropdownLinkWidget(django_filters.widgets.LinkWidget):
             value = all_choices[0][0]
 
         _id = attrs.pop('id')
-        final_attrs = flatatt(self.build_attrs(attrs))
         value_label = self.get_option_label(value, choices=choices)
 
         options = super().render(name, value, attrs={
@@ -47,7 +45,6 @@ class DropdownLinkWidget(django_filters.widgets.LinkWidget):
         return render_to_string(self.template, {
             'options': options,
             'id': _id,
-            'attrs': final_attrs,
             'value_label': value_label,
             'label': self.label,
             'right': self.right,

@@ -16,4 +16,4 @@ def send_notification(sender, instance, created, **kwargs):
             action.obj_content_type.model_class() is IdeaSketch
             or action.obj_content_type.model_class() is Proposal
     ):
-        emails.SubmitNotification.send(action.obj, idea=action.obj)
+        emails.SubmitNotification.send(action.obj)

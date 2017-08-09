@@ -1,5 +1,6 @@
 from django.db import models
 from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.wagtailadmin.edit_handlers import PageChooserPanel
 
 
 @register_setting
@@ -11,4 +12,32 @@ class SocialMediaSettings(BaseSetting):
     flickr = models.URLField(
         help_text='Your flickr page URL', blank=True)
     youtube = models.URLField(
-        help_text='Your YouTube channel or user account URL' , blank=True)
+        help_text='Your YouTube channel or user account URL', blank=True)
+
+
+@register_setting
+class HelpPages(BaseSetting):
+    communication_camp_help_page = models.ForeignKey(
+        'wagtailcore.Page',
+        related_name="help_page_communication_camp",
+        null=True,
+        on_delete=models.SET_NULL,
+        help_text="Please add a link to the page that explains the communication camp here.")
+    annual_theme_help_page = models.ForeignKey(
+        'wagtailcore.Page',
+        related_name="help_page_annual_theme",
+        null=True,
+        on_delete=models.SET_NULL,
+        help_text="Please add a link to the page that explains the annual theme, impact and implementation.")
+    terms_of_use_page = models.ForeignKey(
+        'wagtailcore.Page',
+        related_name="help_page_terms_of_use_page",
+        null=True,
+        on_delete=models.SET_NULL,
+        help_text="Please add a link to the page that explains the terms of condition here.")
+
+    panels = [
+        PageChooserPanel('communication_camp_help_page'),
+        PageChooserPanel('annual_theme_help_page'),
+        PageChooserPanel('terms_of_use_page'),
+    ]
