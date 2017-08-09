@@ -5,6 +5,9 @@
         <h2>{% trans "Journey" %}</h2>
     </div>
     <div class="journey">
+    {% if idea.journeyentry_set.all.count == 0 %}
+        <h3>{% trans 'No entries yet' %}</h3>
+    {% else %}
     {% for entry in idea.journeyentry_set.all %}
         <div class="journey-entry">
             <span class="journey-category">{{ entry.get_category_display }}</span>
@@ -16,6 +19,7 @@
             </p>
         </div>
     {% endfor %}
+    {% endif %}
     </div>
 
 
