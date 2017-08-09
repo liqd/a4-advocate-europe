@@ -1,0 +1,23 @@
+.journey {
+    margin-top: rem(30px);
+
+    h3 {
+        font-size: rem(18px);
+        margin-top: rem(5px);
+        margin-bottom: rem(5px);
+    }
+}
+
+.journey-category {
+    color: $brand-primary;
+    text-transform: uppercase;
+    font-size: rem(12px);
+}
+
+.journey-entry {
+    margin-bottom: rem(43px);
+
+    .collaborator {
+        color: $ae-middle-gray;
+    }
+}
