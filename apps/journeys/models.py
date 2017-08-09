@@ -1,4 +1,5 @@
 from ckeditor.fields import RichTextField
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext as _
 
@@ -34,3 +35,9 @@ class JourneyEntry(UserGeneratedContentModel):
         choices=CATEGORY_CHOICES
     )
     text = RichTextField()
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('idea-detail', args=[self.idea.slug])
