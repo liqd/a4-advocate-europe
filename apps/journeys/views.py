@@ -2,14 +2,14 @@ from django.views import generic
 
 from apps.ideas.models import Idea
 
-from .models import JourneyEntry
+from . import forms
 
 
 class JourneyEntryCreateView(generic.edit.CreateView
                              ):
     # permission_required = 'advocate_europe_ideas.export_idea'
-    model = JourneyEntry
-    fields = ['title', 'category', 'text']
+    form_class = forms.JourneyEntryForm
+    template_name = 'advocate_europe_journeys/journey_entry_form.html'
 
     @property
     def raise_exception(self):

@@ -1,7 +1,7 @@
 {% load i18n rules static %}
 
 <div class="ideadetail-tab">
-    <div class="idealist-controls">
+    <div class="ideadetail-controls">
         {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
         {% if can_export %}
             <a class="btn btn-primary" href="{% url 'journey-entry-create' idea.slug %}">{% trans "create journey entry" %}</a>
