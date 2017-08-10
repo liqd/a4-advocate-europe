@@ -1,14 +1,15 @@
+from django.utils.translation import ugettext as _
 from django.views import generic
 
 from apps.ideas.models import Idea
 
-from . import forms
+from .forms import JourneyEntryForm
+from .models import JourneyEntry
 
 
-class JourneyEntryCreateView(generic.edit.CreateView
-                             ):
+class JourneyEntryCreateView(generic.CreateView):
     # permission_required = 'advocate_europe_ideas.export_idea'
-    form_class = forms.JourneyEntryForm
+    form_class = JourneyEntryForm
     template_name = 'advocate_europe_journeys/journey_entry_form.html'
 
     @property
@@ -24,3 +25,32 @@ class JourneyEntryCreateView(generic.edit.CreateView
         form.instance.creator = self.request.user
         form.instance.idea = self.idea
         return super().form_valid(form)
+
+
+class JourneyEntryUpdateView(generic.UpdateView):
+    # permission_required = 'advocate_europe_ideas.export_idea'
+    form_class = JourneyEntryForm
+    model = JourneyEntry
+    template_name = 'advocate_europe_journeys/journey_entry_form.html'
+
+    @property
+    def raise_exception(self):
+        return self.request.user.is_authenticated()
+
+
+class JourneyEntryDeleteView(generic.DeleteView):
+    model = JourneyEntry
+    success_message = _("Your Journey entry has been deleted")
+
+    @property
+    def raise_exception(self):
+        return self.request.user.is_authenticated()
+
+    # def delete(self, request, *args, **kwargs):
+    #     messages.success(self.request, self.success_message)
+    #     return super(JourneyEntryDeleteView, self).delete(request,
+    #                                                       *args, **kwargs)
+
+    # def get_success_url(self):
+    #     return reverse('idea-detail',
+    #                    kwargs={'slug': self.object.idea.slug})

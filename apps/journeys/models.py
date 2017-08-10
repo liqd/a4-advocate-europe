@@ -1,3 +1,4 @@
+# from autoslug import AutoSlugField
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -30,6 +31,7 @@ class JourneyEntry(UserGeneratedContentModel):
     )
 
     idea = models.ForeignKey(Idea, on_delete=models.CASCADE)
+    # slug = AutoSlugField(populate_from='title', unique=True)
     title = models.CharField(max_length=100)
     category = models.CharField(
         max_length=2,
