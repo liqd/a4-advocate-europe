@@ -1,4 +1,4 @@
-{% load i18n static %}
+{% load i18n static micawber_tags %}
 
 <div class="ideadetail-tab">
     <div class="ideadetailtab-header">
@@ -12,7 +12,7 @@
         <div class="journey-entry">
             <span class="journey-category">{{ entry.get_category_display }}</span>
             <h3>{{ entry.title }}</h3>
-            <p>{{ entry.text | safe }}</p>
+            <p>{{ entry.text | oembed_html }}</p>
             <p>
                 <span class="avatar-round-small" style="background-image: url({{ entry.creator.avatar_or_fallback_url }})"></span>
                 <span class="collaborator"><a href="{% url 'profile' entry.creator.username %}">{{ entry.creator.username }} </a>{% trans 'on' %} {{ entry.created | date }}</span>
