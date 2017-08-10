@@ -1,7 +1,8 @@
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext as _
+from adhocracy4 import transforms
 
 from adhocracy4.models.base import UserGeneratedContentModel
 
@@ -34,10 +35,16 @@ class JourneyEntry(UserGeneratedContentModel):
         max_length=2,
         choices=CATEGORY_CHOICES
     )
-    text = RichTextField()
+    text = RichTextUploadingField(config_name='image-editor')
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse('idea-detail', args=[self.idea.slug])
+
+    def save(self, *args, **kwargs):
+        self.text = transforms.clean_html_field(
+            self.text,
+            setting='image-editor')
+        super().save(*args, **kwargs)
