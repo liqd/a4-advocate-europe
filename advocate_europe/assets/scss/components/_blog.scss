@@ -26,6 +26,10 @@
 
 .blogindex {
     background: linear-gradient(to bottom, $brand-primary rem(162px), #fff 0%);
+
+    @media screen and (max-width: $screen-xs-max) {
+        background: linear-gradient(to bottom, $brand-primary rem(122px), #fff 0%);
+    }
 }
 
 .equal {
