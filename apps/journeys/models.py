@@ -37,6 +37,9 @@ class JourneyEntry(UserGeneratedContentModel):
     )
     text = RichTextUploadingField(config_name='image-editor')
 
+    class Meta:
+        ordering = ['-created']
+
     def __str__(self):
         return self.title
 
