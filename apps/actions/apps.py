@@ -24,6 +24,8 @@ class ActionsConfig(AppConfig):
             ('advocate_europe_ideas', 'ideasketch'),
         )
         configure_type('blog', ('cms_blog', 'blogpage'))
+        configure_type('journey entry',
+                       ('advocate_europe_journeys', 'journeyentry'))
 
         configure_icon('comment', type='comment')
         configure_icon('lightbulb-o', type='item')
