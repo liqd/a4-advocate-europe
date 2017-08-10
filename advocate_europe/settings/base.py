@@ -216,10 +216,15 @@ LANGUAGES = [
     ('de', _('German'))
 ]
 
+COUNTRIES_ONLY = ['AL', 'AD', 'AM', 'AT', 'AZ', 'BY', 'BE', 'BA', 'BG', 'HR',
+                  'CY', 'DK', 'EE', 'FI', 'FR', 'GE', 'DE', 'GR', 'HU', 'IE',
+                  'IS', 'IT', 'LV', 'LI', 'LT', 'LU', 'ME', 'MK', 'MT', 'MD',
+                  'MC', 'NL', 'NO', 'PL', 'PT', 'RO', 'RU', 'SM', 'SE', 'CH',
+                  'RS', 'SK', 'SI', 'ES', 'CZ', 'TR', 'UA', 'GB', 'VA', ('XK', _('Kosovo'))]
+
 
 # fixtures
-
-FIXTURE_DIRS = [ os.path.join(PROJECT_DIR, 'fixtures') ]
+FIXTURE_DIRS = [os.path.join(PROJECT_DIR, 'fixtures')]
 
 IMAGE_ALIASES = {
     '*': {
