@@ -60,8 +60,8 @@ class IdeaFilterSet(DefaultsFilterSet):
             qs = queryset.filter(proposal__isnull=False)
         elif value == 'community_award':
             qs = queryset.filter(community_award_winner=True)
-        elif value == 'camp':
-            qs = queryset.filter(visit_camp=True)
+        elif value == 'shortlist':
+            qs = queryset.filter(is_on_shortlist=True)
         elif value == 'winner':
             qs = queryset.filter(is_winner=True)
         else:
@@ -73,7 +73,7 @@ class IdeaFilterSet(DefaultsFilterSet):
         choices=(
             ('idea_sketch', _('Idea Sketch')),
             ('community_award', _('Community Award Winner')),
-            ('camp', _('Invited to Collaboration Camp')),
+            ('shortlist', _('Shortlist')),
             ('proposal', _('Proposal')),
             ('winner', _('Winner'))
         ),
