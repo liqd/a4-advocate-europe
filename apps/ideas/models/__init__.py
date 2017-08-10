@@ -51,7 +51,7 @@ class AbstractIdea(AbstractApplicantSection,
 
 class Idea(AbstractIdea, Item):
     slug = AutoSlugField(populate_from='idea_title', unique=True)
-    visit_camp = models.BooleanField(default=False)
+    is_on_shortlist = models.BooleanField(default=False)
     is_winner = models.BooleanField(default=False)
     community_award_winner = models.BooleanField(default=False)
     ratings = GenericRelation(rating_models.Rating,
