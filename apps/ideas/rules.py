@@ -36,7 +36,7 @@ rules.add_perm(
         mod_predicates.is_owner |
         predicates.is_collaborator
     ) &
-    predicates.may_visit_camp &
+    predicates.is_on_shortlist &
     phase_predicates.phase_allows_change
 )
 

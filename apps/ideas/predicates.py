@@ -7,5 +7,5 @@ def is_collaborator(user, idea):
 
 
 @rules.predicate
-def may_visit_camp(user, idea):
-    return idea.ideasketch.visit_camp
+def is_on_shortlist(user, idea):
+    return idea.ideasketch.is_on_shortlist
