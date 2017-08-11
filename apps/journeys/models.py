@@ -51,3 +51,7 @@ class JourneyEntry(UserGeneratedContentModel):
             self.text,
             setting='image-editor')
         super().save(*args, **kwargs)
+
+    @property
+    def project(self):
+        return self.idea.project

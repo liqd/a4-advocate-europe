@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.views import generic
+from rules.contrib.views import PermissionRequiredMixin
 
 from apps.ideas.models import Idea
 
@@ -9,10 +10,10 @@ from .forms import JourneyEntryForm
 from .models import JourneyEntry
 
 
-class JourneyEntryCreateView(generic.CreateView):
-    # permission_required = 'advocate_europe_ideas.export_idea'
+class JourneyEntryCreateView(PermissionRequiredMixin, generic.CreateView):
     form_class = JourneyEntryForm
     template_name = 'advocate_europe_journeys/journey_entry_form.html'
+    permission_required = 'advocate_europe_ideas.add_journey'
 
     @property
     def raise_exception(self):
@@ -28,21 +29,25 @@ class JourneyEntryCreateView(generic.CreateView):
         form.instance.idea = self.idea
         return super().form_valid(form)
 
+    def get_permission_object(self, *args, **kwargs):
+        return self.idea
 
-class JourneyEntryUpdateView(generic.UpdateView):
-    # permission_required = 'advocate_europe_ideas.export_idea'
+
+class JourneyEntryUpdateView(PermissionRequiredMixin, generic.UpdateView):
     form_class = JourneyEntryForm
     model = JourneyEntry
     template_name = 'advocate_europe_journeys/journey_entry_form.html'
+    permission_required = 'advocate_europe_ideas.add_journey'
 
     @property
     def raise_exception(self):
         return self.request.user.is_authenticated()
 
 
-class JourneyEntryDeleteView(generic.DeleteView):
+class JourneyEntryDeleteView(PermissionRequiredMixin, generic.DeleteView):
     model = JourneyEntry
     success_message = _("Your Journey entry has been deleted")
+    permission_required = 'advocate_europe_ideas.add_journey'
 
     @property
     def raise_exception(self):
