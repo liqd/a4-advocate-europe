@@ -332,7 +332,8 @@ A4_ACTIONABLES = (
     ('advocate_europe_ideas', 'ideasketch'),
     ('advocate_europe_ideas', 'proposal'),
     ('a4comments', 'comment'),
-    ('cms_blog', 'blogpage')
+    ('cms_blog', 'blogpage'),
+    ('advocate_europe_journeys', 'journeyentry')
 )
 
 

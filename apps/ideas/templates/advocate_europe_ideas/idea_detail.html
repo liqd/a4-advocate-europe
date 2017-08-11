@@ -13,6 +13,9 @@
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">{% trans "Creators" %}</a></li>
                     <li role="presentation" class="active"><a href="#idea" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Idea" %}</a></li>
+                    {% if idea.is_winner %}
+                    <li role="presentation"><a href="#journey" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Project Journey" %}</a></li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="col-xs-5">
@@ -68,6 +71,11 @@
             <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane active" id="idea">
                 {% include 'advocate_europe_ideas/idea_detail_tab_idea.html' %}
             </div>
+            {% if idea.is_winner %}
+            <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane " id="journey">
+                {% include 'advocate_europe_ideas/idea_detail_tab_journey.html' %}
+            </div>
+            {% endif %}
             <div class="col-md-3 col-sm-4 col-xs-12 ideadetail-info-boxes">
                   <div class="ideadetail-info-box">
                         <h4>Collaborators</h4>
