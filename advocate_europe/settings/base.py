@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'modelcluster',
     'taggit',
     'multiselectfield',
+    'micawber.contrib.mcdjango',
 
     'widget_tweaks',
     'crispy_forms',
@@ -81,6 +82,7 @@ INSTALLED_APPS = [
     'apps.invites.apps.InvitesConfig',
     'apps.journeys.apps.JourneysConfig',
     'apps.notifications.apps.NotificationsConfig',
+    'apps.adhocracy3imports.apps.Adhocracy3ImportsConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -144,6 +146,14 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher', # adhocracy3 compat
+)
+
+
+MICAWBER_PROVIDERS = 'apps.contrib.oembed.oembed_providers'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_RESTRICT_BY_USER = True

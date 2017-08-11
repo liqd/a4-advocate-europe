@@ -17,7 +17,7 @@ from . import USERNAME_INVALID_MESSAGE, USERNAME_REGEX
 class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     username = models.CharField(
         _('username'),
-        max_length=60,
+        max_length=75,
         unique=True,
         help_text=_(
             'Required. 60 characters or fewer. Letters, digits, spaces and '
