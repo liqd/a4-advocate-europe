@@ -20,6 +20,7 @@ class AbstractPartnersSection(models.Model):
         verbose_name=PARTNERS_NAME_LABEL
     )
     partner_organisation_1_website = models.URLField(
+        max_length=500,
         blank=True,
         verbose_name=PARTNERS_WEBSITE_LABEL
     )
@@ -33,6 +34,7 @@ class AbstractPartnersSection(models.Model):
         verbose_name=PARTNERS_NAME_LABEL
     )
     partner_organisation_2_website = models.URLField(
+        max_length=500,
         blank=True,
         verbose_name=PARTNERS_WEBSITE_LABEL
     )
@@ -46,6 +48,7 @@ class AbstractPartnersSection(models.Model):
         verbose_name=PARTNERS_NAME_LABEL
     )
     partner_organisation_3_website = models.URLField(
+        max_length=500,
         blank=True,
         verbose_name=PARTNERS_WEBSITE_LABEL
     )

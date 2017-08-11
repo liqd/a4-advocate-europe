@@ -41,7 +41,10 @@ class AbstractApplicantSection(models.Model):
     organisation_name = models.CharField(
         max_length=250,
         blank=True, help_text=ORGANISATION_NAME_HELP)
-    organisation_website = models.URLField(max_length=250, blank=True)
+    organisation_website = models.URLField(
+        max_length=500,
+        blank=True
+    )
     organisation_country = CountryField(blank=True)
     organisation_city = models.CharField(max_length=250, blank=True)
     contact_email = models.EmailField(blank=True)
