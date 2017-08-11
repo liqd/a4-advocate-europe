@@ -27,6 +27,10 @@
         {% if can_export %}
             <a class="btn btn-primary" href="{% url 'journey-entry-update' entry.pk %}">{% trans "update journey entry" %}</a>
             <a class="btn btn-primary" href="{% url 'journey-entry-delete' entry.pk %}">{% trans "delete journey entry" %}</a>
+            <form method="POST" id="entry_delete" action="{% url 'journey-entry-delete' entry.pk %}">
+            {% csrf_token %}
+            </form>
+            <button type="submit" form="entry_delete" class="submit-button">{% trans 'delete'%}</button>
         {% endif %}
     {% endfor %}
     {% endif %}

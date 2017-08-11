@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.views import generic
 
@@ -46,11 +48,11 @@ class JourneyEntryDeleteView(generic.DeleteView):
     def raise_exception(self):
         return self.request.user.is_authenticated()
 
-    # def delete(self, request, *args, **kwargs):
-    #     messages.success(self.request, self.success_message)
-    #     return super(JourneyEntryDeleteView, self).delete(request,
-    #                                                       *args, **kwargs)
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(JourneyEntryDeleteView, self).delete(request,
+                                                          *args, **kwargs)
 
-    # def get_success_url(self):
-    #     return reverse('idea-detail',
-    #                    kwargs={'slug': self.object.idea.slug})
+    def get_success_url(self):
+        return reverse('idea-detail',
+                       kwargs={'slug': self.object.idea.slug})
