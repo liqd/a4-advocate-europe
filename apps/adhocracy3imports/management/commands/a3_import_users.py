@@ -1,11 +1,16 @@
 import csv
+import re
 
 from allauth.account.models import EmailAddress
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand
-from django.db import models
 
 User = get_user_model()
+
+
+def fixup_username(username):
+    return re.sub(r'[^ \w.+\-@]', '_', username).lstrip('+-.@ _')
 
 
 class Command(BaseCommand):
@@ -23,28 +28,52 @@ class Command(BaseCommand):
 
     def _add_user(self, userdata):
         email = userdata['Email']
-        username = userdata['Username']
+        original_username = userdata['Username']
+        username = fixup_username(original_username)
 
         user_exists = User.objects.filter(
-            models.Q(email=email)
-            | models.Q(username=username)).exists()
+            email=email, username=username
+        ).exists()
 
-        email_exists = EmailAddress.objects.filter(email=email).exists()
+        user = User(
+            username=username,
+            email=email,
+            date_joined=userdata['Creation date'],
+            password="bcrypt$" + userdata['Password hash'],
+        )
 
-        if user_exists or email_exists:
-            print('Skipping user {} <{}>'.format(username, email))
-        else:
-            user = User(
-                username=username,
-                email=email,
-                date_joined=userdata['Creation date'],
-                password="bcrypt$" + userdata['Password hash'],
+        if user_exists:
+            print(
+                'Skipping user {} <{}> because already exists'.format(
+                    user.username, user.email
+                )
             )
-            user.save()
-            email = EmailAddress(
-                user=user,
-                email=userdata['Email'],
-                verified=True,
-                primary=True,
-            )
-            email.save()
+            return
+
+        try:
+            user.full_clean()
+        except ValidationError as e:
+            if 'email' in e.error_dict:
+                print(
+                    'Skipping user {} <{}> due to invalid email'.format(
+                        user.username, user.email
+                    )
+                )
+                return
+            else:
+                import sys
+                print(
+                    'Aborting due to user {} <{}> with {}'.format(
+                        user.username, user.email, e
+                    )
+                )
+                sys.exit('Invalid user')
+
+        user.save()
+        email = EmailAddress(
+            user=user,
+            email=userdata['Email'],
+            verified=True,
+            primary=True,
+        )
+        email.save()

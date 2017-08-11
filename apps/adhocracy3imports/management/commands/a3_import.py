@@ -14,6 +14,8 @@ from adhocracy4.projects.models import Project
 from adhocracy4.ratings.models import Rating
 from apps.users.models import User
 
+from .a3_import_users import fixup_username
+
 
 def get_organisation_model():
     """
@@ -145,7 +147,7 @@ class A3ImportCommandMixin():
             'adhocracy_core.sheets.principal.IUserBasic',
             'name'
         )
-        user = User.objects.get(username=username)
+        user = User.objects.get(username=fixup_username(username))
         return user
 
     def a3_import_comment(self, comment_path, object_path,
