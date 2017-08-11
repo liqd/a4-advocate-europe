@@ -8,7 +8,6 @@ from django.core.management.base import CommandError
 from django.utils import timezone
 
 from adhocracy4.comments.models import Comment
-from adhocracy4.maps.models import AreaSettings
 from adhocracy4.modules.models import Module
 from adhocracy4.phases.models import Phase
 from adhocracy4.projects.models import Project
@@ -253,23 +252,6 @@ class A3ImportCommandMixin():
                 if rate_value != 0:
                     rates.append((user, rate_value))
         return rates
-
-    def a3_import_area_settings(self, location_path, module):
-        coordinates = self.a3_get_sheet_field(
-            location_path, self.token,
-            'adhocracy_core.sheets.geo.IMultiPolygon', 'coordinates')
-        polygon = {
-            'type': 'FeatureCollection',
-            'features': [
-                {'type': 'Feature',
-                 'properties': {},
-                 'geometry': {
-                     'type': 'Polygon',
-                     'coordinates': coordinates[0]}}]}
-        AreaSettings.objects.create(
-            module=module,
-            polygon=polygon
-        )
 
     def a3_get_dates(self, path, wt):
         creation_date = wt.get('created')
