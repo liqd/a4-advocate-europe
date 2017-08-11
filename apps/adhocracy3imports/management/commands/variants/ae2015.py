@@ -20,16 +20,11 @@ organisation_status_map = {
 }
 
 
-country_map = {
-    'XK': ''  # Kosovo doesn't have an offical ISO-3166 code yet
-}
-
-
 subresource_map = {
     'adhocracy_mercator.resources.mercator.IOrganizationInfo': {
         "adhocracy_mercator.sheets.mercator.IOrganizationInfo": [
             ("status", "organisation_status", organisation_status_map),
-            ("country", "organisation_country", country_map),
+            ("country", "organisation_country"),
             ("name", "organisation_name"),
             # ("help_request", "???"),
             ("status_other", "organisation_status_extra"),

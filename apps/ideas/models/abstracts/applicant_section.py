@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from django_countries.fields import CountryField
 
+from apps.ideas.countries import EuropeanCountries
 
 FIRST_LAST_NAME_HELP = _('Your first name '
                          'and last name will be '
@@ -45,7 +46,10 @@ class AbstractApplicantSection(models.Model):
         max_length=500,
         blank=True
     )
-    organisation_country = CountryField(blank=True)
+    organisation_country = CountryField(
+        blank=True,
+        countries=EuropeanCountries
+    )
     organisation_city = models.CharField(max_length=250, blank=True)
     contact_email = models.EmailField(blank=True)
     year_of_registration = models.IntegerField(blank=True, null=True)

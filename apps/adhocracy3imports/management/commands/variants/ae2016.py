@@ -28,11 +28,6 @@ heard_froms_map = {
 }
 
 
-country_map = {
-    'XK': ''  # Kosovo doesn't have an offical ISO-3166 code yet
-}
-
-
 def translate_idea_topic(topics):
     return [t.replace('_and_', '_') for t in topics if t != 'other']
 
@@ -92,15 +87,15 @@ subresource_map = {
             ('partner1_name', 'partner_organisation_1_name'),
             ('partner1_website', 'partner_organisation_1_website'),
             ('partner1_country',
-             'partner_organisation_1_country', country_map),
+             'partner_organisation_1_country'),
             ('partner2_name', 'partner_organisation_2_name'),
             ('partner2_website', 'partner_organisation_2_website'),
             ('partner2_country',
-             'partner_organisation_2_country', country_map),
+             'partner_organisation_2_country'),
             ('partner3_name', 'partner_organisation_3_name'),
             ('partner3_website', 'partner_organisation_3_website'),
             ('partner3_country',
-             'partner_organisation_3_country', country_map),
+             'partner_organisation_3_country'),
             ('other_partners', 'partners_more_info'),
         ]
     },
