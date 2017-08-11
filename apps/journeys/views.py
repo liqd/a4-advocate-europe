@@ -19,6 +19,10 @@ class JourneyEntryCreateView(PermissionRequiredMixin, generic.CreateView):
     def raise_exception(self):
         return self.request.user.is_authenticated()
 
+    @property
+    def is_create_view(self):
+        return True
+
     def dispatch(self, *args, **kwargs):
         idea_slug = self.kwargs[self.slug_url_kwarg]
         self.idea = Idea.objects.get(slug=idea_slug)

@@ -4,7 +4,11 @@
 {% block content %}
 <div class="wizard-page">
     <form class="wizard custom-form container-narrow" data-safe-form="wizard" method="post" enctype="multipart/form-data" novalidate>
+        {% if view.is_create_view %}
         <h1>{% trans 'create journal entry' %} </h1>
+        {% else %}
+        <h1>{% trans 'update journal entry' %} </h1>
+        {% endif %}
 
         {% crispy form %}
 
