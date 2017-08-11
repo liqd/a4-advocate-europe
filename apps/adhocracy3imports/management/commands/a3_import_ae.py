@@ -214,15 +214,6 @@ class Command(A3ImportCommandMixin, BaseCommand):
                 v.resources_are_versionable
             )
 
-            # create archived idea sketch
-            archive = models.IdeaSketchArchived.objects.filter(
-                slug=slug).first()
-            if not archive:
-                archive = models.IdeaSketchArchived(
-                    creator=a4proposal.creator,
-                    module=a4proposal.module,
-                )
-
             # a lot of fields have bigger lengths in A3, so the need to be
             # trimmed
             for field in a4proposal._meta.get_fields():
@@ -246,12 +237,22 @@ class Command(A3ImportCommandMixin, BaseCommand):
                     name = name[0]
                 setattr(a4proposal, name, value or DEFAULT_VALUE)
 
+            # create archived idea sketch and copy data
+            archive = models.IdeaSketchArchived.objects.filter(
+                idea__slug=slug).first()
+            if not archive:
+                archive = models.IdeaSketchArchived(
+                    creator=a4proposal.creator,
+                )
+
             proposal_fields = [
                 f.name for f in a4proposal._meta.get_fields()
                 if not f.is_relation
             ]
             archive_fields = [
                 f.name for f in archive._meta.get_fields()
+                if not f.primary_key
+                and not f.is_relation
             ]
             for field_name in proposal_fields:
                 if field_name in archive_fields:
@@ -277,9 +278,8 @@ class Command(A3ImportCommandMixin, BaseCommand):
             archive.collaboration_camp_benefit = 'No expections.'
 
             try:
-                archive.full_clean(exclude=['idea_title'])
-                a4proposal.full_clean(
-                    exclude=['idea_title', 'idea_sketch_archived'])
+                archive.full_clean(exclude=['idea'])
+                a4proposal.full_clean()
             except ValidationError as e:
                 print("ABRT: {}".format(url))
                 from pprint import pprint
@@ -291,10 +291,10 @@ class Command(A3ImportCommandMixin, BaseCommand):
                 print("ABRT: {}".format(url))
                 raise
 
-            archive.save()
-            a4proposal.idea_sketch_archived = archive
             a4proposal.save()
 
+            archive.idea = a4proposal.idea
+            archive.save()
             # TODO: copy comments
 
             if created:
