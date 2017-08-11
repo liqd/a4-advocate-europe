@@ -69,7 +69,7 @@ sheet_map = {
         # ("heard_from_other", "")
         ],
     "adhocracy_core.sheets.title.ITitle": [
-        ("title", "idea_title")
+        ("title", "idea_subtitle")
     ],
     "adhocracy_mercator.sheets.mercator2.ITopic": [
         ("topic", "idea_topics", translate_idea_topic),

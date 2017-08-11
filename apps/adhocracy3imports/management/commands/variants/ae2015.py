@@ -139,6 +139,6 @@ sheet_map = {
         ("family_name", "last_name"),
     ],
     "adhocracy_core.sheets.title.ITitle": [
-        ("title", "idea_title")
+        ("title", "idea_subtitle")
     ],
 }

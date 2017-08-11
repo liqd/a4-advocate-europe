@@ -57,8 +57,8 @@ IDEA_LOCATION_RUHR_HELP = _('If you selected Ruhr area, please explain. '
 
 class AbstractIdeaSection(models.Model):
     idea_title = models.CharField(max_length=50, help_text=IDEA_TITLE_HELP)
-    idea_subtitle = models.CharField(max_length=100,
-                                     help_text=_('(max. 100 characters)'),
+    idea_subtitle = models.CharField(max_length=200,
+                                     help_text=_('(max. 200 characters)'),
                                      blank=True)
     idea_pitch = models.TextField(
         max_length=500,

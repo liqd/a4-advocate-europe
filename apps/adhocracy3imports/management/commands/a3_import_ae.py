@@ -4,7 +4,6 @@ from urllib.parse import urlparse
 
 from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand
-from django.db.models import CharField
 from django.utils.text import slugify
 
 from apps.ideas import models, phases
@@ -214,20 +213,32 @@ class Command(A3ImportCommandMixin, BaseCommand):
                 v.resources_are_versionable
             )
 
-            # a lot of fields have bigger lengths in A3, so the need to be
-            # trimmed
-            for field in a4proposal._meta.get_fields():
-                if isinstance(field, CharField):
-                    value = getattr(a4proposal, field.name, '')
-                    if field.max_length < len(value):
-                        print(
-                            "Cutting {} with value {}".format(
-                                field.name, value
-                            )
-                        )
-                        setattr(
-                            a4proposal, field.name, value[:field.max_length]
-                        )
+            # set title from subtitle
+            subtitle = a4proposal.idea_subtitle
+            if len(subtitle) < 50:
+                title = subtitle
+                subtitle = ''
+            else:
+                pos = -1
+                for mark in ':–-':
+                    pos = subtitle[:50].rfind(mark)
+
+                    if pos > 0:
+                        break
+
+                if pos > 0:
+                    title = subtitle[:pos].strip()
+                    subtitle = subtitle[pos+1:].strip()
+                else:
+                    pos = subtitle[:49].rfind(' ')
+
+                    if pos == -1:
+                        pos = 49
+
+                    title = subtitle[:pos] + ' …'
+                    subtitle = '… ' + subtitle[pos+1:].strip()
+            a4proposal.idea_subtitle = subtitle
+            a4proposal.idea_title = title
 
             # set default values for newly introduced fields
             for name in v.default_fields:
