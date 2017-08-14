@@ -36,7 +36,7 @@ rules.add_perm(
         mod_predicates.is_owner |
         predicates.is_collaborator
     ) &
-    predicates.may_visit_camp &
+    predicates.is_on_shortlist &
     phase_predicates.phase_allows_change
 )
 
@@ -50,4 +50,16 @@ rules.add_perm(
         mod_predicates.is_context_member &
         phase_predicates.phase_allows_comment
     )
+)
+
+
+rules.add_perm(
+    'advocate_europe_ideas.add_journey',
+    mod_predicates.is_context_member &
+    (
+        mod_predicates.is_owner |
+        predicates.is_collaborator
+    ) &
+    predicates.is_winner |
+    mod_predicates.is_project_admin
 )

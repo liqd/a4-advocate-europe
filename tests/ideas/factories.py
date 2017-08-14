@@ -86,7 +86,7 @@ class ProposalFactory(factory.django.DjangoModelFactory):
     other_sources = 0
     other_sources_secured = 0
     duration = factory.Faker('random_number')
-    visit_camp = True
+    is_on_shortlist = True
 
     @factory.post_generation
     def initiators(self, create, extracted, **kwargs):
