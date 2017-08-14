@@ -8,6 +8,10 @@ from adhocracy4.models.base import UserGeneratedContentModel
 
 from apps.ideas.models import Idea
 
+TEXT_HELPTEXT = _("To add videos from Vimeo, "
+                  "Youtube or Facebook just paste the url "
+                  "into the text.")
+
 
 class JourneyEntry(UserGeneratedContentModel):
     IMPACT_ROAD = 'ir'
@@ -35,7 +39,8 @@ class JourneyEntry(UserGeneratedContentModel):
         max_length=2,
         choices=CATEGORY_CHOICES
     )
-    text = RichTextUploadingField(config_name='image-editor')
+    text = RichTextUploadingField(config_name='image-editor',
+                                  help_text=TEXT_HELPTEXT)
 
     class Meta:
         ordering = ['-created']
