@@ -73,7 +73,7 @@ class Idea(AbstractIdea, Item):
             return _('Winner')
         if self.community_award_winner:
             return _('Community Award')
-        if self.visit_camp:
+        if self.is_on_shortlist:
             return _('Shortlist')
 
     @property
