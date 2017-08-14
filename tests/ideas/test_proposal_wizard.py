@@ -8,7 +8,7 @@ from tests.helpers import active_phase
 
 @pytest.mark.django_db
 def test_proposal_anonymous_cannot_create_wizard(client, idea_sketch_factory):
-    idea_sketch = idea_sketch_factory(visit_camp=True)
+    idea_sketch = idea_sketch_factory(is_on_shortlist=True)
     url = reverse('idea-sketch-add-proposal',
                   kwargs={'slug': idea_sketch.slug})
     response = client.get(url)
@@ -18,7 +18,7 @@ def test_proposal_anonymous_cannot_create_wizard(client, idea_sketch_factory):
 @pytest.mark.django_db
 def test_proposal_random_user_cannot_create_wizard(client, user,
                                                    idea_sketch_factory):
-    idea_sketch = idea_sketch_factory(visit_camp=True)
+    idea_sketch = idea_sketch_factory(is_on_shortlist=True)
     client.login(username=user.email,
                  password='password')
     url = reverse('idea-sketch-add-proposal',
@@ -33,7 +33,7 @@ def test_proposal_random_user_cannot_create_wizard(client, user,
 @pytest.mark.django_db
 def test_proposal_no_camp_cannot_create_wizard(client, user,
                                                idea_sketch_factory):
-    idea_sketch = idea_sketch_factory(visit_camp=False)
+    idea_sketch = idea_sketch_factory(is_on_shortlist=False)
     idea_sketch.collaborators.add(user)
     client.login(username=user.email,
                  password='password')
@@ -49,7 +49,7 @@ def test_proposal_no_camp_cannot_create_wizard(client, user,
 @pytest.mark.django_db
 def test_proposal_no_phase_cannot_create_wizard(client, user,
                                                 idea_sketch_factory):
-    idea_sketch = idea_sketch_factory(visit_camp=True)
+    idea_sketch = idea_sketch_factory(is_on_shortlist=True)
     idea_sketch.collaborators.add(user)
     client.login(username=user.email,
                  password='password')
@@ -63,7 +63,7 @@ def test_proposal_no_phase_cannot_create_wizard(client, user,
 @pytest.mark.django_db
 def test_proposal_collaborator_create_wizard(client,
                                              idea_sketch_factory, user, image):
-    idea_sketch = idea_sketch_factory(visit_camp=True, idea_image=image)
+    idea_sketch = idea_sketch_factory(is_on_shortlist=True, idea_image=image)
     idea_sketch.collaborators.add(user)
     client.login(username=user.email,
                  password='password')
