@@ -1,9 +1,9 @@
 import django_filters
 from django.utils.translation import ugettext_lazy as _
 
+from adhocracy4.filters import widgets
 from adhocracy4.filters.filters import DefaultsFilterSet, FreeTextFilter
 from adhocracy4.projects.models import Project
-from apps.contrib import widgets
 
 from . import models
 
@@ -32,7 +32,7 @@ class OrderingFilterWidget(widgets.DropdownLinkWidget):
     right = True
 
 
-class FreeTextFilterWidget(widgets.TextInputWidget):
+class FreeTextSearchFilterWidget(widgets.FreeTextFilterWidget):
     label = _('Search')
 
 
@@ -96,7 +96,7 @@ class IdeaFilterSet(DefaultsFilterSet):
     )
 
     search = FreeTextFilter(
-        widget=FreeTextFilterWidget,
+        widget=FreeTextSearchFilterWidget,
         fields=['idea_title',  # idea section
                 'idea_subtitle',
                 'idea_pitch',
