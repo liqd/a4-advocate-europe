@@ -8,4 +8,12 @@ def is_collaborator(user, idea):
 
 @rules.predicate
 def is_on_shortlist(user, idea):
-    return idea.ideasketch.is_on_shortlist
+    return idea.is_on_shortlist
+
+
+@rules.predicate
+def is_winner(user, obj):
+    if hasattr(obj, 'is_winner'):
+        return obj.is_winner
+    else:
+        return obj.idea.is_winner

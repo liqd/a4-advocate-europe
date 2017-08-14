@@ -51,3 +51,15 @@ rules.add_perm(
         phase_predicates.phase_allows_comment
     )
 )
+
+
+rules.add_perm(
+    'advocate_europe_ideas.add_journey',
+    mod_predicates.is_context_member &
+    (
+        mod_predicates.is_owner |
+        predicates.is_collaborator
+    ) &
+    predicates.is_winner |
+    mod_predicates.is_project_admin
+)

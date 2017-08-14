@@ -1,6 +1,12 @@
-{% load i18n static %}
+{% load i18n rules static micawber_tags %}
 
 <div class="ideadetail-tab">
+    <div class="ideadetail-controls">
+        {% has_perm 'advocate_europe_ideas.add_journey' request.user idea as can_write_journey %}
+        {% if can_write_journey %}
+            <a class="" href="{% url 'journey-entry-create' idea.slug %}">{% trans "create journey entry" %}</a>
+        {% endif %}
+    </div>
     <div class="ideadetailtab-header">
         <h2>{% trans "Journey" %}</h2>
     </div>
@@ -12,15 +18,20 @@
         <div class="journey-entry">
             <span class="journey-category">{{ entry.get_category_display }}</span>
             <h3>{{ entry.title }}</h3>
-            <p>{{ entry.text | safe }}</p>
+            <p>{{ entry.text | oembed_html }}</p>
             <p>
                 <span class="avatar-round-small" style="background-image: url({{ entry.creator.avatar_or_fallback_url }})"></span>
                 <span class="collaborator"><a href="{% url 'profile' entry.creator.username %}">{{ entry.creator.username }} </a>{% trans 'on' %} {{ entry.created | date }}</span>
             </p>
+            {% if can_write_journey %}
+            <a class="btn btn-link" href="{% url 'journey-entry-update' entry.pk %}">{% trans "update" %}</a>
+            <form class="d-inline" method="POST" id="entry_delete" action="{% url 'journey-entry-delete' entry.pk %}">
+            {% csrf_token %}
+                <button type="submit" class="submit-button btn btn-link">{% trans 'delete'%}</button>
+            </form>
+            {% endif %}
         </div>
     {% endfor %}
     {% endif %}
     </div>
-
-
 </div>
