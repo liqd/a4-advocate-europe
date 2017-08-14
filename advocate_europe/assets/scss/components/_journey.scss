@@ -17,10 +17,10 @@
 .journey-entry {
     margin-bottom: rem(43px);
 
-    a {
-        img {
-            width: 100%;
-        }
+    img {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100%;
     }
 
     .collaborator {
