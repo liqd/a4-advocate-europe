@@ -2,7 +2,9 @@ from autoslug import AutoSlugField
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 from adhocracy4.models.base import UserGeneratedContentModel
 from adhocracy4.comments import models as comment_models
@@ -63,8 +65,16 @@ class Idea(AbstractIdea, Item):
     objects = IdeaQuerySet.as_manager()
 
     def get_absolute_url(self):
-        from django.core.urlresolvers import reverse
         return reverse('idea-detail', args=[self.slug])
+
+    @property
+    def badge(self):
+        if self.is_winner:
+            return _('Winner')
+        if self.community_award_winner:
+            return _('Community Award')
+        if self.is_on_shortlist:
+            return _('Shortlist')
 
     @property
     def type(self):

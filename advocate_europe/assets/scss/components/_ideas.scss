@@ -42,9 +42,20 @@
     box-shadow: 0 1px 0 0 $ae-light-gray-shadow;
 
     .idealist-image {
+        position: relative;
+
         img {
             width: 100%;
         }
+    }
+
+    .idealist-label {
+        position: absolute;
+        bottom: rem(10px);
+        left: rem(10px);
+        color: $gray-dark;
+        text-transform: uppercase;
+        background-color: $ae-brand-orange;
     }
 
     .idealist-text {
