@@ -306,7 +306,14 @@ class Command(A3ImportCommandMixin, BaseCommand):
 
             archive.idea = a4proposal.idea
             archive.save()
-            # TODO: copy comments
+
+            if v.resources_are_versionable:
+                data = a3proposal['data']
+                tags = data['adhocracy_core.sheets.tags.ITags']
+                commentable_url = tags['LAST']
+            else:
+                commentable_url = url
+            self.a3_import_comments(commentable_url, a4proposal.idea)
 
             if created:
                 print("INIT: {}".format(url))
