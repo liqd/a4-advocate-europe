@@ -1,9 +1,12 @@
 import datetime
+import sys
+import traceback
 from os import path
 from urllib.parse import urlparse
 
 from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand
+from django.db import transaction
 from django.utils.text import slugify
 
 from apps.ideas import models, phases
@@ -289,20 +292,30 @@ class Command(A3ImportCommandMixin, BaseCommand):
                 archive.full_clean(exclude=['idea'])
                 a4proposal.full_clean()
             except ValidationError as e:
-                print("ABRT: {}".format(url))
+                print("SKIP: {}".format(url))
                 from pprint import pprint
                 pprint(e.error_dict)
-                import pdb
-                pdb.set_trace()
-                raise
+                continue
             except:
                 print("ABRT: {}".format(url))
                 raise
 
-            a4proposal.save()
+            try:
+                with transaction.atomic():
+                    a4proposal.save()
 
-            archive.idea = a4proposal.idea
-            archive.save()
+                    archive.idea = a4proposal.idea
+                    archive.save()
+            except:
+                print("SKIP: {}".format(url))
+                exc_type, exc_value, exc_traceback = sys.exc_info()
+                lines = traceback.format_exception(
+                    exc_type,
+                    exc_value,
+                    exc_traceback
+                )
+                print('\n'.join(lines))
+                continue
 
             if v.resources_are_versionable:
                 data = a3proposal['data']
