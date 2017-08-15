@@ -41,3 +41,26 @@
     font-style: italic;
     font-weight: bold;
 }
+
+@font-face {
+    font-family: 'Avenir Next LT Pro Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir Next LT Pro Bold'), url('../fonts/AvenirNextLTPro-Bold.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'Avenir Next LT Pro Bold Condensed';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir Next LT Pro Bold Condensed'), url('../fonts/AvenirNextLTPro-BoldCn.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'Avenir Next LT Pro Bold Condensed Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir Next LT Pro Bold Condensed Italic'), url('../fonts/AvenirNextLTPro-BoldCnIt.woff') format('woff');
+}
