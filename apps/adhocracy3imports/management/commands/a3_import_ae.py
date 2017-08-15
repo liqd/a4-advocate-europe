@@ -281,12 +281,9 @@ class Command(A3ImportCommandMixin, BaseCommand):
 
             # fill collaboration camp fields
             archive.collaboration_camp_option = 'not_sure'
-            archive.collaboration_camp_represent = (
-                'When this idea was created, '
-                'the collaboration camp did not exist.'
-            )
+            archive.collaboration_camp_represent = DEFAULT_VALUE
             archive.collaboration_camp_email = 'noreply@advocate-europe.eu'
-            archive.collaboration_camp_benefit = 'No expections.'
+            archive.collaboration_camp_benefit = DEFAULT_VALUE
 
             try:
                 archive.full_clean(exclude=['idea'])
