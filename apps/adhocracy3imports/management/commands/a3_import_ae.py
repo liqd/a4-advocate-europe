@@ -286,7 +286,7 @@ class Command(A3ImportCommandMixin, BaseCommand):
 
             a4proposal.is_winner = 'winning' in badges
             a4proposal.jury_statement = badges.get('winning', '')
-            a4proposal.visit_camp = 'shortlist' in badges
+            a4proposal.is_on_shortlist = 'shortlist' in badges
             a4proposal.community_award_winner = 'community' in badges
 
             # fill collaboration camp fields
