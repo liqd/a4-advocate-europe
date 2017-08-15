@@ -26,7 +26,7 @@ class HomePage(Page):
     title_de = models.CharField(
         max_length=255, blank=True, verbose_name="Header Title")
 
-    description_en = models.TextField()
+    description_en = models.TextField(blank=True)
     description_de = models.TextField(blank=True, null=True)
 
     body_en = StreamField(block_types, null=True)
