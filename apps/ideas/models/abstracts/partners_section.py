@@ -17,7 +17,7 @@ PARTNERS_COUNTRY_LABEL = _('country')
 
 class AbstractPartnersSection(models.Model):
     partner_organisation_1_name = models.CharField(
-        max_length=250,
+        max_length=300,
         blank=True,
         verbose_name=PARTNERS_NAME_LABEL
     )
@@ -32,7 +32,7 @@ class AbstractPartnersSection(models.Model):
         countries=EuropeanCountries
     )
     partner_organisation_2_name = models.CharField(
-        max_length=250,
+        max_length=300,
         blank=True,
         verbose_name=PARTNERS_NAME_LABEL
     )
@@ -47,7 +47,7 @@ class AbstractPartnersSection(models.Model):
         countries=EuropeanCountries
     )
     partner_organisation_3_name = models.CharField(
-        max_length=250,
+        max_length=300,
         blank=True,
         verbose_name=PARTNERS_NAME_LABEL
     )
