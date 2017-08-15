@@ -184,6 +184,11 @@ class Command(A3ImportCommandMixin, BaseCommand):
         for url in urls:
             a3proposal = self.a3_get_resource(url + '?elements=content')
 
+            if v.resources_are_versionable:
+                last_version_url = self.a3_get_last_version(url)
+            else:
+                last_version_url = url
+
             # parse slug and fix up differences between slugify implementations
             (_rest, slug) = path.split(path.split(urlparse(url).path)[0])
             slug = slugify(slug)[0:50]
@@ -275,12 +280,14 @@ class Command(A3ImportCommandMixin, BaseCommand):
                     )
 
             # gather information from badges
-            badges = self.a3_get_batches(a3proposal)
+            badges = self.a3_get_batches(
+                self.a3_get_resource(last_version_url)
+            )
 
-            a4proposal.is_winning = 'winning' in badges
+            a4proposal.is_winner = 'winning' in badges
             a4proposal.jury_statement = badges.get('winning', '')
             a4proposal.visit_camp = 'shortlist' in badges
-            a4proposal.community_award_winnter = 'community'
+            a4proposal.community_award_winner = 'community' in badges
 
             # fill collaboration camp fields
             archive.collaboration_camp_option = 'not_sure'
@@ -317,13 +324,7 @@ class Command(A3ImportCommandMixin, BaseCommand):
                 print('\n'.join(lines))
                 continue
 
-            if v.resources_are_versionable:
-                data = a3proposal['data']
-                tags = data['adhocracy_core.sheets.tags.ITags']
-                commentable_url = tags['LAST']
-            else:
-                commentable_url = url
-            self.a3_import_comments(commentable_url, a4proposal.idea)
+            self.a3_import_comments(last_version_url, a4proposal.idea)
 
             if created:
                 print("INIT: {}".format(url))
