@@ -185,6 +185,7 @@ class Command(A3ImportCommandMixin, BaseCommand):
         urls = self.a3_get_elements(v.project_url, v.proposal_ct, 'paths')
 
         for url in urls:
+            print("STRT: {}".format(url))
             a3proposal = self.a3_get_resource(url + '?elements=content')
 
             if v.resources_are_versionable:
@@ -201,10 +202,8 @@ class Command(A3ImportCommandMixin, BaseCommand):
             )
 
             if not a4proposal:
-                print("SKIP: {}".format(url))
+                print("DELT: {}".format(url))
                 continue
-            else:
-                print("STRT: {}".format(url))
 
             a4proposal.module = module
 
