@@ -1,9 +1,9 @@
 import django_filters
 from django.utils.translation import ugettext_lazy as _
 
+from adhocracy4.filters import widgets
 from adhocracy4.filters.filters import DefaultsFilterSet
 
-from apps.contrib import widgets
 from apps.ideas import models as idea_models
 
 
