@@ -48,3 +48,6 @@ def concat(dst_field, seperator=', '):
         if new not in old:
             setattr(a4proposal, dst_field, new)
     return handler
+
+
+bool_map = {'true': True, 'false': False}

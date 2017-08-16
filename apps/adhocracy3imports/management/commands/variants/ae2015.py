@@ -69,8 +69,8 @@ subresource_map = {
         "adhocracy_mercator.sheets.mercator.IFinance": [
             ("budget", "total_budget", floatstr_to_int),
             ("requested_funding", "budget_requested", floatstr_to_int),
-            # ("major_expenses", "major_expenses"),
-            # ('grandted', '???')
+            ("other_sources", "other_sources", bool),
+            ("granted", "other_sources_secured", bool_map)
         ],
     },
     'adhocracy_mercator.resources.mercator.IPartners': {
