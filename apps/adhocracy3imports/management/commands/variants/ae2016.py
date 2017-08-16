@@ -1,4 +1,4 @@
-from .helpers import download_file, floatstr_to_int, parse_year
+from .helpers import download_file, floatstr_to_int, map_and_append, parse_year
 
 # Sheets and subresources that still require mapping:
 #
@@ -49,10 +49,22 @@ sheet_map = {
         ("website", "organisation_website"),
     ],
     "adhocracy_mercator.sheets.mercator2.ILocation": [
-        # ("has_link_to_ruhr", "false"),
+        (
+            "has_link_to_ruhr",
+            map_and_append(
+                "idea_location",
+                {'true': 'ruhr_linkage', 'false': None}
+            )
+        ),
         ("link_to_ruhr", "idea_location_ruhr"),
         ("location", "idea_location_specify"),
-        # ("is_online", "false"),
+        (
+            "is_online",
+            map_and_append(
+                "idea_location",
+                {'true': 'online', 'false': None}
+            )
+        )
     ],
     "adhocracy_mercator.sheets.mercator2.IFinancialPlanning": [
         ("budget", "total_budget", floatstr_to_int),

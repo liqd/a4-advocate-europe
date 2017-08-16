@@ -1,4 +1,9 @@
-from .helpers import download_file, floatstr_to_int, parse_year
+from .helpers import (bool_map,
+                      concat,
+                      download_file,
+                      floatstr_to_int,
+                      map_and_append,
+                      parse_year)
 
 # Subresources and sheets that still require a mapping:
 #
@@ -34,12 +39,30 @@ subresource_map = {
     },
     "adhocracy_mercator.resources.mercator.ILocation": {
         "adhocracy_mercator.sheets.mercator.ILocation": [
-            # "location_is_linked_to_ruhr": "idea_location_ruhr",
-            ("location_specific_1", "idea_location_specify"),
-            # "location_specific_2": "???",
-            # "location_specific_3": "???"
-            # "location_is_online": "false",
-            # "location_is_specific": "true",
+            (
+                "location_is_linked_to_ruhr",
+                map_and_append(
+                    "idea_location",
+                    {'true': 'ruhr_linkage', 'false': None}
+                )
+            ),
+            ("location_specific_1", concat("idea_location_specify")),
+            ("location_specific_2", concat("idea_location_specify")),
+            ("location_specific_3", concat("idea_location_specify")),
+            (
+                "location_is_online",
+                map_and_append(
+                    "idea_location",
+                    {'true': 'online', 'false': None}
+                )
+            ),
+            (
+                "location_is_specific",
+                map_and_append(
+                    "idea_location",
+                    {'true': 'city', 'false': None}
+                )
+            )
         ]
     },
     "adhocracy_mercator.resources.mercator.IFinance": {

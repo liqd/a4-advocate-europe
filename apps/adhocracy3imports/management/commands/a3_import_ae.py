@@ -159,8 +159,11 @@ class Command(A3ImportCommandMixin, BaseCommand):
                 dst_field = actions[0]
                 src_value = data[sheet][src_field]
 
-                if len(actions) == 1:
+                if len(actions) == 1 and not callable(actions[0]):
                     value = src_value
+                elif len(actions) == 1:
+                    actions[0](src_value, item)
+                    continue
                 elif callable(actions[1]):
                     transform = actions[1]
                     if src_value is None:

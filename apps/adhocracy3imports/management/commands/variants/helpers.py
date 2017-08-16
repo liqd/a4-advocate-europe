@@ -27,3 +27,24 @@ def parse_year(date_str):
 
 def floatstr_to_int(float_str):
     return int(float(float_str))
+
+
+def map_and_append(dst_field, mapping, empty_value=[]):
+    def handler(src_value, a4proposal):
+        old = getattr(a4proposal, dst_field) or list(empty_value)
+        new = mapping.get(src_value, src_value)
+
+        if new not in old and new is not None:
+            old.append(new)
+            setattr(a4proposal, dst_field, old)
+    return handler
+
+
+def concat(dst_field, seperator=', '):
+    def handler(src_value, a4proposal):
+        old = getattr(a4proposal, dst_field) or ''
+        new = seperator.join([old, src_value])
+
+        if new not in old:
+            setattr(a4proposal, dst_field, new)
+    return handler
