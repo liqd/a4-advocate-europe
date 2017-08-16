@@ -9,8 +9,7 @@ class JourneyEntryFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = JourneyEntry
 
-    idea = factory.SubFactory(ProposalFactory)
-    idea.is_winner = True
+    idea = factory.SubFactory(ProposalFactory, is_winner=True)
     title = factory.Faker('name')
     category = 'he'
     text = factory.Faker('text')
