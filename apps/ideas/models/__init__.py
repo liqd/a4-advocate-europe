@@ -55,6 +55,8 @@ class Idea(AbstractIdea, Item):
     slug = AutoSlugField(populate_from='idea_title', unique=True)
     is_on_shortlist = models.BooleanField(default=False)
     is_winner = models.BooleanField(default=False)
+    jury_statement = models.TextField(
+        verbose_name='Why this idea?', blank=True)
     community_award_winner = models.BooleanField(default=False)
     ratings = GenericRelation(rating_models.Rating,
                               related_query_name='idea_sketch',
@@ -116,8 +118,6 @@ class IdeaSketchArchived(
 
 class Proposal(Idea, AbstractFinanceAndDurationSection,
                AbstractSelectionCriteriaSection):
-    jury_statement = models.TextField(
-        verbose_name='Why this idea?', blank=True)
 
     def __str__(self):
         return '{} (Proposal)'.format(self.idea_title)
