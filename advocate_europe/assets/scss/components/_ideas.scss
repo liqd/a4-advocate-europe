@@ -308,6 +308,14 @@
     background-color: $ae-light-gray;
     padding: rem(10px) rem(12px);
 
+    &.jurystatement {
+        background-color: $ae-brand-orange;
+
+        p {
+            font-weight: normal;
+        }
+    }
+
     p {
         font-weight: 600;
     }
