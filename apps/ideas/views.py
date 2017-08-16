@@ -156,6 +156,7 @@ class IdeaDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         idea_list = []
+        proposal_list = []
         idea_list.append((_('Idea pitch'), self.object.idea_pitch))
         if self.object.idea_location_specify:
             idea_list.append((_('Where does your idea take place?'),
@@ -168,6 +169,12 @@ class IdeaDetailView(generic.DetailView):
         if self.object.reach_out:
             idea_list.append((_('What do you need from the Advocate Europe '
                                 'community?'), self.object.reach_out))
+
+        if hasattr(self.object, 'proposal') and self.object.proposal:
+            proposal_list.append((_('Major expenses'),
+                                  self.object.proposal.major_expenses))
+            proposal_list.append((_('What makes your idea stand apart?'),
+                                  self.object.proposal.selection_apart))
 
         partner_list = []
         if (self.object.partner_organisation_1_name
@@ -191,6 +198,7 @@ class IdeaDetailView(generic.DetailView):
 
         context = super().get_context_data(**kwargs)
         context['idea_list'] = idea_list
+        context['proposal_list'] = proposal_list
         context['partner_list'] = partner_list
         return context
 

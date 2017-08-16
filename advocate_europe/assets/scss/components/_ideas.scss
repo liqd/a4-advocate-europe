@@ -401,3 +401,28 @@
     margin-top: rem(60px);
     margin-bottom: rem(60px);
 }
+
+.ideadetail-funding {
+    margin-left: 0;
+    margin-top: 20px;
+
+    .well {
+        background-color: $ae-light-gray;
+        border-radius: 0;
+        border: none;
+        padding: 10px;
+        margin-right: 10px;
+        min-height: 85px;
+        box-shadow: 0 1px 0 0 $ae-light-gray-shadow;
+    }
+
+    h3 {
+        font-size: rem(18px);
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+}
