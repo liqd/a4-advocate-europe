@@ -7,3 +7,4 @@ omit =
     */tests.py
     */test_*.py
     */autofixtures.py
+    apps/adhocracy3imports/*

@@ -1,4 +1,9 @@
-from .helpers import download_file, floatstr_to_int, parse_year
+from .helpers import (bool_map,
+                      concat,
+                      download_file,
+                      floatstr_to_int,
+                      map_and_append,
+                      parse_year)
 
 # Subresources and sheets that still require a mapping:
 #
@@ -20,16 +25,11 @@ organisation_status_map = {
 }
 
 
-country_map = {
-    'XK': ''  # Kosovo doesn't have an offical ISO-3166 code yet
-}
-
-
 subresource_map = {
     'adhocracy_mercator.resources.mercator.IOrganizationInfo': {
         "adhocracy_mercator.sheets.mercator.IOrganizationInfo": [
             ("status", "organisation_status", organisation_status_map),
-            ("country", "organisation_country", country_map),
+            ("country", "organisation_country"),
             ("name", "organisation_name"),
             # ("help_request", "???"),
             ("status_other", "organisation_status_extra"),
@@ -39,20 +39,38 @@ subresource_map = {
     },
     "adhocracy_mercator.resources.mercator.ILocation": {
         "adhocracy_mercator.sheets.mercator.ILocation": [
-            # "location_is_linked_to_ruhr": "idea_location_ruhr",
-            ("location_specific_1", "idea_location_specify"),
-            # "location_specific_2": "???",
-            # "location_specific_3": "???"
-            # "location_is_online": "false",
-            # "location_is_specific": "true",
+            (
+                "location_is_linked_to_ruhr",
+                map_and_append(
+                    "idea_location",
+                    {'true': 'ruhr_linkage', 'false': None}
+                )
+            ),
+            ("location_specific_1", concat("idea_location_specify")),
+            ("location_specific_2", concat("idea_location_specify")),
+            ("location_specific_3", concat("idea_location_specify")),
+            (
+                "location_is_online",
+                map_and_append(
+                    "idea_location",
+                    {'true': 'online', 'false': None}
+                )
+            ),
+            (
+                "location_is_specific",
+                map_and_append(
+                    "idea_location",
+                    {'true': 'city', 'false': None}
+                )
+            )
         ]
     },
     "adhocracy_mercator.resources.mercator.IFinance": {
         "adhocracy_mercator.sheets.mercator.IFinance": [
             ("budget", "total_budget", floatstr_to_int),
             ("requested_funding", "budget_requested", floatstr_to_int),
-            # ("major_expenses", "major_expenses"),
-            # ('grandted', '???')
+            ("other_sources", "other_sources", bool),
+            ("granted", "other_sources_secured", bool_map)
         ],
     },
     'adhocracy_mercator.resources.mercator.IPartners': {
@@ -144,6 +162,6 @@ sheet_map = {
         ("family_name", "last_name"),
     ],
     "adhocracy_core.sheets.title.ITitle": [
-        ("title", "idea_title")
+        ("title", "idea_subtitle")
     ],
 }

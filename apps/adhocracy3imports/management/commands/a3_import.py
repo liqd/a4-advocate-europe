@@ -14,6 +14,8 @@ from adhocracy4.projects.models import Project
 from adhocracy4.ratings.models import Rating
 from apps.users.models import User
 
+from .a3_import_users import fixup_username
+
 
 def get_organisation_model():
     """
@@ -145,41 +147,43 @@ class A3ImportCommandMixin():
             'adhocracy_core.sheets.principal.IUserBasic',
             'name'
         )
-        user = User.objects.get(username=username)
+        user = User.objects.get(username=fixup_username(username))
         return user
 
     def a3_import_comment(self, comment_path, object_path,
                           content_object):
         comment = None
-        comment_resource = self.a3_get_resource(comment_path, self.token)
+        comment_resource = self.a3_get_resource(comment_path)
         data = comment_resource['data']
         metadata_sheet = data['adhocracy_core.sheets.metadata.IMetadata']
         is_hidden = metadata_sheet['hidden']
         user_path = metadata_sheet['creator']
         creation_date = parse_dt(metadata_sheet['creation_date'])
-        last_version_path = self.a3_get_last_version(comment_path, self.token)
-        last_version = self.a3_get_resource(last_version_path, self.token)
+        last_version_path = self.a3_get_last_version(comment_path)
+        last_version = self.a3_get_resource(last_version_path)
         data = last_version['data']
         if is_hidden == 'false' and user_path:
             comment_sheet = data['adhocracy_core.sheets.comment.IComment']
             object = comment_sheet['refers_to']
             if object_path == object:
-                user = self.a3_get_user_by_path(user_path, self.token)
+                user = self.a3_get_user_by_path(user_path)
                 content = comment_sheet['content']
-                comment = Comment.objects.create(
-                    comment=content,
+                (comment, _created) = Comment.objects.update_or_create(
                     creator=user,
-                    content_object=content_object,
                     created=creation_date,
+                    defaults={
+                        'content_object': content_object,
+                        'comment': content,
+                    },
                 )
         return comment
 
     def a3_import_comments(self, object_path, content_object):
         comments_path = self.a3_get_sheet_field(
-            object_path, self.token,
+            object_path,
             'adhocracy_core.sheets.comment.ICommentable', 'post_pool')
         comment_paths = self.a3_get_elements(
-            comments_path, self.token,
+            comments_path,
             'adhocracy_core.resources.comment.IComment', 'paths')
         for comment_path in comment_paths:
             comment = self.a3_import_comment(
@@ -187,32 +191,33 @@ class A3ImportCommandMixin():
 
             if comment:
                 comment_version_path = \
-                    self.a3_get_last_version(comment_path, self.token)
+                    self.a3_get_last_version(comment_path)
                 self.a3_import_ratings(
-                    self.token, comment_version_path, comment)
+                    comment_version_path, comment)
                 self.a3_import_comment_replies(
-                    self.token, comment_paths, comment_version_path, comment)
+                    comment_paths, comment_version_path, comment)
 
     def a3_import_comment_replies(self, comment_paths,
                                   comment_version_path, content_object):
         for comment_path in comment_paths:
             reply = self.a3_import_comment(
-                self.token, comment_path, comment_version_path, content_object)
+                comment_path, comment_version_path, content_object)
             if reply:
                 reply_version_path = \
-                    self.a3_get_last_version(comment_path, self.token)
-                self.a3_import_ratings(self.token, comment_version_path, reply)
+                    self.a3_get_last_version(comment_path)
+                self.a3_import_ratings(comment_version_path, reply)
                 self.a3_import_comment_replies(
-                    self.token, comment_paths, reply_version_path,
+                    comment_paths, reply_version_path,
                     content_object)
 
     def a3_import_ratings(self, object_path, content_object):
         rates_path = self.a3_get_sheet_field(
-            object_path, self.token,
-            'adhocracy_core.sheets.rate.IRateable', 'post_pool'
+            object_path,
+            'adhocracy_core.sheets.rate.IRateable',
+            'post_pool'
         )
         rates_content = self.a3_get_elements(
-            rates_path, self.token,
+            rates_path,
             'adhocracy_core.resources.rate.IRateVersion', 'content')
         for rate_resource in rates_content:
             data = rate_resource['data']
@@ -223,14 +228,16 @@ class A3ImportCommandMixin():
             is_object = rate_sheet['object'] == object_path
             if is_hidden == 'false' and user_path and is_object:
                 creation_date = parse_dt(metadata_sheet['creation_date'])
-                user = self.a3_get_user_by_path(user_path, self.token)
+                user = self.a3_get_user_by_path(user_path)
                 rate_value = int(rate_sheet['rate'])
                 if rate_value != 0:
-                    Rating.objects.create(
-                        value=rate_value,
+                    Rating.objects.update_or_create(
                         creator=user,
-                        content_object=content_object,
                         created=creation_date,
+                        defaults={
+                            'value': rate_value,
+                            'content_object': content_object,
+                        },
                     )
 
     def a3_get_rates(self, resource_path, object_path):

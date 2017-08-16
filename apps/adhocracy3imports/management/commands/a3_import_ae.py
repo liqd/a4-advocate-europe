@@ -1,10 +1,12 @@
 import datetime
+import sys
+import traceback
 from os import path
 from urllib.parse import urlparse
 
 from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand
-from django.db.models import CharField
+from django.db import transaction
 from django.utils.text import slugify
 
 from apps.ideas import models, phases
@@ -157,8 +159,11 @@ class Command(A3ImportCommandMixin, BaseCommand):
                 dst_field = actions[0]
                 src_value = data[sheet][src_field]
 
-                if len(actions) == 1:
+                if len(actions) == 1 and not callable(actions[0]):
                     value = src_value
+                elif len(actions) == 1:
+                    actions[0](src_value, item)
+                    continue
                 elif callable(actions[1]):
                     transform = actions[1]
                     if src_value is None:
@@ -180,7 +185,13 @@ class Command(A3ImportCommandMixin, BaseCommand):
         urls = self.a3_get_elements(v.project_url, v.proposal_ct, 'paths')
 
         for url in urls:
+            print("STRT: {}".format(url))
             a3proposal = self.a3_get_resource(url + '?elements=content')
+
+            if v.resources_are_versionable:
+                last_version_url = self.a3_get_last_version(url)
+            else:
+                last_version_url = url
 
             # parse slug and fix up differences between slugify implementations
             (_rest, slug) = path.split(path.split(urlparse(url).path)[0])
@@ -191,10 +202,8 @@ class Command(A3ImportCommandMixin, BaseCommand):
             )
 
             if not a4proposal:
-                print("SKIP: {}".format(url))
+                print("DELT: {}".format(url))
                 continue
-            else:
-                print("STRT: {}".format(url))
 
             a4proposal.module = module
 
@@ -214,20 +223,32 @@ class Command(A3ImportCommandMixin, BaseCommand):
                 v.resources_are_versionable
             )
 
-            # a lot of fields have bigger lengths in A3, so the need to be
-            # trimmed
-            for field in a4proposal._meta.get_fields():
-                if isinstance(field, CharField):
-                    value = getattr(a4proposal, field.name, '')
-                    if field.max_length < len(value):
-                        print(
-                            "Cutting {} with value {}".format(
-                                field.name, value
-                            )
-                        )
-                        setattr(
-                            a4proposal, field.name, value[:field.max_length]
-                        )
+            # set title from subtitle
+            subtitle = a4proposal.idea_subtitle
+            if len(subtitle) < 50:
+                title = subtitle
+                subtitle = ''
+            else:
+                pos = -1
+                for mark in ':–-':
+                    pos = subtitle[:50].rfind(mark)
+
+                    if pos > 0:
+                        break
+
+                if pos > 0:
+                    title = subtitle[:pos].strip()
+                    subtitle = subtitle[pos+1:].strip()
+                else:
+                    pos = subtitle[:49].rfind(' ')
+
+                    if pos == -1:
+                        pos = 49
+
+                    title = subtitle[:pos] + ' …'
+                    subtitle = '… ' + subtitle[pos+1:].strip()
+            a4proposal.idea_subtitle = subtitle
+            a4proposal.idea_title = title
 
             # set default values for newly introduced fields
             for name in v.default_fields:
@@ -261,41 +282,51 @@ class Command(A3ImportCommandMixin, BaseCommand):
                     )
 
             # gather information from badges
-            badges = self.a3_get_batches(a3proposal)
+            badges = self.a3_get_batches(
+                self.a3_get_resource(last_version_url)
+            )
 
-            a4proposal.is_winning = 'winning' in badges
+            a4proposal.is_winner = 'winning' in badges
             a4proposal.jury_statement = badges.get('winning', '')
-            a4proposal.visit_camp = 'shortlist' in badges
-            a4proposal.community_award_winnter = 'community'
+            a4proposal.is_on_shortlist = 'shortlist' in badges
+            a4proposal.community_award_winner = 'community' in badges
 
             # fill collaboration camp fields
             archive.collaboration_camp_option = 'not_sure'
-            archive.collaboration_camp_represent = (
-                'When this idea was created, '
-                'the collaboration camp did not exist.'
-            )
+            archive.collaboration_camp_represent = DEFAULT_VALUE
             archive.collaboration_camp_email = 'noreply@advocate-europe.eu'
-            archive.collaboration_camp_benefit = 'No expections.'
+            archive.collaboration_camp_benefit = DEFAULT_VALUE
 
             try:
                 archive.full_clean(exclude=['idea'])
                 a4proposal.full_clean()
             except ValidationError as e:
-                print("ABRT: {}".format(url))
+                print("SKIP: {}".format(url))
                 from pprint import pprint
                 pprint(e.error_dict)
-                import pdb
-                pdb.set_trace()
-                raise
+                continue
             except:
                 print("ABRT: {}".format(url))
                 raise
 
-            a4proposal.save()
+            try:
+                with transaction.atomic():
+                    a4proposal.save()
 
-            archive.idea = a4proposal.idea
-            archive.save()
-            # TODO: copy comments
+                    archive.idea = a4proposal.idea
+                    archive.save()
+            except:
+                print("SKIP: {}".format(url))
+                exc_type, exc_value, exc_traceback = sys.exc_info()
+                lines = traceback.format_exception(
+                    exc_type,
+                    exc_value,
+                    exc_traceback
+                )
+                print('\n'.join(lines))
+                continue
+
+            self.a3_import_comments(last_version_url, a4proposal.idea)
 
             if created:
                 print("INIT: {}".format(url))
