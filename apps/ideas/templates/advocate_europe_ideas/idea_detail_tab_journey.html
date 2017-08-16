@@ -4,15 +4,10 @@
     <div class="ideadetailtab-header">
         <h2>{% trans "Reporting" %}</h2>
     </div>
-    <div class="ideadetail-controls">
-        {% has_perm 'advocate_europe_ideas.add_journey' request.user idea as can_write_journey %}
-        {% if can_write_journey %}
-            <a class="btn btn-primary" href="{% url 'journey-entry-create' idea.slug %}">{% trans "New entry" %}</a>
-        {% endif %}
-    </div>
-    <div class="ideadetailtab-header">
-        <h2>{% trans "Journey" %}</h2>
-    </div>
+    {% has_perm 'advocate_europe_ideas.add_journey' request.user idea as can_write_journey %}
+    {% if can_write_journey %}
+        <a class="btn btn-primary journey-btn" href="{% url 'journey-entry-create' idea.slug %}">{% trans "New entry" %}</a>
+    {% endif %}
     <div class="journey">
     {% if idea.journeyentry_set.all.count == 0 %}
         <h3>{% trans 'No entries yet' %}</h3>
@@ -24,7 +19,7 @@
             <div>{{ entry.text | oembed_html }}</div>
             <div>
                 <span class="avatar-round-small" style="background-image: url({{ entry.creator.avatar_or_fallback_url }})"></span>
-                <span class="collaborator"><a href="{% url 'profile' entry.creator.username %}">{{ entry.creator.username }} </a>{% trans 'on' %} {{ entry.created | date }}</span>
+                <span class="collaborator"><a class="collaborator-link" href="{% url 'profile' entry.creator.username %}">{{ entry.creator.username }} </a>{% trans 'on' %} {{ entry.created | date }}</span>
                 {% if can_write_journey %}
                 <a class="btn btn-link journey-link" href="{% url 'journey-entry-update' entry.pk %}">{% trans "Edit" %}</a>
                 <form class="d-inline" method="POST" id="entry_delete" action="{% url 'journey-entry-delete' entry.pk %}">

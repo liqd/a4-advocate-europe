@@ -12,10 +12,13 @@
     color: $brand-primary;
     text-transform: uppercase;
     font-size: rem(12px);
+    font-weight: bold;
+    letter-spacing: 0.8px;
 }
 
 .journey-entry {
     margin-bottom: rem(43px);
+    font-size: rem(16px);
 
     img {
         width: 100% !important;
@@ -24,11 +27,29 @@
     }
 
     .collaborator {
+        margin-left: rem(6px);
         color: $ae-middle-gray;
+    }
+
+    .collaborator-link {
+        margin-right: rem(10px);
+        color: $gray-dark;
+        font-size: 14px;
+        font-weight: 600;
     }
 }
 
 .journey-link {
+    padding: 0 0 0 rem(10px);
     font-weight: 600;
     text-decoration: underline $brand-primary;
+}
+
+.journey-btn {
+    margin: 0;
+    padding: rem(10px) rem(18px);
+    border: none;
+    font-size: rem(16px);
+    font-weight: 600;
+    line-height: 1.25;
 }
