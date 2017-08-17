@@ -42,11 +42,14 @@ def map_and_append(dst_field, mapping, empty_value=[]):
 
 def concat(dst_field, seperator=', '):
     def handler(src_value, a4proposal):
-        old = getattr(a4proposal, dst_field) or ''
-        new = seperator.join([old, src_value])
-
-        if new not in old:
-            setattr(a4proposal, dst_field, new)
+        old_value = getattr(a4proposal, dst_field)
+        if not old_value:
+            value = src_value
+        elif src_value in old_value:
+            value = old_value
+        else:
+            value = "{}{}{}".format(old_value, seperator, src_value)
+        setattr(a4proposal, dst_field, value)
     return handler
 
 
