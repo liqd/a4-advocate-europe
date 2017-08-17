@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
 
 
     dependencies = [
-        ('advocate_europe_ideas', '0004_rename_field'),
+        ('advocate_europe_ideas', '0008_increase_orgnaisation_name_length'),
     ]
 
     operations = [
