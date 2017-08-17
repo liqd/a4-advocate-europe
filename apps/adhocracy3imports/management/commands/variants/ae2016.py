@@ -1,4 +1,4 @@
-from .helpers import download_file, floatstr_to_int, parse_year
+from .helpers import download_file, floatstr_to_int, map_and_append, parse_year
 
 # Sheets and subresources that still require mapping:
 #
@@ -28,11 +28,6 @@ heard_froms_map = {
 }
 
 
-country_map = {
-    'XK': ''  # Kosovo doesn't have an offical ISO-3166 code yet
-}
-
-
 def translate_idea_topic(topics):
     return [t.replace('_and_', '_') for t in topics if t != 'other']
 
@@ -54,10 +49,22 @@ sheet_map = {
         ("website", "organisation_website"),
     ],
     "adhocracy_mercator.sheets.mercator2.ILocation": [
-        # ("has_link_to_ruhr", "false"),
+        (
+            "has_link_to_ruhr",
+            map_and_append(
+                "idea_location",
+                {'true': 'ruhr_linkage', 'false': None}
+            )
+        ),
         ("link_to_ruhr", "idea_location_ruhr"),
         ("location", "idea_location_specify"),
-        # ("is_online", "false"),
+        (
+            "is_online",
+            map_and_append(
+                "idea_location",
+                {'true': 'online', 'false': None}
+            )
+        )
     ],
     "adhocracy_mercator.sheets.mercator2.IFinancialPlanning": [
         ("budget", "total_budget", floatstr_to_int),
@@ -74,7 +81,7 @@ sheet_map = {
         # ("heard_from_other", "")
         ],
     "adhocracy_core.sheets.title.ITitle": [
-        ("title", "idea_title")
+        ("title", "idea_subtitle")
     ],
     "adhocracy_mercator.sheets.mercator2.ITopic": [
         ("topic", "idea_topics", translate_idea_topic),
@@ -92,15 +99,15 @@ subresource_map = {
             ('partner1_name', 'partner_organisation_1_name'),
             ('partner1_website', 'partner_organisation_1_website'),
             ('partner1_country',
-             'partner_organisation_1_country', country_map),
+             'partner_organisation_1_country'),
             ('partner2_name', 'partner_organisation_2_name'),
             ('partner2_website', 'partner_organisation_2_website'),
             ('partner2_country',
-             'partner_organisation_2_country', country_map),
+             'partner_organisation_2_country'),
             ('partner3_name', 'partner_organisation_3_name'),
             ('partner3_website', 'partner_organisation_3_website'),
             ('partner3_country',
-             'partner_organisation_3_country', country_map),
+             'partner_organisation_3_country'),
             ('other_partners', 'partners_more_info'),
         ]
     },
