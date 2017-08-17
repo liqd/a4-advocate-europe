@@ -14,7 +14,7 @@
                     <li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">{% trans "Creators" %}</a></li>
                     <li role="presentation" {% if idea.journeyentry_set.all.count == 0 %} class="active" {% endif %}><a href="#idea" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Idea" %}</a></li>
                     {% if idea.is_winner %}
-                    <li role="presentation" {% if idea.journeyentry_set.all.count > 0 %} class="active" {% endif %}><a href="#journey" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Project Journey" %}</a></li>
+                    <li role="presentation" {% if idea.journeyentry_set.all.count > 0 %} class="active" {% endif %}><a href="#journey" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Reporting" %}</a></li>
                     {% endif %}
                 </ul>
             </div>
