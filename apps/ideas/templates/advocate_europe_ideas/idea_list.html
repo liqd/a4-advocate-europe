@@ -16,7 +16,7 @@
                     {% endfor %}
                 </div>
                 <div class="hidden-sm hidden-md hidden-lg mobile-filter">
-                    <button class="btn btn-primary btn-collapse collapsed" type="button" data-toggle="collapse" data-target="#filter" aria-expanded="false" aria-controls="Filter">
+                    <button class="btn btn-default btn-collapse collapsed" type="button" data-toggle="collapse" data-target="#filter" aria-expanded="false" aria-controls="Filter">
                         <div class="btn-label">
                             {% trans "Filters" %}
                             {% count_active_filter view.filter.data as filter_count %}
@@ -39,7 +39,7 @@
             </div>
             {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
             {% if can_export %}
-                <a class="btn btn-primary" href="{% url 'idea-export' %}{{ '?'|add:view.filter.data.urlencode }}">{% trans "export" %}</a>
+                <a class="btn btn-ae-secondary export-btn" href="{% url 'idea-export' %}{{ '?'|add:view.filter.data.urlencode }}">{% trans "export" %}</a>
             {% endif %}
         </div>
         <!-- No idea might exist for the chosen filters -->

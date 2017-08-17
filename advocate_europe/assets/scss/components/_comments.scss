@@ -13,7 +13,7 @@
 
     .submit-button {
         @extend .btn;
-        @extend .btn-default;
+        @extend .btn-primary;
         margin-right: rem(5px);
     }
 

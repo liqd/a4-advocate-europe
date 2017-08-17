@@ -1,5 +1,5 @@
 {% extends "advocate_europe_invites/invite_base.html" %}
 {% load i18n %}
 {% block invite_action %}
-<a class="btn btn-primary" href="{% url 'account_login' %}?next={% url 'ideainvite-detail' invite_token=object.token %}">{% trans "Proceed to login" %}</a>
+<a class="btn btn-ae-secondary" href="{% url 'account_login' %}?next={% url 'ideainvite-detail' invite_token=object.token %}">{% trans "Proceed to login" %}</a>
 {% endblock %}
