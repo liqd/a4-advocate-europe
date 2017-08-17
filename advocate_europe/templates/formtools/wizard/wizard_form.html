@@ -40,7 +40,7 @@
         <div class="row">
             <div class="col-md-12">
                 {% if wizard.steps.prev and wizard.steps.next %}
-                <button class="btn btn-primary"
+                <button class="btn btn-ae-secondary"
                         name="wizard_store_and_goto"
                         type="submit"
                         value="{{ wizard.steps.prev }}">
@@ -49,7 +49,7 @@
                 {% endif %}
 
                 {% if wizard.steps.next %}
-                <button class="btn btn-primary pull-right"
+                <button class="btn btn-ae-secondary pull-right"
                         type="submit"
                         name="submit">
                     {% trans "Continue" %}
@@ -58,7 +58,7 @@
                 <div class="text-center wizard-submit-form">
                     <p class="wizard-bold">{% trans "You're done!" %}</p>
                     <p>{{ view.finish_section_text }}</p>
-                    <button class="btn btn-primary wizard-submit-btn"
+                    <button class="btn btn-ae-secondary wizard-submit-btn"
                             type="submit"
                             name="submit">
                         {{ view.finish_section_btn }}

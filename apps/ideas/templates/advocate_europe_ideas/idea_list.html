@@ -39,7 +39,7 @@
             </div>
             {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
             {% if can_export %}
-                <a class="btn btn-primary" href="{% url 'idea-export' %}{{ '?'|add:view.filter.data.urlencode }}">{% trans "export" %}</a>
+                <a class="btn btn-ae-secondary" href="{% url 'idea-export' %}{{ '?'|add:view.filter.data.urlencode }}">{% trans "export" %}</a>
             {% endif %}
         </div>
         <!-- No idea might exist for the chosen filters -->

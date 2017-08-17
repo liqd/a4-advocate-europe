@@ -1,0 +1,3 @@
+.btn-ae-secondary {
+    @include button-variant($btn-ae-secondary-color, $btn-ae-secondary-bg, $btn-ae-secondary-border);
+}

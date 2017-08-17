@@ -18,6 +18,8 @@ $ae-brand-orange: #fcb813;
 $brand-primary-darker: #007099;
 $ae-light-blue: rgba(0,170,230,0.2); // currently only use for active blog category
 
+// Which colors are used for btn-ae-secondary is defined below.
+
 
 //== Bootstrap
 //== Colors
@@ -172,6 +174,10 @@ $btn-default-border:             darken($btn-default-bg, 5%) !default;
 $btn-primary-color:              #fff !default;
 $btn-primary-bg:                 $brand-primary !default;
 $btn-primary-border:             darken($btn-primary-bg, 5%) !default;
+
+$btn-ae-secondary-color:         $gray-dark !default;
+$btn-ae-secondary-bg:            $brand-secondary !default;
+$btn-ae-secondary-border:        darken($btn-ae-secondary-bg, 5%) !default;
 
 $btn-success-color:              #fff !default;
 $btn-success-bg:                 $brand-success !default;
