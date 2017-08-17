@@ -20,4 +20,24 @@
             <p>{{ field.1 }}</p>
         </div>
     {% endfor %}
+    {% if idea.proposal %}
+        <div class="row ideadetail-funding">
+            <div class="col-lg-4 well">
+                <h3>€ {{ idea.proposal.budget_requested }},-</h3>
+                <p>{% trans 'Funding requested from Advocate Europe' %}</p>
+            </div>
+            <div class="col-lg-4 well">
+                <h3>€ {{ idea.proposal.total_budget }},-</h3>
+                <p>{% trans 'Total budget' %}</p>
+            </div>
+        </div>
+        {% for field in proposal_list %}
+        <div class="ideadetailtab-con-header">
+            <h4>{{ field.0 }}</h4>
+        </div>
+        <div class="ideadetailtab-con-text">
+            <p>{{ field.1 }}</p>
+        </div>
+    {% endfor %}
+    {% endif  %}
 </div>

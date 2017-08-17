@@ -300,6 +300,14 @@
     background-color: $ae-light-gray;
     padding: rem(10px) rem(12px);
 
+    &.jurystatement {
+        background-color: $ae-brand-orange;
+
+        p {
+            font-weight: normal;
+        }
+    }
+
     p {
         font-weight: 600;
     }
@@ -411,4 +419,29 @@
 
 .communityaward {
     background-color: $brand-primary;
+}
+
+.ideadetail-funding {
+    margin-left: 0;
+    margin-top: 20px;
+
+    .well {
+        background-color: $ae-light-gray;
+        border-radius: 0;
+        border: none;
+        padding: 10px;
+        margin-right: 10px;
+        min-height: 85px;
+        box-shadow: 0 1px 0 0 $ae-light-gray-shadow;
+    }
+
+    h3 {
+        font-size: rem(18px);
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
+
+    p {
+        margin-bottom: 0;
+    }
 }
