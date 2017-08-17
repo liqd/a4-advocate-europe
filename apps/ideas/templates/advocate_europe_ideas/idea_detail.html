@@ -76,22 +76,32 @@
                 {% include 'advocate_europe_ideas/idea_detail_tab_journey.html' %}
             </div>
             {% endif %}
+
             <div class="col-md-3 col-sm-4 col-xs-12 ideadetail-info-boxes">
-                  <div class="ideadetail-info-box">
-                        <h4>Collaborators</h4>
-                        <p>
-                            <span class="avatar-round-small" style="background-image: url({{ idea.creator.avatar_or_fallback_url }})"></span>
-                            <span class="collaborator"><a href="{% url 'profile' idea.creator.username %}">{{ idea.creator.username }}</a></span>
-                        </p>
-                        {% for collaborator in idea.collaborators.all %}
-                        <p>
-                            <a href="{% url 'profile' collaborator.username %}">
-                                <span class="avatar-round-small" style="background-image: url({{ collaborator.avatar_or_fallback_url }})"></span>
-                                <span class="collaborator">{{ collaborator.username }}</span>
-                            </a>
-                        </p>
-                        {% endfor %}
-                    </div>
+
+                {% if idea.proposal and idea.jury_statement %}
+                <div class="ideadetail-info-box jurystatement">
+                    <h4><i class="fa fa-trophy" aria-hidden="true"></i> {% trans 'Jury statement' %}</h4>
+                    <p>{{ idea.jury_statement }}</p>
+                </div>
+                {% endif %}
+
+
+                <div class="ideadetail-info-box">
+                    <h4>{% trans 'Collaborators' %}</h4>
+                    <p>
+                        <span class="avatar-round-small" style="background-image: url({{ idea.creator.avatar_or_fallback_url }})"></span>
+                        <span class="collaborator"><a href="{% url 'profile' idea.creator.username %}">{{ idea.creator.username }}</a></span>
+                    </p>
+                    {% for collaborator in idea.collaborators.all %}
+                    <p>
+                        <a href="{% url 'profile' collaborator.username %}">
+                            <span class="avatar-round-small" style="background-image: url({{ collaborator.avatar_or_fallback_url }})"></span>
+                            <span class="collaborator">{{ collaborator.username }}</span>
+                        </a>
+                    </p>
+                    {% endfor %}
+                </div>
 
             </div>
         </div>
