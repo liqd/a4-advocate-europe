@@ -1,4 +1,4 @@
-{% load i18n verbose_name %}
+{% load i18n verbose_name contrib_tags %}
 
 <div>
     {% for action in view.actions %}
@@ -58,8 +58,10 @@
                 {% endblocktrans %}
 
             {% elif action.type == 'idea' and action.verb == 'add' %}
-                <br> {% blocktrans with url=action.obj.get_absolute_url name=action.target %}
-                to <a href="{{ url }}">{{ name }}</a>
+                {% url 'idea-sketch-list' as idea_list %}
+
+                <br> {% blocktrans with url=filtered_list project_pk=action.target.pk project=action.target %}
+                to <a href="{{ idea_list }}?project={{ project_pk }}">{{ project }}</a>
                 {% endblocktrans %}
             {% endif %}
         </div>
