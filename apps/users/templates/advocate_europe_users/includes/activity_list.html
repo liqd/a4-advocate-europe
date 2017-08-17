@@ -48,6 +48,13 @@
             {% trans "Participation phase will end soon:" %}
             {{ action.obj.name }}
 
+            {% elif action.type == 'journey entry' and action.verb == 'add' %}
+            {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url item=action.obj|verbose_name item_title=action.obj.title|truncatewords:50 %}
+            <a href="{{ url }}">{{ name }}</a>
+            added a new {{ item }}
+            <a href="{{ item_url }}">{{ item_title }}</a>
+            {% endblocktrans%}
+
             {% else %}
             {{ action }}
             {% endif %}
@@ -59,9 +66,13 @@
 
             {% elif action.type == 'idea' and action.verb == 'add' %}
                 {% url 'idea-sketch-list' as idea_list %}
-
                 <br> {% blocktrans with url=filtered_list project_pk=action.target.pk project=action.target %}
                 to <a href="{{ idea_list }}?project={{ project_pk }}">{{ project }}</a>
+                {% endblocktrans %}
+
+            {% elif action.type == 'journey entry' and action.verb == 'add' %}
+                <br> {% blocktrans with url=action.obj.get_absolute_url idea=action.obj.idea %}
+                to the idea <a href="{{ url }}">{{ idea }}</a>
                 {% endblocktrans %}
             {% endif %}
         </div>
