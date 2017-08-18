@@ -49,14 +49,6 @@
         }
     }
 
-    .idealist-label {
-        position: absolute;
-        bottom: rem(10px);
-        left: rem(10px);
-        color: $gray-dark;
-        text-transform: uppercase;
-        background-color: $ae-brand-orange;
-    }
 
     .idealist-text {
         padding: rem(12px);
@@ -400,6 +392,33 @@
 .ideadetail-comments {
     margin-top: rem(60px);
     margin-bottom: rem(60px);
+}
+
+.idea_label {
+    text-transform: uppercase;
+    padding: rem(3px) rem(6px);
+    font-size: rem(12px);
+    vertical-align: middle;
+}
+
+.idealist-label {
+    @extend .idea_label;
+    position: absolute;
+    bottom: rem(10px);
+    left: rem(10px);
+}
+
+.winner {
+    background-color: $ae-brand-orange;
+    color: $gray-dark;
+}
+
+.shortlist {
+    background-color: $brand-magenta;
+}
+
+.communityaward {
+    background-color: $brand-primary;
 }
 
 .ideadetail-funding {

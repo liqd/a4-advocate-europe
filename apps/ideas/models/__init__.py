@@ -72,11 +72,11 @@ class Idea(AbstractIdea, Item):
     @property
     def badge(self):
         if self.is_winner:
-            return _('Winner')
+            return _('winner')
         if self.community_award_winner:
-            return _('Community Award')
+            return _('community award')
         if self.is_on_shortlist:
-            return _('Shortlist')
+            return _('shortlist')
 
     @property
     def type(self):

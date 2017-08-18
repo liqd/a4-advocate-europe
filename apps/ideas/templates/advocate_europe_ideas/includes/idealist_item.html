@@ -6,7 +6,7 @@
                 <img src="{% if idea.idea_image %} {{ idea.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_ideatileimage_400x200.png' %} {% endif %}"/>
             </a>
             {% if idea.badge %}
-            <span class="label idealist-label">{{ idea.badge }}</span>
+            <span class="label idealist-label {{ idea.badge|cut:" " }}">{{ idea.badge }}</span>
             {% endif %}
         </div>
         <div class="idealist-text">
