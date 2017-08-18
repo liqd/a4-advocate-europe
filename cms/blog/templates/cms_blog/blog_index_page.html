@@ -41,13 +41,6 @@
             </div>
         {% endif %}
 
-        <!-- No blog entry might exist for the category -->
-        {% if not blogs %}
-            <div class="blogindex-no-entry row">
-                <h4>{% trans "Sorry, no blog entries exist for the chosen category." %}</h4>
-            </div>
-        {% endif %}
-
         <!-- All Blog Entries -->
         {% for post in blogs %}
             <!-- Featured blog entry shouldn't be shown twice on the first index page -->
@@ -84,6 +77,11 @@
                     </div>
                 </div>
             {% endif %}
+        {% empty %}
+            <!-- No blog entry might exist for the category -->
+            <div class="blogindex-no-entry row">
+                <h4>{% trans "Sorry, no blog entries exist for the chosen category." %}</h4>
+            </div>
         {% endfor %}
         <!-- All Blog Entries END -->
 
