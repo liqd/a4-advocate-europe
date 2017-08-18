@@ -37,6 +37,7 @@ rules.add_perm(
         predicates.is_collaborator
     ) &
     predicates.is_on_shortlist &
+    predicates.has_no_proposal &
     phase_predicates.phase_allows_change
 )
 

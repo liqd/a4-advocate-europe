@@ -53,7 +53,7 @@
                             {% elif can_change_proposal %}
                             <li><a href="{% url 'proposal-update' idea.slug %}">{% trans "edit proposal" %}</a></li>
                             {% endif %}
-                            {% if can_add_proposal and not idea.proposal %}
+                            {% if can_add_proposal %}
                             <li><a href="{% url 'idea-sketch-add-proposal' idea.slug %}">{% trans 'add full proposal' %}</a></li>
                             {% endif %}
                         </ul>
