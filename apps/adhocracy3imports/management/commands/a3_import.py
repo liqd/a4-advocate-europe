@@ -1,6 +1,7 @@
 from functools import lru_cache
 
 import requests
+import requests.adapters
 from django.apps import apps as django_apps
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
@@ -71,6 +72,13 @@ class A3ImportCommandMixin():
         creator = options.get('creator')
         default_creator = User.objects.get(username=creator)
 
+        self.session = requests.Session()
+        self.session.mount(
+            url,
+            requests.adapters.HTTPAdapter(max_retries=5)
+
+        )
+
         self.a3_login(url, username, password)
         self.default_creator = default_creator
         fallback_creator, _created = User.objects.get_or_create(
@@ -82,7 +90,7 @@ class A3ImportCommandMixin():
 
     def a3_login(self, url, username, password):
         login_url = url + 'login_username'
-        res = requests.post(
+        res = self.session.post(
             login_url,
             json={'name': username, 'password': password}
         )
@@ -92,13 +100,18 @@ class A3ImportCommandMixin():
         return self.token
 
     def a3_get_elements(self, url, resource_type, elements,
-                        depth='all'):
+                        depth='all', additional_filter=None):
         query_url = '{}?content_type={}&depth={}&elements={}'.format(
             url, resource_type, depth, elements
         )
+        if additional_filter:
+            query_url = (
+                query_url + '&' + additional_filter[0] +
+                '=' + additional_filter[1]
+            )
         if 'Version' in resource_type:
             query_url = query_url + '&tag=LAST'
-        res = requests.get(query_url, headers={'X-User-Token': self.token})
+        res = self.session.get(query_url, headers={'X-User-Token': self.token})
         if res.status_code != requests.codes.ok:
             raise CommandError('Request failed for URL: {}'.format(query_url))
         data = res.json()
@@ -107,7 +120,10 @@ class A3ImportCommandMixin():
 
     @lru_cache(maxsize=None)
     def a3_get_resource(self, resource_url):
-        res = requests.get(resource_url, headers={'X-User-Token': self.token})
+        res = self.session.get(
+            resource_url,
+            headers={'X-User-Token': self.token}
+        )
         if res.status_code != requests.codes.ok:
             raise CommandError('Request failed for URL: {}'.format(
                 resource_url)
@@ -218,7 +234,13 @@ class A3ImportCommandMixin():
         )
         rates_content = self.a3_get_elements(
             rates_path,
-            'adhocracy_core.resources.rate.IRateVersion', 'content')
+            'adhocracy_core.resources.rate.IRateVersion',
+            'content',
+            additional_filter=(
+                'adhocracy_core.sheets.rate.IRate:object',
+                object_path
+            )
+        )
         for rate_resource in rates_content:
             data = rate_resource['data']
             metadata_sheet = data['adhocracy_core.sheets.metadata.IMetadata']
