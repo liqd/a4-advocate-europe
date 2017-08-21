@@ -10,12 +10,12 @@ admin.site.register(models.IdeaSketch)
 
 def set_is_on_shortlist_true(modeladmin, request, queryset):
     queryset.update(is_on_shortlist=True)
-set_is_on_shortlist_true.short_description = 'Allow to add proposal'
+set_is_on_shortlist_true.short_description = 'add to shortlist'
 
 
 def set_is_on_shortlist_false(modeladmin, request, queryset):
     queryset.update(is_on_shortlist=False)
-set_is_on_shortlist_false.short_description = 'Disallow to add proposal'
+set_is_on_shortlist_false.short_description = 'remove from shortlist'
 
 
 def set_community_award_winner_true(modeladmin, request, queryset):
@@ -41,6 +41,7 @@ set_is_winner_false.short_description = 'Unset winner'
 
 
 class IdeaAdmin(admin.ModelAdmin):
+    exclude = ['module']
     raw_id_fields = ('creator', 'collaborators')
     search_fields = ('idea_title',)
     list_filter = (
@@ -49,9 +50,10 @@ class IdeaAdmin(admin.ModelAdmin):
         'is_on_shortlist',
         'community_award_winner',
     )
+
     list_display = ['idea_title', 'type', 'is_on_shortlist',
-                    'community_award_winner', 'is_winner']
-    ordering = ['-is_on_shortlist', '-is_winner', 'idea_title']
+                    'community_award_winner', 'is_winner', 'created']
+    ordering = ['-created', 'idea_title']
     actions = [
         set_is_on_shortlist_true,
         set_is_on_shortlist_false,
@@ -60,5 +62,54 @@ class IdeaAdmin(admin.ModelAdmin):
         set_is_winner_true,
         set_is_winner_false
     ]
+    fieldsets = (
+        ('Jury Section', {
+            'fields': ('jury_statement',
+                       ('is_on_shortlist',
+                        'community_award_winner',
+                        'is_winner')
+                       )
+        }),
+        ('Creator and Collaborators', {
+            'classes': ('collapse',),
+            'fields': ('creator',
+                       'collaborators')
+        }),
+        ('Applicant Section', {
+            'classes': ('collapse',),
+            'fields':
+                tuple([field.name for field
+                       in models.AbstractApplicantSection._meta.get_fields()]),
+        }),
+        ('Partner Section', {
+            'classes': ('collapse',),
+            'fields':
+                tuple([field.name for field
+                       in models.AbstractPartnersSection._meta.get_fields()]),
+        }),
+        ('Idea Section', {
+            'classes': ('collapse',),
+            'fields':
+                tuple([field.name for field
+                       in models.AbstractIdeaSection._meta.get_fields()]),
+        }),
+        ('Impact Section', {
+            'classes': ('collapse',),
+            'fields':
+                tuple([field.name for field
+                       in models.AbstractImpactSection._meta.get_fields()]),
+        }),
+        ('Community Section', {
+            'classes': ('collapse',),
+            'fields':
+                tuple([field.name for field
+                       in models.AbstractCommunitySection._meta.get_fields()]),
+        }),
+    )
+    list_filter = ('module__project',
+                   'is_on_shortlist',
+                   'community_award_winner',
+                   'is_winner')
+    search_fields = ['idea_title']
 
 admin.site.register(models.Idea, IdeaAdmin)
