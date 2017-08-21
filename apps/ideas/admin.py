@@ -41,12 +41,19 @@ set_is_winner_false.short_description = 'Unset winner'
 
 
 class IdeaAdmin(admin.ModelAdmin):
-    raw_id_fields = ('collaborators',)
     exclude = ['module']
-    readonly_fields = ['creator']
+    raw_id_fields = ('creator', 'collaborators')
+    search_fields = ('idea_title',)
+    list_filter = (
+        'module__project__name',
+        'is_winner',
+        'is_on_shortlist',
+        'community_award_winner',
+    )
+
     list_display = ['idea_title', 'type', 'is_on_shortlist',
                     'community_award_winner', 'is_winner', 'created']
-    ordering = ['-is_on_shortlist', '-is_winner', 'idea_title']
+    ordering = ['-created', 'idea_title']
     actions = [
         set_is_on_shortlist_true,
         set_is_on_shortlist_false,
