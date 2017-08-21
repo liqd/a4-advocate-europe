@@ -12,6 +12,11 @@ def is_on_shortlist(user, idea):
 
 
 @rules.predicate
+def has_no_proposal(user, idea):
+    return not hasattr(idea, 'proposal')
+
+
+@rules.predicate
 def is_winner(user, obj):
     if hasattr(obj, 'is_winner'):
         return obj.is_winner
