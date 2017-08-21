@@ -1,4 +1,4 @@
-{% load i18n verbose_name %}
+{% load i18n verbose_name contrib_tags %}
 
 <div>
     {% for action in view.actions %}
@@ -7,28 +7,73 @@
               <i class="fa fa-{{ action.icon }} fa-fw" aria-hidden="true"></i>
             </div>
             <div class="action-date">{{ action.timestamp|date:'d.m.Y' }}</div>
+
             {% if action.type == 'comment' and action.verb == 'add' %}
-            {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username comment=action.obj.comment|truncatechars:50 %} <a href="{{ url }}">{{ name }}</a> commented: {{ comment}} {% endblocktrans %}
+            {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username comment=action.obj.comment|truncatechars:50 %}
+            <a href="{{ url }}">{{ name }}</a>
+            commented: {{ comment}}
+            {% endblocktrans %}
+
             {% elif action.type == 'comment' and action.verb == 'update' %}
-            {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username comment=action.obj.comment|truncatechars:50 %} <a href="{{ url }}">{{ name }}</a> updated comment: {{ comment}} {% endblocktrans %}
+            {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username comment=action.obj.comment|truncatechars:50 %}
+            <a href="{{ url }}">{{ name }}</a>
+            updated comment: {{ comment}}
+            {% endblocktrans %}
+
             {% elif action.type == 'idea' and action.verb == 'add' %}
-            {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url item=action.obj|verbose_name item_title=action.obj.idea_title|truncatewords:50 %}<a href="{{ url }}">{{ name }}</a> added a new {{ item }}  <a href="{{ item_url }}">{{ item_title }}</a>{% endblocktrans%}
+            {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url item=action.obj|verbose_name item_title=action.obj.idea_title|truncatewords:50 %}
+            <a href="{{ url }}">{{ name }}</a>
+            added a new {{ item }}
+            <a href="{{ item_url }}">{{ item_title }}</a>
+            {% endblocktrans%}
+
             {% elif action.type == 'idea' and action.verb == 'update' %}
-            {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url item=action.obj|verbose_name item_title=action.obj.idea_title|truncatewords:50 %}<a href="{{ url }}">{{ name }}</a> updated the {{ item }} <a href="{{ item_url }}">{{ item_title }}</a>{% endblocktrans%}
+            {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url item=action.obj|verbose_name item_title=action.obj.idea_title|truncatewords:50 %}
+            <a href="{{ url }}">{{ name }}</a>
+            updated the {{ item }}
+            <a href="{{ item_url }}">{{ item_title }}</a>
+            {% endblocktrans%}
+
             {% elif action.type == 'blog' and action.verb == 'create' %}
-            {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.url item=action.obj %}<a href="{{ url }}">{{ name }}</a> added new blog entry: <a href="{{ item_url }}">{{ item }}</a>{% endblocktrans%}
+            {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.url item=action.obj %}
+            <a href="{{ url }}">{{ name }}</a>
+            added new blog entry:
+            <a href="{{ item_url }}">{{ item }}</a>
+            {% endblocktrans%}
+
             {% elif action.type == 'project' and action.verb == 'start' %}
             {% trans "New participation started" %}
+
             {% elif action.type == 'phase' and action.verb == 'schedule' %}
             {% trans "Participation phase will end soon:" %}
             {{ action.obj.name }}
+
+            {% elif action.type == 'journey entry' and action.verb == 'add' %}
+            {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.get_absolute_url item=action.obj|verbose_name item_title=action.obj.title|truncatewords:50 %}
+            <a href="{{ url }}">{{ name }}</a>
+            added a new {{ item }}
+            <a href="{{ item_url }}">{{ item_title }}</a>
+            {% endblocktrans%}
+
             {% else %}
             {{ action }}
             {% endif %}
+
             {% if action.type == 'comment' and action.verb == 'add' %}
-                <br> {% blocktrans with url=action.obj.get_absolute_url name=action.target %}on <a href="{{ url }}">{{ name }}</a>{% endblocktrans %}
+                <br> {% blocktrans with url=action.obj.get_absolute_url name=action.target %}
+                on <a href="{{ url }}">{{ name }}</a>
+                {% endblocktrans %}
+
             {% elif action.type == 'idea' and action.verb == 'add' %}
-                <br> {% blocktrans with url=action.obj.get_absolute_url name=action.target %}to <a href="{{ url }}">{{ name }}</a>{% endblocktrans %}
+                {% url 'idea-sketch-list' as idea_list %}
+                <br> {% blocktrans with url=filtered_list project_pk=action.target.pk project=action.target %}
+                to <a href="{{ idea_list }}?project={{ project_pk }}">{{ project }}</a>
+                {% endblocktrans %}
+
+            {% elif action.type == 'journey entry' and action.verb == 'add' %}
+                <br> {% blocktrans with url=action.obj.get_absolute_url idea=action.obj.idea %}
+                to the idea <a href="{{ url }}">{{ idea }}</a>
+                {% endblocktrans %}
             {% endif %}
         </div>
     {% endfor %}
