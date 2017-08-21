@@ -1,4 +1,4 @@
-{% load i18n rules static micawber_tags %}
+{% load i18n rules static micawber_tags contrib_tags %}
 
 <div class="ideadetail-tab">
     <div class="ideadetailtab-header">
@@ -18,13 +18,14 @@
                 <span class="avatar-round-small" style="background-image: url({{ entry.creator.avatar_or_fallback_url }})"></span>
                 <span class="collaborator"><a class="collaborator-link" href="{% url 'profile' entry.creator.username %}">{{ entry.creator.username }} </a>{% trans 'on' %} {{ entry.created | date }}</span>
                 {% if can_write_journey %}
+                {% concat_strings 'delete' entry.pk as delete_pk %}
                 <a class="btn btn-link journey-link" href="{% url 'journey-entry-update' entry.pk %}">{% trans "Edit" %}</a>
-                <button type="button" class="btn btn-link journey-link" data-toggle="modal" data-target="#{{ entry.pk }}">{% trans 'Delete'%}</button>
+                <button type="button" class="btn btn-link journey-link" data-toggle="modal" data-target="#{{ delete_pk }}">{% trans 'Delete'%}</button>
                 {% endif %}
             </div>
         </div>
         {% url 'journey-entry-delete' entry.pk as delete_view_url %}
-        {% include 'advocate_europe_contrib/delete_modal.html' with name=entry.title delete_id=entry.pk delete_action=delete_view_url %}
+        {% include 'advocate_europe_contrib/delete_modal.html' with delete_modal=delete_pk name=entry.title delete_action=delete_view_url %}
     {% empty %}
         <h3>{% trans 'No entries yet' %}</h3>
     {% endfor %}
