@@ -9,9 +9,6 @@
         <a class="btn btn-primary journey-btn" href="{% url 'journey-entry-create' idea.slug %}">{% trans "New entry" %}</a>
     {% endif %}
     <div class="journey">
-    {% if idea.journeyentry_set.all.count == 0 %}
-        <h3>{% trans 'No entries yet' %}</h3>
-    {% else %}
     {% for entry in idea.journeyentry_set.all %}
         <div class="journey-entry">
             <span class="journey-category">{{ entry.get_category_display }}</span>
@@ -22,14 +19,16 @@
                 <span class="collaborator"><a class="collaborator-link" href="{% url 'profile' entry.creator.username %}">{{ entry.creator.username }} </a>{% trans 'on' %} {{ entry.created | date }}</span>
                 {% if can_write_journey %}
                 <a class="btn btn-link journey-link" href="{% url 'journey-entry-update' entry.pk %}">{% trans "Edit" %}</a>
-                <form class="d-inline" method="POST" id="entry_delete" action="{% url 'journey-entry-delete' entry.pk %}">
-                {% csrf_token %}
-                    <button type="submit" class="submit-button btn btn-link journey-link">{% trans 'Delete'%}</button>
-                </form>
+                <button type="button" class="btn btn-link journey-link" data-toggle="modal" data-target="#{{ entry.pk }}">{% trans 'Delete'%}</button>
                 {% endif %}
             </div>
         </div>
+        {% url 'journey-entry-delete' entry.pk as delete_view_url %}
+        {% include 'advocate_europe_contrib/delete_modal.html' with name=entry.title delete_id=entry.pk delete_action=delete_view_url %}
+    {% empty %}
+        <h3>{% trans 'No entries yet' %}</h3>
     {% endfor %}
-    {% endif %}
     </div>
 </div>
+
+

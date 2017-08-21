@@ -1,0 +1,28 @@
+{% load i18n %}
+{% trans "Are you sure you want to delete" as question %}
+
+<div role="dialog" id="{{ delete_id }}" class="modal fade">
+    <div role="document" class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" data-dismiss="modal" aria-label="Abort" class="close">
+                    <i aria-hidden="true" class="fa fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 class="modal-title">{{ question }} {{ name }}?</h3>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <form method="POST" id="delete_entry{{ delete_id }}" action="{{ delete_action }}">
+                        {% csrf_token %}
+                         <button type="submit" form="delete_entry{{ delete_id }}" class="btn btn-danger">{% trans 'Delete'%}</button>
+                    </form>
+                </div>
+                <div class="row">
+                    <button type="button" data-dismiss="modal" class="btn btn-xs btn-default">{% trans 'Abort'%}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
