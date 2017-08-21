@@ -42,15 +42,13 @@
                 <a class="btn btn-ae-secondary export-btn" href="{% url 'idea-export' %}{{ '?'|add:view.filter.data.urlencode }}">{% trans "export" %}</a>
             {% endif %}
         </div>
-        <!-- No idea might exist for the chosen filters -->
-        {% if not idea_list %}
-            <div class="idealist-no-entry">
-                <h4>{% trans "Sorry, no ideas exist for the chosen filters." %}</h4>
-            </div>
-        {% endif %}
         <div class="idealist-list">
             {% for idea in idea_list %}
             {% include 'advocate_europe_ideas/includes/idealist_item.html' %}
+            {% empty %}
+            <div class="idealist-no-entry">
+                <h4>{% trans "Sorry, no ideas exist for the chosen filters." %}</h4>
+            </div>
             {% endfor %}
         </div>
         {% if is_paginated %}
