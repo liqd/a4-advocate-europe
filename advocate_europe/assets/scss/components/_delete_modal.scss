@@ -1,0 +1,36 @@
+.modal-content {
+    border-radius: 0;
+    text-align: center;
+    box-shadow: none;
+    border: 0;
+
+    .modal-header {
+        border: none;
+    }
+
+    .modal-body {
+        .modal-title {
+            font-size: rem(20px);
+        }
+    }
+
+    .modal-footer {
+        border: none;
+        text-align: center;
+        padding: rem(60px) 0;
+
+        .row {
+            padding-top: 10px;
+        }
+
+        .submit-button {
+            @extend .btn;
+            @extend .btn-primary;
+        }
+
+        .cancel-button {
+            @extend .btn;
+            @extend .btn-default;
+        }
+    }
+}
