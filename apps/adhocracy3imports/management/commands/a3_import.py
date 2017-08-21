@@ -92,10 +92,15 @@ class A3ImportCommandMixin():
         return self.token
 
     def a3_get_elements(self, url, resource_type, elements,
-                        depth='all'):
+                        depth='all', additional_filter=None):
         query_url = '{}?content_type={}&depth={}&elements={}'.format(
             url, resource_type, depth, elements
         )
+        if additional_filter:
+            query_url = (
+                query_url + '&' + additional_filter[0] +
+                '=' + additional_filter[1]
+            )
         if 'Version' in resource_type:
             query_url = query_url + '&tag=LAST'
         res = requests.get(query_url, headers={'X-User-Token': self.token})
@@ -218,7 +223,13 @@ class A3ImportCommandMixin():
         )
         rates_content = self.a3_get_elements(
             rates_path,
-            'adhocracy_core.resources.rate.IRateVersion', 'content')
+            'adhocracy_core.resources.rate.IRateVersion',
+            'content',
+            additional_filter=(
+                'adhocracy_core.sheets.rate.IRate:object',
+                object_path
+            )
+        )
         for rate_resource in rates_content:
             data = rate_resource['data']
             metadata_sheet = data['adhocracy_core.sheets.metadata.IMetadata']
