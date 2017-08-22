@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<h4>{% trans "Categories" %}</h4>
+<h4 class="category-title">{% trans "Categories" %}</h4>
 {% for categ in categories %}
     {% if categ.name_en == category %}
         <div class="btn btn-sm blogindex-category-btn active">
