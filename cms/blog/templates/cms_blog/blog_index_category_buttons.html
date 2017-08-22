@@ -8,7 +8,7 @@
         </div>
     {% else %}
         <div class="btn btn-sm blogindex-category-btn">
-            <a href="?category={{ categ }} " role="button" aria-label="{% trans "Filter for category" %} {{ categ }}">{{ categ }}</a>
+            <a href="?category={{ categ.pk }} " role="button" aria-label="{% trans "Filter for category" %} {{ categ }}">{{ categ }}</a>
         </div>
     {% endif %}
     <br>
