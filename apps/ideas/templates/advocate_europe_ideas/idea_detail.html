@@ -91,14 +91,16 @@
                     <h4>{% trans 'Collaborators' %}</h4>
                     <p>
                         <span class="avatar-round-small" style="background-image: url({{ idea.creator.avatar_or_fallback_url }})"></span>
-                        <span class="collaborator"><a href="{% url 'profile' idea.creator.username %}">{{ idea.creator.username }}</a></span>
+                        <span class="collaborator">
+                        <a href="{% url 'profile' idea.creator.username %}">{{ idea.creator.username }}</a>
+                        </span>
                     </p>
                     {% for collaborator in idea.collaborators.all %}
                     <p>
-                        <a href="{% url 'profile' collaborator.username %}">
-                            <span class="avatar-round-small" style="background-image: url({{ collaborator.avatar_or_fallback_url }})"></span>
-                            <span class="collaborator">{{ collaborator.username }}</span>
-                        </a>
+                        <span class="avatar-round-small no-decoration" style="background-image: url({{ collaborator.avatar_or_fallback_url }})"></span>
+                        <span class="collaborator">
+                        <a href="{% url 'profile' collaborator.username %}">{{ collaborator.username }}</a>
+                        </span>
                     </p>
                     {% endfor %}
                 </div>
