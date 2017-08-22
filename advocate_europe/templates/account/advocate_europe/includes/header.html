@@ -1,0 +1,14 @@
+{% load i18n %}
+
+{% url 'account_login' as account_login_url %}
+{% url  'account_signup' as account_signup_url %}
+<header>
+    <ul class="nav nav-tabs login-register-tabs" role="tablist">
+        <li role="presentation" {% if request.path == account_login_url %}class="active"{% endif %}>
+            <a href="{{ account_login_url }}?next={{ redirect_field_value }}">{% trans "login" %}</a>
+        </li>
+        <li role="presentation" {% if request.path == account_signup_url %}class="active"{% endif %}>
+            <a href="{{ account_signup_url }}?next={{ redirect_field_value }}">{% trans "register" %}</a>
+        </li>
+    </ul>
+</header>
