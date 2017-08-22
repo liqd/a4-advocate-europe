@@ -117,7 +117,7 @@ subresource_map = {
             ('challenge', 'challenge')
         ]
     },
-    'adhocracy_mercator.sheets.mercator2.IPracticalRelevance': {
+    'adhocracy_mercator.resources.mercator2.IPracticalRelevance': {
         # WHAT IS THE PRACTICAL RELEVANCE OF YOUR IDEA TO THE
         # EVERYDAY LIVES OF PEOPLE IN EUROPE?
         'adhocracy_mercator.sheets.mercator2.IPracticalRelevance': [
