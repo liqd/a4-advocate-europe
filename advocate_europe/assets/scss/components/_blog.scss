@@ -48,6 +48,10 @@
 .blogindex-no-entry {
     margin-top: rem(100px);
     text-align: center;
+
+    @media screen and (max-width: $screen-sm-max) {
+        margin-top: rem(20px);
+    }
 }
 
 // blog index page entries
@@ -139,7 +143,7 @@
         max-width: rem(150px);
     }
 
-    a {
+    .category-name {
         color: #fff;
         font-size: rem(12px);
         font-weight: bold;
@@ -150,8 +154,25 @@
         background-color: $ae-light-blue;
         box-shadow: none;
 
-        a {
+        a,
+        .category-name {
             color: $gray-base;
+        }
+    }
+
+    a:hover,
+    a:active,
+    a:visited,
+    a:focus {
+        text-decoration: none;
+    }
+
+    .btn-groupie {
+        padding: 0;
+        white-space: normal;
+
+        @media screen and (min-width: $screen-sm-min) {
+            max-width: rem(110px);
         }
     }
 }
