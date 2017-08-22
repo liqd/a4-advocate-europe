@@ -46,9 +46,12 @@
 }
 
 .blogindex-no-entry {
-    margin-top: rem(50px);
+    margin-top: rem(100px);
     text-align: center;
-    min-height: rem(250px);
+
+    @media screen and (max-width: $screen-sm-max) {
+        margin-top: rem(20px);
+    }
 }
 
 // blog index page entries
@@ -109,30 +112,25 @@
     }
 }
 
-.blogindex-dummy-row {
-    margin: 0;
-    position: relative;
+// *********** blogindex category buttons **********************
+
+.category-title {
+    margin-top: 0;
+}
+// the categories need to be in a column left to the blog entries
+
+.blogindex-topics-neg-margin {
+    margin-right: -16.6%;
+
+    @media screen and (max-width: $screen-sm-max) {
+        margin-right: -25%;
+    }
 }
 
-// blogindex category buttons
+// if theres no featured blog entry shown, the categories have to be shown a bit further down, so that they are below the blue header banner
 
-.blogindex-topics {
-    position: absolute;
-}
-
-.blogindex-topics-xs {
-    margin-top: rem(-20px);
-    margin-bottom: rem(10px);
-}
-
-.blogindex-topics-second {
-    position: absolute;
-    top: rem(50px);
-}
-
-.blogindex-topics-xs-second {
+.topics-no-featured {
     margin-top: rem(50px);
-    margin-bottom: rem(10px);
 }
 
 .blogindex-category-btn {
@@ -145,7 +143,7 @@
         max-width: rem(150px);
     }
 
-    a {
+    .category-name {
         color: #fff;
         font-size: rem(12px);
         font-weight: bold;
@@ -156,8 +154,25 @@
         background-color: $ae-light-blue;
         box-shadow: none;
 
-        a {
+        a,
+        .category-name {
             color: $gray-base;
+        }
+    }
+
+    a:hover,
+    a:active,
+    a:visited,
+    a:focus {
+        text-decoration: none;
+    }
+
+    .btn-groupie {
+        padding: 0;
+        white-space: normal;
+
+        @media screen and (min-width: $screen-sm-min) {
+            max-width: rem(110px);
         }
     }
 }

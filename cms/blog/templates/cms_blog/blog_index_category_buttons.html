@@ -1,14 +1,19 @@
 {% load i18n %}
 
-<h4>{% trans "Categories" %}</h4>
+<h4 class="category-title">{% trans "Categories" %}</h4>
 {% for categ in categories %}
     {% if categ.name_en == category %}
-        <div class="btn btn-sm blogindex-category-btn active">
-            <a href="?category=" role="button" aria-label="{% trans "Remove category filter" %} {{ categ }}">{{ categ }} &nbsp; X</a>
+        <div class="btn-group btn-sm blogindex-category-btn active">
+            <div class="">
+                <a href="?category=" role="button" aria-label="{% trans "Remove category filter" %} {{ categ }}">
+                <div class="btn btn-groupie"><div class="category-name">{{ categ }}</div></div>
+                <div class="btn btn-groupie"><i class="fa fa-times" aria-hidden="true"></i></div>
+                </a>
+            </div>
         </div>
     {% else %}
         <div class="btn btn-sm blogindex-category-btn">
-            <a href="?category={{ categ }} " role="button" aria-label="{% trans "Filter for category" %} {{ categ }}">{{ categ }}</a>
+            <a href="?category={{ categ }}" class="category-name" role="button" aria-label="{% trans "Filter for category" %} {{ categ }}">{{ categ }}</a>
         </div>
     {% endif %}
     <br>
