@@ -5,68 +5,68 @@
 {% block title %}{% trans 'Register an account' %}{% endblock %}
 
 {% block form %}
-    <form class="custom-form" role="form" name="RegisterForm" action="{% url 'account_signup' %}" method="post">
-        {% csrf_token %}
+<form class="custom-form" role="form" name="RegisterForm" action="{% url 'account_signup' %}" method="post">
+    {% csrf_token %}
 
-        {% block help_text %}
-        {% endblock %}
+    {% block help_text %}
+    {% endblock %}
 
-        {% if form.non_field_errors %}
-            <div class="form-errors">
-                {% for error in form.non_field_errors %}
-                    <p class="alert alert-danger">{{ error }}</p>
-                {% endfor %}
-            </div>
+    {% if form.non_field_errors %}
+    <div class="form-errors">
+    {% for error in form.non_field_errors %}
+        <p class="alert alert-danger">{{ error }}</p>
+    {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+    {% endif %}
+
+    <div class="form-group">
+        <label class="control-label" for="{{ form.username.id_for_label }}">{{  form.username.label }}</label>
+        {% if form.username.errors %}
+        {{ form.username|add_class:"form-control form-error" }}
+        {% else %}
+        {{ form.username|add_class:"form-control"}}
         {% endif %}
+        {{ form.username.errors }}
+    </div>
 
-        {% if redirect_field_value %}
-            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+    <div class="form-group">
+        <label class="control-label" for="{{ form.email.id_for_label }}">{{  form.email.label }}</label>
+        {% if form.email.errors %}
+        {{ form.email|add_class:"form-control form-error" }}
+        {% else %}
+        {{ form.email|add_class:"form-control"}}
         {% endif %}
+        {{ form.email.errors }}
+    </div>
 
-        <div class="form-group">
-            <label class="control-label" for="{{ form.username.id_for_label }}">{{  form.username.label }}</label>
-            {% if form.username.errors %}
-                {{ form.username|add_class:"form-control form-error" }}
-            {% else %}
-                {{ form.username|add_class:"form-control"}}
-            {% endif %}
-            {{ form.username.errors }}
-        </div>
+    <div class="form-group">
+        <label class="control-label" for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+        {% if form.password1.errors %}
+        {{ form.password1|add_class:"form-control form-error" }}
+        {% else %}
+        {{ form.password1|add_class:"form-control"}}
+        {% endif %}
+        {{ form.password1.errors }}
+    </div>
 
-        <div class="form-group">
-            <label class="control-label" for="{{ form.email.id_for_label }}">{{  form.email.label }}</label>
-            {% if form.email.errors %}
-                {{ form.email|add_class:"form-control form-error" }}
-            {% else %}
-                {{ form.email|add_class:"form-control"}}
-            {% endif %}
-            {{ form.email.errors }}
-        </div>
+    <div class="form-group">
+        <label class="control-label" for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+        {% if form.password2.errors %}
+        {{ form.password2|add_class:"form-control form-error" }}
+        {% else %}
+        {{ form.password2|add_class:"form-control"}}
+        {% endif %}
+        {{ form.password2.errors }}
+    </div>
 
-        <div class="form-group">
-            <label class="control-label" for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
-            {% if form.password1.errors %}
-                {{ form.password1|add_class:"form-control form-error" }}
-            {% else %}
-                {{ form.password1|add_class:"form-control"}}
-            {% endif %}
-            {{ form.password1.errors }}
-        </div>
-
-        <div class="form-group">
-            <label class="control-label" for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
-            {% if form.password2.errors %}
-                {{ form.password2|add_class:"form-control form-error" }}
-            {% else %}
-                {{ form.password2|add_class:"form-control"}}
-            {% endif %}
-            {{ form.password2.errors }}
-        </div>
-
-        <div class="checkbox">
-            <label class="control-label" for="{{ form.terms_of_use.id_for_label }}">{{ form.terms_of_use }} {{ form.terms_of_use.label | safe }}</label>
-            {{ form.terms_of_use.errors }}
-        </div>
-        <button type="submit" value="Register" class="btn btn-primary btn-wide">{% trans "register" %}</button>
-    </form>
+    <div class="checkbox">
+        <label class="control-label" for="{{ form.terms_of_use.id_for_label }}">{{ form.terms_of_use }} {{ form.terms_of_use.label | safe }}</label>
+        {{ form.terms_of_use.errors }}
+    </div>
+    <button type="submit" value="Register" class="btn btn-primary btn-wide">{% trans "register" %}</button>
+</form>
 {% endblock %}
