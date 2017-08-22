@@ -11,40 +11,27 @@
             <h1>{{ page.title }}</h1>
         </div>
         <!-- Featured blog entry will be on first index page only -->
-        {% if not blogs.has_previous and page.featured_page.live %}
+        {% if not blogs.has_previous and not category and page.featured_page.live %}
             {% include 'cms_blog/blog_index_featured_item.html' %}
-            <div class="blogindex-topics-xs hidden-sm hidden-md hidden-lg">
-                <div class="row">
-                    <div class="col-xs-12">
-                        {% include 'cms_blog/blog_index_category_buttons.html' %}
-                    </div>
-                </div>
-            </div>
-            <div class="row blogindex-dummy-row hidden-xs">
-                <div class="blogindex-topics">
-                    {% include 'cms_blog/blog_index_category_buttons.html' %}
-                </div>
-            </div>
         {% else %}
-            <!-- The category buttons have to be moved when on other (not first) pages -->
-            <div class="blogindex-topics-xs-second hidden-sm hidden-md hidden-lg">
-                <div class="row">
-                    <div class="col-xs-12">
-                        {% include 'cms_blog/blog_index_category_buttons.html' %}
-                    </div>
-                </div>
-            </div>
-            <div class="row blogindex-dummy-row hidden-xs">
-                <div class="blogindex-topics-second">
+            <div class="row"></div>
+        {% endif %}
+
+        <div class="hidden-sm hidden-md hidden-lg {% if blogs.has_previous or category or not page.featured_page.live %}topics-no-featured{% endif %}">
+            <div class="row">
+                <div class="col-xs-12">
                     {% include 'cms_blog/blog_index_category_buttons.html' %}
                 </div>
             </div>
-        {% endif %}
+        </div>
+        <div class="row col-sm-3 col-md-2 hidden-xs blogindex-topics-neg-margin {% if blogs.has_previous or category or not page.featured_page.live %}topics-no-featured{% endif %}">
+            {% include 'cms_blog/blog_index_category_buttons.html' %}
+        </div>
 
         <!-- All Blog Entries -->
         {% for post in blogs %}
             <!-- Featured blog entry shouldn't be shown twice on the first index page -->
-            {% if not blogs.has_previous and page.featured_page == post %}
+            {% if not blogs.has_previous and not category and page.featured_page == post %}
             {% else %}
                 <div class="blogindexentry">
                     <div class="row equal blogindex-all">
