@@ -35,8 +35,13 @@ class BlogIndexPage(Page):
         blogs = self.blogs
 
         category = request.GET.get('category')
+
         if category:
-            blogs = blogs.filter(categories__pk=category)
+            try:
+                category = int(category)
+                blogs = blogs.filter(categories__pk=category)
+            except ValueError:
+                blogs = []
 
         page = request.GET.get('page', 1)
         paginator = Paginator(blogs, 5)
