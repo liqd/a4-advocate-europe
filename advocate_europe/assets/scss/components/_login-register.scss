@@ -1,0 +1,61 @@
+.login-register-top {
+    background: linear-gradient(to bottom, $brand-primary rem(360px), #fff 0%);
+}
+
+.login-register {
+    padding-top: 60px;
+
+    @media screen and (min-width: $screen-lg-min) {
+        width: 33%;
+    }
+}
+
+.login-register-tabs {
+    background-color: $ae-light-gray;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    padding-top: 10px;
+    padding-left: 18%;
+    padding-right: 12%;
+
+    li {
+        a {
+            border-radius: 0;
+            padding-right: 30px;
+            padding-left: 30px;
+            font-size: rem(18px);
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+    }
+}
+
+.login-register-form {
+    background-color: white;
+    padding: 40px 30px;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+
+.socialaccounts {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.socialaccounts-heading {
+    font-size: rem(16px);
+}
+
+
+.socialaccount-providers {
+    list-style-type: none;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.socialaccount-provider {
+    margin-bottom: 10px;
+}
+
