@@ -13,9 +13,11 @@
         <!-- Featured blog entry will be on first index page only -->
         {% if not blogs.has_previous and not category and page.featured_page.live %}
             {% include 'cms_blog/blog_index_featured_item.html' %}
+        {% else %}
+            <div class="row"></div>
         {% endif %}
 
-        <div class="hidden-sm hidden-md hidden-lg {% if blogs.has_previous or not page.featured_page.live %}topics-no-featured{% endif %}">
+        <div class="hidden-sm hidden-md hidden-lg {% if blogs.has_previous or category or not page.featured_page.live %}topics-no-featured{% endif %}">
             <div class="row">
                 <div class="col-xs-12">
                     {% include 'cms_blog/blog_index_category_buttons.html' %}
