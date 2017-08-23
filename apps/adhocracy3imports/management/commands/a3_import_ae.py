@@ -243,7 +243,7 @@ class Command(A3ImportCommandMixin, BaseCommand):
                     pos = subtitle[:49].rfind(' ')
 
                     if pos == -1:
-                        pos = 49
+                        pos = 48
 
                     title = subtitle[:pos] + ' …'
                     subtitle = '… ' + subtitle[pos+1:].strip()
