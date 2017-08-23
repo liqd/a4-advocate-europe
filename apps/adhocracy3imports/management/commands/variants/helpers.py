@@ -45,7 +45,7 @@ def concat(dst_field, seperator=', '):
         old_value = getattr(a4proposal, dst_field)
         if not old_value:
             value = src_value
-        elif src_value in old_value:
+        elif src_value in old_value or not src_value:
             value = old_value
         else:
             value = "{}{}{}".format(old_value, seperator, src_value)
