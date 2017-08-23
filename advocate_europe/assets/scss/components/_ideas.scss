@@ -280,6 +280,7 @@
 }
 
 .ideadetail-content {
+    margin-bottom: rem(60px);
     background-color: #fff;
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
     border-bottom-left-radius: rem(5px);
@@ -390,7 +391,6 @@
 // -------------------- Idea Detail Comments --------------------
 
 .ideadetail-comments {
-    margin-top: rem(60px);
     margin-bottom: rem(60px);
 }
 
