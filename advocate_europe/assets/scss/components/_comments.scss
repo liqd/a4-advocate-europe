@@ -38,6 +38,14 @@
         }
     }
 
+    .comment-deleted-author {
+        display: inline-block;
+        margin-right: rem(10px);
+        font-size: rem(16px);
+        font-weight: 600;
+        line-height: 1.5;
+    }
+
     .comment-child-list {
         padding-left: rem(20px);
     }
