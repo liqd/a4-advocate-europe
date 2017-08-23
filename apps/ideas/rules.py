@@ -13,12 +13,12 @@ rules.add_perm(
 )
 
 rules.add_perm(
-    'advocate_europe_ideas.add_ideasketch',
+    'advocate_europe_ideas.create_ideasketch',
     mod_predicates.is_allowed_add_item(models.IdeaSketch)
 )
 
 rules.add_perm(
-    'advocate_europe_ideas.change_idea',
+    'advocate_europe_ideas.update_idea',
     mod_predicates.is_project_admin |
     mod_predicates.is_context_member &
     (
@@ -29,7 +29,7 @@ rules.add_perm(
 )
 
 rules.add_perm(
-    'advocate_europe_ideas.add_proposal',
+    'advocate_europe_ideas.create_proposal',
     mod_predicates.is_project_admin |
     mod_predicates.is_context_member &
     (
