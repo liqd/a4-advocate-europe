@@ -87,7 +87,7 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
                              mixins.ModuleMixin,
                              wizard_mixins.CustomWizardMixin,
                              SessionWizardView):
-    permission_required = 'advocate_europe_ideas.add_ideasketch'
+    permission_required = 'advocate_europe_ideas.create_ideasketch'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
     title = _('create an idea')
@@ -126,7 +126,7 @@ class IdeaSketchEditView(
     SuccessMessageMixin,
     generic.UpdateView
 ):
-    permission_required = 'advocate_europe_ideas.change_idea'
+    permission_required = 'advocate_europe_ideas.update_idea'
     model = IdeaSketch
     template_name = 'advocate_europe_ideas/idea_update_form.html'
     success_message = _('Ideasketch saved')
@@ -216,7 +216,7 @@ class ProposalCreateWizard(PermissionRequiredMixin,
                            wizard_mixins.CustomWizardMixin,
                            SessionWizardView,
                            ):
-    permission_required = 'advocate_europe_ideas.add_proposal'
+    permission_required = 'advocate_europe_ideas.create_proposal'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
     title = _('create a proposal')
@@ -269,7 +269,7 @@ class ProposalEditView(
     SuccessMessageMixin,
     generic.UpdateView
 ):
-    permission_required = 'advocate_europe_ideas.change_idea'
+    permission_required = 'advocate_europe_ideas.update_idea'
     model = Proposal
     template_name = 'advocate_europe_ideas/idea_update_form.html'
     success_message = _('Proposal saved')

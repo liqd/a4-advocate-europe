@@ -34,10 +34,10 @@
                     </a>
 
                     {% if idea.proposal %}
-                        {% has_perm 'advocate_europe_ideas.change_idea' request.user idea as can_change_proposal %}
+                        {% has_perm 'advocate_europe_ideas.update_idea' request.user idea as can_change_proposal %}
                     {% elif idea.ideasketch %}
-                        {% has_perm 'advocate_europe_ideas.change_idea' request.user idea.ideasketch as can_change_sketch %}
-                        {% has_perm 'advocate_europe_ideas.add_proposal' request.user idea as can_add_proposal %}
+                        {% has_perm 'advocate_europe_ideas.update_idea' request.user idea.ideasketch as can_change_sketch %}
+                        {% has_perm 'advocate_europe_ideas.create_proposal' request.user idea as can_add_proposal %}
                     {% endif %}
                     {% if can_change_sketch or can_change_proposal or can_add_proposal %}
 

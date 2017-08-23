@@ -12,7 +12,7 @@
             </button>
 
             <ul class="dropdown-menu user-indicator-menu">
-                {% if request.user.is_superuser %}
+                {% if request.user.is_superuser or request.user.is_staff %}
                 <li>
                     <a href="{% url 'admin:index' %}"><i class="fa fa-hand-spock-o fa-fw" aria-hidden="true"></i> <span class="dropdown-text">{% trans "Admin" %}</span></a>
                 </li>
@@ -22,7 +22,7 @@
                 </li>
                 {% get_modules as modules %}
                 {% for module in modules %}
-                    {% has_perm 'advocate_europe_ideas.add_ideasketch' request.user module as can_add %}
+                    {% has_perm 'advocate_europe_ideas.create_ideasketch' request.user module as can_add %}
                     {% if can_add %}
                     <li>
                         <a href="{% url 'idea-sketch-create' module.slug %}">
