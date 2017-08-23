@@ -326,7 +326,18 @@ class Command(A3ImportCommandMixin, BaseCommand):
                 print('\n'.join(lines))
                 continue
 
-            self.a3_import_comments(last_version_url, a4proposal.idea)
+            try:
+                self.a3_import_comments(last_version_url, a4proposal.idea)
+            except:
+                print("SKIP comments: {}".format(url))
+                exc_type, exc_value, exc_traceback = sys.exc_info()
+                lines = traceback.format_exception(
+                    exc_type,
+                    exc_value,
+                    exc_traceback
+                )
+                print('\n'.join(lines))
+                continue
 
             if created:
                 print("INIT: {}".format(url))
