@@ -236,10 +236,15 @@ class ProposalCreateWizard(PermissionRequiredMixin,
         for field in archive._meta.get_fields():
             value = getattr(self.idea.ideasketch, field.name)
 
+            if not (field.many_to_many or field.one_to_many):
+                setattr(archive, field.name, value)
+        archive.save()
+
+        for field in archive._meta.get_fields():
+            value = getattr(self.idea.ideasketch, field.name)
             if field.many_to_many or field.one_to_many:
                 value = value.all()
-
-            setattr(archive, field.name, value)
+                setattr(archive, field.name, value)
 
         archive.save()
 
