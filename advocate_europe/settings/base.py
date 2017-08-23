@@ -293,6 +293,8 @@ WAGTAIL_SITE_NAME = "advocate_europe"
 LOGIN_URL = 'account_login'
 LOGOUT_URL = 'account_logout'
 LOGIN_REDIRECT_URL = '/'
+ACCOUNT_SIGNUP_FORM_CLASS = 'apps.users.forms.SignUpForm'
+
 
 #ACCOUNT_ADAPTER = 'apps.users.adapters.AccountAdapter'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'

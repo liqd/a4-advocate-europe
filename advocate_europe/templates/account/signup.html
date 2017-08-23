@@ -1,103 +1,72 @@
-{% extends 'base.html' %}
+{% extends 'account/advocate_europe/base_form.html' %}
 
-{% load widget_tweaks socialaccount i18n%}
+{% load widget_tweaks socialaccount i18n %}
 
 {% block title %}{% trans 'Register an account' %}{% endblock %}
 
-{% block content %}
-<main class="container">
-    <header>
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation"><a href="{% url 'account_login' %}?next={{redirect_field_value}}">{% trans "login" %}</a></li>
-            <li role="presentation" class="active"><a href="{% url 'account_signup' %}?next={{redirect_field_value}}">{% trans "register" %}</a></li>
-        </ul>
-    </header>
+{% block form %}
+<form class="custom-form" role="form" name="RegisterForm" action="{% url 'account_signup' %}" method="post">
+    {% csrf_token %}
 
-    <form role="form" name="RegisterForm" action="{% url 'account_signup' %}" method="post" >
-        {% csrf_token %}
+    {% block help_text %}
+    {% endblock %}
 
-        {% block help_text %}
-        {% endblock %}
-
-        {% if form.non_field_errors %}
-        <div class="form-errors">
-        {% for error in form.non_field_errors %}
+    {% if form.non_field_errors %}
+    <div class="form-errors">
+    {% for error in form.non_field_errors %}
         <p class="alert alert-danger">{{ error }}</p>
-        {% endfor %}
-        </div>
-        {% endif %}
-
-        {% if redirect_field_value %}
-            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}
-
-        <div class="form-group">
-            <label class="control-label" for="{{ form.username.id_for_label }}">Username</label>
-            {% if form.username.errors %}
-                {{ form.username|add_class:"form-control form-error" }}
-            {% else %}
-                {{ form.username|add_class:"form-control"}}
-            {% endif %}
-            {{ form.username.errors }}
-        </div>
-
-        <div class="form-group">
-            <label class="control-label" for="{{ form.email.id_for_label }}">Email</label>
-            {% if form.email.errors %}
-                {{ form.email|add_class:"form-control form-error" }}
-            {% else %}
-                {{ form.email|add_class:"form-control"}}
-            {% endif %}
-            {{ form.email.errors }}
-        </div>
-
-        <div class="form-group">
-            <label class="control-label" for="{{ form.password1.id_for_label }}">Password</label>
-            {% if form.password1.errors %}
-                {{ form.password1|add_class:"form-control form-error" }}
-            {% else %}
-                {{ form.password1|add_class:"form-control"}}
-            {% endif %}
-            {{ form.password1.errors }}
-        </div>
-
-        <div class="form-group">
-            <label class="control-label" for="{{ form.password2.id_for_label }}">Password repeat</label>
-            {% if form.password2.errors %}
-                {{ form.password2|add_class:"form-control form-error" }}
-            {% else %}
-                {{ form.password2|add_class:"form-control"}}
-            {% endif %}
-            {{ form.password2.errors }}
-        </div>
-
-        <div class="form-group">
-            {% if form.terms_of_use.errors %}
-                {{ form.terms_of_use|add_class:"form-error" }}
-            {% else %}
-                {{ form.terms_of_use }}
-            {% endif %}
-            <label class="control-label" for="{{ form.terms_of_use.id_for_label }}">
-                {% blocktrans with terms_of_use_url="/terms-of-use" %}
-                I accept the <a href="{{terms_of_use_url}}" target="blank">terms of use</a>.
-                {% endblocktrans %}
-            </label>
-            {{ form.terms_of_use.errors }}
-        </div>
-
-        <button type="submit" value="Register" class="btn btn-ae-secondary">{% trans "register" %}</button>
-    </form>
-
-    <div class="socialaccounts">
-        {% get_providers as socialaccount_providers %}
-        {% if socialaccount_providers %}
-        <p class="h6 text-uppercase sans-serif">{% trans "Login with social account" %}</h6>
-        <div class="socialaccount_ballot">
-            <ul class="socialaccount_providers">
-                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-            </ul>
-        </div>
-        {% endif %}
+    {% endfor %}
     </div>
-</main>
+    {% endif %}
+
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+    {% endif %}
+
+    <div class="form-group">
+        <label class="control-label" for="{{ form.username.id_for_label }}">{{  form.username.label }}</label>
+        {% if form.username.errors %}
+        {{ form.username|add_class:"form-control form-error" }}
+        {% else %}
+        {{ form.username|add_class:"form-control"}}
+        {% endif %}
+        {{ form.username.errors }}
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="{{ form.email.id_for_label }}">{{  form.email.label }}</label>
+        {% if form.email.errors %}
+        {{ form.email|add_class:"form-control form-error" }}
+        {% else %}
+        {{ form.email|add_class:"form-control"}}
+        {% endif %}
+        {{ form.email.errors }}
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+        {% if form.password1.errors %}
+        {{ form.password1|add_class:"form-control form-error" }}
+        {% else %}
+        {{ form.password1|add_class:"form-control"}}
+        {% endif %}
+        {{ form.password1.errors }}
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+        {% if form.password2.errors %}
+        {{ form.password2|add_class:"form-control form-error" }}
+        {% else %}
+        {{ form.password2|add_class:"form-control"}}
+        {% endif %}
+        {{ form.password2.errors }}
+    </div>
+
+    <div class="checkbox">
+        <label class="control-label" for="{{ form.terms_of_use.id_for_label }}">{{ form.terms_of_use }} {{ form.terms_of_use.label | safe }}</label>
+        {{ form.terms_of_use.errors }}
+    </div>
+    <button type="submit" value="Register" class="btn btn-primary btn-wide">{% trans "register" %}</button>
+</form>
 {% endblock %}

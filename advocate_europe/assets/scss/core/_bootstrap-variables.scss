@@ -17,7 +17,10 @@ $ae-font-size-extra-large: 48px;
 $ae-brand-orange: #fcb813;
 $brand-primary-darker: #007099;
 $ae-light-blue: rgba(0,170,230,0.2); // currently only use for active blog category
-
+$ae-facebook: #3b5999;
+$ae-google: #dd4b39;
+$ae-instagram: #e4405f;
+$ae-github: #24292e;
 // Which colors are used for btn-ae-secondary is defined below.
 
 
@@ -169,8 +172,8 @@ $table-border-color:            #ddd !default;
 $btn-font-weight:                normal !default;
 
 $btn-default-color:              $gray-dark !default;
-$btn-default-bg:                 #fff !default;
-$btn-default-border:             #ccc !default;
+$btn-default-bg:                 $ae-light-gray !default;
+$btn-default-border:             darken($ae-light-gray, 5%) !default;
 
 $btn-primary-color:              #fff !default;
 $btn-primary-bg:                 $brand-primary !default;
@@ -179,6 +182,22 @@ $btn-primary-border:             darken($btn-primary-bg, 5%) !default;
 $btn-ae-secondary-color:         $gray-dark !default;
 $btn-ae-secondary-bg:            $brand-secondary !default;
 $btn-ae-secondary-border:        darken($btn-ae-secondary-bg, 5%) !default;
+
+$btn-ae-github-color:            #fff !default;
+$btn-ae-github-bg:               $ae-github;
+$btn-ae-github-border:           darken($ae-github, 5%) !default;
+
+$btn-ae-facebook-color:          #fff !default;
+$btn-ae-facebook-bg:             $ae-facebook;
+$btn-ae-facebook-border:         darken($ae-facebook, 5%) !default;
+
+$btn-ae-google-color:            #fff !default;
+$btn-ae-google-bg:               $ae-google;
+$btn-ae-google-border:           darken($ae-google, 5%) !default;
+
+$btn-ae-instagram-color:         #fff !default;
+$btn-ae-instagram-bg:            $ae-instagram;
+$btn-ae-instagram-border:        darken($ae-instagram, 5%) !default;
 
 $btn-success-color:              #fff !default;
 $btn-success-bg:                 $brand-success !default;

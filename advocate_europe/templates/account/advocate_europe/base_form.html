@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<div class="login-register-top">
+    <div class="container login-register">
+        {% include "account/advocate_europe/includes/header.html" %}
+        <div class="login-register-form">
+        {% block form %}
+        {% endblock %}
+        </div>
+        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+    </div>
+</div>
+{% endblock %}

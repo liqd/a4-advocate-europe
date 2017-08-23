@@ -1,3 +1,30 @@
 .btn-ae-secondary {
     @include button-variant($btn-ae-secondary-color, $btn-ae-secondary-bg, $btn-ae-secondary-border);
 }
+
+.btn-github {
+    @include button-variant($btn-ae-github-color, $btn-ae-github-bg, $btn-ae-github-border);
+    color: white;
+}
+
+.btn-facebook {
+    @include button-variant($btn-ae-facebook-color, $btn-ae-facebook-bg, $btn-ae-facebook-border);
+    color: white;
+}
+
+.btn-google {
+    @include  button-variant($btn-ae-google-color, $btn-ae-google-bg, $btn-ae-google-border);
+    color: white;
+}
+
+.btn-instagram {
+    @include button-variant($btn-ae-instagram-color, $btn-ae-instagram-bg, $btn-ae-instagram-border);
+    color: white;
+}
+
+.btn-wide {
+    width: 100%;
+    text-transform: capitalize;
+    font-size: rem(16px);
+    font-weight: bold;
+}

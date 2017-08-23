@@ -1,9 +1,8 @@
 {% load i18n static thumbnail rules rule_tags %}
 
 <ul class="nav navbar-nav navbar-right user-indicator" id="user-indicator">
+    {% if request.user.is_authenticated %}
     <li class="dropdown">
-
-       {% if request.user.is_authenticated %}
         <div class="btn-group user-indicator-btn-group clearfix">
             <a href="{% url 'profile' request.user.username %}" class="btn user-indicator-profile-btn">
                 <span class="user-indicator-profile-avatar avatar-square-small" style="background-image: url({{ request.user.avatar_or_fallback_url }})"></span><span class="user-indicator-profile-username"> {{ request.user.username }}</span>
@@ -43,24 +42,13 @@
                 </li>
             </ul>
         </div>
-
-        {% else %}
-        <a href="#" class="dropdown-toggle user-login" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="user-login">
-            <span class="inner">{% trans "Login / Register"%}<span class="caret"></span></span>
-        </a>
-
-        <ul class="dropdown-menu">
-            <li>
-                <a href="{% url 'account_login' %}?next={{redirect_field_value }}">
-                    <i class="fa fa-sign-in fa-fw" aria-hidden="true"></i>{% trans "login" %}
-                </a>
-            </li>
-            <li>
-                <a href="{% url 'account_signup' %}?next={{redirect_field_value }}">
-                    <i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>{% trans "register" %}
-                </a>
-            </li>
-        </ul>
-        {% endif %}
     </li>
+    {% else %}
+    <li>
+        <div class="btn-group user-indicator-btn-group">
+            <a href="{% url 'account_login' %}?next={{redirect_field_value }}"><span class="btn btn-default">{% trans "login" %}</span></a>
+            <a href="{% url 'account_signup' %}?next={{redirect_field_value }}"><span class="btn btn-primary">{% trans "register" %}</span></a>
+        </div>
+    </li>
+    {% endif %}
 </ul>
