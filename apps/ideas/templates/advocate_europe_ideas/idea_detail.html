@@ -9,35 +9,39 @@
 
         {% include 'advocate_europe_ideas/idea_detail_header.html' %}
         <div class="row ideadetail-tab-bar">
-            <div class="col-xs-7 tabs" role="navigation">
-                <ul class="nav nav-tabs" role="tablist">
+            <div class="tabs navbar" role="navigation">
+                <ul class="nav navbar-nav nav-tabs" role="tablist">
+
                     <li role="presentation" class="nav-item">
                     <a href="#info" class="nav-link" aria-controls="info" role="tab" data-toggle="tab">{% trans "Creators" %}</a>
                     </li>
+
                     <li role="presentation" class="nav-item {% if not idea.proposal or idea.journeyentry_set.all.count == 0 %}active{% endif %}">
                     <a href="#idea" class="nav-link" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Idea" %}</a>
                     </li>
+
                     {% if idea.is_winner %}
                     <li role="presentation" class="nav-item {% if idea.proposal and idea.journeyentry_set.all.count > 0 %}active{% endif %}">
                     <a href="#journey" class="nav-link" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Reporting" %}</a>
                     </li>
                     {% endif %}
                 </ul>
-            </div>
-            <div class="col-xs-5">
-
-                <div class="btn-group ideadetail-rect-btn-group pull-right" role="group">
+                <ul class="nav navbar-nav navbar-right nav-idea">
                     {% if view.display_type == 'idea' %}
+                    <li>
                     <a href="#" class="btn btn-idea" role="button" aria-label="{% trans 'watch' %}">
                         <i class="fa fa-eye" aria-hidden="true"></i>
                         <span class="hidden-xs">&nbsp;{% trans 'Watch' %}</span>
                     </a>
+                    </li>
                     {% endif %}
 
+                    <li>
                     <a href="#" class="btn btn-idea" role="button" aria-label="{% trans 'share' %}">
                         <i class="fa fa-share" aria-hidden="true"></i>
                         <span class="hidden-xs">&nbsp;{% trans 'Share' %}</span>
                     </a>
+                    </li>
 
                     {% if idea.proposal %}
                         {% has_perm 'advocate_europe_ideas.change_idea' request.user idea as can_change_proposal %}
@@ -48,7 +52,7 @@
                     {% if can_change_sketch or can_change_proposal or can_add_proposal %}
 
                     {% if view.display_type == 'idea' %}
-                    <div class="dropdown">
+                    <li class="dropdown">
                         <button class="btn btn-idea" type="button" id="dropdownEdit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                             <span class="hidden-xs">&nbsp;{% trans 'More' %}</span>
@@ -63,10 +67,10 @@
                             <li><a href="{% url 'idea-sketch-add-proposal' idea.slug %}">{% trans 'add full proposal' %}</a></li>
                             {% endif %}
                         </ul>
-                    </div>
+                    </li>
                     {% endif %}
                     {% endif %}
-                </div>
+                </ul>
             </div>
         </div>
 

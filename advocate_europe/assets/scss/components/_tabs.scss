@@ -1,37 +1,36 @@
 .tabs {
+    margin-bottom: 0;
+    min-height: 0;
+    border: none;
+
     .nav-tabs {
-        border: none;
     }
 
-    li {
+    .nav-item {
         a:link,
         a:visited,
         a:hover,
         a:active {
             color: $gray-base;
             background-color: $ae-light-gray;
-            border: 0;
             font-size: rem(18px);
             font-weight: 600;
             padding-top: rem(8px);
             padding-right: rem(30px);
-            padding-bottom: rem(7px);
+            padding-bottom: rem(8px);
             padding-left: rem(30px);
+            border-radius: 0;
         }
         margin-top: rem(10px);
     }
 
-    li.active {
+    .nav-item.active {
         a:link,
         a:visited,
         a:hover,
         a:active {
             color: $brand-primary;
             background-color: white;
-            border-radius: 0;
-            border-top: 1px solid $ae-dark-gray;
-            border-left: 1px solid $ae-dark-gray;
-            border-right: 1px solid $ae-dark-gray;
         }
     }
 }
