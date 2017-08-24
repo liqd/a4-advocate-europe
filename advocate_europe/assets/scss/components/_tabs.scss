@@ -1,6 +1,5 @@
 .tabs {
     .nav-tabs {
-        height: rem(50px);
         border: none;
     }
 
@@ -12,10 +11,12 @@
             color: $gray-base;
             background-color: $ae-light-gray;
             border: 0;
-            font-size: rem(16px);
+            font-size: rem(18px);
             font-weight: 600;
-            padding-right: 30px;
-            padding-left: 30px;
+            padding-top: rem(8px);
+            padding-right: rem(30px);
+            padding-bottom: rem(7px);
+            padding-left: rem(30px);
         }
         margin-top: rem(10px);
     }

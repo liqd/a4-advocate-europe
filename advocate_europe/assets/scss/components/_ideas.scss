@@ -200,18 +200,18 @@
 // ----------------- Idea Detail Buttons: Watch, Share, ... -----------------
 
 .ideadetail-rect-btn-group {
-    .btn {
-        display: inline-flex;
-        align-items: center;
+    .btn-idea {
+        padding-top: rem(15px);
+        padding-right: rem(20px);
+        padding-bottom: rem(14px);
+        padding-left: rem(20px);
 
-        height: rem(51px);
-        border: 0;
         border-radius: 0;
+        border-left: 1px solid $ae-dark-gray;
 
         color: $gray-base;
-        background-color: $ae-light-gray-darker;
 
-        font-size: rem(16px);
+        font-size: rem(14px);
         font-weight: 500;
     }
 
