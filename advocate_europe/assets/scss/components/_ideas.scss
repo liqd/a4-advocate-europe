@@ -229,6 +229,7 @@
 
 .ideadetail-tab-bar {
     background-color: $ae-light-gray;
+    border-bottom: 1px solid $ae-dark-gray;
 
     .col-xs-5 {
         padding-right: 0;
@@ -237,41 +238,6 @@
     > * {
         @media screen and (max-width: $screen-xs-max) {
             padding: 0 rem(5px);
-        }
-    }
-}
-
-.ideadetail-tabs {
-    .nav-tabs {
-        height: rem(50px);
-        border: none;
-    }
-
-    li {
-        a:link,
-        a:visited,
-        a:hover,
-        a:active {
-            color: $gray-base;
-            background-color: $ae-light-gray;
-            border: 0;
-            font-size: rem(16px);
-            font-weight: 600;
-            padding-right: 30px;
-            padding-left: 30px;
-        }
-        margin-top: rem(10px);
-        border-bottom: 1px solid white;
-    }
-
-    li.active {
-        a:link,
-        a:visited,
-        a:hover,
-        a:active {
-            color: $brand-primary;
-            background-color: white;
-            border: 0;
         }
     }
 }
