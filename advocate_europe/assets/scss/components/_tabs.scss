@@ -1,10 +1,7 @@
 .tabs {
     margin-bottom: 0;
     min-height: 0;
-    border: none;
-
-    .nav-tabs {
-    }
+    width: 100%;
 
     .nav-item {
         a:link,
@@ -12,7 +9,6 @@
         a:hover,
         a:active {
             color: $gray-base;
-            background-color: $ae-light-gray;
             font-size: rem(18px);
             font-weight: 600;
             padding-top: rem(8px);

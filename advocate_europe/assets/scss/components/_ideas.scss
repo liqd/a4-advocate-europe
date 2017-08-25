@@ -199,17 +199,19 @@
 
 // ----------------- Idea Detail Buttons: Watch, Share, ... -----------------
 
-.nav-idea {
+li.nav-idea {
     margin-right: 0;
+    float: right;
 
     .btn-idea {
-        padding-top: rem(14px);
+        padding-top: rem(13px);
         padding-right: rem(20px);
-        padding-bottom: rem(14px);
+        padding-bottom: rem(13px);
         padding-left: rem(20px);
 
-        border: none;
+        margin-right: 0;
         border-left: 1px solid $ae-dark-gray;
+        border-bottom: 1px solid $ae-dark-gray;
         border-radius: 0;
 
         color: $gray-base;
@@ -227,7 +229,10 @@
 
 .ideadetail-tab-bar {
     background-color: $ae-light-gray;
-    border-bottom: 1px solid $ae-dark-gray;
+
+    .tabs {
+        padding-left: rem(10px);
+    }
 
     > * {
         @media screen and (max-width: $screen-xs-max) {
