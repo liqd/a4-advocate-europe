@@ -7,7 +7,7 @@
 <div class="ideadetail">
     <div class="container">
 
-        {% include 'advocate_europe_ideas/idea_detail_header.html' %}
+        {% include 'advocate_europe_ideas/includes/idea_detail_header.html' %}
         <div class="row ideadetail-tab-bar">
             <ul class="nav navbar-nav nav-tabs tabs" role="tablist">
 
@@ -73,14 +73,14 @@
 
         <div class="row tab-content ideadetail-content">
             <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane" id="info">
-                {% include 'advocate_europe_ideas/idea_detail_tab_info.html' %}
+                {% include 'advocate_europe_ideas/includes/idea_detail_tab_info.html' %}
             </div>
             <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane  {% if not idea.proposal or idea.journeyentry_set.all.count == 0 %} active {% endif %}" id="idea">
-                {% include 'advocate_europe_ideas/idea_detail_tab_idea.html' %}
+                {% include 'advocate_europe_ideas/includes/idea_detail_tab_idea.html' %}
             </div>
             {% if idea.is_winner %}
             <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane {% if idea.proposal and idea.journeyentry_set.all.count > 0 %} active {% endif %}" id="journey">
-                {% include 'advocate_europe_ideas/idea_detail_tab_journey.html' %}
+                {% include 'advocate_europe_ideas/includes/idea_detail_tab_journey.html' %}
             </div>
             {% endif %}
 
