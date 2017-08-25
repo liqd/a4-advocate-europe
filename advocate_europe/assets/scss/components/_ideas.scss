@@ -191,9 +191,9 @@
     }
 }
 
+// ------- Idea Detail XS support, watch, share -----
+
 .ideadetail-xs-support {
-    height: rem(60px);
-    margin: 0;
     background-color: $brand-primary-darker;
 }
 
@@ -204,10 +204,7 @@ li.nav-idea {
     float: right;
 
     .btn-idea {
-        padding-top: rem(13px);
-        padding-right: rem(20px);
-        padding-bottom: rem(13px);
-        padding-left: rem(20px);
+        padding: rem(13px 20px);
 
         margin-right: 0;
         border-left: 1px solid $ae-dark-gray;
@@ -220,8 +217,23 @@ li.nav-idea {
         font-weight: 500;
 
         @media screen and (max-width: $screen-xs-max) {
-            padding: 0
+            padding: rem(12px 20px 9px 20px);
+            border: none;
+            color: #fff;
+            font-size: rem(12px);
+
+            // .fa {
+            //     font-size: rem(18px);
+            // }
         }
+    }
+}
+
+li.nav-support {
+    float: left;
+
+    .btn-idea {
+        background: $brand-primary;
     }
 }
 
@@ -231,13 +243,8 @@ li.nav-idea {
     background-color: $ae-light-gray;
 
     .tabs {
+        margin-top: 0;
         padding-left: rem(10px);
-    }
-
-    > * {
-        @media screen and (max-width: $screen-xs-max) {
-            padding: 0 rem(5px);
-        }
     }
 }
 
