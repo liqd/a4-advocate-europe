@@ -37,6 +37,10 @@
 .profile-navbar {
     background-color: $ae-light-gray;
     border-bottom: 1px solid $ae-dark-gray;
+
+    .nav-tabs {
+        border-bottom: none;
+    }
 }
 
 .profile-traits {
@@ -53,6 +57,12 @@
 }
 
 .profile {
+    padding-bottom: rem(60px);
+
+    @media screen and (max-width: $screen-sm-min) {
+        padding-bottom: rem(15px);
+    }
+
     .profile-navbar {
         margin-bottom: rem(20px);
     }

@@ -4,20 +4,26 @@
     width: 100%;
 
     .nav-item {
-        a:link,
-        a:visited,
-        a:hover,
-        a:active {
-            color: $gray-base;
-            font-size: rem(18px);
-            font-weight: 600;
-            padding-top: rem(8px);
-            padding-right: rem(30px);
-            padding-bottom: rem(8px);
-            padding-left: rem(30px);
-            border-radius: 0;
-        }
         margin-top: rem(10px);
+    }
+
+    .nav-item > a:link,
+    .nav-item > a:visited,
+    .nav-item > a:hover,
+    .nav-item > a:active {
+        color: $gray-base;
+        font-size: rem(18px);
+        font-weight: 600;
+        padding-top: rem(8px);
+        padding-right: rem(30px);
+        padding-bottom: rem(8px);
+        padding-left: rem(30px);
+        border-radius: 0;
+
+        @media screen and (max-width: $screen-xs-max) {
+            padding-right: rem(20px);
+            padding-left: rem(20px);
+        }
     }
 
     .nav-item.active {
