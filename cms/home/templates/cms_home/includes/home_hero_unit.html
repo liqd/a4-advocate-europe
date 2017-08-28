@@ -12,8 +12,11 @@
                     <p class="herounit-description">
                         {{ description }}
                     </p>
+                    {% if website %}
+                    <a href="{{ website }}" target="_blank" class="btn btn-ae-secondary btn-md">{% trans 'more' %}</a>
+                    {% endif %}
                     {% if videoplayer_url %}
-                    <a href="#video" class="btn btn-ae-secondary btn-md" data-toggle="modal"><i class="fa fa-play" aria-hidden="true"></i> Play video</a>
+                    <a href="#video" class="btn btn-ae-secondary btn-md" data-toggle="modal"><i class="fa fa-play" aria-hidden="true"></i> {% trans 'Play video' %}</a>
                     {% endif %}
                 </div>
             </div>
