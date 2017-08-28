@@ -28,6 +28,7 @@ def copy_images(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('wagtailimages', '0019_delete_filter'),
         ('cms_images', '0001_initial'),
     ]
 
