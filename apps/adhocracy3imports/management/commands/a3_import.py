@@ -184,7 +184,7 @@ class A3ImportCommandMixin():
             if object_path == object:
                 user = self.a3_get_user_by_path(user_path)
                 content = comment_sheet['content']
-                (comment, _created) = Comment.objects.update_or_create(
+                (comment, _created) = Comment.objects.get_or_create(
                     creator=user,
                     created=creation_date,
                     defaults={
@@ -253,7 +253,7 @@ class A3ImportCommandMixin():
                 user = self.a3_get_user_by_path(user_path)
                 rate_value = int(rate_sheet['rate'])
                 if rate_value != 0:
-                    Rating.objects.update_or_create(
+                    Rating.objects.get_or_create(
                         creator=user,
                         created=creation_date,
                         defaults={

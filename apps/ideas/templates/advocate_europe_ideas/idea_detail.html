@@ -31,12 +31,12 @@
                 <a href="#info" class="nav-link" aria-controls="info" role="tab" data-toggle="tab">{% trans "Creators" %}</a>
                 </li>
 
-                <li role="presentation" class="nav-item {% if not idea.proposal or idea.journeyentry_set.all.count == 0 %}active{% endif %}">
+                <li role="presentation" class="nav-item {% if not idea.proposal or not idea.is_winner or idea.journeyentry_set.all.count == 0 %}active{% endif %}">
                 <a href="#idea" class="nav-link" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Idea" %}</a>
                 </li>
 
                 {% if idea.is_winner %}
-                <li role="presentation" class="nav-item {% if idea.proposal and idea.journeyentry_set.all.count > 0 %}active{% endif %}">
+                <li role="presentation" class="nav-item {% if idea.proposal and idea.is_winner and idea.journeyentry_set.all.count > 0 %}active{% endif %}">
                 <a href="#journey" class="nav-link" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Reporting" %}</a>
                 </li>
                 {% endif %}
@@ -49,11 +49,11 @@
             <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane" id="info">
                 {% include 'advocate_europe_ideas/includes/idea_detail_tab_info.html' %}
             </div>
-            <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane  {% if not idea.proposal or idea.journeyentry_set.all.count == 0 %} active {% endif %}" id="idea">
+            <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane  {% if not idea.proposal or not idea.is_winner or idea.journeyentry_set.all.count == 0 %} active {% endif %}" id="idea">
                 {% include 'advocate_europe_ideas/includes/idea_detail_tab_idea.html' %}
             </div>
             {% if idea.is_winner %}
-            <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane {% if idea.proposal and idea.journeyentry_set.all.count > 0 %} active {% endif %}" id="journey">
+            <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane {% if idea.proposal and idea.is_winner and idea.journeyentry_set.all.count > 0 %} active {% endif %}" id="journey">
                 {% include 'advocate_europe_ideas/includes/idea_detail_tab_journey.html' %}
             </div>
             {% endif %}
