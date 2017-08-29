@@ -199,7 +199,7 @@
 
 // ----------------- Idea Detail Buttons: Watch, Share, ... -----------------
 
-li.nav-idea {
+.nav .nav-idea {
     margin-right: 0;
     float: right;
 
@@ -215,21 +215,24 @@ li.nav-idea {
 
         font-size: rem(14px);
         font-weight: 500;
+    }
 
-        @media screen and (max-width: $screen-xs-max) {
+    @media screen and (max-width: $screen-xs-max) {
+        .btn-idea {
             padding: rem(12px 20px 9px 20px);
             border: none;
             color: #fff;
+            background-color: $brand-primary-darker;
             font-size: rem(12px);
+        }
 
-            // .fa {
-            //     font-size: rem(18px);
-            // }
+        .btn-idea .fa {
+            font-size: rem(18px);
         }
     }
 }
 
-li.nav-support {
+.nav .nav-support {
     float: left;
 
     .btn-idea {
