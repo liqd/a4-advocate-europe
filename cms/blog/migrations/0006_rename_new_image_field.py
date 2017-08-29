@@ -8,12 +8,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cms_home', '0011_auto_20170828_1300'),
+        ('cms_blog', '0005_remove_old_image_field'),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='homepage',
+            model_name='blogpage',
             old_name='custom_image',
             new_name='image',
         ),
