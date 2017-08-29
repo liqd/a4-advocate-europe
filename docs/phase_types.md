@@ -20,11 +20,11 @@ This document explains, which phase types exist and are implemented for a projec
    - sorting: most support
    - filtering: status - ideasketch, year - 2017
 
-5. Shortlist Selection Phase
+5. Interim Shortlist Selection Phase
    - sorting: most support
    - filtering: status - ideasketch, year - 2017
 
-6. Shortlist Published Phase
+6. Interim Shortlist Published Phase
    - shortlist (including the community award winner) is published
    - sorting: alphabetical
    - filtering: status - shortlist, year - 2017
@@ -34,11 +34,11 @@ This document explains, which phase types exist and are implemented for a projec
    - sorting: alphabetical
    - filtering: status - shortlist, year - 2017
 
-8. Selection Winners Phase
+8. Interim Selection Winners Phase
    - sorting: alphabetical
    - filtering: status - proposals, year - 2017
 
-9. Implementation (Phase)
+9. Final Implementation (not a Phase)
    - winners can add journey entries
    - sorting: newest
    - filtering: status - winners
