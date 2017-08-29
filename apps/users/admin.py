@@ -7,7 +7,7 @@ from . import models
 class UserAdmin(auth.admin.UserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password')}),
-        (_('Permissions'), {'fields': ('is_staff', 'is_superuser')}),
+        (_('Permissions'), {'fields': ('is_staff', 'is_superuser', 'groups')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
         (_('Profile data'), {'fields': (
             '_avatar',
