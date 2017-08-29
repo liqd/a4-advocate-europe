@@ -149,9 +149,6 @@
 }
 
 .ideadetail-btn {
-
-    background-color: $ae-light-gray;
-    border-radius: rem(5px);
     margin-top: rem(20px);
 
     a {
@@ -194,37 +191,52 @@
     }
 }
 
+// ------- Idea Detail XS support, watch, share -----
+
 .ideadetail-xs-support {
-    height: rem(60px);
-    margin: 0;
     background-color: $brand-primary-darker;
 }
 
 // ----------------- Idea Detail Buttons: Watch, Share, ... -----------------
 
-.ideadetail-rect-btn-group {
-    .btn {
-        display: inline-flex;
-        align-items: center;
+.nav .nav-idea {
+    margin-right: 0;
+    float: right;
 
-        height: rem(51px);
-        border: 0;
+    .btn-idea {
+        background-color: transparent;
+        padding: rem(13px 20px);
+
+        margin-right: 0;
+        border-left: 1px solid $ae-dark-gray;
         border-radius: 0;
 
         color: $gray-base;
-        background-color: $ae-light-gray-darker;
 
-        font-size: rem(16px);
+        font-size: rem(14px);
         font-weight: 500;
     }
 
-    .dropdown {
-        display: inline-block;
-    }
-
-
     @media screen and (max-width: $screen-xs-max) {
-        padding: 0
+        .btn-idea {
+            padding: rem(12px 20px 9px 20px);
+            border: none;
+            color: #fff;
+            background-color: $brand-primary-darker;
+            font-size: rem(12px);
+        }
+
+        .btn-idea .fa {
+            font-size: rem(18px);
+        }
+    }
+}
+
+.nav .nav-support {
+    float: left;
+
+    .btn-idea {
+        background: $brand-primary;
     }
 }
 
@@ -233,49 +245,9 @@
 .ideadetail-tab-bar {
     background-color: $ae-light-gray;
 
-    .col-xs-5 {
-        padding-right: 0;
-    }
-
-    > * {
-        @media screen and (max-width: $screen-xs-max) {
-            padding: 0 rem(5px);
-        }
-    }
-}
-
-.ideadetail-tabs {
-    .nav-tabs {
-        height: rem(50px);
-        border: none;
-    }
-
-    li {
-        a:link,
-        a:visited,
-        a:hover,
-        a:active {
-            color: $gray-base;
-            background-color: $ae-light-gray;
-            border: 0;
-            font-size: rem(16px);
-            font-weight: 600;
-            padding-right: 30px;
-            padding-left: 30px;
-        }
-        margin-top: rem(10px);
-        border-bottom: 1px solid white;
-    }
-
-    li.active {
-        a:link,
-        a:visited,
-        a:hover,
-        a:active {
-            color: $brand-primary;
-            background-color: white;
-            border: 0;
-        }
+    .tabs {
+        margin-top: 0;
+        padding-left: rem(10px);
     }
 }
 

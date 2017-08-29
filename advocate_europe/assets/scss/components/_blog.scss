@@ -206,14 +206,11 @@
 }
 
 .blogpage-btn {
-
-    background-color: $ae-light-gray;
-    border-radius: rem(5px);
-
     a {
         color: $gray-base;
         font-size: rem(16px);
         font-weight: bold;
+        text-decoration: none;
     }
 }
 

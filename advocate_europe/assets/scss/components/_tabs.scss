@@ -1,34 +1,38 @@
 .tabs {
-    .nav-tabs {
-        height: rem(50px);
-        border: none;
-    }
+    margin-bottom: 0;
+    min-height: 0;
+    width: 100%;
 
-    li {
-        a:link,
-        a:visited,
-        a:hover,
-        a:active {
-            color: $gray-base;
-            background-color: $ae-light-gray;
-            border: 0;
-            font-size: rem(16px);
-            font-weight: 600;
-            padding-right: 30px;
-            padding-left: 30px;
-        }
+    .nav-item {
         margin-top: rem(10px);
-        border-bottom: 1px solid white;
     }
 
-    li.active {
+    .nav-item > a:link,
+    .nav-item > a:visited,
+    .nav-item > a:hover,
+    .nav-item > a:active {
+        color: $gray-base;
+        font-size: rem(18px);
+        font-weight: 600;
+        padding-top: rem(8px);
+        padding-right: rem(30px);
+        padding-bottom: rem(8px);
+        padding-left: rem(30px);
+        border-radius: 0;
+
+        @media screen and (max-width: $screen-xs-max) {
+            padding-right: rem(18px);
+            padding-left: rem(18px);
+        }
+    }
+
+    .nav-item.active {
         a:link,
         a:visited,
         a:hover,
         a:active {
             color: $brand-primary;
             background-color: white;
-            border: 0;
         }
     }
 }
