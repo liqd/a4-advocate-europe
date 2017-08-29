@@ -18,6 +18,7 @@ class HomePage(Page):
         ('call_to_action', custom_blocks.CallToActionBlock()),
         ('carousel', custom_blocks.CustomCarouselBlock()),
         ('blogs', custom_blocks.ThreeBlogEntriesBlock()),
+        ('three_images_block', custom_blocks.ThreeImagesBlock())
     ]
 
     # translated fields
