@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'cms.settings.apps.SettingsConfig',
     'cms.snippets.apps.SnippetsConfig',
     'cms.blog.apps.BlogConfig',
+    'cms.images.apps.ImagesConfig',
 
     'apps.actions.apps.ActionsConfig',
     'apps.contrib',
@@ -286,6 +287,7 @@ MEDIA_URL = '/media/'
 
 
 WAGTAIL_SITE_NAME = "advocate_europe"
+WAGTAILIMAGES_IMAGE_MODEL = 'cms_images.CustomImage'
 
 
 # Authentification
