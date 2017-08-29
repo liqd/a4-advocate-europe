@@ -4,10 +4,6 @@
 
 .login-register {
     padding-top: rem(60px);
-
-    @media screen and (min-width: $screen-lg-min) {
-        width: 33%;
-    }
 }
 
 .login-register-tabs {
