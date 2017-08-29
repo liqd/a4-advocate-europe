@@ -38,7 +38,7 @@ class HomePage(Page):
 
     # shared fields
     image = models.ForeignKey(
-        'wagtailimages.Image',
+        'cms_images.CustomImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,

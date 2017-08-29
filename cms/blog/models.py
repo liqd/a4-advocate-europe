@@ -88,14 +88,14 @@ class BlogPage(Page):
     categories = ParentalManyToManyField('cms_snippets.Category', blank=True)
 
     image = models.ForeignKey(
-        'wagtailimages.Image',
+        'cms_images.CustomImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
         verbose_name="Blog Image",
         help_text="The Image that is shown on the blog page " +
-        "and the blog index page"
+                  "and the blog index page"
     )
 
     subpage_types = []

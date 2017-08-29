@@ -27,6 +27,9 @@
 
         <div class="blog-image container-narrow">
             {% image page.image width-770 %}
+            {% if page.image.caption %}
+            <p class="blog-image-caption">{{ page.image.caption }}</p>
+            {% endif %}
         </div>
         <div class="container-medium">
             <div class="blogpage-body">
