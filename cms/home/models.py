@@ -48,13 +48,15 @@ class HomePage(Page):
     )
 
     videoplayer_url = models.URLField(blank=True, verbose_name='Video URL')
+    website = models.URLField(blank=True, verbose_name='Website')
     subpage_types = ['cms_blog.BlogIndexPage',
                      'cms_home.SimplePage',
                      'cms_home.StructuredTextPage']
 
     content_panels = [
         ImageChooserPanel('image'),
-        FieldPanel('videoplayer_url')
+        FieldPanel('videoplayer_url'),
+        FieldPanel('website')
     ]
 
     en_panels = [
