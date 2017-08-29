@@ -204,11 +204,11 @@
     float: right;
 
     .btn-idea {
+        background-color: transparent;
         padding: rem(13px 20px);
 
         margin-right: 0;
         border-left: 1px solid $ae-dark-gray;
-        border-bottom: 1px solid $ae-dark-gray;
         border-radius: 0;
 
         color: $gray-base;
