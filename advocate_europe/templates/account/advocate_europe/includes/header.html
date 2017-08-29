@@ -3,11 +3,11 @@
 {% url 'account_login' as account_login_url %}
 {% url  'account_signup' as account_signup_url %}
 <header>
-    <ul class="nav nav-tabs login-register-tabs" role="tablist">
-        <li role="presentation" {% if request.path == account_login_url %}class="active"{% endif %}>
+    <ul class="nav nav-tabs tabs login-register-tabs" role="tablist">
+        <li role="presentation" class="nav-item {% if request.path == account_login_url %}active{% endif %}">
             <a href="{{ account_login_url }}?next={{ redirect_field_value }}">{% trans "login" %}</a>
         </li>
-        <li role="presentation" {% if request.path == account_signup_url %}class="active"{% endif %}>
+        <li role="presentation" class="nav-item {% if request.path == account_signup_url %}active{% endif %}">
             <a href="{{ account_signup_url }}?next={{ redirect_field_value }}">{% trans "register" %}</a>
         </li>
     </ul>

@@ -14,19 +14,8 @@
     background-color: $ae-light-gray;
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
-    padding-top: rem(10px);
-    padding-left: 25%;
-
-    li {
-        a {
-            border-radius: 0;
-            padding-right: rem(30px);
-            padding-left: rem(30px);
-            font-size: rem(18px);
-            font-weight: bold;
-            text-transform: capitalize;
-        }
-    }
+    display: flex;
+    justify-content: center;
 }
 
 .login-register-form {
@@ -58,3 +47,12 @@
     margin-bottom: rem(10px);
 }
 
+.login-register-btn-group {
+    @media screen and (max-width: $screen-xs-max) {
+        margin-left: rem(15px);
+    }
+
+    .btn-default {
+        margin-right: rem(10px);
+    }
+}
