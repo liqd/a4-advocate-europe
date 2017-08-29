@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cms_home', '0008_make_description_en_optional'),
+        ('cms_home', '0012_rename_new_image_field'),
     ]
 
     operations = [
