@@ -1,15 +1,27 @@
 {% load wagtailimages_tags %}
 
-<div class="container three-image-block block">
-    <div class="row">
-        <div class="col-lg-4 image-container">
+<div class="container-medium three-image-block block">
+    {% if value.title %}
+    <h3 class="three-image-block-title"> {{ value.title }}</h3>
+    {% endif %}
+    <div class="row three-image-block-row">
+        {% if value.image_left %}
+        <div class="col-lg-4 col-sm-12 three-image-block-image-container">
             {{ value.image_left }}
         </div>
-        <div class="col-lg-4 image-container">
+        {% endif %}
+
+         {% if value.image_middle %}
+        <div class="col-lg-4 col-sm-12 three-image-block-image-container">
             {{ value.image_middle }}
         </div>
-        <div class="col-lg-4 image-container">
+        {% endif %}
+
+         {% if value.image_right %}
+        <div class="col-lg-4 col-sm-12 three-image-block-image-container">
             {{ value.image_right }}
         </div>
+        {% endif %}
+
     </div>
 </div>
