@@ -1,7 +1,8 @@
-from wagtail.wagtailcore.blocks import (CharBlock, ChoiceBlock, ListBlock,
-                                        PageChooserBlock, RichTextBlock,
-                                        StreamBlock, StructBlock, TextBlock,
-                                        URLBlock)
+from django import forms
+from wagtail.wagtailcore.blocks import (CharBlock, ChoiceBlock, ChooserBlock,
+                                        ListBlock, PageChooserBlock,
+                                        RichTextBlock, StreamBlock,
+                                        StructBlock, TextBlock, URLBlock)
 
 from adhocracy4.projects.models import Project
 from apps.ideas import filters
@@ -53,11 +54,14 @@ class CallToActionBlock(StructBlock):
         help_text = 'Call to action with button and text'
 
 
+class ProjectChooserBlock(ChooserBlock):
+    target_model = Project
+    widget = forms.widgets.Select
+
+
 class ProposalCarouselBlock(StructBlock):
     headline = CharBlock(required=False)
-    year = ChoiceBlock(choices=[(project.pk, project.name)
-                                for project in Project.objects.all()],
-                       required=False)
+    year = ProjectChooserBlock(required=False)
     topic = ChoiceBlock(choices=idea_section.IDEA_TOPIC_CHOICES,
                         required=False)
     ordering = ChoiceBlock(choices=filters.ORDERING_CHOICES, required=False)

@@ -1,7 +1,5 @@
 from django import template
-from django.core import exceptions
 
-from adhocracy4.projects.models import Project
 from apps.ideas.filters import IdeaFilterSet
 from apps.ideas.models import Idea
 
@@ -15,12 +13,7 @@ def load_ideas(year, topic, ordering, status):
     idea_filter_set = IdeaFilterSet(data={})
 
     if year:
-        try:
-            id = int(year)
-            project = Project.objects.get(pk=id)
-            ideas = idea_filter_set.filters['project'].filter(ideas, project)
-        except (ValueError, exceptions.ObjectDoesNotExist):
-            pass
+        ideas = idea_filter_set.filters['project'].filter(ideas, year)
     if topic:
         ideas = idea_filter_set.filters['idea_topics'].filter(ideas, topic)
     if ordering:
