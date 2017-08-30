@@ -17,5 +17,5 @@ On your {{ action.target | verbose_name }} {% if action.target.title %}<i>{{ act
 {% block cta_label %}{% if action.target.get_absolute_url %}Check your {{ action.target | verbose_name }}{% else %}Visit the project{% endif %}{% endblock %}
 
 {% block reason %}
-This email was sent to {{ receiver.email }}. This email was sent to you because you created content in a project. If you don’t want to receive these notifications anymore, you can unfollow the project on the project page or disable notifications completely in your account settings.
+This email was sent to {{ receiver }}. You receive this email because you have submitted a {{ idea.type }} using this email address. If you have any further questions, please contact us via info@advocate-europe.eu.
 {% endblock %}
