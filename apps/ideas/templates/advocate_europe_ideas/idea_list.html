@@ -8,6 +8,8 @@
         <h1>{% trans "All ideas" %}</h1>
         {% for phase in active_phases %}
             <h4 class="idealist-subtitle">{{ phase.description }}</h4>
+        {% empty %}
+            <h4 class="idealist-subtitle">{% trans "Ideas from past idea challenges" %}</h4>
         {% endfor %}
     </div>
     <div class="container">
