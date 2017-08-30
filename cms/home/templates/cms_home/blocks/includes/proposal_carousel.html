@@ -1,5 +1,5 @@
 <div class="proposal-tiles carousel">
     {% for item in items %}
-        {{ item }}
+        {% include 'advocate_europe_ideas/includes/idealist_item.html' with idea=item %}
     {% endfor %}
 </div>
