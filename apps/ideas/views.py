@@ -14,6 +14,7 @@ from formtools.wizard.views import SessionWizardView
 from rules.contrib.views import PermissionRequiredMixin
 
 from adhocracy4.filters import views as filter_views
+from adhocracy4.phases.models import Phase
 
 from apps.wizards import mixins as wizard_mixins
 
@@ -299,3 +300,8 @@ class IdeaListView(filter_views.FilteredListView):
     def get_queryset(self):
         queryset = super().get_queryset().annotate_comment_count()
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['active_phases'] = Phase.objects.active_phases()
+        return context
