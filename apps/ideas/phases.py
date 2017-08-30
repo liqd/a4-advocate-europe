@@ -5,6 +5,29 @@ from adhocracy4 import phases
 from . import apps, models
 
 
+class InterimPhase(phases.PhaseContent):
+    app = apps.IdeasConfig.label
+    weight = 10
+    view = None
+
+    module_name = _('Advocate Europe')
+
+    features = {
+    }
+
+
+class PreCallPhase(InterimPhase):
+    phase = 'pre_call'
+
+    name = _('Pre call phase')
+    description = _(
+        'look at previous ideas, get an idea how the idea challenge is run'
+    )
+
+
+phases.content.register(PreCallPhase())
+
+
 class IdeaSketchPhase(phases.PhaseContent):
     app = apps.IdeasConfig.label
     phase = 'ideas_sketch'
@@ -26,6 +49,18 @@ class IdeaSketchPhase(phases.PhaseContent):
 phases.content.register(IdeaSketchPhase())
 
 
+class InterimPostSketchPhase(InterimPhase):
+    phase = 'interim_post_sketch'
+
+    name = _('Interim post sketch phase')
+    description = _(
+        'submitting of idea sketches is closed'
+    )
+
+
+phases.content.register(InterimPostSketchPhase())
+
+
 class CommunityAwardRatingPhase(phases.PhaseContent):
     app = apps.IdeasConfig.label
     phase = 'community_award_rating'
@@ -44,6 +79,26 @@ class CommunityAwardRatingPhase(phases.PhaseContent):
 
 
 phases.content.register(CommunityAwardRatingPhase())
+
+
+class InterimShortlistSelectionPhase(InterimPhase):
+    phase = 'interim_shortlist_selection'
+
+    name = _('Interim shortlist selection phase')
+    description = _('ideas for the shortlist are chosen by the jury')
+
+
+phases.content.register(InterimShortlistSelectionPhase())
+
+
+class InterimShortlistPublicationPhase(InterimPhase):
+    phase = 'interim_shortlist_publication'
+
+    name = _('Interim shortlist publication phase')
+    description = _('the shortlist is published')
+
+
+phases.content.register(InterimShortlistPublicationPhase())
 
 
 class FullProposalPhase(phases.PhaseContent):
@@ -67,19 +122,11 @@ class FullProposalPhase(phases.PhaseContent):
 phases.content.register(FullProposalPhase())
 
 
-class ImplementationPhase(phases.PhaseContent):
-    app = apps.IdeasConfig.label
-    phase = 'implementation'
-    weight = 10
-    view = None
+class InterimWinnersSelectionPhase(InterimPhase):
+    phase = 'interim_winners_selection'
 
-    name = _('Implement proposal')
-    description = _('further iterate proposals')
-    module_name = _('Advocate Europe')
-
-    features = {
-        'update': (models.Idea, models.Proposal,),
-    }
+    name = _('Interim winners selection phase')
+    description = _('winning ideas are chosen by the jury')
 
 
-phases.content.register(ImplementationPhase())
+phases.content.register(InterimWinnersSelectionPhase())
