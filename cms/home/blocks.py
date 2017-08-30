@@ -3,7 +3,7 @@ from wagtail.wagtailcore.blocks import (CharBlock, ChoiceBlock, ChooserBlock,
                                         ListBlock, PageChooserBlock,
                                         RichTextBlock, StreamBlock,
                                         StructBlock, TextBlock, URLBlock)
-
+from wagtail.wagtailimages.blocks import ImageChooserBlock
 from adhocracy4.projects.models import Project
 from apps.ideas import filters
 from apps.ideas.models.abstracts import idea_section

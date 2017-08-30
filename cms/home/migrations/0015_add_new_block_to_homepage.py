@@ -11,7 +11,7 @@ import wagtail.wagtailcore.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cms_home', '0013_homepage_website'),
+        ('cms_home', '0014_add_logo_block'),
     ]
 
     operations = [
