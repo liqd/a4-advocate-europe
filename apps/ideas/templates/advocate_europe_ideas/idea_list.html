@@ -6,6 +6,9 @@
 <div class="idealist">
     <div class="idealist-title text-center">
         <h1>{% trans "All ideas" %}</h1>
+        {% for phase in active_phases %}
+            <h4 class="idealist-subtitle">{{ phase.description }}</h4>
+        {% endfor %}
     </div>
     <div class="container">
         <div class="idealist-controls">
