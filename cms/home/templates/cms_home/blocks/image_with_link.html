@@ -1,0 +1,9 @@
+{% load wagtailimages_tags %}
+
+{% if value.link %}
+<a href="{{  value.link }}" target="_blank">
+    {% image value.image width-300 %}
+</a>
+{% else %}
+{% image value.image width-300 %}
+{% endif %}

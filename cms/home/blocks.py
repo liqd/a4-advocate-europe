@@ -110,3 +110,22 @@ class ThreeBlogEntriesBlock(StructBlock):
         template = 'cms_home/blocks/blog_block.html'
         label = 'Latest Blog Post'
         help_text = 'The three latest blog entries'
+
+
+class ImageWithLinkBlock(StructBlock):
+    image = ImageChooserBlock(required=True)
+    link = URLBlock(required=False)
+
+    class Meta:
+        template = 'cms_home/blocks/image_with_link.html'
+
+
+class ThreeImagesBlock(StructBlock):
+    image_left = ImageWithLinkBlock(required=False)
+    image_middle = ImageWithLinkBlock(required=False)
+    image_right = ImageWithLinkBlock(required=False)
+
+    class Meta:
+        template = 'cms_home/blocks/three_images_block.html'
+        label = 'Three images block'
+        help_text = 'Three images in a row'
