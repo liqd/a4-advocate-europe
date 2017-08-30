@@ -1,0 +1,15 @@
+{% load wagtailimages_tags %}
+
+<div class="container three-image-block block">
+    <div class="row">
+        <div class="col-lg-4 image-container">
+            {{ value.image_left }}
+        </div>
+        <div class="col-lg-4 image-container">
+            {{ value.image_middle }}
+        </div>
+        <div class="col-lg-4 image-container">
+            {{ value.image_right }}
+        </div>
+    </div>
+</div>

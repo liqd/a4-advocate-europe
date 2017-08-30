@@ -208,3 +208,12 @@
         overflow: hidden;
     }
 }
+
+.three-image-block {
+    .image-container {
+        img {
+            display: block;
+            margin: rem(10px) auto;
+        }
+    }
+}
