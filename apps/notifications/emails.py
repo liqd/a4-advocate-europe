@@ -1,7 +1,28 @@
+from email.mime.image import MIMEImage
+
+from django.contrib.staticfiles import finders
+
 from adhocracy4 import emails
 
 
-class SubmitNotification(emails.UserNotification):
+class SVGLogoMixin:
+    """
+    Attaches the static file images/email_logo.svg so it can be used in an html
+    email.
+    """
+    def get_attachments(self):
+        attachments = super().get_attachments()
+        filename = finders.find('images/email_logo.svg')
+
+        if filename:
+            f = open(filename, 'rb')
+            logo = MIMEImage(f.read(), "image/svg+xml")
+            logo.add_header('Content-ID', '<{}>'.format('logo'))
+            return attachments + [logo]
+        return attachments
+
+
+class SubmitNotification(SVGLogoMixin, emails.UserNotification):
     template_name = 'advocate_europe_notifications/emails/submit_notification'
 
     def get_context(self):
@@ -10,7 +31,7 @@ class SubmitNotification(emails.UserNotification):
         return context
 
 
-class NotifyCreatorEmail(emails.UserNotification):
+class NotifyCreatorEmail(SVGLogoMixin, emails.UserNotification):
     template_name = 'advocate_europe_notifications/emails/notify_creator'
     user_attr_name = 'actor'
 
