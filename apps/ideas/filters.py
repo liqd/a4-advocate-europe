@@ -40,6 +40,7 @@ class IdeaFilterSet(DefaultsFilterSet):
 
     defaults = {
         'ordering': 'newest',
+        'status': 'winner',
     }
 
     idea_topics = django_filters.CharFilter(

@@ -305,3 +305,12 @@ class IdeaListView(filter_views.FilteredListView):
         context = super().get_context_data(**kwargs)
         context['active_phases'] = Phase.objects.active_phases()
         return context
+
+    def filter_kwargs(self):
+        default_kwargs = super().filter_kwargs()
+        if Phase.objects.active_phases():
+            data = Phase.objects.active_phases()[0].content().filters.copy()
+            for key in default_kwargs['data']:
+                data.setlist(key, [default_kwargs['data'][key]])
+            default_kwargs['data'] = data
+        return default_kwargs
