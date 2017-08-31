@@ -210,10 +210,34 @@
 }
 
 .three-image-block {
-    .image-container {
+    .three-image-block-title {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 1.33;
+        margin-bottom: 33px;
+    }
+
+    .three-image-block-row {
+        padding-bottom: 60px;
+    }
+
+    .three-image-block-image-container {
+        height: 30px;
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+
+        @media screen and (max-width: $screen-sm-min) {
+            height: 50px;
+        }
+
         img {
+            max-width: 100%;
+            height: auto;
             display: block;
-            margin: rem(10px) auto;
+            margin-left: auto;
+            margin-right: auto;
         }
     }
 }
