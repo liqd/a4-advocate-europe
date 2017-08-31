@@ -16,9 +16,16 @@ def test_idea_sketch_export_view_user(rf, user):
 @pytest.mark.django_db
 def test_idea_export_view_admin(rf, admin, idea_sketch_factory,
                                 proposal_factory):
-    idea_sketch_factory()
-    idea_sketch_factory()
-    proposal_factory()
+    # the default filters without an active phase set 'status': 'winner'
+    idea_sketch = idea_sketch_factory()
+    idea_sketch.is_winner = True
+    idea_sketch.save()
+    proposal1 = proposal_factory()
+    proposal1.is_winner = True
+    proposal1.save()
+    proposal2 = proposal_factory()
+    proposal2.is_winner = True
+    proposal2.save()
 
     view = views.IdeaExportView.as_view()
     request = rf.get('/ideas/list/export')
