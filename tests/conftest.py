@@ -1,6 +1,7 @@
 import factory
 import pytest
 from pytest_factoryboy import register
+from rest_framework.test import APIClient
 
 from adhocracy4.test import factories as a4factories
 from adhocracy4.test import helpers
@@ -26,3 +27,8 @@ def pytest_configure(config):
 @pytest.fixture
 def image():
     return factory.django.ImageField(width=1400, height=1400)
+
+
+@pytest.fixture
+def apiclient():
+    return APIClient()

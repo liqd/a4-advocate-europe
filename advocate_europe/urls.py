@@ -15,6 +15,7 @@ from adhocracy4.api import routers as a4routers
 from adhocracy4.comments.api import CommentViewSet
 from adhocracy4.ratings.api import RatingViewSet
 from adhocracy4.reports.api import ReportViewSet
+from apps.follows.api import FollowViewSet
 from apps.ideas import urls as idea_urls
 from apps.invites import urls as invite_urls
 from apps.journeys import urls as journey_urls
@@ -29,6 +30,7 @@ js_info_dict = {
 
 router = routers.DefaultRouter()
 router.register(r'reports', ReportViewSet, base_name='reports')
+router.register(r'follows', FollowViewSet, base_name='follows')
 
 ct_router = a4routers.ContentTypeDefaultRouter()
 ct_router.register(r'comments', CommentViewSet, base_name='comments')
