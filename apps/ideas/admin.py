@@ -115,11 +115,56 @@ class IdeaAdmin(admin.ModelAdmin):
 
 
 class IdeaSketchArchivedAdmin(admin.ModelAdmin):
+    raw_id_fields = ('creator', 'collaborators')
+    search_fields = ('idea_title',)
 
     formfield_overrides = {
         models.TextField: {'max_length': None,
                            'help_text': None},
     }
+
+    fieldsets = (
+        ('Creator and Collaborators', {
+            'classes': ('collapse',),
+            'fields': ('creator',
+                       'collaborators')
+        }),
+        ('Applicant Section', {
+            'classes': ('collapse',),
+            'fields':
+                tuple([field.name for field
+                       in idea_models.AbstractApplicantSection
+                       ._meta.get_fields()]),
+        }),
+        ('Partner Section', {
+            'classes': ('collapse',),
+            'fields':
+                tuple([field.name for field
+                       in idea_models.AbstractPartnersSection
+                       ._meta.get_fields()]),
+        }),
+        ('Idea Section', {
+            'classes': ('collapse',),
+            'fields':
+                tuple([field.name for field
+                       in idea_models.AbstractIdeaSection
+                       ._meta.get_fields()]),
+        }),
+        ('Impact Section', {
+            'classes': ('collapse',),
+            'fields':
+                tuple([field.name for field
+                       in idea_models.AbstractImpactSection
+                       ._meta.get_fields()]),
+        }),
+        ('Community Section', {
+            'classes': ('collapse',),
+            'fields':
+                tuple([field.name for field
+                       in idea_models.AbstractCommunitySection
+                       ._meta.get_fields()]),
+        }),
+    )
 
 
 class ProposalAdmin(admin.ModelAdmin):
@@ -130,6 +175,21 @@ class ProposalAdmin(admin.ModelAdmin):
                            'help_text': None},
     }
 
+    fieldsets = (
+        ('Finances and Duration', {
+            'fields':
+                tuple([field.name for field
+                       in idea_models.AbstractFinanceAndDurationSection
+                       ._meta.get_fields()]),
+        }),
+        ('Selection', {
+            'fields':
+                tuple([field.name for field
+                       in idea_models.AbstractSelectionCriteriaSection
+                       ._meta.get_fields()]),
+        })
+    )
+
 
 class IdeaSketchAdmin(admin.ModelAdmin):
     search_fields = ('idea_title',)
@@ -138,6 +198,15 @@ class IdeaSketchAdmin(admin.ModelAdmin):
         models.TextField: {'max_length': None,
                            'help_text': None},
     }
+
+    fieldsets = (
+        ('Collaboration Camp', {
+            'fields':
+                tuple([field.name for field
+                       in idea_models.AbstractCollaborationCampSection
+                       ._meta.get_fields()]),
+        }),
+    )
 
 
 admin.site.register(idea_models.Idea, IdeaAdmin)
