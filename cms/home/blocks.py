@@ -121,6 +121,7 @@ class ImageWithLinkBlock(StructBlock):
 
 
 class ThreeImagesBlock(StructBlock):
+    title = CharBlock(required=False)
     image_left = ImageWithLinkBlock(required=False)
     image_middle = ImageWithLinkBlock(required=False)
     image_right = ImageWithLinkBlock(required=False)
