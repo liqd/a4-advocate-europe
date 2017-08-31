@@ -58,6 +58,15 @@ class ProjectChooserBlock(ChooserBlock):
     target_model = Project
     widget = forms.widgets.Select
 
+    def value_for_form(self, value):
+        if isinstance(value, Project):
+            return value.pk
+        return value
+
+    def value_from_form(self, value):
+        value = value or None
+        return super().value_from_form(value)
+
 
 class ProposalCarouselBlock(StructBlock):
     headline = CharBlock(required=False)
