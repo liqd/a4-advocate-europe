@@ -6,7 +6,7 @@ from adhocracy4 import phases
 from . import apps, models
 
 
-class InterimPhase(phases.PhaseContent):
+class IdeaPhase(phases.PhaseContent):
     app = apps.IdeasConfig.label
     weight = 10
     view = None
@@ -16,8 +16,13 @@ class InterimPhase(phases.PhaseContent):
     features = {
     }
 
+    def get_phase_filters(self, active_project_pk):
+        if 'project' in self.default_filters:
+            self.default_filters.setlist('project', str(active_project_pk))
+        return self.default_filters
 
-class PreCallPhase(InterimPhase):
+
+class PreCallPhase(IdeaPhase):
     phase = 'pre_call'
 
     name = _('Pre call phase')
@@ -25,13 +30,16 @@ class PreCallPhase(InterimPhase):
         'look at previous ideas, get an idea how the idea challenge is run'
     )
 
-    filters = QueryDict('status=winner&ordering=newest')
+    default_filters = QueryDict('ordering=newest&'
+                                'status=winner',
+                                mutable=True
+                                )
 
 
 phases.content.register(PreCallPhase())
 
 
-class IdeaSketchPhase(phases.PhaseContent):
+class IdeaSketchPhase(IdeaPhase):
     app = apps.IdeasConfig.label
     phase = 'ideas_sketch'
     weight = 10
@@ -48,13 +56,17 @@ class IdeaSketchPhase(phases.PhaseContent):
         'comment': (models.Idea,),
     }
 
-    filters = QueryDict('status=idea_sketch&ordering=newest')
+    default_filters = QueryDict('ordering=newest&'
+                                'status=idea_sketch&'
+                                'project=',
+                                mutable=True
+                                )
 
 
 phases.content.register(IdeaSketchPhase())
 
 
-class InterimPostSketchPhase(InterimPhase):
+class InterimPostSketchPhase(IdeaPhase):
     phase = 'interim_post_sketch'
 
     name = _('Interim post sketch phase')
@@ -62,13 +74,17 @@ class InterimPostSketchPhase(InterimPhase):
         'submitting of idea sketches is closed'
     )
 
-    filters = QueryDict('status=idea_sketch&ordering=newest')
+    default_filters = QueryDict('ordering=newest&'
+                                'status=idea_sketch&'
+                                'project=',
+                                mutable=True
+                                )
 
 
 phases.content.register(InterimPostSketchPhase())
 
 
-class CommunityAwardRatingPhase(phases.PhaseContent):
+class CommunityAwardRatingPhase(IdeaPhase):
     app = apps.IdeasConfig.label
     phase = 'community_award_rating'
     weight = 10
@@ -84,37 +100,48 @@ class CommunityAwardRatingPhase(phases.PhaseContent):
         'comment': (models.Idea,),
     }
 
-    filters = QueryDict('status=idea_sketch&ordering=comments')
+    default_filters = QueryDict('ordering=comments&'
+                                'status=idea_sketch&'
+                                'project=',
+                                mutable=True
+                                )
 
 
 phases.content.register(CommunityAwardRatingPhase())
 
 
-class InterimShortlistSelectionPhase(InterimPhase):
+class InterimShortlistSelectionPhase(IdeaPhase):
     phase = 'interim_shortlist_selection'
 
     name = _('Interim shortlist selection phase')
     description = _('ideas for the shortlist are chosen by the jury')
 
-    filters = QueryDict('status=idea_sketch&ordering=comments')
+    default_filters = QueryDict('ordering=comments&'
+                                'status=idea_sketch&'
+                                'project=',
+                                mutable=True
+                                )
 
 
 phases.content.register(InterimShortlistSelectionPhase())
 
 
-class InterimShortlistPublicationPhase(InterimPhase):
+class InterimShortlistPublicationPhase(IdeaPhase):
     phase = 'interim_shortlist_publication'
 
     name = _('Interim shortlist publication phase')
     description = _('the shortlist is published')
 
-    filters = QueryDict('status=shortlist&ordering=title')
+    default_filters = QueryDict('ordering=title&'
+                                'status=shortlist&project=',
+                                mutable=True
+                                )
 
 
 phases.content.register(InterimShortlistPublicationPhase())
 
 
-class FullProposalPhase(phases.PhaseContent):
+class FullProposalPhase(IdeaPhase):
     app = apps.IdeasConfig.label
     phase = 'full_proposal'
     weight = 10
@@ -131,19 +158,27 @@ class FullProposalPhase(phases.PhaseContent):
         'comment': (models.Idea,),
     }
 
-    filters = QueryDict('status=shortlist&ordering=title')
+    default_filters = QueryDict('ordering=title&'
+                                'status=shortlist&'
+                                'project=',
+                                mutable=True
+                                )
 
 
 phases.content.register(FullProposalPhase())
 
 
-class InterimWinnersSelectionPhase(InterimPhase):
+class InterimWinnersSelectionPhase(IdeaPhase):
     phase = 'interim_winners_selection'
 
     name = _('Interim winners selection phase')
     description = _('winning ideas are chosen by the jury')
 
-    filters = QueryDict('status=proposal&ordering=title')
+    default_filters = QueryDict('ordering=title&'
+                                'status=proposal&'
+                                'project=',
+                                mutable=True
+                                )
 
 
 phases.content.register(InterimWinnersSelectionPhase())
