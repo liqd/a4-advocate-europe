@@ -1,11 +1,7 @@
 from django.contrib import admin
+from django.db import models
 
-from . import models
-
-
-admin.site.register(models.IdeaSketchArchived)
-admin.site.register(models.Proposal)
-admin.site.register(models.IdeaSketch)
+from . import models as idea_models
 
 
 def set_is_on_shortlist_true(modeladmin, request, queryset):
@@ -51,6 +47,11 @@ class IdeaAdmin(admin.ModelAdmin):
         'community_award_winner',
     )
 
+    formfield_overrides = {
+        models.TextField: {'max_length': None,
+                           'help_text': None},
+    }
+
     list_display = ['idea_title', 'type', 'is_on_shortlist',
                     'community_award_winner', 'is_winner', 'created']
     ordering = ['-created', 'idea_title']
@@ -79,37 +80,67 @@ class IdeaAdmin(admin.ModelAdmin):
             'classes': ('collapse',),
             'fields':
                 tuple([field.name for field
-                       in models.AbstractApplicantSection._meta.get_fields()]),
+                       in idea_models.AbstractApplicantSection
+                       ._meta.get_fields()]),
         }),
         ('Partner Section', {
             'classes': ('collapse',),
             'fields':
                 tuple([field.name for field
-                       in models.AbstractPartnersSection._meta.get_fields()]),
+                       in idea_models.AbstractPartnersSection
+                       ._meta.get_fields()]),
         }),
         ('Idea Section', {
             'classes': ('collapse',),
             'fields':
                 tuple([field.name for field
-                       in models.AbstractIdeaSection._meta.get_fields()]),
+                       in idea_models.AbstractIdeaSection
+                       ._meta.get_fields()]),
         }),
         ('Impact Section', {
             'classes': ('collapse',),
             'fields':
                 tuple([field.name for field
-                       in models.AbstractImpactSection._meta.get_fields()]),
+                       in idea_models.AbstractImpactSection
+                       ._meta.get_fields()]),
         }),
         ('Community Section', {
             'classes': ('collapse',),
             'fields':
                 tuple([field.name for field
-                       in models.AbstractCommunitySection._meta.get_fields()]),
+                       in idea_models.AbstractCommunitySection
+                       ._meta.get_fields()]),
         }),
     )
-    list_filter = ('module__project',
-                   'is_on_shortlist',
-                   'community_award_winner',
-                   'is_winner')
-    search_fields = ['idea_title']
 
-admin.site.register(models.Idea, IdeaAdmin)
+
+class IdeaSketchArchivedAdmin(admin.ModelAdmin):
+
+    formfield_overrides = {
+        models.TextField: {'max_length': None,
+                           'help_text': None},
+    }
+
+
+class ProposalAdmin(admin.ModelAdmin):
+    search_fields = ('idea_title',)
+
+    formfield_overrides = {
+        models.TextField: {'max_length': None,
+                           'help_text': None},
+    }
+
+
+class IdeaSketchAdmin(admin.ModelAdmin):
+    search_fields = ('idea_title',)
+
+    formfield_overrides = {
+        models.TextField: {'max_length': None,
+                           'help_text': None},
+    }
+
+
+admin.site.register(idea_models.Idea, IdeaAdmin)
+admin.site.register(idea_models.IdeaSketchArchived, IdeaSketchArchivedAdmin)
+admin.site.register(idea_models.Proposal, ProposalAdmin)
+admin.site.register(idea_models.IdeaSketch, IdeaSketchAdmin)
