@@ -309,7 +309,11 @@ class IdeaListView(filter_views.FilteredListView):
     def filter_kwargs(self):
         default_kwargs = super().filter_kwargs()
         if Phase.objects.active_phases():
-            data = Phase.objects.active_phases()[0].content().filters.copy()
+            data = (Phase.objects.active_phases()[0].content().
+                    get_phase_filters(Phase.objects.active_phases()[0].
+                                      module.project.pk)
+                    .copy()
+                    )
             for key in default_kwargs['data']:
                 data.setlist(key, [default_kwargs['data'][key]])
             default_kwargs['data'] = data
