@@ -1,3 +1,4 @@
+from django.http import QueryDict
 from django.utils.translation import ugettext_lazy as _
 
 from adhocracy4 import phases
@@ -24,6 +25,8 @@ class PreCallPhase(InterimPhase):
         'look at previous ideas, get an idea how the idea challenge is run'
     )
 
+    filters = QueryDict('status=winner&ordering=newest')
+
 
 phases.content.register(PreCallPhase())
 
@@ -45,6 +48,8 @@ class IdeaSketchPhase(phases.PhaseContent):
         'comment': (models.Idea,),
     }
 
+    filters = QueryDict('status=idea_sketch&ordering=newest')
+
 
 phases.content.register(IdeaSketchPhase())
 
@@ -56,6 +61,8 @@ class InterimPostSketchPhase(InterimPhase):
     description = _(
         'submitting of idea sketches is closed'
     )
+
+    filters = QueryDict('status=idea_sketch&ordering=newest')
 
 
 phases.content.register(InterimPostSketchPhase())
@@ -77,6 +84,8 @@ class CommunityAwardRatingPhase(phases.PhaseContent):
         'comment': (models.Idea,),
     }
 
+    filters = QueryDict('status=idea_sketch&ordering=comments')
+
 
 phases.content.register(CommunityAwardRatingPhase())
 
@@ -87,6 +96,8 @@ class InterimShortlistSelectionPhase(InterimPhase):
     name = _('Interim shortlist selection phase')
     description = _('ideas for the shortlist are chosen by the jury')
 
+    filters = QueryDict('status=idea_sketch&ordering=comments')
+
 
 phases.content.register(InterimShortlistSelectionPhase())
 
@@ -96,6 +107,8 @@ class InterimShortlistPublicationPhase(InterimPhase):
 
     name = _('Interim shortlist publication phase')
     description = _('the shortlist is published')
+
+    filters = QueryDict('status=shortlist&ordering=title')
 
 
 phases.content.register(InterimShortlistPublicationPhase())
@@ -118,6 +131,8 @@ class FullProposalPhase(phases.PhaseContent):
         'comment': (models.Idea,),
     }
 
+    filters = QueryDict('status=shortlist&ordering=title')
+
 
 phases.content.register(FullProposalPhase())
 
@@ -127,6 +142,8 @@ class InterimWinnersSelectionPhase(InterimPhase):
 
     name = _('Interim winners selection phase')
     description = _('winning ideas are chosen by the jury')
+
+    filters = QueryDict('status=proposal&ordering=title')
 
 
 phases.content.register(InterimWinnersSelectionPhase())
