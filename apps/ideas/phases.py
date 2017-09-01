@@ -13,9 +13,6 @@ class IdeaPhase(phases.PhaseContent):
 
     module_name = _('Advocate Europe')
 
-    features = {
-    }
-
     def get_phase_filters(self, active_project_pk):
         if 'project' in self.default_filters:
             self.default_filters.setlist('project', str(active_project_pk))
@@ -40,10 +37,7 @@ phases.content.register(PreCallPhase())
 
 
 class IdeaSketchPhase(IdeaPhase):
-    app = apps.IdeasConfig.label
     phase = 'ideas_sketch'
-    weight = 10
-    view = None
 
     name = _('Idea sketch phase')
     description = _(
@@ -85,10 +79,7 @@ phases.content.register(InterimPostSketchPhase())
 
 
 class CommunityAwardRatingPhase(IdeaPhase):
-    app = apps.IdeasConfig.label
     phase = 'community_award_rating'
-    weight = 10
-    view = None
 
     name = _('Community award rating')
     description = _('submit your rating for the community award')
@@ -142,10 +133,7 @@ phases.content.register(InterimShortlistPublicationPhase())
 
 
 class FullProposalPhase(IdeaPhase):
-    app = apps.IdeasConfig.label
     phase = 'full_proposal'
-    weight = 10
-    view = None
 
     name = _('Full proposal phase')
     description = _('extend idea sketches to a full proposals')
