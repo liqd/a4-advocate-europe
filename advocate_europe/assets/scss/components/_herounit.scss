@@ -70,10 +70,6 @@
     font-size: rem($ae-font-size-extra-large);
     margin: rem(0 0 10px 0);
 
-    @media screen and (max-width: $screen-md-max) {
-        padding: rem(0 40px);
-    }
-
     @media screen and (max-width: $screen-xs) {
         font-size: rem(24px);
         padding: rem(0 10px);
@@ -104,11 +100,8 @@
     font-weight: bold;
     line-height: 1.38;
 
-    @media screen and (max-width: $screen-sm-max) {
-        padding: 0;
-    }
-
     @media screen and (max-width: $screen-xs) {
+        padding: 0;
         font-size: rem(18px);
     }
 }
