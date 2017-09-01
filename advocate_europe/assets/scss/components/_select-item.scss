@@ -1,0 +1,33 @@
+.select-item {
+    min-width: rem(200px);
+    padding-left: rem(30px);
+
+    position: relative;
+
+    white-space: normal;
+    font-size: $font-size-base;
+
+    // unstyle buttons
+    text-align: left;
+    border: none;
+    background: none;
+}
+
+.select-item-active {
+    color: $gray-dark;
+}
+
+.select-item-title {
+    font-weight: bold;
+}
+
+.select-item-desc {
+    display: block;
+    font-size: $font-size-small;
+}
+
+.select-item-indicator {
+    position: absolute;
+    top: 0;
+    left: rem(10px);
+}

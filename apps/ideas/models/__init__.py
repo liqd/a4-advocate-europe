@@ -12,6 +12,8 @@ from adhocracy4.models import query
 from adhocracy4.modules.models import Item
 from adhocracy4.ratings import models as rating_models
 
+from apps.follows import register_follow
+
 from .abstracts.applicant_section import AbstractApplicantSection
 from .abstracts.collaboration_camp_section import \
     AbstractCollaborationCampSection
@@ -85,6 +87,9 @@ class Idea(AbstractIdea, Item):
             return Proposal._meta.verbose_name.title()
         except ObjectDoesNotExist:
             return IdeaSketch._meta.verbose_name.title()
+
+
+register_follow(Idea)
 
 
 class IdeaSketch(Idea, AbstractCollaborationCampSection):
