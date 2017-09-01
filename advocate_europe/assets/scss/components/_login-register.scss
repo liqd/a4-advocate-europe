@@ -44,10 +44,6 @@
 }
 
 .login-register-btn-group {
-    @media screen and (max-width: $screen-xs-max) {
-        margin-left: rem(15px);
-    }
-
     .btn-default {
         margin-right: rem(10px);
     }
