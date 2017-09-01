@@ -1,4 +1,4 @@
-{% load i18n rules %}
+{% load i18n react_follows rules %}
 
 {% if idea.proposal %}
     {% has_perm 'advocate_europe_ideas.change_idea' request.user idea as can_change_proposal %}
@@ -39,10 +39,6 @@
 
 {% if view.display_type == 'idea' %}
 <li class="nav-idea {{ xs_class }}">
-<a href="#" class="btn btn-idea" role="button" aria-label="{% trans 'watch' %}">
-    <i class="fa fa-eye" aria-hidden="true"></i>
-    {{ spacing }}
-    <span class="">{% trans 'Watch' %}</span>
-</a>
+    {% react_follows idea %}
 </li>
 {% endif %}

@@ -203,11 +203,13 @@
     margin-right: 0;
     float: right;
 
-    .btn-idea {
+    .btn-idea,
+    .btn-follow {
         background-color: transparent;
-        padding: rem(13px 20px);
+        padding: rem(14px 20px);
 
         margin-right: 0;
+        border: none;
         border-left: 1px solid $ae-dark-gray;
         border-radius: 0;
 
@@ -217,8 +219,13 @@
         font-weight: 500;
     }
 
+    .dropdown-follow {
+        display: block;
+    }
+
     @media screen and (max-width: $screen-xs-max) {
-        .btn-idea {
+        .btn-idea,
+        .btn-follow {
             padding: rem(12px 20px 9px 20px);
             border: none;
             color: #fff;
