@@ -12,6 +12,13 @@ def test_anonymous_can_read_follow(apiclient, idea_sketch):
 
 
 @pytest.mark.django_db
+def test_anonymous_update(apiclient, idea_sketch):
+    url = reverse('follows-detail', args=[idea_sketch.pk])
+    response = apiclient.put(url, {'enable': True}, format='json')
+    assert response.status_code == status.HTTP_403_FORBIDDEN
+
+
+@pytest.mark.django_db
 def test_read_follow_state(apiclient, user2, idea_follow):
     url = reverse('follows-detail', args=[idea_follow.followable.pk])
     response = apiclient.get(url)
