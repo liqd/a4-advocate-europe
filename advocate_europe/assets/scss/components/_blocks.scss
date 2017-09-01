@@ -18,6 +18,12 @@
 .block-carousel {
     overflow-x: hidden;
 
+    .slick-initialized {
+        .slick-slide {
+            display: flex;
+        }
+    }
+
     .proposal-tile {
         margin: rem(0 13px 13px 0);
         overflow: hidden;
