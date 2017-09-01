@@ -36,12 +36,8 @@ def test_idea_list_view_idea_sketch_phase(rf, admin, idea_sketch_factory,
     # the default filters for the ideaSketchPhase set
     # 'status': 'idea_sketch' and the year (project) to the active one
     with active_phase(module, phases.IdeaSketchPhase):
-        idea_sketch_1 = idea_sketch_factory()
-        idea_sketch_1.module = module
-        idea_sketch_1.save()
-        idea_sketch_2 = idea_sketch_factory()
-        idea_sketch_2.module = module
-        idea_sketch_2.save()
+        idea_sketch_factory(module=module)
+        idea_sketch_factory(module=module)
         proposal_factory()
 
         view = views.IdeaListView.as_view()
