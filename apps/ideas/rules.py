@@ -48,8 +48,7 @@ rules.add_perm(
     mod_predicates.is_context_moderator |
     mod_predicates.is_context_initiator |
     (
-        mod_predicates.is_context_member &
-        phase_predicates.phase_allows_comment
+        mod_predicates.is_context_member
     )
 )
 
