@@ -297,23 +297,20 @@ class IdeaListView(filter_views.FilteredListView):
     paginate_by = 12
     filter_set = filters.IdeaFilterSet
 
+    @property
+    def active_phase(self):
+        return Phase.objects.active_phases().last()
+
     def get_queryset(self):
         queryset = super().get_queryset().annotate_comment_count()
         return queryset
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['active_phases'] = Phase.objects.active_phases()
-        return context
-
     def filter_kwargs(self):
         default_kwargs = super().filter_kwargs()
-        if Phase.objects.active_phases():
-            data = (Phase.objects.active_phases()[0].content().
-                    get_phase_filters(Phase.objects.active_phases()[0].
-                                      module.project.pk)
-                    .copy()
-                    )
+        if self.active_phase:
+            data = (self.active_phase.content().get_phase_filters(
+                self.active_phase.module.project.pk).copy()
+            )
             for key in default_kwargs['data']:
                 data.setlist(key, [default_kwargs['data'][key]])
             default_kwargs['data'] = data
