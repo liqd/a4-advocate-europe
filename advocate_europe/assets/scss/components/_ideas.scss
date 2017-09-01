@@ -230,11 +230,13 @@
             border: none;
             color: #fff;
             background-color: $brand-primary-darker;
-            font-size: rem(12px);
+            font-size: rem(18px);
         }
 
-        .btn-idea .fa {
-            font-size: rem(18px);
+        .btn-idea-label,
+        .btn-follow-label {
+            display: block;
+            font-size: rem(12px)
         }
     }
 }

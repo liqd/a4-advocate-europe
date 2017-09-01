@@ -12,8 +12,7 @@
 <li class="dropdown nav-idea {{ xs_class }}">
     <button class="btn btn-idea" type="button" id="dropdownEdit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
         <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-        {{ spacing }}
-        <span class="">{% trans 'More' %}</span>
+        <span class="btn-idea-label">{% trans 'More' %}</span>
     </button>
     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownEdit">
         {% if can_change_sketch %}
@@ -32,12 +31,12 @@
 <li class="nav-idea {{ xs_class }}">
 <a href="#" class="btn btn-idea" role="button" aria-label="{% trans 'share' %}">
     <i class="fa fa-share" aria-hidden="true"></i>
-    {{ spacing }}
-    <span class="">{% trans 'Share' %}</span>
+    <span class="btn-idea-label">{% trans 'Share' %}</span>
 </a>
 </li>
 
-{% if view.display_type == 'idea' %}
+{% has_perm 'advocate_europe_ideas.follow_idea' request.user idea as can_watch_proposal %}
+{% if view.display_type == 'idea' and can_watch_proposal %}
 <li class="nav-idea {{ xs_class }}">
     {% react_follows idea %}
 </li>
