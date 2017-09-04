@@ -1,11 +1,12 @@
-from wagtail.wagtailcore.blocks import (CharBlock, ChoiceBlock, ListBlock,
-                                        PageChooserBlock, RichTextBlock,
-                                        StreamBlock, StructBlock, TextBlock,
-                                        URLBlock)
+from django import forms
+from wagtail.wagtailcore.blocks import (CharBlock, ChoiceBlock, ChooserBlock,
+                                        ListBlock, PageChooserBlock,
+                                        RichTextBlock, StreamBlock,
+                                        StructBlock, TextBlock, URLBlock)
 from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
-
-from cms.snippets.models import Category
+from adhocracy4.projects.models import Project
+from apps.ideas import filters
+from apps.ideas.models.abstracts import idea_section
 
 
 class LinkBlock(StructBlock):
@@ -53,41 +54,33 @@ class CallToActionBlock(StructBlock):
         help_text = 'Call to action with button and text'
 
 
+class ProjectChooserBlock(ChooserBlock):
+    target_model = Project
+    widget = forms.widgets.Select
+
+    def value_for_form(self, value):
+        if isinstance(value, Project):
+            return value.pk
+        return value
+
+    def value_from_form(self, value):
+        value = value or None
+        return super().value_from_form(value)
+
+
 class ProposalCarouselBlock(StructBlock):
     headline = CharBlock(required=False)
-    ideas = ChoiceBlock(choices=[
-        ('2015', '2015'),
-        ('2016', '2016'),
-    ], required=True)
+    year = ProjectChooserBlock(required=False)
+    topic = ChoiceBlock(choices=idea_section.IDEA_TOPIC_CHOICES,
+                        required=False)
+    ordering = ChoiceBlock(choices=filters.ORDERING_CHOICES, required=False)
+    status = ChoiceBlock(choices=filters.STATUS_FILTER_CHOICES, required=False)
 
     class Meta:
         template = 'cms_home/blocks/carousel_block.html'
         icon = 'folder-inverse'
         label = 'Carousel Block'
-        help_text = 'Carousel of Proposals'
-
-
-class ItemBlock(StructBlock):
-    image = ImageChooserBlock(required=False)
-    label = CharBlock(required=False)
-    category = SnippetChooserBlock(required=False, target_model=Category)
-    title = CharBlock()
-    text = TextBlock()
-    url = URLBlock()
-
-    class Meta:
-        template = 'cms_home/blocks/includes/proposal_tile.html'
-
-
-class CustomCarouselBlock(StructBlock):
-    headline = CharBlock(required=False)
-    items = ListBlock(ItemBlock)
-
-    class Meta:
-        template = 'cms_home/blocks/carousel_block.html'
-        icon = 'folder-inverse'
-        label = 'Carousel Block'
-        help_text = 'Carousel of Proposals'
+        help_text = 'Displays up to 20 ideas that match the filters'
 
 
 class QuestionAnswerBlock(StructBlock):

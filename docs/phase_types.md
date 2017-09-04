@@ -34,7 +34,7 @@ This document explains, which phase types exist and are implemented for a projec
    - sorting: alphabetical
    - filtering: status - shortlist, year - 2017
 
-8. Interim Selection Winners Phase
+8. Interim Winners Selection Phase
    - sorting: alphabetical
    - filtering: status - proposals, year - 2017
 

@@ -6,6 +6,11 @@
 <div class="idealist">
     <div class="idealist-title text-center">
         <h1>{% trans "All ideas" %}</h1>
+        {% if view.active_phase %}
+            <h4 class="idealist-subtitle">{{ view.active_phase.description }}</h4>
+        {% else %}
+            <h4 class="idealist-subtitle">{% trans "Ideas from past idea challenges" %}</h4>
+        {% endif %}
     </div>
     <div class="container">
         <div class="idealist-controls">

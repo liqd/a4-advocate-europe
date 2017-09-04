@@ -1,3 +1,6 @@
+{% load home_tags %}
+
+{% load_ideas value.year value.topic value.ordering value.status as ideas %}
 <div class="block">
     <div class="container text-center">
         <div class="row">
@@ -8,7 +11,7 @@
     </div>
     <div class="block-carousel">
         <div class="container">
-              {% include "cms_home/blocks/includes/proposal_carousel.html" with items=value.items %}
+              {% include "cms_home/blocks/includes/proposal_carousel.html" with items=ideas %}
         </div>
     </div>
 </div>

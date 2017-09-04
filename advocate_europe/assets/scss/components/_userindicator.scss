@@ -73,6 +73,8 @@
         &-btn-group {
             display: flex;
             flex-wrap: wrap;
+            margin-left: rem(15px);
+            margin-right: rem(15px);
         }
 
         &-btn-group &-profile-avatar {

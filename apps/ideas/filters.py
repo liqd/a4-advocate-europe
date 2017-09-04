@@ -8,6 +8,21 @@ from adhocracy4.projects.models import Project
 from . import models
 
 
+STATUS_FILTER_CHOICES = [
+    ('idea_sketch', _('Idea Sketch')),
+    ('community_award', _('Community Award Winner')),
+    ('shortlist', _('Shortlist')),
+    ('proposal', _('Proposal')),
+    ('winner', _('Winner'))
+]
+
+ORDERING_CHOICES = [
+    ('newest', _('Most Recent')),
+    ('comments', _('Most Comments')),
+    ('title', _('Alphabetical'))
+]
+
+
 class StatusFilterWidget(widgets.DropdownLinkWidget):
     label = _('Status')
 
@@ -40,6 +55,7 @@ class IdeaFilterSet(DefaultsFilterSet):
 
     defaults = {
         'ordering': 'newest',
+        'status': 'winner',
     }
 
     idea_topics = django_filters.CharFilter(
@@ -70,13 +86,7 @@ class IdeaFilterSet(DefaultsFilterSet):
 
     status = django_filters.ChoiceFilter(
         method='what_status',
-        choices=(
-            ('idea_sketch', _('Idea Sketch')),
-            ('community_award', _('Community Award Winner')),
-            ('shortlist', _('Shortlist')),
-            ('proposal', _('Proposal')),
-            ('winner', _('Winner'))
-        ),
+        choices=STATUS_FILTER_CHOICES,
         widget=StatusFilterWidget
     )
 
@@ -86,11 +96,7 @@ class IdeaFilterSet(DefaultsFilterSet):
             ('-comment_count', 'comments'),
             ('idea_title', 'title'),
         ),
-        choices=(
-            ('newest', _('Most Recent')),
-            ('comments', _('Most Comments')),
-            ('title', _('Alphabetical')),
-        ),
+        choices=ORDERING_CHOICES,
         empty_label=None,
         widget=OrderingFilterWidget
     )
