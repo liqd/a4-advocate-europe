@@ -47,7 +47,6 @@ class IdeaSketchPhase(IdeaPhase):
 
     features = {
         'crud': (models.IdeaSketch,),
-        'comment': (models.Idea,),
     }
 
     default_filters = QueryDict('ordering=newest&'
@@ -88,7 +87,6 @@ class CommunityAwardRatingPhase(IdeaPhase):
     features = {
         'rate': (models.Idea,),
         # rating only for users, that added an idea in this or previous years
-        'comment': (models.Idea,),
     }
 
     default_filters = QueryDict('ordering=comments&'
@@ -143,7 +141,6 @@ class FullProposalPhase(IdeaPhase):
         'crud': (models.Idea, models.Proposal,),
         'rate': (models.Idea,),
         # rating only for users, that added an idea in this or previous years
-        'comment': (models.Idea,),
     }
 
     default_filters = QueryDict('ordering=title&'
