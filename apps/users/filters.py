@@ -53,7 +53,7 @@ class ProfileIdeaFilterSet(DefaultsFilterSet):
         choices=(
             ('creator', _('Submitted')),
             ('collaborator', _('Supported')),
-            ('watcher', _('Watched'))
+            ('watcher', _('Watching'))
         ),
         empty_label=None,
         widget=ParticipationFilterWidget,
