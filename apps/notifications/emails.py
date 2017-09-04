@@ -16,7 +16,7 @@ class SVGLogoMixin:
 
         if filename:
             f = open(filename, 'rb')
-            logo = MIMEImage(f.read(), "image/svg+xml")
+            logo = MIMEImage(f.read(), "svg+xml")
             logo.add_header('Content-ID', '<{}>'.format('logo'))
             return attachments + [logo]
         return attachments
