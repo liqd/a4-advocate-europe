@@ -3,6 +3,7 @@ from django.dispatch import receiver
 
 from adhocracy4.actions.models import Action
 from adhocracy4.actions.verbs import Verbs
+from adhocracy4.comments.models import Comment
 
 from apps.ideas.models import IdeaSketch, Proposal
 
@@ -17,5 +18,5 @@ def send_notification(sender, instance, created, **kwargs):
         if (action.obj_content_type.model_class() is IdeaSketch
                 or action.obj_content_type.model_class() is Proposal):
             emails.SubmitNotification.send(action.obj)
-        else:
+        elif action.obj_content_type.model_class() is Comment:
             emails.NotifyCreatorEmail.send(action)
