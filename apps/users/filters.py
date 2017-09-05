@@ -44,7 +44,10 @@ class ProfileIdeaFilterSet(DefaultsFilterSet):
         elif value == 'collaborator':
             return queryset.filter(collaborators=self.user)
         elif value == 'watcher':
-            return queryset.filter(ideafollow__creator=self.user)
+            return queryset.filter(
+                ideafollow__creator=self.user,
+                ideafollow__enabled=True,
+            )
         else:
             return queryset.filter_by_participant(self.user)
 
