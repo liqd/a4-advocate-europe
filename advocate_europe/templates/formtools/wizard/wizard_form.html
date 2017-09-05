@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load widget_tweaks i18n idea_tags crispy_forms_tags %}
 
+{% block title %} {{ view.title }} {% endblock %}
+
 {% block content %}
 <div class="wizard-page">
     <form class="wizard custom-form container-narrow" method="post" enctype="multipart/form-data" novalidate>
