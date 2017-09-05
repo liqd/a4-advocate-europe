@@ -1,16 +1,18 @@
+import re
+
 from django.template import Library, Node, TemplateSyntaxError
 from django.utils import translation
 
 register = Library()
 
 
-class TransNode(Node):
-    def __init__(self, nodelist, lc):
+class ForceTransNode(Node):
+    def __init__(self, nodelist, language_name):
         self.nodelist = nodelist
-        self.lc = lc
+        self.language_name = language_name
 
     def render(self, context):
-        with translation.override(self.lc):
+        with translation.override(self.language_name):
             return self.nodelist.render(context)
 
 
@@ -25,16 +27,19 @@ def force_translation(parser, token):
     try:
         nodelist = parser.parse(('endforce_translation',))
         parser.delete_first_token()
-        tag_name, lc = token.split_contents()
+        tag_name, language_name = token.split_contents()
     except ValueError:
         raise TemplateSyntaxError(
             '{} tag requires arguments'.format(token.contents.split()[0])
         )
-    if not (lc[0] == lc[-1] and lc[0] in ('"', "'")):
+    match = re.match(r'["\']([a-z]{2}(:?_[A-Z]{2}})?)["\']', language_name)
+    if not match:
         raise TemplateSyntaxError(
-            '{} locale should be in quotes'.format(tag_name)
+            '{} locale should be in ll[_LL] format and in quotes'.format(
+                tag_name
+            )
         )
-    return TransNode(nodelist, lc[1:-1])
+    return ForceTransNode(nodelist, match.group(1))
 
 
 register.tag('force_translation', force_translation)
