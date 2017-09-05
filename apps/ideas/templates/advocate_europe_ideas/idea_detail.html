@@ -1,6 +1,22 @@
 {% extends "base.html" %}
 
-{% load i18n react_comments rules %}
+{% load i18n react_comments rules static %}
+
+{% block title %} {{ idea.idea_title }} {% endblock %}
+
+{% block social_meta %}
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={{ idea.idea_title }}>
+    <meta name="twitter:description" content={{ idea.idea_pitch }}>
+    <meta name="twitter:image" content={% if idea.idea_image %}{{ idea.idea_image.url }}{% else %}{% static 'images/placeholder_ideadetail_768x320.png' %}{% endif %}>
+
+    <meta property="og:url" content={% url 'idea-detail' slug=idea.slug %}>
+    <meta property="og:title" content={{ idea.idea_title }}>
+    <meta property="og:description" content={{ idea.idea_pitch }}>
+    <meta property="og:image" content={% if idea.idea_image %}{{ idea.idea_image.url }}{% else %}{% static 'images/placeholder_ideadetail_768x320.png' %}{% endif %}>
+
+{% endblock %}
 
 {% block content %}
 
