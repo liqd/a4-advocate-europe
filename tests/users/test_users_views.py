@@ -47,15 +47,20 @@ def test_profile_view_collaboration(client, user, idea_sketch_factory):
 @pytest.mark.django_db
 def test_profile_view_filter_watch(client, user, user2,
                                    idea_follow_factory, idea_sketch_factory):
-    idea_follow = idea_follow_factory(followable__creator=user2, creator=user)
-    idea1 = idea_follow.followable.idea
+    idea_follow1 = idea_follow_factory(followable__creator=user2, creator=user)
+    idea_follow2 = idea_follow_factory(
+        followable__creator=user2, creator=user, enabled=False
+    )
+    idea1 = idea_follow1.followable.idea
     idea2 = idea_sketch_factory(creator=user).idea
+    idea3 = idea_follow2.followable.idea
 
     url = reverse('profile', kwargs={'username': user.username})
     response = client.get(url + '?participation=watcher')
     assert response.status_code == 200
     assert idea1 in response.context_data['idea_list']
     assert idea2 not in response.context_data['idea_list']
+    assert idea3 not in response.context_data['idea_list']
 
     response = client.get(url)
     assert response.status_code == 200
