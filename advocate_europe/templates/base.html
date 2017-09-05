@@ -30,12 +30,12 @@
             <meta name="twitter:card" content="summary">
             <meta name="twitter:title" content="Advocate Europe">
             <meta name="twitter:description" content="Do you have an idea that can inspire Europe? The open idea challenge Advocate Europe is an opportunity for game-changers. We invite active citizens and transnational changemakers to share their non-profit project ideas with us.">
-            <meta name="twitter:image" content={% static 'images/logo_01.png' %}>
+            <meta name="twitter:image" content="{{ request.get_host }}{% static 'images/logo_01.png' %}">
 
-            <meta property="og:url" content="https://advocate-europe.eu/">
+            <meta property="og:url" content="{{ request.get_host }}">
             <meta property="og:title" content="Advocate Europe">
             <meta property="og:description" content="Do you have an idea that can inspire Europe? The open idea challenge Advocate Europe is an opportunity for game-changers. We invite active citizens and transnational changemakers to share their non-profit project ideas with us.">
-            <meta property="og:image" content={% static 'images/logo_01.png' %}>
+            <meta property="og:image" content="{{ request.get_host }}{% static 'images/logo_01.png' %}">
         {% endblock %}
 
         {% render_bundle 'vendor' 'css' %}
