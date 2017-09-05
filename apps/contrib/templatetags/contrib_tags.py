@@ -29,3 +29,8 @@ def concat_strings(*args):
     for string in args:
         concat_str += str(string)
     return concat_str
+
+
+@register.assignment_tag
+def get_absolute_uri(request, obj):
+    return request.build_absolute_uri(obj)
