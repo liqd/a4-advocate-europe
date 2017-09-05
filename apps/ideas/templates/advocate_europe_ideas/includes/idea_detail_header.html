@@ -1,7 +1,7 @@
 {% load i18n static %}
 
 <div class="row ideadetail-header">
-    <div class="ideadetail-image" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000000), url({% if idea.idea_image %} {{ idea.idea_image.url }} {% else %} {% static 'images/placeholder_ideadetail_768x320.png' %} {% endif %});">
+    <div class="ideadetail-image" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000000), url({{ view.idea_image_url }});">
         <div class="ideadetailheader-content">
             <div class="col-md-9 col-sm-8 col-xs-12 ideadetailheader-left">
                 <div class="btn btn-default ideadetail-btn">

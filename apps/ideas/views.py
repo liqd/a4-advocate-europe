@@ -8,6 +8,7 @@ from django.core.paginator import Paginator
 from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.templatetags.static import static
 from django.utils.translation import ugettext as _
 from django.views import generic
 from formtools.wizard.views import SessionWizardView
@@ -154,6 +155,13 @@ class IdeaDetailView(generic.DetailView):
     @property
     def idea_dict(self):
         return model_to_dict(self.object)
+
+    @property
+    def idea_image_url(self):
+        if self.object.idea_image:
+            return self.object.idea_image.url
+        else:
+            return static('images/placeholder_ideadetail_768x320.png')
 
     def get_context_data(self, **kwargs):
         idea_list = []
