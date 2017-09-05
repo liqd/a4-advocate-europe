@@ -47,6 +47,8 @@
 
 .blogindex-no-entry {
     margin-top: rem(100px);
+    margin-left: 0;
+    margin-right: 0;
     text-align: center;
 
     @media screen and (max-width: $screen-sm-max) {
