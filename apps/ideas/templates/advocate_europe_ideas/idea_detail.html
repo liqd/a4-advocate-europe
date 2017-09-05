@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n react_comments rules static %}
+{% load i18n react_comments rules static force_translation %}
 
 {% block title %} {{ idea.idea_title }} {% endblock %}
 
@@ -19,97 +19,97 @@
 {% endblock %}
 
 {% block content %}
+    {% force_translation 'en' %}
+    <div class="ideadetail">
+        <div class="container">
 
-<div class="ideadetail">
-    <div class="container">
+            {% include 'advocate_europe_ideas/includes/idea_detail_header.html' %}
 
-        {% include 'advocate_europe_ideas/includes/idea_detail_header.html' %}
+            <div class="row hidden-lg hidden-md hidden-sm ideadetail-xs-support">
+                <ul class="nav">
+                    <li class="nav-idea nav-support">
+                        <a href="#" class="btn btn-idea" role="button" aria-label="{% trans 'support' %}">
+                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            <span class="support-count">0</span>
+                            <span class="btn-idea-label">{% trans 'Support' %}</span>
+                        </a>
+                    </li>
 
-        <div class="row hidden-lg hidden-md hidden-sm ideadetail-xs-support">
-            <ul class="nav">
-                <li class="nav-idea nav-support">
-                <a href="#" class="btn btn-idea" role="button" aria-label="{% trans 'support' %}">
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    <span class="support-count">0</span>
-                    <span class="btn-idea-label">{% trans 'Support' %}</span>
-                </a>
-                </li>
+                    {% include 'advocate_europe_ideas/includes/idea_detail_watch_btns.html' with xs_class="" spacing="<br>" %}
+                </ul>
+            </div>
 
-                {% include 'advocate_europe_ideas/includes/idea_detail_watch_btns.html' with xs_class="" spacing="<br>" %}
-            </ul>
-        </div>
+            <div class="row ideadetail-tab-bar">
+                <ul class="nav navbar-nav nav-tabs tabs" role="tablist">
 
-        <div class="row ideadetail-tab-bar">
-            <ul class="nav navbar-nav nav-tabs tabs" role="tablist">
+                    <li role="presentation" class="nav-item">
+                        <a href="#info" class="nav-link" aria-controls="info" role="tab" data-toggle="tab">{% trans "Creators" %}</a>
+                    </li>
 
-                <li role="presentation" class="nav-item">
-                <a href="#info" class="nav-link" aria-controls="info" role="tab" data-toggle="tab">{% trans "Creators" %}</a>
-                </li>
+                    <li role="presentation" class="nav-item {% if not idea.proposal or not idea.is_winner or idea.journeyentry_set.all.count == 0 %}active{% endif %}">
+                        <a href="#idea" class="nav-link" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Idea" %}</a>
+                    </li>
 
-                <li role="presentation" class="nav-item {% if not idea.proposal or not idea.is_winner or idea.journeyentry_set.all.count == 0 %}active{% endif %}">
-                <a href="#idea" class="nav-link" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Idea" %}</a>
-                </li>
+                    {% if idea.is_winner %}
+                        <li role="presentation" class="nav-item {% if idea.proposal and idea.is_winner and idea.journeyentry_set.all.count > 0 %}active{% endif %}">
+                            <a href="#journey" class="nav-link" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Reporting" %}</a>
+                        </li>
+                    {% endif %}
 
+                    {% include 'advocate_europe_ideas/includes/idea_detail_watch_btns.html' with xs_class="hidden-xs" %}
+                </ul>
+            </div>
+
+            <div class="row tab-content ideadetail-content">
+                <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane" id="info">
+                    {% include 'advocate_europe_ideas/includes/idea_detail_tab_info.html' %}
+                </div>
+                <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane  {% if not idea.proposal or not idea.is_winner or idea.journeyentry_set.all.count == 0 %} active {% endif %}" id="idea">
+                    {% include 'advocate_europe_ideas/includes/idea_detail_tab_idea.html' %}
+                </div>
                 {% if idea.is_winner %}
-                <li role="presentation" class="nav-item {% if idea.proposal and idea.is_winner and idea.journeyentry_set.all.count > 0 %}active{% endif %}">
-                <a href="#journey" class="nav-link" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Reporting" %}</a>
-                </li>
+                    <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane {% if idea.proposal and idea.is_winner and idea.journeyentry_set.all.count > 0 %} active {% endif %}" id="journey">
+                        {% include 'advocate_europe_ideas/includes/idea_detail_tab_journey.html' %}
+                    </div>
                 {% endif %}
 
-                {% include 'advocate_europe_ideas/includes/idea_detail_watch_btns.html' with xs_class="hidden-xs" %}
-            </ul>
-        </div>
+                <div class="col-md-3 col-sm-4 col-xs-12 ideadetail-info-boxes">
 
-        <div class="row tab-content ideadetail-content">
-            <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane" id="info">
-                {% include 'advocate_europe_ideas/includes/idea_detail_tab_info.html' %}
+                    {% if idea.proposal and idea.jury_statement %}
+                        <div class="ideadetail-info-box jurystatement">
+                            <h4><i class="fa fa-trophy" aria-hidden="true"></i> {% trans 'Jury statement' %}</h4>
+                            <p>{{ idea.jury_statement }}</p>
+                        </div>
+                    {% endif %}
+
+
+                    <div class="ideadetail-info-box">
+                        <h4>{% trans 'Collaborators' %}</h4>
+                        <p>
+                            <span class="avatar-round-small" style="background-image: url({{ idea.creator.avatar_or_fallback_url }})"></span>
+                            <span class="collaborator">
+                                <a href="{% url 'profile' idea.creator.username %}">{{ idea.creator.username }}</a>
+                            </span>
+                        </p>
+                        {% for collaborator in idea.collaborators.all %}
+                            <p>
+                                <span class="avatar-round-small no-decoration" style="background-image: url({{ collaborator.avatar_or_fallback_url }})"></span>
+                                <span class="collaborator">
+                                    <a href="{% url 'profile' collaborator.username %}">{{ collaborator.username }}</a>
+                                </span>
+                            </p>
+                        {% endfor %}
+                    </div>
+
+                </div>
             </div>
-            <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane  {% if not idea.proposal or not idea.is_winner or idea.journeyentry_set.all.count == 0 %} active {% endif %}" id="idea">
-                {% include 'advocate_europe_ideas/includes/idea_detail_tab_idea.html' %}
-            </div>
-            {% if idea.is_winner %}
-            <div role="tabpanel" class="col-md-offset-1 col-md-7 col-sm-8 col-xs-12 tab-pane {% if idea.proposal and idea.is_winner and idea.journeyentry_set.all.count > 0 %} active {% endif %}" id="journey">
-                {% include 'advocate_europe_ideas/includes/idea_detail_tab_journey.html' %}
-            </div>
+            {% if view.display_type == 'idea' %}
+                <div class="container-medium ideadetail-comments">
+                    <h4>{% trans "Write comment" %}</h4>
+                    {% react_comments idea %}
+                </div>
             {% endif %}
-
-            <div class="col-md-3 col-sm-4 col-xs-12 ideadetail-info-boxes">
-
-                {% if idea.proposal and idea.jury_statement %}
-                <div class="ideadetail-info-box jurystatement">
-                    <h4><i class="fa fa-trophy" aria-hidden="true"></i> {% trans 'Jury statement' %}</h4>
-                    <p>{{ idea.jury_statement }}</p>
-                </div>
-                {% endif %}
-
-
-                <div class="ideadetail-info-box">
-                    <h4>{% trans 'Collaborators' %}</h4>
-                    <p>
-                        <span class="avatar-round-small" style="background-image: url({{ idea.creator.avatar_or_fallback_url }})"></span>
-                        <span class="collaborator">
-                        <a href="{% url 'profile' idea.creator.username %}">{{ idea.creator.username }}</a>
-                        </span>
-                    </p>
-                    {% for collaborator in idea.collaborators.all %}
-                    <p>
-                        <span class="avatar-round-small no-decoration" style="background-image: url({{ collaborator.avatar_or_fallback_url }})"></span>
-                        <span class="collaborator">
-                        <a href="{% url 'profile' collaborator.username %}">{{ collaborator.username }}</a>
-                        </span>
-                    </p>
-                    {% endfor %}
-                </div>
-
-            </div>
         </div>
-        {% if view.display_type == 'idea' %}
-        <div class="container-medium ideadetail-comments">
-            <h4>{% trans "Write comment" %}</h4>
-            {% react_comments idea %}
-        </div>
-        {% endif %}
     </div>
-</div>
-
+ {% endforce_translation %}
 {% endblock %}

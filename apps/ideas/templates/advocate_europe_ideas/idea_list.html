@@ -1,67 +1,69 @@
 {% extends "base.html" %}
 
-{% load i18n rules idea_tags %}
+{% load i18n rules idea_tags force_translation %}
 
 {% block title %} {% trans 'All ideas' %} {% endblock %}
 
 {% block content %}
-<div class="idealist">
-    <div class="idealist-title text-center">
-        <h1>{% trans "All ideas" %}</h1>
-        {% if view.active_phase %}
-            <h4 class="idealist-subtitle">{{ view.active_phase.description }}</h4>
-        {% else %}
-            <h4 class="idealist-subtitle">{% trans "Ideas from past idea challenges" %}</h4>
-        {% endif %}
-    </div>
-    <div class="container">
-        <div class="idealist-controls">
-            <div class="filter-bar idealist-filter clearfix">
-                <div class="hidden-xs">
-                    {% for field in view.filter.form %}
-                    {{ field }}
-                    {% endfor %}
-                </div>
-                <div class="hidden-sm hidden-md hidden-lg mobile-filter">
-                    <button class="btn btn-default btn-collapse collapsed" type="button" data-toggle="collapse" data-target="#filter" aria-expanded="false" aria-controls="Filter">
-                        <div class="btn-label">
-                            {% trans "Filters" %}
-                            {% count_active_filter view.filter.data as filter_count %}
-                            {% if filter_count > 0 %}
-                            <span class="number-of-filters">
-                                {{ filter_count }}
-                            </span>
-                            {% endif %}
-                        </div>
-                        <i class="fa fa-chevron-up"></i>
-                    </button>
-                    <div class="collapse" id="filter">
-                    <div class="card card-block">
-                        {% for field in view.filter.form %}
-                        {{ field }}
-                        {% endfor %}
-                    </div>
-                    </div>
-                </div>
-            </div>
-            {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
-            {% if can_export %}
-                <a class="btn btn-ae-secondary export-btn" href="{% url 'idea-export' %}{{ '?'|add:view.filter.data.urlencode }}">{% trans "export" %}</a>
+    {% force_translation 'en' %}
+    <div class="idealist">
+        <div class="idealist-title text-center">
+            <h1>{% trans "All ideas" %}</h1>
+            {% if view.active_phase %}
+                <h4 class="idealist-subtitle">{{ view.active_phase.description }}</h4>
+            {% else %}
+                <h4 class="idealist-subtitle">{% trans "Ideas from past idea challenges" %}</h4>
             {% endif %}
         </div>
-        <div class="idealist-list">
-            {% for idea in idea_list %}
-            {% include 'advocate_europe_ideas/includes/idealist_item.html' %}
-            {% empty %}
-            <div class="idealist-no-entry">
-                <h4>{% trans "Sorry, no ideas exist for the chosen filters." %}</h4>
+        <div class="container">
+            <div class="idealist-controls">
+                <div class="filter-bar idealist-filter clearfix">
+                    <div class="hidden-xs">
+                        {% for field in view.filter.form %}
+                            {{ field }}
+                        {% endfor %}
+                    </div>
+                    <div class="hidden-sm hidden-md hidden-lg mobile-filter">
+                        <button class="btn btn-default btn-collapse collapsed" type="button" data-toggle="collapse" data-target="#filter" aria-expanded="false" aria-controls="Filter">
+                            <div class="btn-label">
+                                {% trans "Filters" %}
+                                {% count_active_filter view.filter.data as filter_count %}
+                                {% if filter_count > 0 %}
+                                    <span class="number-of-filters">
+                                        {{ filter_count }}
+                                    </span>
+                                {% endif %}
+                            </div>
+                            <i class="fa fa-chevron-up"></i>
+                        </button>
+                        <div class="collapse" id="filter">
+                            <div class="card card-block">
+                                {% for field in view.filter.form %}
+                                    {{ field }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
+                {% if can_export %}
+                    <a class="btn btn-ae-secondary export-btn" href="{% url 'idea-export' %}{{ '?'|add:view.filter.data.urlencode }}">{% trans "export" %}</a>
+                {% endif %}
             </div>
-            {% endfor %}
+            <div class="idealist-list">
+                {% for idea in idea_list %}
+                    {% include 'advocate_europe_ideas/includes/idealist_item.html' %}
+                {% empty %}
+                    <div class="idealist-no-entry">
+                        <h4>{% trans "Sorry, no ideas exist for the chosen filters." %}</h4>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if is_paginated %}
+                {% include 'includes/pagination.html' %}
+            {% endif %}
         </div>
-        {% if is_paginated %}
-            {% include 'includes/pagination.html' %}
-        {% endif %}
     </div>
-</div>
 
+{% endforce_translation %}
 {% endblock %}

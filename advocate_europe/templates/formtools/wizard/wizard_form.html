@@ -1,9 +1,10 @@
 {% extends "base.html" %}
-{% load widget_tweaks i18n idea_tags crispy_forms_tags %}
+{% load widget_tweaks i18n idea_tags crispy_forms_tags force_translation %}
 
 {% block title %} {{ view.title }} {% endblock %}
 
 {% block content %}
+    {% force_translation 'en' %}
 <div class="wizard-page">
     <form class="wizard custom-form container-narrow" method="post" enctype="multipart/form-data" novalidate>
         <h1>{{ view.title }} </h1>
@@ -69,5 +70,6 @@
                 {% endif %}
         </div>
     </form>
-</div>
+        </div>
+        {% endforce_translation %}
 {% endblock %}
