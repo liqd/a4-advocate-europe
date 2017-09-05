@@ -9,14 +9,14 @@
 {% block social_meta %}
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content={{ page.title }}>
-    <meta name="twitter:description" content={{ page.teasertext }}>
-    <meta name="twitter:image" content={% image page.image width-770 %}>
+    <meta name="twitter:title" content="{{ page.title }}">
+    <meta name="twitter:description" content="{{ page.teasertext }}">
+    <meta name="twitter:image" content="{% image page.image width-770 %}">
 
-    <meta property="og:url" content={% pageurl page %}>
-    <meta property="og:title" content={{ page.title }}>
-    <meta property="og:description" content={{ page.teasertext }}>
-    <meta property="og:image" content={% image page.image width-770 %}>
+    <meta property="og:url" content="{{ page.get_site.root_url }}{% pageurl page %}">
+    <meta property="og:title" content="{{ page.title }}">
+    <meta property="og:description" content="{{ page.teasertext }}">
+    <meta property="og:image" content="{{ page.get_site.root_url }}{% image page.image width-770" %}>
 
 {% endblock %}
 

@@ -7,14 +7,14 @@
 {% block social_meta %}
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content={{ idea.idea_title }}>
-    <meta name="twitter:description" content={{ idea.idea_pitch }}>
-    <meta name="twitter:image" content={{ view.idea_image_url }}>
+    <meta name="twitter:title" content="{{ idea.idea_title }}">
+    <meta name="twitter:description" content="{{ idea.idea_pitch }}">
+    <meta name="twitter:image" content="{{ request.get_host }}{{ view.idea_image_url }}">
 
-    <meta property="og:url" content={% url 'idea-detail' slug=idea.slug %}>
-    <meta property="og:title" content={{ idea.idea_title }}>
-    <meta property="og:description" content={{ idea.idea_pitch }}>
-    <meta property="og:image" content={{ view.idea_image_url }}>
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:title" content="{{ idea.idea_title }}">
+    <meta property="og:description" content="{{ idea.idea_pitch }}">
+    <meta property="og:image" content="{{ request.get_host }}{{ view.idea_image_url }}">
 
 {% endblock %}
 
