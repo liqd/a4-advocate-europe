@@ -1,6 +1,22 @@
 {% extends "base.html" %}
 
-{% load i18n react_comments rules force_translation %}
+{% load i18n react_comments rules static force_translation %}
+
+{% block title %} {{ idea.idea_title }} {% endblock %}
+
+{% block social_meta %}
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={{ idea.idea_title }}>
+    <meta name="twitter:description" content={{ idea.idea_pitch }}>
+    <meta name="twitter:image" content={{ view.idea_image_url }}>
+
+    <meta property="og:url" content={% url 'idea-detail' slug=idea.slug %}>
+    <meta property="og:title" content={{ idea.idea_title }}>
+    <meta property="og:description" content={{ idea.idea_pitch }}>
+    <meta property="og:image" content={{ view.idea_image_url }}>
+
+{% endblock %}
 
 {% block content %}
     {% force_translation 'en' %}
