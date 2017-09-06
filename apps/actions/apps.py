@@ -26,6 +26,7 @@ class ActionsConfig(AppConfig):
         configure_type('blog', ('cms_blog', 'blogpage'))
         configure_type('journey entry',
                        ('advocate_europe_journeys', 'journeyentry'))
+        configure_type('follows', ('advocate_europe_ideas', 'ideafollow'))
 
         configure_icon('comment', type='comment')
         configure_icon('lightbulb-o', type='item')
