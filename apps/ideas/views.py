@@ -157,11 +157,17 @@ class IdeaDetailView(generic.DetailView):
         return model_to_dict(self.object)
 
     @property
-    def idea_image_url(self):
+    def idea_image(self):
+        image_dict = {
+            'url': static('images/placeholder_ideadetail_768x320.png'),
+            'width': '768',
+            'height': '320',
+        }
         if self.object.idea_image:
-            return self.object.idea_image.url
-        else:
-            return static('images/placeholder_ideadetail_768x320.png')
+            image_dict['url'] = self.object.idea_image.url
+            image_dict['width'] = self.object.idea_image.width
+            image_dict['height'] = self.object.idea_image.height
+        return image_dict
 
     def get_context_data(self, **kwargs):
         idea_list = []
