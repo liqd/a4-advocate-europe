@@ -40,3 +40,15 @@ def test_combined_url_parameter(rf):
     assert 'da=dings' in context['url_par_1']
     assert 'bla=' in context['url_par_2']
     assert 'da=dings' in context['url_par_2']
+
+
+@pytest.mark.django_db
+def test_concat_strings(rf):
+    request = rf.get('/')
+    template = ('{% load contrib_tags %}'
+                '{% concat_strings "bla" "bli" "blub" as con_string %}'
+                '{{ con_string }}')
+    context = {'request': request}
+    helpers.render_template(template, context)
+
+    assert 'blabliblub' in context['con_string']
