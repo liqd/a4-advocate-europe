@@ -32,11 +32,11 @@ def concat_strings(*args):
     return concat_str
 
 
-@register.assignment_tag
-def get_absolute_uri(request, obj):
-    return request.build_absolute_uri(obj)
+@register.simple_tag(takes_context=True)
+def get_absolute_uri(context, obj):
+    return context['request'].build_absolute_uri(obj)
 
 
-@register.assignment_tag
-def get_absolute_uri_static(request, obj):
-    return request.build_absolute_uri(static(obj))
+@register.simple_tag(takes_context=True)
+def get_absolute_uri_static(context, obj):
+    return context['request'].build_absolute_uri(static(obj))
