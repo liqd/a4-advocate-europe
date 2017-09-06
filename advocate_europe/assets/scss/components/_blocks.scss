@@ -24,40 +24,9 @@
         }
     }
 
-    .proposal-tile {
-        margin: rem(0 13px 13px 0);
-        overflow: hidden;
-        text-align: left;
-
-        min-height: 400px;
-
-        img {
-            margin: 0;
-        }
-
-        .label {
-            position: absolute;
-            left: rem(10px);
-            bottom: 0;
-        }
-    }
-
-    .proposal-tile-image {
-        width: 100%;
-    }
-
-    .proposal-tile-image-link {
-        position: relative;
-    }
-
-    .proposal-tile-title {
-        font-size: rem(18px);
-        font-weight: bold;
-        margin-top: rem(4px);
-        line-height: 1.33;
-
-        a {
-            color: $gray-dark;
+    .idealist-item {
+        .idealist-text {
+            min-height: 266px;
         }
     }
 
