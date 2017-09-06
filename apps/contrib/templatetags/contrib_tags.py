@@ -1,4 +1,5 @@
 from django import template
+from django.templatetags.static import static
 
 register = template.Library()
 
@@ -34,3 +35,8 @@ def concat_strings(*args):
 @register.assignment_tag
 def get_absolute_uri(request, obj):
     return request.build_absolute_uri(obj)
+
+
+@register.assignment_tag
+def get_absolute_uri_static(request, obj):
+    return request.build_absolute_uri(static(obj))
