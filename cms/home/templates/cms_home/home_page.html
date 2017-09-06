@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 
+{% load wagtailimages_tags contrib_tags %}
+
 {% block social_meta %}
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Advocate Europe">
     <meta name="twitter:description" content="Do you have an idea that can inspire Europe? The open idea challenge Advocate Europe is an opportunity for game-changers. We invite active citizens and transnational changemakers to share their non-profit project ideas with us.">
     {% if page.image %}
         {% image page.image width-770 as image %}
-        <meta name="twitter:image" content="{{ page.get_site.root_url }}{{ image.url }}" />
+        <meta name="twitter:image" content="{% get_absolute_uri request=request obj=image.url %}" />
     {% else %}
-        <meta name="twitter:image" content="{% get_absolute_uri request=request obj='images/logo_01.png' %}">
+        <meta name="twitter:image" content="{% get_absolute_uri_static request=request obj='images/logo_01.png' %}">
     {% endif %}
 
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
@@ -16,9 +18,9 @@
     <meta property="og:description" content="Do you have an idea that can inspire Europe? The open idea challenge Advocate Europe is an opportunity for game-changers. We invite active citizens and transnational changemakers to share their non-profit project ideas with us.">
     {% if page.image %}
         {% image page.image width-770 as image %}
-        <meta property="og:image" content="{{ page.get_site.root_url }}{{ image.url }}" />
+        <meta property="og:image" content="{% get_absolute_uri request=request obj=image.url %}" />
     {% else %}
-        <meta property="og:image" content="{% get_absolute_uri request=request obj='images/logo_01.png' %}">
+        <meta property="og:image" content="{% get_absolute_uri_static request=request obj='images/logo_01.png' %}">
     {% endif %}
 {% endblock %}
 
