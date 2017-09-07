@@ -22,7 +22,7 @@ def combined_url_parameter(request_query_dict, **kwargs):
     return encoded_parameter
 
 
-@register.assignment_tag
+@register.simple_tag
 def concat_strings(*args):
     """concatenate strings"""
     concat_str = ''

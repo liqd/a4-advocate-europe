@@ -226,6 +226,10 @@
         display: block;
     }
 
+    .fa-socialshare {
+        @include rem(width, 22px);
+    }
+
     @media screen and (max-width: $screen-xs-max) {
         .btn-idea,
         .btn-follow {

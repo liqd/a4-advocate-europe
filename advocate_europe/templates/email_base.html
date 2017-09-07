@@ -10,34 +10,63 @@
             padding: 0;
             min-width: 100% !important;
         }
+
+        .main {
+          min-height: 371px;
+          margin: auto;
+          text-align: center;
+          width: 560px;
+          font-family: Helvetica;
+        }
+
+        .button {
+            border-radius: 0.25rem;
+            background-color: #fcb813;
+            padding: .5rem .75rem;
+            display: block;
+            text-decoration: none;
+            margin: 20px auto;
+            font-weight: bold;
+            color: black;
+            width: 150px
+        }
+
+        .content {
+            background-color: #f3f3f3;
+            padding: 30px 20px;
+            box-shadow: 0 1px 0 0 #cccccc;
+        }
+
+        .footer {
+            color: #999;
+            padding: 30px;
+            font-size: small;
+        }
     </style>
 </head>
 <body>
-<table width="100%" border="0" cellpadding="0" cellspacing="0">
-    <tr>
-        <td style="text-align: center; padding-top: 20px">
-            <img width="50%" src="cid:logo" style="width: 15%;" alt="Logo of {{ site.name }}">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            {% block content %}{% endblock %}
-        </td>
-    </tr>
+<div class="main">
+
+  <div>
+    <img src="cid:logo" style="width: 30%; padding-bottom: 30px" alt="Logo of {{ site.name }}">
+  </div>
+
+  <div class="content">
+    <h3>{% block headline %}{% endblock %}</h3>
+    {% block content %}{% endblock %}
+
     {% block cta %}
-        <tr>
-            <td style="text-align: center; padding-top:20px;">
-                <a href="{% block cta_url %}{% endblock %}" class="button">
-                 {% block cta_label %}{% endblock %}
-                </a>
-            </td>
-        </tr>
+      <a href="{% block cta_url %}{% endblock %}" class="button" style="">
+       {% block cta_label %}{% endblock %}
+      </a>
     {% endblock %}
-    <tr>
-        <td>
-            {% block reason %}{% endblock %}
-        </td>
-    </tr>
-</table>
+
+  </div>
+
+ <div class="footer">
+    {% block reason %}{% endblock %}
+  </div>
+
+</div>
 </body>
 </html>
