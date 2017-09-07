@@ -151,6 +151,7 @@ class IdeaSketchEditView(
 class IdeaDetailView(generic.DetailView):
     display_type = 'idea'
     model = Idea
+    queryset = Idea.objects.annotate_positive_rating_count()
 
     @property
     def idea_dict(self):
@@ -310,7 +311,9 @@ class IdeaListView(filter_views.FilteredListView):
         return Phase.objects.active_phases().last()
 
     def get_queryset(self):
-        queryset = super().get_queryset().annotate_comment_count()
+        queryset = super().get_queryset()\
+            .annotate_comment_count()\
+            .annotate_positive_rating_count()
         return queryset
 
     def filter_kwargs(self):

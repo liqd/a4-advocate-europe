@@ -18,7 +18,8 @@ class ProfileView(filter_views.FilteredListView):
     template_name = 'advocate_europe_users/profile.html'
     paginator_class = Paginator
     filter_set = filters.ProfileIdeaFilterSet
-    queryset = idea_models.Idea.objects.annotate_comment_count()
+    queryset = idea_models.Idea.objects.annotate_comment_count()\
+        .annotate_positive_rating_count()
     action_count = 10
 
     @property
