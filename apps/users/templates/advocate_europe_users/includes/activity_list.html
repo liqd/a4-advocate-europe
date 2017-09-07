@@ -1,7 +1,9 @@
-{% load i18n verbose_name contrib_tags %}
+{% load i18n verbose_name contrib_tags activity %}
 
 <div>
-    {% for action in view.actions %}
+    {% filter_actions view.actions as actions %}
+    {% for action in actions %}
+
         <div class="action clearfix">
             <div class="action-icon">
               <i class="fa fa-{{ action.icon }} fa-fw" aria-hidden="true"></i>
@@ -54,6 +56,13 @@
             added a new {{ item }}
             <a href="{{ item_url }}">{{ item_title }}</a>
             {% endblocktrans%}
+
+            {% elif action.type == 'follows' %}
+                {% blocktrans with url=action.actor.get_absolute_url name=action.actor.username item_url=action.obj.followable.get_absolute_url item=action.obj.followable|verbose_name item_title=action.obj.followable.idea_title|truncatewords:50 %}
+                <a href="{{ url }}">{{ name }}</a>
+                now watches {{ item }}
+                <a href="{{ item_url }}">"{{ item_title }}"</a>
+                {% endblocktrans%}
 
             {% else %}
             {{ action }}
