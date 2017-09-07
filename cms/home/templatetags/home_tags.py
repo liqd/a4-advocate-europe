@@ -9,7 +9,9 @@ register = template.Library()
 @register.assignment_tag(takes_context=False)
 def load_ideas(year, topic, ordering, status):
 
-    ideas = Idea.objects.all().annotate_comment_count()
+    ideas = Idea.objects.all()\
+        .annotate_comment_count()\
+        .annotate_positive_rating_count()
     idea_filter_set = IdeaFilterSet(data={})
 
     if year:

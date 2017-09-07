@@ -43,6 +43,12 @@ class ProfileIdeaFilterSet(DefaultsFilterSet):
             return queryset.filter(creator=self.user)
         elif value == 'collaborator':
             return queryset.filter(collaborators=self.user)
+        elif value == 'supporter':
+            return queryset.filter(
+                ratings__creator=self.user,
+                ratings__value=1)
+        elif value == 'comment':
+            return queryset.filter(comments__creator=self.user)
         elif value == 'watcher':
             return queryset.filter(
                 ideafollow__creator=self.user,
@@ -55,8 +61,10 @@ class ProfileIdeaFilterSet(DefaultsFilterSet):
         method='participation_filter',
         choices=(
             ('creator', _('Submitted')),
-            ('collaborator', _('Supported')),
-            ('watcher', _('Watching'))
+            ('collaborator', _('Collaborator')),
+            ('watcher', _('Watching')),
+            ('supporter', _('Supporting')),
+            ('comment', _('Comments'))
         ),
         empty_label=None,
         widget=ParticipationFilterWidget,

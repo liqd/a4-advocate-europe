@@ -19,6 +19,7 @@ STATUS_FILTER_CHOICES = [
 ORDERING_CHOICES = [
     ('newest', _('Most Recent')),
     ('comments', _('Most Comments')),
+    ('support', _('Most Support')),
     ('title', _('Alphabetical'))
 ]
 
@@ -94,6 +95,7 @@ class IdeaFilterSet(DefaultsFilterSet):
         fields=(
             ('-created', 'newest'),
             ('-comment_count', 'comments'),
+            ('-positive_rating_count', 'support'),
             ('idea_title', 'title'),
         ),
         choices=ORDERING_CHOICES,
