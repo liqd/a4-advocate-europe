@@ -1,5 +1,4 @@
 from django import template
-from django.templatetags.static import static
 
 register = template.Library()
 
@@ -23,20 +22,10 @@ def combined_url_parameter(request_query_dict, **kwargs):
     return encoded_parameter
 
 
-@register.assignment_tag
+@register.simple_tag
 def concat_strings(*args):
     """concatenate strings"""
     concat_str = ''
     for string in args:
         concat_str += str(string)
     return concat_str
-
-
-@register.assignment_tag
-def get_absolute_uri(request, obj):
-    return request.build_absolute_uri(obj)
-
-
-@register.assignment_tag
-def get_absolute_uri_static(request, obj):
-    return request.build_absolute_uri(static(obj))
