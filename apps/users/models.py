@@ -11,6 +11,8 @@ from easy_thumbnails.files import get_thumbnailer
 
 from adhocracy4.images import fields
 
+from apps.ideas.models import Idea
+
 from . import USERNAME_INVALID_MESSAGE, USERNAME_REGEX
 
 
@@ -153,6 +155,12 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     def fallback_avatar(self):
         number = self.pk % 5
         return static('images/avatars/avatar-{0:02d}.svg'.format(number))
+
+    @property
+    def is_innovator(self):
+        return Idea.objects\
+                   .filter(creator=self)\
+                   .count() > 0
 
     def avatar_or_fallback_url(self):
         if self._avatar:

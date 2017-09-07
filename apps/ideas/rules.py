@@ -73,3 +73,12 @@ rules.add_perm(
     predicates.is_winner |
     mod_predicates.is_project_admin
 )
+
+rules.add_perm(
+    'advocate_europe_ideas.rate_idea',
+    (
+        predicates.is_innovator &
+        phase_predicates.phase_allows_rate
+    ) |
+    is_superuser
+)
