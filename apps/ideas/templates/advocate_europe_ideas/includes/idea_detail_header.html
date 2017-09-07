@@ -1,4 +1,4 @@
-{% load i18n static %}
+{% load i18n static react_ratings idea_tags %}
 
 <div class="row ideadetail-header">
     <div class="ideadetail-image" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000000), url({{ view.idea_image_url }});">
@@ -20,14 +20,7 @@
                 </div>
             </div>
             <div class="col-md-3 col-sm-4 hidden-xs ideadetailheader-right">
-                <div class="btn-group ideadetail-support-btn-group" role="group">
-                    <div class="btn">
-                        <i class="fa fa-heart-o" aria-hidden="true"></i> {% trans 'Support' %}
-                    </div>
-                    <div class="btn">
-                        0
-                    </div>
-                </div>
+                {% react_supports idea %}
             </div>
         </div>
     </div>
