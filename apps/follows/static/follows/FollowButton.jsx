@@ -68,7 +68,7 @@ class FollowButton extends React.Component {
         return (
           <span className="dropdown dropdown-follow">
             <button className="btn btn-follow" type="button" id="follow-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i className="fa fa-eye" aria-hidden="true" />&nbsp;
+              <i className={this.state.followed ? "fa fa-eye-slash" : "fa fa-eye" }   aria-hidden="true" />&nbsp;
               <span className="btn-follow-label">
                 {this.state.followed ? django.gettext('Unwatch') : django.gettext('Watch')}
               </span>
