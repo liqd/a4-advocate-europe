@@ -331,6 +331,7 @@ A4_COMMENTABLES = (
 
 A4_RATEABLES = (
     ('a4comments', 'comment'),
+    ('advocate_europe_ideas', 'idea')
 )
 
 A4_REPORTABLES = (
