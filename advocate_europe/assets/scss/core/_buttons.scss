@@ -28,3 +28,30 @@
     font-size: rem(16px);
     font-weight: bold;
 }
+
+.btn-support,
+.btn-support:hover,
+.btn-support:focus,
+.btn-support:active {
+    background-color: transparent;
+    padding-bottom: 0;
+    color: white;
+    box-shadow: none;
+
+    i {
+        font-size: rem(14px);
+    }
+
+    span {
+        font-size: rem(14px);
+    }
+}
+
+.btn-addon:focus,
+.btn-addon:hover,
+.btn-addon:active {
+    color: white;
+    outline: none;
+    box-shadow: none;
+    cursor: default;
+}
