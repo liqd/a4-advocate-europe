@@ -34,16 +34,21 @@
 .btn-support:focus,
 .btn-support:active {
     background-color: transparent;
-    padding-bottom: 0;
+    padding: 0;
     color: white;
     box-shadow: none;
 
+    p {
+        margin-bottom: 0;
+        font-size: rem(12px);
+    }
+
     i {
-        font-size: rem(14px);
+        font-size: rem(18px);
     }
 
     span {
-        font-size: rem(14px);
+        font-size: rem(18px);
     }
 }
 
