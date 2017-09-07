@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n react_comments rules static force_translation %}
+{% load i18n react_comments rules static force_translation idea_tags %}
 
 {% block title %} {{ idea.idea_title }} {% endblock %}
 
@@ -28,13 +28,8 @@
             <div class="row hidden-lg hidden-md hidden-sm ideadetail-xs-support">
                 <ul class="nav">
                     <li class="nav-idea nav-support">
-                        <a href="#" class="btn btn-idea" role="button" aria-label="{% trans 'support' %}">
-                            <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            <span class="support-count">0</span>
-                            <span class="btn-idea-label">{% trans 'Support' %}</span>
-                        </a>
+                        {% react_supports idea True %}
                     </li>
-
                     {% include 'advocate_europe_ideas/includes/idea_detail_watch_btns.html' with xs_class="" spacing="<br>" %}
                 </ul>
             </div>

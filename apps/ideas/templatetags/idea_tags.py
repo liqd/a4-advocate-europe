@@ -25,7 +25,7 @@ def count_active_filter(request_query_dict):
 
 
 @register.simple_tag(takes_context=True)
-def react_supports(context, idea):
+def react_supports(context, idea, mobile):
     request = context['request']
     user = request.user
 
@@ -54,12 +54,13 @@ def react_supports(context, idea):
         'supports': idea.positive_rating_count,
         'userSupport': user_support_value,
         'userSupportId': user_support_id,
-        'isReadOnly': not has_support_permission
+        'isReadOnly': not has_support_permission,
+        'renderMobile': mobile
     }
 
     return format_html(
-        '<span data-ae-widget="supports"'
-        '      data-attributes="{attributes}" ></span>',
+        '<a data-ae-widget="supports"'
+        '      data-attributes="{attributes}" ></a>',
         attributes=json.dumps(attributes),
         pk=idea.pk
     )

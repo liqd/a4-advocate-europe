@@ -64,21 +64,40 @@ class SupportButton extends React.Component {
   }
 
   render () {
-    return (
-      <div className="btn-group ideadetail-support-btn-group" role="group">
-        <button
-          className="btn btn-primary"
-          disabled={this.props.isReadOnly}
-          onClick={this.updateSupport.bind(this)}>
-          {this.state.userSupport == 1
-            ? <i className="fa fa-heart" aria-hidden="true"></i>
-            : <i className="fa fa-heart-o" aria-hidden="true"></i>
-          } {django.gettext('Support')}
-
-        </button>
-        <div className="btn">{this.state.supports}</div>
-      </div>
-    )
+    if(this.props.renderMobile) {
+      return (
+          <button
+            href="#"
+            onClick={this.updateSupport.bind(this)}
+            class="btn btn-idea"
+            role="button"
+            className="btn btn-support"
+            aria-label="{django.gettext('Support')}">
+              {this.state.userSupport == 1
+                ? <i className="fa fa-heart" aria-hidden="true"></i>
+                : <i className="fa fa-heart-o" aria-hidden="true"></i>
+              }
+            <span class="support-count"> {this.state.supports}</span>
+            <p class="btn-idea-label">{django.gettext('Support')}</p>
+          </button>
+      )
+    }
+    else {
+      return (
+        <div className="btn-group ideadetail-support-btn-group" role="group">
+          <button
+            className="btn btn-primary"
+            disabled={this.props.isReadOnly}
+            onClick={this.updateSupport.bind(this)}>
+            {this.state.userSupport == 1
+              ? <i className="fa fa-heart" aria-hidden="true"></i>
+              : <i className="fa fa-heart-o" aria-hidden="true"></i>
+            } {django.gettext('Support')}
+          </button>
+          <div className="btn btn-addon">{this.state.supports}</div>
+        </div>
+      )
+    }
   }
 
 }
