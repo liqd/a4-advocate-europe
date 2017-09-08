@@ -1,12 +1,11 @@
 var ReactComments = require('adhocracy4').comments
-var ReactRatings = require('adhocracy4').ratings
 var ReactFollow = require('../../../apps/follows/static/follows/react_follows.jsx')
+var ReactSupport = require('../../../apps/ideas/static/advocate_europe_ideas/react_supports.jsx')
 
 require('../../../advocate_europe/assets/js/advocate_europe')
 
 module.exports = {
-  'renderComment': ReactComments.renderComment,
-  'renderRatings': ReactRatings.renderRatings
+  'renderComment': ReactComments.renderComment
 }
 
 var initialiseWidget = function (project, name, initialiser) {
@@ -28,3 +27,4 @@ var initialiseWidget = function (project, name, initialiser) {
 }
 
 initialiseWidget('follows', ReactFollow.renderFollow)
+initialiseWidget('supports', ReactSupport.renderSupports)

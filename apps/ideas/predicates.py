@@ -22,3 +22,10 @@ def is_winner(user, obj):
         return obj.is_winner
     else:
         return obj.idea.is_winner
+
+
+@rules.predicate
+def is_innovator(user):
+    if user.is_authenticated:
+        return user.is_innovator
+    return False

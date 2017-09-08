@@ -251,6 +251,16 @@
 
 .nav .nav-support {
     float: left;
+    background-color: $brand-primary;
+
+    a,
+    a:hover,
+    a:active,
+    a:focus,
+    a:visited {
+        background-color: transparent;
+        padding: rem(10px) rem(20px) rem(9px) rem(20px);
+    }
 
     .btn-idea {
         background: $brand-primary;
