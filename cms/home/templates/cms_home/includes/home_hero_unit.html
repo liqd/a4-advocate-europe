@@ -1,24 +1,22 @@
 {% load i18n wagtailimages_tags wagtailembeds_tags static %}
-{% image image fill-768x500 as smallImage %}
+{% image image fill-700x500 as smallImage %}
 {% image image fill-1700x500-c100 as bigImage %}
 <header class="herounit">
-    <div class="herounit-image visible-lg visible-xl" style="background-image: url({{ bigImage.url }})"></div>
-    <div class="herounit-image visible-xs visible-sm visible-md" style="background-image: url({{ smallImage.url }})"></div>
-    <div class="container">
-        <div class="container">
-            <div class="herounit-header">
-                <h1 class="herounit-title">{{ title }}</h1>
-                <div class="herounit-content">
-                    <p class="herounit-description">
-                        {{ description }}
-                    </p>
-                    {% if website %}
-                    <a href="{{ website }}" target="_blank" class="btn btn-ae-secondary btn-md"><i class="fa fa-link" aria-hidden="true"></i> {% trans 'More' %}</a>
-                    {% endif %}
-                    {% if videoplayer_url %}
-                    <a href="#video" class="btn btn-ae-secondary btn-md" data-toggle="modal"><i class="fa fa-play" aria-hidden="true"></i> {% trans 'Play video' %}</a>
-                    {% endif %}
-                </div>
+    <div class="herounit-image visible-lg-block visible-xl-block" style="background-image: url({{ bigImage.url }})"></div>
+    <div class="herounit-image visible-xs-block visible-sm-block visible-md-block" style="background-image: url({{ smallImage.url }})"></div>
+    <div class="container herounit-container">
+        <div class="herounit-header">
+            <h1 class="herounit-title">{{ title }}</h1>
+            <div class="herounit-content">
+                <p class="herounit-description">
+                    {{ description }}
+                </p>
+                {% if website %}
+                <a href="{{ website }}" target="_blank" class="btn btn-ae-secondary btn-md"><i class="fa fa-link" aria-hidden="true"></i> {% trans 'More' %}</a>
+                {% endif %}
+                {% if videoplayer_url %}
+                <a href="#video" class="btn btn-ae-secondary btn-md" data-toggle="modal"><i class="fa fa-play" aria-hidden="true"></i> {% trans 'Play video' %}</a>
+                {% endif %}
             </div>
         </div>
     </div>

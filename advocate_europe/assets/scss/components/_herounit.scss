@@ -1,19 +1,8 @@
 .herounit {
-    background-size: cover;
     text-align: left;
-    min-height: 500px;
     position: relative;
-    padding: rem(40px) 0;
-
-    // centering the container vertically and horizontally
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-    @media only screen and (max-width: $screen-xs) {
-        min-height: 200px;
-    }
+    padding: 0;
+    background-color: $gray-lighter;
 
     &:after {
         content: '\A';
@@ -31,16 +20,33 @@
 
 .herounit-image {
     width: 100%;
-    height: 100%;
+    min-height: 500px;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
 
+    @media only screen and (max-width: $screen-xs) {
+        min-height: 235px;
+        //background-size: 100% 60%;
+    }
+}
+
+.herounit-container {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+
+    // centering the container vertically and horizontally
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    @media screen and (max-width: $screen-xs) {
+        position: static;
+    }
 }
 
 .herounit-header {
@@ -69,15 +75,14 @@
 .herounit-title {
     font-size: rem($ae-font-size-extra-large);
     margin: rem(0 0 10px 0);
+    font-weight: bold;
+    color: #fff;
+    position: absolute;
+    bottom: 100%;
 
     @media screen and (max-width: $screen-xs) {
         font-size: rem(24px);
-        padding: rem(0 10px);
     }
-
-    font-weight: normal;
-    color: #fff;
-    margin-bottom: rem(10px);
 
     &:after {
         background: rgba(0, 0, 0, 0.5);
@@ -91,7 +96,13 @@
 }
 
 .herounit-content {
-    margin-left: rem(15px);
+    margin-left: rem(20px);
+
+    @media screen and (max-width: $screen-xs) {
+        padding-top: rem(10px);
+        padding-bottom: rem(20px);
+        margin-left: 0;
+    }
 }
 
 .herounit-description {
@@ -101,8 +112,8 @@
     line-height: 1.38;
 
     @media screen and (max-width: $screen-xs) {
-        padding: 0;
         font-size: rem(18px);
+        color: $gray-dark;
     }
 }
 
