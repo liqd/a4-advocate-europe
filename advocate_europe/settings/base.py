@@ -299,7 +299,7 @@ LOGIN_REDIRECT_URL = '/'
 ACCOUNT_SIGNUP_FORM_CLASS = 'apps.users.forms.SignUpForm'
 
 
-#ACCOUNT_ADAPTER = 'apps.users.adapters.AccountAdapter'
+ACCOUNT_ADAPTER = 'apps.users.adapters.AccountAdapter'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
 ACCOUNT_EMAIL_REQUIRED = True
