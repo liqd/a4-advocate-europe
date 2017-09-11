@@ -1,5 +1,6 @@
 import factory
 import pytest
+from django.core.urlresolvers import reverse
 from pytest_factoryboy import register
 from rest_framework.test import APIClient
 
@@ -32,3 +33,8 @@ def image():
 @pytest.fixture
 def apiclient():
     return APIClient()
+
+
+@pytest.fixture
+def signup_url():
+    return reverse('account_signup')
