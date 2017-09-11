@@ -31,12 +31,16 @@ fixtures:
 	$(VIRTUAL_ENV)/bin/python3 manage.py loadtestdata advocate_europe_ideas.IdeaSketch:7
 
 watch:
-	trap 'kill %1' KILL; \
+	trap 'kill %1; kill %2' KILL; \
 	npm run watch & \
+	$(VIRTUAL_ENV)/bin/python3 manage.py process_tasks & \
 	$(VIRTUAL_ENV)/bin/python3 manage.py runserver 8000
 
 server:
 	$(VIRTUAL_ENV)/bin/python3 manage.py runserver 8000
+
+background-tasks:
+	$(VIRTUAL_ENV)/bin/python3 manage.py process_tasks
 
 test:
 	$(VIRTUAL_ENV)/bin/py.test --reuse-db
@@ -58,5 +62,5 @@ lint:
 	$(VIRTUAL_ENV)/bin/isort --diff -rc -c $(SOURCE_DIRS) ||  EXIT_STATUS=$$?; \
 	$(VIRTUAL_ENV)/bin/flake8 $(SOURCE_DIRS) --exclude migrations,settings ||  EXIT_STATUS=$$?; \
 	npm run lint --silent ||  EXIT_STATUS=$$?; \
-  $(VIRTUAL_ENV)/bin/python manage.py makemigrations --dry-run --check --noinput || EXIT_STATUS=$$?; \
+	$(VIRTUAL_ENV)/bin/python manage.py makemigrations --dry-run --check --noinput || EXIT_STATUS=$$?; \
 	exit $${EXIT_STATUS}
