@@ -1,5 +1,8 @@
 from contextlib import contextmanager
 from datetime import datetime, timedelta
+from urllib.parse import urlparse
+
+from django.core.urlresolvers import resolve
 from freezegun import freeze_time
 
 
@@ -19,3 +22,10 @@ def active_phase(module, phase_type):
         yield
 
     phase.delete()
+
+
+def redirect_target(response):
+    if response.status_code not in [301, 302]:
+        raise Exception("Response wasn't a redirect")
+    location = urlparse(response['location'])
+    return resolve(location.path).url_name
