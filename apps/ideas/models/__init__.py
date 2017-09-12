@@ -60,6 +60,7 @@ class Idea(AbstractIdea, Item):
     jury_statement = models.TextField(
         verbose_name='Why this idea?', blank=True)
     community_award_winner = models.BooleanField(default=False)
+    budget_granted = models.IntegerField(null=True, blank=True)
     ratings = GenericRelation(rating_models.Rating,
                               related_query_name='idea_sketch',
                               object_id_field='object_pk')
