@@ -426,6 +426,7 @@
     margin-top: 20px;
 
     .well {
+        width: 30%;
         background-color: $ae-light-gray;
         border-radius: 0;
         border: none;
@@ -433,6 +434,10 @@
         margin-right: 10px;
         min-height: 85px;
         box-shadow: 0 1px 0 0 $ae-light-gray-shadow;
+
+        @media screen and (max-width: $screen-sm-max) {
+            min-height: 120px;
+        }
     }
 
     h3 {
