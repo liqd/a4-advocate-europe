@@ -19,9 +19,11 @@
                     {% endif %}
                 </div>
             </div>
+            {% if view.display_type == 'idea' %}
             <div class="col-md-3 col-sm-4 hidden-xs ideadetailheader-right">
                 {% react_supports idea False %}
             </div>
+            {% endif %}
         </div>
     </div>
 </div>
