@@ -14,7 +14,7 @@
         {% if blog_items %}
             <div class="row equal">
                 {% for post in blog_items %}
-                    <div class="col-md-4 col-sm-4 {% if blog_items.count == 1 %}col-md-offset-4 col-sm-offset-4{% endif %} {% if blog_items.count == 2 and forloop.first %}col-md-offset-2 col-sm-offset-2{% endif %} ">
+                    <div class="col-md-4 col-sm-4 col-xs-12 {% if blog_items.count == 1 %}col-md-offset-4 col-sm-offset-4{% endif %} {% if blog_items.count == 2 and forloop.first %}col-md-offset-2 col-sm-offset-2{% endif %} ">
                         <div class="blockblog-entry">
                             <div class="blockblog-image">
                             <a href="{% pageurl post %}">
