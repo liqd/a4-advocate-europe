@@ -66,6 +66,7 @@ class IdeaAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Jury Section', {
             'fields': ('jury_statement',
+                       'budget_granted',
                        ('is_on_shortlist',
                         'community_award_winner',
                         'is_winner')
