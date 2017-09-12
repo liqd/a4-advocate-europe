@@ -225,6 +225,7 @@ class IdeaSketchArchivedDetailView(IdeaDetailView):
     template_name = 'advocate_europe_ideas/idea_detail.html'
     context_object_name = 'idea'
     slug_field = 'idea__slug'
+    queryset = IdeaSketchArchived.objects.all()
 
 
 class ProposalCreateWizard(PermissionRequiredMixin,

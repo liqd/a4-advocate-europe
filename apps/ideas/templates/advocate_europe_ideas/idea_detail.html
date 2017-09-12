@@ -29,9 +29,11 @@
 
             <div class="row hidden-lg hidden-md hidden-sm ideadetail-xs-support">
                 <ul class="nav">
+                    {% if view.display_type == 'idea' %}
                     <li class="nav-idea nav-support">
                         {% react_supports idea True %}
                     </li>
+                    {% endif %}
                     {% include 'advocate_europe_ideas/includes/idea_detail_watch_btns.html' with xs_class="" spacing="<br>" %}
                 </ul>
             </div>
