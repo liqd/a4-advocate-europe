@@ -98,6 +98,14 @@
                                 </span>
                             </p>
                         {% endfor %}
+                        <div class="idea-dates">
+                            {% trans 'Idea created on' %} {{ idea.created|date }}
+                        </div>
+                        {% if idea.modified %}
+                        <div class="idea-dates">
+                            {% trans 'Last edit on' %} {{ idea.modified|date }}
+                        </div>
+                        {% endif %}
                     </div>
 
                 </div>
