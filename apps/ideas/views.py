@@ -159,13 +159,13 @@ class IdeaDetailView(generic.DetailView):
 
     @property
     def idea_image(self):
-        try:
+        if self.object.idea_image_exists:
             image_dict = {
                 'url': self.object.idea_image.url,
                 'width': self.object.idea_image.width,
                 'height': self.object.idea_image.height,
             }
-        except FileNotFoundError:
+        else:
             image_dict = {
                 'url': static('images/placeholder_ideadetail_768x320.png'),
                 'width': '768',
