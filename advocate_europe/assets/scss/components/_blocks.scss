@@ -13,6 +13,20 @@
     &-text {
         margin: rem(10px 0 20px 0);
     }
+
+    &-btn {
+        font-size: rem(16px);
+        font-weight: 600;
+        padding: rem(10px 18px);
+        width: 100%;
+    }
+
+    &-linktext {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+        overflow: hidden;
+    }
 }
 
 .block-carousel {
@@ -139,13 +153,9 @@
 .blockblog-btn {
     margin-top: rem(20px);
     border-radius: 5px;
-    background-color: $ae-brand-orange;
-
-    a {
-        color: $gray-dark;
-        font-size: 16px;
-        font-weight: bold;
-    }
+    font-size: 16px;
+    font-weight: bold;
+    padding: rem(10px 18px);
 }
 
 .three-column-text-block {
@@ -178,9 +188,7 @@
         max-width: rem(200px);
     }
 
-    a {
-        color: #fff;
-        font-size: 14px;
+    .teasertextblock-linktext {
         white-space: nowrap;
         text-overflow: ellipsis;
         display: block;

@@ -44,9 +44,7 @@
         {% if value.link.live %}
             <div class="row text-center">
                 <div class="col-md-12">
-                    <div class="btn blockblog-btn">
-                        <a href={{ value.link.url }} role="button">{% trans 'More' %}</a>
-                    </div>
+                    <a href={{ value.link.url }} class="btn btn-ae-secondary blockblog-btn" role="button">{% trans 'More' %}</a>
                 </div>
             </div>
         {% endif %}
