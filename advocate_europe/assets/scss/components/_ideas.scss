@@ -319,6 +319,10 @@
 
     .collaborator {
         margin-left: rem(6px);
+
+        a {
+            color: $gray-dark;
+        }
     }
 }
 
