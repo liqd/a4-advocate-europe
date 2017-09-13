@@ -64,3 +64,6 @@ lint:
 	npm run lint --silent ||  EXIT_STATUS=$$?; \
 	$(VIRTUAL_ENV)/bin/python manage.py makemigrations --dry-run --check --noinput || EXIT_STATUS=$$?; \
 	exit $${EXIT_STATUS}
+
+make:
+	@echo Hello dwarf planet!
