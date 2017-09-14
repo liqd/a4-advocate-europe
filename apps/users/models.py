@@ -2,15 +2,14 @@ from django.contrib.auth import models as auth_models
 from django.core import validators
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models import Q
 from django.templatetags.static import static
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django_countries import fields as countries_fields
-
 from easy_thumbnails.files import get_thumbnailer
 
 from adhocracy4.images import fields
-
 from apps.ideas.models import Idea
 
 from . import USERNAME_INVALID_MESSAGE, USERNAME_REGEX
@@ -158,9 +157,10 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
     @property
     def is_innovator(self):
-        return Idea.objects\
-                   .filter(creator=self)\
-                   .count() > 0
+        return Idea.objects.filter(
+            Q(creator=self) |
+            Q(collaborators=self)
+        ).count() > 0
 
     def avatar_or_fallback_url(self):
         if self._avatar:
