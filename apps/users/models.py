@@ -68,7 +68,7 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         blank=True,
         verbose_name=_('Short biographie'),
         help_text=_('Tell us about yourself. '
-                    'fields of profession and interest.'
+                    'fields of profession and interest. '
                     '(max. 250 characters)')
     )
 
@@ -76,7 +76,7 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         blank=True,
         verbose_name=_('Your interest in europe'),
         help_text=_('Why do you care about Europe? '
-                    'Where do you try to make a change?'
+                    'Where do you try to make a change? '
                     '(max. 250 characters)')
     )
 
