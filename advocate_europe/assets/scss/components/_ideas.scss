@@ -279,6 +279,10 @@
     a:focus,
     a:visited {
         background-color: transparent;
+        padding: 0;
+    }
+
+    .btn-support {
         padding: rem(10px) rem(20px) rem(9px) rem(20px);
     }
 }
