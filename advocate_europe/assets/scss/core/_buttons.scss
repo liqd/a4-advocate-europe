@@ -2,6 +2,10 @@
     @include button-variant($btn-ae-secondary-color, $btn-ae-secondary-bg, $btn-ae-secondary-border);
 }
 
+.btn-light-blue {
+    @include button-variant($btn-ae-light-blue-color, $btn-ae-light-blue-bg, $btn-ae-light-blue-border);
+}
+
 .btn-github {
     @include button-variant($btn-ae-github-color, $btn-ae-github-bg, $btn-ae-github-border);
     color: white;

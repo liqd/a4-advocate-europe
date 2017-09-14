@@ -19,8 +19,8 @@
 
         .user-indicator-profile-btn,
         .dropdown-toggle {
-            background-color: $ae-light-gray;
-            color: $gray-dark;
+            @extend .btn;
+            @extend .btn-default;
             border: none;
             height: 100%;
         }

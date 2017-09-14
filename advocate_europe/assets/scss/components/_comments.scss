@@ -72,24 +72,27 @@
         margin: 0;
 
         .dropdown-toggle {
-            padding: 0;
+            @extend .btn;
+            @extend .btn-default;
             margin-left: rem(5px);
-            border: 0;
-            background-color: $ae-light-gray;
-            font-size: rem(14px);
+            border: none;
             font-weight: 600;
-            color: $gray-dark;
             height: rem(30px);
             width: rem(30px);
             border-radius: 5px;
+            padding: 0;
             text-align: center;
             vertical-align: baseline;
+        }
+
+        .open .dropdown-menu {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
     }
 
     .dropdown-menu {
         padding: 0;
-        border: 0;
+        border: none;
         border-radius: 5px;
         min-width: rem(80px);
 
@@ -133,14 +136,14 @@
 
     .navbar-right {
         .comment-reply-button {
-            border: 0;
-            background-color: $ae-light-gray;
-            font-size: rem(14px);
+            @extend .btn;
+            @extend .btn-default;
+            background-color: $btn-default-bg;
+            border: none;
             font-weight: 600;
-            color: $gray-dark;
+            padding: 0 rem(11px);
             height: rem(30px);
-            border-radius: 5px;
-            padding: rem(5px) rem(11px);
+            vertical-align: baseline;
         }
 
         i.fa {
@@ -154,13 +157,13 @@
     float: left;
 
     .rating-button {
-        border: 0;
-        background-color: $ae-light-gray;
-        font-size: rem(14px);
+        @extend .btn;
+        @extend .btn-default;
+        border: none;
         font-weight: 600;
-        color: $gray-dark;
+        padding: 0 rem(11px);
         height: rem(30px);
-        padding: rem(5px) rem(11px);
+        vertical-align: baseline;
     }
 
     .rating-up {

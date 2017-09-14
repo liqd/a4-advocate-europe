@@ -51,7 +51,7 @@
     margin-right: 0;
     text-align: center;
 
-    @media screen and (max-width: $screen-sm-max) {
+    @media screen and (max-width: $screen-xs-max) {
         margin-top: rem(20px);
     }
 }
@@ -90,11 +90,11 @@
     padding: 0;
     min-height: rem(300px);
 
-    @media screen and (max-width: $screen-lg-min) {
+    @media screen and (max-width: $screen-md-max) {
         min-height: rem(230px);
     }
 
-    @media screen and (max-width: $screen-md-min) {
+    @media screen and (max-width: $screen-sm-max) {
         min-height: rem(200px);
     }
 }
@@ -105,11 +105,11 @@
     padding: 0;
     min-height: rem(500px);
 
-    @media screen and (max-width: $screen-lg-min) {
+    @media screen and (max-width: $screen-md-max) {
         min-height: rem(300px);
     }
 
-    @media screen and (max-width: $screen-md-min) {
+    @media screen and (max-width: $screen-sm-max) {
         min-height: rem(230px);
     }
 }
@@ -136,42 +136,44 @@
 }
 
 .blogindex-category-btn {
-    background-color: $brand-primary;
     margin-bottom: rem(5px);
-    border-radius: rem(5px);
     white-space: normal;
+    font-size: rem(12px);
+    font-weight: bold;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &:visited {
+        text-decoration: none;
+    }
+
+    &.active {
+        .fa,
+        .category-name {
+            font-size: rem(12px);
+            font-weight: bold;
+        }
+    }
 
     @media screen and (min-width: $screen-sm-min) {
         max-width: rem(150px);
     }
 
     .category-name {
-        color: #fff;
-        font-size: rem(12px);
-        font-weight: bold;
         word-wrap: break-word;
-    }
-
-    &.active {
-        background-color: $ae-light-blue;
-        box-shadow: none;
-
-        a,
-        .category-name {
-            color: $gray-base;
-        }
-    }
-
-    a:hover,
-    a:active,
-    a:visited,
-    a:focus {
-        text-decoration: none;
     }
 
     .btn-groupie {
         padding: 0;
         white-space: normal;
+        // make btns in group same height
+        float: none;
+        display: table-cell;
+
+        &:active {
+            box-shadow: none;
+        }
 
         @media screen and (min-width: $screen-sm-min) {
             max-width: rem(110px);
@@ -208,11 +210,11 @@
 }
 
 .blogpage-btn {
-    a {
-        color: $gray-base;
-        font-size: rem(16px);
-        font-weight: bold;
-        text-decoration: none;
+    font-size: rem(16px);
+    font-weight: bold;
+
+    .fa {
+        padding-right: rem(5px);
     }
 }
 
