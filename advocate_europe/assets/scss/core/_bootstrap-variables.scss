@@ -179,6 +179,10 @@ $btn-primary-color:              #fff !default;
 $btn-primary-bg:                 $brand-primary !default;
 $btn-primary-border:             darken($btn-primary-bg, 5%) !default;
 
+$btn-ae-light-blue-color:        $gray-base !default;
+$btn-ae-light-blue-bg:           $ae-light-blue !default;
+$btn-ae-light-blue-border:       darken($btn-ae-light-blue-bg, 5%) !default;
+
 $btn-ae-secondary-color:         $gray-dark !default;
 $btn-ae-secondary-bg:            $brand-secondary !default;
 $btn-ae-secondary-border:        darken($btn-ae-secondary-bg, 5%) !default;

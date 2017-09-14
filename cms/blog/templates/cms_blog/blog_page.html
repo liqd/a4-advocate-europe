@@ -38,9 +38,7 @@
 
     <div class="container blogpage">
         <div class="container-narrow">
-            <div class="btn btn-default blogpage-btn">
-                <a href="{{ page.get_parent.url }}" role="button"><i class="fa fa-chevron-left" aria-hidden="true"></i> {% trans "To overview" %}</a>
-            </div>
+            <a href="{{ page.get_parent.url }}" class="btn btn-default blogpage-btn" role="button"><i class="fa fa-chevron-left" aria-hidden="true"></i> {% trans "To overview" %}</a>
         </div>
         <div class="container-medium">
             {% include 'cms_blog/blog_categories.html' with categories=page.categories.all %}
