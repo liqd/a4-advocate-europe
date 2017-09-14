@@ -157,11 +157,10 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
     @property
     def is_innovator(self):
-        user_ideas = Idea.objects.filter(
+        return Idea.objects.filter(
             Q(creator=self) |
             Q(collaborators=self)
-        ).count()
-        return user_ideas > 0
+        ).count() > 0
 
     def avatar_or_fallback_url(self):
         if self._avatar:
