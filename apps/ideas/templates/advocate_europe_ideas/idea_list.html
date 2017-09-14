@@ -62,6 +62,7 @@
             {% if is_paginated %}
                 {% include 'includes/pagination.html' %}
             {% endif %}
+            <div class="idealist-found {% if not is_paginated %}margin{% endif %}"><p>{{ view.count }} {% trans "Ideas found" %}</p></div>
         </div>
     </div>
 
