@@ -17,15 +17,19 @@
         position: static; // overwrite position relative of button group
         height: rem(31px);
 
+        /* stylelint-disable max-nesting-depth */
+
         .user-indicator-profile-btn,
         .dropdown-toggle {
-            @extend .btn;
-            @extend .btn-default;
+            background-color: $ae-light-gray;
+            color: $gray-dark;
             border: none;
             height: 100%;
-        }
 
-        /* stylelint-disable max-nesting-depth */
+            &:hover {
+                background-color: darken($ae-light-gray, 10%);
+            }
+        }
 
         &.open {
             a,
