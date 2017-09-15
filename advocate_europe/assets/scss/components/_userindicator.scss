@@ -110,7 +110,6 @@
 .login-register-btn-group {
     margin-top: $navbar-padding-vertical/1.5;
     display: block;
-    position: static; // overwrite position relative of button group
     height: rem(31px);
 
     @media screen and (max-width: $grid-float-breakpoint-max) {
