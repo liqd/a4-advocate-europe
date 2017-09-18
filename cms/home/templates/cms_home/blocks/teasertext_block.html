@@ -5,13 +5,11 @@
     </div>
     <div>
         {% if value.link.live %}
-        <div class="btn teasertextblock-btn">
             {% if value.link_text %}
-                <a href="{{ value.link.url }}" role="button">{{ value.link_text }}</a>
+                <a href="{{ value.link.url }}" class="btn btn-primary teasertextblock-btn" role="button"><span class="teasertextblock-linktext">{{ value.link_text }}</span></a>
             {% else %}
-                <a href="{{ value.link.url }}" role="button">{{ value.link.title }}</a>
+                <a href="{{ value.link.url }}" class="btn btn-primary teasertextblock-btn" role="button"><span class="teasertextblock-linktext">{{ value.link.title }}</span></a>
             {% endif %}
-        </div>
         {% endif %}
     </div>
 </div>

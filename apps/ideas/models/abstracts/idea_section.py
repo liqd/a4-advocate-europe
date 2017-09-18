@@ -104,3 +104,14 @@ class AbstractIdeaSection(models.Model):
         if self.idea_topics_other:
             idea_topics.append(self.idea_topics_other)
         return idea_topics
+
+    @property
+    def idea_image_exists(self):
+        if self.idea_image:
+            try:
+                self.idea_image.width
+                return True
+            except FileNotFoundError:
+                return False
+        else:
+            return False

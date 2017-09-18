@@ -4,8 +4,13 @@
     <div class="ideadetailtab-header">
         <span class="ideadetailtab-header-content-switcher">
             {% if idea.idea_sketch_archived %}
-                <a class="{% if view.display_type == 'idea_sketch_archive' %}active{% endif %}" href="{% url 'idea-sketch-archived-detail' idea.slug %}">Ideasketch</a> |
-                <a class="{% if view.display_type == 'idea'%} active {% endif %}" href="{% url 'idea-detail' idea.slug %}">Proposal</a>
+            {% if view.display_type == 'idea_sketch_archive' %}
+                <span class="active" >Ideasketch</span> |
+                <a href="{% url 'idea-detail' idea.slug %}">Proposal</a>
+            {% else %}
+                <a href="{% url 'idea-sketch-archived-detail' idea.slug %}">Ideasketch</a> |
+                <span class="active">Proposal</span>
+            {% endif %}
             {% else %}
             Ideasketch
             {% endif %}

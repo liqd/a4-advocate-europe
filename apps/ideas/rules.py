@@ -78,7 +78,9 @@ rules.add_perm(
     'advocate_europe_ideas.rate_idea',
     (
         predicates.is_innovator &
-        phase_predicates.phase_allows_rate
+        phase_predicates.phase_allows_rate &
+        ~mod_predicates.is_owner &
+        ~predicates.is_collaborator
     ) |
     is_superuser
 )

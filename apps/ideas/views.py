@@ -159,15 +159,18 @@ class IdeaDetailView(generic.DetailView):
 
     @property
     def idea_image(self):
-        image_dict = {
-            'url': static('images/placeholder_ideadetail_768x320.png'),
-            'width': '768',
-            'height': '320',
-        }
-        if self.object.idea_image:
-            image_dict['url'] = self.object.idea_image.url
-            image_dict['width'] = self.object.idea_image.width
-            image_dict['height'] = self.object.idea_image.height
+        if self.object.idea_image_exists:
+            image_dict = {
+                'url': self.object.idea_image.url,
+                'width': self.object.idea_image.width,
+                'height': self.object.idea_image.height,
+            }
+        else:
+            image_dict = {
+                'url': static('images/placeholder_ideadetail_768x320.png'),
+                'width': '768',
+                'height': '320',
+            }
         return image_dict
 
     def get_context_data(self, **kwargs):

@@ -158,19 +158,17 @@
 
 .ideadetail-btn {
     margin-top: rem(20px);
+    color: $gray-base;
+    font-size: rem(16px);
+    font-weight: 600;
 
-    a {
-        color: $gray-base;
-        font-size: rem(16px);
-        font-weight: 600;
+    .fa {
+        padding-right: rem(5px);
     }
 
     @media screen and (max-width: $screen-sm-max) {
         margin-top: rem(10px);
-
-        a {
-            font-size: rem(14px);
-        }
+        font-size: rem(14px);
     }
 }
 
@@ -211,6 +209,11 @@
     margin-right: 0;
     float: right;
 
+    &:hover {
+        background-color: darken($btn-default-bg, 10%);
+        border-color: darken($btn-default-border, 12%);
+    }
+
     .btn-idea,
     .btn-follow {
         background-color: transparent;
@@ -236,6 +239,11 @@
     }
 
     @media screen and (max-width: $screen-xs-max) {
+        .btn-idea:hover,
+        .btn-follow:hover {
+            background-color: darken($brand-primary-darker, 10%);
+        }
+
         .btn-idea,
         .btn-follow {
             padding: rem(12px 20px 9px 20px);
@@ -257,17 +265,25 @@
     float: left;
     background-color: $brand-primary;
 
+    .btn-idea {
+        background: $brand-primary;
+    }
+
+    &:hover {
+        background-color: darken($btn-primary-bg, 10%);
+    }
+
     a,
     a:hover,
     a:active,
     a:focus,
     a:visited {
         background-color: transparent;
-        padding: rem(10px) rem(20px) rem(9px) rem(20px);
+        padding: 0;
     }
 
-    .btn-idea {
-        background: $brand-primary;
+    .btn-support {
+        padding: rem(10px) rem(20px) rem(9px) rem(20px);
     }
 }
 
@@ -319,6 +335,10 @@
 
     .collaborator {
         margin-left: rem(6px);
+
+        a {
+            color: $gray-dark;
+        }
     }
 }
 
