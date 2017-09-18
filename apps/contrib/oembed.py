@@ -4,24 +4,8 @@ from micawber.providers import Provider, ProviderRegistry
 oembed_providers = ProviderRegistry(cache)
 
 oembed_providers.register(
-    'http://\S*imgur\.com/\S+',
-    Provider('http://api.imgur.com/oembed')
-),
-oembed_providers.register(
-    'https?://\S*?flickr.com/\S+',
-    Provider('https://www.flickr.com/services/oembed/')
-)
-oembed_providers.register(
     'https?://flic\.kr/\S*',
     Provider('https://www.flickr.com/services/oembed/')
-)
-oembed_providers.register(
-    'http://i\S*.photobucket.com/albums/\S+',
-    Provider('http://photobucket.com/oembed')
-)
-oembed_providers.register(
-    'http://gi\S*.photobucket.com/groups/\S+',
-    Provider('http://photobucket.com/oembed')
 )
 oembed_providers.register(
     'https://\S*?soundcloud.com/\S+',
