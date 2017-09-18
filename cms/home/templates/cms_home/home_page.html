@@ -30,7 +30,7 @@
 
 {% block content %}
 
-        {% include "cms_home/includes/home_hero_unit.html" with image=page.random_image title=page.translated_title website=page.website videoplayer_url=page.videoplayer_url description=page.description %}
+        {% include "cms_home/includes/home_hero_unit.html" with image=page.random_image title=page.translated_title website=page.website link_text=page.website_link_text videoplayer_url=page.videoplayer_url video_button_text=page.video_button_text description=page.description %}
 
         {% for block in page.body %}
             {{ block }}
