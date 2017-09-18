@@ -1,8 +1,8 @@
 import random
 
 from django.db import models
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, ObjectList,
-                                                StreamFieldPanel,
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
+                                                ObjectList, StreamFieldPanel,
                                                 TabbedInterface)
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.fields import StreamField
@@ -91,7 +91,21 @@ class HomePage(Page):
     )
 
     videoplayer_url = models.URLField(blank=True, verbose_name='Video URL')
+    video_button_text_de = models.CharField(
+        default='Video abspielen', blank=True, max_length=100)
+    video_button_text_en = models.CharField(
+        default='Play Video', blank=True, max_length=100)
+
+    video_button_text = translations.TranslatedField('video_button_text')
+
     website = models.URLField(blank=True, verbose_name='Website')
+    website_link_text_de = models.CharField(
+        default='mehr', blank=True, max_length=100)
+    website_link_text_en = models.CharField(
+        default='more', blank=True, max_length=100)
+
+    website_link_text = translations.TranslatedField('website_link_text')
+
     subpage_types = ['cms_blog.BlogIndexPage',
                      'cms_home.SimplePage',
                      'cms_home.StructuredTextPage']
@@ -105,13 +119,35 @@ class HomePage(Page):
                            'image_{}'.format(random.choice(image_numbers)))
 
     content_panels = [
-        ImageChooserPanel('image_1'),
-        ImageChooserPanel('image_2'),
-        ImageChooserPanel('image_3'),
-        ImageChooserPanel('image_4'),
-        ImageChooserPanel('image_5'),
-        FieldPanel('videoplayer_url'),
-        FieldPanel('website')
+        MultiFieldPanel(
+            [
+                ImageChooserPanel('image_1'),
+                ImageChooserPanel('image_2'),
+                ImageChooserPanel('image_3'),
+                ImageChooserPanel('image_4'),
+                ImageChooserPanel('image_5'),
+            ],
+            heading="Images",
+            classname="collapsible"
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel('videoplayer_url'),
+                FieldPanel('video_button_text_en'),
+                FieldPanel('video_button_text_de')
+            ],
+            heading="Video",
+            classname="collapsible"
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel('website'),
+                FieldPanel('website_link_text_en'),
+                FieldPanel('website_link_text_de')
+            ],
+            heading="Link",
+            classname="collapsible"
+        )
     ]
 
     en_panels = [
