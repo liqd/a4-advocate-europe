@@ -84,17 +84,16 @@
             text-align: center;
             vertical-align: baseline;
         }
-
-        .open .dropdown-menu {
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
     }
 
-    .dropdown-menu {
+    .open .dropdown-menu {
+        position: absolute;
+        background-color: #fff;
         padding: 0;
         border: none;
         border-radius: 5px;
         min-width: rem(80px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 
         li.divider {
             height: rem(1px);
@@ -135,6 +134,9 @@
     }
 
     .navbar-right {
+        float: right;
+        display: block;
+
         .comment-reply-button {
             @extend .btn;
             @extend .btn-default;
