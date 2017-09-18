@@ -21,6 +21,22 @@ body {
     }
 }
 
+
+@mixin selection {
+    ::selection {
+        @content;
+    }
+
+    ::moz-selection {
+        @content;
+    }
+}
+
+@include selection {
+    color: $gray-dark;
+    background: $ae-brand-orange;
+}
+
 .footer {
     position: absolute;
     right: 0;
