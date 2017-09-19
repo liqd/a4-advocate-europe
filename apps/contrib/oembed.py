@@ -4,6 +4,10 @@ from micawber.providers import Provider, ProviderRegistry
 oembed_providers = ProviderRegistry(cache)
 
 oembed_providers.register(
+    'https?://\S*?flickr.com/\S+',
+    Provider('https://www.flickr.com/services/oembed/')
+)
+oembed_providers.register(
     'https?://flic\.kr/\S*',
     Provider('https://www.flickr.com/services/oembed/')
 )
