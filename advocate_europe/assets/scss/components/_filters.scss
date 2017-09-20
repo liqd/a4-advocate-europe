@@ -155,3 +155,35 @@
         }
     }
 }
+
+.filter-list {
+    padding-left: 0;
+    list-style: none;
+    font-weight: 600;
+}
+
+@media screen and (min-width: $screen-sm-min) {
+    .filter-bar .filter-list {
+        float: left;
+    }
+
+    .filter-bar .filter-list-sort {
+        float: right;
+    }
+}
+
+.filter-list-item {
+    display: inline-block;
+
+    a {
+        color: $gray;
+    }
+
+    .selected {
+        color: $brand-primary;
+    }
+
+    & + :before {
+        content: '| ';
+    }
+}

@@ -1,19 +1,30 @@
 import django_filters
+from django.forms.utils import flatatt
 from django.utils.translation import ugettext_lazy as _
 
-from adhocracy4.filters import widgets
 from adhocracy4.filters.filters import DefaultsFilterSet
 
 from apps.ideas import models as idea_models
 
 
-class ParticipationFilterWidget(widgets.DropdownLinkWidget):
-    label = _('Participation')
+class LinkWidget(django_filters.widgets.LinkWidget):
+    default_list_attrs = {'class': 'filter-list'}
+    default_item_attrs = {'class': 'filter-list-item'}
+
+    def __init__(self, attrs=None):
+        super().__init__(attrs=self.default_list_attrs.copy())
+
+    def option_string(self):
+        return (
+            '<li {attrs}><a%(attrs)s href="?%(query_string)s">'
+            '%(label)s</a></li>'
+        ).format(
+            attrs=flatatt(self.default_item_attrs)
+        )
 
 
-class OrderingFilterWidget(widgets.DropdownLinkWidget):
-    label = _('Sorting')
-    right = True
+class LinkSortWidget(LinkWidget):
+    default_list_attrs = {'class': 'filter-list filter-list-sort'}
 
 
 class ProfileIdeaFilterSet(DefaultsFilterSet):
@@ -80,5 +91,5 @@ class ProfileIdeaFilterSet(DefaultsFilterSet):
             ('oldest', _('Oldest')),
         ),
         empty_label=None,
-        widget=OrderingFilterWidget
+        widget=LinkSortWidget,
     )
