@@ -1,16 +1,18 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n force_translation %}
 
 {% block title %}{% trans 'Invitation to collaborate' %}{% endblock %}
 {% block content %}
-<div class="container">
-    <h2>{% blocktrans with object=object.subject %} Do you want to collaborate on "{{ object }}"?{% endblocktrans %}</h2>
-    {{ form.non_field_errors }}
-    <div class="container-narrow">
-        <p>
-            {% trans "You were invited by creator of the idea sketch. If you accept you will be able to update the idea and will be named as one of the co-creators. You can also decline and you will no longer be borthered." %}
-        </p>
+    {% force_translation 'en' %}
+    <div class="container">
+        <h2>{% blocktrans with object=object.subject %} Do you want to collaborate on "{{ object }}"?{% endblocktrans %}</h2>
+        {{ form.non_field_errors }}
+        <div class="container-narrow">
+            <p>
+                {% trans "You were invited by creator of the idea sketch. If you accept you will be able to update the idea and will be named as one of the co-creators. You can also decline and you will no longer be borthered." %}
+            </p>
+        </div>
+        {% block invite_action %}{% endblock %}
     </div>
-    {% block invite_action %}{% endblock %}
-</div>
+    {% endforce_translation %}
 {% endblock %}
