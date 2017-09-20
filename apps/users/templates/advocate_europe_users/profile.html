@@ -57,25 +57,14 @@
             <main class="tab-content profile-tab-content">
                 <div role="tabpanel" class="profile-info-pane tab-pane col-sm-3" id="info">
                     <h1 class="profile-title">{{ view.user.username }}</h1>
-                    <div>{{ view.user.motto }}</div>
+                    <div>
+                        <p>{{ view.user.biographie }}</p>
+                    </div>
+                    <div>
+                        <P>{{ view.user.europe }}</P>
+                    </div>
                     <ul class="profile-traits">
                         {% with user=view.user %}
-                        {% if user.country and user.city %}
-                        <li>
-                            <i class="fa fa-map-marker fa-fw trait-icon" aria-hidden="true"></i>
-                            <span aria-label="{% trans 'location' %}">{{ user.city }}, {{ user.country }}</span>
-                        </li>
-                        {% endif %}
-                        {% if user.occupation %}
-                        <li>
-                            <i class="fa fa-{% if user.occupation.lower == 'student' %}graduation-cap
-                                            {% elif 'party' in user.occupation.lower %}beer
-                                            {% elif 'activist' in user.occupation.lower %}hand-rock-o
-                                            {% else %}briefcase{% endif %} fa-fw trait-icon" aria-hidden="true"></i>
-                            <span aria-label="{% trans 'occupation' %}">{{ user.occupation }}</span>
-                        </li>
-                        {% endif %}
-
                         {% if user.twitter_handle %}
                         <li>
                             <i class="fa fa-twitter fa-fw trait-icon" aria-hidden="true"></i>
