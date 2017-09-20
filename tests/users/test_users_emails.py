@@ -57,7 +57,7 @@ def test_register_with_next(client, signup_url):
             'password1': 'password',
             'password2': 'password',
             'terms_of_use': 'on',
-            'next': '/en/ideas/pppp/',
+            'next': '/ideas/pppp/',
         }
     )
     assert response.status_code == 302
@@ -66,7 +66,7 @@ def test_register_with_next(client, signup_url):
     ).count() == 1
     assert len(mail.outbox) == 1
     confirmation_url = re.search(
-        r'(http://testserver/.*/?next=/en/ideas/pppp/)',
+        r'(http://testserver/.*/?next=/ideas/pppp/)',
         str(mail.outbox[0].body)
     ).group(0)
     confirm_email_response = client.get(confirmation_url)
