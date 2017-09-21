@@ -45,9 +45,9 @@
     </li>
     {% else %}
     <li>
-        <div class="btn-group user-indicator-btn-group login-register-btn-group">
-            <a href="{% url 'account_login' %}?next={{redirect_field_value }}"><span class="btn btn-default">{% trans "login" %}</span></a>
-            <a href="{% url 'account_signup' %}?next={{redirect_field_value }}"><span class="btn btn-primary">{% trans "register" %}</span></a>
+        <div class="login-register-btn-group">
+            <a class="btn btn-default" href="{% url 'account_login' %}?next={{redirect_field_value }}">{% trans "login" %}</a>
+            <a class="btn btn-primary" href="{% url 'account_signup' %}?next={{redirect_field_value }}">{% trans "register" %}</a>
         </div>
     </li>
     {% endif %}

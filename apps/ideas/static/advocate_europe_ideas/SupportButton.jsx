@@ -70,6 +70,7 @@ class SupportButton extends React.Component {
             href="#"
             onClick={this.updateSupport.bind(this)}
             class="btn btn-idea"
+            disabled={this.props.isReadOnly}
             role="button"
             className="btn btn-support"
             aria-label="{django.gettext('Support')}">

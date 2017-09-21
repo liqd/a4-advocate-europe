@@ -15,7 +15,7 @@ class IdeaPhase(phases.PhaseContent):
 
     def get_phase_filters(self, active_project_pk):
         if 'project' in self.default_filters:
-            self.default_filters.setlist('project', str(active_project_pk))
+            self.default_filters['project'] = str(active_project_pk)
         return self.default_filters
 
 

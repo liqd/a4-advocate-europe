@@ -8,8 +8,10 @@ from adhocracy4.models.base import UserGeneratedContentModel
 
 from apps.ideas.models import Idea
 
-TEXT_HELPTEXT = _("To add videos from Vimeo, "
-                  "Youtube or Facebook just paste the url "
+TEXT_HELPTEXT = _("To add content from Vimeo, "
+                  "Youtube, Facebook, flickr, "
+                  "soundcloud or instagram "
+                  "just paste the url "
                   "into the text.")
 
 

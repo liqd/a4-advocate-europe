@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
-{% load i18n static %}
+{% load i18n static force_translation %}
 
 {% block content %}
+    {% force_translation 'en' %}
     <div class="container">
         <div class="row profile-form">
             <div class="col-md-3 well">
@@ -39,10 +40,11 @@
                 </ul>
             </div>
             <div class="col-md-6">
-            {% block form %}{% endblock %}
+                {% block form %}{% endblock %}
             </div>
         </div>
     </div>
+    {% endforce_translation %}
 {% endblock %}
 
 {% block extra_js %}
