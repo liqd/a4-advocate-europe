@@ -1,11 +1,11 @@
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext as _
+
 from adhocracy4 import transforms
-
-from adhocracy4.models.base import UserGeneratedContentModel
-
 from apps.ideas.models import Idea
 
 TEXT_HELPTEXT = _("To add content from Vimeo, "
@@ -15,7 +15,7 @@ TEXT_HELPTEXT = _("To add content from Vimeo, "
                   "into the text.")
 
 
-class JourneyEntry(UserGeneratedContentModel):
+class JourneyEntry(models.Model):
     IMPACT_ROAD = 'ir'
     HEROINES = 'he'
     IMPACT_STORY = 'is'
@@ -34,6 +34,12 @@ class JourneyEntry(UserGeneratedContentModel):
         (JOIN, _('Join forces!')),
         (ANYTHING, _('Anything else?'))
     )
+
+    created = models.DateTimeField(editable=True, default=timezone.now)
+    modified = models.DateTimeField(blank=True, null=True, editable=True)
+
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                on_delete=models.CASCADE)
 
     idea = models.ForeignKey(Idea, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
@@ -54,6 +60,8 @@ class JourneyEntry(UserGeneratedContentModel):
         return reverse('idea-detail', args=[self.idea.slug])
 
     def save(self, *args, **kwargs):
+        if self.pk is not None:
+            self.modified = timezone.now()
         self.text = transforms.clean_html_field(
             self.text,
             setting='image-editor')
