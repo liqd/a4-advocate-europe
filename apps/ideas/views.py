@@ -167,7 +167,7 @@ class IdeaDetailView(generic.DetailView):
             }
         else:
             image_dict = {
-                'url': static('images/placeholder_yellow.svg'),
+                'url': static('images/placeholder_blue.svg'),
                 'width': '768',
                 'height': '320',
             }
