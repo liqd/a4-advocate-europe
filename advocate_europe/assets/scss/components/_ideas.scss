@@ -45,9 +45,12 @@
     box-shadow: 0 1px 0 0 $ae-light-gray-shadow;
 
     .idealist-image {
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: block;
         position: relative;
+        box-sizing: content-box;
         width: 100%;
-        height: rem(135px);
         overflow: hidden;
 
         .idealist-image-img {
@@ -60,7 +63,7 @@
 
         &:hover .idealist-image-img,
         &:focus .idealist-image-img {
-            transform: scale(1.2);
+            transform: scale(1.1);
         }
     }
 

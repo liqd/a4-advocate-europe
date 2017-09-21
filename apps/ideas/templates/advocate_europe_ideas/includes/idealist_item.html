@@ -1,7 +1,7 @@
 {% load static thumbnail %}
 <div class="idealist-item">
     <div class="idealist-upper">
-        <div class="idealist-image">
+        <div class="idealist-image" style="background-image:url({% if idea.idea_image_exists %} {{ idea.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_ideatileimage_400x200.png' %} {% endif %});">
             <a href="{% url 'idea-detail' slug=idea.slug %}">
                 <img class="idealist-image-img" src="{% if idea.idea_image_exists %} {{ idea.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_ideatileimage_400x200.png' %} {% endif %}"/>
             </a>
