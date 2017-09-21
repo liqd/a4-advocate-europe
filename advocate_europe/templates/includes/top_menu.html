@@ -35,12 +35,13 @@
                     </ul>
                 </li>
                 {% else %}
-                <li><a href="{{ menuitem.url }}"{% if request.path == menuitem.url %} class="is-active"{% endif %}>{{ menuitem.translated_menu_title }}</a></li>
+                <li><a href="{{ menuitem.url }}" class="{% if request.path == menuitem.url %}is-active {% else %}not-active{% endif %}">{{ menuitem.translated_menu_title }}</a></li>
                 {% endif %}
                 {% endfor %}
 
                 <li>
-                    <a href="{% url 'idea-sketch-list' %}">{% trans 'ideaspace'  %}</a>
+                    {% url 'idea-sketch-list' as idea_list %}
+                    <a href="{{ idea_list }}" class="{% if request.path == idea_list %}is-active {% else %}not-active{% endif %}">{% trans 'ideaspace'  %}</a>
                 </li>
 
                 <li class="dropdown">
