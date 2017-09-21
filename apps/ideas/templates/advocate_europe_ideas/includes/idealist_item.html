@@ -3,7 +3,7 @@
     <div class="idealist-upper">
         <div class="idealist-image">
             <a href="{% url 'idea-detail' slug=idea.slug %}">
-                <img src="{% if idea.idea_image_exists %} {{ idea.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_ideatileimage_400x200.png' %} {% endif %}"/>
+                <img src="{% if idea.idea_image_exists %} {{ idea.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_blue.svg' %} {% endif %}"/>
             </a>
             {% if idea.badge %}
             <span class="label idealist-label {{ idea.badge|cut:" " }}">{{ idea.badge }}</span>
