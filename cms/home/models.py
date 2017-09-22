@@ -1,6 +1,8 @@
+import random
+
 from django.db import models
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, ObjectList,
-                                                StreamFieldPanel,
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
+                                                ObjectList, StreamFieldPanel,
                                                 TabbedInterface)
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.fields import StreamField
@@ -38,26 +40,114 @@ class HomePage(Page):
     translated_title = translations.TranslatedField('title')
 
     # shared fields
-    image = models.ForeignKey(
+    image_1 = models.ForeignKey(
         'cms_images.CustomImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
-        verbose_name="Header Image",
+        verbose_name="Header Image 1",
+        help_text="The Image that is shown on top of the page"
+    )
+
+    image_2 = models.ForeignKey(
+        'cms_images.CustomImage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name="Header Image 2",
+        help_text="The Image that is shown on top of the page"
+    )
+
+    image_3 = models.ForeignKey(
+        'cms_images.CustomImage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name="Header Image 3",
+        help_text="The Image that is shown on top of the page"
+    )
+
+    image_4 = models.ForeignKey(
+        'cms_images.CustomImage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name="Header Image 4",
+        help_text="The Image that is shown on top of the page"
+    )
+
+    image_5 = models.ForeignKey(
+        'cms_images.CustomImage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name="Header Image 5",
         help_text="The Image that is shown on top of the page"
     )
 
     videoplayer_url = models.URLField(blank=True, verbose_name='Video URL')
+    video_button_text_de = models.CharField(
+        default='Video abspielen', blank=True, max_length=100)
+    video_button_text_en = models.CharField(
+        default='Play Video', blank=True, max_length=100)
+
+    video_button_text = translations.TranslatedField('video_button_text')
+
     website = models.URLField(blank=True, verbose_name='Website')
+    website_link_text_de = models.CharField(
+        default='mehr', blank=True, max_length=100)
+    website_link_text_en = models.CharField(
+        default='more', blank=True, max_length=100)
+
+    website_link_text = translations.TranslatedField('website_link_text')
+
     subpage_types = ['cms_blog.BlogIndexPage',
                      'cms_home.SimplePage',
                      'cms_home.StructuredTextPage']
 
+    @property
+    def random_image(self):
+        image_numbers = [i for i in range(1, 6)
+                         if getattr(self, 'image_{}'.format(i))]
+        if image_numbers:
+            return getattr(self,
+                           'image_{}'.format(random.choice(image_numbers)))
+
     content_panels = [
-        ImageChooserPanel('image'),
-        FieldPanel('videoplayer_url'),
-        FieldPanel('website')
+        MultiFieldPanel(
+            [
+                ImageChooserPanel('image_1'),
+                ImageChooserPanel('image_2'),
+                ImageChooserPanel('image_3'),
+                ImageChooserPanel('image_4'),
+                ImageChooserPanel('image_5'),
+            ],
+            heading="Images",
+            classname="collapsible"
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel('videoplayer_url'),
+                FieldPanel('video_button_text_en'),
+                FieldPanel('video_button_text_de')
+            ],
+            heading="Video",
+            classname="collapsible"
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel('website'),
+                FieldPanel('website_link_text_en'),
+                FieldPanel('website_link_text_de')
+            ],
+            heading="Link",
+            classname="collapsible"
+        )
     ]
 
     en_panels = [
@@ -75,7 +165,7 @@ class HomePage(Page):
     edit_handler = TabbedInterface([
         ObjectList(en_panels, heading='English'),
         ObjectList(de_panels, heading='German'),
-        ObjectList(content_panels, heading='Media'),
+        ObjectList(content_panels, heading='Header'),
         ObjectList(Page.promote_panels, heading='Promote')
     ])
 

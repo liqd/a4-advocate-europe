@@ -5,7 +5,7 @@
         {% if page.featured_page.image %}
             {% image page.featured_page.image fill-870x500 as image%}
         {% endif %}
-        <a href="{% pageurl page.featured_page %}" class="div blog-index-feature-image col-xs-12 col-sm-6 col-md-9" style="background-image: url({% if image %} {{ image.url }} {% else %} {% static 'images/placeholder_870x500.png' %} {% endif %});">
+        <a href="{% pageurl page.featured_page %}" class="div blog-index-feature-image col-xs-12 col-sm-6 col-md-9" style="background-image: url({% if image %} {{ image.url }} {% else %} {% static 'images/placeholder_yellow.svg' %} {% endif %});">
         </a>
         <div class="blogindex-text col-xs-12 col-sm-6 col-md-3">
             {% include 'cms_blog/blog_categories.html' with categories=page.featured_page.categories.all %}

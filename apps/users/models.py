@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.templatetags.static import static
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from django_countries import fields as countries_fields
+
 from easy_thumbnails.files import get_thumbnailer
 
 from adhocracy4.images import fields
@@ -64,57 +64,20 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         default=timezone.now
     )
 
-    city = models.CharField(
+    biographie = models.TextField(
         blank=True,
-        max_length=80,
-        verbose_name=_('City of residence'),
-    )
-
-    country = countries_fields.CountryField(
-        blank=True,
-        verbose_name=_('Country of residence'),
-    )
-
-    birthdate = models.DateField(
-        blank=True,
-        null=True,
-        verbose_name=_('Date of birth'),
-    )
-
-    occupation = models.CharField(
-        blank=True,
-        max_length=80,
-        verbose_name=_('Occupation')
-    )
-
-    languages = models.CharField(
-        blank=True,
-        verbose_name=_('Languages'),
-        max_length=150,
-        help_text=_('Enter the languages you’re speaking.')
-    )
-
-    motto = models.TextField(
-        blank=True,
-        verbose_name=_('Your motto of life'),
-        help_text=_('Write a little bit about yourself. '
+        verbose_name=_('Short biographie'),
+        help_text=_('Tell us about yourself. '
+                    'fields of profession and interest. '
                     '(max. 250 characters)')
     )
 
-    gender = models.CharField(
+    europe = models.TextField(
         blank=True,
-        verbose_name=_('Gender'),
-        max_length=2,
-        choices=[
-            ('M', _('Male')),
-            ('F', _('Female')),
-            ('T', _('Transgender')),
-            ('TF', _('Transgender Female')),
-            ('TM', _('Transgender Male')),
-            ('I', _('Intersex')),
-            ('GF', _('Gender Fluid')),
-            ('O', _('Other')),
-        ],
+        verbose_name=_('Your interest in europe'),
+        help_text=_('Why do you care about Europe? '
+                    'Where do you try to make a change? '
+                    '(max. 250 characters)')
     )
 
     twitter_handle = models.CharField(
