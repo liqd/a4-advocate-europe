@@ -58,6 +58,7 @@
     width: 100%;
 
     .idealist-item {
+        //https://github.com/philipwalton/flexbugs/tree/676abf342f9284c0fc616ee9c69006eb35a0b2d6#7-flex-basis-doesnt-account-for-box-sizingborder-box
         margin: rem(5px 5px);
     }
 }
