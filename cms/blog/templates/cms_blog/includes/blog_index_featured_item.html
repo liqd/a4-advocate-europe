@@ -10,7 +10,7 @@
             </a>
         </div>
         <div class="blogindex-text col-xs-12 col-sm-6 col-md-3">
-            {% include 'cms_blog/blog_categories.html' with categories=page.featured_page.categories.all %}
+            {% include 'cms_blog/includes/blog_categories.html' with categories=page.featured_page.categories.all %}
             <div class="blogindexentry-title">
                 <h4><a href="{% pageurl page.featured_page %}">{{ page.featured_page.title }}</a></h4>
             </div>
