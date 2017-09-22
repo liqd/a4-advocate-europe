@@ -68,6 +68,7 @@
     flex-wrap: nowrap;
     flex-direction: column;
     justify-content: space-between;
+    flex-grow: 1;
 
     background-color: $ae-light-gray;
     min-height: rem(400px);
