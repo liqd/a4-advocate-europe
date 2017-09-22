@@ -20,12 +20,6 @@
     .right {
         @media screen and (min-width: $screen-md-min) {
             float: right;
-            margin-right: rem(100px);
-        }
-
-        @media screen and (min-width: $screen-lg-min) {
-            float: right;
-            margin-right: rem(20px);
         }
     }
 
