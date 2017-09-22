@@ -110,12 +110,12 @@
                     </div>
 
                     <div role="tabpanel" class="tab-pane active col-sm-9" id="ideas">
-                        <div class="profile-list-filter">
-                            <div class="filter-bar idealist-filter clearfix">
-                                {% for field in view.filter.form %}
+                        <div class="filter-bar idealist-filter clearfix">
+                            {% for field in view.filter.form %}
+                                {% if field.name != 'ordering' or idea_list.count > 1 %}
                                     {{ field }}
-                                {% endfor %}
-                            </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
 
                         <div class="idealist-list">
