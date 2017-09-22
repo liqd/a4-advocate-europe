@@ -110,20 +110,24 @@
                     </div>
 
                     <div role="tabpanel" class="tab-pane active col-sm-9" id="ideas">
-                        <div class="profile-list-filter">
-                            <div class="filter-bar idealist-filter clearfix">
-                                {% for field in view.filter.form %}
+                        <div class="filter-bar idealist-filter clearfix">
+                            {% for field in view.filter.form %}
+                                {% if field.name != 'ordering' or idea_list.count > 1 %}
                                     {{ field }}
-                                {% endfor %}
-                            </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
 
-                        <div class="idealist-list">
+                        <div class="idealist-list idealist-list-3">
                             {% for idea in idea_list %}
-                                {% include 'advocate_europe_ideas/includes/idealist_item.html' %}
+                               <div class="idealist-itemwrapper">
+                                   {% include 'advocate_europe_ideas/includes/idealist_item.html' %}
+                               </div>
                             {% endfor %}
                             {% if view.user == request.user %}
-                                {% include 'advocate_europe_ideas/includes/call_to_action_tile.html' %}
+                                <div class="idealist-itemwrapper">
+                                    {% include 'advocate_europe_ideas/includes/call_to_action_tile.html' %}
+                                </div>
                             {% endif %}
                         </div>
 

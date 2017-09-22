@@ -20,12 +20,6 @@
     .right {
         @media screen and (min-width: $screen-md-min) {
             float: right;
-            margin-right: rem(100px);
-        }
-
-        @media screen and (min-width: $screen-lg-min) {
-            float: right;
-            margin-right: rem(20px);
         }
     }
 
@@ -153,5 +147,39 @@
             right: 0;
             left: auto;
         }
+    }
+}
+
+.filter-list {
+    padding-left: 0;
+    margin-left: rem(5px);
+    margin-right: rem(5px);
+    list-style: none;
+    font-weight: 600;
+}
+
+@media screen and (min-width: $screen-sm-min) {
+    .filter-bar .filter-list {
+        float: left;
+    }
+
+    .filter-bar .filter-list-sort {
+        float: right;
+    }
+}
+
+.filter-list-item {
+    display: inline-block;
+
+    a {
+        color: $gray;
+    }
+
+    .selected {
+        color: $brand-primary;
+    }
+
+    & + :before {
+        content: '| ';
     }
 }
