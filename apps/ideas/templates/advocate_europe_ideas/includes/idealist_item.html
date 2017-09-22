@@ -1,9 +1,9 @@
 {% load static thumbnail %}
 <div class="idealist-item">
     <div class="idealist-upper">
-        <div class="idealist-image">
+        <div class="idealist-image" style="background-image:url({% if idea.idea_image_exists %} {{ idea.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_blue.svg' %} {% endif %});">
             <a href="{% url 'idea-detail' slug=idea.slug %}">
-                <img src="{% if idea.idea_image_exists %} {{ idea.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_blue.svg' %} {% endif %}"/>
+                <img class="idealist-image-img" src="{% if idea.idea_image_exists %} {{ idea.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_blue.svg' %} {% endif %}"/>
             </a>
             {% if idea.badge %}
             <span class="label idealist-label {{ idea.badge|cut:" " }}">{{ idea.badge }}</span>
@@ -14,7 +14,7 @@
                 {{ idea.idea_topics_names|join:" | " }}
             </div>
 
-            <h4><a href="{% url 'idea-detail' slug=idea.slug %}">{{ idea.idea_title }}</a></h4>
+            <h4 class="idealist-tile-title"><a href="{% url 'idea-detail' slug=idea.slug %}">{{ idea.idea_title }}</a></h4>
             {{ idea.idea_pitch|truncatechars:240 }}
         </div>
     </div>
