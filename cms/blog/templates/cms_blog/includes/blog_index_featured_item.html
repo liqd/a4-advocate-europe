@@ -5,8 +5,8 @@
         {% if page.featured_page.image %}
             {% image page.featured_page.image fill-870x500 as image%}
         {% endif %}
-        <div class="blog-index-image-feat col-xs-12 col-sm-6 col-md-9" style="background-image: url({% if image %} {{ image.url }} {% else %} {% static 'images/placeholder_yellow.svg' %} {% endif %});">
-            <a href="{% pageurl page.featured_page %}" class="blog-index-image" style="background-image: url({% if image %} {{ image.url }} {% else %} {% static 'images/placeholder_yellow.svg' %} {% endif %});">
+        <div class="hover-parent-bg-img blogindex-featured-img col-xs-12 col-sm-6 col-md-9" style="background-image: url({% if image %} {{ image.url }} {% else %} {% static 'images/placeholder_yellow.svg' %} {% endif %});">
+            <a href="{% pageurl page.featured_page %}" class="hover-child-img" style="background-image: url({% if image %} {{ image.url }} {% else %} {% static 'images/placeholder_yellow.svg' %} {% endif %});">
             </a>
         </div>
         <div class="blogindex-text col-xs-12 col-sm-6 col-md-3">
