@@ -320,10 +320,6 @@ class IdeaListView(filter_views.FilteredListView):
     def active_phase(self):
         return Phase.objects.active_phases().last()
 
-    @property
-    def count(self):
-        return len(self.get_queryset())
-
     def get_queryset(self):
         queryset = super().get_queryset()\
             .annotate_comment_count()\
