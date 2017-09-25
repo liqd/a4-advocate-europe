@@ -51,6 +51,11 @@
                 {% endif %}
             </div>
             <div class="idealist-list idealist-list-4">
+                {% if page_obj.number == 1 and view.is_cta_enabled %}
+                <div class="idealist-itemwrapper">
+                        {% include 'advocate_europe_ideas/includes/call_to_action_tile.html' with module=view.cta_object %}
+                </div>
+                {% endif %}
                 {% for idea in idea_list %}
                     <div class="idealist-itemwrapper">
                         {% include 'advocate_europe_ideas/includes/idealist_item.html' %}
@@ -65,13 +70,11 @@
                 {% include 'includes/pagination.html' %}
             {% endif %}
             <div class="idealist-found {% if not is_paginated %}margin{% endif %}">
-              {% with view.count as count %}
-              {% blocktrans count ideacount=view.count %}
+              {% blocktrans count ideacount=view.get_queryset.count %}
                 <p>One idea found</p>
               {% plural %}
                 <p>{{ ideacount }} Ideas found</p>
               {% endblocktrans %}
-              {% endwith %}
             </div>
         </div>
     </div>

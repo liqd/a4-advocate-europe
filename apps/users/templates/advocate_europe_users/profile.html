@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n force_translation %}
+{% load i18n force_translation rules rule_tags %}
 
 {% block title %}
     {% trans "Profile" %} {{ view.user.username }}
@@ -124,9 +124,9 @@
                                    {% include 'advocate_europe_ideas/includes/idealist_item.html' %}
                                </div>
                             {% endfor %}
-                            {% if view.user == request.user %}
+                            {% if page_obj.number == 1 and view.is_cta_enabled %}
                                 <div class="idealist-itemwrapper">
-                                    {% include 'advocate_europe_ideas/includes/call_to_action_tile.html' %}
+                                    {% include 'advocate_europe_ideas/includes/call_to_action_tile.html' with module=view.cta_object %}
                                 </div>
                             {% endif %}
                         </div>
