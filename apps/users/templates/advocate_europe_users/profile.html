@@ -124,14 +124,10 @@
                                    {% include 'advocate_europe_ideas/includes/idealist_item.html' %}
                                </div>
                             {% endfor %}
-                            {% if view.user == request.user %}
-                                {% get_modules as modules %}
-                                {% has_perm 'advocate_europe_ideas.add_ideasketch' request.user modules.0 as can_add %}
-                                {% if can_add %}
-                                    <div class="idealist-itemwrapper">
-                                        {% include 'advocate_europe_ideas/includes/call_to_action_tile.html' with module=modules.0 %}
-                                    </div>
-                                {% endif %}
+                            {% if page_obj.number == 1 and view.is_cta_enabled %}
+                                <div class="idealist-itemwrapper">
+                                    {% include 'advocate_europe_ideas/includes/call_to_action_tile.html' with module=view.cta_object %}
+                                </div>
                             {% endif %}
                         </div>
 
