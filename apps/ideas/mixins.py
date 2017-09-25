@@ -66,11 +66,11 @@ class CtaPaginatorMixin:
     """
     Leaves space for cta tile if cta_permission is given for current user.
     """
-    cta_permission = 'adocate_europe_ideas.add_idea_sketch'
+    cta_permission = 'advocate_europe_ideas.add_ideasketch'
 
     @property
     def cta_object(self):
-        phase = Phase.objects.past_and_active_phases().last()
+        phase = Phase.objects.active_phases().last()
 
         if phase:
             return phase.module
