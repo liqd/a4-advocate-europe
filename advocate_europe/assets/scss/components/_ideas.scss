@@ -68,33 +68,11 @@
     flex-wrap: nowrap;
     flex-direction: column;
     justify-content: space-between;
+    flex-grow: 1;
 
     background-color: $ae-light-gray;
     min-height: rem(400px);
     box-shadow: 0 1px 0 0 $ae-light-gray-shadow;
-
-    .idealist-image {
-        background-size: cover;
-        background-repeat: no-repeat;
-        display: block;
-        position: relative;
-        box-sizing: content-box;
-        width: 100%;
-        overflow: hidden;
-
-        .idealist-image-img {
-            max-width: 100%;
-            max-height: 100%;
-            background-position: center;
-            background-size: cover;
-            transition: all .5s;
-        }
-
-        &:hover .idealist-image-img,
-        &:focus .idealist-image-img {
-            transform: scale(1.1);
-        }
-    }
 
     .idealist-image:after {
         content: '';

@@ -124,30 +124,6 @@
         }
     }
 
-    .blockblog-image {
-        background-size: cover;
-        background-repeat: no-repeat;
-        display: block;
-        position: relative;
-        box-sizing: content-box;
-        width: 100%;
-        height: auto;
-        overflow: hidden;
-
-        img {
-            max-width: 100%;
-            max-height: 100%;
-            background-position: center;
-            background-size: cover;
-            transition: all .5s;
-        }
-
-        &:hover img,
-        &:focus img {
-            transform: scale(1.1);
-        }
-    }
-
     .blockblog-text {
         padding: rem(15px);
     }

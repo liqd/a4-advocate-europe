@@ -20,17 +20,17 @@
                             {% if post.image %}
                                 {% image post.image fill-490x240 as image%}
                             {% endif %}
-                            <div class="blockblog-image" style="background-image:url({% if post.image %} {{ image.url }} {% else %} {% static 'images/placeholder_yellow.svg' %} {% endif %});">
+                            <div class="hover-parent-bg-img" style="background-image:url({% if post.image %} {{ image.url }} {% else %} {% static 'images/placeholder_yellow.svg' %} {% endif %});">
                                 <a href="{% pageurl post %}">
                                 {% if post.image %}
-                                    <img src="{{ image.url }}">
+                                    <img class="hover-child-img" src="{{ image.url }}">
                                 {% else %}
-                                    <img src="{% static 'images/placeholder_yellow.svg' %}">
+                                    <img class="hover-child-img" src="{% static 'images/placeholder_yellow.svg' %}">
                                 {% endif %}
                                 </a>
                             </div>
                             <div class="blockblog-text">
-                                {% include 'cms_blog/blog_categories.html' with categories=post.categories.all %}
+                                {% include 'cms_blog/includes/blog_categories.html' with categories=post.categories.all %}
                                 <h4><a href="{% pageurl post %}" class="blockblog-title-link">{{ post.title }}</a></h4>
                                 <div>
                                     {{ post.teasertext|truncatechars:350 }}

@@ -15,7 +15,7 @@
         </div>
         <!-- Featured blog entry will be on first index page only -->
         {% if not blogs.has_previous and not category and page.featured_page.live %}
-            {% include 'cms_blog/blog_index_featured_item.html' %}
+            {% include 'cms_blog/includes/blog_index_featured_item.html' %}
         {% else %}
             <div class="row"></div>
         {% endif %}
@@ -23,12 +23,12 @@
         <div class="hidden-sm hidden-md hidden-lg {% if blogs.has_previous or category or not page.featured_page.live %}topics-no-featured{% endif %}">
             <div class="row">
                 <div class="col-xs-12">
-                    {% include 'cms_blog/blog_index_category_buttons.html' %}
+                    {% include 'cms_blog/includes/blog_index_category_buttons.html' %}
                 </div>
             </div>
         </div>
         <div class="row col-sm-3 col-md-2 hidden-xs blogindex-topics-neg-margin {% if blogs.has_previous or category or not page.featured_page.live %}topics-no-featured{% endif %}">
-            {% include 'cms_blog/blog_index_category_buttons.html' %}
+            {% include 'cms_blog/includes/blog_index_category_buttons.html' %}
         </div>
 
         <!-- All Blog Entries -->
@@ -41,12 +41,12 @@
                         {% if post.image %}
                             {% image post.image fill-470x300 as image%}
                         {% endif %}
-                        <div class="blog-index-image-list col-xs-12 col-sm-5 col-sm-offset-3 col-md-5 col-md-offset-2" style="background-image: url({% if post.image %} {{ image.url }} {% else %} {% static 'images/placeholder_yellow.svg' %} {% endif %});">
-                            <a href="{% pageurl post %}" class="blog-index-image" style="background-image: url({% if post.image %} {{ image.url }} {% else %} {% static 'images/placeholder_yellow.svg' %} {% endif %});">
+                        <div class="hover-parent-bg-img blogindex-img col-xs-12 col-sm-5 col-sm-offset-3 col-md-5 col-md-offset-2" style="background-image: url({% if post.image %} {{ image.url }} {% else %} {% static 'images/placeholder_yellow.svg' %} {% endif %});">
+                            <a href="{% pageurl post %}" class="hover-child-img" style="background-image: url({% if post.image %} {{ image.url }} {% else %} {% static 'images/placeholder_yellow.svg' %} {% endif %});">
                             </a>
                         </div>
                         <div class="blogindex-text col-xs-12 col-sm-4 col-md-3">
-                            {% include 'cms_blog/blog_categories.html' with categories=post.categories.all %}
+                            {% include 'cms_blog/includes/blog_categories.html' with categories=post.categories.all %}
                             <div class="blogindexentry-title">
                                 <h4><a href="{% pageurl post %}">{{ post.title }}</a></h4>
                             </div>
