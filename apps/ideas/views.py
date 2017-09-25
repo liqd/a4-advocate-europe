@@ -4,7 +4,6 @@ import os
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.files.storage import FileSystemStorage
-from django.core.paginator import Paginator
 from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from django.shortcuts import redirect
@@ -310,9 +309,9 @@ class ProposalEditView(
         return self.request.user.is_authenticated()
 
 
-class IdeaListView(filter_views.FilteredListView):
+class IdeaListView(mixins.CtaPaginatorMixin, filter_views.FilteredListView):
     model = Idea
-    paginator_class = Paginator
+    paginator_class = None
     paginate_by = 12
     filter_set = filters.IdeaFilterSet
 
