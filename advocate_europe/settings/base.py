@@ -251,6 +251,7 @@ THUMBNAIL_ALIASES = {
     '': {
         'heroimage': {'size': (1500, 500), 'crop': 'smart'},
         'ideatileimage': {'size': (400, 200), 'crop': 'smart'},
+        'ideadetailimage': {'size': (1500, 500), 'crop': 'smart'},
         'thumbnail': {'size': (240, 240), 'crop': 'smart'},
         'avatar': {'size': (340, 340), 'crop': 'smart'}
     }
