@@ -1,7 +1,8 @@
-{% load i18n wagtailcore_tags wagtailimages_tags blog_tags static %}
+{% load i18n wagtailcore_tags wagtailimages_tags blog_tags static force_translation %}
 
 {% load_latest_blogs "blogs" as blog_items %}
 
+{% force_translation 'en' %}
 <div class="container block">
     {% if value.title %}
         <div class="row text-center">
@@ -53,3 +54,4 @@
         {% endif %}
     </div>
 </div>
+{% endforce_translation %}

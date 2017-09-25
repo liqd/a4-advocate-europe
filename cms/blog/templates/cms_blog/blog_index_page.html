@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
-{% load i18n static wagtailcore_tags wagtailimages_tags %}
+{% load i18n static wagtailcore_tags wagtailimages_tags force_translation %}
 
 {% block title %} {{ page.title }} {% endblock %}
 
 {% block body_class %}template-blogindexpage{% endblock %}
 
 {% block content %}
+{% force_translation 'en' %}
 <div class="blogindex">
     <div class="container">
         <div class="blogindex-title">
@@ -80,5 +81,5 @@
 
     </div>
 </div>
-
+{% endforce_translation %}
 {% endblock %}
