@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n force_translation %}
+{% load i18n force_translation rules rule_tags %}
 
 {% block title %}
     {% trans "Profile" %} {{ view.user.username }}
@@ -125,9 +125,13 @@
                                </div>
                             {% endfor %}
                             {% if view.user == request.user %}
-                                <div class="idealist-itemwrapper">
-                                    {% include 'advocate_europe_ideas/includes/call_to_action_tile.html' %}
-                                </div>
+                                {% get_modules as modules %}
+                                {% has_perm 'advocate_europe_ideas.add_ideasketch' request.user modules.0 as can_add %}
+                                {% if can_add %}
+                                    <div class="idealist-itemwrapper">
+                                        {% include 'advocate_europe_ideas/includes/call_to_action_tile.html' with module=modules.0 %}
+                                    </div>
+                                {% endif %}
                             {% endif %}
                         </div>
 
