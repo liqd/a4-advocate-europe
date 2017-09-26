@@ -11,7 +11,12 @@
         </a>
         <div class="idealist-text">
             <div class="idealist-category">
-                {{ idea.idea_topics_names|join:" | " }}
+                {% if idea.idea_topics %}
+                    {{ idea.idea_topics_names|join:" | " }}
+                {% else %}
+                    &nbsp;
+                {% endif %}
+
             </div>
 
             <h4 class="idealist-tile-title"><a href="{% url 'idea-detail' slug=idea.slug %}">{{ idea.idea_title }}</a></h4>
