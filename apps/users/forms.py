@@ -14,7 +14,7 @@ class UserProfileForm(forms.ModelForm):
         model = User
         fields = ['username', '_avatar', 'biographie', 'europe',
                   'twitter_handle', 'facebook_handle',
-                  'instagram_handle', 'website']
+                  'instagram_handle', 'website', 'get_notifications']
 
     @property
     def helper(self):
@@ -41,6 +41,10 @@ class UserProfileForm(forms.ModelForm):
                     Field('website', wrapper_class='col-md-6'),
                     css_class='row'
                 )
+            ),
+            Fieldset(
+                _('Notifications'),
+                'get_notifications'
             )
         )
         return helper
