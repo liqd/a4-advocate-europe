@@ -6,6 +6,7 @@ from adhocracy4.actions.verbs import Verbs
 from adhocracy4.comments.models import Comment
 
 from apps.ideas.models import IdeaSketch, Proposal
+from apps.journeys.models import JourneyEntry
 
 from . import emails
 
@@ -14,9 +15,15 @@ from . import emails
 def send_notification(sender, instance, created, **kwargs):
     action = instance
     if action.verb == Verbs.ADD.value:
+        modelcls = action.obj_content_type.model_class()
 
-        if (action.obj_content_type.model_class() is IdeaSketch
-                or action.obj_content_type.model_class() is Proposal):
+        if (modelcls is IdeaSketch):
             emails.SubmitNotification.send(action.obj)
-        elif action.obj_content_type.model_class() is Comment:
+        elif (modelcls is Proposal):
+            emails.NotifyFollowersOnNewProposal.send(action)
+        elif (modelcls is Comment):
             emails.NotifyCreatorEmail.send(action)
+            emails.NotifyFollowersOnNewComment.send(action)
+        elif (modelcls is JourneyEntry):
+            emails.SubmitNotification.send(action.obj)
+            emails.NotifyFollowersOnNewJourney.send(action)
