@@ -4,7 +4,6 @@ import os
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.files.storage import FileSystemStorage
-from django.core.paginator import Paginator
 from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from django.shortcuts import redirect
@@ -167,7 +166,7 @@ class IdeaDetailView(generic.DetailView):
             }
         else:
             image_dict = {
-                'url': static('images/placeholder_ideadetail_768x320.png'),
+                'url': static('images/placeholder_blue.svg'),
                 'width': '768',
                 'height': '320',
             }
@@ -310,19 +309,15 @@ class ProposalEditView(
         return self.request.user.is_authenticated()
 
 
-class IdeaListView(filter_views.FilteredListView):
+class IdeaListView(mixins.CtaPaginatorMixin, filter_views.FilteredListView):
     model = Idea
-    paginator_class = Paginator
+    paginator_class = None
     paginate_by = 12
     filter_set = filters.IdeaFilterSet
 
     @property
     def active_phase(self):
         return Phase.objects.active_phases().last()
-
-    @property
-    def count(self):
-        return len(self.get_queryset())
 
     def get_queryset(self):
         queryset = super().get_queryset()\

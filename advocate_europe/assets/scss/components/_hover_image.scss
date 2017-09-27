@@ -1,0 +1,21 @@
+.hover-parent-bg-img {
+    background-size: cover;
+    display: block;
+    position: relative;
+    box-sizing: content-box;
+    height: auto;
+    overflow: hidden;
+
+    .hover-child-img {
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+        transition: all .5s;
+    }
+
+    &:hover .hover-child-img,
+    &:focus .hover-child-img {
+        transform: scale(1.1);
+    }
+}

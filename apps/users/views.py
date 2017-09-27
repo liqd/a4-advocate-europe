@@ -1,5 +1,4 @@
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
@@ -8,26 +7,28 @@ from rules.compat import access_mixins as mixins
 
 from adhocracy4.filters import views as filter_views
 
+from apps.ideas import mixins as idea_mixins
 from apps.ideas import models as idea_models
 
 from . import models as user_models
 from . import filters, forms
 
 
-class ProfileView(filter_views.FilteredListView):
+class ProfileView(
+        idea_mixins.CtaPaginatorMixin,
+        filter_views.FilteredListView
+):
     template_name = 'advocate_europe_users/profile.html'
-    paginator_class = Paginator
+    paginator_class = None
+    paginate_by = 9
     filter_set = filters.ProfileIdeaFilterSet
     queryset = idea_models.Idea.objects.annotate_comment_count()\
         .annotate_positive_rating_count()
     action_count = 10
 
     @property
-    def paginate_by(self):
-        if self.request.user == self.user:
-            return 8
-        else:
-            return 9
+    def is_cta_enabled(self):
+        return self.user == self.request.user and super().is_cta_enabled
 
     def filter_kwargs(self):
         kwargs = super().filter_kwargs()

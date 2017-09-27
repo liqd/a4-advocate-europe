@@ -50,9 +50,16 @@
                     <a class="btn btn-ae-secondary export-btn" href="{% url 'idea-export' %}{{ '?'|add:view.filter.data.urlencode }}">{% trans "export" %}</a>
                 {% endif %}
             </div>
-            <div class="idealist-list">
+            <div class="idealist-list idealist-list-4">
+                {% if page_obj.number == 1 and view.is_cta_enabled %}
+                <div class="idealist-itemwrapper">
+                        {% include 'advocate_europe_ideas/includes/call_to_action_tile.html' with module=view.cta_object %}
+                </div>
+                {% endif %}
                 {% for idea in idea_list %}
-                    {% include 'advocate_europe_ideas/includes/idealist_item.html' %}
+                    <div class="idealist-itemwrapper">
+                        {% include 'advocate_europe_ideas/includes/idealist_item.html' %}
+                    </div>
                 {% empty %}
                     <div class="idealist-no-entry">
                         <h4>{% trans "Sorry, no ideas exist for the chosen filters." %}</h4>
@@ -63,13 +70,11 @@
                 {% include 'includes/pagination.html' %}
             {% endif %}
             <div class="idealist-found {% if not is_paginated %}margin{% endif %}">
-              {% with view.count as count %}
-              {% blocktrans count ideacount=view.count %}
+              {% blocktrans count ideacount=view.get_queryset.count %}
                 <p>One idea found</p>
               {% plural %}
                 <p>{{ ideacount }} Ideas found</p>
               {% endblocktrans %}
-              {% endwith %}
             </div>
         </div>
     </div>

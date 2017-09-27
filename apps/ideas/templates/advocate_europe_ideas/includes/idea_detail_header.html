@@ -1,7 +1,7 @@
-{% load i18n static react_ratings idea_tags %}
+{% load i18n static react_ratings idea_tags thumbnail %}
 
 <div class="row ideadetail-header">
-    <div class="ideadetail-image" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000000), url({{ view.idea_image.url }});">
+    <div class="ideadetail-image" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000000), url({% if idea.idea_image_exists %} {{ idea.idea_image|thumbnail_url:'ideadetailimage' }} {% else %} {% static 'images/placeholder_blue.svg' %} {% endif %});">
         <div class="ideadetailheader-content">
             <div class="col-md-9 col-sm-8 col-xs-12 ideadetailheader-left">
                 <div >

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n static wagtailcore_tags wagtailimages_tags absolute_url %}
+{% load i18n static wagtailcore_tags wagtailimages_tags absolute_url force_translation %}
 
 {% block title %} {{ page.title }} {% endblock %}
 
@@ -35,13 +35,14 @@
 {% endblock %}
 
 {% block content %}
+    {% force_translation 'en' %}
 
     <div class="container blogpage">
         <div class="container-narrow">
             <a href="{{ page.get_parent.url }}" class="btn btn-default blogpage-btn" role="button"><i class="fa fa-chevron-left" aria-hidden="true"></i> {% trans "To overview" %}</a>
         </div>
         <div class="container-medium">
-            {% include 'cms_blog/blog_categories.html' with categories=page.categories.all %}
+            {% include 'cms_blog/includes/blog_categories.html' with categories=page.categories.all %}
             <div class="blogpage-title">
                 <h1>{{ page.title }}</h1>
             </div>
@@ -65,4 +66,5 @@
             </div>
         </div>
     </div>
+    {% endforce_translation %}
 {% endblock %}

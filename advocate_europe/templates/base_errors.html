@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Error{% endblock %}
+
+{% block content %}
+<div class="error-top">
+    <div class="container">
+        <div class="container-medium error-box">
+            <h1>{% block error_status %}{% endblock %}</h1>
+            <h2>{% trans 'Error' %}</h2>
+
+            <p>{% trans 'Sorry, something went wrong.' %}<br>
+            {% block error_description %}{% endblock %}</p>
+            <a href="/" class="button">{% trans 'Get back to Advocate Europe' %}</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -18,7 +18,7 @@
         font-size: rem(16px);
         font-weight: 600;
         padding: rem(10px 18px);
-        width: 100%;
+        max-width: 100%;
     }
 
     &-linktext {
@@ -124,13 +124,6 @@
         }
     }
 
-    .blockblog-image {
-        img {
-            width: 100%;
-            height: auto;
-        }
-    }
-
     .blockblog-text {
         padding: rem(15px);
     }
@@ -141,6 +134,7 @@
         &:hover,
         &:focus {
             text-decoration: none;
+            color: $ae-middle-gray;
         }
     }
 

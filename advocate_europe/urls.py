@@ -1,7 +1,6 @@
 from ckeditor_uploader import views as ck_views
 from django.conf import settings
 from django.conf.urls import include, url
-from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
@@ -48,7 +47,7 @@ urlpatterns = [
         never_cache(login_required(ck_views.browse)), name='ckeditor_browse'),
 ]
 
-urlpatterns += i18n_patterns(
+urlpatterns += [
     url(r'^accounts/', include('allauth.account.urls')),
     url(r'^accounts/social/', include('allauth.socialaccount.urls')),
     url(r'', include(user_urls)),
@@ -57,8 +56,9 @@ urlpatterns += i18n_patterns(
     url(r'^journeys/', include(journey_urls)),
     url(r'^jsi18n/$', javascript_catalog,
         js_info_dict, name='javascript-catalog'),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'', include(wagtail_urls))
-)
+]
 
 urlpatterns += [
     url(r'^accounts/', include(urls_accounts)),

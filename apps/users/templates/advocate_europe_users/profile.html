@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n force_translation rules rule_tags %}
 
 {% block title %}
     {% trans "Profile" %} {{ view.user.username }}
@@ -7,134 +7,140 @@
 
 
 {% block content %}
-<div class="profile">
-    <div class="profile-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-4 profile-image-holder">
-                    <span
-                        class="circled profile-image"
-                        style="background-image: url({{ view.user.avatar_or_fallback_url }})"
-                    ></span>
-                </div>
-                <div class="col-xs-8">
-                    <h1 class="visible-xs profile-title">
-                        {{ view.user.username }}
-                    </h1>
+    {% force_translation 'en' %}
+    <div class="profile">
+        <div class="profile-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-4 profile-image-holder">
+                        <span
+                            class="circled profile-image"
+                            style="background-image: url({{ view.user.avatar_or_fallback_url }})"
+                        ></span>
+                    </div>
+                    <div class="col-xs-8">
+                        <h1 class="visible-xs profile-title">
+                            {{ view.user.username }}
+                        </h1>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="profile-navbar">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-offset-3 col-sm-9 tabs">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="visible-xs nav-item">
-                            <a href="#info" aria-controls="info" role="tab" data-toggle="tab">
-                            {% trans "Info" %}
-                            </a>
-                        </li>
-                        <li role="presentation" class="active nav-item">
-                            <a href="#ideas" aria-controls="ideas" role="tab" data-toggle="tab">
-                            {% trans "Ideas" %}
-                            </a>
-                        </li>
-                        <li role="presentation" class="nav-item">
-                            <a href="#activities" aria-controls="activities" role="tab" data-toggle="tab">
-                            {% trans "Activity" %}
-                            </a>
-                        </li>
-                    </ul>
+        <div class="profile-navbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-offset-3 col-sm-9 tabs">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="visible-xs nav-item">
+                                <a href="#info" aria-controls="info" role="tab" data-toggle="tab">
+                                    {% trans "Info" %}
+                                </a>
+                            </li>
+                            <li role="presentation" class="active nav-item">
+                                <a href="#ideas" aria-controls="ideas" role="tab" data-toggle="tab">
+                                    {% trans "Ideas" %}
+                                </a>
+                            </li>
+                            <li role="presentation" class="nav-item">
+                                <a href="#activities" aria-controls="activities" role="tab" data-toggle="tab">
+                                    {% trans "Activity" %}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="container">
-        <div class="row">
-            <main class="tab-content profile-tab-content">
-                <div role="tabpanel" class="profile-info-pane tab-pane col-sm-3" id="info">
-                    <h1 class="profile-title">{{ view.user.username }}</h1>
-                    <div>
-                        <p>{{ view.user.biographie }}</p>
-                    </div>
-                    <div>
-                        <P>{{ view.user.europe }}</P>
-                    </div>
-                    <ul class="profile-traits">
-                        {% with user=view.user %}
-                        {% if user.twitter_handle %}
-                        <li>
-                            <i class="fa fa-twitter fa-fw trait-icon" aria-hidden="true"></i>
-                            <span aria-label="twitter">
-                                <a href="https://twitter.com/{{ user.twitter_handle }}"
-                                    target="_blank">@{{ user.twitter_handle }}</a>
-                            </span>
-                        </li>
-                        {% endif %}
+        <div class="container">
+            <div class="row">
+                <main class="tab-content profile-tab-content">
+                    <div role="tabpanel" class="profile-info-pane tab-pane col-sm-3" id="info">
+                        <h1 class="profile-title">{{ view.user.username }}</h1>
+                        <div>
+                            <p>{{ view.user.biographie }}</p>
+                        </div>
+                        <div>
+                            <P>{{ view.user.europe }}</P>
+                        </div>
+                        <ul class="profile-traits">
+                            {% with user=view.user %}
+                                {% if user.twitter_handle %}
+                                    <li>
+                                        <i class="fa fa-twitter fa-fw trait-icon" aria-hidden="true"></i>
+                                        <span aria-label="twitter">
+                                            <a href="https://twitter.com/{{ user.twitter_handle }}"
+                                               target="_blank">@{{ user.twitter_handle }}</a>
+                                        </span>
+                                    </li>
+                                {% endif %}
 
-                        {% if user.facebook_handle %}
-                        <li>
-                            <i class="fa fa-facebook fa-fw trait-icon" aria-hidden="true"></i>
-                            <span aria-label="facebook">
-                                <a href="https://facebook.com/{{ user.facebook_handle }}"
-                                   target="_blank">{{ user.facebook_handle }}</a>
-                            </span>
-                        </li>
-                        {% endif %}
+                                {% if user.facebook_handle %}
+                                    <li>
+                                        <i class="fa fa-facebook fa-fw trait-icon" aria-hidden="true"></i>
+                                        <span aria-label="facebook">
+                                            <a href="https://facebook.com/{{ user.facebook_handle }}"
+                                               target="_blank">{{ user.facebook_handle }}</a>
+                                        </span>
+                                    </li>
+                                {% endif %}
 
-                        {% if user.instagram_handle %}
-                        <li>
-                            <i class="fa fa-instagram fa-fw trait-icon" aria-hidden="true"></i>
-                            <span aria-label="instagram">
-                                <a href="https://instagram.com/{{ user.instagram_handle }}"
-                                   target="_blank">{{ user.instagram_handle }}</a>
-                            </span>
-                        </li>
-                        {% endif %}
+                                {% if user.instagram_handle %}
+                                    <li>
+                                        <i class="fa fa-instagram fa-fw trait-icon" aria-hidden="true"></i>
+                                        <span aria-label="instagram">
+                                            <a href="https://instagram.com/{{ user.instagram_handle }}"
+                                               target="_blank">{{ user.instagram_handle }}</a>
+                                        </span>
+                                    </li>
+                                {% endif %}
 
-                        {% if user.website %}
-                        <li>
-                            <i class="fa fa-link fa-fw trait-icon" aria-hidden="true"></i>
-                            <span aria-label="Website">
-                                <a href="{{ user.website }}" target="_blank">{% trans 'Website' %}</a>
-                            </span>
-                        </li>
-                        {% endif %}
+                                {% if user.website %}
+                                    <li>
+                                        <i class="fa fa-link fa-fw trait-icon" aria-hidden="true"></i>
+                                        <span aria-label="Website">
+                                            <a href="{{ user.website }}" target="_blank">{% trans 'Website' %}</a>
+                                        </span>
+                                    </li>
+                                {% endif %}
 
-                        {% endwith %}
+                            {% endwith %}
                         </ul>
                     </div>
 
                     <div role="tabpanel" class="tab-pane active col-sm-9" id="ideas">
-                        <div class="profile-list-filter">
-                            <div class="filter-bar idealist-filter clearfix">
-                                {% for field in view.filter.form %}
+                        <div class="filter-bar idealist-filter clearfix">
+                            {% for field in view.filter.form %}
+                                {% if field.name != 'ordering' or idea_list.count > 1 %}
                                     {{ field }}
-                                {% endfor %}
-                            </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
 
-                        <div class="idealist-list">
-                        {% for idea in idea_list %}
-                        {% include 'advocate_europe_ideas/includes/idealist_item.html' %}
-                        {% endfor %}
-                        {% if view.user == request.user %}
-                            {% include 'advocate_europe_ideas/includes/call_to_action_tile.html' %}
-                        {% endif %}
+                        <div class="idealist-list idealist-list-3">
+                            {% for idea in idea_list %}
+                               <div class="idealist-itemwrapper">
+                                   {% include 'advocate_europe_ideas/includes/idealist_item.html' %}
+                               </div>
+                            {% endfor %}
+                            {% if page_obj.number == 1 and view.is_cta_enabled %}
+                                <div class="idealist-itemwrapper">
+                                    {% include 'advocate_europe_ideas/includes/call_to_action_tile.html' with module=view.cta_object %}
+                                </div>
+                            {% endif %}
                         </div>
 
                         {% if is_paginated %}{% include 'includes/pagination.html' %}{% endif %}
                     </div>
 
                     <div role="tabpanel" class="tab-pane col-sm-9" id="activities">
-                    {% include 'advocate_europe_users/includes/activity_list.html'%}
+                        {% include 'advocate_europe_users/includes/activity_list.html'%}
                     </div>
-            </main>
+                </main>
 
+            </div>
         </div>
     </div>
-</div>
+{% endforce_translation %}
 {% endblock %}

@@ -1,10 +1,13 @@
 import pytest
 
 from django import forms
+from django.contrib.auth.models import AnonymousUser
 from django.http import Http404
 from django.views import generic
 
-from apps.ideas import mixins
+from apps.ideas import mixins, models, phases
+
+from tests.helpers import active_phase
 
 
 @pytest.fixture
@@ -96,3 +99,34 @@ def test_module_mixin(rf, module):
 
     with pytest.raises(Http404):
         view(rf.get('/module/invalid'), slug='invalid')
+
+
+@pytest.mark.django_db
+def test_cta_paginator_mixin(rf, user, phase):
+    class TestView(mixins.CtaPaginatorMixin, generic.ListView):
+        model = models.IdeaSketch
+
+    view = TestView.as_view()
+    module = phase.module
+
+    request = rf.get('/ideas/')
+    request.user = AnonymousUser()
+    response = view(request)
+    instance = response.context_data['view']
+    assert not instance.is_cta_enabled
+    assert instance.cta_object is None
+
+    request = rf.get('/ideas/')
+    request.user = user
+    response = view(request)
+    instance = response.context_data['view']
+    assert not instance.is_cta_enabled
+    assert instance.cta_object is None
+
+    with active_phase(module, phases.IdeaSketchPhase):
+        request = rf.get('/ideas/')
+        request.user = user
+        response = view(request)
+        instance = response.context_data['view']
+        assert instance.is_cta_enabled
+        assert instance.cta_object == module
