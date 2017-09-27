@@ -59,7 +59,6 @@ class CountryFilterWidget(widgets.DropdownLinkWidget):
 
 class OrderingFilterWidget(widgets.DropdownLinkWidget):
     label = _('Sorting')
-    right = True
 
 
 class FreeTextSearchFilterWidget(widgets.FreeTextFilterWidget):
