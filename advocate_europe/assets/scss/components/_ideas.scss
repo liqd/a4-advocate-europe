@@ -14,10 +14,16 @@
 }
 
 .idealist-no-entry {
+    background-color: $ae-brand-orange;
     margin-top: rem(20px);
+    margin-left: rem(5px);
+    margin-right: rem(5px);
+    padding-top: 30px;
+    padding-bottom: 30px;
 
     h4 {
         margin: 0;
+        text-align: center;
     }
 }
 
