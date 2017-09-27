@@ -1,17 +1,30 @@
+.idealist {
+    background: linear-gradient(to bottom, $brand-primary rem(240px), #fff 0%);
+}
+
+.idealist-list-container {
+    padding-bottom: rem(40px);
+}
+
+.idealist-content {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+}
+
 .idealist-no-entry {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: rem(50px);
-    min-height: rem(150px);
+    margin-top: rem(20px);
+
+    h4 {
+        margin: 0;
+    }
 }
 
 .idealist-title {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    background-color: $brand-primary;
     height: rem(122px);
     color: #fff;
     font-weight: bold;
@@ -22,9 +35,9 @@
 }
 
 .idealist-list {
+    margin-top: rem(20px);
     display: flex;
     flex-wrap: wrap;
-    flex-basis: 100%;
 
     &-4 .idealist-itemwrapper {
         @media screen and (min-width: $screen-sm-min) {
