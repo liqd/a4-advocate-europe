@@ -11,14 +11,18 @@
     }
 
     h1 {
-        text-transform: uppercase;
         margin-top: rem(10px);
-        margin-bottom: rem(30px);
+        margin-bottom: rem(20px);
         font-size: rem(24px);
     }
 
+    .help-block {
+        margin-top: 0;
+        margin-bottom: rem(5px);
+    }
+
     .form-group {
-        margin-bottom: rem(30px);
+        margin-bottom: rem(20px);
     }
 
     .form-control {
