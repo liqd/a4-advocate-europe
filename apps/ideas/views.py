@@ -312,7 +312,7 @@ class ProposalEditView(
 class IdeaListView(mixins.CtaPaginatorMixin, filter_views.FilteredListView):
     model = Idea
     paginator_class = None
-    paginate_by = 12
+    paginate_by = 9
     filter_set = filters.IdeaFilterSet
 
     @property
