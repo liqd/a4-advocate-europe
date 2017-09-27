@@ -45,6 +45,13 @@
 
     .filter-element {
         width: 100%;
+
+        .dropdown-menu {
+            min-width: 100%;
+            height: auto;
+            max-height: 300px;
+            overflow-x: hidden;
+        }
     }
 
     .filter-element .btn-filter {
@@ -205,8 +212,11 @@
 }
 
 .filter-ordering {
+    padding-bottom: rem(40px);
+
     .filter-element {
-        padding-top: 40px;
-        padding-bottom: 40px;
+        padding-top: rem(40px);
     }
 }
+
+
