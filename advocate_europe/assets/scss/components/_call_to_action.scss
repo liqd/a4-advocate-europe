@@ -1,8 +1,15 @@
 .call-to-action-tile.idealist-item {
     background-color: $brand-primary;
-    padding: rem(20px 12px);
     align-items: center;
     color: #fff;
+
+    .call-to-action-img {
+        padding: 0;
+
+        img {
+            width: 100%;
+        }
+    }
 
     .call-to-action-link {
         color: #fff;
@@ -10,6 +17,7 @@
     }
 
     .call-to-action-btn {
+        margin-bottom: rem(25px);
         font-size: 16px;
         font-weight: 600;
     }

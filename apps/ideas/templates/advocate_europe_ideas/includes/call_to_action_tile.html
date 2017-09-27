@@ -1,14 +1,19 @@
 {% load static i18n %}
 <div class="call-to-action-tile idealist-item">
-    <div class="call-to-action-img">
-        <img src="{% static 'images/ae_logo_white.svg' %}">
-    </div>
     <div>
-        <h4>{% trans "Got an idea? Share it!" %}</h4>
-        <div>{% trans "Get support from the community and win funding for your project!" %}</div>
-        {% if settings.cms_settings.HelpPages.selection_criteria %}
-        <a class="call-to-action-link" href="{{ settings.cms_settings.HelpPages.selection_criteria.url }}">{% trans "Read about the criterias" %}</a>
-        {% endif %}
+        <div class="call-to-action-img">
+            <img src="{% static 'images/cta_tile_logo.png' %}">
+        </div>
+        <div class="idealist-text">
+            <div class="idealist-category">
+                &nbsp;
+            </div>
+            <h4 class="idealist-tile-title">{% trans "Got an idea? Share it!" %}</h4>
+            {% trans "Get support from the community and win funding for your project!" %}
+            {% if settings.cms_settings.HelpPages.selection_criteria %}
+            <a class="call-to-action-link" href="{{ settings.cms_settings.HelpPages.selection_criteria.url }}">{% trans "Read about the criterias" %}</a>
+            {% endif %}
+        </div>
     </div>
-          <a class="btn btn-ae-secondary call-to-action-btn" href="{% url 'idea-sketch-create' module.slug %}">{% trans "Create proposal!" %}</a>
+    <a class="btn btn-ae-secondary call-to-action-btn" href="{% url 'idea-sketch-create' module.slug %}">{% trans "Create proposal!" %}</a>
 </div>
