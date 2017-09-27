@@ -4,8 +4,8 @@
     <div class="ideadetail-image" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000000), url({% if idea.idea_image_exists %} {{ idea.idea_image|thumbnail_url:'ideadetailimage' }} {% else %} {% static 'images/placeholder_blue.svg' %} {% endif %});">
         <div class="ideadetailheader-content">
             <div class="col-md-9 col-sm-8 col-xs-12 ideadetailheader-left">
-                <div >
-                    <a href="{% url 'idea-sketch-list' %}" class="btn btn-default ideadetail-btn" role="button"><i class="fa fa-chevron-left" aria-hidden="true"></i> {% trans "Idea Space" %}</a>
+                <div class="ideadetail-btn">
+                    <a href="{% url 'idea-sketch-list' %}" class="btn-back-to" role="button"><i class="fa fa-chevron-left" aria-hidden="true"></i> {% trans "Idea Space" %}</a>
                 </div>
                 <div class="ideadetail-title">
                     <div class="ideadetail-category">

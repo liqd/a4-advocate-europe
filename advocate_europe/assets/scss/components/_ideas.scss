@@ -202,17 +202,9 @@
 
 .ideadetail-btn {
     margin-top: rem(20px);
-    color: $gray-base;
-    font-size: rem(16px);
-    font-weight: 600;
-
-    .fa {
-        padding-right: rem(5px);
-    }
 
     @media screen and (max-width: $screen-sm-max) {
         margin-top: rem(10px);
-        font-size: rem(14px);
     }
 }
 
