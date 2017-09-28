@@ -60,7 +60,7 @@ def test_collaborator_edit(idea_sketch):
         instance=idea_sketch,
         data={
             'collaborators_emails': 'test1@test.de, test2@test.de',
-            'invites': ['test1@test.de']
+            'collaborators': ['test1@test.de']
         }
     )
     assert not form.is_valid()
@@ -69,8 +69,7 @@ def test_collaborator_edit(idea_sketch):
         instance=idea_sketch,
         data={
             'collaborators_emails': 'test1@test.de, test2@test.de',
-            'invites': ['foo@test.de'],
-            'collaborators': ['Erich'],
+            'collaborators': ['Erich', 'foo@test.de'],
             'reach_out': 'edit_reach_out',
             'how_did_you_hear': 'other'
         }
@@ -101,8 +100,8 @@ def test_collaborator_edit_too_many(idea_sketch):
             'collaborators_emails': 'test6@test.de',
             'reach_out': 'edit_reach_out',
             'how_did_you_hear': 'other',
-            'invites': ['test1@test.de', 'test2@test.de', 'test3@test.de'],
-            'collaborators': ['test4', 'test5'],
+            'collaborators': ['test4', 'test5', 'test1@test.de',
+                              'test2@test.de', 'test3@test.de'],
         }
     )
 
@@ -137,7 +136,7 @@ def test_collaborters_reinvite(idea_sketch):
             'collaborators_emails': 'test@test.de',
             'reach_out': 'edit_reach_out',
             'how_did_you_hear': 'other',
-            'invites': ['test@test.de'],
+            'collaborators': ['test@test.de'],
         }
     )
 

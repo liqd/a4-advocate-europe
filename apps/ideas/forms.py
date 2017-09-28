@@ -317,10 +317,6 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
             crisp.layout.Field,
             template="bootstrap3/user_checkboxselectmultiple_field.html",
         )
-        helper['invites'].wrap(
-            crisp.layout.Field,
-            template="bootstrap3/user_checkboxselectmultiple_field.html",
-        )
         return helper
 
     def random_avatar(self):
@@ -331,12 +327,11 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
         super().clean()
 
         addresses = self.cleaned_data.get('collaborators_emails', [])
-        invites = self.cleaned_data.get('invites', [])
         collaborators = self.cleaned_data.get('collaborators', [])
 
         duplicate_errors = []
         for (name, address) in addresses:
-            if address in invites:
+            if address in collaborators:
                 error = ValidationError({
                     'collaborators_emails': _(
                         'You already invited {email}'
@@ -348,7 +343,6 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
 
         collaborator_count = sum([
             len(addresses),
-            len(invites),
             len(collaborators),
         ])
 
@@ -371,7 +365,7 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
         self.instance.collaborators.remove(*collaborators)
 
         self.instance.ideainvite_set.exclude(
-            email__in=self.cleaned_data.get('invites', [])
+            email__in=self.cleaned_data.get('collaborators', [])
         ).delete()
 
         if 'collaborators_emails' in self.cleaned_data:
