@@ -79,6 +79,16 @@
     }
 }
 
+.accordion-toggle {
+    .fa {
+        float: right
+    }
+
+    &.collapsed .fa {
+        transform: rotateZ(180deg);
+    }
+}
+
 .form-link {
     font-weight: bold;
     font-size: rem(16px);
