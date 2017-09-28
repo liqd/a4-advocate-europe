@@ -55,6 +55,9 @@
     line-height: 1.25;
 }
 
+
+//---------- Journey Create/Update Views --------------------
+
 .journey-form-top {
     @media screen and (min-width: $screen-md-min) {
         padding-top: rem(40px);
@@ -93,11 +96,16 @@
     border-radius: 4px;
 
     @media screen and (min-width: $screen-sm-min) {
-        padding: rem(30px 60px);
+        padding: rem(20px);
     }
 
     @media screen and (max-width: $screen-xs-max) {
-        padding: rem(10px 10px);
+        padding: rem(10px);
+    }
+
+    .journey-form-idea {
+        font-size: 16px;
+        font-weight: 600;
     }
 }
 
