@@ -1,8 +1,10 @@
 from itertools import chain
+from random import randint
 
 import crispy_forms as crisp
 from django import forms
 from django.core.exceptions import ValidationError
+from django.templatetags.static import static
 from django.utils.translation import ugettext_lazy as _
 
 from cms.contrib import helpers
@@ -35,16 +37,7 @@ COLLABORATORS_HELP = _('Here you can insert the email addresses of up to 5 '
                        'appear with their user name on your idea page and '
                        'will be able to edit your idea. ')
 
-COLLABORATORS_EDIT_TITLE = _('Remove collaborators from your project.')
-COLLABORATORS_EDIT_HELP = _('These people are now collaborating on your idea. '
-                            'You can delete them here and they will not be '
-                            'able to make changes to your idea anymore.')
-
-INVITES_EDIT_TITLE = _('Revoke collaboration invites sent earlier.')
-INVITES_EDIT_HELP = _('These email addresses have received invites to '
-                      'collaborate but not accepted them yet. '
-                      'You can delete them here and they will not be '
-                      'able to join your project.')
+COLLABORATORS_EDIT_TITLE = _('Your collaborators')
 
 
 class BaseForm(forms.ModelForm):
@@ -282,32 +275,10 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
 
         if self.instance:
             invites = self.instance.ideainvite_set.all()
-            if invites:
-                self.fields['invites'] = forms.MultipleChoiceField(
-                    required=False,
-                    help_text=INVITES_EDIT_HELP,
-                    label=INVITES_EDIT_TITLE,
-                    choices=[
-                        (
-                            i.email,
-                            {
-                                'username': i.email,
-                                'detail': _('invitation pending'),
-                                'cta_checked': _('revoke'),
-                                'cta_unchecked': _('will be revoked on save')
-                            }
-                        ) for i in invites
-                        ],
-                    initial=[i.email for i in invites],
-                    widget=forms.CheckboxSelectMultiple
-                )
-                self.fields.move_to_end('invites', last=False)
-
             collaborators = self.instance.collaborators.all()
-            if collaborators:
+            if invites or collaborators:
                 self.fields['collaborators'] = forms.MultipleChoiceField(
                     required=False,
-                    help_text=COLLABORATORS_EDIT_HELP,
                     label=COLLABORATORS_EDIT_TITLE,
                     choices=[
                         (
@@ -319,8 +290,20 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
                                 'cta_unchecked': _('will be removed on save')
                             }
                         ) for c in collaborators
+                        ] + [
+                        (
+                            i.email,
+                            {
+                                'username': i.email,
+                                'avatar': self.random_avatar(),
+                                'detail': _('Invitation pending'),
+                                'cta_checked': _('remove'),
+                                'cta_unchecked': _('will be removed on save')
+                            }
+                        ) for i in invites
                         ],
-                    initial=[c.username for c in collaborators],
+                    initial=[c.username for c in collaborators] +
+                            [i.email for i in invites],
                     widget=forms.CheckboxSelectMultiple
                 )
                 self.fields.move_to_end('collaborators', last=False)
@@ -339,6 +322,10 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
             template="bootstrap3/user_checkboxselectmultiple_field.html",
         )
         return helper
+
+    def random_avatar(self):
+        number = randint(0, 4)
+        return static('images/avatars/avatar-{0:02d}.svg'.format(number))
 
     def clean(self):
         super().clean()
