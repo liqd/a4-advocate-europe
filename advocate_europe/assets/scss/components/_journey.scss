@@ -40,7 +40,8 @@
 }
 
 .journey-link {
-    padding: 0 0 0 rem(10px);
+    padding: 0;
+    margin-left: rem(10px);
     font-weight: 600;
     text-decoration: underline $brand-primary;
 }
@@ -52,4 +53,60 @@
     font-size: rem(16px);
     font-weight: 600;
     line-height: 1.25;
+}
+
+.journey-form-top {
+    @media screen and (min-width: $screen-md-min) {
+        padding-top: rem(40px);
+        padding-bottom: rem(60px);
+    }
+
+    @media screen and (max-width: $screen-sm-max) {
+        padding-top: rem(40px);
+        padding-bottom: rem(40px);
+    }
+
+    background: linear-gradient(to bottom, $ae-lighter-gray rem(360px), #fff 0%);
+}
+
+.journey-form-btn-box {
+    padding-left: 0;
+    padding-bottom: rem(20px);
+
+    .journey-form-btn {
+        font-size: rem(16px);
+        font-weight: 600;
+
+        .fa {
+            padding-right: rem(5px);
+        }
+
+        @media screen and (max-width: $screen-sm-max) {
+            font-size: rem(14px);
+        }
+    }
+}
+
+.journey-form-box {
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    border-radius: 4px;
+
+    @media screen and (min-width: $screen-sm-min) {
+        padding: rem(30px 60px);
+    }
+
+    @media screen and (max-width: $screen-xs-max) {
+        padding: rem(10px 10px);
+    }
+}
+
+.journey-form-save-btn {
+    font-size: rem(16px);
+    font-weight: 600;
+    padding: rem(9px 18px);
+
+    @media screen and (max-width: $screen-sm-max) {
+        font-size: rem(14px);
+    }
 }
