@@ -74,6 +74,15 @@ def autounfollow_creator(sender, instance, **kwargs):
             enabled=False
         )
 
+    if instance.is_winner and not old_idea.is_winner:
+        emails.NotifyFollowersOnWinner.send(instance)
+
+    if instance.is_on_shortlist and not old_idea.is_on_shortlist:
+        emails.NotifyFollowersOnShortlist.send(instance)
+
+    if instance.community_award_winner and not old_idea.community_award_winner:
+            emails.NotifyFollowersOnCommunityAward.send(instance)
+
 
 @receiver(signals.post_save, sender=Idea)
 def autofollow_creator(sender, instance, created, **kwargs):

@@ -113,3 +113,40 @@ class NotifyFollowersOnNewProposal(NotifyFollowers):
 
 class NotifyFollowersOnNewJourney(NotifyFollowersOnNewProposal):
     pass
+
+
+class NotifyFollowersOnWinner(SVGLogoMixin, emails.UserNotification):
+    template_name = \
+        'advocate_europe_notifications/emails/notify_followers_winner'
+
+    def _filter(self, receivers):
+        idea = self.object
+
+        receivers = _exclude_notifications_disabled(receivers)
+
+        if hasattr(idea, 'creator'):
+            receivers = _exclude_actor(receivers, idea.creator)
+
+        return receivers
+
+    def get_receivers(self):
+        idea = self.object
+
+        receivers = User.objects.filter(
+            ideafollow__followable=idea,
+            ideafollow__enabled=True,
+        )
+
+        receivers = self._filter(receivers)
+
+        return receivers
+
+
+class NotifyFollowersOnShortlist(NotifyFollowersOnWinner):
+    #TODO set template_name
+    pass
+
+
+class NotifyFollowersOnCommunityAward(NotifyFollowersOnWinner):
+    #TODO set template_name
+    pass
