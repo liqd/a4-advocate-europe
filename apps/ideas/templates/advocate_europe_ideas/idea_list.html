@@ -6,78 +6,95 @@
 
 {% block content %}
     {% force_translation 'en' %}
-    <div class="idealist">
-        <div class="idealist-title text-center">
-            <h1>{% trans "All ideas" %}</h1>
-            {% if view.active_phase %}
+        <div class="idealist">
+            <div class="idealist-title text-center">
+                <h1>{% trans "All ideas" %}</h1>
+                {% if view.active_phase %}
                 <h4 class="idealist-subtitle">{{ view.active_phase.name }}</h4>
-            {% else %}
+                {% else %}
                 <h4 class="idealist-subtitle">{% trans "Ideas from past idea challenges" %}</h4>
-            {% endif %}
-        </div>
-        <div class="container">
-            <div class="idealist-controls">
-                <div class="filter-bar idealist-filter clearfix">
-                    <div class="hidden-xs">
-                        {% for field in view.filter.form %}
-                            {{ field }}
-                        {% endfor %}
-                    </div>
-                    <div class="hidden-sm hidden-md hidden-lg mobile-filter">
-                        <button class="btn btn-default btn-collapse collapsed" type="button" data-toggle="collapse" data-target="#filter" aria-expanded="false" aria-controls="Filter">
-                            <div class="btn-label">
-                                {% trans "Filters" %}
-                                {% count_active_filter view.filter.data as filter_count %}
-                                {% if filter_count > 0 %}
-                                    <span class="number-of-filters">
-                                        {{ filter_count }}
-                                    </span>
-                                {% endif %}
-                            </div>
-                            <i class="fa fa-chevron-up"></i>
-                        </button>
-                        <div class="collapse" id="filter">
-                            <div class="card card-block">
+                {% endif %}
+            </div>
+            <div class="container idealist-content">
+                <div class="row equal">
+                    <div class="col-md-3 col-sm-3 col-xs-12 idealist-controls">
+                        <div class="filter-bar idealist-filter clearfix">
+                            <div class="hidden-xs">
                                 {% for field in view.filter.form %}
-                                    {{ field }}
+                                    <div class="row">
+                                        <div class="col-lg-12 filter-{{ field.name }}">
+                                            {{ field }}
+                                        </div>
+                                    </div>
                                 {% endfor %}
                             </div>
+                            <div class="hidden-sm hidden-md hidden-lg mobile-filter">
+                                <button class="btn btn-default btn-collapse collapsed" type="button"
+                                        data-toggle="collapse" data-target="#filter" aria-expanded="false"
+                                        aria-controls="Filter">
+                                    <div class="btn-label">
+                                        {% trans "Filters" %}
+                                        {% count_active_filter view.filter.data as filter_count %}
+                                        {% if filter_count > 0 %}
+                                            <span class="number-of-filters">
+                                        {{ filter_count }}
+                                    </span>
+                                        {% endif %}
+                                    </div>
+                                    <i class="fa fa-chevron-up"></i>
+                                </button>
+                                <div class="collapse" id="filter">
+                                    <div class="card card-block">
+                                        {% for field in view.filter.form %}
+                                            {{ field }}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
+                        {% if can_export %}
+                            <a class="btn btn-ae-secondary export-btn btn-wide" href="
+
+                                    {% url 'idea-export' %}{{ '?'|add:view.filter.data.urlencode }}">{% trans "export" %}</a>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-xs-12 idealist-list-container">
+                        {% if not idea_list %}
+                        <div class="idealist-no-entry">
+                            <h4>{% trans "Sorry, no ideas exist for the chosen filters." %}</h4>
+                        </div>
+                        {% endif %}
+                        <div class="idealist-list idealist-list-3">
+                            {% if page_obj.number == 1 and view.is_cta_enabled %}
+                            <div class="idealist-itemwrapper">
+                                {% include 'advocate_europe_ideas/includes/call_to_action_tile.html' with module=view.cta_object %}
+                            </div>
+                            {% endif %}
+                            {% for idea in idea_list %}
+                            <div class="idealist-itemwrapper">
+                                {% include 'advocate_europe_ideas/includes/idealist_item.html' %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% if is_paginated %}
+                        {% include 'includes/pagination.html' %}
+                        {% endif %}
+                        <div class="idealist-found {% if not is_paginated %}margin{% endif %}">
+                        {% if idea_list %}
+                        {% blocktrans count ideacount=view.get_queryset.count %}
+                            <p>One idea found</p>
+                            {% plural %}
+                            <p>{{ ideacount }} Ideas found</p>
+                        {% endblocktrans %}
+                        {% endif %}
                         </div>
                     </div>
                 </div>
-                {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
-                {% if can_export %}
-                    <a class="btn btn-ae-secondary export-btn" href="{% url 'idea-export' %}{{ '?'|add:view.filter.data.urlencode }}">{% trans "export" %}</a>
-                {% endif %}
-            </div>
-            <div class="idealist-list idealist-list-4">
-                {% if page_obj.number == 1 and view.is_cta_enabled %}
-                <div class="idealist-itemwrapper">
-                        {% include 'advocate_europe_ideas/includes/call_to_action_tile.html' with module=view.cta_object %}
-                </div>
-                {% endif %}
-                {% for idea in idea_list %}
-                    <div class="idealist-itemwrapper">
-                        {% include 'advocate_europe_ideas/includes/idealist_item.html' %}
-                    </div>
-                {% empty %}
-                    <div class="idealist-no-entry">
-                        <h4>{% trans "Sorry, no ideas exist for the chosen filters." %}</h4>
-                    </div>
-                {% endfor %}
-            </div>
-            {% if is_paginated %}
-                {% include 'includes/pagination.html' %}
-            {% endif %}
-            <div class="idealist-found {% if not is_paginated %}margin{% endif %}">
-              {% blocktrans count ideacount=view.get_queryset.count %}
-                <p>One idea found</p>
-              {% plural %}
-                <p>{{ ideacount }} Ideas found</p>
-              {% endblocktrans %}
             </div>
         </div>
-    </div>
 
-{% endforce_translation %}
+
+
+    {% endforce_translation %}
 {% endblock %}

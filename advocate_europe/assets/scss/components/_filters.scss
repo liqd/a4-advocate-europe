@@ -1,6 +1,15 @@
 .idealist {
     .idealist-controls {
-        padding: rem(5px) rem(5px) 0 rem(5px);
+        padding: rem(15px) rem(20px) rem(20px) rem(20px);
+        background-color: $ae-lighter-gray;
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+
+        @media screen and (max-width: $screen-xs-max) {
+            background-color: white;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
 
         .export-btn {
             margin: rem(5px) rem(5px) rem(5px) 0;
@@ -29,7 +38,18 @@
         font-weight: 600;
         letter-spacing: rem(1px);
         text-transform: uppercase;
-        color: $gray-dark;
+        color: $ae-middle-gray;
+    }
+
+    .filter-element {
+        width: 100%;
+
+        .dropdown-menu {
+            min-width: 100%;
+            height: auto;
+            max-height: 300px;
+            overflow-x: hidden;
+        }
     }
 
     .filter-element .btn-filter {
@@ -43,6 +63,7 @@
         background-color: #fff;
         border: solid 1px $ae-light-gray-shadow;
         color: $gray-dark;
+        width: 100%;
     }
 
     .filter-element .value-label {
@@ -51,11 +72,17 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        width: rem(128px);
 
         @media screen and (max-width: $screen-md-max) {
             width: rem(76px);
         }
+    }
+
+    .search-filter {
+        width: 100%;
+        position: relative;
+        height: 33px;
+        margin-bottom: 40px;
     }
 
     .filter-element .search-filter {
@@ -70,6 +97,8 @@
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
             color: #fff;
+            position: absolute;
+            right: 0;
         }
     }
 
@@ -79,18 +108,13 @@
         line-height: rem(20px);
         padding: rem(6px 12px);
         border-radius: 5px;
-        width: rem(230px);
+        width: 100%;
         float: left;
-
-        @media screen and (max-width: $screen-md-max) {
-            width: rem(210px);
-        }
     }
 
     .mobile-filter {
         float: none;
-        margin: rem(-15px) auto rem(20px) auto;
-        width: rem(270px);
+        width: 100%;
         border-radius: 5px;
         border: solid 1px $ae-dark-gray;
 
@@ -140,6 +164,7 @@
         }
 
         .filter-element {
+            width: 90%;
             margin: rem(5px) rem(5px);
         }
 
@@ -183,3 +208,13 @@
         content: '| ';
     }
 }
+
+.filter-ordering {
+    padding-bottom: rem(40px);
+
+    .filter-element {
+        padding-top: rem(40px);
+    }
+}
+
+

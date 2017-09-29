@@ -1,3 +1,5 @@
+from operator import itemgetter
+
 import django_filters
 from django.utils.translation import ugettext_lazy as _
 
@@ -5,7 +7,7 @@ from adhocracy4.filters import widgets
 from adhocracy4.filters.filters import DefaultsFilterSet, FreeTextFilter
 from adhocracy4.projects.models import Project
 
-from . import models
+from . import countries, models
 
 
 STATUS_FILTER_CHOICES = [
@@ -22,6 +24,9 @@ ORDERING_CHOICES = [
     ('support', _('Most Support')),
     ('title', _('Alphabetical'))
 ]
+
+EUROPEAN_COUNTRIES = list(countries.EuropeanCountries().countries.items())
+EUROPEAN_COUNTRIES.sort(key=itemgetter(1))
 
 
 class StatusFilterWidget(widgets.DropdownLinkWidget):
@@ -43,9 +48,17 @@ class ProjectFilterWidget(widgets.DropdownLinkWidget):
     label = _('Year')
 
 
+class CountryFilterWidget(widgets.DropdownLinkWidget):
+    label = _('Organisation Country')
+
+    def __init__(self, attrs=None):
+        choices = [('', _('All')), ]
+        choices += EUROPEAN_COUNTRIES
+        super().__init__(attrs, choices)
+
+
 class OrderingFilterWidget(widgets.DropdownLinkWidget):
     label = _('Sorting')
-    right = True
 
 
 class FreeTextSearchFilterWidget(widgets.FreeTextFilterWidget):
@@ -68,6 +81,11 @@ class IdeaFilterSet(DefaultsFilterSet):
         name='module__project__name',
         queryset=Project.objects.all(),
         widget=ProjectFilterWidget,
+    )
+
+    country = django_filters.CharFilter(
+        name='organisation_country',
+        widget=CountryFilterWidget,
     )
 
     def what_status(self, queryset, name, value):
@@ -133,4 +151,5 @@ class IdeaFilterSet(DefaultsFilterSet):
 
     class Meta:
         model = models.Idea
-        fields = ['search', 'project', 'status', 'idea_topics', 'ordering']
+        fields = ['search', 'project', 'status', 'idea_topics', 'country',
+                  'ordering']
