@@ -1,4 +1,5 @@
 from django.core.paginator import Page, Paginator
+from django.utils.functional import cached_property
 
 
 class DeltaFirstPagePaginator(Paginator):
@@ -20,3 +21,17 @@ class DeltaFirstPagePaginator(Paginator):
             top = self.count
 
         return Page(self.object_list[bottom:top], number, self)
+
+    @cached_property
+    def count(self):
+        """
+        Return the total number of objects + 'delta' entries,
+        across all pages.
+        """
+        try:
+            return (self.object_list.count() + self.delta)
+        except (AttributeError, TypeError):
+            # AttributeError if object_list has no count() method.
+            # TypeError if object_list.count() requires arguments
+            # (i.e. is of type list).
+            return (len(self.object_list) + self.delta)
