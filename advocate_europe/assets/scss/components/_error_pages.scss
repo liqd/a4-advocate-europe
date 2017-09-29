@@ -1,13 +1,6 @@
 .error-top {
-    @media screen and (min-width: $screen-md-min) {
-        padding-top: rem(60px);
-        padding-bottom: rem(60px);
-    }
-
-    @media screen and (max-width: $screen-sm-max) {
-        padding-top: rem(40px);
-        padding-bottom: rem(40px);
-    }
+    padding-top: rem(40px);
+    padding-bottom: rem(40px);
 
     background: linear-gradient(to bottom, $brand-primary rem(162px), #fff 0%);
 }
@@ -16,12 +9,67 @@
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
     background-color: #fff;
     border-radius: 4px;
+    padding: rem(40px);
 
-    @media screen and (min-width: $screen-sm-min) {
-        padding: rem(30px 60px);
+    .fa {
+        color: $ae-brand-orange;
     }
 
-    @media screen and (max-width: $screen-xs-max) {
-        padding: rem(10px 10px);
+    .error-status {
+        font-size: rem(72px);
+        font-weight: bold;
     }
+
+    .error-message {
+        font-size: rem(18px);
+        font-weight: 600;
+        margin-top: rem(20px);
+        margin-bottom: rem(20px);
+    }
+
+    .error-btn {
+        font-size: rem(16px);
+        font-weight: 600;
+        padding: rem(10px 20px);
+    }
+}
+
+
+// The fa-stacking was too small.
+// The following classes work like the fa-classes as commented
+//.fa-3x
+
+.error-stack-size {
+    font-size: rem(72px);
+}
+
+//still the same as .fa-stack
+
+.error-stack {
+    position: relative;
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    vertical-align: middle;
+}
+
+//.fa-stack-1x,
+//.fa-stack-2x
+
+.error-stack-1x,
+.error-stack-2x {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.error-stack-1x {
+    line-height: inherit;
+    padding-top: rem(10px);
+}
+
+.error-stack-2x {
+    font-size: rem(144px);
 }
