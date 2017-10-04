@@ -93,6 +93,8 @@
     min-height: rem(400px);
     box-shadow: 0 1px 0 0 $ae-light-gray-shadow;
 
+    word-break: break-all;
+
     .idealist-image:after {
         content: '';
         background: linear-gradient(to top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
