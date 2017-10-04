@@ -83,11 +83,11 @@ class ProfileIdeaFilterSet(DefaultsFilterSet):
     ordering = django_filters.OrderingFilter(
         fields=(
             ('-created', 'newest'),
-            ('created', 'oldest'),
+            ('idea_title', 'alphabetical'),
         ),
         choices=(
             ('newest', _('Newest')),
-            ('oldest', _('Oldest')),
+            ('alphabetical', _('Alphabetical')),
         ),
         empty_label=None,
         widget=LinkSortWidget,
