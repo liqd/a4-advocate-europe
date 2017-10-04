@@ -1,6 +1,7 @@
 from operator import itemgetter
 
 import django_filters
+from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
 from adhocracy4.filters import widgets
@@ -83,8 +84,17 @@ class IdeaFilterSet(DefaultsFilterSet):
         widget=ProjectFilterWidget,
     )
 
+    def organisation_countries(self, queryset, name, value):
+        return queryset.filter(
+            Q(organisation_country=value)
+            | Q(partner_organisation_1_country=value)
+            | Q(partner_organisation_2_country=value)
+            | Q(partner_organisation_3_country=value)
+        )
+
     country = django_filters.CharFilter(
-        name='organisation_country',
+        name='',
+        method='organisation_countries',
         widget=CountryFilterWidget,
     )
 
@@ -136,16 +146,12 @@ class IdeaFilterSet(DefaultsFilterSet):
                 'last_name',
                 'organisation_name',
                 'organisation_website',
-                'organisation_country',
                 'partner_organisation_1_name',  # partners section
                 'partner_organisation_1_website',
-                'partner_organisation_1_country',
                 'partner_organisation_2_name',
                 'partner_organisation_2_website',
-                'partner_organisation_2_country',
                 'partner_organisation_3_name',
                 'partner_organisation_3_website',
-                'partner_organisation_3_country',
                 'partners_more_info']
     )
 
