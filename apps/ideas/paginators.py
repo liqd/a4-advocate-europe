@@ -17,8 +17,8 @@ class DeltaFirstPagePaginator(Paginator):
             bottom = (number - 1) * self.per_page - self.delta
             top = bottom + self.per_page
 
-        if top + self.orphans >= self.count:
-            top = self.count
+        if top + self.orphans >= self.count - self.delta:
+            top = self.count - self.delta
 
         return Page(self.object_list[bottom:top], number, self)
 
