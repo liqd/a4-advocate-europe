@@ -7,7 +7,6 @@ from django.core.files.storage import FileSystemStorage
 from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.templatetags.static import static
 from django.utils.translation import ugettext as _
 from django.views import generic
 from formtools.wizard.views import SessionWizardView
@@ -155,22 +154,6 @@ class IdeaDetailView(generic.DetailView):
     @property
     def idea_dict(self):
         return model_to_dict(self.object)
-
-    @property
-    def idea_image(self):
-        if self.object.idea_image_exists:
-            image_dict = {
-                'url': self.object.idea_image.url,
-                'width': self.object.idea_image.width,
-                'height': self.object.idea_image.height,
-            }
-        else:
-            image_dict = {
-                'url': static('images/placeholder_blue.svg'),
-                'width': '768',
-                'height': '320',
-            }
-        return image_dict
 
     def get_context_data(self, **kwargs):
         idea_list = []
