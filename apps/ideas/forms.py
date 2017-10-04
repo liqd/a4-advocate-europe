@@ -282,7 +282,7 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
                     label=COLLABORATORS_EDIT_TITLE,
                     choices=[
                         (
-                            c.username,
+                            'c:'+c.username,
                             {
                                 'username': c.username,
                                 'avatar': c.avatar_or_fallback_url,
@@ -292,7 +292,7 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
                         ) for c in collaborators
                         ] + [
                         (
-                            i.email,
+                            'i:'+i.email,
                             {
                                 'username': i.email,
                                 'avatar': self.random_avatar(),
@@ -302,8 +302,8 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
                             }
                         ) for i in invites
                         ],
-                    initial=[c.username for c in collaborators] +
-                            [i.email for i in invites],
+                    initial=['c:'+c.username for c in collaborators] +
+                            ['i:'+i.email for i in invites],
                     widget=forms.CheckboxSelectMultiple
                 )
                 self.fields.move_to_end('collaborators', last=False)
@@ -327,11 +327,19 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
         super().clean()
 
         addresses = self.cleaned_data.get('collaborators_emails', [])
-        collaborators = self.cleaned_data.get('collaborators', [])
+        invites = []
+        collaborators = []
+        for entry in self.cleaned_data.get('collaborators', []):
+            if entry[:2] == 'c:':
+                collaborators.append(entry[2:])
+            else:
+                invites.append(entry[2:])
+        self.cleaned_data['invites'] = invites
+        self.cleaned_data['collaborators'] = collaborators
 
         duplicate_errors = []
         for (name, address) in addresses:
-            if address in collaborators:
+            if address in invites:
                 error = ValidationError({
                     'collaborators_emails': _(
                         'You already invited {email}'
@@ -343,6 +351,7 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
 
         collaborator_count = sum([
             len(addresses),
+            len(invites),
             len(collaborators),
         ])
 
@@ -352,7 +361,6 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
     def save(self, commit=True):
         """
         Deletes invites and collaborators and adds new invites of instance.
-
         There is a little hack here, it uses the idea creator and not the
         current user as creator for the invites. There for no user needs to
         passed and it can be used in the edit view, just as all other forms.
@@ -365,7 +373,7 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
         self.instance.collaborators.remove(*collaborators)
 
         self.instance.ideainvite_set.exclude(
-            email__in=self.cleaned_data.get('collaborators', [])
+            email__in=self.cleaned_data.get('invites', [])
         ).delete()
 
         if 'collaborators_emails' in self.cleaned_data:
