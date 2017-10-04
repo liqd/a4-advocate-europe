@@ -22,7 +22,7 @@
             <h4>{{ field.0 }}</h4>
         </div>
         <div class="ideadetailtab-con-text">
-            <p>{{ field.1 }}</p>
+            <p>{{ field.1|linebreaks }}</p>
         </div>
     {% endfor %}
     {% if idea.proposal %}
