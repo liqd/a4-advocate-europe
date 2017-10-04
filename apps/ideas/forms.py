@@ -1,5 +1,5 @@
 from itertools import chain
-from random import randint
+from zlib import adler32
 
 import crispy_forms as crisp
 from django import forms
@@ -295,7 +295,7 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
                             'i:'+i.email,
                             {
                                 'username': i.email,
-                                'avatar': self.random_avatar(),
+                                'avatar': self.fallback_avatar(i.email),
                                 'detail': _('Invitation pending'),
                                 'cta_checked': _('remove'),
                                 'cta_unchecked': _('will be removed on save')
@@ -319,8 +319,8 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
         )
         return helper
 
-    def random_avatar(self):
-        number = randint(0, 4)
+    def fallback_avatar(self, email):
+        number = adler32(bytes(email, 'UTF-8')) % 5
         return static('images/avatars/avatar-{0:02d}.svg'.format(number))
 
     def clean(self):
