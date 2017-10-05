@@ -122,10 +122,6 @@
         flex-direction: column;
         flex-basis: 90%;
 
-        @media screen and (min-width: $screen-sm-min) {
-            flex-basis: 40%;
-        }
-
         @media screen and (min-width: $screen-md-min) {
             flex-basis: 30%;
         }
