@@ -1,4 +1,7 @@
+from math import ceil
+
 from django.core.paginator import Page, Paginator
+from django.utils.functional import cached_property
 
 
 class DeltaFirstPagePaginator(Paginator):
@@ -20,3 +23,14 @@ class DeltaFirstPagePaginator(Paginator):
             top = self.count
 
         return Page(self.object_list[bottom:top], number, self)
+
+    @cached_property
+    def num_pages(self):
+        """
+        Return the total number of pages.
+        Add delta elements to the count to get all pages.
+        """
+        if self.count == 0 and not self.allow_empty_first_page:
+            return 0
+        hits = max(1, self.count + self.delta - self.orphans)
+        return ceil(hits / self.per_page)
