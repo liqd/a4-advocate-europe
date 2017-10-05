@@ -7,43 +7,41 @@
     {% if value.title %}
         <div class="row text-center">
             <div class="col-md-12">
-                <h3>{{ value.title }}</h3>
+                <h2>{{ value.title }}</h2>
             </div>
         </div>
     {% endif %}
-    <div class="block-blog">
+    <div class="blockblog">
         {% if blog_items %}
-            <div class="row equal">
+            <div class="blockblog-list">
                 {% for post in blog_items %}
-                    <div class="col-md-4 col-sm-4 col-xs-12 {% if blog_items.count == 1 %}col-md-offset-4 col-sm-offset-4{% endif %} {% if blog_items.count == 2 and forloop.first %}col-md-offset-2 col-sm-offset-2{% endif %} ">
-                        <div class="blockblog-entry">
-                            {% if post.image %}
-                                {% image post.image fill-490x240 as image%}
-                            {% endif %}
-                            <div class="hover-parent-bg-img" style="background-image:url({% if post.image %} {{ image.url }} {% else %} {% static 'images/placeholder_yellow.svg' %} {% endif %});">
-                                <a href="{% pageurl post %}">
+                    <div class="blockblog-entry">
+                        {% if post.image %}
+                            {% image post.image fill-490x240 as image%}
+                        {% endif %}
+                        <div class="hover-parent-bg-img" style="background-image:url({% if post.image %} {{ image.url }} {% else %} {% static 'images/placeholder_yellow.svg' %} {% endif %});">
+                            <a href="{% pageurl post %}">
                                 {% if post.image %}
                                     <img class="hover-child-img" src="{{ image.url }}">
                                 {% else %}
                                     <img class="hover-child-img" src="{% static 'images/placeholder_yellow.svg' %}">
                                 {% endif %}
-                                </a>
+                            </a>
+                        </div>
+                        <div class="blockblog-text">
+                            {% include 'cms_blog/includes/blog_categories.html' with categories=post.categories.all %}
+                            <h4><a href="{% pageurl post %}" class="blockblog-title-link">{{ post.title }}</a></h4>
+                            <div class="blockblog-text-text">
+                                {{ post.teasertext|truncatechars:350 }}
                             </div>
-                            <div class="blockblog-text">
-                                {% include 'cms_blog/includes/blog_categories.html' with categories=post.categories.all %}
-                                <h4><a href="{% pageurl post %}" class="blockblog-title-link">{{ post.title }}</a></h4>
-                                <div>
-                                    {{ post.teasertext|truncatechars:350 }}
-                                </div>
-                                <div class="blockblog-createdates">
-                                    on {{ post.create_date|date }}
-                                </div>
+                            <div class="blockblog-createdates">
+                                on {{ post.create_date|date }}
                             </div>
                         </div>
                     </div>
                 {% endfor %}
             </div>
-            {% endif %}
+        {% endif %}
 
         {% if value.link.live %}
             <div class="row text-center">
