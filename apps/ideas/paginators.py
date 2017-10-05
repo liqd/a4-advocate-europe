@@ -1,3 +1,5 @@
+from math import ceil
+
 from django.core.paginator import Page, Paginator
 from django.utils.functional import cached_property
 
@@ -17,21 +19,18 @@ class DeltaFirstPagePaginator(Paginator):
             bottom = (number - 1) * self.per_page - self.delta
             top = bottom + self.per_page
 
-        if top + self.orphans >= self.count - self.delta:
-            top = self.count - self.delta
+        if top + self.orphans >= self.count:
+            top = self.count
 
         return Page(self.object_list[bottom:top], number, self)
 
     @cached_property
-    def count(self):
+    def num_pages(self):
         """
-        Return the total number of objects + 'delta' entries,
-        across all pages.
+        Return the total number of pages.
+        Add delta elements to the count to get all pages.
         """
-        try:
-            return (self.object_list.count() + self.delta)
-        except (AttributeError, TypeError):
-            # AttributeError if object_list has no count() method.
-            # TypeError if object_list.count() requires arguments
-            # (i.e. is of type list).
-            return (len(self.object_list) + self.delta)
+        if self.count == 0 and not self.allow_empty_first_page:
+            return 0
+        hits = max(1, self.count + self.delta - self.orphans)
+        return ceil(hits / self.per_page)
