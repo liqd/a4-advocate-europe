@@ -43,12 +43,7 @@ class ProfileIdeaFilterSet(DefaultsFilterSet):
         data = data.copy()
         self.user = user
 
-        # Set the defaults if they are not manually set yet
-        for key, value in self.defaults.items():
-            if key not in data:
-                data[key] = value
-
-        super(django_filters.FilterSet, self).__init__(data, *args, **kwargs)
+        super().__init__(data, *args, **kwargs)
 
     def participation_filter(self, queryset, name, value):
         if value == 'creator_or_collaborator':
