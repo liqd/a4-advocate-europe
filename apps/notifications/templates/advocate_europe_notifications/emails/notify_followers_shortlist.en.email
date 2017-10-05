@@ -1,0 +1,26 @@
+{% extends 'email_base.'|add:part_type %}
+{% load verbose_name %}
+
+{% block subject %}
+{{ idea.idea_title }} was flagged as chosen for the shortlist.
+{% endblock %}
+
+{% block headline %}
+The idea {{ idea.idea_title }} changed status.
+{% endblock %}
+
+{% block content %}
+The idea <i>{{ idea.idea_title }}</i> was flagged as chosen for the shortlist.
+{% endblock %}
+
+{% block cta_url %}
+{% if idea.get_absolute_url %}{{ email.get_host }}{{ idea.get_absolute_url }}{% else %}{{ email.get_host }}{{ idea.project.get_absolute_url }}{% endif %}
+{% endblock %}
+
+{% block cta_label %}
+Visit the project
+{% endblock %}
+
+{% block reason %}
+This email was sent to {{ receiver }}. This email was sent to you because you follow a project. If you don’t want to receive these notifications anymore, you can unfollow the project on the project page or disable notifications completely in your account settings.
+{% endblock %}

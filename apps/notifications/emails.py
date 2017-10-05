@@ -143,10 +143,10 @@ class NotifyFollowersOnWinner(SVGLogoMixin, emails.UserNotification):
 
 
 class NotifyFollowersOnShortlist(NotifyFollowersOnWinner):
-    #TODO set template_name
-    pass
+    template_name = \
+        'advocate_europe_notifications/emails/notify_followers_shortlist'
 
 
 class NotifyFollowersOnCommunityAward(NotifyFollowersOnWinner):
-    #TODO set template_name
-    pass
+    template_name = ('advocate_europe_notifications/emails/'
+                     'notify_followers_community_award')
