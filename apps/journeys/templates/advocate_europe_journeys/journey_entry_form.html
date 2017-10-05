@@ -8,15 +8,15 @@
 <div class="journey-form-top">
     <div class="container">
         <div class="journey-form-btn-box container-medium">
-            <a href="{% if view.is_create_view %}{% url 'idea-detail' slug=view.idea.slug %}{% else %}{% url 'idea-detail' slug=journeyentry.idea.slug %}{% endif %}" class="btn btn-default journey-form-btn" role="button"><i class="fa fa-chevron-left" aria-hidden="true"></i> {% trans "Back to idea" %}</a>
+            <a href="{% if view.is_create_view %}{% url 'idea-detail' slug=view.idea.slug %}{% else %}{% url 'idea-detail' slug=journeyentry.idea.slug %}{% endif %}" class="btn-back-to" role="button"><i class="fa fa-chevron-left" aria-hidden="true"></i> {% trans "Back to idea" %}</a>
         </div>
         <form class="journey-form-box custom-form container-medium" data-safe-form="wizard" method="post" enctype="multipart/form-data" novalidate>
             {% if view.is_create_view %}
-            <h1>{% trans 'new entry' %} </h1>
-            <h4>{{ view.idea.idea_title }}</h4>
+            <h1>{% trans 'New entry' %} </h1>
+            <h4 class="journey-form-idea">{{ view.idea.idea_title }}</h4>
             {% else %}
-            <h1>{% trans 'update entry' %} </h1>
-            <h4>{{ journeyentry.idea.idea_title }}</h4>
+            <h1>{% trans 'Update entry' %} </h1>
+            <h4 class="journey-form-idea">{{ journeyentry.idea.idea_title }}</h4>
             {% endif %}
 
             {% crispy form %}

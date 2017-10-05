@@ -26,6 +26,22 @@
     color: white;
 }
 
+.btn-back-to {
+    @extend .btn;
+    @extend .btn-default;
+    font-size: rem(16px);
+    font-weight: 600;
+
+    .fa {
+        padding-right: rem(5px);
+    }
+
+    @media screen and (max-width: $screen-sm-max) {
+        margin-top: rem(10px);
+        font-size: rem(14px);
+    }
+}
+
 .btn-wide {
     width: 100%;
     text-transform: capitalize;

@@ -1,0 +1,20 @@
+{% comment %}
+     src: https://github.com/django-crispy-forms/django-crispy-forms/blob/64606b457504a53013cb015dd4bac61b274876b9/crispy_forms/templates/bootstrap3/accordion-group.html
+
+     added chevrons
+{% endcomment %}
+{% load crispy_forms_filters %}
+{% load l10n %}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle {% if not div.active %}collapsed{% endif %}" data-toggle="collapse" data-parent="#{{ div.data_parent }}" href="#{{ div.css_id }}">{{ div.name }}<span><i class="fa fa-chevron-up" aria-hidden="true"></i></span></a>
+        </h4>
+    </div>
+    <div id="{{ div.css_id }}" class="panel-collapse collapse{% if div.active %} in{% endif %}" >
+        <div class="panel-body">
+            {{ fields|safe }}
+        </div>
+    </div>
+</div>
