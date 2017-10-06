@@ -126,16 +126,6 @@ class NotifyFollowersOnWinner(emails.UserNotification):
     template_name = \
         'advocate_europe_notifications/emails/notify_followers_winner'
 
-    def _filter(self, receivers):
-        idea = self.object
-
-        receivers = _exclude_notifications_disabled(receivers)
-
-        if hasattr(idea, 'creator'):
-            receivers = _exclude_actor(receivers, idea.creator)
-
-        return receivers
-
     def get_receivers(self):
         idea = self.object
 
@@ -144,7 +134,7 @@ class NotifyFollowersOnWinner(emails.UserNotification):
             ideafollow__enabled=True,
         )
 
-        receivers = self._filter(receivers)
+        receivers = _exclude_notifications_disabled(receivers)
 
         return receivers
 
