@@ -2,15 +2,15 @@
 {% load verbose_name %}
 
 {% block subject %}
-{{ idea.idea_title }} was flagged as community award winner.
+"{{ idea.idea_title }}" was flagged as community award winner.
 {% endblock %}
 
 {% block headline %}
-The idea {{ idea.idea_title }} changed status.
+The idea "{{ idea.idea_title }}" changed status.
 {% endblock %}
 
 {% block content %}
-The idea <i>{{ idea.idea_title }}</i> was flagged as community award winner.
+{% if idea.creator == receiver %}Your{% else %}The{% endif %} idea <i>{{ idea.idea_title }}</i> was flagged as community award winner.
 {% endblock %}
 
 {% block cta_url %}

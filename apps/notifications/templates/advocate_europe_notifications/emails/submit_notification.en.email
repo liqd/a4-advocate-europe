@@ -9,7 +9,7 @@ You have sucessfully submitted your {{ idea.type }} to {{ idea.project.name }}
 {% endblock  %}
 
 {% block content %}
-You have submitted the {{ idea.type }} "{{ idea.idea_title }}".{% if idea.project.active_phase %} Your {{ idea.type }} can still be edted until the submission deadline on {{ idea.project.active_phase.end_date }}.{% endif %} Thank you for your participation. 
+You have submitted the {{ idea.type }} "{{ idea.idea_title }}".{% if idea.project.active_phase %} Your {{ idea.type }} can still be edited until the submission deadline on {{ idea.project.active_phase.end_date }}.{% endif %} Thank you for your participation.
 {% endblock %}
 
 {% block cta_url %}{{ email.get_host }}{{ idea.get_absolute_url }}{% endblock %}
