@@ -1,7 +1,4 @@
-from email.mime.image import MIMEImage
-
 from django.contrib import auth
-from django.contrib.staticfiles import finders
 
 from adhocracy4 import emails
 
@@ -38,6 +35,16 @@ class SubmitNotification(emails.UserNotification):
     def get_context(self):
         context = super().get_context()
         context['idea'] = self.object
+        return context
+
+
+class SubmitJourneyNotification(emails.UserNotification):
+    template_name = \
+        'advocate_europe_notifications/emails/submit_journey_notification'
+
+    def get_context(self):
+        context = super().get_context()
+        context['journey'] = self.object
         return context
 
 
@@ -115,7 +122,7 @@ class NotifyFollowersOnNewJourney(NotifyFollowersOnNewProposal):
     pass
 
 
-class NotifyFollowersOnWinner(SVGLogoMixin, emails.UserNotification):
+class NotifyFollowersOnWinner(emails.UserNotification):
     template_name = \
         'advocate_europe_notifications/emails/notify_followers_winner'
 

@@ -5,25 +5,10 @@ from adhocracy4.actions.models import Action
 from adhocracy4.actions.verbs import Verbs
 from adhocracy4.comments.models import Comment
 
-from apps.follows import Registry
 from apps.ideas.models import Idea, IdeaSketch, Proposal
 from apps.journeys.models import JourneyEntry
 
 from . import emails
-
-
-def _autofollow(instance, pk_set, reverse, enabled):
-
-    # pk_set contains the set of users
-    if not reverse:
-        model = Registry.get_follow_model()
-
-        for pk in pk_set:
-            model.objects.update_or_create(
-                followable=instance,
-                creator_id=pk,
-                defaults={'enabled': enabled}
-            )
 
 
 @receiver(signals.post_save, sender=Action)
@@ -35,60 +20,38 @@ def send_notification(sender, instance, created, **kwargs):
         if (modelcls is IdeaSketch):
             emails.SubmitNotification.send(action.obj)
         elif (modelcls is Proposal):
+            emails.SubmitNotification.send(action.obj)
             emails.NotifyFollowersOnNewProposal.send(action)
         elif (modelcls is Comment):
             emails.NotifyCreatorEmail.send(action)
             emails.NotifyFollowersOnNewComment.send(action)
         elif (modelcls is JourneyEntry):
-            emails.SubmitNotification.send(action.obj)
+            emails.SubmitJourneyNotification.send(action.obj)
             emails.NotifyFollowersOnNewJourney.send(action)
 
 
-@receiver(signals.m2m_changed, sender=IdeaSketch.collaborators.through)
-def autofollow_collaborateurs(instance, action, pk_set, reverse, **kwargs):
-    if action == 'post_add':
-        enabled = True
-    elif action in ('post_remove', 'post_clear'):
-        enabled = False
-    else:
-        return
-
-    _autofollow(
-        instance=instance,
-        pk_set=pk_set,
-        reverse=reverse,
-        enabled=enabled
-    )
-
-
 @receiver(signals.pre_save, sender=Idea)
-def autounfollow_creator(sender, instance, **kwargs):
+def identify_status_changes(sender, instance, **kwargs):
     old_idea = Idea.objects.filter(pk=instance.pk).first()
-    old_creator = old_idea.creator
-
-    if old_creator != instance.creator:
-        _autofollow(
-            instance=instance,
-            pk_set=[old_creator.pk],
-            reverse=False,
-            enabled=False
-        )
 
     if instance.is_winner and not old_idea.is_winner:
-        emails.NotifyFollowersOnWinner.send(instance)
+        setattr(instance, 'notifyFollowersOnWinner', True)
 
     if instance.is_on_shortlist and not old_idea.is_on_shortlist:
-        emails.NotifyFollowersOnShortlist.send(instance)
+        setattr(instance, 'notifyFollowersOnShortlist', True)
 
     if instance.community_award_winner and not old_idea.community_award_winner:
-            emails.NotifyFollowersOnCommunityAward.send(instance)
+        setattr(instance, 'notifyFollowersOnCommunityAward', True)
 
 
 @receiver(signals.post_save, sender=Idea)
-def autofollow_creator(sender, instance, created, **kwargs):
-    _autofollow(
-        instance=instance,
-        pk_set=[instance.creator.pk],
-        reverse=False,
-        enabled=True
-    )
+def send_status_notification(sender, instance, **kwargs):
+
+    if getattr(instance, 'notifyFollowersOnWinner', False):
+        emails.NotifyFollowersOnWinner.send(instance)
+
+    if getattr(instance, 'notifyFollowersOnShortlist', False):
+        emails.NotifyFollowersOnShortlist.send(instance)
+
+    if getattr(instance, 'notifyFollowersOnCommunityAward', False):
+        emails.NotifyFollowersOnCommunityAward.send(instance)
