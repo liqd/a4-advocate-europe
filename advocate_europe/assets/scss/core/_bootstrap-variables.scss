@@ -24,6 +24,8 @@ $ae-instagram: #e4405f;
 $ae-github: #24292e;
 // Which colors are used for btn-ae-secondary is defined below.
 
+// demibold font-weight for buttons, tabs, and links
+$demibold: 600;
 
 //== Bootstrap
 //== Colors
@@ -170,7 +172,7 @@ $table-border-color:            #ddd !default;
 //
 //## For each of Bootstrap's buttons, define text, background and border color.
 
-$btn-font-weight:                normal !default;
+$btn-font-weight:                $demibold !default; // was: normal
 
 $btn-default-color:              $gray-dark !default;
 $btn-default-bg:                 $ae-light-gray !default;
