@@ -47,5 +47,5 @@ class InviteUpdateView(mixins.LoginRequiredMixin,
             self.object.accept(self.request.user)
             return redirect(self.object.subject.get_absolute_url())
         else:
-            self.instance.reject()
+            self.object.reject()
             return redirect('/')
