@@ -40,7 +40,7 @@ def test_profile_view_filter_watch(client, user, user2,
     response = client.get(url + '?participation=watcher')
     assert response.status_code == 200
     assert idea1 in response.context_data['idea_list']
-    assert idea2 not in response.context_data['idea_list']
+    assert idea2 in response.context_data['idea_list']
     assert idea3 not in response.context_data['idea_list']
 
     response = client.get(url)
