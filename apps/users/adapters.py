@@ -5,11 +5,10 @@ from django.utils.http import is_safe_url
 
 from adhocracy4.emails import Email
 from adhocracy4.emails.mixins import SyncEmailMixin
-from apps.notifications.emails import SVGLogoMixin
 from apps.users import USERNAME_REGEX
 
 
-class AccountEmail(SVGLogoMixin, Email, SyncEmailMixin):
+class AccountEmail(Email, SyncEmailMixin):
     def get_receivers(self):
         return [self.object]
 
