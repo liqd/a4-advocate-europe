@@ -71,6 +71,9 @@ class NotifyFollowers(emails.UserNotification):
         receivers = _exclude_moderators(receivers, action)
 
         if hasattr(action.target, 'creator'):
+            # As the creator of an idea or comment already gets
+            # notifications via NotifyCreatorEmail, we remove the
+            # creator here even if he watches the project.
             receivers = _exclude_actor(receivers, action.target.creator)
 
         return receivers
