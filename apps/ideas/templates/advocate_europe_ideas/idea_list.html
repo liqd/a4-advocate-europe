@@ -65,7 +65,7 @@
                             <h4>{% trans "Sorry, no ideas exist for the chosen filters." %}</h4>
                         </div>
                         {% endif %}
-                        <div class="idealist-list idealist-list-3">
+                        <div class="idealist-list">
                             {% if page_obj.number == 1 and view.is_cta_enabled %}
                             <div class="idealist-itemwrapper">
                                 {% include 'advocate_europe_ideas/includes/call_to_action_tile.html' with module=view.cta_object %}
