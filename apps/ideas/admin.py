@@ -38,7 +38,7 @@ set_is_winner_false.short_description = 'Unset winner'
 
 class IdeaAdmin(admin.ModelAdmin):
     exclude = ['module']
-    raw_id_fields = ('creator', 'collaborators')
+    raw_id_fields = ('creator', 'co_workers')
     search_fields = ('idea_title',)
     list_filter = (
         'module__project__name',
@@ -75,7 +75,7 @@ class IdeaAdmin(admin.ModelAdmin):
         ('Creator and Collaborators', {
             'classes': ('collapse',),
             'fields': ('creator',
-                       'collaborators')
+                       'co_workers')
         }),
         ('Applicant Section', {
             'classes': ('collapse',),
@@ -116,7 +116,7 @@ class IdeaAdmin(admin.ModelAdmin):
 
 
 class IdeaSketchArchivedAdmin(admin.ModelAdmin):
-    raw_id_fields = ('creator', 'collaborators')
+    raw_id_fields = ('creator', 'co_workers')
     search_fields = ('idea_title',)
 
     formfield_overrides = {
@@ -128,7 +128,7 @@ class IdeaSketchArchivedAdmin(admin.ModelAdmin):
         ('Creator and Collaborators', {
             'classes': ('collapse',),
             'fields': ('creator',
-                       'collaborators')
+                       'co_workers')
         }),
         ('Applicant Section', {
             'classes': ('collapse',),

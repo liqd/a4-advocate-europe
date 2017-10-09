@@ -6,10 +6,10 @@ from apps.ideas import forms as idea_forms
 
 
 @pytest.mark.django_db
-@pytest.mark.parametrize('idea_sketch__collaborators', [[]])
+@pytest.mark.parametrize('idea_sketch__co_workers', [[]])
 def test_community_section_empty_edit(idea_sketch):
     """
-    Check that the CommunitySectionEdit form works if no collaborators and
+    Check that the CommunitySectionEdit form works if no co-workers and
     and invites are present.
     """
 
@@ -17,13 +17,13 @@ def test_community_section_empty_edit(idea_sketch):
         instance=idea_sketch,
     )
 
-    assert list(idea_sketch.collaborators.all()) == []
+    assert list(idea_sketch.co_workers.all()) == []
     assert list(idea_sketch.ideainvite_set.all()) == []
 
     form = idea_forms.CommunitySectionEditForm(
         instance=idea_sketch,
         data={
-            'collaborators_emails': 'test@test.de, test2@test.de',
+            'co_workers_emails': 'test@test.de, test2@test.de',
             'reach_out': 'edit_reach_out',
             'how_did_you_hear': 'other'
         }
@@ -45,13 +45,13 @@ def test_community_section_empty_edit(idea_sketch):
 @pytest.mark.django_db
 @pytest.mark.parametrize('idea_sketch__invites',
                          [['test@test.de', 'foo@test.de']])
-@pytest.mark.parametrize('idea_sketch__collaborators', [['Jürgen', 'Erich']])
-def test_collaborator_edit(idea_sketch):
+@pytest.mark.parametrize('idea_sketch__co_workers', [['Jürgen', 'Erich']])
+def test_co_worker_edit(idea_sketch):
     """
-    Remove collaborator and invite, while also adding new invite all in
+    Remove co-worker and invite, while also adding new invite all in
     one operation.
     """
-    collaborators = list(idea_sketch.collaborators.all())
+    co_workers = list(idea_sketch.co_workers.all())
     form = idea_forms.CommunitySectionEditForm(
         instance=idea_sketch,
     )
@@ -59,8 +59,8 @@ def test_collaborator_edit(idea_sketch):
     form = idea_forms.CommunitySectionEditForm(
         instance=idea_sketch,
         data={
-            'collaborators_emails': 'test1@test.de, test2@test.de',
-            'collaborators': ['i:test1@test.de']
+            'co_workers_emails': 'test1@test.de, test2@test.de',
+            'co_workers': ['i:test1@test.de']
         }
     )
     assert not form.is_valid()
@@ -68,8 +68,8 @@ def test_collaborator_edit(idea_sketch):
     form = idea_forms.CommunitySectionEditForm(
         instance=idea_sketch,
         data={
-            'collaborators_emails': 'test1@test.de, test2@test.de',
-            'collaborators': ['c:Erich', 'i:foo@test.de'],
+            'co_workers_emails': 'test1@test.de, test2@test.de',
+            'co_workers': ['c:Erich', 'i:foo@test.de'],
             'reach_out': 'edit_reach_out',
             'how_did_you_hear': 'other'
         }
@@ -86,22 +86,22 @@ def test_collaborator_edit(idea_sketch):
     assert len(invites) == len(new_invites)
     for invite in invites:
         assert invite in new_invites
-    assert list(idea_sketch.collaborators.all()) == collaborators[1:]
+    assert list(idea_sketch.co_workers.all()) == co_workers[1:]
 
 
 @pytest.mark.django_db
 @pytest.mark.parametrize('idea_sketch__invites',
                          [['test1@test.de', 'test2@test.de', 'test3@test.de']])
-@pytest.mark.parametrize('idea_sketch__collaborators', [['test4', 'test5']])
-def test_collaborator_edit_too_many(idea_sketch):
+@pytest.mark.parametrize('idea_sketch__co_workers', [['test4', 'test5']])
+def test_co_worker_edit_too_many(idea_sketch):
     form = idea_forms.CommunitySectionEditForm(
         instance=idea_sketch,
         data={
-            'collaborators_emails': 'test6@test.de',
+            'co_workers_emails': 'test6@test.de',
             'reach_out': 'edit_reach_out',
             'how_did_you_hear': 'other',
-            'collaborators': ['c:test4', 'c:test5', 'i:test1@test.de',
-                              'i:test2@test.de', 'i:test3@test.de'],
+            'co_workers': ['c:test4', 'c:test5', 'i:test1@test.de',
+                           'i:test2@test.de', 'i:test3@test.de'],
         }
     )
 
@@ -111,16 +111,16 @@ def test_collaborator_edit_too_many(idea_sketch):
 @pytest.mark.django_db
 @pytest.mark.parametrize('idea_sketch__invites',
                          [['test1@test.de', 'test2@test.de', 'test3@test.de']])
-@pytest.mark.parametrize('idea_sketch__collaborators', [['test4', 'test5']])
-def test_collaborator_edit_replace_one(idea_sketch):
+@pytest.mark.parametrize('idea_sketch__co_workers', [['test4', 'test5']])
+def test_co_worker_edit_replace_one(idea_sketch):
     form = idea_forms.CommunitySectionEditForm(
         instance=idea_sketch,
         data={
-            'collaborators_emails': 'test6@test.de',
+            'co_workers_emails': 'test6@test.de',
             'reach_out': 'edit_reach_out',
             'how_did_you_hear': 'other',
-            'collaborators': ['c:test4', 'i:test1@test.de',
-                              'i:test2@test.de', 'i:test3@test.de'],
+            'co_workers': ['c:test4', 'i:test1@test.de',
+                           'i:test2@test.de', 'i:test3@test.de'],
         }
     )
 
@@ -133,41 +133,41 @@ def test_collaborters_reinvite(idea_sketch):
     form = idea_forms.CommunitySectionEditForm(
         instance=idea_sketch,
         data={
-            'collaborators_emails': 'test@test.de',
+            'co_workers_emails': 'test@test.de',
             'reach_out': 'edit_reach_out',
             'how_did_you_hear': 'other',
-            'collaborators': ['i:test@test.de'],
+            'co_workers': ['i:test@test.de'],
         }
     )
 
     assert not form.is_valid()
 
 
-def test_clean_collaborators_email():
+def test_clean_co_workers_email():
 
     class TestForm(idea_forms.CollaboratorsEmailsFormMixin, forms.Form):
-        collaborators_emails = forms.CharField()
+        co_workers_emails = forms.CharField()
 
     form = TestForm(
-        data={'collaborators_emails': 'meg@test.com, carren@test.de'}
+        data={'co_workers_emails': 'meg@test.com, carren@test.de'}
     )
     assert form.is_valid()
 
-    form = TestForm(data={'collaborators_emails': 'meg, carren@test.de, john'})
+    form = TestForm(data={'co_workers_emails': 'meg, carren@test.de, john'})
     assert not form.is_valid()
     assert form.errors == {
-        'collaborators_emails': [
+        'co_workers_emails': [
             'Invalid email address (meg)',
             'Invalid email address (john)'
         ]
     }
 
     form = TestForm(
-        data={'collaborators_emails': 'carren@test.de, carren@test.de'}
+        data={'co_workers_emails': 'carren@test.de, carren@test.de'}
     )
     assert not form.is_valid()
     assert form.errors == {
-        'collaborators_emails': [
+        'co_workers_emails': [
             'Duplicate email address (carren@test.de)',
         ]
     }

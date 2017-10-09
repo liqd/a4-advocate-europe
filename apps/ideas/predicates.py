@@ -2,8 +2,8 @@ import rules
 
 
 @rules.predicate
-def is_collaborator(user, idea):
-    return user in idea.collaborators.all()
+def is_co_worker(user, idea):
+    return user in idea.co_workers.all()
 
 
 @rules.predicate

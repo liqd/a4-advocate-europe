@@ -29,23 +29,23 @@ class IdeaSketchFactory(factory.django.DjangoModelFactory):
     module = factory.SubFactory(ModuleFactory)
 
     @factory.post_generation
-    def collaborators(self, create, extracted, **kwargs):
+    def co_workers(self, create, extracted, **kwargs):
         if extracted == []:
             return
 
         if not extracted:
             user = UserFactory()
-            self.collaborators.add(user)
+            self.co_workers.add(user)
             return
 
         if extracted:
             for user in extracted:
                 if isinstance(user, str):
-                    self.collaborators.add(
+                    self.co_workers.add(
                         UserFactory(username=user)
                     )
                 else:
-                    self.collaborators.add(user)
+                    self.co_workers.add(user)
 
     @factory.post_generation
     def invites(self, create, extracted, **kwargs):
@@ -92,12 +92,12 @@ class ProposalFactory(factory.django.DjangoModelFactory):
     def initiators(self, create, extracted, **kwargs):
         if not extracted:
             user = UserFactory()
-            self.collaborators.add(user)
+            self.co_workers.add(user)
             return
 
         if extracted:
             for user in extracted:
-                self.collaborators.add(user)
+                self.co_workers.add(user)
 
     @factory.post_generation
     def idea_archive(self, create, extracted, **kwargs):

@@ -32,7 +32,7 @@ class ProfileIdeaFilterSet(DefaultsFilterSet):
 
     defaults = {
         'ordering': 'newest',
-        'participation': 'creator_or_collaborator',
+        'participation': 'creator_or_co_worker',
     }
 
     class Meta:
@@ -46,10 +46,10 @@ class ProfileIdeaFilterSet(DefaultsFilterSet):
         super().__init__(data, *args, **kwargs)
 
     def participation_filter(self, queryset, name, value):
-        if value == 'creator_or_collaborator':
+        if value == 'creator_or_co_worker':
             return queryset.filter(
                 models.Q(creator=self.user)
-                | models.Q(collaborators=self.user)
+                | models.Q(co_workers=self.user)
             )
         elif value == 'supporter':
             return queryset.filter(
@@ -67,7 +67,7 @@ class ProfileIdeaFilterSet(DefaultsFilterSet):
     participation = django_filters.ChoiceFilter(
         method='participation_filter',
         choices=(
-            ('creator_or_collaborator', _('Submitted')),
+            ('creator_or_co_worker', _('Submitted')),
             ('watcher', _('Watching')),
             ('supporter', _('Supporting')),
         ),

@@ -16,7 +16,7 @@ def test_idea_rate_rules(admin, user, idea_sketch_factory, module):
     assert not rules.has_perm('advocate_europe_ideas.rate_idea',
                               user,
                               idea_sketch)
-    idea_sketch.collaborators.add(user)
+    idea_sketch.co_workers.add(user)
     assert not rules.has_perm('advocate_europe_ideas.rate_idea',
                               user,
                               idea_sketch)
@@ -37,8 +37,8 @@ def test_idea_rate_rules(admin, user, idea_sketch_factory, module):
         proposal = proposal_factory()
         creator = UserFactory()
         proposal.creator = creator
-        collaborator = UserFactory()
-        proposal.collaborators = [collaborator]
+        co_worker = UserFactory()
+        proposal.co_workers = [co_worker]
 
         # proposal not winner
         assert not rules.has_perm('advocate_europe_ideas.add_journey',
@@ -46,7 +46,7 @@ def test_idea_rate_rules(admin, user, idea_sketch_factory, module):
         assert not rules.has_perm('advocate_europe_ideas.add_journey',
                                   creator, proposal)
         assert not rules.has_perm('advocate_europe_ideas.add_journey',
-                                  collaborator, proposal)
+                                  co_worker, proposal)
         assert rules.has_perm('advocate_europe_ideas.add_journey',
                               admin, proposal)
 
@@ -57,6 +57,6 @@ def test_idea_rate_rules(admin, user, idea_sketch_factory, module):
         assert rules.has_perm('advocate_europe_ideas.add_journey',
                               creator, proposal)
         assert rules.has_perm('advocate_europe_ideas.add_journey',
-                              collaborator, proposal)
+                              co_worker, proposal)
         assert rules.has_perm('advocate_europe_ideas.add_journey',
                               admin, proposal)
