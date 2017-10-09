@@ -1,17 +1,22 @@
 .block {
-    margin-top: 40px;
+    padding-top: rem(20px);
+    padding-bottom: rem(30px);
+
+    &-title {
+        margin: 0;
+    }
 }
 
 .block-cta {
     color: #fff;
     background-color: $brand-primary;
 
-    &-headline {
-        margin: rem(20px 0 10px 0);
+    &-title {
+        margin-top: 0;
     }
 
     &-text {
-        margin: rem(10px 0 20px 0);
+        margin-top: rem(10px);
     }
 
     &-btn {
@@ -44,30 +49,6 @@
 
         .idealist-image img {
             height: auto;
-        }
-    }
-
-    .proposal-tile-label {
-        background-color: $brand-secondary;
-        color: $gray-dark;
-    }
-
-    .proposal-tile-category {
-        text-transform: uppercase;
-        font-weight: 900;
-        letter-spacing: 0.8px;
-        color: $brand-primary;
-        font-size: rem(12px);
-        margin-bottom: 0;
-    }
-
-    .proposal-tile-body {
-        padding: rem(10px);
-        height: 100%;
-        background-color: $ae-light-gray;
-
-        .row {
-            margin: 0;
         }
     }
 }
@@ -111,6 +92,8 @@
 
 .blockblog {
     &-list {
+        margin-top: rem(20px);
+        margin-bottom: rem(20px);
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
@@ -125,7 +108,7 @@
             flex-basis: 30%;
         }
 
-        margin: 10px 15px;
+        margin: 0 15px;
         background-color: $ae-light-gray;
         box-shadow: 0 1px 0 0 $ae-light-gray-shadow;
     }
@@ -156,25 +139,19 @@
     &-createdates {
         margin-top: rem(10px);
     }
-}
-
-.blockblog-btn {
-    margin-top: rem(20px);
-    border-radius: 5px;
-    font-size: 16px;
-    padding: rem(10px 18px);
+  
+    &-btn {
+        border-radius: 5px;
+        font-size: 16px;
+        padding: rem(10px 18px);
+    }
 }
 
 .three-column-text-block {
     background-color: $ae-light-gray;
-    padding-bottom: rem(40px);
 
-    h3 {
-        margin-bottom: 0;
-    }
-
-    h4 {
-        margin-top: rem(20px);
+    &-title {
+        margin-top: 0;
     }
 }
 
@@ -208,11 +185,12 @@
         text-align: center;
         font-size: 18px;
         line-height: 1.33;
-        margin-bottom: 33px;
+        margin-top: rem(10px);
+        margin-bottom: rem(33px);
     }
 
     .three-image-block-row {
-        padding-bottom: 60px;
+        padding-bottom: rem(30px);
     }
 
     .three-image-block-image-container {
