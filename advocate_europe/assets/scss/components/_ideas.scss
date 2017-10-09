@@ -44,27 +44,15 @@
     display: flex;
     flex-wrap: wrap;
 
-    &-4 .idealist-itemwrapper {
-        @media screen and (min-width: $screen-sm-min) {
-            flex-basis: 50%;
-        }
-
-        @media screen and (min-width: $screen-md-min) {
-            flex-basis: 33.33%;
-        }
-
-        @media screen and (min-width: $screen-lg-min) {
-            flex-basis: 25%;
-        }
-    }
-
-    &-3 .idealist-itemwrapper {
+    .idealist-itemwrapper {
         @media screen and (min-width: $screen-md-min) {
             flex-basis: 50%;
+            max-width: 50%;
         }
 
         @media screen and (min-width: $screen-lg-min) {
             flex-basis: 33.33%;
+            max-width: 33.33%;
         }
     }
 }
@@ -92,7 +80,7 @@
     min-height: rem(400px);
     box-shadow: 0 1px 0 0 $ae-light-gray-shadow;
 
-    word-break: break-all;
+    overflow-wrap: break-word;
 
     .idealist-image:after {
         content: '';
