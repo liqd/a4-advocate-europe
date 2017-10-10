@@ -19,6 +19,7 @@ from apps.ideas import urls as idea_urls
 from apps.invites import urls as invite_urls
 from apps.journeys import urls as journey_urls
 from apps.users import urls as user_urls
+from apps.richtexts import urls as richtext_urls
 
 from . import urls_accounts
 
@@ -54,6 +55,7 @@ urlpatterns += [
     url(r'^ideas/', include(idea_urls)),
     url(r'^invites/', include(invite_urls)),
     url(r'^journeys/', include(journey_urls)),
+    url(r'^richtexts/', include(richtext_urls)),
     url(r'^jsi18n/$', javascript_catalog,
         js_info_dict, name='javascript-catalog'),
     url(r'^i18n/', include('django.conf.urls.i18n')),

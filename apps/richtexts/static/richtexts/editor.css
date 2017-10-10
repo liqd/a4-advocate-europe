@@ -1,0 +1,39 @@
+.ql-formats {
+    margin-right: 0.5em;
+}
+
+.ql-clear:before {
+	font-family: FontAwesome;
+    content: "\f246";
+}
+
+.ql-bold:before {
+	font-family: FontAwesome;
+    content: "\f032";
+}
+
+.ql-italic:before {
+	font-family: FontAwesome;
+    content: "\f033";
+}
+
+.ql-strike:before {
+	font-family: FontAwesome;
+    content: "\f0cc"
+}
+
+.ql-underline:before {
+	font-family: FontAwesome;
+    content: "\f0cd"
+}
+
+.ql-link:before {
+	font-family: FontAwesome;
+    content: "\f0c1"
+}
+
+
+.ql-a4image:before {
+	font-family: FontAwesome;
+    content: "\f03e"
+}

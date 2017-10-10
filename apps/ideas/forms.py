@@ -7,6 +7,7 @@ from django.core.exceptions import ValidationError
 from django.templatetags.static import static
 from django.utils.translation import ugettext_lazy as _
 
+from apps.richtexts import widgets
 from cms.contrib import helpers
 
 from . import models
@@ -102,6 +103,9 @@ class ApplicantSectionForm(BaseForm):
             'contact_email',
             'year_of_registration'
         ]
+        widgets = {
+            'organisation_status': widgets.Editor,
+        }
 
 
 class PartnersSectionForm(BaseForm):

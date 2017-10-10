@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
+    'apps.richtexts.apps.RichtextsConfig',
+
     'adhocracy4.images.apps.ImagesConfig',
     'adhocracy4.phases.apps.PhasesConfig',
     'adhocracy4.projects.apps.ProjectsConfig',
