@@ -1,3 +1,5 @@
+from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
 from django.db import models
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
@@ -20,14 +22,39 @@ class MenuItem(models.Model):
         related_name='+',
         blank=True,
         null=True,
-        help_text='Leave empty if you add subpages'
+        help_text=(
+            'Creates a link to a single wagtail page. '
+            'Leave empty if you add subpages or a link view'
+        )
     )
 
-    subpages = StreamField([
-        ('link', snippets_blocks.LinkBlock())
-    ], blank=True, null=True, help_text='These Links will be ' +
-                                        'displayed in as a dropdown menu',
-        verbose_name='Submenu')
+    allowed_views = (
+        ('idea-sketch-list', 'ideaspace'),
+    )
+
+    link_view = models.CharField(
+        max_length=100,
+        blank=True,
+        choices=[
+            (name, title) for name, title in allowed_views
+        ],
+        help_text=(
+            'Creates a link to a non wagtail view (e.g ideaspace). '
+            'Leave empty if you add subpages or a link page'
+        )
+    )
+
+    subpages = StreamField(
+        [
+            ('link', snippets_blocks.LinkBlock())
+        ],
+        blank=True,
+        null=True,
+        help_text=(
+            'These Links will be displayed in as a dropdown menu'
+        ),
+        verbose_name='Submenu'
+    )
 
     class Meta:
         abstract = True
@@ -36,22 +63,38 @@ class MenuItem(models.Model):
     def url(self):
         if self.link_page:
             return self.link_page.url
-        return ''
+        else:
+            return reverse(self.link_view)
 
     def __str__(self):
         return self.title
 
+    def clean(self):
+        if self.link_page and self.link_view:
+            msg = 'Can only either link a view or a page.'
+            raise ValidationError({
+                'link_view': msg,
+                'link_page': msg,
+            })
+        if not self.link_page and not self.link_view:
+            msg = 'Specify either a link to a view or a page.'
+            raise ValidationError({
+                'link_view': msg,
+                'link_page': msg,
+            })
+
     panels = [
-                 edit_handlers.MultiFieldPanel(
-                     [
-                         edit_handlers.FieldPanel('menu_title_en'),
-                         edit_handlers.FieldPanel('menu_title_de'),
-                         edit_handlers.PageChooserPanel('link_page'),
-                         edit_handlers.StreamFieldPanel('subpages')
-                     ],
-                     heading="Translations",
-                     classname="collapsible collapsed"
-                 )]
+        edit_handlers.MultiFieldPanel(
+            [
+                edit_handlers.FieldPanel('menu_title_en'),
+                edit_handlers.FieldPanel('menu_title_de'),
+                edit_handlers.FieldPanel('link_view'),
+                edit_handlers.PageChooserPanel('link_page'),
+                edit_handlers.StreamFieldPanel('subpages')
+            ],
+            heading="Translations",
+            classname="collapsible collapsed"
+        )]
 
 
 class NavigationMenuItem(Orderable, MenuItem):
