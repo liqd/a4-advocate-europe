@@ -39,22 +39,18 @@
                 {% endif %}
                 {% endfor %}
 
-                <li>
-                    {% url 'idea-sketch-list' as idea_list %}
-                    <a href="{{ idea_list }}" class="{% if request.path == idea_list %}is-active {% else %}not-active{% endif %}">{% trans 'ideaspace'  %}</a>
-                </li>
-
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ LANGUAGE_CODE|capfirst }} <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ LANGUAGE_CODE|upper }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         {% get_available_languages as languages %}
                         {% for lang_code, lang_name in languages %}
                             {% if lang_code != LANGUAGE_CODE %}
+                                {% get_language_info for lang_code as lang %}
                                 <li>
                                     <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
                                         <input name="next" type="hidden" value="{{ redirect_to }}" />
                                         <input name="language" type="hidden" value="{{ lang_code }}">
-                                        <button type="submit">{{ lang_name }}</button>
+                                        <button type="submit">{{ lang.name_local }}</button>
                                     </form>
                                 </li>
                             {% endif %}
