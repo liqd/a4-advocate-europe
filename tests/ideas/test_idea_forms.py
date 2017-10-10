@@ -145,7 +145,7 @@ def test_collaborters_reinvite(idea_sketch):
 
 def test_clean_co_workers_email():
 
-    class TestForm(idea_forms.CollaboratorsEmailsFormMixin, forms.Form):
+    class TestForm(idea_forms.CoWorkersEmailsFormMixin, forms.Form):
         co_workers_emails = forms.CharField()
 
     form = TestForm(
