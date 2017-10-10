@@ -20,9 +20,6 @@ from apps.invites import urls as invite_urls
 from apps.journeys import urls as journey_urls
 from apps.users import urls as user_urls
 
-from . import urls_accounts
-
-
 js_info_dict = {
     'packages': ('adhocracy4.comments',),
 }
@@ -48,8 +45,7 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    url(r'^accounts/', include('allauth.account.urls')),
-    url(r'^accounts/social/', include('allauth.socialaccount.urls')),
+    url(r'^accounts/', include('allauth.urls')),
     url(r'', include(user_urls)),
     url(r'^ideas/', include(idea_urls)),
     url(r'^invites/', include(invite_urls)),
@@ -60,9 +56,6 @@ urlpatterns += [
     url(r'', include(wagtail_urls))
 ]
 
-urlpatterns += [
-    url(r'^accounts/', include(urls_accounts)),
-]
 
 if settings.DEBUG:
     from django.conf.urls.static import static
