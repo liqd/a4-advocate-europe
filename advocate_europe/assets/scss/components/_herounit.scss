@@ -96,12 +96,9 @@
 }
 
 .herounit-content {
-    margin-left: rem(20px);
-
     @media screen and (max-width: $screen-xs) {
         padding-top: rem(10px);
         padding-bottom: rem(20px);
-        margin-left: 0;
     }
 }
 
