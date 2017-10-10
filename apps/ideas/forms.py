@@ -29,15 +29,15 @@ ACCEPT_CONDITIONS_LABEL = _('I hereby confirm and agree that '
                             'the visual material '
                             'used in this proposal.')
 
-COLLABORATORS_TITLE = _('Please add your co-workers here.')
-COLLABORATORS_HELP = _('Here you can insert the email addresses of up to 5 '
-                       'co-workers. Each of the named co-workers will '
-                       'receive an email inviting them to register on the '
-                       'Advocate Europe website. After registering they will '
-                       'appear with their user name on your idea page and '
-                       'will be able to edit your idea. ')
+COWORKERS_TITLE = _('Please add your co-workers here.')
+COWORKERS_HELP = _('Here you can insert the email addresses of up to 5 '
+                   'co-workers. Each of the named co-workers will '
+                   'receive an email inviting them to register on the '
+                   'Advocate Europe website. After registering they will '
+                   'appear with their user name on your idea page and '
+                   'will be able to edit your idea. ')
 
-COLLABORATORS_EDIT_TITLE = _('Your co-workers')
+COWORKERS_EDIT_TITLE = _('Your co-workers')
 
 
 class BaseForm(forms.ModelForm):
@@ -50,7 +50,7 @@ class BaseForm(forms.ModelForm):
         return helper
 
 
-class CollaboratorsEmailsFormMixin:
+class CoWorkersEmailsFormMixin:
     def clean_co_workers_emails(self):
         from email.utils import getaddresses
         import re
@@ -202,12 +202,12 @@ class CollaborationCampSectionForm(BaseForm):
             "communication_camp_help_page")
 
 
-class CommunitySectionForm(CollaboratorsEmailsFormMixin, BaseForm):
+class CommunitySectionForm(CoWorkersEmailsFormMixin, BaseForm):
     section_name = _('Community Information')
     co_workers_emails = forms.CharField(
         required=False,
-        help_text=COLLABORATORS_HELP,
-        label=COLLABORATORS_TITLE)
+        help_text=COWORKERS_HELP,
+        label=COWORKERS_TITLE)
     accept_conditions = forms.BooleanField(label=ACCEPT_CONDITIONS_LABEL)
 
     class Meta:
@@ -255,12 +255,12 @@ class FinanceAndDurationSectionForm(BaseForm):
         ]
 
 
-class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
+class CommunitySectionEditForm(CoWorkersEmailsFormMixin, BaseForm):
     section_name = _('Community Information')
     co_workers_emails = forms.CharField(
         required=False,
-        help_text=COLLABORATORS_HELP,
-        label=COLLABORATORS_TITLE)
+        help_text=COWORKERS_HELP,
+        label=COWORKERS_TITLE)
 
     class Meta:
         model = models.Idea
@@ -279,7 +279,7 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
             if invites or co_workers:
                 self.fields['co_workers'] = forms.MultipleChoiceField(
                     required=False,
-                    label=COLLABORATORS_EDIT_TITLE,
+                    label=COWORKERS_EDIT_TITLE,
                     choices=[
                         (
                             'c:'+c.username,
