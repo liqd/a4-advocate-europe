@@ -125,7 +125,7 @@ class IdeaSketchArchivedAdmin(admin.ModelAdmin):
     }
 
     fieldsets = (
-        ('Creator and Collaborators', {
+        ('Creator and Co-workers', {
             'classes': ('collapse',),
             'fields': ('creator',
                        'co_workers')
