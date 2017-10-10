@@ -33,7 +33,6 @@
     justify-content: center;
     height: rem(122px);
     color: #fff;
-    font-weight: bold;
 }
 
 .idealist-subtitle {
@@ -130,7 +129,7 @@
 
 .idealist-category {
     font-size: 12px;
-    font-weight: 900;
+    font-weight: bold;
     letter-spacing: rem(.8px);
     text-transform: uppercase;
     color: $brand-primary;
@@ -239,7 +238,6 @@
 
     .btn {
         font-size: rem(18px);
-        font-weight: 600;
         border: 0.5px solid $brand-primary-darker;
     }
 
@@ -284,7 +282,6 @@
         color: $gray-base;
 
         font-size: rem(14px);
-        font-weight: 500;
     }
 
     .dropdown-follow {
@@ -380,14 +377,10 @@
 
     &.jurystatement {
         background-color: $ae-brand-orange;
-
-        p {
-            font-weight: normal;
-        }
     }
 
-    p {
-        font-weight: 600;
+    &-collaborators {
+        font-weight: $demibold;
     }
 
     .collaborator {
@@ -411,12 +404,15 @@
 
 .ideadetail-tab {
     .ideadetailtab-header {
-        font-weight: bold;
         margin-top: 40px;
 
         h2 {
             margin-top: 20px;
             margin-bottom: 20px;
+        }
+
+        &-content-switcher {
+            font-weight: $demibold;
         }
     }
 
@@ -429,7 +425,6 @@
     }
 
     h4 {
-        font-weight: bold;
         margin-bottom: rem(5px);
         margin-top: rem(30px);
 
@@ -473,6 +468,10 @@
 
 .ideadetail-comments {
     margin-bottom: rem(60px);
+
+    &-title {
+        font-weight: $demibold;
+    }
 }
 
 .idea_label {

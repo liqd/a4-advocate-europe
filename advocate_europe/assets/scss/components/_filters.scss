@@ -35,7 +35,7 @@
     .filter-label {
         margin-bottom: rem(2px);
         font-size: rem(10px);
-        font-weight: 600;
+        font-weight: $demibold;
         letter-spacing: rem(1px);
         text-transform: uppercase;
         color: $ae-middle-gray;
@@ -59,10 +59,10 @@
             line-height: rem(20px);
         }
 
+        font-weight: normal;
         border-radius: 5px;
         background-color: #fff;
         border: solid 1px $ae-light-gray-shadow;
-        color: $gray-dark;
         width: 100%;
     }
 
@@ -126,7 +126,6 @@
             background-color: $gray-lighter;
             border: none;
             font-size: rem(18px);
-            font-weight: 600;
         }
 
         .btn-label {
@@ -180,7 +179,6 @@
     margin-left: rem(5px);
     margin-right: rem(5px);
     list-style: none;
-    font-weight: 600;
 }
 
 @media screen and (min-width: $screen-sm-min) {

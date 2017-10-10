@@ -21,6 +21,10 @@ body {
     }
 }
 
+a,
+.btn-link {
+    font-weight: $demibold;
+}
 
 @mixin selection {
     ::selection {

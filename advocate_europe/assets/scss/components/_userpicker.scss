@@ -30,7 +30,7 @@
     &-label-text {
         padding-left: rem(6px);
         font-size: rem(14px);
-        font-weight: 600;
+        font-weight: $demibold;
     }
 
     &-label-detail {
@@ -59,7 +59,6 @@
 
     &-cta {
         font-size: rem(14px);
-        font-weight: 600;
         color: $ae-wizard-red;
         text-decoration: underline;
         text-align: right;
