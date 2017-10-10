@@ -54,7 +54,7 @@ def test_profile_edit(client, user):
     url = reverse('edit_profile')
 
     response = client.post(url, {
-        'biographie': 'foobar',
+        'europe': 'foobar',
         'username': user.username
     })
 
@@ -65,7 +65,7 @@ def test_profile_edit(client, user):
 
     assert profile_response.status_code == 200
     assert profile_response.context['user'] == user
-    assert profile_response.context['user'].biographie == 'foobar'
+    assert profile_response.context['user'].europe == 'foobar'
 
 
 @pytest.mark.django_db
