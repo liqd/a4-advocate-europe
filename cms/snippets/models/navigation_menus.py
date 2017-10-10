@@ -29,6 +29,9 @@ class MenuItem(models.Model):
                                         'displayed in as a dropdown menu',
         verbose_name='Submenu')
 
+    class Meta:
+        abstract = True
+
     @property
     def url(self):
         if self.link_page:
