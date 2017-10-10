@@ -37,7 +37,7 @@ def test_invite_reject(client, user, invite):
     response = client.post(url, {'reject': True})
 
     assert redirect_target(response) == 'wagtail_serve'
-    assert user not in invite.subject.collaborators.all()
+    assert user not in invite.subject.co_workers.all()
 
 
 @pytest.mark.django_db
@@ -47,4 +47,4 @@ def test_invite_accept(client, user, invite):
     response = client.post(url, {'accept': True})
 
     assert redirect_target(response) == 'idea-detail'
-    assert user in invite.subject.collaborators.all()
+    assert user in invite.subject.co_workers.all()

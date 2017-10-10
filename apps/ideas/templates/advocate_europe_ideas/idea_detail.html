@@ -62,7 +62,7 @@
 
                     {% if idea.is_winner %}
                         <li role="presentation" class="nav-item {% if idea.proposal and idea.is_winner and idea.journeyentry_set.all.count > 0 %}active{% endif %}">
-                            <a href="#journey" class="nav-link" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Reporting" %}</a>
+                            <a href="#journey" class="nav-link" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Project Journey" %}</a>
                         </li>
                     {% endif %}
 
@@ -94,18 +94,18 @@
 
 
                     <div class="ideadetail-info-box">
-                        <h4>{% trans 'Collaborators' %}</h4>
+                        <h4>{% trans 'Co-workers' %}</h4>
                         <p>
                             <span class="avatar-round-small" style="background-image: url({{ idea.creator.avatar_or_fallback_url }})"></span>
-                            <span class="collaborator">
+                            <span class="co-worker">
                                 <a href="{% url 'profile' idea.creator.username %}">{{ idea.creator.username }}</a>
                             </span>
                         </p>
-                        {% for collaborator in idea.collaborators.all %}
-                            <p class="ideadetail-info-box-collaborators">
-                                <span class="avatar-round-small no-decoration" style="background-image: url({{ collaborator.avatar_or_fallback_url }})"></span>
-                                <span class="collaborator">
-                                    <a href="{% url 'profile' collaborator.username %}">{{ collaborator.username }}</a>
+                        {% for co_worker in idea.co_workers.all %}
+                            <p class="ideadetail-info-box-co-workers">
+                                <span class="avatar-round-small no-decoration" style="background-image: url({{ co_worker.avatar_or_fallback_url }})"></span>
+                                <span class="co-worker">
+                                    <a href="{% url 'profile' co_worker.username %}">{{ co_worker.username }}</a>
                                 </span>
                             </p>
                         {% endfor %}

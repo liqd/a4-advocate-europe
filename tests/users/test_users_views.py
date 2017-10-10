@@ -12,7 +12,7 @@ def test_profile_view(client, user, idea_sketch_factory):
     Check if profile view shows created and collaborated ideas by default.
     """
     idea1 = idea_sketch_factory(creator=user).idea
-    idea2 = idea_sketch_factory(collaborators=[user]).idea
+    idea2 = idea_sketch_factory(co_workers=[user]).idea
     idea3 = idea_sketch_factory().idea
 
     url = reverse('profile', kwargs={'username': user.username})

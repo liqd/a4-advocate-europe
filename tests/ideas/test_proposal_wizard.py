@@ -34,7 +34,7 @@ def test_proposal_random_user_cannot_create_wizard(client, user,
 def test_proposal_no_camp_cannot_create_wizard(client, user,
                                                idea_sketch_factory):
     idea_sketch = idea_sketch_factory(is_on_shortlist=False)
-    idea_sketch.collaborators.add(user)
+    idea_sketch.co_workers.add(user)
     client.login(username=user.email,
                  password='password')
     url = reverse('idea-sketch-add-proposal',
@@ -50,7 +50,7 @@ def test_proposal_no_camp_cannot_create_wizard(client, user,
 def test_proposal_no_phase_cannot_create_wizard(client, user,
                                                 idea_sketch_factory):
     idea_sketch = idea_sketch_factory(is_on_shortlist=True)
-    idea_sketch.collaborators.add(user)
+    idea_sketch.co_workers.add(user)
     client.login(username=user.email,
                  password='password')
     url = reverse('idea-sketch-add-proposal',
@@ -61,10 +61,10 @@ def test_proposal_no_phase_cannot_create_wizard(client, user,
 
 
 @pytest.mark.django_db
-def test_proposal_collaborator_create_wizard(client,
-                                             idea_sketch_factory, user, image):
+def test_proposal_co_worker_create_wizard(client, idea_sketch_factory,
+                                          user, image):
     idea_sketch = idea_sketch_factory(is_on_shortlist=True, idea_image=image)
-    idea_sketch.collaborators.add(user)
+    idea_sketch.co_workers.add(user)
     client.login(username=user.email,
                  password='password')
     url = reverse('idea-sketch-add-proposal',

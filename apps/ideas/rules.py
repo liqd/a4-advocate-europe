@@ -33,7 +33,7 @@ rules.add_perm(
     mod_predicates.is_context_member &
     (
         mod_predicates.is_owner |
-        predicates.is_collaborator
+        predicates.is_co_worker
     ) &
     phase_predicates.phase_allows_change
 )
@@ -44,7 +44,7 @@ rules.add_perm(
     mod_predicates.is_context_member &
     (
         mod_predicates.is_owner |
-        predicates.is_collaborator
+        predicates.is_co_worker
     ) &
     predicates.is_on_shortlist &
     predicates.has_no_proposal &
@@ -68,7 +68,7 @@ rules.add_perm(
     mod_predicates.is_context_member &
     (
         mod_predicates.is_owner |
-        predicates.is_collaborator
+        predicates.is_co_worker
     ) &
     predicates.is_winner |
     mod_predicates.is_project_admin
@@ -80,7 +80,7 @@ rules.add_perm(
         predicates.is_innovator &
         phase_predicates.phase_allows_rate &
         ~mod_predicates.is_owner &
-        ~predicates.is_collaborator
+        ~predicates.is_co_worker
     ) |
     is_superuser
 )

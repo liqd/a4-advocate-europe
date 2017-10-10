@@ -24,12 +24,12 @@ def test_invite_on_quyerset(user, idea_sketch):
 @pytest.mark.django_db
 def test_accept(invite, user):
     invite.accept(user)
-    assert user in invite.subject.collaborators.all()
+    assert user in invite.subject.co_workers.all()
     assert not IdeaInvite.objects.filter(token=invite.token)
 
 
 @pytest.mark.django_db
 def test_reject(invite, user):
     invite.reject()
-    assert user not in invite.subject.collaborators.all()
+    assert user not in invite.subject.co_workers.all()
     assert not IdeaInvite.objects.filter(token=invite.token)

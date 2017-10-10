@@ -21,7 +21,7 @@ IDEA_IMAGE_HELP = _('Upload a photo or illustration that visually '
                     'format and have a width of at least 400 pixels.')
 IDEA_TOPIC_CHOICES = (
     ('democracy_participation', _('Democracy and participation')),
-    ('arts_cultural_activities', _('Arts and (inter-)cultural activities')),
+    ('arts_cultural_activities', _('Arts and cultural activities')),
     ('environment', _('Environment')),
     ('social_inclusion', _('Social inclusion')),
     ('migration', _('Migration')),
