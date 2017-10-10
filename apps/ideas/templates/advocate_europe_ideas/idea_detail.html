@@ -102,7 +102,7 @@
                             </span>
                         </p>
                         {% for co_worker in idea.co_workers.all %}
-                            <p>
+                            <p class="ideadetail-info-box-co-workers">
                                 <span class="avatar-round-small no-decoration" style="background-image: url({{ co_worker.avatar_or_fallback_url }})"></span>
                                 <span class="co-worker">
                                     <a href="{% url 'profile' co_worker.username %}">{{ co_worker.username }}</a>
@@ -123,7 +123,7 @@
             </div>
             {% if view.display_type == 'idea' %}
                 <div class="container-medium ideadetail-comments">
-                    <h4>{% trans "Write comment" %}</h4>
+                    <h4 class="ideadetail-comments-title">{% trans "Write comment" %}</h4>
                     {% react_comments idea %}
                 </div>
             {% endif %}
