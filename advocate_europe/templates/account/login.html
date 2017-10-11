@@ -1,9 +1,6 @@
 {% extends 'account/advocate_europe/base_form.html' %}
 
-{% load account %}
-{% load i18n %}
-{% load socialaccount %}
-{% load widget_tweaks %}
+{% load account i18n socialaccount widget_tweaks %}
 
 {% block title %}{% trans 'Login' %}{% endblock %}
 
@@ -23,7 +20,7 @@
     {% endif %}
 
     <div class="form-group">
-        <label class="control-label" for="{{ form.username.id_for_label }}">{% trans "Email" %}</label>
+        <label class="control-label" for="{{ form.username.id_for_label }}">{% trans "E-mail" %}</label>
         {% if form.login.errors %}
         {{ form.login|add_class:"form-control form-error" }}
         {% else %}

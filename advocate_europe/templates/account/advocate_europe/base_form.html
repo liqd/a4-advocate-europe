@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
+{% load i18n force_translation %}
+
 {% block title %}{% endblock %}
 
 {% block content %}
+{% force_translation 'en' %}
 <div class="login-register-top">
     <div class="container login-register">
         <div class="container-medium">
@@ -11,8 +14,12 @@
             {% block form %}
             {% endblock %}
             </div>
+            <div class="socialaccounts">
+            <h3 class="socialaccounts-heading">{% trans "or use your social media account" %}</h3>
             {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+            </div>
         </div>
     </div>
 </div>
+{% endforce_translation %}
 {% endblock %}
