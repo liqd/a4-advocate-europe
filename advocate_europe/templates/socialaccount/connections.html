@@ -1,10 +1,11 @@
 {% extends "advocate_europe_users/base_accounts_settings_form.html" %}
-{% load i18n %}
-{% load widget_tweaks %}
+
+{% load i18n widget_tweaks force_translation %}
 
 {% block title %}{% trans "Social Connections" %}{% endblock %}
 
 {% block form %}
+{% force_translation 'en' %}
     <div class="custom-form">
         <fieldset>
             <legend>{% trans "Social Connections" %}</legend>
@@ -41,8 +42,9 @@
                 <p>{% trans 'You currently have no social network accounts connected to this account.' %}</p>
             {% endif %}
 
-    <h2>{% trans 'Add a 3rd Party Account' %}</h2>
+    <h4>{% trans 'Add a 3rd Party Account' %}</h4>
     <ul class="socialaccount_providers">
         {% include "socialaccount/snippets/provider_list.html" with process="connect" %}
     </ul>
+{% endforce_translation %}
 {% endblock %}
