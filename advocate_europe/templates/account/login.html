@@ -1,11 +1,10 @@
 {% extends 'account/advocate_europe/base_form.html' %}
 
-{% load account i18n socialaccount widget_tweaks force_translation %}
+{% load account i18n socialaccount widget_tweaks %}
 
 {% block title %}{% trans 'Login' %}{% endblock %}
 
 {% block form %}
-{% force_translation 'en' %}
 <form class="custom-form" role="form" name="LoginForm" action="{% url 'account_login' %}" method="post">
     {% csrf_token %}
     {% if form.non_field_errors %}
@@ -45,5 +44,4 @@
 
     <button type="submit" value="Login" class="btn btn-primary btn-wide">{% trans "login" %}</button>
 </form>
-{% endforce_translation %}
 {% endblock %}
