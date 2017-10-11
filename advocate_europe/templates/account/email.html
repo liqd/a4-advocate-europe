@@ -5,6 +5,7 @@
 {% block title %}{% trans 'E-mail Addresses' %}{% endblock %}
 
 {% block form %}
+{% force_translation 'en' %}
     <form action="{% url 'account_email' %}?next={{ request.path }}" class="custom-form email_list" method="post">
         {% csrf_token %}
         <fieldset>
@@ -50,6 +51,7 @@
         </div>
         <input class="btn btn-sm btn-primary" name="action_add" type="submit" value="{% trans 'Add E-mail' %}"/>
     </form>
+{% endforce_translation %}
 {% endblock %}
 
 {% block extra_js %}

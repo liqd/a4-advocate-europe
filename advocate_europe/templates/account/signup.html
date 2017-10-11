@@ -5,6 +5,7 @@
 {% block title %}{% trans 'Register an account' %}{% endblock %}
 
 {% block form %}
+{% force_translation 'en' %}
 <form class="custom-form" role="form" name="RegisterForm" action="{% url 'account_signup' %}" method="post">
     {% csrf_token %}
 
@@ -69,4 +70,5 @@
     </div>
     <button type="submit" value="Register" class="btn btn-primary btn-wide">{% trans "register" %}</button>
 </form>
+{% endforce_translation %}
 {% endblock %}
