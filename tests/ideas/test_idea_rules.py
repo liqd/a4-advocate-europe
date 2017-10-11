@@ -7,6 +7,18 @@ from tests.helpers import active_phase
 
 
 @pytest.mark.django_db
+def test_idea_view_rule(user):
+    assert rules.has_perm('advocate_europe_ideas.view_idea',
+                          user)
+
+
+@pytest.mark.django_db
+def test_idea_follow_rule(user):
+    assert rules.has_perm('advocate_europe_ideas.follow_idea',
+                          user)
+
+
+@pytest.mark.django_db
 def test_idea_export_rule(admin, user, module):
     assert not rules.has_perm('advocate_europe_ideas.export_idea',
                               user)
@@ -15,6 +27,24 @@ def test_idea_export_rule(admin, user, module):
                           module)
     assert rules.has_perm('advocate_europe_ideas.export_idea',
                           admin)
+
+
+@pytest.mark.django_db
+def test_idea_add_rule(admin, user, module):
+    assert not rules.has_perm('advocate_europe_ideas.add_ideasketch',
+                              user,
+                              module)
+    assert rules.has_perm('advocate_europe_ideas.add_ideasketch',
+                          admin,
+                          module)
+    with active_phase(module, phases.IdeaSketchPhase):
+        assert rules.has_perm('advocate_europe_ideas.add_ideasketch',
+                              user,
+                              module)
+    with active_phase(module, phases.CommunityAwardRatingPhase):
+        assert not rules.has_perm('advocate_europe_ideas.add_ideasketch',
+                                  user,
+                                  module)
 
 
 @pytest.mark.django_db
