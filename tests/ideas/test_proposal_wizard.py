@@ -63,7 +63,10 @@ def test_proposal_no_phase_cannot_create_wizard(client, user,
 @pytest.mark.django_db
 def test_proposal_co_worker_create_wizard(client, idea_sketch_factory,
                                           user, image):
-    idea_sketch = idea_sketch_factory(is_on_shortlist=True, idea_image=image)
+    idea_sketch = idea_sketch_factory(
+        is_on_shortlist=True,
+        idea_image=image,
+        idea_title='Idea')
     idea_sketch.co_workers.add(user)
     client.login(username=user.email,
                  password='password')
@@ -114,7 +117,10 @@ def test_proposal_co_worker_create_wizard(client, idea_sketch_factory,
             'proposal_create_wizard-current_step': '2'
         }
         for key, value in wizard['form'].initial.items():
-            data['2-{}'.format(key)] = value
+            if key == 'idea_title':
+                data['2-{}'.format(key)] = value + ' Proposal'
+            else:
+                data['2-{}'.format(key)] = value
 
         # Form 4 (Impact)
         response = client.post(url, data)
@@ -222,5 +228,7 @@ def test_proposal_co_worker_create_wizard(client, idea_sketch_factory,
 
                 assert archive_field == idea_sketch_field
 
-        assert Proposal.objects.all() \
-            .first().idea_title == idea_sketch.idea_title
+        proposal = Proposal.objects.all().first()
+        assert proposal.idea_title == idea_sketch.idea_title + ' Proposal'
+        assert proposal.is_on_shortlist
+        assert proposal.slug == idea_sketch.idea.slug
