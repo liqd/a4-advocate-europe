@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load i18n force_translation %}
+
+{% block content %}
+    {% force_translation 'en' %}
+        <div class="account-top">
+            <div class="container">
+                <div class="container-medium account-box">
+                    {% block account_content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    {% endforce_translation %}
+{% endblock %}

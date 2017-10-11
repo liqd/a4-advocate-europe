@@ -1,7 +1,6 @@
 {% extends 'advocate_europe_users/base_accounts_settings_form.html' %}
 
-{% load i18n %}
-{% load widget_tweaks %}
+{% load i18n widget_tweaks force_translation %}
 
 {% block title %}{% trans 'E-mail Addresses' %}{% endblock %}
 
@@ -9,7 +8,7 @@
     <form action="{% url 'account_email' %}?next={{ request.path }}" class="custom-form email_list" method="post">
         {% csrf_token %}
         <fieldset>
-        <legend>{% trans 'Email Adresses' %}</legend>
+        <legend>{% trans 'E-mail Adresses' %}</legend>
         <div class="form-group {% if form.email.errors %}has-error {% endif %}">
             <label>{{ form.email.label }}</label>
             {% for emailaddress in user.emailaddress_set.all %}
@@ -45,11 +44,11 @@
         {% endif %}
 
         <div class="form-group">
-            <label class="control-label" for="{{ form.email.id_for_label }}">{% trans "Add another Email" %}</label>
+            <label class="control-label" for="{{ form.email.id_for_label }}">{% trans "Add another E-mail" %}</label>
             {{ form.email.errors }}
             {{ form.email|add_class:"form-control" }}
         </div>
-        <input class="btn btn-sm btn-primary" name="action_add" type="submit" value="{% trans 'Add Email' %}"/>
+        <input class="btn btn-sm btn-primary" name="action_add" type="submit" value="{% trans 'Add E-mail' %}"/>
     </form>
 {% endblock %}
 
