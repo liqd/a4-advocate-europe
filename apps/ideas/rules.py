@@ -19,7 +19,8 @@ rules.add_perm(
 
 rules.add_perm(
     'advocate_europe_ideas.export_idea',
-    is_superuser
+    mod_predicates.is_context_moderator
+    | is_superuser
 )
 
 rules.add_perm(
