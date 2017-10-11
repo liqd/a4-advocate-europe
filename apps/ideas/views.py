@@ -262,6 +262,13 @@ class ProposalCreateWizard(PermissionRequiredMixin,
             }
         )
         proposal.save()
+
+        for field in Idea._meta.concrete_fields:
+            if field.name not in data:
+                setattr(proposal, field.name, getattr(self.idea, field.name))
+
+        proposal.save()
+
         return redirect(proposal.get_absolute_url())
 
 
