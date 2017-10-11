@@ -1,10 +1,11 @@
 {% extends "advocate_europe_users/base_accounts_settings_form.html" %}
 
-{% load i18n widget_tweaks %}
+{% load i18n widget_tweaks force_translation %}
 
 {% block title %}{% trans "Social Connections" %}{% endblock %}
 
 {% block form %}
+{% force_translation 'en' %}
     <div class="custom-form">
         <fieldset>
             <legend>{% trans "Social Connections" %}</legend>
@@ -45,4 +46,5 @@
     <ul class="socialaccount_providers">
         {% include "socialaccount/snippets/provider_list.html" with process="connect" %}
     </ul>
+{% endforce_translation %}
 {% endblock %}

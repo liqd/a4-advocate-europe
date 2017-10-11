@@ -1,11 +1,12 @@
 {% extends 'account/advocate_europe/base_account.html' %}
 
 {% load account %}
-{% load i18n %}
+{% load i18n force_translation %}
 
 {% block title %}{% trans 'Activate your account' %}{% endblock %}
 
 {% block account_content %}
+{% force_translation 'en' %}
     {% if confirmation %}
         {% user_display confirmation.email_address.user as user_display %}
         <form id="ActivateForm" method="post">
@@ -26,4 +27,5 @@
         {% url 'account_email' as email_url %}
         <p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
     {% endif %}
+{% endforce_translation %}
 {% endblock %}

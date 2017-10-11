@@ -1,8 +1,9 @@
-{% load socialaccount i18n %}
+{% load socialaccount i18n force_translation %}
+
 {% get_providers as socialaccount_providers %}
 
 {% if socialaccount_providers %}
-
+{% force_translation 'en' %}
     <ul class="socialaccount-providers">
     {% for provider in socialaccount_providers %}
         {% if provider.id == "openid" %}
@@ -22,5 +23,5 @@
         </li>
     {% endfor %}
     </ul>
-
+{% endforce_translation %}
 {% endif %}
