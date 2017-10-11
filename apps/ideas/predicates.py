@@ -3,7 +3,12 @@ import rules
 
 @rules.predicate
 def is_co_worker(user, idea):
-    return user in idea.co_workers.all()
+    if hasattr(idea, 'co_workers'):
+        return user in idea.co_workers.all()
+    elif hasattr(idea, 'idea'):
+        return user in idea.idea.co_workers.all()
+    else:
+        return False
 
 
 @rules.predicate
