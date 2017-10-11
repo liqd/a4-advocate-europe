@@ -1,4 +1,6 @@
-{% load i18n %}
+{% load i18n force_translation %}
+
+{% force_translation 'en' %}
 {% trans "Are you sure you want to delete" as question %}
 
 <div role="dialog" id="{{ delete_modal }}" class="modal fade">
@@ -26,3 +28,4 @@
         </div>
     </div>
 </div>
+{% endforce_translation %}

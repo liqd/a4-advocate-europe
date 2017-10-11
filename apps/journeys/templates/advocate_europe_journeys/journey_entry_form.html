@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% load i18n crispy_forms_tags %}
+{% load i18n crispy_forms_tags force_translation %}
 
 {% block title %} {% trans 'journey entry' %} {% endblock %}
 
 {% block content %}
-
+{% force_translation 'en' %}
 <div class="journey-form-top">
     <div class="container">
         <div class="journey-form-btn-box container-medium">
@@ -30,4 +30,5 @@
         </form>
     </div>
 </div>
+{% endforce_translation %}
 {% endblock %}
