@@ -22,9 +22,10 @@ def test_idea_follow_rule(user):
 def test_idea_export_rule(admin, user, module):
     assert not rules.has_perm('advocate_europe_ideas.export_idea',
                               user)
+    user.is_staff = True
+    user.save()
     assert rules.has_perm('advocate_europe_ideas.export_idea',
-                          module.project.moderators.first(),
-                          module)
+                          user)
     assert rules.has_perm('advocate_europe_ideas.export_idea',
                           admin)
 
