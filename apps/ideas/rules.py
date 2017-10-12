@@ -1,11 +1,11 @@
 import rules
-from rules.predicates import always_allow, is_authenticated, is_superuser
+from rules.predicates import (always_allow, is_authenticated, is_staff,
+                              is_superuser)
 
 from adhocracy4.modules import predicates as mod_predicates
 from adhocracy4.phases import predicates as phase_predicates
 
 from . import models, predicates
-
 
 rules.add_perm(
     'advocate_europe_ideas.view_idea',
@@ -19,8 +19,8 @@ rules.add_perm(
 
 rules.add_perm(
     'advocate_europe_ideas.export_idea',
-    mod_predicates.is_context_moderator
-    | is_superuser
+    is_staff |
+    is_superuser
 )
 
 rules.add_perm(

@@ -52,10 +52,9 @@
                                 </div>
                             </div>
                         </div>
-                        {% has_perm 'advocate_europe_ideas.export_idea' request.user view.active_phase.module as can_export %}
+                        {% has_perm 'advocate_europe_ideas.export_idea' request.user as can_export %}
                         {% if can_export %}
                             <a class="btn btn-ae-secondary export-btn btn-wide" href="
-
                                     {% url 'idea-export' %}{{ '?'|add:view.filter.data.urlencode }}">{% trans "export" %}</a>
                         {% endif %}
                     </div>
