@@ -12,7 +12,7 @@ def load_ideas(year, topic, ordering, status):
     ideas = Idea.objects.all()\
         .annotate_comment_count()\
         .annotate_positive_rating_count()
-    idea_filter_set = IdeaFilterSet(data={})
+    idea_filter_set = IdeaFilterSet(data={}, view=None)
 
     if year:
         ideas = idea_filter_set.filters['project'].filter(ideas, year)
