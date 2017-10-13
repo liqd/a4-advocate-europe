@@ -35,6 +35,15 @@
             line-height: 1.5;
             color: $gray-dark;
         }
+
+        .label-subtle {
+            background-color: $ae-middle-gray;
+            text-transform: uppercase;
+            padding: rem(3px) rem(6px);
+            font-size: rem(12px);
+            vertical-align: middle;
+            margin-left: 5px;
+        }
     }
 
     .comment-deleted-author {
