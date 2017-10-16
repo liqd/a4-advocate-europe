@@ -87,14 +87,14 @@
 
                     {% if idea.proposal and idea.jury_statement %}
                         <div class="ideadetail-info-box jurystatement">
-                            <h4><i class="fa fa-trophy" aria-hidden="true"></i> {% trans 'Jury statement' %}</h4>
+                            <h4><i class="fa fa-trophy" aria-hidden="true"></i> {% trans 'Why this idea?' %}</h4>
                             <p>{{ idea.jury_statement }}</p>
                         </div>
                     {% endif %}
 
 
                     <div class="ideadetail-info-box">
-                        <h4>{% trans 'Co-workers' %}</h4>
+                        <h4>{% trans 'Team' %}</h4>
                         <p>
                             <span class="avatar-round-small" style="background-image: url({{ idea.creator.avatar_or_fallback_url }})"></span>
                             <span class="co-worker">
