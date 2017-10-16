@@ -29,15 +29,15 @@ ACCEPT_CONDITIONS_LABEL = _('I hereby confirm and agree that '
                             'the visual material '
                             'used in this proposal.')
 
-COWORKERS_TITLE = _('Please add your co-workers here.')
+COWORKERS_TITLE = _('Please add your team members here.')
 COWORKERS_HELP = _('Here you can insert the email addresses of up to 5 '
-                   'co-workers. Each of the named co-workers will '
+                   'team members. Each of the named team members will '
                    'receive an email inviting them to register on the '
                    'Advocate Europe website. After registering they will '
                    'appear with their user name on your idea page and '
                    'will be able to edit your idea. ')
 
-COWORKERS_EDIT_TITLE = _('Your co-workers')
+COWORKERS_EDIT_TITLE = _('Your team members')
 
 
 class BaseForm(forms.ModelForm):
@@ -223,7 +223,7 @@ class CommunitySectionForm(CoWorkersEmailsFormMixin, BaseForm):
         addresses = super().clean_co_workers_emails()
 
         if len(addresses) > 5:
-            raise ValidationError(_('Maximum 5 co-workers allowed'))
+            raise ValidationError(_('Maximum 5 team members allowed'))
 
         return addresses
 
@@ -356,7 +356,7 @@ class CommunitySectionEditForm(CoWorkersEmailsFormMixin, BaseForm):
         ])
 
         if co_worker_count > 5:
-            raise ValidationError(_('Maximum 5 co-workers allowed'))
+            raise ValidationError(_('Maximum 5 team members allowed'))
 
     def save(self, commit=True):
         """
