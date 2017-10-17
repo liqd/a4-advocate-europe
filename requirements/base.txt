@@ -21,7 +21,7 @@ html5lib==0.999999999
 bleach==2.1.1
 django-autofixture==0.12.1
 rules==1.2.1
-jsonfield==1.0.3
+jsonfield==2.0.2
 packaging==16.8
 appdirs==1.4.3
 factory-boy==2.8.1
