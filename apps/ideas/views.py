@@ -106,7 +106,7 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
                 if field not in special_fields
                 }
         )
-
+        idea_sketch.co_workers.add(self.request.user)
         for name, email in data['co_workers_emails']:
             idea_sketch.ideainvite_set.invite(
                 self.request.user,
