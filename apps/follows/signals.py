@@ -6,12 +6,11 @@ from apps.ideas import models as idea_models
 from . import Registry
 
 
-def _autofollow(instance, pk_set, reverse, enabled):
-    # pk_set contains the set of users
+def _autofollow(instance, user_pks, reverse, enabled):
     if not reverse:
         model = Registry.get_follow_model()
 
-        for pk in pk_set:
+        for pk in user_pks:
             model.objects.update_or_create(
                 followable=instance,
                 creator_id=pk,
@@ -34,7 +33,7 @@ def autofollow_collaborateurs(instance, action, pk_set, reverse, **kwargs):
 
     _autofollow(
         instance=instance,
-        pk_set=pk_set,
+        user_pks=pk_set,
         reverse=reverse,
         enabled=enabled
     )
