@@ -18,7 +18,7 @@ djangorestframework==3.7.1
 django-countries==5.0
 python-magic==0.4.13
 html5lib==0.999999999
-bleach==1.4.3
+bleach==2.1.1
 django-autofixture==0.12.1
 rules==1.1.1
 jsonfield==1.0.3
