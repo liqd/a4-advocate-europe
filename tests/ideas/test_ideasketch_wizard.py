@@ -113,3 +113,4 @@ def test_ideasketch_create_wizard(client, user, module):
             'You have sucessfully submitted your Idea Sketch to'
         )
         assert mail.outbox[0].recipients() == [user.email]
+        assert my_idea_sketch.creator in my_idea_sketch.co_workers.all()
