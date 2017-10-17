@@ -54,7 +54,7 @@
 
     .slick-list {
         overflow: visible;
-        @include rem(padding, 20px 0 30px);
+        @include rem(padding, 20px 0 0);
 
         @media (max-width: $screen-md-min) {
             overflow: hidden;

@@ -22,14 +22,13 @@
 
     .error-message {
         font-size: rem(18px);
-        font-weight: 600;
+        font-weight: $demibold;
         margin-top: rem(20px);
         margin-bottom: rem(20px);
     }
 
     .error-btn {
         font-size: rem(16px);
-        font-weight: 600;
         padding: rem(10px 20px);
     }
 }

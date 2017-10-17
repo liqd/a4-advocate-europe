@@ -95,7 +95,7 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
     finish_section_btn = _('Submit your idea!')
 
     def done(self, form_list, **kwargs):
-        special_fields = ['accept_conditions', 'collaborators_emails']
+        special_fields = ['accept_conditions', 'co_workers_emails']
 
         data = self.get_all_cleaned_data()
         idea_sketch = IdeaSketch.objects.create(
@@ -107,7 +107,7 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
                 }
         )
 
-        for name, email in data['collaborators_emails']:
+        for name, email in data['co_workers_emails']:
             idea_sketch.ideainvite_set.invite(
                 self.request.user,
                 email
@@ -250,7 +250,7 @@ class ProposalCreateWizard(PermissionRequiredMixin,
 
         archive.save()
 
-        special_fields = ['accept_conditions', 'collaborators_emails']
+        special_fields = ['accept_conditions', 'co_workers_emails']
         data = self.get_all_cleaned_data()
         proposal = Proposal(
             idea_ptr=self.idea,
@@ -262,6 +262,13 @@ class ProposalCreateWizard(PermissionRequiredMixin,
             }
         )
         proposal.save()
+
+        for field in Idea._meta.concrete_fields:
+            if field.name not in data:
+                setattr(proposal, field.name, getattr(self.idea, field.name))
+
+        proposal.save()
+
         return redirect(proposal.get_absolute_url())
 
 

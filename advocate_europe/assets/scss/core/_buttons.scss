@@ -30,7 +30,6 @@
     @extend .btn;
     @extend .btn-default;
     font-size: rem(16px);
-    font-weight: 600;
 
     .fa {
         padding-right: rem(5px);
@@ -46,7 +45,6 @@
     width: 100%;
     text-transform: capitalize;
     font-size: rem(16px);
-    font-weight: bold;
 }
 
 .btn-support,

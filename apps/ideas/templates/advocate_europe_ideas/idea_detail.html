@@ -62,7 +62,7 @@
 
                     {% if idea.is_winner %}
                         <li role="presentation" class="nav-item {% if idea.proposal and idea.is_winner and idea.journeyentry_set.all.count > 0 %}active{% endif %}">
-                            <a href="#journey" class="nav-link" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Reporting" %}</a>
+                            <a href="#journey" class="nav-link" aria-controls="idea" role="tab" data-toggle="tab">{% trans "Project Journey" %}</a>
                         </li>
                     {% endif %}
 
@@ -87,25 +87,25 @@
 
                     {% if idea.proposal and idea.jury_statement %}
                         <div class="ideadetail-info-box jurystatement">
-                            <h4><i class="fa fa-trophy" aria-hidden="true"></i> {% trans 'Jury statement' %}</h4>
+                            <h4><i class="fa fa-trophy" aria-hidden="true"></i> {% trans 'Why this idea?' %}</h4>
                             <p>{{ idea.jury_statement }}</p>
                         </div>
                     {% endif %}
 
 
                     <div class="ideadetail-info-box">
-                        <h4>{% trans 'Collaborators' %}</h4>
+                        <h4>{% trans 'Team' %}</h4>
                         <p>
                             <span class="avatar-round-small" style="background-image: url({{ idea.creator.avatar_or_fallback_url }})"></span>
-                            <span class="collaborator">
+                            <span class="co-worker">
                                 <a href="{% url 'profile' idea.creator.username %}">{{ idea.creator.username }}</a>
                             </span>
                         </p>
-                        {% for collaborator in idea.collaborators.all %}
-                            <p>
-                                <span class="avatar-round-small no-decoration" style="background-image: url({{ collaborator.avatar_or_fallback_url }})"></span>
-                                <span class="collaborator">
-                                    <a href="{% url 'profile' collaborator.username %}">{{ collaborator.username }}</a>
+                        {% for co_worker in idea.co_workers.all %}
+                            <p class="ideadetail-info-box-co-workers">
+                                <span class="avatar-round-small no-decoration" style="background-image: url({{ co_worker.avatar_or_fallback_url }})"></span>
+                                <span class="co-worker">
+                                    <a href="{% url 'profile' co_worker.username %}">{{ co_worker.username }}</a>
                                 </span>
                             </p>
                         {% endfor %}
@@ -123,7 +123,7 @@
             </div>
             {% if view.display_type == 'idea' %}
                 <div class="container-medium ideadetail-comments">
-                    <h4>{% trans "Write comment" %}</h4>
+                    <h4 class="ideadetail-comments-title">{% trans "Write comment" %}</h4>
                     {% react_comments idea %}
                 </div>
             {% endif %}

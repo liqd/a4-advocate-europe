@@ -30,7 +30,7 @@ from .abstracts.selection_criteria_section import \
 class IdeaQuerySet(query.RateableQuerySet, query.CommentableQuerySet):
     def filter_by_participant(self, user):
         return self.filter(
-            models.Q(creator=user) | models.Q(collaborators=user)
+            models.Q(creator=user) | models.Q(co_workers=user)
         )
 
 
@@ -39,9 +39,9 @@ class AbstractIdea(AbstractApplicantSection,
                    AbstractIdeaSection,
                    AbstractImpactSection,
                    AbstractCommunitySection):
-    collaborators = models.ManyToManyField(
+    co_workers = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
-        related_name='%(class)s_collaborators',
+        related_name='%(class)s_co_workers',
         blank=True
     )
 

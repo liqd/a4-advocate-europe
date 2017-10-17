@@ -12,7 +12,7 @@ def test_profile_view(client, user, idea_sketch_factory):
     Check if profile view shows created and collaborated ideas by default.
     """
     idea1 = idea_sketch_factory(creator=user).idea
-    idea2 = idea_sketch_factory(collaborators=[user]).idea
+    idea2 = idea_sketch_factory(co_workers=[user]).idea
     idea3 = idea_sketch_factory().idea
 
     url = reverse('profile', kwargs={'username': user.username})
@@ -54,7 +54,7 @@ def test_profile_edit(client, user):
     url = reverse('edit_profile')
 
     response = client.post(url, {
-        'biographie': 'foobar',
+        'europe': 'foobar',
         'username': user.username
     })
 
@@ -65,7 +65,7 @@ def test_profile_edit(client, user):
 
     assert profile_response.status_code == 200
     assert profile_response.context['user'] == user
-    assert profile_response.context['user'].biographie == 'foobar'
+    assert profile_response.context['user'].europe == 'foobar'
 
 
 @pytest.mark.django_db

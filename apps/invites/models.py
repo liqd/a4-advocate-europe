@@ -50,7 +50,7 @@ class Invite(base.TimeStampedModel):
         return reverse(view_name, kwargs=url_kwargs)
 
     def accept(self, user):
-        self.subject.collaborators.add(user)
+        self.subject.co_workers.add(user)
         self.delete()
 
     def reject(self):

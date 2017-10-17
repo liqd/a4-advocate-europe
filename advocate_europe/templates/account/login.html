@@ -1,13 +1,11 @@
 {% extends 'account/advocate_europe/base_form.html' %}
 
-{% load account %}
-{% load i18n %}
-{% load socialaccount %}
-{% load widget_tweaks %}
+{% load account i18n socialaccount widget_tweaks force_translation %}
 
 {% block title %}{% trans 'Login' %}{% endblock %}
 
 {% block form %}
+{% force_translation 'en' %}
 <form class="custom-form" role="form" name="LoginForm" action="{% url 'account_login' %}" method="post">
     {% csrf_token %}
     {% if form.non_field_errors %}
@@ -23,7 +21,7 @@
     {% endif %}
 
     <div class="form-group">
-        <label class="control-label" for="{{ form.username.id_for_label }}">{% trans "Email" %}</label>
+        <label class="control-label" for="{{ form.username.id_for_label }}">{% trans "E-mail" %}</label>
         {% if form.login.errors %}
         {{ form.login|add_class:"form-control form-error" }}
         {% else %}
@@ -47,4 +45,5 @@
 
     <button type="submit" value="Login" class="btn btn-primary btn-wide">{% trans "login" %}</button>
 </form>
+{% endforce_translation %}
 {% endblock %}

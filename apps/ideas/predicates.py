@@ -2,8 +2,13 @@ import rules
 
 
 @rules.predicate
-def is_collaborator(user, idea):
-    return user in idea.collaborators.all()
+def is_co_worker(user, idea):
+    if hasattr(idea, 'co_workers'):
+        return user in idea.co_workers.all()
+    elif hasattr(idea, 'idea'):
+        return user in idea.idea.co_workers.all()
+    else:
+        return False
 
 
 @rules.predicate

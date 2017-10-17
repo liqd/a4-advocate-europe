@@ -26,23 +26,21 @@
         max-width: 100%;
     }
 
-    .collaborator {
+    .co-worker {
         margin-left: rem(6px);
         color: $ae-middle-gray;
     }
 
-    .collaborator-link {
+    .co-worker-link {
         margin-right: rem(10px);
         color: $gray-dark;
         font-size: 14px;
-        font-weight: 600;
     }
 }
 
 .journey-link {
     padding: 0;
     margin-left: rem(10px);
-    font-weight: 600;
     text-decoration: underline $brand-primary;
 }
 
@@ -51,7 +49,6 @@
     padding: rem(10px) rem(18px);
     border: none;
     font-size: rem(16px);
-    font-weight: 600;
     line-height: 1.25;
 }
 
@@ -78,7 +75,6 @@
 
     .journey-form-btn {
         font-size: rem(16px);
-        font-weight: 600;
 
         .fa {
             padding-right: rem(5px);
@@ -105,13 +101,12 @@
 
     .journey-form-idea {
         font-size: 16px;
-        font-weight: 600;
+        font-weight: $demibold;
     }
 }
 
 .journey-form-save-btn {
     font-size: rem(16px);
-    font-weight: 600;
     padding: rem(9px 18px);
 
     @media screen and (max-width: $screen-sm-max) {

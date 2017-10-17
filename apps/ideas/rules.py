@@ -1,11 +1,11 @@
 import rules
-from rules.predicates import always_allow, is_authenticated, is_superuser
+from rules.predicates import (always_allow, is_authenticated, is_staff,
+                              is_superuser)
 
 from adhocracy4.modules import predicates as mod_predicates
 from adhocracy4.phases import predicates as phase_predicates
 
 from . import models, predicates
-
 
 rules.add_perm(
     'advocate_europe_ideas.view_idea',
@@ -19,6 +19,7 @@ rules.add_perm(
 
 rules.add_perm(
     'advocate_europe_ideas.export_idea',
+    is_staff |
     is_superuser
 )
 
@@ -33,7 +34,7 @@ rules.add_perm(
     mod_predicates.is_context_member &
     (
         mod_predicates.is_owner |
-        predicates.is_collaborator
+        predicates.is_co_worker
     ) &
     phase_predicates.phase_allows_change
 )
@@ -44,7 +45,7 @@ rules.add_perm(
     mod_predicates.is_context_member &
     (
         mod_predicates.is_owner |
-        predicates.is_collaborator
+        predicates.is_co_worker
     ) &
     predicates.is_on_shortlist &
     predicates.has_no_proposal &
@@ -68,7 +69,7 @@ rules.add_perm(
     mod_predicates.is_context_member &
     (
         mod_predicates.is_owner |
-        predicates.is_collaborator
+        predicates.is_co_worker
     ) &
     predicates.is_winner |
     mod_predicates.is_project_admin
@@ -80,7 +81,7 @@ rules.add_perm(
         predicates.is_innovator &
         phase_predicates.phase_allows_rate &
         ~mod_predicates.is_owner &
-        ~predicates.is_collaborator
+        ~predicates.is_co_worker
     ) |
     is_superuser
 )

@@ -2,7 +2,7 @@
 
 .blog-category {
     font-size: 12px;
-    font-weight: 900;
+    font-weight: bold;
     letter-spacing: rem(.8px);
     text-transform: uppercase;
     color: $brand-primary;
@@ -150,7 +150,12 @@
 // if theres no featured blog entry shown, the categories have to be shown a bit further down, so that they are below the blue header banner
 
 .topics-no-featured {
-    margin-top: rem(50px);
+    margin-top: rem(70px);
+
+    @media screen and (max-width: $screen-xs-max) {
+        margin-top: rem(60px);
+        margin-bottom: rem(20px);
+    }
 }
 
 .blogindex-category-btn {

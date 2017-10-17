@@ -1,9 +1,9 @@
-{% load socialaccount i18n %}
+{% load socialaccount i18n force_translation %}
+
 {% get_providers as socialaccount_providers %}
 
 {% if socialaccount_providers %}
-<div class="socialaccounts">
-    <h3 class="socialaccounts-heading">{% trans "or use your social media account" %}</h3>
+{% force_translation 'en' %}
     <ul class="socialaccount-providers">
     {% for provider in socialaccount_providers %}
         {% if provider.id == "openid" %}
@@ -19,9 +19,9 @@
         <li>
             <a title="{% trans 'Login with ' %} {{ provider.name }}"
                class="socialaccount-provider btn btn-{{ provider.id }} btn-wide {{ provider.id }}"
-               href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">{% trans 'login with ' %} {{ provider.id }}</a>
+               href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">{% trans 'Login with ' %} {{ provider.id|capfirst }}</a>
         </li>
     {% endfor %}
     </ul>
-</div>
+{% endforce_translation %}
 {% endif %}

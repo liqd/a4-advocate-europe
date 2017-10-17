@@ -29,15 +29,15 @@ ACCEPT_CONDITIONS_LABEL = _('I hereby confirm and agree that '
                             'the visual material '
                             'used in this proposal.')
 
-COLLABORATORS_TITLE = _('Please add your collaborators here.')
-COLLABORATORS_HELP = _('Here you can insert the email addresses of up to 5 '
-                       'collaborators. Each of the named collaborators will '
-                       'receive an email inviting them to register on the '
-                       'Advocate Europe website. After registering they will '
-                       'appear with their user name on your idea page and '
-                       'will be able to edit your idea. ')
+COWORKERS_TITLE = _('Please add your team members here.')
+COWORKERS_HELP = _('Here you can insert the email addresses of up to 5 '
+                   'team members. Each of the named team members will '
+                   'receive an email inviting them to register on the '
+                   'Advocate Europe website. After registering they will '
+                   'appear with their user name on your idea page and '
+                   'will be able to edit your idea. ')
 
-COLLABORATORS_EDIT_TITLE = _('Your collaborators')
+COWORKERS_EDIT_TITLE = _('Your team members')
 
 
 class BaseForm(forms.ModelForm):
@@ -50,12 +50,12 @@ class BaseForm(forms.ModelForm):
         return helper
 
 
-class CollaboratorsEmailsFormMixin:
-    def clean_collaborators_emails(self):
+class CoWorkersEmailsFormMixin:
+    def clean_co_workers_emails(self):
         from email.utils import getaddresses
         import re
 
-        value = self.cleaned_data['collaborators_emails'].strip(' ,')
+        value = self.cleaned_data['co_workers_emails'].strip(' ,')
         addresses = getaddresses([value])
         valid_addresses = []
         errors = []
@@ -202,28 +202,28 @@ class CollaborationCampSectionForm(BaseForm):
             "communication_camp_help_page")
 
 
-class CommunitySectionForm(CollaboratorsEmailsFormMixin, BaseForm):
+class CommunitySectionForm(CoWorkersEmailsFormMixin, BaseForm):
     section_name = _('Community Information')
-    collaborators_emails = forms.CharField(
+    co_workers_emails = forms.CharField(
         required=False,
-        help_text=COLLABORATORS_HELP,
-        label=COLLABORATORS_TITLE)
+        help_text=COWORKERS_HELP,
+        label=COWORKERS_TITLE)
     accept_conditions = forms.BooleanField(label=ACCEPT_CONDITIONS_LABEL)
 
     class Meta:
         model = AbstractCommunitySection
         fields = [
-            'collaborators_emails',
+            'co_workers_emails',
             'reach_out',
             'how_did_you_hear',
             'accept_conditions'
         ]
 
-    def clean_collaborators_emails(self):
-        addresses = super().clean_collaborators_emails()
+    def clean_co_workers_emails(self):
+        addresses = super().clean_co_workers_emails()
 
         if len(addresses) > 5:
-            raise ValidationError(_('Maximum 5 collaborators allowed'))
+            raise ValidationError(_('Maximum 5 team members allowed'))
 
         return addresses
 
@@ -255,17 +255,17 @@ class FinanceAndDurationSectionForm(BaseForm):
         ]
 
 
-class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
+class CommunitySectionEditForm(CoWorkersEmailsFormMixin, BaseForm):
     section_name = _('Community Information')
-    collaborators_emails = forms.CharField(
+    co_workers_emails = forms.CharField(
         required=False,
-        help_text=COLLABORATORS_HELP,
-        label=COLLABORATORS_TITLE)
+        help_text=COWORKERS_HELP,
+        label=COWORKERS_TITLE)
 
     class Meta:
         model = models.Idea
         fields = [
-            'collaborators_emails',
+            'co_workers_emails',
             'reach_out',
             'how_did_you_hear',
         ]
@@ -275,11 +275,11 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
 
         if self.instance:
             invites = self.instance.ideainvite_set.all()
-            collaborators = self.instance.collaborators.all()
-            if invites or collaborators:
-                self.fields['collaborators'] = forms.MultipleChoiceField(
+            co_workers = self.instance.co_workers.all()
+            if invites or co_workers:
+                self.fields['co_workers'] = forms.MultipleChoiceField(
                     required=False,
-                    label=COLLABORATORS_EDIT_TITLE,
+                    label=COWORKERS_EDIT_TITLE,
                     choices=[
                         (
                             'c:'+c.username,
@@ -289,7 +289,7 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
                                 'cta_checked': _('remove'),
                                 'cta_unchecked': _('will be removed on save')
                             }
-                        ) for c in collaborators
+                        ) for c in co_workers
                         ] + [
                         (
                             'i:'+i.email,
@@ -302,18 +302,18 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
                             }
                         ) for i in invites
                         ],
-                    initial=['c:'+c.username for c in collaborators] +
+                    initial=['c:'+c.username for c in co_workers] +
                             ['i:'+i.email for i in invites],
                     widget=forms.CheckboxSelectMultiple
                 )
-                self.fields.move_to_end('collaborators', last=False)
+                self.fields.move_to_end('co_workers', last=False)
 
-            self.fields.move_to_end('collaborators_emails', last=False)
+            self.fields.move_to_end('co_workers_emails', last=False)
 
     @property
     def helper(self):
         helper = super().helper
-        helper['collaborators'].wrap(
+        helper['co_workers'].wrap(
             crisp.layout.Field,
             template="bootstrap3/user_checkboxselectmultiple_field.html",
         )
@@ -326,22 +326,22 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
     def clean(self):
         super().clean()
 
-        addresses = self.cleaned_data.get('collaborators_emails', [])
+        addresses = self.cleaned_data.get('co_workers_emails', [])
         invites = []
-        collaborators = []
-        for entry in self.cleaned_data.get('collaborators', []):
+        co_workers = []
+        for entry in self.cleaned_data.get('co_workers', []):
             if entry[:2] == 'c:':
-                collaborators.append(entry[2:])
+                co_workers.append(entry[2:])
             else:
                 invites.append(entry[2:])
         self.cleaned_data['invites'] = invites
-        self.cleaned_data['collaborators'] = collaborators
+        self.cleaned_data['co_workers'] = co_workers
 
         duplicate_errors = []
         for (name, address) in addresses:
             if address in invites:
                 error = ValidationError({
-                    'collaborators_emails': _(
+                    'co_workers_emails': _(
                         'You already invited {email}'
                     ).format(email=address)
                 })
@@ -349,35 +349,35 @@ class CommunitySectionEditForm(CollaboratorsEmailsFormMixin, BaseForm):
         if duplicate_errors:
             raise ValidationError(duplicate_errors)
 
-        collaborator_count = sum([
+        co_worker_count = sum([
             len(addresses),
             len(invites),
-            len(collaborators),
+            len(co_workers),
         ])
 
-        if collaborator_count > 5:
-            raise ValidationError(_('Maximum 5 collaborators allowed'))
+        if co_worker_count > 5:
+            raise ValidationError(_('Maximum 5 team members allowed'))
 
     def save(self, commit=True):
         """
-        Deletes invites and collaborators and adds new invites of instance.
+        Deletes invites and co-workers and adds new invites of instance.
         There is a little hack here, it uses the idea creator and not the
         current user as creator for the invites. There for no user needs to
         passed and it can be used in the edit view, just as all other forms.
         """
         super().save(commit)
 
-        collaborators = self.instance.collaborators.exclude(
-            username__in=self.cleaned_data.get('collaborators', [])
+        co_workers = self.instance.co_workers.exclude(
+            username__in=self.cleaned_data.get('co_workers', [])
         )
-        self.instance.collaborators.remove(*collaborators)
+        self.instance.co_workers.remove(*co_workers)
 
         self.instance.ideainvite_set.exclude(
             email__in=self.cleaned_data.get('invites', [])
         ).delete()
 
-        if 'collaborators_emails' in self.cleaned_data:
-            for name, email in self.cleaned_data['collaborators_emails']:
+        if 'co_workers_emails' in self.cleaned_data:
+            for name, email in self.cleaned_data['co_workers_emails']:
                 self.instance.ideainvite_set.invite(
                     self.instance.creator,
                     email
@@ -392,7 +392,7 @@ class FinishForm(forms.Form):
     class Meta:
         model = models.IdeaSketch
         exclude = [
-            'collaborators_emails', 'how_did_you_hear', 'creator', 'module'
+            'co_workers_emails', 'how_did_you_hear', 'creator', 'module'
         ]
 
     @property

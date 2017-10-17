@@ -11,7 +11,6 @@ class UserAdmin(auth.admin.UserAdmin):
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
         (_('Profile data'), {'fields': (
             '_avatar',
-            'biographie',
             'europe',
             'twitter_handle',
             'facebook_handle',

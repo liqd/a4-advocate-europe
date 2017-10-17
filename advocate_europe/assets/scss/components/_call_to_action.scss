@@ -11,6 +11,10 @@
         }
     }
 
+    .cta-tile-text {
+        font-weight: $demibold;
+    }
+
     .call-to-action-link {
         color: #fff;
         text-decoration: underline;
@@ -19,6 +23,5 @@
     .call-to-action-btn {
         margin-bottom: rem(25px);
         font-size: 16px;
-        font-weight: 600;
     }
 }

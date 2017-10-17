@@ -1,35 +1,31 @@
-{% extends 'base.html' %}
+{% extends 'account/advocate_europe/base_account.html' %}
 
 {% load account %}
-{% load i18n %}
+{% load i18n force_translation %}
 
 {% block title %}{% trans 'Activate your account' %}{% endblock %}
 
-{% block content %}
-<div class="account-top">
-    <div class="container">
-        <div class="container-medium account-box">
-            {% if confirmation %}
-                {% user_display confirmation.email_address.user as user_display %}
-                <form id="ActivateForm" method="post">
-                    {% csrf_token %}
-                    <h2>{% trans 'Welcome to Advocate Europe!' %}</h2>
-                    <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
-                    {% if form.non_field_errors %}
-                        <div class="form-errors">
-                        {% for error in form.non_field_errors %}
-                            <p class="alert alert-danger">{{ error }}</p>
-                        {% endfor %}
-                        </div>
-                    {% endif %}
-                    <button type="submit" value="Activate" class="btn btn-ae-secondary">{% trans "Activate account" %}</button>
-                </form>
-            {% else %}
-                <h2>{% trans 'Welcome to Advocate Europe!' %}</h2>
-                {% url 'account_email' as email_url %}
-                <p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
+{% block account_content %}
+{% force_translation 'en' %}
+    {% if confirmation %}
+        {% user_display confirmation.email_address.user as user_display %}
+        <form id="ActivateForm" method="post">
+            {% csrf_token %}
+            <h2>{% trans 'Welcome to Advocate Europe!' %}</h2>
+            <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
+            {% if form.non_field_errors %}
+                <div class="form-errors">
+                {% for error in form.non_field_errors %}
+                    <p class="alert alert-danger">{{ error }}</p>
+                {% endfor %}
+                </div>
             {% endif %}
-        </div>
-    </div>
-</div>
+            <button type="submit" value="Activate" class="btn btn-ae-secondary">{% trans "Activate account" %}</button>
+        </form>
+    {% else %}
+        <h2>{% trans 'Welcome to Advocate Europe!' %}</h2>
+        {% url 'account_email' as email_url %}
+        <p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
+    {% endif %}
+{% endforce_translation %}
 {% endblock %}

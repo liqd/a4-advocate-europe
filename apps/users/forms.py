@@ -12,7 +12,7 @@ TERMS_OF_USE_LABEL = _('I accept the terms of use.')
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username', '_avatar', 'biographie', 'europe',
+        fields = ['username', '_avatar', 'europe',
                   'twitter_handle', 'facebook_handle',
                   'instagram_handle', 'website', 'get_notifications']
 
@@ -26,11 +26,10 @@ class UserProfileForm(forms.ModelForm):
                 _('Your Profile'),
                 'username',
                 '_avatar',
-                'biographie',
                 'europe'
             ),
             Fieldset(
-                _('Social Media Handlers'),
+                _('Social Media'),
                 Div(
                     Field('twitter_handle', wrapper_class='col-md-6'),
                     Field('facebook_handle', wrapper_class='col-md-6'),
@@ -38,7 +37,10 @@ class UserProfileForm(forms.ModelForm):
                 ),
                 Div(
                     Field('instagram_handle', wrapper_class='col-md-6'),
-                    Field('website', wrapper_class='col-md-6'),
+                    css_class='row'
+                ),
+                Div(
+                    Field('website', wrapper_class='col-md-12'),
                     css_class='row'
                 )
             ),

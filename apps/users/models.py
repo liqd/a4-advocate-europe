@@ -56,7 +56,9 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         'avatar',
         upload_to='users/images',
         blank=True,
-        verbose_name=_('Avatar picture'),
+        verbose_name=_('Profile picture'),
+        help_text=_('The image should be at least 340 pixel '
+                    'wide and 340 pixel high.')
     )
 
     date_joined = models.DateTimeField(
@@ -64,20 +66,13 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         default=timezone.now
     )
 
-    biographie = models.TextField(
-        blank=True,
-        verbose_name=_('Short biographie'),
-        help_text=_('Tell us about yourself. '
-                    'fields of profession and interest. '
-                    '(max. 250 characters)')
-    )
-
     europe = models.TextField(
         blank=True,
-        verbose_name=_('Your interest in europe'),
+        max_length=200,
+        verbose_name=_('Your interest in Europe'),
         help_text=_('Why do you care about Europe? '
                     'Where do you try to make a change? '
-                    '(max. 250 characters)')
+                    '(max. 200 characters)')
     )
 
     twitter_handle = models.CharField(
@@ -100,7 +95,9 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
     website = models.URLField(
         blank=True,
-        verbose_name=_('Website')
+        verbose_name=_('Website'),
+        help_text=_('Plase add either https:// or http:// '
+                    'to the front of your URL.')
     )
 
     get_notifications = models.BooleanField(
@@ -130,7 +127,7 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     def is_innovator(self):
         return Idea.objects.filter(
             Q(creator=self) |
-            Q(collaborators=self)
+            Q(co_workers=self)
         ).count() > 0
 
     def avatar_or_fallback_url(self):
