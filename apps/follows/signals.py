@@ -34,28 +34,3 @@ def autofollow_collaborateurs(instance, action, pk_set, reverse, **kwargs):
         reverse=reverse,
         enabled=enabled
     )
-
-
-@receiver(signals.pre_save, sender=Idea)
-def autounfollow_creator(sender, instance, **kwargs):
-    old_idea = Idea.objects.filter(pk=instance.pk).first()
-    old_creator = old_idea.creator
-
-    if old_creator != instance.creator:
-        _autofollow(
-            instance=instance,
-            pk_set=[old_creator.pk],
-            reverse=False,
-            enabled=False
-        )
-
-
-@receiver(signals.post_save, sender=IdeaSketch)
-@receiver(signals.post_save, sender=Idea)
-def autofollow_creator(sender, instance, created, **kwargs):
-    _autofollow(
-        instance=instance,
-        pk_set=[instance.creator.pk],
-        reverse=False,
-        enabled=True
-    )
