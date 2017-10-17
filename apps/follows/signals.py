@@ -1,7 +1,7 @@
 from django.db.models import signals
 from django.dispatch import receiver
 
-from apps.ideas.models import Idea, IdeaSketch
+from apps.ideas import models as idea_models
 
 from . import Registry
 
@@ -19,7 +19,11 @@ def _autofollow(instance, pk_set, reverse, enabled):
             )
 
 
-@receiver(signals.m2m_changed, sender=IdeaSketch.collaborators.through)
+@receiver(
+    signals.m2m_changed,
+    sender=idea_models.IdeaSketch.co_workers.through
+)
+@receiver(signals.m2m_changed, sender=idea_models.Proposal.co_workers.through)
 def autofollow_collaborateurs(instance, action, pk_set, reverse, **kwargs):
     if action == 'post_add':
         enabled = True
