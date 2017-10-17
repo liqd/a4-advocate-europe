@@ -130,7 +130,15 @@
         // show answers
 
         .comment-reply-button {
+            @extend .btn;
+            background-color: transparent;
+            padding-left: 0;
+        }
 
+        .comment-reply-button:focus,
+        .comment-reply-button:active {
+            box-shadow: none;
+            outline: none !important;
         }
     }
 
