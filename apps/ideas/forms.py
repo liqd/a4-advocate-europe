@@ -86,7 +86,7 @@ class CoWorkersEmailsFormMixin:
 
 
 class ApplicantSectionForm(BaseForm):
-    section_name = _('Applicant Section')
+    section_name = _('Applicant')
 
     class Meta:
         model = AbstractApplicantSection
@@ -141,7 +141,7 @@ class PartnersSectionForm(BaseForm):
 
 
 class IdeaSectionForm(BaseForm):
-    section_name = _('Idea details')
+    section_name = _('Idea')
 
     class Meta:
         model = AbstractIdeaSection
@@ -159,7 +159,7 @@ class IdeaSectionForm(BaseForm):
 
 
 class ImpactSectionForm(BaseForm):
-    section_name = _('Impact')
+    section_name = _('Road to Impact')
 
     class Meta:
         model = AbstractImpactSection
@@ -203,7 +203,7 @@ class CollaborationCampSectionForm(BaseForm):
 
 
 class CommunitySectionForm(CoWorkersEmailsFormMixin, BaseForm):
-    section_name = _('Community Information')
+    section_name = _('Community')
     co_workers_emails = forms.CharField(
         required=False,
         help_text=COWORKERS_HELP,
