@@ -1,4 +1,4 @@
-{% load i18n react_follows rules %}
+{% load i18n react_follows rules discovery_tags %}
 
 {% if idea.proposal %}
     {% has_perm 'advocate_europe_ideas.change_idea' request.user idea as can_change_proposal %}
@@ -47,8 +47,16 @@
 </li>
 
 {% has_perm 'advocate_europe_ideas.follow_idea' request.user idea as can_watch_proposal %}
+{% would_have_perm 'advocate_europe_ideas.follow_idea' idea as could_watch_proposal %}
 {% if view.display_type == 'idea' and can_watch_proposal %}
 <li class="nav-idea {{ xs_class }}">
     {% react_follows idea %}
+</li>
+{% elif view.display_type == 'idea' and could_watch_proposal %}
+<li class="nav-idea {{ xs_class }}">
+    <a href="{% url 'account_login' %}?next={% url 'idea-detail' slug=idea.slug %}" class="btn btn-follow" id="idea-create">
+        <i class="fa fa-eye" aria-hidden="true"></i>
+        <span class="btn-idea-label">{% trans 'Watch' %}</span>
+    </a>
 </li>
 {% endif %}
