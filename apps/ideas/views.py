@@ -90,7 +90,7 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
     permission_required = 'advocate_europe_ideas.add_ideasketch'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
-    title = _('Create an idea')
+    title = _('Idea Sketch')
     finish_section_text = _('You can add data or edit your idea later.')
     finish_section_btn = _('Submit your idea!')
 
