@@ -7,8 +7,7 @@
     {% force_translation 'en' %}
 <div class="wizard-page">
     <form class="wizard custom-form container-narrow" method="post" enctype="multipart/form-data" novalidate>
-        <h1>{{ view.title }} </h1>
-
+        <h1>{{ view.title }} | {{ form.section_name }}</h1>
         <div class="wizard-progress-side">
             <ul class="wizard-progress hidden-sm hidden-xs">
                 {% for step_id, form, status in view.progress %}
