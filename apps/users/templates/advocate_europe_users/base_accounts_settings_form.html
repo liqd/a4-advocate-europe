@@ -11,13 +11,20 @@
                     {% url 'edit_profile' as edit_profile_url %}
                     <li class="list-group-item {% if edit_profile_url == request.get_full_path  %} active {% endif %}">
                         <a href="{% url 'edit_profile' %}">
-                            <i class="fa fa-user" aria-hidden="true"></i> {% trans 'Your Profile' %}
+                            <span class="fa-stack">
+                                <i class="fa fa-square-o fa-stack-2x transparent"  aria-hidden="true"></i>
+                                <i class="fa fa-user fa-stack-1x" aria-hidden="true"></i>
+                            </span>
+                            {% trans 'Your Profile' %}
                         </a>
                     </li>
                     {% url 'account_change_password' as change_password_url %}
                     <li class="list-group-item {% if change_password_url == request.get_full_path  %} active {% endif %}">
                         <a href="{% url 'account_change_password' %}">
-                            <i class="fa fa-lock" aria-hidden="true"></i>
+                            <span class="fa-stack">
+                                <i class="fa fa-square-o fa-stack-2x transparent"  aria-hidden="true"></i>
+                                <i class="fa fa-lock fa-stack-1x" aria-hidden="true"></i>
+                            </span>
                             {% if request.user.has_usable_password %}
                                 {% trans 'Change Password' %}
                             {% else %}
@@ -28,13 +35,21 @@
                     {% url 'account_email' as change_email_url %}
                     <li class="list-group-item {% if change_email_url == request.get_full_path  %} active {% endif %}">
                         <a href="{% url 'account_email' %}">
-                            <i class="fa fa-envelope" aria-hidden="true"></i> {% trans 'Mail adresses' %}
+                            <span class="fa-stack">
+                                <i class="fa fa-square-o fa-stack-2x transparent"  aria-hidden="true"></i>
+                                <i class="fa fa-envelope fa-stack-1x" aria-hidden="true"></i>
+                            </span>
+                            {% trans 'Mail adresses' %}
                         </a>
                     </li>
                     {% url 'socialaccount_connections' as social_accounts_url %}
                     <li class="list-group-item {% if social_accounts_url == request.get_full_path  %} active {% endif %}">
                         <a href="{% url 'socialaccount_connections' %}">
-                            <i class="fa fa-users" aria-hidden="true"></i> {% trans 'Account Connections' %}
+                            <span class="fa-stack">
+                                <i class="fa fa-square-o fa-stack-2x transparent"  aria-hidden="true"></i>
+                                <i class="fa fa-users fa-stack-1x" aria-hidden="true"></i>
+                            </span>
+                            {% trans 'Account Connections' %}
                         </a>
                     </li>
                 </ul>
