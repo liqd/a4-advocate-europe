@@ -41,7 +41,7 @@
                         {% if post.image %}
                             {% image post.image fill-470x300 as image%}
                         {% endif %}
-                        <div class="hover-parent-bg-img blogindex-img col-xs-12 col-sm-5 col-sm-offset-3 col-md-5 col-md-offset-2">
+                        <div class="hover-parent blogindex-img col-xs-12 col-sm-5 col-sm-offset-3 col-md-5 col-md-offset-2">
                             <a href="{% pageurl post %}" class="hover-child-img" style="background-image: url({% if post.image %} {{ image.url }} {% else %} {% static 'images/placeholder_yellow.svg' %} {% endif %});">
                             </a>
                         </div>
