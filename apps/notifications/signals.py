@@ -12,7 +12,7 @@ from . import emails
 
 
 @receiver(signals.post_save, sender=Action)
-def send_notification(sender, instance, created, **kwargs):
+def send_create_notification(sender, instance, created, **kwargs):
     action = instance
     if action.verb == Verbs.ADD.value:
         modelcls = action.obj_content_type.model_class()
