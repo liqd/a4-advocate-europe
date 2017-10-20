@@ -19,7 +19,13 @@
             {% if user.avatar %}
             <span class="avatar-round-small" style="background-image: url({{ user.avatar }});"></span>
             {% endif %}
-            <span class="user-picker-label-text">{{ user.username|unlocalize }}</span>
+            <span class="user-picker-label-text">
+            {% if not user.detail %}
+            <a href="{% url 'profile' user.username %}">{{ user.username|unlocalize }}</a>
+            {% else %}
+            {{ user.username|unlocalize }}
+            {% endif %}
+            </span>
             {% if user.detail %}
             <span class="user-picker-label-text user-picker-label-detail">{{ user.detail|unlocalize }}</span>
             {% endif %}
