@@ -30,7 +30,9 @@ def test_profile_view_filter_watch(client, user, user2,
                                    idea_follow_factory, idea_sketch_factory):
     idea_follow1 = idea_follow_factory(followable__creator=user2, creator=user)
     idea_follow2 = idea_follow_factory(
-        followable__creator=user2, creator=user, enabled=False
+        followable__creator=user2,
+        creator=user,
+        enabled=False
     )
     idea1 = idea_follow1.followable.idea
     idea2 = idea_sketch_factory(creator=user).idea

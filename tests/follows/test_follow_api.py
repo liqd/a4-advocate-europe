@@ -4,8 +4,9 @@ from rest_framework import status
 
 
 @pytest.mark.django_db
-def test_anonymous_can_read_follow(apiclient, idea_sketch):
-    url = reverse('follows-detail', args=[idea_sketch.pk])
+def test_anonymous_can_read_follow(apiclient, idea_sketch_factory, user):
+    idea = idea_sketch_factory(creator=user, co_workers=[])
+    url = reverse('follows-detail', args=[idea.pk])
     response = apiclient.get(url)
     assert response.status_code == status.HTTP_200_OK
     assert response.data == {'follows': 0}
@@ -19,27 +20,24 @@ def test_anonymous_update(apiclient, idea_sketch):
 
 
 @pytest.mark.django_db
-def test_read_follow_state(apiclient, user2, idea_follow):
-    url = reverse('follows-detail', args=[idea_follow.followable.pk])
+def test_read_follow_state(apiclient, user2, idea_sketch_factory):
+    idea = idea_sketch_factory(co_workers=[])
+    url = reverse('follows-detail', args=[idea.pk])
     response = apiclient.get(url)
     assert response.status_code == status.HTTP_200_OK
-    assert response.data == {'follows': 1}
-
-    apiclient.force_authenticate(user=idea_follow.creator)
-    response = apiclient.get(url)
-    assert response.status_code == status.HTTP_200_OK
-    assert response.data == {'follows': 1, 'enabled': True}
+    assert response.data == {'follows': 0}
 
     apiclient.force_authenticate(user=user2)
     response = apiclient.get(url)
     assert response.status_code == status.HTTP_200_OK
-    assert response.data == {'follows': 1, 'enabled': False}
+    assert response.data == {'follows': 0, 'enabled': False}
 
 
 @pytest.mark.django_db
-def test_user_create_follow(apiclient, idea_sketch, user):
+def test_user_create_follow(apiclient, idea_sketch_factory, user2):
+    idea_sketch = idea_sketch_factory(co_workers=[])
     url = reverse('follows-detail', args=[idea_sketch.pk])
-    apiclient.force_authenticate(user=user)
+    apiclient.force_authenticate(user=user2)
 
     response = apiclient.put(url, {'enabled': True}, format='json')
     assert response.status_code == status.HTTP_201_CREATED
@@ -51,13 +49,10 @@ def test_user_create_follow(apiclient, idea_sketch, user):
 
 
 @pytest.mark.django_db
-def test_user_update_follow(apiclient, idea_follow):
+def test_user_update_follow(apiclient, idea_follow_factory):
+    idea_follow = idea_follow_factory(followable__co_workers=[])
     url = reverse('follows-detail', args=[idea_follow.followable.pk])
     apiclient.force_authenticate(user=idea_follow.creator)
-
-    response = apiclient.put(url, {'enabled': True}, format='json')
-    assert response.status_code == status.HTTP_200_OK
-    assert response.data == {'follows': 1, 'enabled': True}
 
     response = apiclient.put(url, {'enabled': False}, format='json')
     assert response.status_code == status.HTTP_200_OK
