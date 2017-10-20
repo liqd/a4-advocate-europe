@@ -1,5 +1,5 @@
 import crispy_forms as crisp
-from crispy_forms.layout import Div, Field, Fieldset, Layout, Submit
+from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, Submit
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from cms.contrib import helpers
@@ -61,7 +61,12 @@ class NotificationsForm(forms.ModelForm):
         helper.layout = Layout(
             Fieldset(
                 _('Notifications'),
-                'get_notifications'
+                Div(
+                    HTML("<p>I want to receive mails with notifications "
+                         "about:</p>"),
+                    Field('get_notifications'),
+                    css_class='notification-settings'
+                ),
             )
         )
         return helper

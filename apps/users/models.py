@@ -101,11 +101,8 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     )
 
     get_notifications = models.BooleanField(
-        verbose_name=_('Send me email notifications'),
-        default=True,
-        help_text=_(
-            'Designates whether you want to receive notifications. '
-            'Unselect if you do not want to receive notifications.')
+        verbose_name=_("my own ideas and ideas that I'm watching"),
+        default=True
     )
 
     objects = auth_models.UserManager()
