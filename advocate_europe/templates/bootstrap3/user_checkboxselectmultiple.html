@@ -31,8 +31,13 @@
             {% elif user.username == request.user.username %}
             <span class="user-picker-label-text user-picker-label-detail">This is you!</span>
             {% endif %}
+            {% if user.username == request.user.username %}
+            <div class="user-picker-cta user-picker-cta-checked btn-link">Leave team</div>
+            <div class="user-picker-cta user-picker-cta-unchecked btn-link">You will be removed on save</div>
+            {% else %}
             <div class="user-picker-cta user-picker-cta-checked btn-link">{{ user.cta_checked }}</div>
             <div class="user-picker-cta user-picker-cta-unchecked btn-link">{{ user.cta_unchecked }}</div>
+            {% endif %}
         </div>
     </label>
     {% if not inline_class %}</div>{% endif %}
