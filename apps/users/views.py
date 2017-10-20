@@ -64,3 +64,22 @@ class EditProfileView(mixins.LoginRequiredMixin,
     @property
     def raise_exception(self):
         return self.request.user.is_authenticated()
+
+
+class NotificationsView(mixins.LoginRequiredMixin,
+                        SuccessMessageMixin,
+                        generic.UpdateView):
+    model = user_models.User
+    template_name = "advocate_europe_users/notifications_form.html"
+    success_message = _('Your notification settings have been updated')
+    form_class = forms.NotificationsForm
+
+    def get_object(self):
+        return get_object_or_404(user_models.User, pk=self.request.user.id)
+
+    def get_success_url(self):
+        return reverse('notifications')
+
+    @property
+    def raise_exception(self):
+        return self.request.user.is_authenticated()
