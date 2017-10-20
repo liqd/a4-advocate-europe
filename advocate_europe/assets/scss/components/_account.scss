@@ -47,10 +47,15 @@
         .active {
             background-color: #fff;
             color: $gray-dark;
+            border-radius: 5px;
         }
 
-        .transparent {
-            color: transparent;
+        .active .fa {
+            color: $brand-primary;
+        }
+
+        .fa {
+            margin-right: rem(10px);
         }
     }
 
