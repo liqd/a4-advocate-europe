@@ -1,7 +1,7 @@
 import pytest
 from django.core.urlresolvers import reverse
 
-from tests.helpers import redirect_target, templates_used
+from adhocracy4.test.helpers import redirect_target, templates_used
 
 
 @pytest.mark.django_db
