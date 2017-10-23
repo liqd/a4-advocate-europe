@@ -40,6 +40,13 @@
                             {% trans 'Account Connections' %}
                         </a>
                     </li>
+                    {% url 'notifications' as notifications_url %}
+                    <li class="list-group-item {% if notifications_url == request.get_full_path  %} active {% endif %}">
+                        <a href="{% url 'notifications' %}">
+                            <i class="fa fa-bell fa-fw" aria-hidden="true"></i>
+                            {% trans 'Notifications' %}
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="col-md-6">

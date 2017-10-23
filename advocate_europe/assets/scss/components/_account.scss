@@ -82,3 +82,14 @@
         }
     }
 }
+
+.notification-settings {
+    p {
+        font-size: rem(16px);
+        font-weight: $demibold;
+    }
+
+    .form-group label {
+        font-weight: normal;
+    }
+}

@@ -14,4 +14,9 @@ urlpatterns = [
         views.EditProfileView.as_view(),
         name='edit_profile',
     ),
+    url(
+        '^accounts/notifications/$'.format(USERNAME_REGEX[1:-1]),
+        views.NotificationsView.as_view(),
+        name='notifications',
+    ),
 ]
