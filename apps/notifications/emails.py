@@ -86,13 +86,13 @@ class NotifyFollowersOnNewComment(NotifyFollowers):
     def get_receivers(self):
         action = self.object
 
-        # new comment on idea
-        if action.target_content_type.model == 'idea':
-            idea = action.target
-
         # new comment on comment
-        else:
+        if hasattr(action.target, 'content_object'):
             idea = action.target.content_object
+
+        # new comment on idea
+        else:
+            idea = action.target
 
         receivers = User.objects.filter(
             ideafollow__followable=idea,
