@@ -22,20 +22,24 @@ from .models.abstracts.partners_section import AbstractPartnersSection
 from .models.abstracts.selection_criteria_section import \
     AbstractSelectionCriteriaSection
 
-ACCEPT_CONDITIONS_LABEL = _('I hereby confirm and agree that '
-                            'my idea will be public once'
-                            ' published. I confirm that I have '
-                            'the right to share the idea and '
-                            'the visual material '
+CONFIRM_PUBLICITY_LABEL = _('I hereby confirm and agree that '
+                            'my idea will be public once published. '
+                            'I confirm that I have the right to share '
+                            'the idea and the visual material '
                             'used in this proposal.')
+ACCEPT_CONDITIONS_LABEL = _('I hereby agree to the terms'
+                            ' and conditions of the Advocate'
+                            ' Europe idea challenge.')
 
 COWORKERS_TITLE = _('Please add your team members here.')
-COWORKERS_HELP = _('Here you can insert the email addresses of up to 5 '
-                   'team members. Each of the named team members will '
-                   'receive an email inviting them to register on the '
-                   'Advocate Europe website. After registering they will '
-                   'appear with their user name on your idea page and '
-                   'will be able to edit your idea. ')
+COWORKERS_HELP = _('Here you can insert the email addresses '
+                   'of up to 5 team members. Each of the named '
+                   'team members will receive an email '
+                   'inviting them to register on '
+                   'the Advocate Europe website. '
+                   'After registering they will appear with '
+                   'their user name on your idea page '
+                   'and will be able to edit your idea. ')
 
 COWORKERS_EDIT_TITLE = _('Your team members')
 
@@ -107,9 +111,9 @@ class ApplicantSectionForm(BaseForm):
 class PartnersSectionForm(BaseForm):
     section_name = _('Partners')
     accordions = [
-        _('first partner organisation'),
-        _('second partner organisation'),
-        _('third partner organisation'),
+        _('Partner Organisation 1'),
+        _('Partner Organisation 2'),
+        _('Partner Organisation 3'),
     ]
 
     class Meta:
@@ -208,7 +212,13 @@ class CommunitySectionForm(CoWorkersEmailsFormMixin, BaseForm):
         required=False,
         help_text=COWORKERS_HELP,
         label=COWORKERS_TITLE)
+    confirm_publicity = forms.BooleanField(label=CONFIRM_PUBLICITY_LABEL)
     accept_conditions = forms.BooleanField(label=ACCEPT_CONDITIONS_LABEL)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['accept_conditions'].label = helpers.add_link_to_helptext(
+            self.fields['accept_conditions'].label, "terms_of_use_page")
 
     class Meta:
         model = AbstractCommunitySection
