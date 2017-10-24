@@ -180,7 +180,8 @@ def test_proposal_co_worker_create_wizard(client, idea_sketch_factory,
         data = {
             'proposal_create_wizard-current_step': '6',
             '6-accept_conditions': 'on',
-            '6-confirm_publicity': 'on'
+            '6-confirm_publicity': 'on',
+            '6-confirm_collaboration_camp': 'on'
         }
 
         for key, value in wizard['form'].initial.items():
