@@ -96,7 +96,7 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
 
     def done(self, form_list, **kwargs):
         special_fields = ['accept_conditions', 'co_workers_emails',
-                          'confirm_publicity']
+                          'confirm_publicity', 'confirm_collaboration_camp']
 
         data = self.get_all_cleaned_data()
         idea_sketch = IdeaSketch.objects.create(
@@ -252,7 +252,7 @@ class ProposalCreateWizard(PermissionRequiredMixin,
         archive.save()
 
         special_fields = ['accept_conditions', 'co_workers_emails',
-                          'confirm_publicity']
+                          'confirm_publicity', 'confirm_collaboration_camp']
         data = self.get_all_cleaned_data()
         proposal = Proposal(
             idea_ptr=self.idea,
