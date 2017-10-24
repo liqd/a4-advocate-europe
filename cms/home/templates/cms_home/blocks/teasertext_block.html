@@ -4,7 +4,9 @@
         <p>{{ value.text }}</p>
     </div>
     <div>
-        {% if value.link.live %}
+        {% if value.externlink %}
+                <a href="{{ value.externlink }}" class="btn btn-primary teasertextblock-btn" role="button"><span class="teasertextblock-linktext">{{ value.link_text }}</span></a>
+        {% elif value.link.live %}
             {% if value.link_text %}
                 <a href="{{ value.link.url }}" class="btn btn-primary teasertextblock-btn" role="button"><span class="teasertextblock-linktext">{{ value.link_text }}</span></a>
             {% else %}
