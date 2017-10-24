@@ -52,3 +52,10 @@ class HelpPages(BaseSetting):
         PageChooserPanel('terms_of_use_page'),
         PageChooserPanel('selection_criteria')
     ]
+
+
+@register_setting
+class CollaborationCampSettings(BaseSetting):
+    start_date = models.DateField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
+    description = models.TextField(blank=True)
