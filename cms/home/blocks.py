@@ -22,7 +22,7 @@ class TeasertextBlock(StructBlock):
     headline = CharBlock(required=True, length=256)
     text = TextBlock(required=True)
     link = PageChooserBlock(required=False)
-    externlink = URLBlock(required=False,
+    externlink = URLBlock(label=_("External Link"), required=False,
                           help_text=_("The external link overwrites the "
                                       "link to a local page. It also "
                                       "requires a link text.")
