@@ -168,6 +168,8 @@ class IdeaDetailView(generic.DetailView):
         idea_list.append((_('What is your impact?'), self.object.outcome))
         idea_list.append((_('How do you get there?'), self.object.plan))
         idea_list.append((_('What is your story?'), self.object.importance))
+        idea_list.append((_('Who are you doing it for?'),
+                          self.object.target_group))
         if self.object.reach_out:
             idea_list.append((_('What do you need from the Advocate Europe '
                                 'community?'), self.object.reach_out))
