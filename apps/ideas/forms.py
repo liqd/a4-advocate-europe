@@ -30,6 +30,11 @@ CONFIRM_PUBLICITY_LABEL = _('I hereby confirm and agree that '
 ACCEPT_CONDITIONS_LABEL = _('I hereby agree to the terms'
                             ' and conditions of the Advocate'
                             ' Europe idea challenge.')
+CONFIRM_COLLABORATION_CAMP_WITH_DATE = _('If selected, I commit to joining '
+                                         'the Collaboration Camp '
+                                         'from {} to {}.')
+CONFIRM_COLLABORATION_CAMP_WITHOUT_DATE = _('If selected, I commit to joining '
+                                            'the Collaboration Camp.')
 
 COWORKERS_TITLE = _('Please add your team members here.')
 COWORKERS_HELP = _('Here you can insert the email addresses '
@@ -42,6 +47,12 @@ COWORKERS_HELP = _('Here you can insert the email addresses '
                    'and will be able to edit your idea. ')
 
 COWORKERS_EDIT_TITLE = _('Your team members')
+
+CHALLENGE_LINK_TEXT = _('Please look {}here{} for more '
+                        'information about the annual theme.')
+COLLABORATION_CAMP_OPTION_LINK = _('More information about '
+                                   'the collaboration camp and '
+                                   'the two tracks is available {}here{}.')
 
 
 class BaseForm(forms.ModelForm):
@@ -181,7 +192,9 @@ class ImpactSectionForm(BaseForm):
         self.fields['outcome'].help_text = helpers.add_link_to_helptext(
             self.fields['outcome'].help_text, "annual_theme_help_page")
         self.fields['challenge'].help_text = helpers.add_link_to_helptext(
-            self.fields['challenge'].help_text, "annual_theme_help_page")
+            self.fields['challenge'].help_text,
+            "annual_theme_help_page",
+            CHALLENGE_LINK_TEXT)
         self.fields['plan'].help_text = helpers.add_link_to_helptext(
             self.fields['plan'].help_text, "annual_theme_help_page")
 
@@ -203,7 +216,7 @@ class CollaborationCampSectionForm(BaseForm):
         self.fields['collaboration_camp_option'].help_text \
             = helpers.add_link_to_helptext(
             self.fields['collaboration_camp_option'].help_text,
-            "communication_camp_help_page")
+            "communication_camp_help_page", COLLABORATION_CAMP_OPTION_LINK)
 
 
 class CommunitySectionForm(CoWorkersEmailsFormMixin, BaseForm):
@@ -214,11 +227,18 @@ class CommunitySectionForm(CoWorkersEmailsFormMixin, BaseForm):
         label=COWORKERS_TITLE)
     confirm_publicity = forms.BooleanField(label=CONFIRM_PUBLICITY_LABEL)
     accept_conditions = forms.BooleanField(label=ACCEPT_CONDITIONS_LABEL)
+    confirm_collaboration_camp = forms.BooleanField(
+        label=CONFIRM_COLLABORATION_CAMP_WITHOUT_DATE)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['accept_conditions'].label = helpers.add_link_to_helptext(
             self.fields['accept_conditions'].label, "terms_of_use_page")
+        settings = helpers.get_collaboration_camp_settings()
+        if settings.start_date and settings.end_date:
+            self.fields['confirm_collaboration_camp'].label = \
+                CONFIRM_COLLABORATION_CAMP_WITH_DATE.format(
+                    settings.start_date, settings.end_date)
 
     class Meta:
         model = AbstractCommunitySection
