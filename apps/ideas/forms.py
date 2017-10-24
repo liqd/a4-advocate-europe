@@ -121,6 +121,12 @@ class ApplicantSectionForm(BaseForm):
 
 class PartnersSectionForm(BaseForm):
     section_name = _('Partners')
+    section_description = _('Please share the names '
+                            'of your partner organisations here. '
+                            'If you do not have any partner '
+                            'organisations, leave the fields empty. '
+                            'You can update these fields any time '
+                            'before the application deadline.')
     accordions = [
         _('Partner Organisation 1'),
         _('Partner Organisation 2'),
@@ -213,6 +219,9 @@ class CollaborationCampSectionForm(BaseForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        if helpers.get_collaboration_camp_settings().description:
+            self.section_description = \
+                helpers.get_collaboration_camp_settings().description
         self.fields['collaboration_camp_option'].help_text \
             = helpers.add_link_to_helptext(
             self.fields['collaboration_camp_option'].help_text,
