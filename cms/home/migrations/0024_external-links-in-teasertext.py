@@ -12,7 +12,7 @@ import wagtail.wagtailimages.blocks
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cms_home', '0022_rename_idea_topic'),
+        ('cms_home', '0023_auto_20171023_0829'),
     ]
 
     operations = [
