@@ -22,22 +22,37 @@ from .models.abstracts.partners_section import AbstractPartnersSection
 from .models.abstracts.selection_criteria_section import \
     AbstractSelectionCriteriaSection
 
-ACCEPT_CONDITIONS_LABEL = _('I hereby confirm and agree that '
-                            'my idea will be public once'
-                            ' published. I confirm that I have '
-                            'the right to share the idea and '
-                            'the visual material '
+CONFIRM_PUBLICITY_LABEL = _('I hereby confirm and agree that '
+                            'my idea will be public once published. '
+                            'I confirm that I have the right to share '
+                            'the idea and the visual material '
                             'used in this proposal.')
+ACCEPT_CONDITIONS_LABEL = _('I hereby agree to the terms'
+                            ' and conditions of the Advocate'
+                            ' Europe idea challenge.')
+CONFIRM_COLLABORATION_CAMP_WITH_DATE = _('If selected, I commit to joining '
+                                         'the Collaboration Camp '
+                                         'from {} to {}.')
+CONFIRM_COLLABORATION_CAMP_WITHOUT_DATE = _('If selected, I commit to joining '
+                                            'the Collaboration Camp.')
 
 COWORKERS_TITLE = _('Please add your team members here.')
-COWORKERS_HELP = _('Here you can insert the email addresses of up to 5 '
-                   'team members. Each of the named team members will '
-                   'receive an email inviting them to register on the '
-                   'Advocate Europe website. After registering they will '
-                   'appear with their user name on your idea page and '
-                   'will be able to edit your idea. ')
+COWORKERS_HELP = _('Here you can insert the email addresses '
+                   'of up to 5 team members. Each of the named '
+                   'team members will receive an email '
+                   'inviting them to register on '
+                   'the Advocate Europe website. '
+                   'After registering they will appear with '
+                   'their user name on your idea page '
+                   'and will be able to edit your idea. ')
 
 COWORKERS_EDIT_TITLE = _('Your team members')
+
+CHALLENGE_LINK_TEXT = _('Please look {}here{} for more '
+                        'information about the annual theme.')
+COLLABORATION_CAMP_OPTION_LINK = _('More information about '
+                                   'the collaboration camp and '
+                                   'the two tracks is available {}here{}.')
 
 
 class BaseForm(forms.ModelForm):
@@ -86,7 +101,7 @@ class CoWorkersEmailsFormMixin:
 
 
 class ApplicantSectionForm(BaseForm):
-    section_name = _('Applicant Section')
+    section_name = _('Applicant')
 
     class Meta:
         model = AbstractApplicantSection
@@ -106,10 +121,16 @@ class ApplicantSectionForm(BaseForm):
 
 class PartnersSectionForm(BaseForm):
     section_name = _('Partners')
+    section_description = _('Please share the names '
+                            'of your partner organisations here. '
+                            'If you do not have any partner '
+                            'organisations, leave the fields empty. '
+                            'You can update these fields any time '
+                            'before the application deadline.')
     accordions = [
-        _('first partner organisation'),
-        _('second partner organisation'),
-        _('third partner organisation'),
+        _('Partner Organisation 1'),
+        _('Partner Organisation 2'),
+        _('Partner Organisation 3'),
     ]
 
     class Meta:
@@ -141,7 +162,7 @@ class PartnersSectionForm(BaseForm):
 
 
 class IdeaSectionForm(BaseForm):
-    section_name = _('Idea details')
+    section_name = _('Idea')
 
     class Meta:
         model = AbstractIdeaSection
@@ -159,7 +180,7 @@ class IdeaSectionForm(BaseForm):
 
 
 class ImpactSectionForm(BaseForm):
-    section_name = _('Impact')
+    section_name = _('Road to Impact')
 
     class Meta:
         model = AbstractImpactSection
@@ -177,7 +198,9 @@ class ImpactSectionForm(BaseForm):
         self.fields['outcome'].help_text = helpers.add_link_to_helptext(
             self.fields['outcome'].help_text, "annual_theme_help_page")
         self.fields['challenge'].help_text = helpers.add_link_to_helptext(
-            self.fields['challenge'].help_text, "annual_theme_help_page")
+            self.fields['challenge'].help_text,
+            "annual_theme_help_page",
+            CHALLENGE_LINK_TEXT)
         self.fields['plan'].help_text = helpers.add_link_to_helptext(
             self.fields['plan'].help_text, "annual_theme_help_page")
 
@@ -196,19 +219,35 @@ class CollaborationCampSectionForm(BaseForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        if helpers.get_collaboration_camp_settings().description:
+            self.section_description = \
+                helpers.get_collaboration_camp_settings().description
         self.fields['collaboration_camp_option'].help_text \
             = helpers.add_link_to_helptext(
             self.fields['collaboration_camp_option'].help_text,
-            "communication_camp_help_page")
+            "communication_camp_help_page", COLLABORATION_CAMP_OPTION_LINK)
 
 
 class CommunitySectionForm(CoWorkersEmailsFormMixin, BaseForm):
-    section_name = _('Community Information')
+    section_name = _('Community')
     co_workers_emails = forms.CharField(
         required=False,
         help_text=COWORKERS_HELP,
         label=COWORKERS_TITLE)
+    confirm_publicity = forms.BooleanField(label=CONFIRM_PUBLICITY_LABEL)
     accept_conditions = forms.BooleanField(label=ACCEPT_CONDITIONS_LABEL)
+    confirm_collaboration_camp = forms.BooleanField(
+        label=CONFIRM_COLLABORATION_CAMP_WITHOUT_DATE)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['accept_conditions'].label = helpers.add_link_to_helptext(
+            self.fields['accept_conditions'].label, "terms_of_use_page")
+        settings = helpers.get_collaboration_camp_settings()
+        if settings.start_date and settings.end_date:
+            self.fields['confirm_collaboration_camp'].label = \
+                CONFIRM_COLLABORATION_CAMP_WITH_DATE.format(
+                    settings.start_date, settings.end_date)
 
     class Meta:
         model = AbstractCommunitySection

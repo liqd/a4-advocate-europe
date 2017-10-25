@@ -4,13 +4,13 @@ from django.utils.translation import ugettext as _
 COLLABORATION_CAMP_OPTIONS_CHOICES = (
     ('single_track', 'Single track'),
     ('partner_track', 'Partner track'),
-    ('not_sure', "I'm not sure yet")
+    ('not_sure', "I am not sure yet")
 )
 COLLABORATION_CAMP_OPTIONS_HELP = _('Choose one of the following options.')
 COLLABORATION_CAMP_REPRESENT_TITLE = _('Who will represent your idea '
                                        'at the Collaboration Camp and why?')
-COLLABORATION_CAMP_REPRESENT_HELP = _('(Specify one person only. '
-                                      '(max 150 characters))')
+COLLABORATION_CAMP_REPRESENT_HELP = _('Specify one person only. '
+                                      '(max 150 characters)')
 COLLABORATION_CAMP_EMAIL_TITLE = _('Email address for contacting your '
                                    'representative on the collaboration camp.')
 COLLABORATION_CAMP_BENEFIT_TITLE = _('How could you contribute to and'
@@ -18,9 +18,11 @@ COLLABORATION_CAMP_BENEFIT_TITLE = _('How could you contribute to and'
                                      'Collaboration Camp?')
 COLLABORATION_CAMP_BENEFIT_HELP = _("Tell us about your expectations. "
                                     "Think about your skills, resources, "
-                                    "networks and partners when describing "
-                                    "what you could offer and what you'd "
-                                    "like to take away. (max. 300 characters)")
+                                    "networks and partners "
+                                    "when describing what "
+                                    "you could offer and what you "
+                                    "would like to take away. "
+                                    "(max. 300 characters)")
 
 
 class AbstractCollaborationCampSection(models.Model):

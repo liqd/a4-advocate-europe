@@ -20,14 +20,13 @@ ORGANISATION_STATUS_CHOICES = (
                         'a non-profit organisation')),
     ('other', _('Other')),
 )
-ORGANISATION_STATUS_EXTRA_HELP = _('If you selected other, '
-                                   'please clarify your current '
-                                   'status. How can we help '
-                                   'you? (max. 200 characters)')
-ORGANISATION_NAME_HELP = _('Also if you do not yet have a '
-                           'registered organisation, please '
-                           'write here the name of your initiative '
-                           'or planned organisation.')
+ORGANISATION_STATUS_EXTRA_HELP = _('Please provide details '
+                                   'about your current status, '
+                                   'especially if you selected "Other" '
+                                   '(max. 200 characters)')
+ORGANISATION_NAME_HELP = _('If you do not yet have a registered '
+                           'organisation, please write here the name of '
+                           'your initiative or planned organisation.')
 
 
 class AbstractApplicantSection(models.Model):
@@ -38,6 +37,7 @@ class AbstractApplicantSection(models.Model):
                                            choices=ORGANISATION_STATUS_CHOICES)
     organisation_status_extra = models.TextField(
         max_length=200, blank=True,
+        verbose_name=_('Organisation details'),
         help_text=ORGANISATION_STATUS_EXTRA_HELP)
     organisation_name = models.CharField(
         max_length=300,
@@ -51,7 +51,8 @@ class AbstractApplicantSection(models.Model):
         countries=EuropeanCountries
     )
     organisation_city = models.CharField(max_length=250, blank=True)
-    contact_email = models.EmailField(blank=True)
+    contact_email = models.EmailField(
+        blank=True, verbose_name=_('Organisation email'))
     year_of_registration = models.IntegerField(blank=True, null=True)
 
     class Meta:

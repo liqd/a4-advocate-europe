@@ -10,7 +10,7 @@ PARTNERS_MORE_INFO_HELP = _('Please use this field if you '
                             'your proposed partnership '
                             'arrangements (max. 200 characters).')
 
-PARTNERS_NAME_LABEL = _('name')
+PARTNERS_NAME_LABEL = _('Organisation Name')
 PARTNERS_WEBSITE_LABEL = _('website')
 PARTNERS_COUNTRY_LABEL = _('country')
 

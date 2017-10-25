@@ -5,9 +5,9 @@ from multiselectfield import MultiSelectField
 from adhocracy4.images import fields
 
 IDEA_TITLE_HELP = _('Give your idea a short '
-                    'and meaningful title '
-                    '(max. 50 characters).')
-IDEA_PITCH_HELP = _('Present your idea in 500 characters. Share a '
+                    'and meaningful title. '
+                    '(max. 50 characters)')
+IDEA_PITCH_HELP = _('Present your idea in max. 500 characters. Share a '
                     'concise and attractive text that makes the'
                     ' reader curious. Try to pitch your main '
                     'challenge, objective, method and target '
@@ -21,7 +21,7 @@ IDEA_IMAGE_HELP = _('Upload a photo or illustration that visually '
                     'format and have a width of at least 400 pixels.')
 IDEA_TOPIC_CHOICES = (
     ('democracy_participation', _('Democracy and participation')),
-    ('arts_cultural_activities', _('Arts and cultural activities')),
+    ('arts_cultural_activities', _('Arts and culture')),
     ('environment', _('Environment')),
     ('social_inclusion', _('Social inclusion')),
     ('migration', _('Migration')),
@@ -30,7 +30,11 @@ IDEA_TOPIC_CHOICES = (
     ('education', _('Education'))
 )
 
-IDEA_TOPIC_HELP = _('Please select one or two topics for your project.')
+IDEA_TOPIC_HELP = _('Please select 1-2 topics for your project. '
+                    'Your answer to this question does not '
+                    'influence the selection process. '
+                    'It helps us to get a better overview '
+                    'over the proposals we receive.')
 
 IDEA_LOCATION_CHOICES = (
     ('city', _('City, country or region')),
@@ -39,18 +43,18 @@ IDEA_LOCATION_CHOICES = (
 )
 
 
-IDEA_LOCATION_HELP = _('Please indicate the location of '
-                       'your project. Choose all options '
-                       'that apply. One to three choices possible.')
+IDEA_LOCATION_HELP = _('Where will your idea take place? '
+                       'Choose all options that apply. '
+                       '1-3 choices possible.')
 
 IDEA_LOCATION_SPECIFY_HELP = _('Please specify the city, '
-                               'country and region, e.g. '
-                               'Berlin, Germany')
+                               'country and region, e.g. Berlin, Germany. '
+                               '(max. 100 characters)')
 
-IDEA_LOCATION_RUHR_HELP = _('If you selected Ruhr area, please explain. '
-                            'Is your project connected to the Ruhr area of '
-                            'Germany through project partners, audiences, '
-                            'or in some other way? '
+IDEA_LOCATION_RUHR_HELP = _('Is your project connected to '
+                            'the Ruhr area of Germany '
+                            'through project partners, '
+                            'audiences, or in some other way? '
                             'Please provide further details. '
                             '(max. 200 characters)')
 
@@ -68,6 +72,7 @@ class AbstractIdeaSection(models.Model):
         'idea_image',
         upload_to='ideas/images',
         blank=True,
+        verbose_name=_('Visualise your idea'),
         help_text=IDEA_IMAGE_HELP
     )
     idea_topics = MultiSelectField(
@@ -75,19 +80,27 @@ class AbstractIdeaSection(models.Model):
         choices=IDEA_TOPIC_CHOICES,
         max_choices=2,
         help_text=IDEA_TOPIC_HELP,
+        verbose_name=_('Topic')
     )
-    idea_topics_other = models.CharField(max_length=250, blank=True)
+    idea_topics_other = models.CharField(
+        max_length=250,
+        blank=True,
+        help_text=_('Please specify. (max 250 characters)')
+    )
     idea_location = MultiSelectField(max_length=250,
+                                     verbose_name=_('Location'),
                                      choices=IDEA_LOCATION_CHOICES,
                                      help_text=IDEA_LOCATION_HELP,
                                      max_choices=3)
     idea_location_specify = models.TextField(
         max_length=100,
         blank=True,
+        verbose_name=_('Location details'),
         help_text=IDEA_LOCATION_SPECIFY_HELP)
     idea_location_ruhr = models.TextField(
         max_length=200,
         blank=True,
+        verbose_name=_('Linkage to the Ruhr area'),
         help_text=IDEA_LOCATION_RUHR_HELP)
 
     class Meta:

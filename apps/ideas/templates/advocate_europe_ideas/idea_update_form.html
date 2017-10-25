@@ -12,7 +12,10 @@
             </a>
         </div>
         <form class="wizard custom-form container-narrow" data-safe-form="wizard" method="post" enctype="multipart/form-data" novalidate>
-            <h1>{% trans 'Update idea' %} </h1>
+            <h1>{% trans 'Update idea' %} | {{ form.section_name }}</h1>
+            {% if form.section_description  %}
+            <p>{{ form.section_description }}</p>
+            {% endif %}
 
             <div class="wizard-progress-side">
                 <ul class="wizard-progress">

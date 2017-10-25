@@ -87,7 +87,9 @@ def test_ideasketch_create_wizard(client, user, module):
             'idea_sketch_create_wizard-current_step': '5',
 
             '5-how_did_you_hear': 'personal_contact',
-            '5-accept_conditions': True
+            '5-accept_conditions': True,
+            '5-confirm_publicity': True,
+            '5-confirm_collaboration_camp': True
         }
 
         # Form 7 (Finish)

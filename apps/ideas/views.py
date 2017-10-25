@@ -90,12 +90,13 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
     permission_required = 'advocate_europe_ideas.add_ideasketch'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
-    title = _('Create an idea')
+    title = _('Idea Sketch')
     finish_section_text = _('You can add data or edit your idea later.')
     finish_section_btn = _('Submit your idea!')
 
     def done(self, form_list, **kwargs):
-        special_fields = ['accept_conditions', 'co_workers_emails']
+        special_fields = ['accept_conditions', 'co_workers_emails',
+                          'confirm_publicity', 'confirm_collaboration_camp']
 
         data = self.get_all_cleaned_data()
         idea_sketch = IdeaSketch.objects.create(
@@ -167,6 +168,8 @@ class IdeaDetailView(generic.DetailView):
         idea_list.append((_('What is your impact?'), self.object.outcome))
         idea_list.append((_('How do you get there?'), self.object.plan))
         idea_list.append((_('What is your story?'), self.object.importance))
+        idea_list.append((_('Who are you doing it for?'),
+                          self.object.target_group))
         if self.object.reach_out:
             idea_list.append((_('What do you need from the Advocate Europe '
                                 'community?'), self.object.reach_out))
@@ -250,7 +253,8 @@ class ProposalCreateWizard(PermissionRequiredMixin,
 
         archive.save()
 
-        special_fields = ['accept_conditions', 'co_workers_emails']
+        special_fields = ['accept_conditions', 'co_workers_emails',
+                          'confirm_publicity', 'confirm_collaboration_camp']
         data = self.get_all_cleaned_data()
         proposal = Proposal(
             idea_ptr=self.idea,
