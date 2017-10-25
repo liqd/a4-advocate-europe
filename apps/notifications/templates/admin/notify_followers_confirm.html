@@ -1,0 +1,45 @@
+{% extends "admin/base_site.html" %}
+{% load verbose_name i18n admin_urls %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+&rsaquo; <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+&rsaquo; {% trans 'Send notification' %}
+</div>
+{% endblock %}
+
+{% block content %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% if display_winners %}
+            <h2>Winners Shortlist entries</h2>
+            <div>
+                Notify followers about the success of the idea success for:
+            </div>
+        {% else %}
+            <h2>Shortlist Entries</h2>
+            <div>
+                Notify followers that thier idea is on the shortlist or has won the communit award.
+            </div>
+        {% endif %}
+
+        {% if ideas %}
+        <ul>
+            {% for idea in ideas %}
+                <li>
+                    {{ idea|verbose_name|capfirst }}:
+                    {% if not display_ideas and idea.is_community_award %}
+                       	👑 community award 👑
+                    {% endif %}
+                    <a href="{{ idea.get_absolute_url }}">{{ idea }}</a>
+                    <input type="hidden" name="idea_ids" value="{{ idea.id }}">
+                </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <button type="submit">Send notifications</button>
+    </form>
+{% endblock %}

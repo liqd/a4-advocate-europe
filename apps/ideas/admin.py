@@ -1,16 +1,13 @@
 from django.contrib import admin
 from django.db import models
 
-from apps.notifications import signals
+from apps.notifications import admin as notification_admin
 
 from . import models as idea_models
 
 
 def set_is_on_shortlist_true(modeladmin, request, queryset):
     queryset.update(is_on_shortlist=True)
-    idea = queryset.first()
-    setattr(idea, 'notifyFollowersOnShortlist', True)
-    signals.send_status_notification(sender=None, instance=idea)
 set_is_on_shortlist_true.short_description = 'add to shortlist'
 
 
@@ -21,9 +18,6 @@ set_is_on_shortlist_false.short_description = 'remove from shortlist'
 
 def set_community_award_winner_true(modeladmin, request, queryset):
     queryset.update(community_award_winner=True)
-    idea = queryset.first()
-    setattr(idea, 'notifyFollowersOnCommunityAward', True)
-    signals.send_status_notification(sender=None, instance=idea)
 set_community_award_winner_true.\
     short_description = 'Set to community award winner'
 
@@ -36,9 +30,6 @@ set_community_award_winner_false.\
 
 def set_is_winner_true(modeladmin, request, queryset):
     queryset.update(is_winner=True)
-    idea = queryset.first()
-    setattr(idea, 'notifyFollowersOnWinner', True)
-    signals.send_status_notification(sender=None, instance=idea)
 set_is_winner_true.short_description = 'Set to winner'
 
 
@@ -47,7 +38,7 @@ def set_is_winner_false(modeladmin, request, queryset):
 set_is_winner_false.short_description = 'Unset winner'
 
 
-class IdeaAdmin(admin.ModelAdmin):
+class IdeaAdmin(notification_admin.NotifyMixin, admin.ModelAdmin):
     exclude = ['module']
     raw_id_fields = ('creator', 'co_workers')
     search_fields = ('idea_title',)
@@ -72,7 +63,7 @@ class IdeaAdmin(admin.ModelAdmin):
         set_community_award_winner_true,
         set_community_award_winner_false,
         set_is_winner_true,
-        set_is_winner_false
+        set_is_winner_false,
     ]
     fieldsets = (
         ('Jury Section', {
