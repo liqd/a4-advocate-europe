@@ -1,9 +1,13 @@
 from django import forms
+from django.core.exceptions import ValidationError
+from django.forms.utils import ErrorList
+from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailcore.blocks import (CharBlock, ChoiceBlock, ChooserBlock,
                                         ListBlock, PageChooserBlock,
                                         RichTextBlock, StreamBlock,
                                         StructBlock, TextBlock, URLBlock)
 from wagtail.wagtailimages.blocks import ImageChooserBlock
+
 from adhocracy4.projects.models import Project
 from apps.ideas import filters
 from apps.ideas.models.abstracts import idea_section
@@ -18,14 +22,36 @@ class TeasertextBlock(StructBlock):
     headline = CharBlock(required=True, length=256)
     text = TextBlock(required=True)
     link = PageChooserBlock(required=False)
-    link_text = CharBlock(required=False,
-                          help_text=("Text to be displayed on the link-button."
-                                     "Should be quite short! If not given, the"
-                                     "title of the linked page will be used.")
+    externlink = URLBlock(label=_("External Link"), required=False,
+                          help_text=_("The external link overwrites the "
+                                      "link to a local page. It also "
+                                      "requires a link text.")
                           )
+    link_text = CharBlock(
+                required=False,
+                help_text=_("Text to be displayed on the link-button."
+                            "Should be quite short! If not given, the "
+                            "title of the linked page will be used.")
+                )
 
     class Meta:
         template = 'cms_home/blocks/teasertext_block.html'
+
+    def clean(self, value):
+        result = super().clean(value)
+        errors = {}
+
+        if value['externlink'] and not value['link_text']:
+            errors['link_text'] = ErrorList([
+                'External links require a link text.',
+            ])
+
+        if errors:
+            raise ValidationError(
+                _('External links require a link text.'),
+                params=errors)
+
+        return result
 
 
 class ThreeColumnTextBlock(StructBlock):
