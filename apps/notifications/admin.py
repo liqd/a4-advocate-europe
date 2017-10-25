@@ -1,7 +1,8 @@
 from django.conf.urls import url
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
+from django.template.response import TemplateResponse
 
 from adhocracy4.phases import models as phase_models
 
@@ -36,13 +37,15 @@ class NotifyMixin:
                     'notify winners {}'.format(module.name)
                 ),
             ]
+        return []
 
     @property
     def latest_module(self):
-        return phase_models.Phase.objects\
+        phase = phase_models.Phase.objects\
                                  .past_and_active_phases()\
-                                 .last()\
-                                 .module
+                                 .last()
+        if phase:
+            return phase.module
 
     def get_urls(self):
         return [
@@ -104,7 +107,7 @@ class NotifyMixin:
             }
             context.update(self.admin_site.each_context(request))
 
-            return render(
+            return TemplateResponse(
                 request,
                 [
                     'admin/{}/notify_followers_confirm.html'.format(
