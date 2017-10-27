@@ -30,7 +30,7 @@ def test_notify_shortlist(
         client, admin, module, idea_sketch_factory, idea_follow_factory
 ):
     """
-    Send notifications to all winners.
+    Send notifications to shortlist
     """
 
     idea_sketch_factory(module=module)
