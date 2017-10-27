@@ -100,6 +100,11 @@ module.exports = {
         from: './advocate_europe/assets/images/**/*',
         to: 'images/',
         flatten: true
+      },
+      {
+        from: './advocate_europe/assets/icons/**/*',
+        to: 'icons/',
+        flatten: true
       }
     ])
   ]
