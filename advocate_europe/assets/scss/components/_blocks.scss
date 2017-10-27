@@ -194,13 +194,13 @@
     }
 
     .three-image-block-image-container {
-        height: 30px;
+        height: rem(30px);
         display: flex;
         justify-content: flex-end;
         flex-direction: column;
 
-        @media screen and (max-width: $screen-sm-min) {
-            height: 50px;
+        @media screen and (max-width: $screen-md-max) {
+            height: rem(50px);
         }
 
         img {
