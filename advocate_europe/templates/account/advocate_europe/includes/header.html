@@ -5,10 +5,10 @@
 <header>
     <ul class="nav nav-tabs tabs login-register-tabs" role="tablist">
         <li role="presentation" class="nav-item {% if request.path == account_login_url %}active{% endif %}">
-            <a href="{{ account_login_url }}?next={{ redirect_field_value }}">{% trans "login" %}</a>
+            <a href="{{ account_login_url }}?next={{ redirect_field_value|urlencode }}">{% trans "login" %}</a>
         </li>
         <li role="presentation" class="nav-item {% if request.path == account_signup_url %}active{% endif %}">
-            <a href="{{ account_signup_url }}?next={{ redirect_field_value }}">{% trans "register" %}</a>
+            <a href="{{ account_signup_url }}?next={{ redirect_field_value|urlencode }}">{% trans "register" %}</a>
         </li>
     </ul>
 </header>
