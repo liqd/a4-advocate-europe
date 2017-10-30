@@ -9,17 +9,6 @@ from apps.ideas.models import Idea
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-
-        # for file in os.listdir(path):
-            # filename, extension = os.path.splitext(file)
-            # if not extension:
-                # self.stdout.write(path+file+' --> '+path+file+'.jpg')
-                # os.rename(path+file, path+file+'.jpg')
-
-        # os.rename(model.direct_file.path, new_path)
-        # model.direct_file.name = new_name
-        # model.save()
-
         ideas = Idea.objects.all()
         mime = Magic(mime=True)
         filetypes = {
