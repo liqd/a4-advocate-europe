@@ -34,7 +34,7 @@
                 <li>
                     <form class="user-indicator-logout-form" action="{% url 'account_logout' %}" method="post" >
                         {% csrf_token %}
-                        <input type="hidden" name="next" value="{{ redirect_field_value }}">
+                        <input type="hidden" name="next" value="{{ redirect_field_value|urlencode }}">
                         <button type="submit" value="Register">
                             <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>{% trans "logout" %}
                         </button>
