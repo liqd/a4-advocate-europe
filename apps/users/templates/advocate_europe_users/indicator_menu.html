@@ -46,8 +46,8 @@
     {% else %}
     <li>
         <div class="login-register-btn-group">
-            <a class="btn btn-default" href="{% url 'account_login' %}?next={{redirect_field_value }}">{% trans "login" %}</a>
-            <a class="btn btn-primary" href="{% url 'account_signup' %}?next={{redirect_field_value }}">{% trans "register" %}</a>
+            <a class="btn btn-default" href="{% url 'account_login' %}?next={{redirect_field_value|urlencode }}">{% trans "login" %}</a>
+            <a class="btn btn-primary" href="{% url 'account_signup' %}?next={{redirect_field_value|urlencode }}">{% trans "register" %}</a>
         </div>
     </li>
     {% endif %}
