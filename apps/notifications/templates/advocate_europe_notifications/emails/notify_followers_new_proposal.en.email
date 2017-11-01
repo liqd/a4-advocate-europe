@@ -1,26 +1,25 @@
-{% extends 'email_base.'|add:part_type %}
+{% extends 'advocate_europe_notifications/emails/follow.en.email' %}
 {% load verbose_name %}
 
 {% block subject %}
-A {{ action.obj | verbose_name }} was added.
+Idea sketch was made into a proposal.
 {% endblock %}
 
 {% block headline %}
-A {{ action.obj | verbose_name }} was created by {{ action.actor.username }}.
+The idea sketch "{{ action.obj.idea_sketch_archived.idea_title }}" was extended
+to a proposal.
 {% endblock %}
 
 {% block content %}
-A {{ action.obj | verbose_name }} was added to {{ action.obj.idea }}{% if action.obj.idea.title %} <i>{{ action.obj.idea.title }}</i>{% endif %}.
+The idea "{{ action.obj.idea_sketch_archived.idea_title }}" was extended to a
+proposal. It is now competing in the final round of the {{ site.name }}
+{{ action.obj.module.name }} competition.
 {% endblock %}
 
 {% block cta_url %}
-{% if action.obj.idea.get_absolute_url %}{{ email.get_host }}{{ action.obj.idea.get_absolute_url }}{% else %}{{ email.get_host }}{{ action.project.get_absolute_url }}{% endif %}
+{{ email.get_host }}{{ action.obj.idea.get_absolute_url }}
 {% endblock %}
 
 {% block cta_label %}
-Visit the project
-{% endblock %}
-
-{% block reason %}
-This email was sent to {{ receiver }}. This email was sent to you because you follow a project. If you don’t want to receive these notifications anymore, you can unfollow the project on the project page or disable notifications completely in your account settings.
+Visit the proposal
 {% endblock %}
