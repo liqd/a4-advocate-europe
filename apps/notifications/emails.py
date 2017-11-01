@@ -13,15 +13,6 @@ def _exclude_actor(receivers, actor):
     return [receiver for receiver in receivers if not receiver == actor]
 
 
-def _exclude_moderators(receivers, action):
-    if hasattr(action, 'project'):
-        moderator_ids = action.project.moderators.values_list('id', flat=True)
-
-        return [user for user in receivers if user.id not in moderator_ids]
-
-    return receivers
-
-
 def _exclude_notifications_disabled(receivers):
     if hasattr(receivers, 'filter'):
         return receivers.filter(get_notifications=True)
@@ -68,7 +59,6 @@ class NotifyFollowers(emails.UserNotification):
 
         receivers = _exclude_notifications_disabled(receivers)
         receivers = _exclude_actor(receivers, action.actor)
-        receivers = _exclude_moderators(receivers, action)
 
         if hasattr(action.target, 'creator'):
             # As the creator of an idea or comment already gets
