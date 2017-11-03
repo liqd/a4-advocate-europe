@@ -3,7 +3,7 @@
 
 {% block reason %}
 This email was sent to {{ receiver }}. This email was sent to you because you
-watch a {{ action.object|verbose_name }}. If you don’t want to receive these
-notifications anymore, you can unwatch the {{ action.object|verbose_name }}
+watch an idea. If you don’t want to receive these
+notifications anymore, you can unwatch the idea
 or disable notifications completely in your account settings.
 {% endblock %}

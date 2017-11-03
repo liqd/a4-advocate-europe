@@ -112,7 +112,8 @@ class NotifyFollowersOnNewProposal(NotifyFollowers):
 
 
 class NotifyFollowersOnNewJourney(NotifyFollowersOnNewProposal):
-    pass
+    template_name = \
+        'advocate_europe_notifications/emails/notify_followers_new_journey'
 
 
 class NotifyFollowersOnWinner(emails.UserNotification):

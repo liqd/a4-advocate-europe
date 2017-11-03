@@ -2,16 +2,16 @@
 {% load verbose_name %}
 
 {% block subject %}
-"{{ action.object.idea_title }}" has won.
+"{{ action.obj.idea_title }}" has won.
 {% endblock %}
 
 {% block headline %}
-The proposal "{{ action.object.idea_title }}" has won.
+The proposal "{{ action.obj.idea_title }}" has won.
 {% endblock %}
 
 {% block content %}
-The proposal "{{ action.object.idea_title }}" has won the {{ site.name }}
-{{ action.object.module.name }} contest. It was choosen by the jury as one of
+The proposal "{{ action.obj.idea_title }}" has won the {{ site.name }}
+{{ action.obj.module.name }} contest. It was choosen by the jury as one of
 best proposals. You can now follow the implementation of the proposal on the
 project journey.
 {% endblock %}
