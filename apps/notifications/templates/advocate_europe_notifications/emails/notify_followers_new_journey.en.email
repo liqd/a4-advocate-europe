@@ -1,17 +1,18 @@
 {% extends 'advocate_europe_notifications/emails/follow.en.email' %}
+{% load verbose_name %}
 
 {% block subject %}
-Idea sketch was made into a proposal.
+A new journey entry was added to a proposal.
 {% endblock %}
 
 {% block headline %}
-The idea sketch "{{ action.obj.idea_sketch_archived.idea_title }}" was extended
-to a proposal.
+The journey entry "{{ action.obj.title }}" was added.
 {% endblock %}
 
 {% block content %}
-The idea "{{ action.obj.idea_sketch_archived.idea_title }}" was extended to a
-proposal. It is now competing in the final round of the {{ site.name }}
+The team behind the proposal "{{ action.obj.idea.idea_title }}"
+provided new updates about thier project. Read about the progress in thier
+newest journey entry "{{ action.object.title }}".
 {{ action.obj.module.name }} competition.
 {% endblock %}
 
@@ -20,5 +21,5 @@ proposal. It is now competing in the final round of the {{ site.name }}
 {% endblock %}
 
 {% block cta_label %}
-Visit the proposal
+Visit the project journey
 {% endblock %}

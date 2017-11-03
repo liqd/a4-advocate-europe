@@ -1,5 +1,4 @@
 {% extends 'advocate_europe_notifications/emails/follow.en.email' %}
-{% load verbose_name %}
 
 {% block subject %}
 "{{ idea.idea_title }}" has won the community award.
@@ -10,7 +9,7 @@ The idea "{{ idea.idea_title }}" has won the community award.
 {% endblock %}
 
 {% block content %}
-{% if idea.creator == receiver %}The idea "{{ idea.idea_title }}" is the
+The idea "{{ idea.idea_title }}" is the
 community award winner of the {{ site.name }} {{ idea.module.name }} competition.
 The team behind the idea is now invited to the collaboration camp, where they
 can meet other inovators and team up to increase thier changes. Afterwards they
