@@ -6,17 +6,19 @@
 
 {% block content %}
     {% force_translation 'en' %}
-        <div class="idealist">
-            <div class="idealist-title text-center">
-                <h1>{% trans "All ideas" %}</h1>
-                {% if view.active_phase %}
-                <h4 class="idealist-subtitle">{{ view.active_phase.name }}</h4>
-                {% else %}
-                <h4 class="idealist-subtitle">{% trans "Ideas from past idea challenges" %}</h4>
-                {% endif %}
-            </div>
-            <div class="container idealist-content">
-                <div class="row equal">
+    <div class="custompage">
+            <div class="container">
+                <header class="custompage-header">
+                    <h1>{% trans "All ideas" %}</h1>
+                    <p>
+                        {% if view.active_phase %}
+                            {{ view.active_phase.name }}
+                        {% else %}
+                            {% trans "Ideas from past idea challenges" %}
+                        {% endif %}
+                    </p>
+                </header>
+                <div class="row equal idealist-content">
                     <div class="col-md-3 col-sm-3 col-xs-12 idealist-controls">
                         <div class="filter-bar idealist-filter clearfix">
                             <div class="hidden-xs">
