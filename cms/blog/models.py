@@ -22,6 +22,7 @@ class BlogIndexPage(Page):
         on_delete=models.SET_NULL,
         related_name='+',
     )
+    subtitle = models.CharField(max_length=200)
 
     subpage_types = ['cms_blog.BlogPage']
 
@@ -59,6 +60,7 @@ class BlogIndexPage(Page):
 
     content_panels = [
         FieldPanel('title'),
+        FieldPanel('subtitle'),
         PageChooserPanel('featured_page'),
     ]
 
