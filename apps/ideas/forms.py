@@ -281,6 +281,7 @@ class SelectionCriteriaSectionForm(BaseForm):
 
 class FinanceAndDurationSectionForm(BaseForm):
     section_name = _('Finances and Duration')
+    budget_requested = forms.IntegerField(max_value=50000)
 
     class Meta:
         model = AbstractFinanceAndDurationSection
@@ -292,6 +293,15 @@ class FinanceAndDurationSectionForm(BaseForm):
             'other_sources_secured',
             'duration'
         ]
+
+    def clean(self):
+        if ('budget_requested' in self.cleaned_data and
+           'total_budget' in self.cleaned_data):
+            if (self.cleaned_data['budget_requested'] >
+                    self.cleaned_data['total_budget']):
+                raise ValidationError(_("Requested Budget can't be "
+                                        "higher than your total budget"))
+        return self.cleaned_data
 
 
 class CommunitySectionEditForm(CoWorkersEmailsFormMixin, BaseForm):
