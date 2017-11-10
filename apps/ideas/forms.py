@@ -322,8 +322,8 @@ class FinanceAndDurationSectionForm(BaseForm):
            'total_budget' in self.cleaned_data):
             if (self.cleaned_data['budget_requested'] >
                     self.cleaned_data['total_budget']):
-                raise ValidationError(_("Requested Budget can't be "
-                                        "higher than your total budget"))
+                raise ValidationError(_("The requested budget can't be "
+                                        "higher than the total budget"))
 
         if self.cleaned_data['other_sources']:
             if self.cleaned_data['other_sources_secured'] is None:
