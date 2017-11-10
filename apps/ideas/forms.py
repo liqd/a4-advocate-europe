@@ -118,6 +118,18 @@ class ApplicantSectionForm(BaseForm):
             'year_of_registration'
         ]
 
+    def clean(self):
+        if ('organisation_status' in self.cleaned_data and
+           self.cleaned_data['organisation_status'] == 'other'):
+                if not self.cleaned_data['organisation_status_extra']:
+                    raise ValidationError({'organisation_status_extra':
+                                          _("You selected 'other' as "
+                                            "organisation status. "
+                                            "Please provide more information "
+                                            "about your current status.")})
+
+        return self.cleaned_data
+
 
 class PartnersSectionForm(BaseForm):
     section_name = _('Partners')
@@ -177,6 +189,16 @@ class IdeaSectionForm(BaseForm):
             'idea_location_specify',
             'idea_location_ruhr'
         ]
+
+    def clean(self):
+        if ('idea_location' in self.cleaned_data and
+                'ruhr_linkage' in self.cleaned_data['idea_location']):
+            if not self.cleaned_data['idea_location_ruhr']:
+                raise ValidationError({'idea_location_ruhr':
+                                      _('You indicated that your idea has a '
+                                       'linkage to the Ruhr area of Germany. '
+                                        'Please specify.')})
+        return self.cleaned_data
 
 
 class ImpactSectionForm(BaseForm):
@@ -281,7 +303,8 @@ class SelectionCriteriaSectionForm(BaseForm):
 
 class FinanceAndDurationSectionForm(BaseForm):
     section_name = _('Finances and Duration')
-    budget_requested = forms.IntegerField(max_value=50000)
+    budget_requested = forms.IntegerField(max_value=50000, min_value=0)
+    total_budget = forms.IntegerField(min_value=0)
 
     class Meta:
         model = AbstractFinanceAndDurationSection
@@ -301,6 +324,15 @@ class FinanceAndDurationSectionForm(BaseForm):
                     self.cleaned_data['total_budget']):
                 raise ValidationError(_("Requested Budget can't be "
                                         "higher than your total budget"))
+
+        if self.cleaned_data['other_sources']:
+            if self.cleaned_data['other_sources_secured'] is None:
+                raise ValidationError({'other_sources_secured':
+                                      _('You indicated that you have '
+                                        'other sources of income for '
+                                        'your activity or initiative. '
+                                        'Please also indicate whether '
+                                        'those sources are secured or not.')})
         return self.cleaned_data
 
 
