@@ -48,7 +48,7 @@ def test_ideasketch_create_wizard(client, user, module):
             '2-idea_title': 'My very good idea',
             '2-idea_pitch': 'My very good idea is such a good idea!',
             '2-idea_topics': 'education',
-            '2-idea_location': 'ruhr_linkage',
+            '2-idea_location': 'online'
         }
 
         # Form 4 (Impact)
@@ -108,7 +108,7 @@ def test_ideasketch_create_wizard(client, user, module):
         assert IdeaSketch.objects.all().count() == 1
         assert my_idea_sketch.first_name == 'Qwertz'
         assert (my_idea_sketch.get_idea_location_display() ==
-                'Linkage to the Ruhr area of Germany')
+                'Online')
         assert my_idea_sketch.target_group == 'Children'
         assert my_idea_sketch.collaboration_camp_option == 'not_sure'
         assert mail.outbox[0].subject.startswith(

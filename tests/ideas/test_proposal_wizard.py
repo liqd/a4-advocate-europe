@@ -163,8 +163,8 @@ def test_proposal_co_worker_create_wizard(client, idea_sketch_factory,
             '5-total_budget': 6000,
             '5-budget_requested': 5000,
             '5-major_expenses': 'Lorem ipsum ...',
-            '5-other_sources': 1,
-            '5-other_sources_secured': 1,
+            '5-other_sources': True,
+            '5-other_sources_secured': True,
             '5-duration': 24
         }
 
