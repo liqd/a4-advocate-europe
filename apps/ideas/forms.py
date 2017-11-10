@@ -119,16 +119,17 @@ class ApplicantSectionForm(BaseForm):
         ]
 
     def clean(self):
-        if ('organisation_status' in self.cleaned_data and
-           self.cleaned_data['organisation_status'] == 'other'):
-                if not self.cleaned_data['organisation_status_extra']:
-                    raise ValidationError({'organisation_status_extra':
-                                          _("You selected 'other' as "
-                                            "organisation status. "
-                                            "Please provide more information "
-                                            "about your current status.")})
-
-        return self.cleaned_data
+        cleaned_data = super().clean()
+        organisation_status = cleaned_data.get('organisation_status')
+        organisation_status_extra = cleaned_data.get(
+            'organisation_status_extra')
+        if organisation_status and organisation_status == 'other':
+                if not organisation_status_extra:
+                    self.add_error('organisation_status_extra',
+                                   _("You selected 'other' as "
+                                     "organisation status. "
+                                     "Please provide more information "
+                                     "about your current status."))
 
 
 class PartnersSectionForm(BaseForm):
@@ -191,14 +192,16 @@ class IdeaSectionForm(BaseForm):
         ]
 
     def clean(self):
-        if ('idea_location' in self.cleaned_data and
-                'ruhr_linkage' in self.cleaned_data['idea_location']):
-            if not self.cleaned_data['idea_location_ruhr']:
-                raise ValidationError({'idea_location_ruhr':
-                                      _('You indicated that your idea has a '
-                                       'linkage to the Ruhr area of Germany. '
-                                        'Please specify.')})
-        return self.cleaned_data
+        cleaned_data = super().clean()
+        idea_location = cleaned_data.get('idea_location')
+        idea_location_ruhr = cleaned_data.get('idea_location_ruhr')
+
+        if idea_location and 'ruhr_linkage' in idea_location:
+            if not idea_location_ruhr:
+                self.add_error('idea_location_ruhr',
+                               _('You indicated that your idea has a '
+                                 'linkage to the Ruhr area of Germany. '
+                                 'Please specify.'))
 
 
 class ImpactSectionForm(BaseForm):
@@ -318,22 +321,25 @@ class FinanceAndDurationSectionForm(BaseForm):
         ]
 
     def clean(self):
-        if ('budget_requested' in self.cleaned_data and
-           'total_budget' in self.cleaned_data):
-            if (self.cleaned_data['budget_requested'] >
-                    self.cleaned_data['total_budget']):
-                raise ValidationError(_("The requested budget can't be "
-                                        "higher than the total budget"))
+        cleaned_data = super().clean()
+        budget_requested = cleaned_data.get('budget_requested')
+        total_budget = cleaned_data.get('total_budget')
+        other_sources = cleaned_data.get('other_sources')
+        other_sources_secured = cleaned_data.get('other_sources_secured')
 
-        if self.cleaned_data['other_sources']:
-            if self.cleaned_data['other_sources_secured'] is None:
-                raise ValidationError({'other_sources_secured':
-                                      _('You indicated that you have '
-                                        'other sources of income for '
-                                        'your activity or initiative. '
-                                        'Please also indicate whether '
-                                        'those sources are secured or not.')})
-        return self.cleaned_data
+        if budget_requested and total_budget:
+            if budget_requested > total_budget:
+                self.add_error('__all__', _("The requested budget can't be "
+                                            "higher than the total budget"))
+
+        if other_sources:
+            if other_sources_secured is None:
+                self.add_error('other_sources_secured',
+                               _('You indicated that you have '
+                                 'other sources of income for '
+                                 'your activity or initiative. '
+                                 'Please also indicate whether '
+                                 'those sources are secured or not.'))
 
 
 class CommunitySectionEditForm(CoWorkersEmailsFormMixin, BaseForm):
