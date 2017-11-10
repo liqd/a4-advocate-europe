@@ -94,6 +94,11 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
     finish_section_text = _('You can add data or edit your idea later.')
     finish_section_btn = _('Submit your idea!')
 
+    def get_form_kwargs(self, step=None):
+        if step == '5':
+            return {'display_communication_camp_checkbox': True}
+        return {}
+
     def done(self, form_list, **kwargs):
         special_fields = ['accept_conditions', 'co_workers_emails',
                           'confirm_publicity', 'confirm_collaboration_camp']
@@ -227,6 +232,11 @@ class ProposalCreateWizard(PermissionRequiredMixin,
     title = _('create a proposal')
     finish_section_text = _('You can add data or edit your proposal later.')
     finish_section_btn = _('Submit your proposal!')
+
+    def get_form_kwargs(self, step=None):
+        if step == '6':
+            return {'display_communication_camp_checkbox': False}
+        return {}
 
     def get_form_initial(self, step):
         initial = self.initial_dict.get(step, {})

@@ -240,6 +240,8 @@ class CommunitySectionForm(CoWorkersEmailsFormMixin, BaseForm):
         label=CONFIRM_COLLABORATION_CAMP_WITHOUT_DATE)
 
     def __init__(self, *args, **kwargs):
+        self.display_communication_camp_section = \
+            kwargs.pop('display_communication_camp_checkbox')
         super().__init__(*args, **kwargs)
         self.fields['accept_conditions'].label = helpers.add_link_to_helptext(
             self.fields['accept_conditions'].label, "terms_of_use_page")
@@ -248,6 +250,8 @@ class CommunitySectionForm(CoWorkersEmailsFormMixin, BaseForm):
             self.fields['confirm_collaboration_camp'].label = \
                 CONFIRM_COLLABORATION_CAMP_WITH_DATE.format(
                     settings.start_date, settings.end_date)
+        if not self.display_communication_camp_section:
+            del self.fields['confirm_collaboration_camp']
 
     class Meta:
         model = AbstractCommunitySection
