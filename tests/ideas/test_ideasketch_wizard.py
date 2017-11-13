@@ -27,11 +27,29 @@ def test_ideasketch_create_wizard(client, user, module):
 
             '0-first_name': 'Qwertz',
             '0-last_name': 'Uiopü',
-            '0-organisation_status': 'no_non_profit',
+            '0-organisation_status': 'other',
+        }
+
+        response = client.post(url, data)
+        assert response.context['form'].errors == {'organisation_status_extra':
+                                                   ["You selected 'other' as "
+                                                    "organisation status. "
+                                                    "Please provide more "
+                                                    "information about your "
+                                                    "current status."]}
+        assert response.status_code == 200
+
+        data = {
+            'idea_sketch_create_wizard-current_step': '0',
+            '0-organisation_status_extra': 'We are great',
+            '0-first_name': 'Qwertz',
+            '0-last_name': 'Uiopü',
+            '0-organisation_status': 'other',
         }
 
         # Form 2 (Partners)
         response = client.post(url, data)
+        assert response.context['form'].errors == {}
         assert response.status_code == 200
 
         data = {
@@ -48,16 +66,37 @@ def test_ideasketch_create_wizard(client, user, module):
             '2-idea_title': 'My very good idea',
             '2-idea_pitch': 'My very good idea is such a good idea!',
             '2-idea_topics': 'education',
+            '2-idea_location': 'ruhr_linkage'
+        }
+
+        response = client.post(url, data)
+        assert response.context['form'].errors == {'idea_location_ruhr':
+                                                   ['You indicated '
+                                                    'that your idea '
+                                                    'has a linkage to '
+                                                    'the Ruhr area '
+                                                    'of Germany. '
+                                                    'Please specify.']}
+
+        assert response.status_code == 200
+
+        data = {
+            'idea_sketch_create_wizard-current_step': '2',
+
+            '2-idea_title': 'My very good idea',
+            '2-idea_pitch': 'My very good idea is such a good idea!',
+            '2-idea_topics': 'education',
             '2-idea_location': 'ruhr_linkage',
+            '2-idea_location_ruhr': 'Our project will take place in Essen'
         }
 
         # Form 4 (Impact)
         response = client.post(url, data)
+        assert response.context['form'].errors == {}
         assert response.status_code == 200
 
         data = {
             'idea_sketch_create_wizard-current_step': '3',
-
             '3-challenge': 'Balance a ball on your nose',
             '3-outcome': 'I balanced a ball on my nose',
             '3-plan': 'I will balance a ball on my nose',

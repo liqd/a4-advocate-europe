@@ -161,10 +161,41 @@ def test_proposal_co_worker_create_wizard(client, idea_sketch_factory,
         data = {
             'proposal_create_wizard-current_step': '5',
             '5-total_budget': 6000,
-            '5-budget_requested': 5000,
+            '5-budget_requested': 7000,
             '5-major_expenses': 'Lorem ipsum ...',
-            '5-other_sources': 1,
+            '5-other_sources': 'on',
             '5-other_sources_secured': 1,
+            '5-duration': 24
+        }
+
+        response = client.post(url, data)
+        assert response.status_code == 200
+        assert response.context['form'].errors == {'__all__':
+                                                   ["The requested "
+                                                    "budget can't "
+                                                    "be higher than "
+                                                    "the total "
+                                                    "budget"],
+                                                   'other_sources_secured':
+                                                   ['You indicated '
+                                                    'that you have '
+                                                    'other sources '
+                                                    'of income for '
+                                                    'your activity '
+                                                    'or initiative. '
+                                                    'Please also indicate '
+                                                    'whether '
+                                                    'those sources are '
+                                                    'secured or not.']
+                                                   }
+
+        data = {
+            'proposal_create_wizard-current_step': '5',
+            '5-total_budget': 8000,
+            '5-budget_requested': 7000,
+            '5-major_expenses': 'Lorem ipsum ...',
+            '5-other_sources': True,
+            '5-other_sources_secured': True,
             '5-duration': 24
         }
 
@@ -173,6 +204,7 @@ def test_proposal_co_worker_create_wizard(client, idea_sketch_factory,
         assert response.status_code == 200
         wizard = response.context['wizard']
         assert wizard['steps'].step1 == 7
+        assert response.context['form'].errors == {}
 
         for field, value in wizard['form'].initial.items():
             assert value == getattr(idea_sketch, field)

@@ -118,6 +118,19 @@ class ApplicantSectionForm(BaseForm):
             'year_of_registration'
         ]
 
+    def clean(self):
+        cleaned_data = super().clean()
+        organisation_status = cleaned_data.get('organisation_status')
+        organisation_status_extra = cleaned_data.get(
+            'organisation_status_extra')
+        if organisation_status and organisation_status == 'other':
+                if not organisation_status_extra:
+                    self.add_error('organisation_status_extra',
+                                   _("You selected 'other' as "
+                                     "organisation status. "
+                                     "Please provide more information "
+                                     "about your current status."))
+
 
 class PartnersSectionForm(BaseForm):
     section_name = _('Partners')
@@ -177,6 +190,18 @@ class IdeaSectionForm(BaseForm):
             'idea_location_specify',
             'idea_location_ruhr'
         ]
+
+    def clean(self):
+        cleaned_data = super().clean()
+        idea_location = cleaned_data.get('idea_location')
+        idea_location_ruhr = cleaned_data.get('idea_location_ruhr')
+
+        if idea_location and 'ruhr_linkage' in idea_location:
+            if not idea_location_ruhr:
+                self.add_error('idea_location_ruhr',
+                               _('You indicated that your idea has a '
+                                 'linkage to the Ruhr area of Germany. '
+                                 'Please specify.'))
 
 
 class ImpactSectionForm(BaseForm):
@@ -285,6 +310,8 @@ class SelectionCriteriaSectionForm(BaseForm):
 
 class FinanceAndDurationSectionForm(BaseForm):
     section_name = _('Finances and Duration')
+    budget_requested = forms.IntegerField(max_value=50000, min_value=0)
+    total_budget = forms.IntegerField(min_value=0)
 
     class Meta:
         model = AbstractFinanceAndDurationSection
@@ -296,6 +323,27 @@ class FinanceAndDurationSectionForm(BaseForm):
             'other_sources_secured',
             'duration'
         ]
+
+    def clean(self):
+        cleaned_data = super().clean()
+        budget_requested = cleaned_data.get('budget_requested')
+        total_budget = cleaned_data.get('total_budget')
+        other_sources = cleaned_data.get('other_sources')
+        other_sources_secured = cleaned_data.get('other_sources_secured')
+
+        if budget_requested and total_budget:
+            if budget_requested > total_budget:
+                self.add_error('__all__', _("The requested budget can't be "
+                                            "higher than the total budget"))
+
+        if other_sources:
+            if other_sources_secured is None:
+                self.add_error('other_sources_secured',
+                               _('You indicated that you have '
+                                 'other sources of income for '
+                                 'your activity or initiative. '
+                                 'Please also indicate whether '
+                                 'those sources are secured or not.'))
 
 
 class CommunitySectionEditForm(CoWorkersEmailsFormMixin, BaseForm):
