@@ -73,7 +73,7 @@ def test_ideasketch_create_wizard(client, user, module):
         assert response.context['form'].errors == {'idea_location_ruhr':
                                                    ['You indicated '
                                                     'that your idea '
-                                                    'has a linkage to '
+                                                    'links to '
                                                     'the Ruhr area '
                                                     'of Germany. '
                                                     'Please specify.']}
@@ -147,9 +147,8 @@ def test_ideasketch_create_wizard(client, user, module):
         assert IdeaSketch.objects.all().count() == 1
         assert my_idea_sketch.first_name == 'Qwertz'
         assert (my_idea_sketch.get_idea_location_display() ==
-                'Linkage to the Ruhr area of Germany')
+                'Links to the Ruhr area of Germany')
         assert my_idea_sketch.target_group == 'Children'
-        assert my_idea_sketch.collaboration_camp_option == 'not_sure'
         assert mail.outbox[0].subject.startswith(
             'You have sucessfully submitted your Idea Sketch to'
         )
