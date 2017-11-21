@@ -12,7 +12,7 @@
                     <h1>{% trans "All ideas" %}</h1>
                     <p>
                         {% if view.active_phase %}
-                            {{ view.active_phase.name }}
+                            {{ view.active_phase.description }}
                         {% else %}
                             {% trans "Ideas from past idea challenges" %}
                         {% endif %}
