@@ -12,7 +12,7 @@ HOW_DID_YOU_HEAR_TITLE = _('How did you hear about '
                            'Advocate Europe?')
 HOW_DID_YOU_HEAR_CHOICES = (
     ('personal_contact', _('Personal contact')),
-    ('websites', _('Websites')),
+    ('websites', _('Website')),
     ('facebook', _('Facebook')),
     ('twitter', _('Twitter')),
     ('newsletter', _('Newsletter')),

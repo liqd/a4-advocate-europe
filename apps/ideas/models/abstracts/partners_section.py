@@ -64,6 +64,7 @@ class AbstractPartnersSection(models.Model):
     partners_more_info = models.TextField(
         blank=True,
         max_length=200,
+        verbose_name='More information',
         help_text=PARTNERS_MORE_INFO_HELP
     )
 
