@@ -30,29 +30,28 @@ CONFIRM_PUBLICITY_LABEL = _('I hereby confirm and agree that '
 ACCEPT_CONDITIONS_LABEL = _('I hereby agree to the terms'
                             ' and conditions of the Advocate'
                             ' Europe idea challenge.')
-CONFIRM_COLLABORATION_CAMP_WITH_DATE = _('If selected, I commit to joining '
+CONFIRM_COLLABORATION_CAMP_WITH_DATE = _('If selected, a representative of '
+                                         'my project will commit to joining '
                                          'the Collaboration Camp '
                                          'from {} to {}.')
-CONFIRM_COLLABORATION_CAMP_WITHOUT_DATE = _('If selected, I commit to joining '
-                                            'the Collaboration Camp.')
+CONFIRM_COLLABORATION_CAMP_WITHOUT_DATE = _('If selected, a representative '
+                                            'of my project will commit '
+                                            'to joining the Collaboration '
+                                            'Camp at the end of April 2018.')
 
 COWORKERS_TITLE = _('Please add your team members here.')
-COWORKERS_HELP = _('Here you can insert the email addresses '
-                   'of up to 5 team members. Each of the named '
-                   'team members will receive an email '
-                   'inviting them to register on '
-                   'the Advocate Europe website. '
-                   'After registering they will appear with '
-                   'their user name on your idea page '
-                   'and will be able to edit your idea. ')
+COWORKERS_HELP = _('Here you can insert the email addresses of '
+                   'up to 5 team members. They will receive an email '
+                   'inviting them to register on the Advocate '
+                   'Europe website. After registering they '
+                   'will appear with their user name on your idea '
+                   'page and will be able to edit your idea. ')
 
 COWORKERS_EDIT_TITLE = _('Your team members')
 
-CHALLENGE_LINK_TEXT = _('Please look {}here{} for more '
-                        'information about the annual theme.')
 COLLABORATION_CAMP_OPTION_LINK = _('More information about '
-                                   'the collaboration camp and '
-                                   'the two tracks is available {}here{}.')
+                                   'the {}Collaboration Camp{}. '
+                                   '(max. 150 characters)')
 
 
 class BaseForm(forms.ModelForm):
@@ -101,7 +100,7 @@ class CoWorkersEmailsFormMixin:
 
 
 class ApplicantSectionForm(BaseForm):
-    section_name = _('Applicant')
+    section_name = _('About You')
 
     class Meta:
         model = AbstractApplicantSection
@@ -130,6 +129,18 @@ class ApplicantSectionForm(BaseForm):
                                      "organisation status. "
                                      "Please provide more information "
                                      "about your current status."))
+
+    def __init__(self, *args, **kwargs):
+        self.end_date = kwargs.pop('end_date')
+        super().__init__(*args, **kwargs)
+        if self.end_date:
+            self.section_description = _('Applications may be submitted, '
+                                         'in English only, until {}. '
+                                         'After publishing, '
+                                         'you can continue to edit '
+                                         'all the fields '
+                                         'of your application right up to {}.'
+                                         .format(self.end_date, self.end_date))
 
 
 class PartnersSectionForm(BaseForm):
@@ -195,12 +206,21 @@ class IdeaSectionForm(BaseForm):
         cleaned_data = super().clean()
         idea_location = cleaned_data.get('idea_location')
         idea_location_ruhr = cleaned_data.get('idea_location_ruhr')
+        idea_location_specify = cleaned_data.get('idea_location_specify')
 
         if idea_location and 'ruhr_linkage' in idea_location:
             if not idea_location_ruhr:
                 self.add_error('idea_location_ruhr',
-                               _('You indicated that your idea has a '
-                                 'linkage to the Ruhr area of Germany. '
+                               _('You indicated that your idea '
+                                 'links to the Ruhr area of Germany. '
+                                 'Please specify.'))
+
+        if idea_location and 'city' in idea_location:
+            if not idea_location_specify:
+                self.add_error('idea_location_specify',
+                               _('You indicated that your idea '
+                                 'will take place in a city, '
+                                 'country and/or region. '
                                  'Please specify.'))
 
 
@@ -220,14 +240,9 @@ class ImpactSectionForm(BaseForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['outcome'].help_text = helpers.add_link_to_helptext(
-            self.fields['outcome'].help_text, "annual_theme_help_page")
         self.fields['challenge'].help_text = helpers.add_link_to_helptext(
             self.fields['challenge'].help_text,
-            "annual_theme_help_page",
-            CHALLENGE_LINK_TEXT)
-        self.fields['plan'].help_text = helpers.add_link_to_helptext(
-            self.fields['plan'].help_text, "annual_theme_help_page")
+            "annual_theme_help_page")
 
 
 class CollaborationCampSectionForm(BaseForm):
@@ -236,9 +251,7 @@ class CollaborationCampSectionForm(BaseForm):
     class Meta:
         model = AbstractCollaborationCampSection
         fields = [
-            'collaboration_camp_option',
             'collaboration_camp_represent',
-            'collaboration_camp_email',
             'collaboration_camp_benefit'
         ]
 
@@ -247,9 +260,9 @@ class CollaborationCampSectionForm(BaseForm):
         if helpers.get_collaboration_camp_settings().description:
             self.section_description = \
                 helpers.get_collaboration_camp_settings().description
-        self.fields['collaboration_camp_option'].help_text \
-            = helpers.add_link_to_helptext(
-            self.fields['collaboration_camp_option'].help_text,
+        self.fields['collaboration_camp_represent'].help_text = \
+            helpers.add_link_to_helptext(
+            self.fields['collaboration_camp_represent'].help_text,
             "communication_camp_help_page", COLLABORATION_CAMP_OPTION_LINK)
 
 
@@ -478,7 +491,7 @@ class CommunitySectionEditForm(CoWorkersEmailsFormMixin, BaseForm):
 
 
 class FinishForm(forms.Form):
-    section_name = _('Finish')
+    section_name = _('Submit and publish')
 
     class Meta:
         model = models.IdeaSketch
