@@ -10,11 +10,11 @@ from django.shortcuts import redirect
 from django.utils.translation import ugettext as _
 from django.views import generic
 from formtools.wizard.views import SessionWizardView
+from pytz import timezone
 from rules.contrib.views import PermissionRequiredMixin
 
 from adhocracy4.filters import views as filter_views
 from adhocracy4.phases.models import Phase
-
 from apps.wizards import mixins as wizard_mixins
 
 from . import filters, forms, mixins
@@ -91,10 +91,22 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
     title = _('Idea Sketch')
-    finish_section_text = _('You can add data or edit your idea later.')
-    finish_section_btn = _('Submit your idea!')
+    finish_section_text = _('As soon as you have submitted your application, '
+                            'it will be published online in the idea space.')
+    finish_section_btn = _('Submit your idea')
+
+    @property
+    def end_date(self):
+        if (self.module.active_phase and
+                self.module.active_phase.has_feature('crud', IdeaSketch)):
+            settings_time_zone = timezone(settings.TIME_ZONE)
+            end_date = self.module.active_phase.end_date
+            return end_date.astimezone(settings_time_zone)\
+                .strftime("%d %B %Y (%H:%M CET)")
 
     def get_form_kwargs(self, step=None):
+        if step == '0':
+            return {'end_date': self.end_date}
         if step == '5':
             return {'display_communication_camp_checkbox': True}
         return {}
@@ -234,6 +246,8 @@ class ProposalCreateWizard(PermissionRequiredMixin,
     finish_section_btn = _('Submit your proposal!')
 
     def get_form_kwargs(self, step=None):
+        if step == '0':
+            return {'end_date': None}
         if step == '6':
             return {'display_communication_camp_checkbox': False}
         return {}

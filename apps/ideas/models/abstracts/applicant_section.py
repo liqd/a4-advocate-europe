@@ -24,9 +24,11 @@ ORGANISATION_STATUS_EXTRA_HELP = _('Please provide details '
                                    'about your current status, '
                                    'especially if you selected "Other" '
                                    '(max. 200 characters)')
-ORGANISATION_NAME_HELP = _('If you do not yet have a registered '
-                           'organisation, please write here the name of '
-                           'your initiative or planned organisation.')
+ORGANISATION_NAME_HELP = _('If you do not yet have '
+                           'a registered organisation, '
+                           'please write the name of '
+                           'your initiative or planned  '
+                           'organisation here.')
 
 
 class AbstractApplicantSection(models.Model):
