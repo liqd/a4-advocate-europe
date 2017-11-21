@@ -1,16 +1,17 @@
 .select-item {
     min-width: rem(200px);
-    padding-left: rem(30px);
+
+    // overwrite more specific styling for element in dropdown menu
+    // can probably made unimportant with bootstrap update?!
+    // and if we change our bootstrap-like styling in dropdowns.scss
+    padding-left: rem(30px) !important;
+    padding-top: rem(5px) !important;
+    padding-bottom: rem(5px) !important;
 
     position: relative;
 
     white-space: normal;
     font-size: $font-size-base;
-
-    // unstyle buttons
-    text-align: left;
-    border: none;
-    background: none;
 }
 
 .select-item-active {
@@ -28,6 +29,6 @@
 
 .select-item-indicator {
     position: absolute;
-    top: 0;
+    top: rem(5px);
     left: rem(10px);
 }
