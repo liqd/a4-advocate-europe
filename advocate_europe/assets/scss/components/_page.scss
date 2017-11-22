@@ -8,3 +8,9 @@
 .custompage {
     background: linear-gradient(to bottom, $brand-primary rem(160px), #fff 0%);
 }
+
+.custompage-with-title {
+    @media screen and (max-width: $screen-xs-max) {
+        background: linear-gradient(to bottom, $brand-primary rem(200px), #fff 0%);
+    }
+}
