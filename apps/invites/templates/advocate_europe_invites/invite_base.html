@@ -4,7 +4,7 @@
 {% block title %}{% trans 'Invitation to collaborate' %}{% endblock %}
 {% block content %}
     {% force_translation 'en' %}
-    <div class="account-top">
+    <div class="account-top custompage">
     <div class="container-medium account-box">
         <h2>{% blocktrans with object=object.subject %} Do you want to collaborate on "{{ object }}"?{% endblocktrans %}</h2>
         {{ form.non_field_errors }}
