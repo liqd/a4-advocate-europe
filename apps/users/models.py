@@ -57,8 +57,9 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         upload_to='users/images',
         blank=True,
         verbose_name=_('Profile picture'),
-        help_text=_('The image should be at least 340 pixel '
-                    'wide and 340 pixel high.')
+        help_text=_('Please upload a squared image, at least '
+                    '340x340 px. Allowed formats are jpg, gif '
+                    'and png.')
     )
 
     date_joined = models.DateTimeField(
