@@ -131,7 +131,10 @@ class ApplicantSectionForm(BaseForm):
                                      "about your current status."))
 
     def __init__(self, *args, **kwargs):
-        self.end_date = kwargs.pop('end_date')
+        if 'end_date' in kwargs:
+            self.end_date = kwargs.pop('end_date')
+        else:
+            self.end_date = None
         super().__init__(*args, **kwargs)
         if self.end_date:
             self.section_description = _('Applications may be submitted, '

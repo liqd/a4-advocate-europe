@@ -246,8 +246,6 @@ class ProposalCreateWizard(PermissionRequiredMixin,
     finish_section_btn = _('Submit your proposal!')
 
     def get_form_kwargs(self, step=None):
-        if step == '0':
-            return {'end_date': None}
         if step == '6':
             return {'display_communication_camp_checkbox': False}
         return {}
