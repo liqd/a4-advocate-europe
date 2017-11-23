@@ -106,9 +106,11 @@
 
         @media screen and (min-width: $screen-md-min) {
             flex-basis: 30%;
+            margin-top: 0;
+            margin-bottom: 0;
         }
 
-        margin: 0 15px;
+        margin: rem(5px 15px);
         background-color: $ae-light-gray;
         box-shadow: 0 1px 0 0 $ae-light-gray-shadow;
     }
