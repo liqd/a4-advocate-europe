@@ -55,7 +55,8 @@ class IdeaAdmin(notification_admin.NotifyMixin, admin.ModelAdmin):
     }
 
     list_display = ['idea_title', 'type', 'is_on_shortlist',
-                    'community_award_winner', 'is_winner', 'created']
+                    'community_award_winner', 'is_winner',
+                    'created', 'modified']
     ordering = ['-created', 'idea_title']
     actions = [
         set_is_on_shortlist_true,
