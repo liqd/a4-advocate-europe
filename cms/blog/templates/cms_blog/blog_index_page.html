@@ -8,12 +8,16 @@
 
 {% block content %}
 {% force_translation 'en' %}
-<div class="custompage">
+<div class="custompage-blue">
     <div class="container">
         <header class="custompage-header">
             <h1>{{ page.title }}</h1>
             <p>{{ page.subtitle }}</p>
         </header>
+    </div>
+</div>
+<div class="custompage-45">
+    <div class="container">
         <!-- Featured blog entry will be on first index page only -->
         {% if not blogs.has_previous and not category and page.featured_page.live %}
             {% include 'cms_blog/includes/blog_index_featured_item.html' %}

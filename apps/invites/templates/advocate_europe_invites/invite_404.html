@@ -5,12 +5,14 @@
 {% block content %}
     {% force_translation 'en' %}
     <div class="account-top custompage">
-    <div class="container-medium account-box">
-        <h2>{% blocktrans %} Your invitation is not valid. {% endblocktrans %}</h2>
-        <p>
-            {% trans "You either already accepted or declined the invitation or you were uninvited." %}
-        </p>
-    </div>
+        <div class="container-medium">
+            <div class="account-box">
+                <h2>{% blocktrans %} Your invitation is not valid. {% endblocktrans %}</h2>
+                <p>
+                    {% trans "You either already accepted or declined the invitation or you were uninvited." %}
+                </p>
+            </div>
+        </div>
     </div>
     {% endforce_translation %}
 {% endblock %}

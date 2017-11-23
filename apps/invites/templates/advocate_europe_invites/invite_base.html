@@ -5,14 +5,16 @@
 {% block content %}
     {% force_translation 'en' %}
     <div class="account-top custompage">
-    <div class="container-medium account-box">
-        <h2>{% blocktrans with object=object.subject %} Do you want to collaborate on "{{ object }}"?{% endblocktrans %}</h2>
-        {{ form.non_field_errors }}
-        <p>
-            {% trans "You were invited by creator of the idea sketch. If you accept you will be able to update the idea and will be named as one of the co-creators. You can also decline and you will no longer be borthered." %}
-        </p>
-        {% block invite_action %}{% endblock %}
-    </div>
+        <div class="container-medium">
+            <div class="account-box">
+                <h2>{% blocktrans with object=object.subject %} Do you want to collaborate on "{{ object }}"?{% endblocktrans %}</h2>
+                {{ form.non_field_errors }}
+                <p>
+                    {% trans "You were invited by creator of the idea sketch. If you accept you will be able to update the idea and will be named as one of the co-creators. You can also decline and you will no longer be borthered." %}
+                </p>
+                {% block invite_action %}{% endblock %}
+            </div>
+        </div>
     </div>
     {% endforce_translation %}
 {% endblock %}
