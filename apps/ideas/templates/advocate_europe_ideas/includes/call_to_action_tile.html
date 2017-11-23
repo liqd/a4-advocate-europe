@@ -9,11 +9,11 @@
                 &nbsp;
             </div>
             <h4 class="idealist-tile-title">{% trans "Got an idea? Share it!" %}</h4>
-            <span class="cta-tile-text">{% trans "Get support from the community and win funding for your project!" %}</span>
+            <span class="cta-tile-text">{% trans "Apply now and get funding for your project!" %}</span>
             {% if settings.cms_settings.HelpPages.selection_criteria %}
-            <a class="call-to-action-link" href="{{ settings.cms_settings.HelpPages.selection_criteria.url }}">{% trans "Read about the criterias" %}</a>
+            <a class="call-to-action-link" href="{{ settings.cms_settings.HelpPages.selection_criteria.url }}">{% trans "Read about the criteria" %}</a>
             {% endif %}
         </div>
     </div>
-    <a class="btn btn-ae-secondary call-to-action-btn" href="{% url 'idea-sketch-create' module.slug %}">{% trans "Create idea sketch!" %}</a>
+    <a class="btn btn-ae-secondary call-to-action-btn" href="{% url 'idea-sketch-create' module.slug %}">{% trans "Create your idea sketch!" %}</a>
 </div>
