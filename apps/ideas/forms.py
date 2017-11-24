@@ -27,8 +27,8 @@ CONFIRM_PUBLICITY_LABEL = _('I hereby confirm and agree that '
                             'I confirm that I have the right to share '
                             'the idea and the visual material '
                             'used in this proposal.')
-ACCEPT_CONDITIONS_LABEL = _('I hereby agree to the terms'
-                            ' and conditions of the Advocate'
+ACCEPT_CONDITIONS_LABEL = _('I hereby agree to the {}terms'
+                            ' and conditions{} of the Advocate'
                             ' Europe idea challenge.')
 CONFIRM_COLLABORATION_CAMP_WITH_DATE = _('If selected, a representative of '
                                          'my project will commit to joining '
@@ -276,7 +276,7 @@ class CommunitySectionForm(CoWorkersEmailsFormMixin, BaseForm):
         help_text=COWORKERS_HELP,
         label=COWORKERS_TITLE)
     confirm_publicity = forms.BooleanField(label=CONFIRM_PUBLICITY_LABEL)
-    accept_conditions = forms.BooleanField(label=ACCEPT_CONDITIONS_LABEL)
+    accept_conditions = forms.BooleanField(label='')
     confirm_collaboration_camp = forms.BooleanField(
         label=CONFIRM_COLLABORATION_CAMP_WITHOUT_DATE)
 
@@ -285,7 +285,8 @@ class CommunitySectionForm(CoWorkersEmailsFormMixin, BaseForm):
             kwargs.pop('display_communication_camp_checkbox')
         super().__init__(*args, **kwargs)
         self.fields['accept_conditions'].label = helpers.add_link_to_helptext(
-            self.fields['accept_conditions'].label, "terms_of_use_page")
+            self.fields['accept_conditions'].label, "terms_of_use_page",
+            ACCEPT_CONDITIONS_LABEL)
         settings = helpers.get_collaboration_camp_settings()
         if settings.start_date and settings.end_date:
             self.fields['confirm_collaboration_camp'].label = \
