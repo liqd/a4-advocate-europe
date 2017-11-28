@@ -1,5 +1,11 @@
 {% extends 'email_base.'|add:part_type %}
 
+{% comment %}
+FIXME: This contains hard coded dates.
+FIXME: This contains hard coded urls.
+FIXME: This overwrites the proposal submit notification with stuff that only makes sense for the idea sketch.
+{% endcomment %}
+
 {% block subject %}
 Thank you for submitting your project idea for the Advocate Europe idea challenge!
 {% endblock %}
