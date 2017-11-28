@@ -16,5 +16,5 @@ You were invited to colaborate by <i>{{ invite.creator.username }}</i>. If you w
 {% block cta_label %}Accept invitation{% endblock %}
 
 {% block reason %}
-This email was sent to {{ receiver }}. If you think you were invited by mistake, you can ignore this email. You will not receive any further notifications. If you have any further questions, please contact us via info@advocate-europe.eu.
+This email was sent to {{ receiver }}. If you think you were invited by mistake, you can ignore this email. You will not receive any further notifications. If you have any further questions, please contact us via help@advocate-europe.eu.
 {% endblock %}

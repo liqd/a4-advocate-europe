@@ -16,5 +16,5 @@ You have submitted your journey "{{ journey.title }}" to {{ journey.idea.type }}
 {% block cta_label %}Visit your journey{% endblock %}
 
 {% block reason %}
-This email was sent to {{ receiver }}. You receive this email because you have submitted a journey using this email address. If you have any further questions, please contact us via info@advocate-europe.eu.
+This email was sent to {{ receiver }}. You receive this email because you have submitted a journey using this email address. If you have any further questions, please contact us via help@advocate-europe.eu.
 {% endblock %}
