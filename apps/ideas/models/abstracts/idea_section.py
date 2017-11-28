@@ -55,7 +55,8 @@ IDEA_LOCATION_SPECIFY_HELP = _('Please specify the city, '
 IDEA_LOCATION_RUHR_HELP = _('Is your project connected '
                             'to the Ruhr area of Germany '
                             'through project partners '
-                            'or audiences?')
+                            'or audiences? Please provide '
+                            'further details. (max. 200 characters)')
 
 
 class AbstractIdeaSection(models.Model):

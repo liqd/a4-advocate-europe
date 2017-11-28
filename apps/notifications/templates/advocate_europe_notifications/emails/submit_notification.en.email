@@ -1,20 +1,42 @@
 {% extends 'email_base.'|add:part_type %}
 
+{% comment %}
+FIXME: This contains hard coded dates.
+FIXME: This contains hard coded urls.
+FIXME: This overwrites the proposal submit notification with stuff that only makes sense for the idea sketch.
+{% endcomment %}
+
 {% block subject %}
-You have sucessfully submitted your {{ idea.type }} to {{ idea.project.name }}
+Thank you for submitting your project idea for the Advocate Europe idea challenge!
 {% endblock %}
 
 {% block headline %}
-You have sucessfully submitted your {{ idea.type }} to {{ idea.project.name }}
+Thank you for submitting your project idea sketch for the Advocate Europe idea challenge!
 {% endblock  %}
 
 {% block content %}
-You have submitted the {{ idea.type }} "{{ idea.idea_title }}".{% if idea.project.active_phase %} Your {{ idea.type }} can still be edited until the submission deadline on {{ idea.project.active_phase.end_date }}.{% endif %} Thank you for your participation.
+{% if idea.project.active_phase %}You can edit your idea sketch until {{ idea.project.active_phase.end_date|date:"d F Y"}} ({{ idea.project.active_phase.end_date|time:"H:i"}} CET) {% endif %}
+</br></br>
+<h3>What happens next?</h3>
+Following the application deadline, a shortlist of approximately 30 proposals will be made from among the submitted proposals that meet the selection and eligibility criteria and fit our call 2017/2018.
+</br></br>
+If your idea has made it to the shortlist, we will meet in person at the Collaboration Camp in late April 2018. Only after the Collaboration Camp will our interdisciplinary jury select up to twelve winning ideas in June 2018.
+</br></br>
+<h3>Take a look at the other submitted ideas</h3>
+All submitted project ideas are publically visible in our Idea Space. Who could be an interesting partner for you? What inspirations can you get from them? Use the opportunity to exchange experiences and knowledge, discuss topics and methods and expand your network.
+</br></br>
+<h3>Vote for the Community Award from 22.01.2018 until 12.02.2018</h3>
+Anyone who has submitted an idea to one of the three idea challenges in 2017/2018, 2016 or 2015, is entitled to vote for our community award - both applicants and co-workers. The idea with the most votes will be included in the shortlist and receive start-up funding of € 1,000.
+Please note that you can choose your personal favourite submission. You and your co-workers can, however, not vote for your own project idea.
+</br></br>
+We are looking forward to an exciting exchange of thoughts and ideas on Advocate Europe!
+</br></br>
+Your Advocate Europe Team
 {% endblock %}
 
-{% block cta_url %}{{ email.get_host }}{{ idea.get_absolute_url }}{% endblock %}
-{% block cta_label %}Visit your idea sketch{% endblock %}
+{% block cta_url %}https://advocate-europe.eu/join/{% endblock %}
+{% block cta_label %}Find out more{% endblock %}
 
 {% block reason %}
-This email was sent to {{ receiver }}. You receive this email because you have submitted a {{ idea.type }} using this email address. If you have any further questions, please contact us via info@advocate-europe.eu.
+This email was sent to {{ receiver }}. You receive this email because you have submitted a {{ idea.type }} using this email address. If you have any further questions, please contact us via help@advocate-europe.eu.
 {% endblock %}
