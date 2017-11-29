@@ -9,7 +9,7 @@ You are invited to contribute to “{{ invite.subject.idea_title }}” on <i>{{ 
 {% endblock  %}
 
 {% block content %}
-You were invited to colaborate by <i>{{ invite.creator.username }}</i>. If you want to collaborate, please visit the project by clicking the {% if part_type == "txt" %}link{% else %}button{% endif %} below.
+You were invited by <i>{{ invite.creator.username }}</i> to become a team member. If you want to become a co-worker, please visit the project by clicking the {% if part_type == "txt" %}link{% else %}button{% endif %} below.
 {% endblock %}
 
 {% block cta_url %}{{ email.get_host }}{{ invite.get_absolute_url }}{% endblock %}
