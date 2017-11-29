@@ -38,5 +38,5 @@ Your Advocate Europe Team
 {% block cta_label %}Find out more{% endblock %}
 
 {% block reason %}
-This email was sent to {{ receiver }}. You received this email because you have submitted an {{ idea.type }} using this email address. If you have any further questions, please contact us via help@advocate-europe.eu.
+This email was sent to {{ receiver }}. You received this email because you submitted an {{ idea.type }} using this email address. If you have any further questions, please contact us via help@advocate-europe.eu.
 {% endblock %}
