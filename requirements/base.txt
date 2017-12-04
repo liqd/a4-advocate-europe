@@ -24,7 +24,6 @@ rules==1.2.1
 jsonfield==2.0.2
 packaging==16.8
 appdirs==1.4.3
-factory-boy==2.9.2
 # django micawber (released version 0.3.4 has no support for django 1.11)
 git+git://github.com/coleifer/micawber.git@9e3f0169a1e9ac80a5e481155abf7658af507c24
 # django multiform (released version 0.1 was too old)
