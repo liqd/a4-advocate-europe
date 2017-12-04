@@ -1,0 +1,22 @@
+{% extends 'advocate_europe_notifications/emails/follow.en.email' %}
+{% load verbose_name %}
+
+{% block subject %}
+A {{ action.obj|verbose_name }} was added.
+{% endblock %}
+
+{% block headline %}
+A {{ action.obj|verbose_name }} was created by {{ action.actor.username }}.
+{% endblock %}
+
+{% block content %}
+A {{ action.obj|verbose_name }} was added to {{ action.target }}{% if action.target.title %} <i>{{ action.target.title }}</i>{% endif %}.
+{% endblock %}
+
+{% block cta_url %}
+{{ email.get_host }}{{ action.target.get_absolute_url }}
+{% endblock %}
+
+{% block cta_label %}
+Visit the {{ action.obj|verbose_name }}
+{% endblock %}

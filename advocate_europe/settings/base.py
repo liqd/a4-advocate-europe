@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'adhocracy4.organisations.apps.OrganisationsConfig',
     'adhocracy4.actions.apps.ActionsConfig',
     'adhocracy4.filters.apps.FiltersConfig',
+    'adhocracy4.rules.apps.RulesConfig',
 
     'cms.home.apps.HomeConfig',
     'cms.settings.apps.SettingsConfig',
@@ -216,7 +217,7 @@ BLEACH_LIST = {
 
 LANGUAGE_CODE = 'en'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Berlin'
 
 USE_I18N = True
 

@@ -22,22 +22,36 @@ from .models.abstracts.partners_section import AbstractPartnersSection
 from .models.abstracts.selection_criteria_section import \
     AbstractSelectionCriteriaSection
 
-ACCEPT_CONDITIONS_LABEL = _('I hereby confirm and agree that '
-                            'my idea will be public once'
-                            ' published. I confirm that I have '
-                            'the right to share the idea and '
-                            'the visual material '
+CONFIRM_PUBLICITY_LABEL = _('I hereby confirm and agree that '
+                            'my idea will be public once published. '
+                            'I confirm that I have the right to share '
+                            'the idea and the visual material '
                             'used in this proposal.')
+ACCEPT_CONDITIONS_LABEL = _('I hereby agree to the {}terms'
+                            ' and conditions{} of the Advocate'
+                            ' Europe idea challenge.')
+CONFIRM_COLLABORATION_CAMP_WITH_DATE = _('If selected, a representative of '
+                                         'my project will commit to joining '
+                                         'the Collaboration Camp '
+                                         'from {} to {}.')
+CONFIRM_COLLABORATION_CAMP_WITHOUT_DATE = _('If selected, a representative '
+                                            'of my project will commit '
+                                            'to joining the Collaboration '
+                                            'Camp at the end of April 2018.')
 
 COWORKERS_TITLE = _('Please add your team members here.')
-COWORKERS_HELP = _('Here you can insert the email addresses of up to 5 '
-                   'team members. Each of the named team members will '
-                   'receive an email inviting them to register on the '
-                   'Advocate Europe website. After registering they will '
-                   'appear with their user name on your idea page and '
-                   'will be able to edit your idea. ')
+COWORKERS_HELP = _('Here you can insert the email addresses of '
+                   'up to 5 team members. They will receive an email '
+                   'inviting them to register on the Advocate '
+                   'Europe website. After registering they '
+                   'will appear with their user name on your idea '
+                   'page and will be able to edit your idea. ')
 
 COWORKERS_EDIT_TITLE = _('Your team members')
+
+COLLABORATION_CAMP_OPTION_LINK = _('More information about '
+                                   'the {}Collaboration Camp{}. '
+                                   '(max. 150 characters)')
 
 
 class BaseForm(forms.ModelForm):
@@ -86,7 +100,7 @@ class CoWorkersEmailsFormMixin:
 
 
 class ApplicantSectionForm(BaseForm):
-    section_name = _('Applicant Section')
+    section_name = _('About You')
 
     class Meta:
         model = AbstractApplicantSection
@@ -103,13 +117,47 @@ class ApplicantSectionForm(BaseForm):
             'year_of_registration'
         ]
 
+    def clean(self):
+        cleaned_data = super().clean()
+        organisation_status = cleaned_data.get('organisation_status')
+        organisation_status_extra = cleaned_data.get(
+            'organisation_status_extra')
+        if organisation_status and organisation_status == 'other':
+                if not organisation_status_extra:
+                    self.add_error('organisation_status_extra',
+                                   _("You selected 'other' as "
+                                     "organisation status. "
+                                     "Please provide more information "
+                                     "about your current status."))
+
+    def __init__(self, *args, **kwargs):
+        if 'end_date' in kwargs:
+            self.end_date = kwargs.pop('end_date')
+        else:
+            self.end_date = None
+        super().__init__(*args, **kwargs)
+        if self.end_date:
+            self.section_description = _('Applications may be submitted, '
+                                         'in English only, until {}. '
+                                         'After publishing, '
+                                         'you can continue to edit '
+                                         'all the fields '
+                                         'of your application right up to {}.'
+                                         .format(self.end_date, self.end_date))
+
 
 class PartnersSectionForm(BaseForm):
     section_name = _('Partners')
+    section_description = _('Please share the names '
+                            'of your partner organisations here. '
+                            'If you do not have any partner '
+                            'organisations, leave the fields empty. '
+                            'You can update these fields any time '
+                            'before the application deadline.')
     accordions = [
-        _('first partner organisation'),
-        _('second partner organisation'),
-        _('third partner organisation'),
+        _('Partner Organisation 1'),
+        _('Partner Organisation 2'),
+        _('Partner Organisation 3'),
     ]
 
     class Meta:
@@ -141,7 +189,7 @@ class PartnersSectionForm(BaseForm):
 
 
 class IdeaSectionForm(BaseForm):
-    section_name = _('Idea details')
+    section_name = _('Idea')
 
     class Meta:
         model = AbstractIdeaSection
@@ -157,9 +205,30 @@ class IdeaSectionForm(BaseForm):
             'idea_location_ruhr'
         ]
 
+    def clean(self):
+        cleaned_data = super().clean()
+        idea_location = cleaned_data.get('idea_location')
+        idea_location_ruhr = cleaned_data.get('idea_location_ruhr')
+        idea_location_specify = cleaned_data.get('idea_location_specify')
+
+        if idea_location and 'ruhr_linkage' in idea_location:
+            if not idea_location_ruhr:
+                self.add_error('idea_location_ruhr',
+                               _('You indicated that your idea '
+                                 'links to the Ruhr area of Germany. '
+                                 'Please specify.'))
+
+        if idea_location and 'city' in idea_location:
+            if not idea_location_specify:
+                self.add_error('idea_location_specify',
+                               _('You indicated that your idea '
+                                 'will take place in a city, '
+                                 'country and/or region. '
+                                 'Please specify.'))
+
 
 class ImpactSectionForm(BaseForm):
-    section_name = _('Impact')
+    section_name = _('Road to Impact')
 
     class Meta:
         model = AbstractImpactSection
@@ -174,12 +243,9 @@ class ImpactSectionForm(BaseForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['outcome'].help_text = helpers.add_link_to_helptext(
-            self.fields['outcome'].help_text, "annual_theme_help_page")
         self.fields['challenge'].help_text = helpers.add_link_to_helptext(
-            self.fields['challenge'].help_text, "annual_theme_help_page")
-        self.fields['plan'].help_text = helpers.add_link_to_helptext(
-            self.fields['plan'].help_text, "annual_theme_help_page")
+            self.fields['challenge'].help_text,
+            "annual_theme_help_page")
 
 
 class CollaborationCampSectionForm(BaseForm):
@@ -188,27 +254,46 @@ class CollaborationCampSectionForm(BaseForm):
     class Meta:
         model = AbstractCollaborationCampSection
         fields = [
-            'collaboration_camp_option',
             'collaboration_camp_represent',
-            'collaboration_camp_email',
             'collaboration_camp_benefit'
         ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['collaboration_camp_option'].help_text \
-            = helpers.add_link_to_helptext(
-            self.fields['collaboration_camp_option'].help_text,
-            "communication_camp_help_page")
+        if helpers.get_collaboration_camp_settings().description:
+            self.section_description = \
+                helpers.get_collaboration_camp_settings().description
+        self.fields['collaboration_camp_represent'].help_text = \
+            helpers.add_link_to_helptext(
+            self.fields['collaboration_camp_represent'].help_text,
+            "communication_camp_help_page", COLLABORATION_CAMP_OPTION_LINK)
 
 
 class CommunitySectionForm(CoWorkersEmailsFormMixin, BaseForm):
-    section_name = _('Community Information')
+    section_name = _('Community')
     co_workers_emails = forms.CharField(
         required=False,
         help_text=COWORKERS_HELP,
         label=COWORKERS_TITLE)
-    accept_conditions = forms.BooleanField(label=ACCEPT_CONDITIONS_LABEL)
+    confirm_publicity = forms.BooleanField(label=CONFIRM_PUBLICITY_LABEL)
+    accept_conditions = forms.BooleanField(label='')
+    confirm_collaboration_camp = forms.BooleanField(
+        label=CONFIRM_COLLABORATION_CAMP_WITHOUT_DATE)
+
+    def __init__(self, *args, **kwargs):
+        self.display_communication_camp_section = \
+            kwargs.pop('display_communication_camp_checkbox')
+        super().__init__(*args, **kwargs)
+        self.fields['accept_conditions'].label = helpers.add_link_to_helptext(
+            self.fields['accept_conditions'].label, "terms_of_use_page",
+            ACCEPT_CONDITIONS_LABEL)
+        settings = helpers.get_collaboration_camp_settings()
+        if settings.start_date and settings.end_date:
+            self.fields['confirm_collaboration_camp'].label = \
+                CONFIRM_COLLABORATION_CAMP_WITH_DATE.format(
+                    settings.start_date, settings.end_date)
+        if not self.display_communication_camp_section:
+            del self.fields['confirm_collaboration_camp']
 
     class Meta:
         model = AbstractCommunitySection
@@ -242,6 +327,8 @@ class SelectionCriteriaSectionForm(BaseForm):
 
 class FinanceAndDurationSectionForm(BaseForm):
     section_name = _('Finances and Duration')
+    budget_requested = forms.IntegerField(max_value=50000, min_value=0)
+    total_budget = forms.IntegerField(min_value=0)
 
     class Meta:
         model = AbstractFinanceAndDurationSection
@@ -253,6 +340,27 @@ class FinanceAndDurationSectionForm(BaseForm):
             'other_sources_secured',
             'duration'
         ]
+
+    def clean(self):
+        cleaned_data = super().clean()
+        budget_requested = cleaned_data.get('budget_requested')
+        total_budget = cleaned_data.get('total_budget')
+        other_sources = cleaned_data.get('other_sources')
+        other_sources_secured = cleaned_data.get('other_sources_secured')
+
+        if budget_requested and total_budget:
+            if budget_requested > total_budget:
+                self.add_error('__all__', _("The requested budget can't be "
+                                            "higher than the total budget"))
+
+        if other_sources:
+            if other_sources_secured is None:
+                self.add_error('other_sources_secured',
+                               _('You indicated that you have '
+                                 'other sources of income for '
+                                 'your activity or initiative. '
+                                 'Please also indicate whether '
+                                 'those sources are secured or not.'))
 
 
 class CommunitySectionEditForm(CoWorkersEmailsFormMixin, BaseForm):
@@ -387,7 +495,7 @@ class CommunitySectionEditForm(CoWorkersEmailsFormMixin, BaseForm):
 
 
 class FinishForm(forms.Form):
-    section_name = _('Finish')
+    section_name = _('Submit and publish')
 
     class Meta:
         model = models.IdeaSketch

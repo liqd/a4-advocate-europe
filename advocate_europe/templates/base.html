@@ -15,12 +15,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="apple-mobile-web-app-title" content="Advocate Europe">
         <meta name="application-name" content="Advocate Europe">
-        <meta name="theme-color" content="#ffffff">
-        <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png">
-        <link rel="icon" type="image/png" href="/static/icons/favicon-32x32.png" sizes="32x32">
-        <link rel="icon" type="image/png" href="/static/icons/favicon-16x16.png" sizes="16x16">
-        <link rel="manifest" href="/static/icons/manifest.json">
-        <link rel="shortcut icon" href="/static/icons/favicon.ico">
+        <meta name="theme-color" content="#00aae5">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'icons/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" href="{% static 'icons/favicon-32x32.png' %}" sizes="32x32">
+        <link rel="icon" type="image/png" href="{% static 'icons/favicon-16x16.png' %}" sizes="16x16">
+        <link rel="manifest" href="{% static 'icons/manifest.json' %}">
+        <link rel="shortcut icon" href="{% static 'icons/favicon.ico' %}">
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}

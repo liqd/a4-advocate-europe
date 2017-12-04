@@ -27,11 +27,29 @@ def test_ideasketch_create_wizard(client, user, module):
 
             '0-first_name': 'Qwertz',
             '0-last_name': 'Uiopü',
-            '0-organisation_status': 'no_non_profit',
+            '0-organisation_status': 'other',
+        }
+
+        response = client.post(url, data)
+        assert response.context['form'].errors == {'organisation_status_extra':
+                                                   ["You selected 'other' as "
+                                                    "organisation status. "
+                                                    "Please provide more "
+                                                    "information about your "
+                                                    "current status."]}
+        assert response.status_code == 200
+
+        data = {
+            'idea_sketch_create_wizard-current_step': '0',
+            '0-organisation_status_extra': 'We are great',
+            '0-first_name': 'Qwertz',
+            '0-last_name': 'Uiopü',
+            '0-organisation_status': 'other',
         }
 
         # Form 2 (Partners)
         response = client.post(url, data)
+        assert response.context['form'].errors == {}
         assert response.status_code == 200
 
         data = {
@@ -48,16 +66,37 @@ def test_ideasketch_create_wizard(client, user, module):
             '2-idea_title': 'My very good idea',
             '2-idea_pitch': 'My very good idea is such a good idea!',
             '2-idea_topics': 'education',
+            '2-idea_location': 'ruhr_linkage'
+        }
+
+        response = client.post(url, data)
+        assert response.context['form'].errors == {'idea_location_ruhr':
+                                                   ['You indicated '
+                                                    'that your idea '
+                                                    'links to '
+                                                    'the Ruhr area '
+                                                    'of Germany. '
+                                                    'Please specify.']}
+
+        assert response.status_code == 200
+
+        data = {
+            'idea_sketch_create_wizard-current_step': '2',
+
+            '2-idea_title': 'My very good idea',
+            '2-idea_pitch': 'My very good idea is such a good idea!',
+            '2-idea_topics': 'education',
             '2-idea_location': 'ruhr_linkage',
+            '2-idea_location_ruhr': 'Our project will take place in Essen'
         }
 
         # Form 4 (Impact)
         response = client.post(url, data)
+        assert response.context['form'].errors == {}
         assert response.status_code == 200
 
         data = {
             'idea_sketch_create_wizard-current_step': '3',
-
             '3-challenge': 'Balance a ball on your nose',
             '3-outcome': 'I balanced a ball on my nose',
             '3-plan': 'I will balance a ball on my nose',
@@ -87,7 +126,9 @@ def test_ideasketch_create_wizard(client, user, module):
             'idea_sketch_create_wizard-current_step': '5',
 
             '5-how_did_you_hear': 'personal_contact',
-            '5-accept_conditions': True
+            '5-accept_conditions': True,
+            '5-confirm_publicity': True,
+            '5-confirm_collaboration_camp': True
         }
 
         # Form 7 (Finish)
@@ -106,10 +147,10 @@ def test_ideasketch_create_wizard(client, user, module):
         assert IdeaSketch.objects.all().count() == 1
         assert my_idea_sketch.first_name == 'Qwertz'
         assert (my_idea_sketch.get_idea_location_display() ==
-                'Linkage to the Ruhr area of Germany')
+                'Links to the Ruhr area of Germany')
         assert my_idea_sketch.target_group == 'Children'
-        assert my_idea_sketch.collaboration_camp_option == 'not_sure'
-        assert mail.outbox[0].subject.startswith(
-            'You have sucessfully submitted your Idea Sketch to'
+        assert mail.outbox[0].subject == (
+            'Thank you for submitting your project idea for the '
+            'Advocate Europe idea challenge!'
         )
         assert mail.outbox[0].recipients() == [user.email]

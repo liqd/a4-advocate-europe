@@ -5,6 +5,7 @@ from django.views import generic
 
 from adhocracy4.modules.models import Module
 from adhocracy4.phases.models import Phase
+from adhocracy4.rules.discovery import NormalUser
 
 from .models import Idea
 from .paginators import DeltaFirstPagePaginator
@@ -78,10 +79,17 @@ class CtaPaginatorMixin:
     @property
     def is_cta_enabled(self):
         if self.cta_object:
-            return self.request.user.has_perm(
-                self.cta_permission,
-                self.cta_object
+            has_or_would_have_perm = (
+                self.request.user.has_perm(
+                    self.cta_permission,
+                    self.cta_object
+                ) or
+                NormalUser().would_have_perm(
+                    self.cta_permission,
+                    self.cta_object
+                )
             )
+            return has_or_would_have_perm
         else:
             return False
 

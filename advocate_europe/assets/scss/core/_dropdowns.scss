@@ -4,6 +4,7 @@
 */
 
 .dropdown-menu {
+    > button,
     > li > button,
     > li > form > button {
         // same as for links in bootstrap
@@ -22,6 +23,17 @@
 
         // fix width
         width: 100%;
+    }
+}
+
+.dropdown-menu > button,
+.dropdown-menu > li > button,
+.dropdown-menu > li > form > button {
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        color: $dropdown-link-hover-color;
+        background-color: $dropdown-link-hover-bg;
     }
 }
 

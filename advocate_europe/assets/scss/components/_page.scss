@@ -1,0 +1,18 @@
+.custompage-header {
+    color: #fff;
+    text-align: center;
+    font-size: rem(18px);
+    font-weight: bold;
+}
+
+.custompage {
+    background: linear-gradient(to bottom, $brand-primary rem(160px), #fff 0%);
+}
+
+.custompage-blue {
+    background-color: $brand-primary;
+}
+
+.custompage-45 {
+    background: linear-gradient(to bottom, $brand-primary rem(45px), #fff 0%);
+}

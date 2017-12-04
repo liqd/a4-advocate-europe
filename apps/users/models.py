@@ -57,8 +57,9 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         upload_to='users/images',
         blank=True,
         verbose_name=_('Profile picture'),
-        help_text=_('The image should be at least 340 pixel '
-                    'wide and 340 pixel high.')
+        help_text=_('Please upload a squared image, at least '
+                    '340x340 px. Allowed formats are jpg, gif '
+                    'and png.')
     )
 
     date_joined = models.DateTimeField(
@@ -98,6 +99,11 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         verbose_name=_('Website'),
         help_text=_('Plase add either https:// or http:// '
                     'to the front of your URL.')
+    )
+
+    get_notifications = models.BooleanField(
+        verbose_name=_("my own ideas and ideas that I'm watching"),
+        default=True
     )
 
     objects = auth_models.UserManager()

@@ -1,0 +1,24 @@
+{% extends 'advocate_europe_notifications/emails/follow.en.email' %}
+
+{% block subject %}
+Idea sketch was made into a proposal.
+{% endblock %}
+
+{% block headline %}
+The idea sketch "{{ action.obj.idea_sketch_archived.idea_title }}" was extended
+to a proposal.
+{% endblock %}
+
+{% block content %}
+The idea "{{ action.obj.idea_sketch_archived.idea_title }}" was extended to a
+proposal. It is now competing in the final round of the {{ site.name }}
+{{ action.obj.module.name }} competition.
+{% endblock %}
+
+{% block cta_url %}
+{{ email.get_host }}{{ action.obj.idea.get_absolute_url }}
+{% endblock %}
+
+{% block cta_label %}
+Visit the proposal
+{% endblock %}

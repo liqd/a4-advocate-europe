@@ -24,10 +24,6 @@
 
 // ---------------------- blog_index_page -------------------------------
 
-.blogindex {
-    background: linear-gradient(to bottom, $brand-primary rem(162px), #fff 0%);
-}
-
 .equal {
     display: flex;
     flex-wrap: wrap;
@@ -35,14 +31,6 @@
 
 .blogindex-category {
     color: $ae-middle-gray;
-}
-
-.blogindex-title {
-    h1 {
-        padding: rem(20px) 0 rem(30px) 0;
-        text-align: center;
-        color: #fff;
-    }
 }
 
 .blogindex-no-entry {
@@ -90,7 +78,7 @@
         color: $ae-middle-gray;
     }
 
-    .hover-parent-bg-img {
+    .hover-parent {
         padding: 0;
     }
 

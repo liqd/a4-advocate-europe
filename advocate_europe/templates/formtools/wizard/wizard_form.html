@@ -7,8 +7,10 @@
     {% force_translation 'en' %}
 <div class="wizard-page">
     <form class="wizard custom-form container-narrow" method="post" enctype="multipart/form-data" novalidate>
-        <h1>{{ view.title }} </h1>
-
+        <h1>{{ view.title }} | {{ form.section_name }}</h1>
+        {% if form.section_description  %}
+        <p>{{ form.section_description }}</p>
+        {% endif %}
         <div class="wizard-progress-side">
             <ul class="wizard-progress hidden-sm hidden-xs">
                 {% for step_id, form, status in view.progress %}
@@ -59,8 +61,11 @@
                 </button>
                 {% else %}
                 <div class="text-center wizard-submit-form">
-                    <p class="wizard-bold">{% trans "You're done!" %}</p>
+                    <p class="wizard-bold">{% trans "Almost finished!" %}</p>
                     <p>{{ view.finish_section_text }}</p>
+                    {% if view.end_date  %}
+                    <p>{% trans 'You and your team members can edit all the fields of your idea sketch until ' %}{{ view.end_date }}</p>
+                    {% endif %}
                     <button class="btn btn-ae-secondary wizard-submit-btn"
                             type="submit"
                             name="submit">

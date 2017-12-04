@@ -1,13 +1,11 @@
 {% load static thumbnail %}
 <div class="idealist-item">
     <div class="idealist-upper">
-        <a class="idealist-image hover-parent-bg-img" href="{% url 'idea-detail' slug=idea.slug %}">
-            <div style="background-image:url({% if idea.idea_image_exists %} {{ idea.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_blue.svg' %} {% endif %});">
-                <img class="hover-child-img" src="{% if idea.idea_image_exists %} {{ idea.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_blue.svg' %} {% endif %}"/>
-                {% if idea.badge %}
-                <span class="label idealist-label {{ idea.badge|cut:" " }}">{{ idea.badge }}</span>
-                {% endif %}
-            </div>
+        <a class="idealist-image hover-parent" href="{% url 'idea-detail' slug=idea.slug %}">
+            <img class="hover-child-img" src="{% if idea.idea_image_exists %} {{ idea.idea_image|thumbnail_url:'ideatileimage' }} {% else %} {% static 'images/placeholder_blue.svg' %} {% endif %}"/>
+            {% if idea.badge %}
+            <span class="label idealist-label {{ idea.badge|cut:" " }}">{{ idea.badge }}</span>
+            {% endif %}
         </a>
         <div class="idealist-text">
             <div class="idealist-category">

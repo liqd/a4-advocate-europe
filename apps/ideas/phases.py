@@ -139,8 +139,6 @@ class FullProposalPhase(IdeaPhase):
 
     features = {
         'crud': (models.Idea, models.Proposal,),
-        'rate': (models.Idea,),
-        # rating only for users, that added an idea in this or previous years
     }
 
     default_filters = QueryDict('ordering=title&'

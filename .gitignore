@@ -1,22 +1,31 @@
 *.pyc
 __pycache__
 .cache
-myvenv
+.DS_Store
+
+# project specific
 db.sqlite3
 test_db.sqlite3
 /static
-.DS_Store
 *.mo
 /media
 .sass-cache
-venv
 /node_modules
-/lib/python*
-/lib64
-/include/python*
-/bin
-/pyvenv.cfg
 /webpack-stats.json
 /advocate_europe/settings/local.py
 /advocate_europe/static
+
+# coveerage
 .coverage
+htmlcov
+
+# virtual
+myvenv
+venv
+/bin
+/pyvenv.cfg
+/share
+/include
+/pip-selfcheck.json
+/lib
+/lib64

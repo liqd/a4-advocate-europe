@@ -4,20 +4,21 @@
 {% block content %}
     {% force_translation 'en' %}
     <div class="container">
-        <div class="row profile-form">
+        <div class="row account-settings">
             <div class="col-md-3 well">
                 <h1>{% trans 'Account settings' %}</h1>
                 <ul class="list-group">
                     {% url 'edit_profile' as edit_profile_url %}
                     <li class="list-group-item {% if edit_profile_url == request.get_full_path  %} active {% endif %}">
                         <a href="{% url 'edit_profile' %}">
-                            <i class="fa fa-user" aria-hidden="true"></i> {% trans 'Your Profile' %}
+                            <i class="fa fa-user fa-fw" aria-hidden="true"></i>
+                            {% trans 'Your Profile' %}
                         </a>
                     </li>
                     {% url 'account_change_password' as change_password_url %}
                     <li class="list-group-item {% if change_password_url == request.get_full_path  %} active {% endif %}">
                         <a href="{% url 'account_change_password' %}">
-                            <i class="fa fa-lock" aria-hidden="true"></i>
+                            <i class="fa fa-lock fa-fw" aria-hidden="true"></i>
                             {% if request.user.has_usable_password %}
                                 {% trans 'Change Password' %}
                             {% else %}
@@ -28,13 +29,22 @@
                     {% url 'account_email' as change_email_url %}
                     <li class="list-group-item {% if change_email_url == request.get_full_path  %} active {% endif %}">
                         <a href="{% url 'account_email' %}">
-                            <i class="fa fa-envelope" aria-hidden="true"></i> {% trans 'Mail adresses' %}
+                            <i class="fa fa-envelope fa-fw" aria-hidden="true"></i>
+                            {% trans 'Mail adresses' %}
                         </a>
                     </li>
                     {% url 'socialaccount_connections' as social_accounts_url %}
                     <li class="list-group-item {% if social_accounts_url == request.get_full_path  %} active {% endif %}">
                         <a href="{% url 'socialaccount_connections' %}">
-                            <i class="fa fa-users" aria-hidden="true"></i> {% trans 'Account Connections' %}
+                            <i class="fa fa-users fa-fw" aria-hidden="true"></i>
+                            {% trans 'Account Connections' %}
+                        </a>
+                    </li>
+                    {% url 'notifications' as notifications_url %}
+                    <li class="list-group-item {% if notifications_url == request.get_full_path  %} active {% endif %}">
+                        <a href="{% url 'notifications' %}">
+                            <i class="fa fa-bell fa-fw" aria-hidden="true"></i>
+                            {% trans 'Notifications' %}
                         </a>
                     </li>
                 </ul>

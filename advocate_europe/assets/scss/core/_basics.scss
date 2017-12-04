@@ -100,13 +100,13 @@ a,
     .is-active:after {
         display: block;
         content: '';
-        border-bottom: solid 3px $brand-primary;
+        border-bottom: solid $navbar-underline-height $brand-primary;
     }
 
     .not-active:after {
         display: block;
         content: '';
-        border-bottom: solid 3px $brand-primary;
+        border-bottom: solid $navbar-underline-height $brand-primary;
         transform: scaleX(0);
         transition: transform 250ms ease-in-out;
     }

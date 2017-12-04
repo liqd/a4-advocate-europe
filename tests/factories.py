@@ -21,3 +21,4 @@ class AdminFactory(factory.django.DjangoModelFactory):
     username = factory.Faker('name')
     password = make_password('password')
     is_superuser = True
+    is_staff = True

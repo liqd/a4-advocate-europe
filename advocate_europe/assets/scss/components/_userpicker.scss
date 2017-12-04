@@ -31,6 +31,11 @@
         padding-left: rem(6px);
         font-size: rem(14px);
         font-weight: $demibold;
+
+        a {
+            color: $gray-dark;
+            text-decoration: none;
+        }
     }
 
     &-label-detail {

@@ -10,11 +10,11 @@ from django.shortcuts import redirect
 from django.utils.translation import ugettext as _
 from django.views import generic
 from formtools.wizard.views import SessionWizardView
+from pytz import timezone
 from rules.contrib.views import PermissionRequiredMixin
 
 from adhocracy4.filters import views as filter_views
 from adhocracy4.phases.models import Phase
-
 from apps.wizards import mixins as wizard_mixins
 
 from . import filters, forms, mixins
@@ -90,12 +90,30 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
     permission_required = 'advocate_europe_ideas.add_ideasketch'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
-    title = _('Create an idea')
-    finish_section_text = _('You can add data or edit your idea later.')
-    finish_section_btn = _('Submit your idea!')
+    title = _('Idea Sketch')
+    finish_section_text = _('As soon as you have submitted your application, '
+                            'it will be published online in the idea space.')
+    finish_section_btn = _('Submit your idea')
+
+    @property
+    def end_date(self):
+        if (self.module.active_phase and
+                self.module.active_phase.has_feature('crud', IdeaSketch)):
+            settings_time_zone = timezone(settings.TIME_ZONE)
+            end_date = self.module.active_phase.end_date
+            return end_date.astimezone(settings_time_zone)\
+                .strftime("%d %B %Y (%H:%M CET)")
+
+    def get_form_kwargs(self, step=None):
+        if step == '0':
+            return {'end_date': self.end_date}
+        if step == '5':
+            return {'display_communication_camp_checkbox': True}
+        return {}
 
     def done(self, form_list, **kwargs):
-        special_fields = ['accept_conditions', 'co_workers_emails']
+        special_fields = ['accept_conditions', 'co_workers_emails',
+                          'confirm_publicity', 'confirm_collaboration_camp']
 
         data = self.get_all_cleaned_data()
         idea_sketch = IdeaSketch.objects.create(
@@ -167,6 +185,8 @@ class IdeaDetailView(generic.DetailView):
         idea_list.append((_('What is your impact?'), self.object.outcome))
         idea_list.append((_('How do you get there?'), self.object.plan))
         idea_list.append((_('What is your story?'), self.object.importance))
+        idea_list.append((_('Who are you doing it for?'),
+                          self.object.target_group))
         if self.object.reach_out:
             idea_list.append((_('What do you need from the Advocate Europe '
                                 'community?'), self.object.reach_out))
@@ -225,6 +245,11 @@ class ProposalCreateWizard(PermissionRequiredMixin,
     finish_section_text = _('You can add data or edit your proposal later.')
     finish_section_btn = _('Submit your proposal!')
 
+    def get_form_kwargs(self, step=None):
+        if step == '6':
+            return {'display_communication_camp_checkbox': False}
+        return {}
+
     def get_form_initial(self, step):
         initial = self.initial_dict.get(step, {})
         form = self.form_list[step]
@@ -250,7 +275,8 @@ class ProposalCreateWizard(PermissionRequiredMixin,
 
         archive.save()
 
-        special_fields = ['accept_conditions', 'co_workers_emails']
+        special_fields = ['accept_conditions', 'co_workers_emails',
+                          'confirm_publicity', 'confirm_collaboration_camp']
         data = self.get_all_cleaned_data()
         proposal = Proposal(
             idea_ptr=self.idea,

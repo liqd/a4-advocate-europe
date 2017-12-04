@@ -1,0 +1,26 @@
+{% extends 'advocate_europe_notifications/emails/follow.en.email' %}
+{% load verbose_name %}
+
+{% block subject %}
+"{{ idea.idea_title }}" was shortlisted.
+{% endblock %}
+
+{% block headline %}
+The idea "{{ idea.idea_title }}" was selected for the shortlist.
+{% endblock %}
+
+{% block content %}
+The idea "{{ idea.idea_title }}" was selected by the jury for the short list.
+The team behind the idea is now invited to the collaboration camp, where they
+can meet other inovators and team up to increase thier changes. Afterwards they
+can transform thier idea sketch into an proposal to participate in the final
+round.
+{% endblock %}
+
+{% block cta_url %}
+{{ email.get_host }}{{ idea.get_absolute_url }}
+{% endblock %}
+
+{% block cta_label %}
+Visit the idea sketch
+{% endblock %}

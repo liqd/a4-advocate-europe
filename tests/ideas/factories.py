@@ -89,7 +89,7 @@ class ProposalFactory(factory.django.DjangoModelFactory):
     is_on_shortlist = True
 
     @factory.post_generation
-    def initiators(self, create, extracted, **kwargs):
+    def co_workers(self, create, extracted, **kwargs):
         if not extracted:
             user = UserFactory()
             self.co_workers.add(user)

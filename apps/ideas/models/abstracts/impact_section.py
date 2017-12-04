@@ -1,20 +1,23 @@
 from django.db import models
 from django.utils.translation import ugettext as _
 
-CHALLENGE_TITLE = _('What problem or societal need are you working on?')
-CHALLENGE_HELP = _('max. 300 characters.')
-OUTCOME_TITLE = _('What would be a successful outcome for your project?')
-OUTCOME_HELP = _('If your project is selected, what will be different '
-                 'a year from now? What will have changed? '
-                 '(max. 300 characters).')
+CHALLENGE_TITLE = _('How will your idea strengthen democracy in Europe?')
+CHALLENGE_HELP = _('How does your idea address the challenges of democracy '
+                   'in Europe today? How does it suit our 2017-2018 call '
+                   'for ideas with its question “What if we took the stage? '
+                   'Ideas for democracy in Europe.”? (max. 300 characters) ')
+OUTCOME_TITLE = _('What would a successful outcome for your project be?')
+OUTCOME_HELP = _('If your project is selected, what will be different'
+                 ' a year from now? What will have changed? '
+                 '(max. 300 characters)')
 PLAN_TITLE = _('How do you plan to get there? Remember to highlight'
                ' what makes your project design or idea '
                'different and innovative.')
-PLAN_HELP = _('Describe as concretely as possible the '
-              'approach and / or the method '
-              'you will use when implementing your idea. '
-              'What are the steps you plan '
-              'to take? (max. 500 characters).')
+PLAN_HELP = _('Describe as concretely as possible '
+              'the approach and/or the method you '
+              'will use when implementing your idea. '
+              'What are the steps you plan to take? '
+              '(max. 500 characters)')
 IMPORTANCE_TITLE = _('Why is this idea important to you?')
 IMPORTANCE_HELP = _('What motivates you to bring this idea to life? '
                     'What is your story? What is your personal '
@@ -27,7 +30,7 @@ TARGET_GROUP_HELP = _('Which target groups, stakeholders, '
 MEMBERS_TITLE = _('Who is in your project team?')
 MEMBERS_HELP = _('Please introduce us to the main members'
                  ' of your project team and briefly '
-                 'summariese their experience and skills. '
+                 'summarise their experience and skills. '
                  '(max. 500 characters)')
 
 

@@ -8,11 +8,16 @@
 
 {% block content %}
 {% force_translation 'en' %}
-<div class="blogindex">
+<div class="custompage-blue">
     <div class="container">
-        <div class="blogindex-title">
+        <header class="custompage-header">
             <h1>{{ page.title }}</h1>
-        </div>
+            <p>{{ page.subtitle }}</p>
+        </header>
+    </div>
+</div>
+<div class="custompage-45">
+    <div class="container">
         <!-- Featured blog entry will be on first index page only -->
         {% if not blogs.has_previous and not category and page.featured_page.live %}
             {% include 'cms_blog/includes/blog_index_featured_item.html' %}
@@ -41,7 +46,7 @@
                         {% if post.image %}
                             {% image post.image fill-470x300 as image%}
                         {% endif %}
-                        <div class="hover-parent-bg-img blogindex-img col-xs-12 col-sm-5 col-sm-offset-3 col-md-5 col-md-offset-2" style="background-image: url({% if post.image %} {{ image.url }} {% else %} {% static 'images/placeholder_yellow.svg' %} {% endif %});">
+                        <div class="hover-parent blogindex-img col-xs-12 col-sm-5 col-sm-offset-3 col-md-5 col-md-offset-2">
                             <a href="{% pageurl post %}" class="hover-child-img" style="background-image: url({% if post.image %} {{ image.url }} {% else %} {% static 'images/placeholder_yellow.svg' %} {% endif %});">
                             </a>
                         </div>

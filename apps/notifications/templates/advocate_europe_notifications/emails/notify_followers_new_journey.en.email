@@ -1,0 +1,25 @@
+{% extends 'advocate_europe_notifications/emails/follow.en.email' %}
+{% load verbose_name %}
+
+{% block subject %}
+A new journey entry was added to a proposal.
+{% endblock %}
+
+{% block headline %}
+The journey entry "{{ action.obj.title }}" was added.
+{% endblock %}
+
+{% block content %}
+The team behind the proposal "{{ action.obj.idea.idea_title }}"
+provided new updates about thier project. Read about the progress in thier
+newest journey entry "{{ action.object.title }}".
+{{ action.obj.module.name }} competition.
+{% endblock %}
+
+{% block cta_url %}
+{{ email.get_host }}{{ action.obj.idea.get_absolute_url }}
+{% endblock %}
+
+{% block cta_label %}
+Visit the project journey
+{% endblock %}

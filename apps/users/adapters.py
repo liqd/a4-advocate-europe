@@ -1,4 +1,5 @@
 import re
+from urllib.parse import quote
 
 from allauth.account.adapter import DefaultAccountAdapter
 from django.utils.http import is_safe_url
@@ -23,7 +24,7 @@ class AccountAdapter(DefaultAccountAdapter):
     def get_email_confirmation_url(self, request, emailconfirmation):
         url = super().get_email_confirmation_url(request, emailconfirmation)
         if 'next' in request.POST and is_safe_url(request.POST['next']):
-            return '{}?next={}'.format(url, request.POST['next'])
+            return '{}?next={}'.format(url, quote(request.POST['next']))
         else:
             return url
 

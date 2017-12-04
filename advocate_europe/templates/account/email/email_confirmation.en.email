@@ -12,5 +12,5 @@ Your email address has been added to the username “{{ receiver.username }}” 
 {% block cta_label %}Confirm your email address{% endblock %}
 
 {% block reason %}
-This email was sent to {{ receiver.email }}. If you think this email was sent to you by mistake, you can ignore it. We will not send you any further emails. If you have any further questions, please contact us via info@opin.me
+This email was sent to {{ receiver.email }}. If you think this email was sent to you by mistake, you can ignore it. We will not send you any further emails. If you have any further questions, please contact us via help@advocate-europe.eu
 {% endblock %}

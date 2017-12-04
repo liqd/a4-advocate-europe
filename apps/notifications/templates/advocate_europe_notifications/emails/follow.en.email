@@ -1,0 +1,9 @@
+{% extends 'email_base.'|add:part_type %}
+{% load verbose_name %}
+
+{% block reason %}
+This email was sent to {{ receiver }}. This email was sent to you because you
+watch an idea. If you don’t want to receive these
+notifications anymore, you can unwatch the idea
+or disable notifications completely in your account settings.
+{% endblock %}

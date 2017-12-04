@@ -1,0 +1,25 @@
+{% extends 'advocate_europe_notifications/emails/follow.en.email' %}
+{% load verbose_name %}
+
+{% block subject %}
+"{{ idea.idea_title }}" has won.
+{% endblock %}
+
+{% block headline %}
+The proposal "{{ idea.idea_title }}" has won.
+{% endblock %}
+
+{% block content %}
+The proposal "{{ idea.idea_title }}" has won the {{ site.name }}
+{{ idea.module.name }} contest. It was choosen by the jury as one of
+best proposals. You can now follow the implementation of the proposal on the
+project journey.
+{% endblock %}
+
+{% block cta_url %}
+{{ email.get_host }}{{ idea.get_absolute_url }}
+{% endblock %}
+
+{% block cta_label %}
+Visit the project journey
+{% endblock %}

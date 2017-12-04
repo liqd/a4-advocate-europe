@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save
+from django.db.models import signals
 from django.dispatch import receiver
 
 from adhocracy4.actions.models import Action
@@ -6,17 +6,25 @@ from adhocracy4.actions.verbs import Verbs
 from adhocracy4.comments.models import Comment
 
 from apps.ideas.models import IdeaSketch, Proposal
+from apps.journeys.models import JourneyEntry
 
 from . import emails
 
 
-@receiver(post_save, sender=Action)
-def send_notification(sender, instance, created, **kwargs):
+@receiver(signals.post_save, sender=Action)
+def send_create_notification(sender, instance, created, **kwargs):
     action = instance
     if action.verb == Verbs.ADD.value:
+        modelcls = action.obj_content_type.model_class()
 
-        if (action.obj_content_type.model_class() is IdeaSketch
-                or action.obj_content_type.model_class() is Proposal):
+        if (modelcls is IdeaSketch):
             emails.SubmitNotification.send(action.obj)
-        elif action.obj_content_type.model_class() is Comment:
+        elif (modelcls is Proposal):
+            emails.SubmitNotification.send(action.obj)
+            emails.NotifyFollowersOnNewProposal.send(action)
+        elif (modelcls is Comment):
             emails.NotifyCreatorEmail.send(action)
+            emails.NotifyFollowersOnNewComment.send(action)
+        elif (modelcls is JourneyEntry):
+            emails.SubmitJourneyNotification.send(action.obj)
+            emails.NotifyFollowersOnNewJourney.send(action)
