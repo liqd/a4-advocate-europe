@@ -4,7 +4,6 @@ from django.dispatch import receiver
 from adhocracy4.actions.models import Action
 from adhocracy4.actions.verbs import Verbs
 from adhocracy4.comments.models import Comment
-
 from apps.ideas.models import IdeaSketch, Proposal
 from apps.journeys.models import JourneyEntry
 

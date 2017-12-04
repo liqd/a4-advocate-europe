@@ -1,5 +1,4 @@
 from django.utils.translation import ugettext_lazy as _
-
 from django_countries import Countries
 
 

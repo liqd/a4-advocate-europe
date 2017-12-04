@@ -2,7 +2,6 @@ from django.conf.urls import url
 
 from . import USERNAME_REGEX, views
 
-
 urlpatterns = [
     url(
         '^profile/(?P<username>{})/$'.format(USERNAME_REGEX[1:-1]),

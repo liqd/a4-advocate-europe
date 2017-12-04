@@ -2,6 +2,7 @@ import crispy_forms as crisp
 from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, Submit
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+
 from cms.contrib import helpers
 
 from .models import User

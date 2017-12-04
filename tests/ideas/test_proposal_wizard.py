@@ -1,8 +1,8 @@
 import pytest
 from django.core.urlresolvers import reverse
+
 from apps.ideas.models import IdeaSketch, IdeaSketchArchived, Proposal
 from apps.ideas.phases import FullProposalPhase
-
 from tests.helpers import active_phase
 
 

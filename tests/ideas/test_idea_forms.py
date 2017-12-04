@@ -1,5 +1,4 @@
 import pytest
-
 from django import forms
 
 from apps.ideas import forms as idea_forms

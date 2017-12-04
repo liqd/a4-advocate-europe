@@ -10,7 +10,6 @@ from adhocracy4.projects.models import Project
 
 from . import countries, models
 
-
 STATUS_FILTER_CHOICES = [
     ('idea_sketch', _('Idea Sketch')),
     ('community_award', _('Community Award Winner')),

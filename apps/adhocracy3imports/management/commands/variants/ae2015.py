@@ -1,9 +1,5 @@
-from .helpers import (bool_map,
-                      concat,
-                      download_file,
-                      floatstr_to_int,
-                      map_and_append,
-                      parse_year)
+from .helpers import (bool_map, concat, download_file, floatstr_to_int,
+                      map_and_append, parse_year)
 
 # Subresources and sheets that still require a mapping:
 #

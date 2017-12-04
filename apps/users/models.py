@@ -6,7 +6,6 @@ from django.db.models import Q
 from django.templatetags.static import static
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
 from easy_thumbnails.files import get_thumbnailer
 
 from adhocracy4.images import fields
