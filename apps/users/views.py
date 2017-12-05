@@ -6,7 +6,6 @@ from django.views import generic
 from rules.compat import access_mixins as mixins
 
 from adhocracy4.filters import views as filter_views
-
 from apps.ideas import mixins as idea_mixins
 from apps.ideas import models as idea_models
 

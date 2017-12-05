@@ -9,7 +9,6 @@ from adhocracy4.test import helpers
 
 from . import factories
 
-
 register(factories.UserFactory)
 register(factories.UserFactory, 'user2')
 register(factories.AdminFactory, 'admin')

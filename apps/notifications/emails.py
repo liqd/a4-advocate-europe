@@ -2,7 +2,6 @@ from django.contrib import auth
 
 from adhocracy4 import emails
 
-
 User = auth.get_user_model()
 
 

@@ -38,6 +38,7 @@ def get_organisation_model():
             ).format(settings.A4_ORGANISATIONS_MODEL)
         )
 
+
 Organisation = get_organisation_model()
 
 

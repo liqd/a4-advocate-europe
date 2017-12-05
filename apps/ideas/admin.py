@@ -8,33 +8,45 @@ from . import models as idea_models
 
 def set_is_on_shortlist_true(modeladmin, request, queryset):
     queryset.update(is_on_shortlist=True)
+
+
 set_is_on_shortlist_true.short_description = 'add to shortlist'
 
 
 def set_is_on_shortlist_false(modeladmin, request, queryset):
     queryset.update(is_on_shortlist=False)
+
+
 set_is_on_shortlist_false.short_description = 'remove from shortlist'
 
 
 def set_community_award_winner_true(modeladmin, request, queryset):
     queryset.update(community_award_winner=True)
+
+
 set_community_award_winner_true.\
     short_description = 'Set to community award winner'
 
 
 def set_community_award_winner_false(modeladmin, request, queryset):
     queryset.update(community_award_winner=False)
+
+
 set_community_award_winner_false.\
     short_description = 'Unset community award winner'
 
 
 def set_is_winner_true(modeladmin, request, queryset):
     queryset.update(is_winner=True)
+
+
 set_is_winner_true.short_description = 'Set to winner'
 
 
 def set_is_winner_false(modeladmin, request, queryset):
     queryset.update(is_winner=False)
+
+
 set_is_winner_false.short_description = 'Unset winner'
 
 

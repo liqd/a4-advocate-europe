@@ -1,11 +1,9 @@
 import pytest
-
 from django.core import mail
 from django.core.urlresolvers import reverse
 
 from apps.ideas.models import IdeaSketch
 from apps.ideas.phases import IdeaSketchPhase
-
 from tests.helpers import active_phase
 
 

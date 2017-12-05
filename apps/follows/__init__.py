@@ -30,4 +30,5 @@ class Registry:
         name = target_model._meta.model_name
         cls._follow_model = cls._create_follow_class(name, target_model)
 
+
 register_follow = Registry.register_follow

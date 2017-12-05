@@ -1,6 +1,5 @@
 from django.apps import AppConfig
 
-
 from adhocracy4.actions.verbs import Verbs
 
 

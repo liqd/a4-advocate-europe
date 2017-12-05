@@ -4,7 +4,6 @@ from django.forms.utils import flatatt
 from django.utils.translation import ugettext_lazy as _
 
 from adhocracy4.filters.filters import DefaultsFilterSet
-
 from apps.ideas import models as idea_models
 
 

@@ -2,7 +2,6 @@ import pytest
 from django.core.urlresolvers import reverse
 
 from apps.ideas import phases
-
 from tests.helpers import active_phase
 
 

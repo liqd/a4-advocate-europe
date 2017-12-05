@@ -1,12 +1,10 @@
 import pytest
-
 from django import forms
 from django.contrib.auth.models import AnonymousUser
 from django.http import Http404
 from django.views import generic
 
 from apps.ideas import mixins, models, phases
-
 from tests.helpers import active_phase
 
 
