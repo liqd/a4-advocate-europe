@@ -1,4 +1,4 @@
-{% load wagtailimages_tags %}
+{% load wagtailimages_tags wagtailcore_tags %}
 
 <div class="container-medium three-image-block block">
     {% if value.title %}
@@ -7,19 +7,19 @@
     <div class="row three-image-block-row">
         {% if value.image_left %}
         <div class="col-lg-4 col-sm-12 three-image-block-image-container">
-            {{ value.image_left }}
+            {% include_block value.image_left %}
         </div>
         {% endif %}
 
          {% if value.image_middle %}
         <div class="col-lg-4 col-sm-12 three-image-block-image-container">
-            {{ value.image_middle }}
+            {% include_block value.image_middle %}
         </div>
         {% endif %}
 
          {% if value.image_right %}
         <div class="col-lg-4 col-sm-12 three-image-block-image-container">
-            {{ value.image_right }}
+            {% include_block value.image_right %}
         </div>
         {% endif %}
 

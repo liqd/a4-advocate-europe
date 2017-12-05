@@ -1,14 +1,12 @@
 {% extends "base.html" %}
-
+{% load wagtailcore_tags %}
 {% block title %} {{ page.translated_title }} {% endblock %}
 
 {% block content %}
     <div class="container simple-page">
         <div class="col-md-6 col-md-offset-3">
             <h1>{{ page.translated_title }}</h1>
-            {% for block in page.body %}
-                {{ block }}
-            {% endfor %}
+            {% include_block page.body %}
         </div>
     </div>
 {% endblock %}

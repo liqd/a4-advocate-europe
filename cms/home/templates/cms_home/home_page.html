@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailimages_tags absolute_url %}
+{% load wagtailimages_tags wagtailcore_tags absolute_url %}
 
 {% block social_meta %}
     <meta name="twitter:card" content="summary">
@@ -32,8 +32,6 @@
 
         {% include "cms_home/includes/home_hero_unit.html" with image=page.random_image title=page.translated_title website=page.website link_text=page.website_link_text videoplayer_url=page.videoplayer_url video_button_text=page.video_button_text description=page.description %}
 
-        {% for block in page.body %}
-            {{ block }}
-        {% endfor %}
+    {% include_block page.body %}
 
 {% endblock %}
