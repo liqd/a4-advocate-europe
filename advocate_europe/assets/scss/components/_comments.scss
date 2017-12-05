@@ -8,6 +8,7 @@
         border-radius: 5px;
         background-color: $ae-lighter-gray;
         border: 1px solid $ae-light-gray-shadow;
+
         @include rem(font-size, 14px);
     }
 
