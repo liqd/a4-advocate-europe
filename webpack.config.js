@@ -2,7 +2,7 @@ var BundleTracker = require('webpack-bundle-tracker')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var path = require('path')
-var webpack = require("webpack");
+var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 
 
@@ -32,10 +32,8 @@ module.exports = {
       'jquery',
       'react',
       'react-dom',
-      'react-flip-move',
       'react-addons-update',
       'classnames',
-      'moment',
       'font-awesome/scss/font-awesome.scss',
       './advocate_europe/assets/js/jquery-fix.js',
       'bootstrap-sass',
@@ -47,8 +45,8 @@ module.exports = {
   output: {
     libraryTarget: 'var',
     library: '[name]',
-    path: './advocate_europe/static/',
-    publicPath: "/static/",
+    path: path.resolve('./advocate_europe/static/'),
+    publicPath: '/static/',
     filename: '[name].js'
   },
   externals: {
@@ -61,12 +59,34 @@ module.exports = {
         exclude: /node_modules\/(?!adhocracy4)/,  // exclude all dependencies but adhocracy4
         loader: 'babel-loader',
         query: {
-          presets: ['babel-preset-es2015', 'babel-preset-react'].map(require.resolve)
+          presets: ['babel-preset-env', 'babel-preset-react'].map(require.resolve)
         }
       },
       {
         test: /\.s?css$/,
-        loader: ExtractTextPlugin.extract('style?sourceMap','!css?sourceMap!postcss?sourceMap!sass?sourceMap')
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss',
+                plugins: (loader) => [
+                  autoprefixer({browsers: ['last 3 versions', 'ie >= 10']})
+                ]
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                includePaths: [
+                  path.resolve('./node_modules/bootstrap-sass/assets/stylesheets')
+                ]
+              }
+            }
+          ]
+        })
       },
       {
         test: /fonts\/.*\.(svg|woff2?|ttf|eot)(\?.*)?$/,
@@ -78,22 +98,17 @@ module.exports = {
       }
     ]
   },
-  postcss: [
-    autoprefixer({browsers: ['last 3 versions', 'ie >= 10']})
-  ],
   resolve: {
-    fallback: path.join(__dirname, 'node_modules'),
-    extensions: ['', '.js', '.jsx', '.scss', '.css']
-  },
-  resolveLoader: { fallback: path.join(__dirname, "node_modules") },
-  sassLoader: {
-    includePaths: [
-      path.resolve('./node_modules/bootstrap-sass/assets/stylesheets')
-    ]
+    extensions: ['*', '.js', '.jsx', '.scss', '.css'],
+    // when using `npm link`, dependencies are resolved against the linked
+    // folder by default. This may result in dependencies being included twice.
+    // Setting `resolve.root` forces webpack to resolve all dependencies
+    // against the local directory.
+    modules: [path.resolve('./node_modules')]
   },
   plugins: [
     new BundleTracker({filename: './webpack-stats.json'}),
-    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.js"),
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.js'}),
     new ExtractTextPlugin('[name].css'),
     new CopyWebpackPlugin([
       {

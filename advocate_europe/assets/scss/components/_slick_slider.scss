@@ -54,6 +54,7 @@
 
     .slick-list {
         overflow: visible;
+
         @include rem(padding, 20px 0 0);
 
         @media (max-width: $screen-md-min) {
@@ -71,7 +72,9 @@
 
     .slick-dots {
         list-style: none;
+
         @include rem(margin-bottom, 15px);
+
         padding-left: 0;
         overflow: hidden;
 
