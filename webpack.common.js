@@ -27,7 +27,6 @@ module.exports = {
       './advocate_europe/assets/js/app.js',
     adhocracy4css:
       './advocate_europe/assets/scss/all.scss',
-
     vendor: [
       'jquery',
       'react',
@@ -41,7 +40,6 @@ module.exports = {
       'slick-carousel/slick/slick.css',
     ]
   },
-  devtool: 'eval',
   output: {
     libraryTarget: 'var',
     library: '[name]',
