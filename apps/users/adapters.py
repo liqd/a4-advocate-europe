@@ -9,7 +9,7 @@ from adhocracy4.emails.mixins import SyncEmailMixin
 from apps.users import USERNAME_REGEX
 
 
-class AccountEmail(Email, SyncEmailMixin):
+class AccountEmail(SyncEmailMixin, Email):
     def get_receivers(self):
         return [self.object]
 
