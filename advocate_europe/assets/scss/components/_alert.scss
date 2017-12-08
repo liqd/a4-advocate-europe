@@ -1,0 +1,10 @@
+/* Style a4 alerts based on boostrap alerts (for Comments) */
+
+.alert--danger {
+    @extend .alert-danger;
+}
+
+.alert__close {
+    float: right;
+    color: inherit;
+}

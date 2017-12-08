@@ -1,4 +1,4 @@
-git+git://github.com/liqd/adhocracy4.git@9f39f9da4ed37d328da0e9e09882944302f94c6e
+git+git://github.com/liqd/adhocracy4.git@87d3dcf4778c1d78b69a30bc7d579591e0892277
 bcrypt==3.1.4
 Django>=1.11,<1.12
 wagtail==1.13
