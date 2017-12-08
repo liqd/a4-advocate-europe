@@ -3,7 +3,6 @@ let django = require('django')
 let React = require('react')
 
 class SupportButton extends React.Component {
-
   constructor (props) {
     super(props)
 
@@ -64,42 +63,40 @@ class SupportButton extends React.Component {
   }
 
   render () {
-    if(this.props.renderMobile) {
+    if (this.props.renderMobile) {
       return (
-          <button
-            href="#"
-            onClick={this.updateSupport.bind(this)}
-            className="btn btn-idea"
-            disabled={this.props.isReadOnly}
-            role="button"
-            aria-label="{django.gettext('Support')}">
-              {this.state.userSupport == 1
-                ? <i className="fa fa-heart" aria-hidden="true"></i>
-                : <i className="fa fa-heart-o" aria-hidden="true"></i>
+        <button
+          href='#'
+          onClick={this.updateSupport.bind(this)}
+          className='btn btn-idea'
+          disabled={this.props.isReadOnly}
+          role='button'      
+          aria-label="{django.gettext('Support')}">
+          {this.state.userSupport === 1
+                ? <i className='fa fa-heart' aria-hidden='true' />
+                : <i className='fa fa-heart-o' aria-hidden='true' />
               }
-            <span className="support-count"> {this.state.supports}</span>
-            <p className="btn-idea-label">{django.gettext('Support')}</p>
-          </button>
+          <span className='support-count'> {this.state.supports}</span>
+          <p className='btn-idea-label'>{django.gettext('Support')}</p>
+        </button>
       )
-    }
-    else {
+    } else {
       return (
-        <div className="btn-group ideadetail-support-btn-group" role="group">
+        <div className='btn-group ideadetail-support-btn-group' role='group'>
           <button
-            className="btn btn-primary"
+            className='btn btn-primary'
             disabled={this.props.isReadOnly}
             onClick={this.updateSupport.bind(this)}>
-            {this.state.userSupport == 1
-              ? <i className="fa fa-heart" aria-hidden="true"></i>
-              : <i className="fa fa-heart-o" aria-hidden="true"></i>
+            {this.state.userSupport === 1
+              ? <i className='fa fa-heart' aria-hidden='true' />
+              : <i className='fa fa-heart-o' aria-hidden='true' />
             } {django.gettext('Support')}
           </button>
-          <div className="btn btn-addon">{this.state.supports}</div>
+          <div className='btn btn-addon'>{this.state.supports}</div>
         </div>
       )
     }
   }
-
 }
 
 module.exports = SupportButton

@@ -1,6 +1,0 @@
-{
-  "extends": ["standard", "standard-jsx"],
-  "rules": {
-    "jsx-quotes": [2, "prefer-double"]
-  }
-}
