@@ -1,9 +1,8 @@
 from .base import *
 
-COMPRESS = True
-COMPRESS_OFFLINE = True
-
 DEBUG = False
+
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 try:
     from .local import *
