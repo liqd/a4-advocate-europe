@@ -6,7 +6,7 @@ feedparser==5.2.1
 python-dateutil==2.6.1
 django-allauth==0.34.0
 django-ckeditor==5.4.0
-django-filter==1.0.4
+django-filter==1.1.0
 django-crispy-forms==1.6.1
 django-formtools==2.1
 django-widget-tweaks==1.4.1
