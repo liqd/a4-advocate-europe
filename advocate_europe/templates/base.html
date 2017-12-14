@@ -1,4 +1,4 @@
-{% load i18n static wagtailuserbar webpack_loader absolute_url %}
+{% load i18n static wagtailuserbar absolute_url %}
 {% get_current_language as LANGUAGE_CODE %}
 
 
@@ -41,8 +41,8 @@
             <meta property="og:image:height" content="129">
         {% endblock %}
 
-        {% render_bundle 'vendor' 'css' %}
-        {% render_bundle 'adhocracy4css' 'css' %}
+        <link rel="stylesheet" href="{% static 'vendor.css' %}">
+        <link rel="stylesheet" href="{% static 'adhocracy4.css' %}">
 
         {# Global javascript #}
         <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
@@ -50,9 +50,8 @@
             var django = window.django || (window.django = {});
             django.languageCode = '{{ request.LANGUAGE_CODE }}';
         </script>
-
-        {% render_bundle 'vendor' 'js' %}
-        {% render_bundle 'adhocracy4' 'js' %}
+        <script type="text/javascript" src="{% static 'vendor.js' %}"></script>
+        <script type="text/javascript" src="{% static 'adhocracy4.js' %}"></script>
     </head>
 
     <body>

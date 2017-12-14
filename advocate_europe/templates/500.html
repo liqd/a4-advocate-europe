@@ -1,9 +1,9 @@
-{% load i18n static webpack_loader %}
+{% load i18n static %}
 <html>
     <head>
         <title>Error | Advocate Europe</title>
-        {% render_bundle 'vendor' 'css' %}
-        {% render_bundle 'adhocracy4css' 'css' %}
+        <link rel="stylesheet" href="{% static 'vendor.css' %}">
+        <link rel="stylesheet" href="{% static 'adhcoracy4.css' %}">
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top" aria-label="{% trans 'main menu' %}">
