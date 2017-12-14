@@ -20,10 +20,11 @@ class HelpPages(BaseSetting):
     communication_camp_help_page = models.ForeignKey(
         'wagtailcore.Page',
         related_name="help_page_communication_camp",
+        verbose_name='Idea Challenge Help Page',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        help_text="Please add a link to the page that explains the communication camp here.")
+        help_text="Please add a link to the page that explains the idea challenge camp here.")
     annual_theme_help_page = models.ForeignKey(
         'wagtailcore.Page',
         related_name="help_page_annual_theme",
@@ -59,3 +60,6 @@ class CollaborationCampSettings(BaseSetting):
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
     description = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name = 'Idea Challenge Settings'
