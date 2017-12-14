@@ -15,8 +15,8 @@ from adhocracy4.ratings import models as rating_models
 from apps.follows import register_follow
 
 from .abstracts.applicant_section import AbstractApplicantSection
-from .abstracts.collaboration_camp_section import \
-    AbstractCollaborationCampSection
+from .abstracts.idea_challenge_camp_section import \
+    AbstractIdeaChallengeCampSection
 from .abstracts.community_section import AbstractCommunitySection
 from .abstracts.finances_duration_section import \
     AbstractFinanceAndDurationSection
@@ -93,7 +93,7 @@ class Idea(AbstractIdea, Item):
 register_follow(Idea)
 
 
-class IdeaSketch(Idea, AbstractCollaborationCampSection):
+class IdeaSketch(Idea, AbstractIdeaChallengeCampSection):
 
     def __str__(self):
         return '{} (Ideasketch)'.format(self.idea_title)
@@ -101,7 +101,7 @@ class IdeaSketch(Idea, AbstractCollaborationCampSection):
 
 class IdeaSketchArchived(
         UserGeneratedContentModel,
-        AbstractCollaborationCampSection,
+        AbstractIdeaChallengeCampSection,
         AbstractIdea,
 ):
     idea = models.OneToOneField(Idea, related_name='idea_sketch_archived')

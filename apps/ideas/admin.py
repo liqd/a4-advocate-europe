@@ -219,7 +219,7 @@ class IdeaSketchAdmin(admin.ModelAdmin):
         ('Collaboration Camp', {
             'fields':
                 tuple([field.name for field
-                       in idea_models.AbstractCollaborationCampSection
+                       in idea_models.AbstractIdeaChallengeCampSection
                        ._meta.get_fields()]),
         }),
     )

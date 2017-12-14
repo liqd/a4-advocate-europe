@@ -11,11 +11,11 @@ from cms.contrib import helpers
 
 from . import models
 from .models.abstracts.applicant_section import AbstractApplicantSection
-from .models.abstracts.collaboration_camp_section import \
-    AbstractCollaborationCampSection
 from .models.abstracts.community_section import AbstractCommunitySection
 from .models.abstracts.finances_duration_section import \
     AbstractFinanceAndDurationSection
+from .models.abstracts.idea_challenge_camp_section import \
+    AbstractIdeaChallengeCampSection
 from .models.abstracts.idea_section import AbstractIdeaSection
 from .models.abstracts.impact_section import AbstractImpactSection
 from .models.abstracts.partners_section import AbstractPartnersSection
@@ -30,14 +30,14 @@ CONFIRM_PUBLICITY_LABEL = _('I hereby confirm and agree that '
 ACCEPT_CONDITIONS_LABEL = _('I hereby agree to the {}terms'
                             ' and conditions{} of the Advocate'
                             ' Europe idea challenge.')
-CONFIRM_COLLABORATION_CAMP_WITH_DATE = _('If selected, a representative of '
-                                         'my project will commit to joining '
-                                         'the Collaboration Camp '
-                                         'from {} to {}.')
-CONFIRM_COLLABORATION_CAMP_WITHOUT_DATE = _('If selected, a representative '
-                                            'of my project will commit '
-                                            'to joining the Collaboration '
-                                            'Camp at the end of April 2018.')
+CONFIRM_IDEA_CHALLENGE_CAMP_WITH_DATE = _('If selected, a representative of '
+                                          'my project will commit to joining '
+                                          'the Idea Challenge Camp '
+                                          'from {} to {}.')
+CONFIRM_IDEA_CHALLENGE_CAMP_WITHOUT_DATE = _('If selected, a representative '
+                                             'of my project will commit '
+                                             'to joining the Idea Challenge '
+                                             'Camp at the end of April 2018.')
 
 COWORKERS_TITLE = _('Please add your team members here.')
 COWORKERS_HELP = _('Here you can insert the email addresses of '
@@ -49,9 +49,9 @@ COWORKERS_HELP = _('Here you can insert the email addresses of '
 
 COWORKERS_EDIT_TITLE = _('Your team members')
 
-COLLABORATION_CAMP_OPTION_LINK = _('More information about '
-                                   'the {}Collaboration Camp{}. '
-                                   '(max. 150 characters)')
+IDEA_CHALLENGE_CAMP_OPTION_LINK = _('More information about '
+                                    'the {}Idea Challenge Camp{}. '
+                                    '(max. 150 characters)')
 
 
 class BaseForm(forms.ModelForm):
@@ -248,25 +248,25 @@ class ImpactSectionForm(BaseForm):
             "annual_theme_help_page")
 
 
-class CollaborationCampSectionForm(BaseForm):
-    section_name = _('Collaboration camp')
+class IdeaChallengeCampSectionForm(BaseForm):
+    section_name = _('Idea Challenge Camp')
 
     class Meta:
-        model = AbstractCollaborationCampSection
+        model = AbstractIdeaChallengeCampSection
         fields = [
-            'collaboration_camp_represent',
-            'collaboration_camp_benefit'
+            'idea_challenge_camp_represent',
+            'idea_challenge_camp_benefit'
         ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        if helpers.get_collaboration_camp_settings().description:
+        if helpers.get_idea_challenge_camp_settings().description:
             self.section_description = \
-                helpers.get_collaboration_camp_settings().description
-        self.fields['collaboration_camp_represent'].help_text = \
+                helpers.get_idea_challenge_camp_settings().description
+        self.fields['idea_challenge_camp_represent'].help_text = \
             helpers.add_link_to_helptext(
-            self.fields['collaboration_camp_represent'].help_text,
-            "communication_camp_help_page", COLLABORATION_CAMP_OPTION_LINK)
+            self.fields['idea_challenge_camp_represent'].help_text,
+            "communication_camp_help_page", IDEA_CHALLENGE_CAMP_OPTION_LINK)
 
 
 class CommunitySectionForm(CoWorkersEmailsFormMixin, BaseForm):
@@ -277,23 +277,23 @@ class CommunitySectionForm(CoWorkersEmailsFormMixin, BaseForm):
         label=COWORKERS_TITLE)
     confirm_publicity = forms.BooleanField(label=CONFIRM_PUBLICITY_LABEL)
     accept_conditions = forms.BooleanField(label='')
-    confirm_collaboration_camp = forms.BooleanField(
-        label=CONFIRM_COLLABORATION_CAMP_WITHOUT_DATE)
+    confirm_idea_challenge_camp = forms.BooleanField(
+        label=CONFIRM_IDEA_CHALLENGE_CAMP_WITHOUT_DATE)
 
     def __init__(self, *args, **kwargs):
-        self.display_communication_camp_section = \
-            kwargs.pop('display_communication_camp_checkbox')
+        self.display_idea_challenge_camp_section = \
+            kwargs.pop('display_idea_challenge_camp_checkbox')
         super().__init__(*args, **kwargs)
         self.fields['accept_conditions'].label = helpers.add_link_to_helptext(
             self.fields['accept_conditions'].label, "terms_of_use_page",
             ACCEPT_CONDITIONS_LABEL)
-        settings = helpers.get_collaboration_camp_settings()
+        settings = helpers.get_idea_challenge_camp_settings()
         if settings.start_date and settings.end_date:
-            self.fields['confirm_collaboration_camp'].label = \
-                CONFIRM_COLLABORATION_CAMP_WITH_DATE.format(
+            self.fields['confirm_idea_challenge_camp'].label = \
+                CONFIRM_IDEA_CHALLENGE_CAMP_WITH_DATE.format(
                     settings.start_date, settings.end_date)
-        if not self.display_communication_camp_section:
-            del self.fields['confirm_collaboration_camp']
+        if not self.display_idea_challenge_camp_section:
+            del self.fields['confirm_idea_challenge_camp']
 
     class Meta:
         model = AbstractCommunitySection

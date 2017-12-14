@@ -1,17 +1,18 @@
 from django.conf.urls import url
 
 from . import views
-from .forms import (ApplicantSectionForm, CollaborationCampSectionForm,
-                    CommunitySectionForm, FinanceAndDurationSectionForm,
-                    FinishForm, IdeaSectionForm, ImpactSectionForm,
-                    PartnersSectionForm, SelectionCriteriaSectionForm)
+from .forms import (ApplicantSectionForm, CommunitySectionForm,
+                    FinanceAndDurationSectionForm, FinishForm,
+                    IdeaChallengeCampSectionForm, IdeaSectionForm,
+                    ImpactSectionForm, PartnersSectionForm,
+                    SelectionCriteriaSectionForm)
 
 urlpatterns = [
     url(r'create/module/(?P<slug>[-\w_]+)/$',
         views.IdeaSketchCreateWizard.as_view(
             [ApplicantSectionForm, PartnersSectionForm,
              IdeaSectionForm, ImpactSectionForm,
-             CollaborationCampSectionForm,
+             IdeaChallengeCampSectionForm,
              CommunitySectionForm, FinishForm]), name='idea-sketch-create'),
     url(r'^archived/(?P<slug>[-\w_]+)/$',
         views.IdeaSketchArchivedDetailView.as_view(),
