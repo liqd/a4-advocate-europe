@@ -103,17 +103,17 @@ def test_ideasketch_create_wizard(client, user, module):
             '3-members': 'Me and my ball',
         }
 
-        # Form 5 (Collaboration camp)
+        # Form 5 (Idea Challenge camp)
         response = client.post(url, data)
         assert response.status_code == 200
 
         data = {
             'idea_sketch_create_wizard-current_step': '4',
 
-            '4-collaboration_camp_option': 'not_sure',
-            '4-collaboration_camp_represent': 'Mr. Not So Sure',
-            '4-collaboration_camp_email': 'email@example.com',
-            '4-collaboration_camp_benefit': 'We will be very sure afterwards',
+            '4-idea_challenge_camp_option': 'not_sure',
+            '4-idea_challenge_camp_represent': 'Mr. Not So Sure',
+            '4-idea_challenge_camp_email': 'email@example.com',
+            '4-idea_challenge_camp_benefit': 'We will be very sure afterwards',
         }
 
         # Form 6 (Community)
@@ -126,7 +126,7 @@ def test_ideasketch_create_wizard(client, user, module):
             '5-how_did_you_hear': 'personal_contact',
             '5-accept_conditions': True,
             '5-confirm_publicity': True,
-            '5-confirm_collaboration_camp': True
+            '5-confirm_idea_challenge_camp': True
         }
 
         # Form 7 (Finish)
