@@ -62,4 +62,4 @@ class CollaborationCampSettings(BaseSetting):
     description = models.TextField(blank=True)
 
     class Meta:
-        verbose_name = 'Idea Challenge Settings'
+        verbose_name = 'Idea Challenge Camp Settings'
