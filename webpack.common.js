@@ -1,4 +1,3 @@
-var BundleTracker = require('webpack-bundle-tracker')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var path = require('path')
@@ -23,10 +22,10 @@ var autoprefixer = require('autoprefixer');
 
 module.exports = {
   entry: {
-    adhocracy4:
-      './advocate_europe/assets/js/app.js',
-    adhocracy4css:
+    adhocracy4: [
       './advocate_europe/assets/scss/all.scss',
+      './advocate_europe/assets/js/app.js'
+    ],
     vendor: [
       'jquery',
       'react',
@@ -37,7 +36,7 @@ module.exports = {
       './advocate_europe/assets/js/jquery-fix.js',
       'bootstrap-sass',
       'slick-carousel/slick/slick.min.js',
-      'slick-carousel/slick/slick.css',
+      'slick-carousel/slick/slick.css'
     ]
   },
   output: {
@@ -105,7 +104,6 @@ module.exports = {
     modules: [path.resolve('./node_modules')]
   },
   plugins: [
-    new BundleTracker({filename: './webpack-stats.json'}),
     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.js'}),
     new ExtractTextPlugin('[name].css'),
     new CopyWebpackPlugin([
