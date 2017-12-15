@@ -108,12 +108,12 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
         if step == '0':
             return {'end_date': self.end_date}
         if step == '5':
-            return {'display_communication_camp_checkbox': True}
+            return {'display_idea_challenge_camp_checkbox': True}
         return {}
 
     def done(self, form_list, **kwargs):
         special_fields = ['accept_conditions', 'co_workers_emails',
-                          'confirm_publicity', 'confirm_collaboration_camp']
+                          'confirm_publicity', 'confirm_idea_challenge_camp']
 
         data = self.get_all_cleaned_data()
         idea_sketch = IdeaSketch.objects.create(
@@ -155,7 +155,7 @@ class IdeaSketchEditView(
         forms.PartnersSectionForm,
         forms.IdeaSectionForm,
         forms.ImpactSectionForm,
-        forms.CollaborationCampSectionForm,
+        forms.IdeaChallengeCampSectionForm,
         forms.CommunitySectionEditForm,
     ]
 
@@ -247,7 +247,7 @@ class ProposalCreateWizard(PermissionRequiredMixin,
 
     def get_form_kwargs(self, step=None):
         if step == '6':
-            return {'display_communication_camp_checkbox': False}
+            return {'display_idea_challenge_camp_checkbox': False}
         return {}
 
     def get_form_initial(self, step):
@@ -276,7 +276,7 @@ class ProposalCreateWizard(PermissionRequiredMixin,
         archive.save()
 
         special_fields = ['accept_conditions', 'co_workers_emails',
-                          'confirm_publicity', 'confirm_collaboration_camp']
+                          'confirm_publicity', 'confirm_idea_challenge_camp']
         data = self.get_all_cleaned_data()
         proposal = Proposal(
             idea_ptr=self.idea,

@@ -26,7 +26,7 @@ def add_link_to_helptext(help_text, help_page_name, link_text=None):
     return help_text
 
 
-def get_collaboration_camp_settings():
+def get_idea_challenge_camp_settings():
     site = Site.objects.filter(
         is_default_site=True
     ).first()
