@@ -38,8 +38,8 @@
       "description": "Add your idea sketches.",
       "type": "advocate_europe_ideas:010:ideas_sketch",
       "module": 1,
-      "start_date": "2017-05-01 12:00:00",
-      "end_date": "2018-05-01 12:00:00",
+      "start_date": "2017-05-01 12:00:00+01:00",
+      "end_date": "2018-05-01 12:00:00+01:00",
       "weight": 10
     }
   }
