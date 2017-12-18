@@ -100,6 +100,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.locale.LocaleMiddleware',
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
+    'csp.middleware.CSPMiddleware',
 ]
 
 SITE_ID = 1
@@ -340,3 +341,5 @@ A4_ACTIONABLES = (
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CRISPY_FAIL_SILENTLY = False
+
+CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
