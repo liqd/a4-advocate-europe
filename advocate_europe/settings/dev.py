@@ -9,6 +9,9 @@ for template_engine in TEMPLATES:
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'b*1ljsb!x7@d_o$sohx-&q-7n*#r=lwhy542zxk(e=fj%ey3xp'
 
+# enable unsafe-eval for webpack source maps
+if DEBUG == True:
+    CSP_SCRIPT_SRC = ("'self'", "'unsafe-eval'")
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
