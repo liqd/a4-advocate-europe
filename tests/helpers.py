@@ -3,13 +3,14 @@ from datetime import datetime, timedelta
 from unittest import mock
 
 from freezegun import freeze_time
+from pytz import timezone
 
 from adhocracy4.emails.base import EmailBase
 
 
 @contextmanager
 def active_phase(module, phase_type):
-    now = datetime.now()
+    now = datetime.now(timezone('Europe/Berlin'))
     phase = module.phase_set.create(
         start_date=now,
         end_date=now + timedelta(days=1),
