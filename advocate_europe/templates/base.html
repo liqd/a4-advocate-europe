@@ -46,10 +46,6 @@
 
         {# Global javascript #}
         <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
-        <script>
-            var django = window.django || (window.django = {});
-            django.languageCode = '{{ request.LANGUAGE_CODE }}';
-        </script>
         <script type="text/javascript" src="{% static 'vendor.js' %}"></script>
         <script type="text/javascript" src="{% static 'adhocracy4.js' %}"></script>
     </head>
