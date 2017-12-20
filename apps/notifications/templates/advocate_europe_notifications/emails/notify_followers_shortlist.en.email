@@ -6,15 +6,11 @@
 {% endblock %}
 
 {% block headline %}
-The idea "{{ idea.idea_title }}" was selected for the shortlist.
+The idea sketch "{{ idea.idea_title }}" was selected for the shortlist.
 {% endblock %}
 
 {% block content %}
-The idea "{{ idea.idea_title }}" was selected by the jury for the short list.
-The team behind the idea is now invited to the idea challenge camp, where they
-can meet other inovators and team up to increase thier changes. Afterwards they
-can transform thier idea sketch into an proposal to participate in the final
-round.
+ The idea sketch "{{ idea.idea_title }}" was selected for the shortlist. The team behind the idea is now invited to the Idea Challenge Camp. Afterwards they can transform their idea sketch into a project proposal to participate in the final round.
 {% endblock %}
 
 {% block cta_url %}

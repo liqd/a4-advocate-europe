@@ -10,10 +10,7 @@ The journey entry "{{ action.obj.title }}" was added.
 {% endblock %}
 
 {% block content %}
-The team behind the proposal "{{ action.obj.idea.idea_title }}"
-provided new updates about thier project. Read about the progress in thier
-newest journey entry "{{ action.object.title }}".
-{{ action.obj.module.name }} competition.
+The team behind the proposal "{{ action.obj.idea.idea_title }}" updated their project journey. Read about the development in their newest journey entry.
 {% endblock %}
 
 {% block cta_url %}
