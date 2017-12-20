@@ -1,0 +1,20 @@
+{% extends 'email_base.'|add:part_type %}
+
+{% block subject %}
+Thank you for submitting your proposal for the {{ site.name }} idea challenge!
+{% endblock %}
+
+{% block headline %}
+Thank you for submitting your proposal for the {{ site.name }} idea challenge!
+{% endblock  %}
+
+{% block content %}
+You have upgraded your idea sketch to a full proposal, that is now in the final round of the {{ site.name }} idea challenge.
+{% endblock %}
+
+{% block cta_url %}{{ email.get_host }}{{ proposal.get_absolute_url }}{% endblock %}
+{% block cta_label %}Visit your proposal{% endblock %}
+
+{% block reason %}
+This email was sent to {{ receiver }}. You received this email because you have submitted an idea sketch using this email address. If you have any further questions, please contact us via help@advocate-europe.eu.
+{% endblock %}

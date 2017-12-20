@@ -1,6 +1,7 @@
 from django.contrib import auth
 
 from adhocracy4 import emails
+from apps.ideas import phases
 
 User = auth.get_user_model()
 
@@ -19,12 +20,29 @@ def _exclude_notifications_disabled(receivers):
     return [user for user in receivers if user.get_notifications]
 
 
-class SubmitNotification(emails.UserNotification):
-    template_name = 'advocate_europe_notifications/emails/submit_notification'
+class SubmitIdeaSketchNotification(emails.UserNotification):
+    template_name = (
+        'advocate_europe_notifications/emails/submit_ideasketch_notification'
+    )
 
     def get_context(self):
         context = super().get_context()
         context['idea'] = self.object
+        module_phases = self.object.module.phases
+        context['community_award_rating_phase'] = module_phases.filter(
+            type=phases.CommunityAwardRatingPhase().identifier
+        ).first()
+        return context
+
+
+class SubmitProposalNotification(emails.UserNotification):
+    template_name = (
+        'advocate_europe_notifications/emails/submit_proposal_notification'
+    )
+
+    def get_context(self):
+        context = super().get_context()
+        context['proposal'] = self.object
         return context
 
 
