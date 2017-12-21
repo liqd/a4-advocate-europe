@@ -85,7 +85,6 @@ INSTALLED_APPS = [
     'apps.follows.apps.FollowsConfig',
     'apps.journeys.apps.JourneysConfig',
     'apps.notifications.apps.NotificationsConfig',
-    'apps.adhocracy3imports.apps.Adhocracy3ImportsConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
