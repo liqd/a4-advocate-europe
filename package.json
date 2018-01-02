@@ -2,7 +2,7 @@
   "name": "advocate_europe",
   "dependencies": {
     "adhocracy4": "liqd/adhocracy4#87d3dcf4778c1d78b69a30bc7d579591e0892277",
-    "autoprefixer": "7.2.3",
+    "autoprefixer": "7.2.4",
     "babel-core": "6.17.0",
     "babel-loader": "7.1.2",
     "babel-preset-env": "1.6.1",
