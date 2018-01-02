@@ -6,14 +6,12 @@
 {% endblock %}
 
 {% block headline %}
-The proposal "{{ idea.idea_title }}" has won.
+The proposal "{{ idea.idea_title }}" is a winning idea.
 {% endblock %}
 
 {% block content %}
-The proposal "{{ idea.idea_title }}" has won the {{ site.name }}
-{{ idea.module.name }} contest. It was choosen by the jury as one of
-best proposals. You can now follow the implementation of the proposal on the
-project journey.
+ The proposal "{{ idea.idea_title }}" is a winning idea of the Advocate Europe {{ site.name }}
+{{ idea.module.name }}.
 {% endblock %}
 
 {% block cta_url %}
@@ -21,5 +19,5 @@ project journey.
 {% endblock %}
 
 {% block cta_label %}
-Visit the project journey
+Visit the project proposal
 {% endblock %}

@@ -5,11 +5,11 @@ You have been invited to work on a proposal on {{ site.name }}
 {% endblock %}
 
 {% block headline %}
-You are invited to contribute to “{{ invite.subject.idea_title }}” on <i>{{ site.name }}</i>
+You are invited to contribute to "{{ invite.subject.idea_title }}" on "{{ site.name }}"
 {% endblock  %}
 
 {% block content %}
-You were invited by <i>{{ invite.creator.username }}</i> to become a team member. If you want to become a co-worker, please visit the project by clicking the {% if part_type == "txt" %}link{% else %}button{% endif %} below.
+You were invited by "{{ invite.creator.username }}" to become a team member. If you want to become a team member, please visit the project by clicking the {% if part_type == "txt" %}link{% else %}button{% endif %} below.
 {% endblock %}
 
 {% block cta_url %}{{ email.get_host }}{{ invite.get_absolute_url }}{% endblock %}

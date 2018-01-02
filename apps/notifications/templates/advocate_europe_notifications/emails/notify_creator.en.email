@@ -2,20 +2,25 @@
 {% load verbose_name %}
 
 {% block subject %}
-A {{ action.obj | verbose_name }} was added to your {{ action.target | verbose_name }}
+A {{ action.obj|verbose_name|lower }} was added to your {{ action.target|verbose_name|lower }}
 {% endblock %}
 
 {% block headline %}
-{{ action.actor.username }} created a {{ action.obj | verbose_name }} on your {{ action.target | verbose_name }}
+{{ action.actor.username }} created a {{ action.obj|verbose_name|lower }} on your {{ action.target|verbose_name|lower }}
 {% endblock  %}
 
 {% block content %}
-On your {{ action.target | verbose_name }} {% if action.target.title %}<i>{{ action.target.title }}</i>{% endif %} a {{ action.obj | verbose_name }} was added by {{ action.actor.username }}. Checkout what happend on{% if action.target.get_absolute_url %} your {{ action.target | verbose_name }}{% else %} the project <i>{{ action.project.name }}</i>{% endif %} on {{ site.name }} by clicking the {% if part_type == 'txt' %}link{% else %}button{% endif %} below.
+On your {{ action.target|verbose_name|lower }}{% if action.target.idea_title %} "{{ action.target.idea_title }}"{% endif %} a {{ action.obj|verbose_name|lower }} was added by {{ action.actor.username }}. Checkout what happend on{% if action.target.get_absolute_url %} your {{ action.target|verbose_name|lower }}{% else %} the project "{{ action.project.name }}"{% endif %} on {{ site.name }} by clicking the {% if part_type == 'txt' %}link{% else %}button{% endif %} below.
 {% endblock %}
 
-{% block cta_url %}{% if action.target.get_absolute_url %}{{ email.get_host }}{{ action.target.get_absolute_url }}{% else %}{{ email.get_host }}{{ action.project.get_absolute_url }}{% endif %}{% endblock %}
-{% block cta_label %}{% if action.target.get_absolute_url %}Check your {{ action.target | verbose_name }}{% else %}Visit the project{% endif %}{% endblock %}
+{% block cta_url %}
+{% if action.target.get_absolute_url %}{{ email.get_host }}{{ action.target.get_absolute_url }}{% else %}{{ email.get_host }}{{ action.project.get_absolute_url }}{% endif %}
+{% endblock %}
+
+{% block cta_label %}
+{% if action.target.get_absolute_url %}Visit the {{ action.target|verbose_name|lower }}{% else %}Visit the project{% endif %}
+{% endblock %}
 
 {% block reason %}
-This email was sent to {{ receiver }}. You receive this email because you have submitted a {{ idea.type }} using this email address. If you have any further questions, please contact us via help@advocate-europe.eu.
+This email was sent to {{ receiver }}. You receive this email because you have submitted a {{ action.target|verbose_name|lower }} using this email address. If you no longer wish to receive these notifications, you can disable notifications in your account settings.
 {% endblock %}

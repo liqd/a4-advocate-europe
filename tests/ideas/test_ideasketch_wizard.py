@@ -149,6 +149,6 @@ def test_ideasketch_create_wizard(client, user, module):
         assert my_idea_sketch.target_group == 'Children'
         assert mail.outbox[0].subject == (
             'Thank you for submitting your project idea for the '
-            'Advocate Europe idea challenge!'
+            'example.com idea challenge!'
         )
         assert mail.outbox[0].recipients() == [user.email]

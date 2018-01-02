@@ -3,7 +3,7 @@
 
 {% block reason %}
 This email was sent to {{ receiver }}. This email was sent to you because you
-watch an idea. If you don’t want to receive these
-notifications anymore, you can unwatch the idea
-or disable notifications completely in your account settings.
+are watching an idea. If you no longer wish to receive these notifications, you
+can unwatch the project on the project page or disable notifications completely
+in your account settings.
 {% endblock %}

@@ -42,5 +42,18 @@
       "end_date": "2018-05-01 12:00:00+01:00",
       "weight": 10
     }
+  },
+  {
+    "model": "a4phases.phase",
+    "pk": 2,
+    "fields":{
+      "name": "Rate idea sletches",
+      "description": "Rate your idea sketches.",
+      "type": "advocate_europe_ideas:010:community_award_rating",
+      "module": 1,
+      "start_date": "2019-05-01 12:00:00+01:00",
+      "end_date": "2020-05-01 12:00:00+01:00",
+      "weight": 11
+    }
   }
 ]

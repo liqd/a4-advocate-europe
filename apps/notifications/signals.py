@@ -17,9 +17,9 @@ def send_create_notification(sender, instance, created, **kwargs):
         modelcls = action.obj_content_type.model_class()
 
         if (modelcls is IdeaSketch):
-            emails.SubmitNotification.send(action.obj)
+            emails.SubmitIdeaSketchNotification.send(action.obj)
         elif (modelcls is Proposal):
-            emails.SubmitNotification.send(action.obj)
+            emails.SubmitProposalNotification.send(action.obj)
             emails.NotifyFollowersOnNewProposal.send(action)
         elif (modelcls is Comment):
             emails.NotifyCreatorEmail.send(action)

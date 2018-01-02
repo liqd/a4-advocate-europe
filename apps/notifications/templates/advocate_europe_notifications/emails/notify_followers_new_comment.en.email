@@ -10,7 +10,7 @@ A {{ action.obj|verbose_name }} was created by {{ action.actor.username }}.
 {% endblock %}
 
 {% block content %}
-A {{ action.obj|verbose_name }} was added to {{ action.target }}{% if action.target.title %} <i>{{ action.target.title }}</i>{% endif %}.
+A {{ action.obj|verbose_name }} was added to {{ action.target }}{% if action.target.title %} "{{ action.target.title }}"{% endif %}.
 {% endblock %}
 
 {% block cta_url %}

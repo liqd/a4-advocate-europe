@@ -1,12 +1,11 @@
 {% extends 'advocate_europe_notifications/emails/follow.en.email' %}
 
 {% block subject %}
-Idea sketch was made into a proposal.
+A proposal was created by {{ action.actor }}.
 {% endblock %}
 
 {% block headline %}
-The idea sketch "{{ action.obj.idea_sketch_archived.idea_title }}" was extended
-to a proposal.
+The Idea Sketch "{{ action.obj.idea_sketch_archived.idea_title }}" became a proposal!
 {% endblock %}
 
 {% block content %}
