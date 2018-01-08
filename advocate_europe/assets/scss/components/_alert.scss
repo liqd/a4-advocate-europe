@@ -1,4 +1,38 @@
 /* Style a4 alerts based on boostrap alerts (for Comments) */
+.alert {
+    border-radius: 0;
+    margin-bottom: 15px;
+}
+
+.alert-danger {
+    background-color: $brand-danger;
+    font-size: rem(16px);
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    padding: 0.5rem 0 0.5rem 1rem;
+
+    .l-wrapper {
+        padding: 0;
+    }
+
+    li {
+        padding: rem(2px 2px 2px) 2em;
+        position: relative;
+    }
+
+    li:before {
+        position: absolute;
+        left: 0.5em;
+        display: inline;
+        font-family: "FontAwesome";
+        content: "\F071";
+    }
+}
+
+.alert-message {
+    margin-bottom: 0;
+}
 
 .alert--danger {
     @extend .alert-danger;
@@ -7,4 +41,6 @@
 .alert__close {
     float: right;
     color: inherit;
+    background-color: transparent;
+    border: none;
 }

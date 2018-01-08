@@ -1,3 +1,5 @@
+/* global location */
+
 var widget = require('adhocracy4').widget
 var ReactComments = require('adhocracy4').comments
 var ReactFollow = require('../../../apps/follows/static/follows/react_follows.jsx')
@@ -11,3 +13,11 @@ $(function () {
   widget.initialise('ae', 'follows', ReactFollow.renderFollow)
   widget.initialise('ae', 'supports', ReactSupport.renderSupports)
 })
+
+var getCurrentPath = function () {
+  return location.pathname
+}
+
+module.exports = {
+  'getCurrentPath': getCurrentPath
+}

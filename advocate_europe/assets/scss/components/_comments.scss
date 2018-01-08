@@ -57,6 +57,14 @@
 
     .comment-child-list {
         padding-left: rem(20px);
+
+        .general-form {
+            margin-top: 40px;
+        }
+
+        .comments_login {
+            margin-top: 40px;
+        }
     }
 
     .comment-submission-date {
@@ -130,10 +138,22 @@
 
         // show answers
 
-        .comment-reply-button {
+        .comment-reply-button,
+        .comment-answer-button {
             @extend .btn;
             background-color: transparent;
-            padding-left: 0;
+        }
+
+        .comment-reply-button {
+            padding: 0;
+        }
+
+        .fa-plus {
+            padding-right: 10px;
+        }
+
+        .fa-minus {
+            padding-right: 10px;
         }
 
         .comment-reply-button:focus,
