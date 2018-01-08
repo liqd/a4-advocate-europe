@@ -95,12 +95,14 @@
 
                     <div class="ideadetail-info-box">
                         <h4>{% trans 'Team' %}</h4>
+                        {% if idea.creator not in idea.co_workers.all %}
                         <p>
                             <span class="avatar-round-small" style="background-image: url({{ idea.creator.avatar_or_fallback_url }})"></span>
                             <span class="co-worker">
                                 <a href="{% url 'profile' idea.creator.username %}">{{ idea.creator.username }}</a>
                             </span>
                         </p>
+                        {% endif %}
                         {% for co_worker in idea.co_workers.all %}
                             <p class="ideadetail-info-box-co-workers">
                                 <span class="avatar-round-small no-decoration" style="background-image: url({{ co_worker.avatar_or_fallback_url }})"></span>

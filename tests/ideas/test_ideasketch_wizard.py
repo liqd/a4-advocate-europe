@@ -152,3 +152,4 @@ def test_ideasketch_create_wizard(client, user, module):
             'example.com idea challenge!'
         )
         assert mail.outbox[0].recipients() == [user.email]
+        assert my_idea_sketch.creator in my_idea_sketch.co_workers.all()

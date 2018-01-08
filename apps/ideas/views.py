@@ -4,6 +4,7 @@ import os
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.files.storage import FileSystemStorage
+from django.db import transaction
 from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from django.shortcuts import redirect
@@ -111,6 +112,7 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
             return {'display_idea_challenge_camp_checkbox': True}
         return {}
 
+    @transaction.atomic
     def done(self, form_list, **kwargs):
         special_fields = ['accept_conditions', 'co_workers_emails',
                           'confirm_publicity', 'confirm_idea_challenge_camp']
@@ -124,6 +126,7 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
                 if field not in special_fields
                 }
         )
+        idea_sketch.co_workers.add(self.request.user)
 
         for name, email in data['co_workers_emails']:
             idea_sketch.ideainvite_set.invite(
@@ -258,6 +261,7 @@ class ProposalCreateWizard(PermissionRequiredMixin,
                 initial[field] = getattr(self.idea, field)
         return initial
 
+    @transaction.atomic
     def done(self, form_list, **kwargs):
         archive = IdeaSketchArchived(id=self.idea.id)
         for field in archive._meta.get_fields():
