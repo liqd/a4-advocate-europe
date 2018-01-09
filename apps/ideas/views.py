@@ -1,11 +1,10 @@
-import csv
 import os
+from collections import OrderedDict
 
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.files.storage import FileSystemStorage
 from django.forms.models import model_to_dict
-from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.utils.translation import ugettext as _
 from django.views import generic
@@ -13,6 +12,8 @@ from formtools.wizard.views import SessionWizardView
 from pytz import timezone
 from rules.contrib.views import PermissionRequiredMixin
 
+from adhocracy4.exports import mixins as export_mixins
+from adhocracy4.exports import views as export_views
 from adhocracy4.filters import views as filter_views
 from adhocracy4.phases.models import Phase
 from apps.wizards import mixins as wizard_mixins
@@ -21,66 +22,76 @@ from . import filters, forms, mixins
 from .models import Idea, IdeaSketch, IdeaSketchArchived, Proposal
 
 
-class IdeaExportView(PermissionRequiredMixin, filter_views.FilteredListView):
+class IdeaExportView(PermissionRequiredMixin,
+                     export_views.SimpleItemExportView,
+                     export_mixins.ItemExportWithRatesMixin,
+                     export_mixins.ItemExportWithCommentCountMixin,
+                     export_mixins.ItemExportWithCommentsMixin,
+                     filter_views.FilteredListView,
+                     ):
+
     permission_required = 'advocate_europe_ideas.export_idea'
     model = Idea
-    raise_exception = True
     filter_set = filters.IdeaFilterSet
+    exclude = ['module', 'item_ptr', 'members',
+               'slug', 'idea_ptr', 'idea_image',
+               'idea_sketch_archived', 'co_workers']
+
+    @property
+    def raise_exception(self):
+        return self.request.user.is_authenticated()
 
     def get_queryset(self):
-        queryset = super().get_queryset().annotate_comment_count()
-        return queryset
+        return super().get_queryset() \
+            .annotate_comment_count() \
+            .annotate_positive_rating_count()
 
-    def get(self, request, *args, **kwargs):
-        response = HttpResponse(content_type='text/csv; charset=utf-8')
-        response['Content-Disposition'] = (
-            'attachment; filename="ideas.csv"'
-        )
+    def _setup_fields(self):
+        ideasketch_fields = IdeaSketch._meta.get_fields()
+        proposal_fields = Proposal._meta.get_fields()
 
-        exclude_fields = ['module', 'item_ptr', 'members',
-                          'slug', 'idea_ptr', 'idea_image',
-                          'idea_sketch_archived']
+        fields = set(ideasketch_fields + proposal_fields)
 
-        field_names = []
-        for field in IdeaSketch._meta.concrete_fields:
-            if (field.name not in exclude_fields and
-                    field.name not in field_names):
-                field_names.append(field.name)
+        # Ensure that link is the first row even though it's a virtual field
+        names = ['link']
+        header = [_('Link')]
 
-        for field in Proposal._meta.concrete_fields:
-            if (field.name not in exclude_fields and
-                    field.name not in field_names):
-                field_names.append(field.name)
+        for field in fields:
+            if field.concrete \
+                    and not (field.one_to_one and field.rel.parent_link) \
+                    and field.name not in self.exclude \
+                    and field.name not in names:
 
-        field_names.append('link')
-        field_names.append('type')
+                names.append(field.name)
+                header.append(str(field.verbose_name))
 
-        writer = csv.writer(response, lineterminator='\n',
-                            quotechar='"', quoting=csv.QUOTE_ALL)
-        writer.writerow(field_names)
+        # Get virtual fields in their order from the Mixins
+        virtual = OrderedDict()
+        virtual = self.get_virtual_fields(virtual)
+        for name, head in virtual.items():
+            if name not in names:
+                names.append(name)
+                header.append(head)
 
-        del field_names[-2:]
+        return header, names
 
+    def export_rows(self):
         for idea_base in self.get_queryset():
             has_proposal = hasattr(idea_base, 'proposal')
-            idea = idea_base.proposal if has_proposal else idea_base.ideasketch
-            data = []
-            for name in field_names:
-                if hasattr(idea, name):
-                    value = getattr(idea, name)
-                    if type(value) is list:
-                        data.append(str(', '.join(value)))
-                    else:
-                        data.append(str(value)
-                                    .replace('\r', '')
-                                    .replace('\n', ''))
-                else:
-                    data.append('')
-            data.append(request.build_absolute_uri(idea.get_absolute_url()))
-            data.append(idea.type)
-            writer.writerow(data)
+            item = idea_base.proposal if has_proposal else idea_base.ideasketch
+            yield [self.get_field_data(item, name) for name in self._names]
 
-        return response
+    def get_comment_count_data(self, item):
+        item = item.idea
+        return super().get_comment_count_data(item)
+
+    def get_comments_data(self, item):
+        item = item.idea
+        return super().get_comments_data(item)
+
+    def get_ratings_positive_data(self, item):
+        item = item.idea
+        return super().get_ratings_positive_data(item)
 
 
 class IdeaSketchCreateWizard(PermissionRequiredMixin,
