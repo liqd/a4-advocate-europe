@@ -1,4 +1,4 @@
-{% load i18n static react_ratings idea_tags thumbnail %}
+{% load i18n static react_ratings idea_tags thumbnail rules %}
 
 <div class="row ideadetail-header">
     <div class="ideadetail-image" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000000), url({% if idea.idea_image_exists %} {{ idea.idea_image|thumbnail_url:'ideadetailimage' }} {% else %} {% static 'images/placeholder_blue.svg' %} {% endif %});">
@@ -19,7 +19,8 @@
                     {% endif %}
                 </div>
             </div>
-            {% if view.display_type == 'idea' %}
+            {% has_perm 'advocate_europe_ideas.may_rate_idea' request.user idea as may_rate_idea %}
+            {% if may_rate_idea and view.display_type == 'idea' %}
             <div class="col-md-3 col-sm-4 hidden-xs ideadetailheader-right">
                 {% react_supports idea False %}
             </div>
