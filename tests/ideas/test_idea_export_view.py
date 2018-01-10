@@ -27,13 +27,6 @@ def test_idea_export_view_admin(rf, admin, idea_sketch_factory,
     response = view(request)
     assert response.status_code == 200
     assert (response._headers['content-type'] ==
-            ('Content-Type', 'text/csv; charset=utf-8'))
-    assert (response._headers['content-disposition'] ==
-            ('Content-Disposition', 'attachment; filename="ideas.csv"'))
-
-    content_line = response.content.split(b'\n')
-    assert len(content_line) == 5
-
-    assert len(str(content_line[0]).split('","')) == 57
-    assert len(str(content_line[1]).split('","')) == 57
-    assert len(str(content_line[3]).split('","')) == 57
+            ('Content-Type', 'application/vnd.openxmlformats-officedocument.'
+                             'spreadsheetml.sheet'))
+    assert ('download' in response._headers['content-disposition'][1])
