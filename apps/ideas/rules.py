@@ -85,3 +85,13 @@ rules.add_perm(
     ) |
     is_superuser
 )
+
+rules.add_perm(
+    'advocate_europe_ideas.may_rate_idea',
+    (
+        predicates.is_innovator &
+        ~mod_predicates.is_owner &
+        ~predicates.is_co_worker
+    ) |
+    is_superuser
+)

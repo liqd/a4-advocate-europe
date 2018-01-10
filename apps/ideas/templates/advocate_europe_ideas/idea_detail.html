@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n react_comments rules static force_translation idea_tags absolute_url %}
+{% load i18n react_comments rules static force_translation idea_tags absolute_url rules %}
 
 {% block title %} {{ idea.idea_title }} {% endblock %}
 
@@ -42,7 +42,10 @@
                 <ul class="nav">
                     {% if view.display_type == 'idea' %}
                     <li class="nav-idea nav-support">
+                        {% has_perm 'advocate_europe_ideas.may_rate_idea' request.user idea as may_rate_idea %}
+                        {% if may_rate_idea and view.display_type == 'idea' %}
                         {% react_supports idea True %}
+                        {% endif %}
                     </li>
                     {% endif %}
                     {% include 'advocate_europe_ideas/includes/idea_detail_watch_btns.html' with xs_class="" spacing="<br>" %}

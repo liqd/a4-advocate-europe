@@ -43,7 +43,8 @@ def test_notify_on_create_idea(comment_factory, idea_sketch_factory):
         assert len(emails) == 1
 
         creator_email = emails[0]
-        assert isinstance(creator_email, not_emails.SubmitIdeaSketchNotification)
+        assert isinstance(creator_email,
+                          not_emails.SubmitIdeaSketchNotification)
         assert [idea_sketch.creator] == creator_email.get_receivers()
 
 
