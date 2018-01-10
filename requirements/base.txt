@@ -1,6 +1,6 @@
 git+git://github.com/liqd/adhocracy4.git@6fbf817762a76bf4112abb7477e92006273141bb
 bcrypt==3.1.4
-Django==1.11.8 # pyup: >=1.11,<1.12
+Django==1.11.9 # pyup: >=1.11,<1.12
 wagtail==1.13.1
 feedparser==5.2.1
 python-dateutil==2.6.1
@@ -13,7 +13,7 @@ django-widget-tweaks==1.4.1
 easy-thumbnails==2.5
 django-autoslug==1.9.3
 django-multiselectfield==0.1.8
-djangorestframework==3.7.3
+djangorestframework==3.7.7
 django-countries==5.0
 python-magic==0.4.15
 html5lib==1.0.1
