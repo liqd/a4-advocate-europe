@@ -24,10 +24,10 @@ from .models import Idea, IdeaSketch, IdeaSketchArchived, Proposal
 
 class IdeaExportView(PermissionRequiredMixin,
                      export_views.SimpleItemExportView,
+                     filter_views.FilteredListView,
                      export_mixins.ItemExportWithRatesMixin,
                      export_mixins.ItemExportWithCommentCountMixin,
-                     export_mixins.ItemExportWithCommentsMixin,
-                     filter_views.FilteredListView,
+                     export_mixins.ItemExportWithCommentsMixin
                      ):
 
     permission_required = 'advocate_europe_ideas.export_idea'
@@ -40,11 +40,6 @@ class IdeaExportView(PermissionRequiredMixin,
     @property
     def raise_exception(self):
         return self.request.user.is_authenticated()
-
-    def get_queryset(self):
-        return super().get_queryset() \
-            .annotate_comment_count() \
-            .annotate_positive_rating_count()
 
     def _setup_fields(self):
         ideasketch_fields = IdeaSketch._meta.get_fields()
