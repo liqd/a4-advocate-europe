@@ -220,7 +220,7 @@ BLEACH_LIST = {
             'margin-right',
         ],
     },
-    'image-editor': {
+    'collapsible-image-editor': {
         'tags': ['p', 'strong', 'em', 'u', 'ol', 'li', 'ul', 'a', 'img',
                  'div'],
         'attributes': {
