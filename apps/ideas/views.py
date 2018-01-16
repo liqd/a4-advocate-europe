@@ -37,6 +37,12 @@ class IdeaExportView(PermissionRequiredMixin,
                'slug', 'idea_ptr', 'idea_image',
                'idea_sketch_archived', 'co_workers']
 
+    def get_queryset(self):
+        queryset = super().get_queryset()\
+            .annotate_comment_count()\
+            .annotate_positive_rating_count()
+        return queryset
+
     @property
     def raise_exception(self):
         return self.request.user.is_authenticated()
