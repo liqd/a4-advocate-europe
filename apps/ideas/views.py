@@ -34,7 +34,7 @@ class IdeaExportView(PermissionRequiredMixin,
     model = Idea
     filter_set = filters.IdeaFilterSet
     exclude = ['module', 'item_ptr', 'slug', 'idea_ptr',
-               'idea_image', 'idea_sketch_archived', 'co_workers']
+               'idea_image', 'idea_sketch_archived']
 
     @property
     def raise_exception(self):
@@ -86,6 +86,12 @@ class IdeaExportView(PermissionRequiredMixin,
     def get_ratings_positive_data(self, item):
         item = item.idea
         return super().get_ratings_positive_data(item)
+
+    def get_co_workers_data(self, item):
+        co_workers = ', '.join(
+            [co_worker.username for co_worker in item.idea.co_workers.all()]
+        )
+        return co_workers
 
 
 class IdeaSketchCreateWizard(PermissionRequiredMixin,
