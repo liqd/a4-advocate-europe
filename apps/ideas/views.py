@@ -33,9 +33,8 @@ class IdeaExportView(PermissionRequiredMixin,
     permission_required = 'advocate_europe_ideas.export_idea'
     model = Idea
     filter_set = filters.IdeaFilterSet
-    exclude = ['module', 'item_ptr', 'members',
-               'slug', 'idea_ptr', 'idea_image',
-               'idea_sketch_archived', 'co_workers']
+    exclude = ['module', 'item_ptr', 'slug', 'idea_ptr',
+               'idea_image', 'idea_sketch_archived', 'co_workers']
 
     @property
     def raise_exception(self):
