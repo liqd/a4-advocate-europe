@@ -4,13 +4,6 @@
 <footer id="footer" class="footer">
     <nav class="navbar navbar-default">
         <div class="container">
-            <div class="pull-right">
-                <ul class="nav navbar-nav">
-                    {% for menuitem in footer_menu_items %}
-                    <li><a href="{{ menuitem.url }}"class="footer-entry">{{ menuitem.translated_menu_title }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
             <div class="pull-left">
                 <ul class="nav navbar-nav">
                     {% if settings.cms_settings.SocialMediaSettings.facebook %}
@@ -28,6 +21,13 @@
                     {% if settings.cms_settings.SocialMediaSettings.flickr %}
                     <li><a href="{{ settings.cms_settings.SocialMediaSettings.flickr }}" target="_blank" class="footer-entry"><i class="fa fa-flickr" aria-hidden="true"></i> Flickr</a></li>
                     {% endif %}
+                </ul>
+            </div>
+            <div class="pull-right">
+                <ul class="nav navbar-nav">
+                    {% for menuitem in footer_menu_items %}
+                    <li><a href="{{ menuitem.url }}"class="footer-entry">{{ menuitem.translated_menu_title }}</a></li>
+                    {% endfor %}
                 </ul>
             </div>
          </div>
