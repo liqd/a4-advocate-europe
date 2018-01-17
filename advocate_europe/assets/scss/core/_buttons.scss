@@ -41,6 +41,21 @@
     }
 }
 
+.btn-filter {
+    @include button-variant($gray-dark, #fff, $ae-light-gray-shadow);
+
+    font-weight: normal;
+    border-radius: 5px;
+}
+
+.search-filter-btn {
+    @include button-variant(#fff, $brand-primary, $brand-primary);
+
+    border: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
 .btn-wide {
     width: 100%;
     text-transform: capitalize;
