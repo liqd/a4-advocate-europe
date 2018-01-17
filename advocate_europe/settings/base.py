@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'adhocracy4.actions.apps.ActionsConfig',
     'adhocracy4.filters.apps.FiltersConfig',
     'adhocracy4.rules.apps.RulesConfig',
+    'adhocracy4.ckeditor.apps.CKEditorConfig',
 
     'cms.home.apps.HomeConfig',
     'cms.settings.apps.SettingsConfig',
@@ -180,6 +181,17 @@ CKEDITOR_CONFIGS = {
             ['NumberedList', 'BulletedList'],
             ['Link', 'Unlink']
         ]
+    },
+    'collapsible-image-editor': {
+        'width': '100%',
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['Image'],
+            ['NumberedList', 'BulletedList'],
+            ['Link', 'Unlink'],
+            ['CollapsibleItem']
+        ]
     }
 }
 
@@ -195,6 +207,26 @@ BLEACH_LIST = {
         'attributes': {
             'a': ['href', 'rel'],
             'img': ['src', 'alt', 'style']
+        },
+        'styles': [
+            'float',
+            'margin',
+            'padding',
+            'width',
+            'height',
+            'margin-bottom',
+            'margin-top',
+            'margin-left',
+            'margin-right',
+        ],
+    },
+    'collapsible-image-editor': {
+        'tags': ['p', 'strong', 'em', 'u', 'ol', 'li', 'ul', 'a', 'img',
+                 'div'],
+        'attributes': {
+            'a': ['href', 'rel'],
+            'img': ['src', 'alt', 'style'],
+            'div': ['class']
         },
         'styles': [
             'float',
