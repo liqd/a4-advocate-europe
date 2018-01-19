@@ -59,10 +59,6 @@
             line-height: rem(20px);
         }
 
-        font-weight: normal;
-        border-radius: 5px;
-        background-color: #fff;
-        border: solid 1px $ae-light-gray-shadow;
         width: 100%;
     }
 
@@ -92,11 +88,6 @@
         color: $gray-dark;
 
         .search-filter-btn {
-            border: none;
-            background-color: $brand-primary;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            color: #fff;
             position: absolute;
             right: 0;
         }
