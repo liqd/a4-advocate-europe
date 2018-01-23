@@ -93,9 +93,12 @@ class IdeaExportView(PermissionRequiredMixin,
         item = item.idea
         return super().get_ratings_positive_data(item)
 
+    def get_creator_data(self, item):
+        return item.creator.email
+
     def get_co_workers_data(self, item):
         co_workers = ', '.join(
-            [co_worker.username for co_worker in item.idea.co_workers.all()]
+            [co_worker.email for co_worker in item.idea.co_workers.all()]
         )
         return co_workers
 
