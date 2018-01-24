@@ -65,6 +65,17 @@ class FreeTextSearchFilterWidget(widgets.FreeTextFilterWidget):
     label = _('Search')
 
 
+class DistinctOrderingFilter(django_filters.OrderingFilter):
+
+    def filter(self, qs, value):
+
+        if value in django_filters.constants.EMPTY_VALUES:
+            return qs.order_by('pk')
+
+        ordering = [self.get_ordering_value(param) for param in value] + ['pk']
+        return qs.order_by(*ordering)
+
+
 class IdeaFilterSet(DefaultsFilterSet):
 
     defaults = {
@@ -118,7 +129,7 @@ class IdeaFilterSet(DefaultsFilterSet):
         widget=StatusFilterWidget
     )
 
-    ordering = django_filters.OrderingFilter(
+    ordering = DistinctOrderingFilter(
         fields=(
             ('-created', 'newest'),
             ('-comment_count', 'comments'),
