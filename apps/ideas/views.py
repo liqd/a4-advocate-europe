@@ -33,9 +33,14 @@ class IdeaExportView(PermissionRequiredMixin,
     permission_required = 'advocate_europe_ideas.export_idea'
     model = Idea
     filter_set = filters.IdeaFilterSet
-    exclude = ['module', 'item_ptr', 'members',
-               'slug', 'idea_ptr', 'idea_image',
-               'idea_sketch_archived', 'co_workers']
+    exclude = ['module', 'item_ptr', 'slug', 'idea_ptr',
+               'idea_image', 'idea_sketch_archived']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()\
+            .annotate_comment_count()\
+            .annotate_positive_rating_count()
+        return queryset
 
     @property
     def raise_exception(self):
@@ -87,6 +92,15 @@ class IdeaExportView(PermissionRequiredMixin,
     def get_ratings_positive_data(self, item):
         item = item.idea
         return super().get_ratings_positive_data(item)
+
+    def get_creator_data(self, item):
+        return item.creator.email
+
+    def get_co_workers_data(self, item):
+        co_workers = ', '.join(
+            [co_worker.email for co_worker in item.idea.co_workers.all()]
+        )
+        return co_workers
 
 
 class IdeaSketchCreateWizard(PermissionRequiredMixin,
