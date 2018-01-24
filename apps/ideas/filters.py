@@ -158,3 +158,4 @@ class IdeaFilterSet(DefaultsFilterSet):
         model = models.Idea
         fields = ['search', 'project', 'status', 'idea_topics', 'country',
                   'ordering']
+        order_by = model()._meta.ordering
