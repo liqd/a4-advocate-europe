@@ -3,7 +3,8 @@ from django.db import models
 from django.forms.utils import flatatt
 from django.utils.translation import ugettext_lazy as _
 
-from adhocracy4.filters.filters import DefaultsFilterSet
+from adhocracy4.filters.filters import (DefaultsFilterSet,
+                                        DistinctOrderingFilter)
 from apps.ideas import models as idea_models
 
 
@@ -74,7 +75,7 @@ class ProfileIdeaFilterSet(DefaultsFilterSet):
         widget=LinkWidget,
     )
 
-    ordering = django_filters.OrderingFilter(
+    ordering = DistinctOrderingFilter(
         fields=(
             ('-created', 'newest'),
             ('idea_title', 'alphabetical'),
