@@ -5,7 +5,8 @@ from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
 from adhocracy4.filters import widgets
-from adhocracy4.filters.filters import DefaultsFilterSet, FreeTextFilter
+from adhocracy4.filters.filters import (DefaultsFilterSet,
+                                        DistinctOrderingFilter, FreeTextFilter)
 from adhocracy4.projects.models import Project
 
 from . import countries, models
@@ -63,17 +64,6 @@ class OrderingFilterWidget(widgets.DropdownLinkWidget):
 
 class FreeTextSearchFilterWidget(widgets.FreeTextFilterWidget):
     label = _('Search')
-
-
-class DistinctOrderingFilter(django_filters.OrderingFilter):
-
-    def filter(self, qs, value):
-
-        if value in django_filters.constants.EMPTY_VALUES:
-            return qs.order_by('pk')
-
-        ordering = [self.get_ordering_value(param) for param in value] + ['pk']
-        return qs.order_by(*ordering)
 
 
 class IdeaFilterSet(DefaultsFilterSet):
