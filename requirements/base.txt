@@ -1,4 +1,4 @@
-git+git://github.com/liqd/adhocracy4.git@8e031bf456822a7dfee13379b6323248869c138f
+git+git://github.com/liqd/adhocracy4.git@57c977f776e5ae854ec1407052f245d2eb67b539
 bcrypt==3.1.4
 Django==1.11.9 # pyup: >=1.11,<1.12
 wagtail==1.11.1 # pyup: ignore # disable until we fix block on homepage
