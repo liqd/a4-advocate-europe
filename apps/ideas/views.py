@@ -1,5 +1,5 @@
 import os
-from collections import OrderedDict
+from datetime import datetime
 
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
@@ -23,11 +23,19 @@ from .models import Idea, IdeaSketch, IdeaSketchArchived, Proposal
 
 
 class IdeaExportView(PermissionRequiredMixin,
-                     export_views.SimpleItemExportView,
-                     filter_views.FilteredListView,
+
+                     export_views.BaseExport,
+                     export_mixins.ItemExportWithLinkMixin,
+                     mixins.ExportMultiModelIdeaFieldsMixin,
                      export_mixins.ItemExportWithRatesMixin,
                      export_mixins.ItemExportWithCommentCountMixin,
-                     export_mixins.ItemExportWithCommentsMixin
+                     export_mixins.ItemExportWithCommentsMixin,
+
+                     # Both AbstractXlsxExportView and FilteredListView
+                     # define `get()`. To ensure data is exported, the
+                     # AbstractXlsxExportView class has to be defined first.
+                     export_views.AbstractXlsxExportView,
+                     filter_views.FilteredListView,
                      ):
 
     permission_required = 'advocate_europe_ideas.export_idea'
@@ -36,50 +44,24 @@ class IdeaExportView(PermissionRequiredMixin,
     exclude = ['module', 'item_ptr', 'slug', 'idea_ptr',
                'idea_image', 'idea_sketch_archived']
 
+    def get_base_filename(self):
+        settings_time_zone = timezone(settings.TIME_ZONE)
+        return 'download_%s' % (
+            datetime.now(settings_time_zone).strftime('%Y%m%dT%H%M%S'))
+
     def get_queryset(self):
         queryset = super().get_queryset()\
             .annotate_comment_count()\
             .annotate_positive_rating_count()
         return queryset
 
+    def get_object_list(self):
+        return (idea.proposal if hasattr(idea, 'proposal') else idea.ideasketch
+                for idea in self.get_queryset())
+
     @property
     def raise_exception(self):
         return self.request.user.is_authenticated()
-
-    def _setup_fields(self):
-        ideasketch_fields = IdeaSketch._meta.get_fields()
-        proposal_fields = Proposal._meta.get_fields()
-
-        fields = set(ideasketch_fields + proposal_fields)
-
-        # Ensure that link is the first row even though it's a virtual field
-        names = ['link']
-        header = [_('Link')]
-
-        for field in fields:
-            if field.concrete \
-                    and not (field.one_to_one and field.rel.parent_link) \
-                    and field.name not in self.exclude \
-                    and field.name not in names:
-
-                names.append(field.name)
-                header.append(str(field.verbose_name))
-
-        # Get virtual fields in their order from the Mixins
-        virtual = OrderedDict()
-        virtual = self.get_virtual_fields(virtual)
-        for name, head in virtual.items():
-            if name not in names:
-                names.append(name)
-                header.append(head)
-
-        return header, names
-
-    def export_rows(self):
-        for idea_base in self.get_queryset():
-            has_proposal = hasattr(idea_base, 'proposal')
-            item = idea_base.proposal if has_proposal else idea_base.ideasketch
-            yield [self.get_field_data(item, name) for name in self._names]
 
     def get_comment_count_data(self, item):
         item = item.idea
@@ -95,6 +77,9 @@ class IdeaExportView(PermissionRequiredMixin,
 
     def get_creator_data(self, item):
         return item.creator.email
+
+    def get_created_data(self, item):
+        return item.created.isoformat()
 
     def get_co_workers_data(self, item):
         co_workers = ', '.join(
