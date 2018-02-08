@@ -3,11 +3,12 @@ from django.http import Http404
 from django.utils.http import is_safe_url
 from django.views import generic
 
+from adhocracy4.exports.mixins import VirtualFieldMixin
 from adhocracy4.modules.models import Module
 from adhocracy4.phases.models import Phase
 from adhocracy4.rules.discovery import NormalUser
 
-from .models import Idea
+from .models import Idea, IdeaSketch, Proposal
 from .paginators import DeltaFirstPagePaginator
 
 
@@ -99,3 +100,23 @@ class CtaPaginatorMixin:
         else:
             self.paginator_class = Paginator
         return super().get_paginator(*args, **kwargs)
+
+
+class ExportMultiModelIdeaFieldsMixin(VirtualFieldMixin):
+    exclude = None
+
+    def get_virtual_fields(self, virtual):
+        ideasketch_fields = IdeaSketch._meta.get_fields()
+        proposal_fields = Proposal._meta.get_fields()
+
+        fields = set(ideasketch_fields + proposal_fields)
+        exclude = self.exclude if self.exclude else []
+
+        for field in fields:
+            if field.concrete \
+                    and not (field.one_to_one and field.rel.parent_link) \
+                    and field.name not in exclude \
+                    and field.name not in virtual:
+                virtual[field.name] = str(field.verbose_name)
+
+        return super().get_virtual_fields(virtual)
