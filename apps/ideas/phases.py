@@ -105,7 +105,7 @@ class InterimShortlistSelectionPhase(IdeaPhase):
     name = _('Interim shortlist selection phase')
     description = _('ideas for the shortlist are chosen by the jury')
 
-    default_filters = QueryDict('ordering=comments&'
+    default_filters = QueryDict('ordering=support&'
                                 'status=idea_sketch&'
                                 'project=',
                                 mutable=True
