@@ -4,7 +4,7 @@ Django==1.11.10 # pyup: >=1.11,<1.12
 wagtail==1.13.1
 feedparser==5.2.1
 python-dateutil==2.6.1
-django-allauth==0.34.0
+django-allauth==0.35.0
 django-ckeditor==5.4.0
 django-filter==1.1.0
 django-crispy-forms==1.7.0
