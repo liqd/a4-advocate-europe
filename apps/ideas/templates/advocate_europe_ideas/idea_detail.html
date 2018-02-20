@@ -9,7 +9,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Advocate Europe | {{ idea.idea_title }}">
     <meta name="twitter:description" content="{{ idea.idea_pitch }}">
-    {% if idea.idea_image_exists %}
+    {% if idea.idea_image %}
         <meta name="twitter:image" content="{% get_absolute_uri obj=idea.idea_image.url %}">
     {% else %}
         <meta name="twitter:image" content="{% get_absolute_uri_static obj='images/logo_01.png' %}">
@@ -19,7 +19,7 @@
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
     <meta property="og:title" content="Advocate Europe | {{ idea.idea_title }}">
     <meta property="og:description" content="{{ idea.idea_pitch }}">
-    {% if idea.idea_image_exists %}
+    {% if idea.idea_image %}
         <meta property="og:image" content="{% get_absolute_uri obj=idea.idea_image.url %}">
         <meta property="og:image:width" content="{{ idea.idea_image.width }}">
         <meta property="og:image:height" content="{{ idea.idea_image.height }}">
