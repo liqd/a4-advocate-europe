@@ -23,7 +23,7 @@
     "react-dom": "16.2.0",
     "sass-loader": "6.0.6",
     "slick-carousel": "1.6.0",
-    "style-loader": "0.20.1",
+    "style-loader": "0.20.2",
     "webpack": "3.11.0",
     "webpack-merge": "4.1.1"
   },
