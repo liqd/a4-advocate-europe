@@ -67,6 +67,7 @@ lint:
 	exit $${EXIT_STATUS}
 
 .PHONY: release
+release: export DJANGO_SETTINGS_MODULE ?= advocate_europe.settings.build
 release:
 	npm install --silent
 	npm run build

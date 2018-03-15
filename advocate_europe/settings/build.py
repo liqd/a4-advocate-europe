@@ -1,5 +1,3 @@
-from .base import *
-
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+from .production import *
 
 SECRET_KEY = "dummykeyforbuilding"
