@@ -1,6 +1,6 @@
 all: help
 
-VIRTUAL_ENV ?= env
+VIRTUAL_ENV ?= venv
 SOURCE_DIRS = apps advocate_europe cms tests
 
 help:
