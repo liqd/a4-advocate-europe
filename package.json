@@ -34,7 +34,8 @@
   },
   "license": "AGPL-3.0+",
   "scripts": {
-    "build": "webpack --config ./webpack.prod.js --progress",
+    "build": "webpack --config ./webpack.prod.js",
+    "build:dev": "webpack --config ./webpack.dev.js --progress",
     "watch": "webpack --config ./webpack.dev.js --progress --colors --watch",
     "lint": "standard '{apps,cms,advocate_europe}/**/*.{js,jsx}' && stylelint 'advocate_europe/assets/scss/**/*.scss' --syntax scss",
     "precommit": "make lint"

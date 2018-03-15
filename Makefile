@@ -1,6 +1,6 @@
 all: help
 
-VIRTUAL_ENV ?= .
+VIRTUAL_ENV ?= venv
 SOURCE_DIRS = apps advocate_europe cms tests
 
 help:
@@ -11,16 +11,17 @@ help:
 	@echo
 	@echo usage:
 	@echo
-	@echo   make install      -- install dev setup
-	@echo   make server	  -- development server
-	@echo   make test         -- tests on exiting database
-	@echo   make lint	  -- lint javascript and python
+	@echo "  make install      -- install dev setup"
+	@echo "  make server       -- development server"
+	@echo "  make test         -- tests on exiting database"
+	@echo "  make lint         -- lint javascript and python"
+	@echo "  make release      -- build everything required for a release"
 	@echo
 
 install:
 	npm install
 	npm run build
-	if [ ! -f $(VIRTUAL_ENV)/bin/python3 ]; then python3 -m venv .; fi
+	if [ ! -f $(VIRTUAL_ENV)/bin/python3 ]; then python3 -m venv $(VIRTUAL_ENV); fi
 	$(VIRTUAL_ENV)/bin/python3 -m pip install --upgrade -r requirements/dev.txt
 	$(VIRTUAL_ENV)/bin/python3 manage.py migrate
 
@@ -34,10 +35,10 @@ watch:
 	trap 'kill %1; kill %2' KILL; \
 	npm run watch & \
 	$(VIRTUAL_ENV)/bin/python3 manage.py process_tasks & \
-	$(VIRTUAL_ENV)/bin/python3 manage.py runserver 8000
+	$(VIRTUAL_ENV)/bin/python3 manage.py runserver 8002
 
 server:
-	$(VIRTUAL_ENV)/bin/python3 manage.py runserver 8000
+	$(VIRTUAL_ENV)/bin/python3 manage.py runserver 8002
 
 background-tasks:
 	$(VIRTUAL_ENV)/bin/python3 manage.py process_tasks
@@ -64,6 +65,14 @@ lint:
 	npm run lint --silent ||  EXIT_STATUS=$$?; \
 	$(VIRTUAL_ENV)/bin/python manage.py makemigrations --dry-run --check --noinput || EXIT_STATUS=$$?; \
 	exit $${EXIT_STATUS}
+
+.PHONY: release
+release: export DJANGO_SETTINGS_MODULE ?= advocate_europe.settings.build
+release:
+	npm install --silent
+	npm run build
+	$(VIRTUAL_ENV)/bin/python3 -m pip install -r requirements.txt -q
+	$(VIRTUAL_ENV)/bin/python3 manage.py collectstatic --noinput -v0
 
 make:
 	@echo Hello dwarf planet!

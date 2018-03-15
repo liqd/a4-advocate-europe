@@ -20,12 +20,6 @@ test_db.sqlite3
 htmlcov
 
 # virtual
-myvenv
-venv
-/bin
+/venv/
 /pyvenv.cfg
-/share
-/include
 /pip-selfcheck.json
-/lib
-/lib64
