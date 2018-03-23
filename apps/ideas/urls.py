@@ -4,7 +4,7 @@ from . import views
 from .forms import (ApplicantSectionForm, CommunitySectionForm,
                     FinanceAndDurationSectionForm, FinishForm,
                     IdeaChallengeCampSectionForm, IdeaSectionForm,
-                    ImpactSectionForm, PartnersSectionForm,
+                    ImpactSectionForm, NetworkForm, PartnersSectionForm,
                     SelectionCriteriaSectionForm)
 
 urlpatterns = [
@@ -27,7 +27,8 @@ urlpatterns = [
         views.ProposalCreateWizard.as_view(
             [ApplicantSectionForm, PartnersSectionForm,
              IdeaSectionForm, ImpactSectionForm, SelectionCriteriaSectionForm,
-             FinanceAndDurationSectionForm, CommunitySectionForm, FinishForm]
+             NetworkForm, FinanceAndDurationSectionForm,
+             CommunitySectionForm, FinishForm]
         ), name='idea-sketch-add-proposal'),
     url(r'^(?P<slug>[-\w_]+)/proposal/edit/$',
         views.ProposalEditView.as_view(), name='proposal-update'),

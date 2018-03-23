@@ -25,6 +25,7 @@ from .abstracts.impact_section import AbstractImpactSection
 from .abstracts.partners_section import AbstractPartnersSection
 from .abstracts.selection_criteria_section import \
     AbstractSelectionCriteriaSection
+from .abstracts.network_section import AbstractNetworkSection
 
 
 class IdeaQuerySet(query.RateableQuerySet, query.CommentableQuerySet):
@@ -123,7 +124,7 @@ class IdeaSketchArchived(
 
 
 class Proposal(Idea, AbstractFinanceAndDurationSection,
-               AbstractSelectionCriteriaSection):
+               AbstractSelectionCriteriaSection, AbstractNetworkSection):
 
     def __str__(self):
         return '{} (Proposal)'.format(self.idea_title)

@@ -247,11 +247,13 @@ class ProposalCreateWizard(PermissionRequiredMixin,
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
     title = _('create a proposal')
-    finish_section_text = _('You can add data or edit your proposal later.')
-    finish_section_btn = _('Submit your proposal!')
+    finish_section_text = _('As soon as you have submitted your '
+                            'application, it will be published '
+                            'online in the idea space.')
+    finish_section_btn = _('Submit your idea!')
 
     def get_form_kwargs(self, step=None):
-        if step == '6':
+        if step == '7':
             return {'display_idea_challenge_camp_checkbox': False}
         return {}
 
@@ -321,6 +323,7 @@ class ProposalEditView(
         forms.IdeaSectionForm,
         forms.ImpactSectionForm,
         forms.SelectionCriteriaSectionForm,
+        forms.NetworkForm,
         forms.FinanceAndDurationSectionForm,
         forms.CommunitySectionEditForm,
     ]

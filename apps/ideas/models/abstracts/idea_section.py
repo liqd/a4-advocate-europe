@@ -30,7 +30,7 @@ IDEA_TOPIC_CHOICES = (
     ('education', _('Education'))
 )
 
-IDEA_TOPIC_HELP = _('Choose 1-2 topics that describe your project. '
+IDEA_TOPIC_HELP = _('Choose 1-2 topics that describe your idea. '
                     'Your answer to this question does not '
                     'influence the selection process. '
                     'It helps us to get a better '
@@ -56,7 +56,7 @@ IDEA_LOCATION_RUHR_HELP = _('Is your project connected '
                             'to the Ruhr area of Germany '
                             'through project partners '
                             'or audiences? Please provide '
-                            'further details. (max. 200 characters)')
+                            'further details. (max. 500 characters)')
 
 
 class AbstractIdeaSection(models.Model):
@@ -99,7 +99,7 @@ class AbstractIdeaSection(models.Model):
         verbose_name=_('Location details'),
         help_text=IDEA_LOCATION_SPECIFY_HELP)
     idea_location_ruhr = models.TextField(
-        max_length=200,
+        max_length=500,
         blank=True,
         verbose_name=_('Links to the Ruhr area'),
         help_text=IDEA_LOCATION_RUHR_HELP)
