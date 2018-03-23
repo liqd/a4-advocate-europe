@@ -83,7 +83,7 @@ def test_proposal_co_worker_create_wizard(client, idea_sketch_factory,
         response = client.get(url)
         wizard = response.context['wizard']
         assert response.status_code == 200
-        assert wizard['steps'].count == 8
+        assert wizard['steps'].count == 9
         assert wizard['steps'].step1 == 1
         for field, value in wizard['form'].initial.items():
             assert value == getattr(idea_sketch, field)
@@ -139,7 +139,7 @@ def test_proposal_co_worker_create_wizard(client, idea_sketch_factory,
         for key, value in wizard['form'].initial.items():
             data['3-{}'.format(key)] = value
 
-        # Form 5 (Finances and Duration)
+        # Form 5 (Selection)
         response = client.post(url, data)
         assert response.status_code == 200
         wizard = response.context['wizard']
@@ -147,12 +147,12 @@ def test_proposal_co_worker_create_wizard(client, idea_sketch_factory,
 
         data = {
             'proposal_create_wizard-current_step': '4',
-            '4-selection_cohesion': 'Lorem ipsum ...',
+            '4-selection_advocating': 'Lorem ipsum ...',
             '4-selection_apart': 'Lorem ipsum ...',
-            '4-selection_relevance': 'Lorem ipsum ...',
+            '4-selection_key_indicators': 'Lorem ipsum ...',
         }
 
-        # Form 6 (Finances and Duration)
+        # Form 6 (Network)
         response = client.post(url, data)
         assert response.status_code == 200
         wizard = response.context['wizard']
@@ -160,12 +160,21 @@ def test_proposal_co_worker_create_wizard(client, idea_sketch_factory,
 
         data = {
             'proposal_create_wizard-current_step': '5',
-            '5-total_budget': 6000,
-            '5-budget_requested': 7000,
-            '5-major_expenses': 'Lorem ipsum ...',
-            '5-other_sources': 'on',
-            '5-other_sources_secured': 1,
-            '5-duration': 24
+            '5-network': 'Lorem ipsum ...',
+        }
+
+        # Form 7 (Finances and Duration)
+        response = client.post(url, data)
+        assert response.status_code == 200
+        wizard = response.context['wizard']
+        assert wizard['steps'].step1 == 7
+
+        data = {
+            'proposal_create_wizard-current_step': '6',
+            '6-total_budget': 6000,
+            '6-budget_requested': 7000,
+            '6-major_expenses': 'Lorem ipsum ...',
+            '6-duration': 24
         }
 
         response = client.post(url, data)
@@ -175,61 +184,50 @@ def test_proposal_co_worker_create_wizard(client, idea_sketch_factory,
                                                     "budget can't "
                                                     "be higher than "
                                                     "the total "
-                                                    "budget"],
-                                                   'other_sources_secured':
-                                                   ['You indicated '
-                                                    'that you have '
-                                                    'other sources '
-                                                    'of income for '
-                                                    'your activity '
-                                                    'or initiative. '
-                                                    'Please also indicate '
-                                                    'whether '
-                                                    'those sources are '
-                                                    'secured or not.']
+                                                    "budget"]
                                                    }
 
         data = {
-            'proposal_create_wizard-current_step': '5',
-            '5-total_budget': 8000,
-            '5-budget_requested': 7000,
-            '5-major_expenses': 'Lorem ipsum ...',
-            '5-other_sources': True,
-            '5-other_sources_secured': True,
-            '5-duration': 24
+            'proposal_create_wizard-current_step': '6',
+            '6-total_budget': 8000,
+            '6-budget_requested': 7000,
+            '6-major_expenses': 'Lorem ipsum ...',
+            '6-other_sources': True,
+            '6-other_sources_secured': True,
+            '6-duration': 24
         }
 
-        # Form 7 (Community)
+        # Form 8 (Community)
         response = client.post(url, data)
         assert response.status_code == 200
         wizard = response.context['wizard']
-        assert wizard['steps'].step1 == 7
+        assert wizard['steps'].step1 == 8
         assert response.context['form'].errors == {}
 
         for field, value in wizard['form'].initial.items():
             assert value == getattr(idea_sketch, field)
 
         data = {
-            'proposal_create_wizard-current_step': '6',
-            '6-accept_conditions': 'on',
-            '6-confirm_publicity': 'on',
-            '6-confirm_idea_challenge_camp': 'on'
+            'proposal_create_wizard-current_step': '7',
+            '7-accept_conditions': 'on',
+            '7-confirm_publicity': 'on',
+            '7-confirm_idea_challenge_camp': 'on'
         }
 
         for key, value in wizard['form'].initial.items():
-            data['6-{}'.format(key)] = value
+            data['7-{}'.format(key)] = value
 
-        # Form 8 (Finish)
+        # Form 9 (Finish)
         response = client.post(url, data)
         assert response.status_code == 200
         wizard = response.context['wizard']
-        assert wizard['steps'].step1 == 8
+        assert wizard['steps'].step1 == 9
 
         for field, value in wizard['form'].initial.items():
             assert value == getattr(idea_sketch, field)
 
         data = {
-            'proposal_create_wizard-current_step': '7'
+            'proposal_create_wizard-current_step': '8'
         }
 
         # Final Post
