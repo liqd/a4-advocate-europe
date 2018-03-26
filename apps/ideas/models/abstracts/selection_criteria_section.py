@@ -42,7 +42,7 @@ class AbstractSelectionCriteriaSection(models.Model):
         max_length=500,
         verbose_name=SELECTION_COHESION_TITLE)
     selection_apart = models.TextField(
-        max_length=500,
+        max_length=800,
         verbose_name=SELECTION_APART_TITLE,
         help_text=SELECTION_APART_HELP)
     selection_relevance = models.TextField(

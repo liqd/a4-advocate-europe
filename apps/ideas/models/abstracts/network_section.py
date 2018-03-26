@@ -13,7 +13,7 @@ NETWORK_HELP = _('The Advocate Europe network includes all '
                  'Tell us about your expectations. '
                  'Think about your skills, resources, networks and partners '
                  'when describing what you could offer and '
-                 '‚what you would like to take away. (max. 800 characters)')
+                 'what you would like to take away. (max. 800 characters)')
 
 
 class AbstractNetworkSection(models.Model):
