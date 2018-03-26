@@ -80,11 +80,12 @@ class ProposalFactory(factory.django.DjangoModelFactory):
     idea_title = factory.Faker('name')
     creator = factory.SubFactory(UserFactory)
     module = factory.SubFactory(ModuleFactory)
+    network = factory.Faker('text')
+    selection_advocating = factory.Faker('text')
+    selection_key_indicators = factory.Faker('text')
     idea_topics = 'environment'
     total_budget = factory.Faker('random_number')
     budget_requested = factory.Faker('random_number')
-    other_sources = 0
-    other_sources_secured = 0
     duration = factory.Faker('random_number')
     is_on_shortlist = True
 

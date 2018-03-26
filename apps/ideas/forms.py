@@ -10,14 +10,14 @@ from django.utils.translation import ugettext_lazy as _
 from cms.contrib import helpers
 
 from . import models
+from .models.abstracts import finances_duration_section
 from .models.abstracts.applicant_section import AbstractApplicantSection
 from .models.abstracts.community_section import AbstractCommunitySection
-from .models.abstracts.finances_duration_section import \
-    AbstractFinanceAndDurationSection
 from .models.abstracts.idea_challenge_camp_section import \
     AbstractIdeaChallengeCampSection
 from .models.abstracts.idea_section import AbstractIdeaSection
 from .models.abstracts.impact_section import AbstractImpactSection
+from .models.abstracts.network_section import AbstractNetworkSection
 from .models.abstracts.partners_section import AbstractPartnersSection
 from .models.abstracts.selection_criteria_section import \
     AbstractSelectionCriteriaSection
@@ -314,30 +314,48 @@ class CommunitySectionForm(CoWorkersEmailsFormMixin, BaseForm):
 
 
 class SelectionCriteriaSectionForm(BaseForm):
-    section_name = _('Selection Criteria')
+    section_name = _('Outreach and indicators')
 
     class Meta:
         model = AbstractSelectionCriteriaSection
         fields = [
-            'selection_cohesion',
             'selection_apart',
-            'selection_relevance',
+            'selection_advocating',
+            'selection_key_indicators'
+        ]
+
+
+class NetworkForm(BaseForm):
+    section_name = _('Network')
+
+    class Meta:
+        model = AbstractNetworkSection
+        fields = [
+            'network'
         ]
 
 
 class FinanceAndDurationSectionForm(BaseForm):
-    section_name = _('Finances and Duration')
-    budget_requested = forms.IntegerField(max_value=50000, min_value=0)
-    total_budget = forms.IntegerField(min_value=0)
+    section_name = _('Finances')
+
+    budget_requested = forms.IntegerField(
+        max_value=50000,
+        min_value=0,
+        label=finances_duration_section.BUDGET_REQUESTED_TITLE,
+        help_text=finances_duration_section.BUDGET_REQUESTED_HELP
+    )
+    total_budget = forms.IntegerField(
+        min_value=0,
+        label=finances_duration_section.TOTAL_BUDGET_TITLE,
+        help_text=finances_duration_section.TOTAL_BUDGET_HELP
+    )
 
     class Meta:
-        model = AbstractFinanceAndDurationSection
+        model = finances_duration_section.AbstractFinanceAndDurationSection
         fields = [
             'total_budget',
             'budget_requested',
             'major_expenses',
-            'other_sources',
-            'other_sources_secured',
             'duration'
         ]
 
@@ -345,26 +363,15 @@ class FinanceAndDurationSectionForm(BaseForm):
         cleaned_data = super().clean()
         budget_requested = cleaned_data.get('budget_requested')
         total_budget = cleaned_data.get('total_budget')
-        other_sources = cleaned_data.get('other_sources')
-        other_sources_secured = cleaned_data.get('other_sources_secured')
 
         if budget_requested and total_budget:
             if budget_requested > total_budget:
                 self.add_error('__all__', _("The requested budget can't be "
                                             "higher than the total budget"))
 
-        if other_sources:
-            if other_sources_secured is None:
-                self.add_error('other_sources_secured',
-                               _('You indicated that you have '
-                                 'other sources of income for '
-                                 'your activity or initiative. '
-                                 'Please also indicate whether '
-                                 'those sources are secured or not.'))
-
 
 class CommunitySectionEditForm(CoWorkersEmailsFormMixin, BaseForm):
-    section_name = _('Community Information')
+    section_name = _('Community')
     co_workers_emails = forms.CharField(
         required=False,
         help_text=COWORKERS_HELP,
