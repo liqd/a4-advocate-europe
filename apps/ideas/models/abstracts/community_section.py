@@ -3,7 +3,8 @@ from django.utils.translation import ugettext as _
 
 REACH_OUT_TITLE = _('Reach out – get feedback, '
                     'ideas and inspiration from '
-                    'the Advocate Europe Community!')
+                    'the Advocate Europe online '
+                    'Community!')
 REACH_OUT_HELP = _('What kind of advice, comments or '
                    'feedback would you like to receive '
                    'about your idea from others on the '

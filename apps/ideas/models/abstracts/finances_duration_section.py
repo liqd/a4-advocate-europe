@@ -4,14 +4,14 @@ from django.utils.translation import ugettext as _
 TOTAL_BUDGET_TITLE = _('Total Budget')
 TOTAL_BUDGET_HELP = _('Please indicate your overall budget. '
                       'The total budget may (but does not have to) '
-                      'include the applicant’s own contribution '
-                      'and/or external sources of funding.')
+                      'include the applicant’s own contribution and/or '
+                      'external sources of funding.')
 BUDGET_REQUESTED_TITLE = _('Funding requested from Advocate Europe')
-BUDGET_REQUESTED_HELP = _('Funding requested from Advocate Europe '
-                          'can range from 1 to 50,000 EUR. '
-                          'Depending on your planning, the amount '
-                          'entered here can be the same as the'
-                          ' “total budget” figure entered above.')
+BUDGET_REQUESTED_HELP = _('Funding requested from Advocate Europe can '
+                          'range from 1 to 50,000 EUR. Depending on your '
+                          'planning, the amount entered here can '
+                          'be the same as the “total budget” '
+                          'figure entered above.')
 MAJOR_EXPENSES_TITLE = _('Major expenses')
 MAJOR_EXPENSES_HELP = _('Which are the major expenses you foresee '
                         'for the implementation of your idea? '
@@ -43,14 +43,6 @@ class AbstractFinanceAndDurationSection(models.Model):
     major_expenses = models.TextField(
         max_length=500,
         verbose_name=MAJOR_EXPENSES_TITLE, help_text=MAJOR_EXPENSES_HELP)
-    other_sources = models.BooleanField(
-        verbose_name=OTHER_SOURCES_TITLE,
-        help_text=OTHER_SOURCES_HELP,
-        default=False,
-    )
-    other_sources_secured = models.NullBooleanField(
-        verbose_name=OTHER_SOURCES_SECURED_TITLE,
-        help_text=OTHER_SOURCES_SECURED_HELP)
     duration = models.IntegerField(
         verbose_name=DURATION_TITLE,
         help_text=DURATION_HELP)
