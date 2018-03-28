@@ -5,14 +5,14 @@
         <span class="ideadetailtab-header-content-switcher">
             {% if idea.idea_sketch_archived %}
             {% if view.display_type == 'idea_sketch_archive' %}
-                <span class="active" >Ideasketch</span> |
+                <span class="active" >Idea Sketch</span> |
                 <a href="{% url 'idea-detail' idea.slug %}">Proposal</a>
             {% else %}
-                <a href="{% url 'idea-sketch-archived-detail' idea.slug %}">Ideasketch</a> |
+                <a href="{% url 'idea-sketch-archived-detail' idea.slug %}">Idea Sketch</a> |
                 <span class="active">Proposal</span>
             {% endif %}
             {% else %}
-            Ideasketch
+            Idea Sketch
             {% endif %}
         </span>
         <h2>{% trans "Idea" %}</h2>

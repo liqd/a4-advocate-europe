@@ -152,7 +152,7 @@ class IdeaSketchEditView(
     permission_required = 'advocate_europe_ideas.change_idea'
     model = IdeaSketch
     template_name = 'advocate_europe_ideas/idea_update_form.html'
-    success_message = _('Ideasketch saved')
+    success_message = _('Idea Sketch saved')
     next_view = 'idea-sketch-update-form'
 
     form_classes = [
