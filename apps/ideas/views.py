@@ -3,6 +3,7 @@ from datetime import datetime
 
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.files.base import ContentFile
 from django.core.files.storage import FileSystemStorage
 from django.forms.models import model_to_dict
 from django.shortcuts import redirect
@@ -282,6 +283,12 @@ class ProposalCreateWizard(PermissionRequiredMixin,
                 setattr(archive, field.name, value)
 
         archive.save()
+
+        if self.idea.idea_image:
+            picture_copy = ContentFile(self.idea.idea_image.read())
+            new_picture_name = \
+                'archived_{}'.format(self.idea.idea_image.name.split("/")[-1])
+            archive.idea_image.save(new_picture_name, picture_copy)
 
         special_fields = ['accept_conditions', 'co_workers_emails',
                           'confirm_publicity', 'confirm_idea_challenge_camp']
