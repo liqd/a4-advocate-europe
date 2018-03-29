@@ -152,8 +152,9 @@ class IdeaSketchEditView(
     permission_required = 'advocate_europe_ideas.change_idea'
     model = IdeaSketch
     template_name = 'advocate_europe_ideas/idea_update_form.html'
-    success_message = _('Ideasketch saved')
+    success_message = _('Idea Sketch saved')
     next_view = 'idea-sketch-update-form'
+    title = _('Update Idea Sketch')
 
     form_classes = [
         forms.ApplicantSectionForm,
@@ -246,7 +247,7 @@ class ProposalCreateWizard(PermissionRequiredMixin,
     permission_required = 'advocate_europe_ideas.add_proposal'
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'idea_sketch_images'))
-    title = _('create a proposal')
+    title = _('Proposal')
     finish_section_text = _('As soon as you have submitted your '
                             'application, it will be published '
                             'online in the idea space.')
@@ -316,6 +317,7 @@ class ProposalEditView(
     template_name = 'advocate_europe_ideas/idea_update_form.html'
     success_message = _('Proposal saved')
     next_view = 'proposal-update-form'
+    title = _('Update proposal')
 
     form_classes = [
         forms.ApplicantSectionForm,
