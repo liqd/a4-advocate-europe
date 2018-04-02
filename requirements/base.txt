@@ -3,7 +3,7 @@ bcrypt==3.1.4
 Django==1.11.11 # pyup: >=1.11,<1.12
 wagtail==1.13.1 # pyup: <2.0
 feedparser==5.2.1
-python-dateutil==2.7.1
+python-dateutil==2.7.2
 django-allauth==0.35.0
 django-ckeditor==5.4.0
 django-cloudflare-push==0.2.0
