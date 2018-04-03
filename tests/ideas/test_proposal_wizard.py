@@ -257,6 +257,10 @@ def test_proposal_co_worker_create_wizard(client, idea_sketch_factory,
                 elif field.many_to_many or field.one_to_many:
                     archive_field = set(archive_field.all())
                     idea_sketch_field = set(idea_sketch_field.all())
+                elif field.name == 'idea_image':
+                    idea_sketch_field = idea_sketch_field.name.split('/')[-1]
+                    filename = archive_field.name.split('/')[-1]
+                    param, archive_field = filename.split('_', 1)
 
                 assert archive_field == idea_sketch_field
 
