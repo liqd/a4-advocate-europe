@@ -14,6 +14,7 @@ def copy_images(apps, schema_editor):
             picture_copy = ContentFile(idea.idea_image.read())
             new_picture_name = 'archived_{}'.format(idea.idea_image.name.split("/")[-1])
             archive.idea_image.save(new_picture_name, picture_copy)
+            picture_copy.close()
 
 
 class Migration(migrations.Migration):

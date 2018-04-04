@@ -289,6 +289,7 @@ class ProposalCreateWizard(PermissionRequiredMixin,
             new_picture_name = \
                 'archived_{}'.format(self.idea.idea_image.name.split("/")[-1])
             archive.idea_image.save(new_picture_name, picture_copy)
+            picture_copy.close()
 
         special_fields = ['accept_conditions', 'co_workers_emails',
                           'confirm_publicity', 'confirm_idea_challenge_camp']
