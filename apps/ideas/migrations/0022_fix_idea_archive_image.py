@@ -12,9 +12,11 @@ def copy_images(apps, schema_editor):
         idea = archive.idea
         if idea.idea_image:
             picture_copy = ContentFile(idea.idea_image.read())
+            idea.idea_image.close()
             new_picture_name = 'archived_{}'.format(idea.idea_image.name.split("/")[-1])
             archive.idea_image.save(new_picture_name, picture_copy)
-            picture_copy.close()
+            archive.idea_image.close()
+            picture_copy.file.close()
 
 
 class Migration(migrations.Migration):
