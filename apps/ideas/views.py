@@ -309,6 +309,9 @@ class ProposalCreateWizard(PermissionRequiredMixin,
             if field.name not in data:
                 setattr(proposal, field.name, getattr(self.idea, field.name))
 
+        if not proposal.idea_image:
+            proposal.idea_image = None
+
         proposal.save()
 
         return redirect(proposal.get_absolute_url())
