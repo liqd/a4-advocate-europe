@@ -1,20 +1,20 @@
 git+git://github.com/liqd/adhocracy4.git@9f2adb49dd4247370327dfef542468bea95bd005
 bcrypt==3.1.4
-Django==1.11.11 # pyup: >=1.11,<1.12
+Django==1.11.12 # pyup: >=1.11,<1.12
 wagtail==1.13.1 # pyup: <2.0
 feedparser==5.2.1
-python-dateutil==2.7.1
+python-dateutil==2.7.2
 django-allauth==0.35.0
 django-ckeditor==5.4.0
 django-cloudflare-push==0.2.0
 django-filter==1.1.0
 django-crispy-forms==1.7.2
 django-formtools==2.1
-django-widget-tweaks==1.4.1
+django-widget-tweaks==1.4.2
 easy-thumbnails==2.5
 django-autoslug==1.9.3
 django-multiselectfield==0.1.8
-djangorestframework==3.7.7
+djangorestframework==3.8.2
 django-countries==5.2
 python-magic==0.4.15
 html5lib==1.0.1
