@@ -15,8 +15,8 @@ def test_idea_detail_view(rf, idea_sketch_factory, proposal_factory):
     view = views.IdeaDetailView.as_view()
     request = rf.get('/ideas/')
     response = view(request, slug=ideasketch.slug)
-    assert 'idea_list' in response.context_data
-    assert (response.context_data['idea_list'][0] ==
+    assert 'idea_list_1' in response.context_data
+    assert (response.context_data['idea_list_1'][0] ==
             ('Idea pitch', ideasketch.idea_pitch))
     assert 'partner_list' in response.context_data
 
