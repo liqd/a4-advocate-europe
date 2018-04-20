@@ -17,11 +17,14 @@ help:
 	@echo "  make server           -- start a dev server"
 	@echo "  make watch            -- start a dev server and rebuild js and css files on changes"
 	@echo "  make background       -- start a dev server, rebuild js and css files on changes, and start background processes"
-	@echo "  make background-tasks -- start a background tasks"
+	@echo "  make background-tasks -- start a background task"
 	@echo "  make test             -- tests on exiting database"
 	@echo "  make test-lastfailed  -- run test that failed last"
 	@echo "  make test-clean       -- test on new database"
-	@echo "  make lint             -- lint javascript and python"
+	@echo "  make coverage         -- write coverage report to dir htmlcov"
+	@echo "  make lint             -- lint javascript and python, check for missing migrations"
+	@echo "  make po               -- create new po files from the source"
+	@echo "  make mo               -- create new mo files from the translated po files"
 	@echo "  make release          -- build everything required for a release"
 	@echo
 
@@ -78,13 +81,6 @@ test-clean:
 coverage:
 	$(VIRTUAL_ENV)/bin/py.test --reuse-db --cov --cov-report=html
 
-.PHONY: locales-collect
-locales-collect:
-	$(VIRTUAL_ENV)/bin/python manage.py makemessages -d djangojs
-	$(VIRTUAL_ENV)/bin/python manage.py makemessages -d django
-	sed -i 's%#: .*/node_modules.*/adhocracy4%#: adhocracy4.js%' locale/*/LC_MESSAGES/django*.po
-	sed -i 's%#: .*/adhocracy4%#: adhocracy4.py%' locale/*/LC_MESSAGES/django*.po
-
 .PHONY: lint
 lint:
 	EXIT_STATUS=0; \
@@ -93,6 +89,19 @@ lint:
 	npm run lint --silent ||  EXIT_STATUS=$$?; \
 	$(VIRTUAL_ENV)/bin/python manage.py makemigrations --dry-run --check --noinput || EXIT_STATUS=$$?; \
 	exit $${EXIT_STATUS}
+
+.PHONY: po
+po:
+	$(VIRTUAL_ENV)/bin/python manage.py makemessages -d djangojs
+	$(VIRTUAL_ENV)/bin/python manage.py makemessages -d django
+	sed -i 's%#: .*/node_modules.*/adhocracy4%#: adhocracy4.js%' locale/*/LC_MESSAGES/django*.po
+	sed -i 's%#: .*/adhocracy4%#: adhocracy4.py%' locale/*/LC_MESSAGES/django*.po
+	msgen locale/en_GB/LC_MESSAGES/django.po -o locale/en_GB/LC_MESSAGES/django.po
+	msgen locale/en_GB/LC_MESSAGES/djangojs.po -o locale/en_GB/LC_MESSAGES/djangojs.po
+
+.PHONY: mo
+mo:
+	$(VIRTUAL_ENV)/bin/python manage.py compilemessages
 
 .PHONY: release
 release: export DJANGO_SETTINGS_MODULE ?= advocate_europe.settings.build
