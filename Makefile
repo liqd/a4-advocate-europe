@@ -18,6 +18,7 @@ help:
 	@echo "  make release      -- build everything required for a release"
 	@echo
 
+.PHONY: install
 install:
 	npm install --no-save
 	npm run build
@@ -25,39 +26,48 @@ install:
 	$(VIRTUAL_ENV)/bin/python3 -m pip install --upgrade -r requirements/dev.txt
 	$(VIRTUAL_ENV)/bin/python3 manage.py migrate
 
+.PHONY: fixtures
 fixtures:
 	$(VIRTUAL_ENV)/bin/python3 manage.py loaddata advocate_europe/fixtures/site-dev.json
 	$(VIRTUAL_ENV)/bin/python3 manage.py loaddata advocate_europe/fixtures/users-dev.json
 	$(VIRTUAL_ENV)/bin/python3 manage.py loaddata advocate_europe/fixtures/projects-dev.json
 	$(VIRTUAL_ENV)/bin/python3 manage.py loadtestdata advocate_europe_ideas.IdeaSketch:7
 
+.PHONY: watch
 watch:
 	trap 'kill %1; kill %2' KILL; \
 	npm run watch & \
 	$(VIRTUAL_ENV)/bin/python3 manage.py process_tasks & \
 	$(VIRTUAL_ENV)/bin/python3 manage.py runserver 8002
 
+.PHONY: server
 server:
 	$(VIRTUAL_ENV)/bin/python3 manage.py runserver 8002
 
+.PHONY: background-tasks
 background-tasks:
 	$(VIRTUAL_ENV)/bin/python3 manage.py process_tasks
 
+.PHONY: test
 test:
 	$(VIRTUAL_ENV)/bin/py.test --reuse-db
 
+.PHONY: test-lastfailed
 test-lastfailed:
 	$(VIRTUAL_ENV)/bin/py.test --reuse-db --last-failed
 
+.PHONY: coverage
 coverage:
 	$(VIRTUAL_ENV)/bin/py.test --reuse-db --cov --cov-report=html
 
+.PHONY: locales-collect
 locales-collect:
 	$(VIRTUAL_ENV)/bin/python manage.py makemessages -d djangojs
 	$(VIRTUAL_ENV)/bin/python manage.py makemessages -d django
 	sed -i 's%#: .*/node_modules.*/adhocracy4%#: adhocracy4.js%' locale/*/LC_MESSAGES/django*.po
 	sed -i 's%#: .*/adhocracy4%#: adhocracy4.py%' locale/*/LC_MESSAGES/django*.po
 
+.PHONY: lint
 lint:
 	EXIT_STATUS=0; \
 	$(VIRTUAL_ENV)/bin/isort --diff -rc -c $(SOURCE_DIRS) ||  EXIT_STATUS=$$?; \
@@ -74,5 +84,6 @@ release:
 	$(VIRTUAL_ENV)/bin/python3 -m pip install -r requirements.txt -q
 	$(VIRTUAL_ENV)/bin/python3 manage.py collectstatic --noinput -v0
 
+.PHONY: make
 make:
 	@echo Hello dwarf planet!
