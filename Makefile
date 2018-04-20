@@ -11,11 +11,15 @@ help:
 	@echo
 	@echo usage:
 	@echo
-	@echo "  make install      -- install dev setup"
-	@echo "  make server       -- development server"
-	@echo "  make test         -- tests on exiting database"
-	@echo "  make lint         -- lint javascript and python"
-	@echo "  make release      -- build everything required for a release"
+	@echo "  make install          -- install dev setup"
+	@echo "  make fixtures         -- load example data"
+	@echo "  make server           -- start a dev server"
+	@echo "  make watch            -- start a dev server and rebuild js and css files on changes"
+	@echo "  make background       -- start a dev server, rebuild js and css files on changes, and start background processes"
+	@echo "  make background-tasks -- start a background tasks"
+	@echo "  make test             -- tests on exiting database"
+	@echo "  make lint             -- lint javascript and python"
+	@echo "  make release          -- build everything required for a release"
 	@echo
 
 .PHONY: install
@@ -33,15 +37,21 @@ fixtures:
 	$(VIRTUAL_ENV)/bin/python3 manage.py loaddata advocate_europe/fixtures/projects-dev.json
 	$(VIRTUAL_ENV)/bin/python3 manage.py loadtestdata advocate_europe_ideas.IdeaSketch:7
 
+.PHONY: server
+server:
+	$(VIRTUAL_ENV)/bin/python3 manage.py runserver 8002
+
 .PHONY: watch
 watch:
+	trap 'kill %1' KILL; \
+	npm run watch & \
+	$(VIRTUAL_ENV)/bin/python3 manage.py runserver 8002
+
+.PHONY: background
+background:
 	trap 'kill %1; kill %2' KILL; \
 	npm run watch & \
 	$(VIRTUAL_ENV)/bin/python3 manage.py process_tasks & \
-	$(VIRTUAL_ENV)/bin/python3 manage.py runserver 8002
-
-.PHONY: server
-server:
 	$(VIRTUAL_ENV)/bin/python3 manage.py runserver 8002
 
 .PHONY: background-tasks
