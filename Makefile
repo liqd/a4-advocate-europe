@@ -3,6 +3,7 @@ all: help
 VIRTUAL_ENV ?= venv
 SOURCE_DIRS = apps advocate_europe cms tests
 
+.PHONY: help
 help:
 	@echo advocate-europe development tools
 	@echo
@@ -18,6 +19,8 @@ help:
 	@echo "  make background       -- start a dev server, rebuild js and css files on changes, and start background processes"
 	@echo "  make background-tasks -- start a background tasks"
 	@echo "  make test             -- tests on exiting database"
+	@echo "  make test-lastfailed  -- run test that failed last"
+	@echo "  make test-clean       -- test on new database"
 	@echo "  make lint             -- lint javascript and python"
 	@echo "  make release          -- build everything required for a release"
 	@echo
@@ -65,6 +68,11 @@ test:
 .PHONY: test-lastfailed
 test-lastfailed:
 	$(VIRTUAL_ENV)/bin/py.test --reuse-db --last-failed
+
+.PHONY: test-clean
+test-clean:
+	if [ -f test_db.sqlite3 ]; then rm test_db.sqlite3; fi
+	$(VIRTUAL_ENV)/bin/py.test
 
 .PHONY: coverage
 coverage:
