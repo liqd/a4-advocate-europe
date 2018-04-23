@@ -15,7 +15,7 @@ easy-thumbnails==2.5
 django-autoslug==1.9.3
 django-multiselectfield==0.1.8
 djangorestframework==3.8.2
-django-countries==5.2
+django-countries==5.3
 python-magic==0.4.15
 html5lib==1.0.1
 bleach==2.1.3
