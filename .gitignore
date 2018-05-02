@@ -1,25 +1,63 @@
-*.pyc
-__pycache__
-.cache
-.DS_Store
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
 
-# project specific
-db.sqlite3
-test_db.sqlite3
-/static
-*.mo
-/media
-.sass-cache
-/node_modules
-/webpack-stats.json
-/advocate_europe/settings/local.py
-/advocate_europe/static
+# C extensions
+*.so
 
-# coveerage
+# Unit test / coverage reports
+htmlcov/
+.tox/
 .coverage
-htmlcov
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache
 
-# virtual
-/venv/
+# Translations
+*.mo
+*.pot
+
+# Environments
+venv/
 /pyvenv.cfg
 /pip-selfcheck.json
+
+# Node
+node_modules/
+package-lock.json
+npm-debug.log*
+/webpack-stats.json
+
+# IDEs
+.idea/
+
+# Django databases
+*.sqlite3
+db.sqlite3*
+
+# Local instance specific settings
+/advocate_europe/settings/local.py
+
+# Generated static files
+/advocate_europe/static
+static/
+
+# Media
+media/
+
+# setuptools
+/build
+/dist
+/*.egg-info
+/share
+
+# OS
+.DS_Store
+
+# sass
+.sass-cache
