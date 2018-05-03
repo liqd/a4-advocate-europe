@@ -20,7 +20,7 @@
     "postcss-loader": "2.1.4",
     "react": "16.2.0",
     "react-addons-update": "15.6.2",
-    "react-dom": "16.2.0",
+    "react-dom": "16.3.0",
     "sass-loader": "6.0.7",
     "slick-carousel": "1.9.0",
     "style-loader": "0.21.0",
