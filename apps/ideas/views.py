@@ -181,28 +181,39 @@ class IdeaDetailView(generic.DetailView):
         return model_to_dict(self.object)
 
     def get_context_data(self, **kwargs):
-        idea_list = []
-        proposal_list = []
-        idea_list.append((_('Idea pitch'), self.object.idea_pitch))
+        idea_list_1 = []
+        idea_list_2 = []
+        budget_list = []
+        idea_list_1.append((_('Idea pitch'), self.object.idea_pitch))
         if self.object.idea_location_specify:
-            idea_list.append((_('Where does your idea take place?'),
-                              self.object.idea_location_specify))
-        idea_list.append((_('Why does Europe need your idea?'),
-                          self.object.challenge))
-        idea_list.append((_('What is your impact?'), self.object.outcome))
-        idea_list.append((_('How do you get there?'), self.object.plan))
-        idea_list.append((_('What is your story?'), self.object.importance))
-        idea_list.append((_('Who are you doing it for?'),
-                          self.object.target_group))
+            idea_list_1.append((_('Where will your idea take place?'),
+                                self.object.idea_location_specify))
+        idea_list_1.append((_('Why does Europe need your idea?'),
+                            self.object.challenge))
+        idea_list_1.append((_('What is your impact?'), self.object.outcome))
+        idea_list_1.append((_('How do you get there?'), self.object.plan))
+        idea_list_1.append((_('What is your story?'), self.object.importance))
+        idea_list_1.append((_('Who are you doing it for?'),
+                            self.object.target_group))
+
+        if hasattr(self.object, 'proposal') and self.object.proposal:
+            idea_list_1.append((_('What makes your idea stand apart?'),
+                                self.object.proposal.selection_apart))
+            idea_list_2.append((_('Major expenses'),
+                                self.object.proposal.major_expenses))
+
         if self.object.reach_out:
-            idea_list.append((_('What do you need from the Advocate Europe '
+            idea_list_2.append((_('What do you need from the Advocate Europe '
                                 'community?'), self.object.reach_out))
 
         if hasattr(self.object, 'proposal') and self.object.proposal:
-            proposal_list.append((_('Major expenses'),
-                                  self.object.proposal.major_expenses))
-            proposal_list.append((_('What makes your idea stand apart?'),
-                                  self.object.proposal.selection_apart))
+            budget_list.append((_('Funding requested from Advocate Europe'),
+                                self.object.proposal.budget_requested))
+            budget_list.append((_('Total budget'),
+                                self.object.proposal.total_budget))
+            if self.object.budget_granted:
+                budget_list.append((_('Funding granted from Advocate Europe'),
+                                    self.object.proposal.budget_granted))
 
         partner_list = []
         if (self.object.partner_organisation_1_name
@@ -225,8 +236,9 @@ class IdeaDetailView(generic.DetailView):
                                  get_partner_organisation_3_country_display))
 
         context = super().get_context_data(**kwargs)
-        context['idea_list'] = idea_list
-        context['proposal_list'] = proposal_list
+        context['idea_list_1'] = idea_list_1
+        context['idea_list_2'] = idea_list_2
+        context['budget_list'] = budget_list
         context['partner_list'] = partner_list
         return context
 
@@ -308,6 +320,9 @@ class ProposalCreateWizard(PermissionRequiredMixin,
         for field in Idea._meta.concrete_fields:
             if field.name not in data:
                 setattr(proposal, field.name, getattr(self.idea, field.name))
+
+        if not proposal.idea_image:
+            proposal.idea_image = None
 
         proposal.save()
 

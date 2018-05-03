@@ -15,9 +15,13 @@
             Idea Sketch
             {% endif %}
         </span>
+        {% if idea.proposal %}
+        <h2>{% trans "Proposal" %}</h2>
+        {% else %}
         <h2>{% trans "Idea" %}</h2>
+        {% endif %}
     </div>
-    {% for field in idea_list %}
+    {% for field in idea_list_1 %}
         <div class="ideadetailtab-con-header">
             <h4>{{ field.0 }}</h4>
         </div>
@@ -27,22 +31,15 @@
     {% endfor %}
     {% if idea.proposal %}
         <div class="row ideadetail-funding">
+            {% for field in budget_list %}
             <div class="col-lg-4 col-sm-4 col-xs-4 well">
-                <h3>€ {{ idea.proposal.budget_requested }},-</h3>
-                <p>{% trans 'Funding requested from Advocate Europe' %}</p>
+                <h3>€ {{ field.1 }},-</h3>
+                <p>{{ field.0 }}</p>
             </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 well">
-                <h3>€ {{ idea.proposal.total_budget }},-</h3>
-                <p>{% trans 'Total budget' %}</p>
-            </div>
-            {% if idea.budget_granted %}
-            <div class="col-lg-4 col-sm-4 col-xs-4 well">
-                <h3>€ {{ idea.proposal.budget_granted }},-</h3>
-                <p>{% trans 'Funding granted from Advocate Europe' %}</p>
-            </div>
-            {% endif %}
+            {% endfor %}
         </div>
-        {% for field in proposal_list %}
+    {% endif  %}
+    {% for field in idea_list_2 %}
         <div class="ideadetailtab-con-header">
             <h4>{{ field.0 }}</h4>
         </div>
@@ -50,5 +47,4 @@
             <p>{{ field.1 }}</p>
         </div>
     {% endfor %}
-    {% endif  %}
 </div>
