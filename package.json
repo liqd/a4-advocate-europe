@@ -22,7 +22,7 @@
     "react-addons-update": "15.6.2",
     "react-dom": "16.2.0",
     "sass-loader": "6.0.7",
-    "slick-carousel": "1.8.1",
+    "slick-carousel": "1.9.0",
     "style-loader": "0.21.0",
     "webpack": "3.11.0",
     "webpack-merge": "4.1.2"
