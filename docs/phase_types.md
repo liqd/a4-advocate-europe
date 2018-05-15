@@ -38,7 +38,11 @@ This document explains, which phase types exist and are implemented for a projec
    - sorting: alphabetical
    - filtering: status - proposals, year - 2017
 
-9. Final Implementation (not a Phase)
-   - winners can add journey entries
+9. Interim Winners Phase
+   - sorting: newest
+   - filtering: status - winner, year - 2017
+
+10. Final Implementation (not a Phase)
+   - winners can add journey entries (as they can always do)
    - sorting: newest
    - filtering: status - winners
