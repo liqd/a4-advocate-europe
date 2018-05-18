@@ -165,3 +165,20 @@ class InterimWinnersSelectionPhase(IdeaPhase):
 
 
 phases.content.register(InterimWinnersSelectionPhase())
+
+
+class InterimWinnersPhase(IdeaPhase):
+    phase = 'interim_winners'
+
+    name = _('Interim winners phase')
+    description = _('winning ideas are from the current idea '
+                    'challenge are shown')
+
+    default_filters = QueryDict('ordering=newest&'
+                                'status=winner&'
+                                'project=',
+                                mutable=True
+                                )
+
+
+phases.content.register(InterimWinnersPhase())
