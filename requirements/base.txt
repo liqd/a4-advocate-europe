@@ -28,4 +28,4 @@ appdirs==1.4.3
 git+git://github.com/coleifer/micawber.git@9e3f0169a1e9ac80a5e481155abf7658af507c24
 # django multiform (released version 0.1 was too old)
 git+git://github.com/bmispelon/django-multiform.git@0e02f0d5729a80502a290070b474f3e3ac85c926
-XlsxWriter==1.0.4
+XlsxWriter==1.0.5
