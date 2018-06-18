@@ -7,6 +7,6 @@ pytest==3.6.1
 pytest-django==3.3.0
 pytest-cov==2.5.1
 pytest-factoryboy==2.0.1
-Faker==0.8.15
+Faker==0.8.16
 django-debug-toolbar==1.9.1
 transifex-client==0.12.5 # pyup: ignore # currently broken (version not found)
