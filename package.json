@@ -21,7 +21,7 @@
     "react": "16.4.1",
     "react-addons-update": "15.6.2",
     "react-dom": "16.4.1",
-    "sass-loader": "6.0.7",
+    "sass-loader": "7.0.3",
     "slick-carousel": "1.8.1",
     "style-loader": "0.21.0",
     "webpack": "3.12.0",
