@@ -82,11 +82,15 @@
 }
 
 .accordion-toggle {
-    .fa {
+    .fa,
+    .fas,
+    .far {
         float: right
     }
 
-    &.collapsed .fa {
+    &.collapsed .fa,
+    &.collapsed .fas,
+    &.collapsed .far {
         transform: rotateZ(180deg);
     }
 }

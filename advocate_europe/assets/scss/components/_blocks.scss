@@ -80,7 +80,9 @@
     }
 
     .collapsed {
-        .fa {
+        .fa,
+        .fas,
+        .far {
             transform: rotateZ(180deg);
         }
     }

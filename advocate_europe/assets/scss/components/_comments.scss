@@ -178,7 +178,9 @@
             font-size: rem(16px);
         }
 
-        i.fa {
+        i.fa,
+        i.fas,
+        i.far {
             padding-right: rem(5px);
         }
     }
@@ -201,7 +203,9 @@
         border-right: rem(1px) solid $ae-dark-gray;
         border-radius: 5px 0 0 5px;
 
-        i.fa {
+        i.fa,
+        i.fas,
+        i.far {
             padding-right: rem(5px);
             color: $brand-success;
         }
@@ -210,7 +214,9 @@
     .rating-down {
         border-radius: 0 5px 5px 0;
 
-        i.fa {
+        i.fa,
+        i.fas,
+        i.far {
             padding-right: rem(5px);
             color: $brand-danger;
         }

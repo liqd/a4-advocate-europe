@@ -87,7 +87,9 @@
         padding: rem(12px);
         box-shadow: 0 -1px 0 0 $ae-dark-gray;
 
-        .fa {
+        .fa,
+        .fas,
+        .far {
             padding-left: rem(10px);
         }
     }
