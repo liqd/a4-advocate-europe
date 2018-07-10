@@ -161,6 +161,8 @@
 
     &.active {
         .fa,
+        .fas,
+        .far,
         .category-name {
             font-size: rem(12px);
             font-weight: bold;
@@ -224,7 +226,9 @@
     font-size: rem(16px);
     font-weight: bold;
 
-    .fa {
+    .fa,
+    .fas,
+    .far {
         padding-right: rem(5px);
     }
 }

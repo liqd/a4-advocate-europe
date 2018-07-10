@@ -73,8 +73,8 @@ class SupportButton extends React.Component {
           role='button'
           aria-label="{django.gettext('Support')}">
           {this.state.userSupport === 1
-            ? <i className='fa fa-heart' aria-hidden='true' />
-            : <i className='fa fa-heart-o' aria-hidden='true' />
+            ? <i className='fas fa-heart' aria-hidden='true' />
+            : <i className='far fa-heart' aria-hidden='true' />
           }
           <span className='support-count'> {this.state.supports}</span>
           <p className='btn-idea-label'>{django.gettext('Support')}</p>
@@ -88,8 +88,8 @@ class SupportButton extends React.Component {
             disabled={this.props.isReadOnly}
             onClick={this.updateSupport.bind(this)}>
             {this.state.userSupport === 1
-              ? <i className='fa fa-heart' aria-hidden='true' />
-              : <i className='fa fa-heart-o' aria-hidden='true' />
+              ? <i className='fas fa-heart' aria-hidden='true' />
+              : <i className='far fa-heart' aria-hidden='true' />
             } {django.gettext('Support')}
           </button>
           <div className='btn btn-addon'>{this.state.supports}</div>

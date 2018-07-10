@@ -48,11 +48,15 @@
             border-radius: 5px;
         }
 
-        .active .fa {
+        .active .fa,
+        .active .fas,
+        .active .far {
             color: $brand-primary;
         }
 
-        .fa {
+        .fa,
+        .fas,
+        .far {
             margin-right: rem(10px);
         }
     }

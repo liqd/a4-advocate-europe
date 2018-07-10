@@ -14,7 +14,7 @@
             <ul class="dropdown-menu user-indicator-menu">
                 {% if request.user.is_superuser or request.user.is_staff  %}
                 <li>
-                    <a href="{% url 'admin:index' %}"><i class="fa fa-hand-spock-o fa-fw" aria-hidden="true"></i> <span class="dropdown-text">{% trans "Admin" %}</span></a>
+                    <a href="{% url 'admin:index' %}"><i class="far fa-hand-spock fa-fw" aria-hidden="true"></i> <span class="dropdown-text">{% trans "Admin" %}</span></a>
                 </li>
                 {% endif %}
                 <li>
@@ -36,7 +36,7 @@
                         {% csrf_token %}
                         <input type="hidden" name="next" value="{{ redirect_field_value }}">
                         <button type="submit" value="Register">
-                            <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>{% trans "logout" %}
+                            <i class="fas fa-sign-out-alt fa-fw" aria-hidden="true"></i>{% trans "logout" %}
                         </button>
                     </form>
                 </li>

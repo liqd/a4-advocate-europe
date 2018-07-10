@@ -124,7 +124,9 @@
             float: left;
         }
 
-        .btn-collapse .fa {
+        .btn-collapse .fa,
+        .btn-collapse .fas,
+        .btn-collapse .far {
             float: right;
             margin-top: rem(5px);
         }
@@ -141,7 +143,9 @@
             text-align: center;
         }
 
-        .collapsed .fa {
+        .collapsed .fa,
+        .collapsed .fas,
+        .collapsed .far {
             transform: rotateZ(180deg);
         }
 

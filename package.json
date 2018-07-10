@@ -1,7 +1,7 @@
 {
   "name": "advocate_europe",
   "dependencies": {
-    "adhocracy4": "liqd/adhocracy4#31bd992a1813208c5aa44a0cebb2fe00bdea6f34",
+    "adhocracy4": "liqd/adhocracy4#029bd5fb27236f9c1c042e32b126e41fe4f9a73e",
     "autoprefixer": "8.6.5",
     "babel-core": "6.26.3",
     "babel-loader": "7.1.5",
@@ -13,7 +13,7 @@
     "css-loader": "0.28.11",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.11",
-    "font-awesome": "4.7.0",
+    "@fortawesome/fontawesome-free-webfonts": "1.0.4",
     "jquery": "3.3.1",
     "js-cookie": "2.2.0",
     "node-sass": "4.9.1",
@@ -21,6 +21,7 @@
     "react": "16.4.1",
     "react-addons-update": "15.6.2",
     "react-dom": "16.4.1",
+    "react-flip-move": "3.0.2",
     "sass-loader": "7.0.3",
     "slick-carousel": "1.8.1",
     "style-loader": "0.21.0",

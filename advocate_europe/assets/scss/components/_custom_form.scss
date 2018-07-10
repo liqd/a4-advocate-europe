@@ -67,8 +67,9 @@
             position: absolute;
             left: 0.5em;
             display: inline;
-            font-family: "FontAwesome";
-            content: "\F071";
+            font-family: "Font Awesome 5 Free", sans-serif;
+            font-weight: 900;
+            content: "\F071"; //exclamation-triangle
         }
     }
 
@@ -81,11 +82,15 @@
 }
 
 .accordion-toggle {
-    .fa {
+    .fa,
+    .fas,
+    .far {
         float: right
     }
 
-    &.collapsed .fa {
+    &.collapsed .fa,
+    &.collapsed .fas,
+    &.collapsed .far {
         transform: rotateZ(180deg);
     }
 }
