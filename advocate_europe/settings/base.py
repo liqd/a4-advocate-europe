@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django_countries',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sitemaps',
     'django.contrib.staticfiles',
     'rest_framework',
     'formtools',
