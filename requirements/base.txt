@@ -26,7 +26,7 @@ html5lib==1.0.1
 jsonfield==2.0.2
 packaging==17.1
 rules==2.0
-XlsxWriter==1.0.5
+XlsxWriter==1.1.0
 
 # django micawber (released version 0.3.4 has no support for django 1.11)
 git+git://github.com/coleifer/micawber.git@9e3f0169a1e9ac80a5e481155abf7658af507c24
