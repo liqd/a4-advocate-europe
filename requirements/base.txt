@@ -7,7 +7,7 @@ bcrypt==3.1.4
 bleach==3.0.0
 feedparser==5.2.1
 easy-thumbnails==2.5
-django-allauth==0.36.0
+django-allauth==0.38.0
 django-autofixture==0.12.1
 django-autoslug==1.9.3
 django-ckeditor==5.5.0
