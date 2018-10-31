@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'formtools',
     'autofixture',
-    'rules',
+    'rules.apps.AutodiscoverRulesConfig',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
