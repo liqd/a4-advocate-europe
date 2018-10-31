@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class SettingsConfig(AppConfig):
+class Config(AppConfig):
     name = 'cms.settings'
     label = 'cms_settings'

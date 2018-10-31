@@ -3,7 +3,7 @@ from django.apps import AppConfig
 from adhocracy4.actions.verbs import Verbs
 
 
-class ActionsConfig(AppConfig):
+class Config(AppConfig):
     name = 'apps.actions'
     label = 'advocate_europe_actions'
 

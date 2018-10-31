@@ -7,7 +7,7 @@ from . import apps, models
 
 
 class IdeaPhase(phases.PhaseContent):
-    app = apps.IdeasConfig.label
+    app = apps.Config.label
     weight = 10
     view = None
 
