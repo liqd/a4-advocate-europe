@@ -4,6 +4,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
+from django.views.generic import TemplateView
 from django.views.i18n import javascript_catalog
 from rest_framework import routers
 from wagtail.contrib.wagtailsitemaps import views as wagtail_sitemap_views
@@ -69,6 +70,9 @@ urlpatterns += [
         {'sitemaps': sitemaps, 'sitemap_url_name': 'sitemaps'}),
     url('^sitemap-(?P<section>.+)\.xml$', wagtail_sitemap_views.sitemap,
         {'sitemaps': sitemaps}, name='sitemaps'),
+    url(r'^robots\.txt$', TemplateView.as_view(
+        template_name='robots.txt',
+        content_type="text/plain"), name="robots_file"),
 
     url(r'', include(wagtail_urls))
 ]
