@@ -16,7 +16,7 @@
     "@fortawesome/fontawesome-free-webfonts": "1.0.9",
     "jquery": "3.3.1",
     "js-cookie": "2.2.0",
-    "node-sass": "4.10.0",
+    "node-sass": "4.11.0",
     "postcss-loader": "2.1.6",
     "react": "16.6.3",
     "react-addons-update": "15.6.2",
