@@ -26,7 +26,7 @@
     "slick-carousel": "1.8.1",
     "style-loader": "0.23.1",
     "webpack": "3.12.0",
-    "webpack-merge": "4.1.5"
+    "webpack-merge": "4.2.1"
   },
   "devDependencies": {
     "husky": "0.14.3",
