@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 import django.db.models.deletion
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 from django.db import migrations, models
 
 
@@ -21,8 +21,8 @@ class Migration(migrations.Migration):
                 ('title_en', models.CharField(blank=True, max_length=255, verbose_name='Header Title')),
                 ('title_de', models.CharField(blank=True, max_length=255, verbose_name='Header Title')),
                 ('videoplayer_url', models.URLField()),
-                ('body_en', wagtail.wagtailcore.fields.StreamField((), null=True)),
-                ('body_de', wagtail.wagtailcore.fields.StreamField((), blank=True, null=True)),
+                ('body_en', wagtail.core.fields.StreamField((), null=True)),
+                ('body_de', wagtail.core.fields.StreamField((), blank=True, null=True)),
                 ('image', models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL, verbose_name='Header Image', null=True, related_name='+', blank=True, help_text='The Image that is shown on top of the page', to='wagtailimages.Image')),
             ],
             options={

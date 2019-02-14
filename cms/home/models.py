@@ -1,13 +1,13 @@
 import random
 
 from django.db import models
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
-                                                ObjectList, StreamFieldPanel,
-                                                TabbedInterface)
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.admin.edit_handlers import (FieldPanel, MultiFieldPanel,
+                                         ObjectList, StreamFieldPanel,
+                                         TabbedInterface)
+from wagtail.core import blocks
+from wagtail.core.fields import StreamField
+from wagtail.core.models import Page
+from wagtail.images.edit_handlers import ImageChooserPanel
 
 from cms.contrib import translations
 

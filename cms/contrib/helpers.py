@@ -1,6 +1,6 @@
 from django.utils.html import mark_safe
 from django.utils.translation import ugettext_lazy as _
-from wagtail.wagtailcore.models import Site
+from wagtail.core.models import Site
 
 from cms.settings.models import CollaborationCampSettings, HelpPages
 

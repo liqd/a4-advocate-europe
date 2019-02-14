@@ -1,5 +1,5 @@
 from django.db import models
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.admin.edit_handlers import FieldPanel
 
 
 class Category(models.Model):

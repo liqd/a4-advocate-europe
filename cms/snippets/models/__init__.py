@@ -1,4 +1,4 @@
-from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.snippets.models import register_snippet
 from .categories import Category
 from .navigation_menus import NavigationMenu
 

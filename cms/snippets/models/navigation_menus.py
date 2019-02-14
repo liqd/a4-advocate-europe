@@ -3,9 +3,9 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
-from wagtail.wagtailadmin import edit_handlers
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import Orderable
+from wagtail.admin import edit_handlers
+from wagtail.core.fields import StreamField
+from wagtail.core.models import Orderable
 
 from cms.contrib import translations
 from cms.snippets import blocks as snippets_blocks

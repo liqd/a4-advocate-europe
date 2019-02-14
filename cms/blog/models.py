@@ -3,12 +3,12 @@ from django.core.paginator import InvalidPage, Paginator
 from django.db import models
 from django.http import Http404
 from modelcluster.fields import ParentalManyToManyField
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
-                                                ObjectList, PageChooserPanel,
-                                                TabbedInterface)
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.admin.edit_handlers import (FieldPanel, MultiFieldPanel,
+                                         ObjectList, PageChooserPanel,
+                                         TabbedInterface)
+from wagtail.core.fields import RichTextField
+from wagtail.core.models import Page
+from wagtail.images.edit_handlers import ImageChooserPanel
 
 from cms.snippets.models import Category
 

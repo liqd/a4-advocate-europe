@@ -2,11 +2,10 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 from django.utils.translation import ugettext_lazy as _
-from wagtail.wagtailcore.blocks import (CharBlock, ChoiceBlock, ChooserBlock,
-                                        ListBlock, PageChooserBlock,
-                                        RichTextBlock, StreamBlock,
-                                        StructBlock, TextBlock, URLBlock)
-from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.core.blocks import (CharBlock, ChoiceBlock, ChooserBlock,
+                                 ListBlock, PageChooserBlock, RichTextBlock,
+                                 StreamBlock, StructBlock, TextBlock, URLBlock)
+from wagtail.images.blocks import ImageChooserBlock
 
 from adhocracy4.projects.models import Project
 from apps.ideas import filters
