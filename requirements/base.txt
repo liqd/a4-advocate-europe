@@ -1,6 +1,6 @@
 git+git://github.com/liqd/adhocracy4.git@44b104bbeff2400e62f5e9033cd217ec7757d493#egg=adhocracy4
-Django==1.11.16 # pyup: >=1.11,<1.12
-wagtail==1.13.4 # pyup: <2.0
+Django==1.11.20
+wagtail==2.3
 
 appdirs==1.4.3
 bcrypt==3.1.4

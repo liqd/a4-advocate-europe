@@ -5,8 +5,8 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 import django.db.models.deletion
 import modelcluster.fields
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
+import wagtail.core.blocks
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 ('sort_order', models.IntegerField(blank=True, editable=False, null=True)),
                 ('menu_title_en', models.CharField(max_length=255)),
                 ('menu_title_de', models.CharField(blank=True, max_length=255)),
-                ('subpages', wagtail.wagtailcore.fields.StreamField((('link', wagtail.wagtailcore.blocks.StructBlock((('link', wagtail.wagtailcore.blocks.PageChooserBlock(required=True)), ('link_text_en', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('link_text_de', wagtail.wagtailcore.blocks.CharBlock(required=False))))),), blank=True, help_text='These Links will be displayed in as a dropdown menu', null=True, verbose_name='Submenu')),
+                ('subpages', wagtail.core.fields.StreamField((('link', wagtail.core.blocks.StructBlock((('link', wagtail.core.blocks.PageChooserBlock(required=True)), ('link_text_en', wagtail.core.blocks.CharBlock(required=True)), ('link_text_de', wagtail.core.blocks.CharBlock(required=False))))),), blank=True, help_text='These Links will be displayed in as a dropdown menu', null=True, verbose_name='Submenu')),
                 ('link_page', models.ForeignKey(blank=True, help_text='Leave empty if you add subpages', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='wagtailcore.Page')),
                 ('parent', modelcluster.fields.ParentalKey(on_delete=django.db.models.deletion.CASCADE, related_name='menu_items', to='cms_snippets.NavigationMenu')),
             ],

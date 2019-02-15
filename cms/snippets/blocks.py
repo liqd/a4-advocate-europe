@@ -1,4 +1,4 @@
-from wagtail.wagtailcore.blocks import CharBlock, PageChooserBlock, StructBlock
+from wagtail.core.blocks import CharBlock, PageChooserBlock, StructBlock
 
 
 class LinkBlock(StructBlock):
