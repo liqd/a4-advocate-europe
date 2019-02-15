@@ -3,8 +3,8 @@ python:
 - '3.6'
 cache: pip
 install:
-- nvm install 8
-- npm install --production
+- nvm install 6
+- npm install
 - npm run build
 - pip install -r requirements/dev.txt
 - pip install coveralls
