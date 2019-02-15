@@ -9,7 +9,7 @@ def register_blockquote_feature(features):
 
     feature_name = 'blockquote'
     type_ = 'blockquote'
-    tag = 'mark'
+    tag = 'blockquote'
 
     control = {
         'type': type_,
