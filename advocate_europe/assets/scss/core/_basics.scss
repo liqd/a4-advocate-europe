@@ -169,3 +169,10 @@ a,
 .alert {
     margin-bottom: 0;
 }
+
+blockquote {
+    background-color: $ae-brand-orange;
+    border-left: none;
+    padding: rem(10px) rem(12px);
+    font-size: inherit;
+}
