@@ -68,7 +68,7 @@
                                 {{ post.teasertext|truncatechars:60 }}
                             </div>
                             <div class="blog-createdates">
-                                {% trans "on" %} {{ post.create_date|date }}
+                                {% trans "on" %} {{ post.last_published_at|date }}
                             </div>
                         </div>
                     </div>

@@ -29,7 +29,7 @@ class BlogIndexPage(Page):
     @property
     def blogs(self):
         blogs = BlogPage.objects.live()
-        blogs = blogs.order_by('-create_date')
+        blogs = blogs.order_by('-last_published_at')
         return blogs
 
     def get_context(self, request):
