@@ -1,5 +1,5 @@
 git+git://github.com/liqd/adhocracy4.git@44b104bbeff2400e62f5e9033cd217ec7757d493#egg=adhocracy4
-Django==1.11.20
+Django==2.1.7
 wagtail==2.3
 
 appdirs==1.4.3
