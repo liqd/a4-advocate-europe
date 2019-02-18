@@ -66,9 +66,9 @@ urlpatterns += [
         js_info_dict, name='javascript-catalog'),
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
-    url('^sitemap\.xml$', wagtail_sitemap_views.index,
+    url(r'^sitemap\.xml$', wagtail_sitemap_views.index,
         {'sitemaps': sitemaps, 'sitemap_url_name': 'sitemaps'}),
-    url('^sitemap-(?P<section>.+)\.xml$', wagtail_sitemap_views.sitemap,
+    url(r'^sitemap-(?P<section>.+)\.xml$', wagtail_sitemap_views.sitemap,
         {'sitemaps': sitemaps}, name='sitemaps'),
     url(r'^robots\.txt$', TemplateView.as_view(
         template_name='robots.txt',
