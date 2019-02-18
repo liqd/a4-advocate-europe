@@ -105,6 +105,11 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         default=True
     )
 
+    get_newsletters = models.BooleanField(
+        verbose_name=_('Send me Advocate Europe news.'),
+        default=False
+    )
+
     objects = auth_models.UserManager()
 
     USERNAME_FIELD = 'email'
@@ -139,6 +144,13 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     def get_full_name(self):
         full_name = '%s <%s>' % (self.username, self.email)
         return full_name.strip()
+
+    def signup(self, username, email, commit=True):
+        """Update the fields required for sign-up."""
+        self.username = username
+        self.email = email
+        if commit:
+            self.save()
 
     def get_absolute_url(self):
         return reverse('profile', args=[str(self.username)])
