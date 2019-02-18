@@ -123,12 +123,12 @@ class ApplicantSectionForm(BaseForm):
         organisation_status_extra = cleaned_data.get(
             'organisation_status_extra')
         if organisation_status and organisation_status == 'other':
-                if not organisation_status_extra:
-                    self.add_error('organisation_status_extra',
-                                   _("You selected 'other' as "
-                                     "organisation status. "
-                                     "Please provide more information "
-                                     "about your current status."))
+            if not organisation_status_extra:
+                self.add_error('organisation_status_extra',
+                               _("You selected 'other' as "
+                                 "organisation status. "
+                                 "Please provide more information "
+                                 "about your current status."))
 
     def __init__(self, *args, **kwargs):
         if 'end_date' in kwargs:

@@ -132,7 +132,7 @@ def test_max_stored(view_client, test_wizard_view):
     }
     response = view_client.post(view, data)
     assert response.status_code == 200
-    assert response.context_data['view'].max_stored is '0'
+    assert response.context_data['view'].max_stored == '0'
 
     data = {
         'wizard_store_and_goto_step': '0',
