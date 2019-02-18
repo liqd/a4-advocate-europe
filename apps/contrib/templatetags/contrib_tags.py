@@ -3,7 +3,7 @@ from django import template
 register = template.Library()
 
 
-@register.assignment_tag
+@register.simple_tag
 def get_range(number, listcount):
     if number < 3:
         return range(1, 6)
@@ -13,7 +13,7 @@ def get_range(number, listcount):
         return range(number-2, number+3)
 
 
-@register.assignment_tag
+@register.simple_tag
 def combined_url_parameter(request_query_dict, **kwargs):
     combined_query_dict = request_query_dict.copy()
     for key in kwargs:

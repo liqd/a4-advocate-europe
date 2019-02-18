@@ -15,7 +15,7 @@ def is_checkbox(bound_field):
     return widget is forms.CheckboxSelectMultiple
 
 
-@register.assignment_tag
+@register.simple_tag
 def count_active_filter(request_query_dict):
     count = 0
     for key, value in request_query_dict.items():

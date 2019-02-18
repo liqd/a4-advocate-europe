@@ -6,7 +6,7 @@ from apps.ideas.models import Idea
 register = template.Library()
 
 
-@register.assignment_tag(takes_context=False)
+@register.simple_tag(takes_context=False)
 def load_ideas(year, topic, ordering, status):
 
     ideas = Idea.objects.all()\

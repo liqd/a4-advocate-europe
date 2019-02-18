@@ -5,7 +5,7 @@ from cms.blog.models import BlogPage
 register = template.Library()
 
 
-@register.assignment_tag(takes_context=False)
+@register.simple_tag(takes_context=False)
 def load_latest_blogs(menu_name):
     blogs = BlogPage.objects.live()
     blogs = blogs.order_by('-create_date')
