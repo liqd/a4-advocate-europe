@@ -17,13 +17,13 @@ django-formtools==2.1
 django-multiselectfield==0.1.8
 django-sites==0.10
 django-widget-tweaks==1.4.3
-djangorestframework==3.8.2
+djangorestframework==3.9.1
 easy-thumbnails==2.6
 feedparser==5.2.1
 html5lib==1.0.1
 jsonfield==2.0.2
-packaging==18.0
-python-dateutil==2.7.3
+packaging==19.0
+python-dateutil==2.8.0
 python-magic==0.4.15
 raven==6.9.0
 rules==1.3
