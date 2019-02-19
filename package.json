@@ -1,7 +1,6 @@
 {
   "name": "advocate_europe",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.7.2",
     "adhocracy4": "liqd/adhocracy4#44b104bbeff2400e62f5e9033cd217ec7757d493",
     "autoprefixer": "9.4.7",
     "babel-core": "6.26.3",
@@ -14,6 +13,7 @@
     "css-loader": "2.1.0",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.11",
+    "@fortawesome/fontawesome-free": "^5.7.2",
     "jquery": "3.3.1",
     "js-cookie": "2.2.0",
     "node-sass": "4.11.0",
