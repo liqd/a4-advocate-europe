@@ -62,7 +62,7 @@ class EditProfileView(mixins.LoginRequiredMixin,
 
     @property
     def raise_exception(self):
-        return self.request.user.is_authenticated()
+        return self.request.user.is_authenticated
 
 
 class NotificationsView(mixins.LoginRequiredMixin,
@@ -81,4 +81,4 @@ class NotificationsView(mixins.LoginRequiredMixin,
 
     @property
     def raise_exception(self):
-        return self.request.user.is_authenticated()
+        return self.request.user.is_authenticated

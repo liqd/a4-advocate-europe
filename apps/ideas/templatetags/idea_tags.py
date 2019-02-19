@@ -34,7 +34,7 @@ def react_supports(context, idea, mobile):
     permission = '{ct.app_label}.rate_{ct.model}'.format(ct=contenttype)
     has_support_permission = user.has_perm(permission, idea)
 
-    if user.is_authenticated():
+    if user.is_authenticated:
         authenticated_as = user.username
     else:
         authenticated_as = None

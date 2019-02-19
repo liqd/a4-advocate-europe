@@ -17,7 +17,7 @@ class JourneyEntryCreateView(PermissionRequiredMixin, generic.CreateView):
 
     @property
     def raise_exception(self):
-        return self.request.user.is_authenticated()
+        return self.request.user.is_authenticated
 
     @property
     def is_create_view(self):
@@ -45,7 +45,7 @@ class JourneyEntryUpdateView(PermissionRequiredMixin, generic.UpdateView):
 
     @property
     def raise_exception(self):
-        return self.request.user.is_authenticated()
+        return self.request.user.is_authenticated
 
 
 class JourneyEntryDeleteView(PermissionRequiredMixin, generic.DeleteView):
@@ -55,7 +55,7 @@ class JourneyEntryDeleteView(PermissionRequiredMixin, generic.DeleteView):
 
     @property
     def raise_exception(self):
-        return self.request.user.is_authenticated()
+        return self.request.user.is_authenticated
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
