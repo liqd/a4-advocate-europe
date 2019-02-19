@@ -1,23 +1,27 @@
 language: python
+dist: xenial
 python:
-- '3.6'
-cache: pip
+  - "3.6"
+cache:
+  pip: true
+  directories:
+    - node_modules
 install:
-- nvm install 6
-- npm install
-- npm run build
-- pip install -r requirements/dev.txt
-- pip install coveralls
+  - nvm install 8
+  - npm install
+  - npm run build
+  - pip install -r requirements/dev.txt
+  - pip install coveralls
 script:
-- py.test --cov
-- python manage.py makemigrations --dry-run --check --noinput
+  - py.test --cov
+  - python manage.py makemigrations --dry-run --check --noinput
 after_success:
-- coveralls
+  - coveralls
 deploy:
-- provider: script
-  script: scripts/deploy.sh
-  on:
-    branch: master
+  - provider: script
+    script: scripts/deploy.sh
+    on:
+      branch: master
 env:
   global:
     secure: Uv859f1F+sRrCISFJUtWQcxFh935sV6wj1U5B86Pyd1/z8Azby2vNfo+imQMRtpg7HxVDTg0mOcawwEuQ/7D/BiUffPHMvg9KqunRs3ZjLeywK+aGSDhGSlDanPU13e3a3Y/iccxSRC3j9D7O6HX+kZ54c3q2/pDF0BR8/7aUdqER4SyKd6UrxJlwOso+IpjATx67DqHvOiAl4Y8ED+EHwWOL8I3ruJamj/2x4EL7vY1vRzQjJr/15SjghQTnM3bY3YNw9NQnFlEjroAzCa59B8PNjBu0v00uGaSG5N5VPp6VHsEIAcLvX0lmIrlXp+grCS+jH2WO8OMgTTl7ztl/vS1gJOAt8e179INaKDBfz1D3HzEY5EzK62dKVxWFHjfBzJiBwe74JiVNHtj+pCZH8ayDwk1cCPWWPO6NxW8yR0LtytHEamnPJEdP7hVAasafk60HIMr2cALD1aQthZ7RWFOp9pUQ0whxL/i/BqhkXdIfheEOgyAkztI07rPc8AU8OrqCuY0esh3VVBL/kg401qyzMXFhr0G4La8vcw5IO9bETaUO30tD+8wHyadCrmZ9qmcFFdGtspE1r1Tmre7SRNgjiZqt/eLXYAPY5WKUb8LLJRnBfcHsrwSaSkz2uT4quTLLs9tCRmyajP/j5gUftL8SQTDYdnmw4jsj6rexd8=
