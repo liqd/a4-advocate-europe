@@ -15,7 +15,7 @@ def is_checkbox(bound_field):
     return widget is forms.CheckboxSelectMultiple
 
 
-@register.assignment_tag
+@register.simple_tag
 def count_active_filter(request_query_dict):
     count = 0
     for key, value in request_query_dict.items():
@@ -34,7 +34,7 @@ def react_supports(context, idea, mobile):
     permission = '{ct.app_label}.rate_{ct.model}'.format(ct=contenttype)
     has_support_permission = user.has_perm(permission, idea)
 
-    if user.is_authenticated():
+    if user.is_authenticated:
         authenticated_as = user.username
     else:
         authenticated_as = None

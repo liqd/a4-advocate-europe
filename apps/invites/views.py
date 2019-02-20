@@ -16,7 +16,7 @@ class InviteDetailView(generic.DetailView):
         return '{}/invite_detail.html'.format(self.model._meta.app_label)
 
     def dispatch(self, request, invite_token, *args, **kwargs):
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             try:
                 models.IdeaInvite.objects.get(token=invite_token)
                 return redirect(

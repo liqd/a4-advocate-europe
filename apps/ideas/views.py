@@ -62,7 +62,7 @@ class IdeaExportView(PermissionRequiredMixin,
 
     @property
     def raise_exception(self):
-        return self.request.user.is_authenticated()
+        return self.request.user.is_authenticated
 
     def get_comment_count_data(self, item):
         item = item.idea
@@ -141,7 +141,7 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
 
     @property
     def raise_exception(self):
-        return self.request.user.is_authenticated()
+        return self.request.user.is_authenticated
 
 
 class IdeaSketchEditView(
@@ -168,7 +168,7 @@ class IdeaSketchEditView(
 
     @property
     def raise_exception(self):
-        return self.request.user.is_authenticated()
+        return self.request.user.is_authenticated
 
 
 class IdeaDetailView(generic.DetailView):
@@ -355,7 +355,7 @@ class ProposalEditView(
 
     @property
     def raise_exception(self):
-        return self.request.user.is_authenticated()
+        return self.request.user.is_authenticated
 
 
 class IdeaListView(mixins.CtaPaginatorMixin, filter_views.FilteredListView):
