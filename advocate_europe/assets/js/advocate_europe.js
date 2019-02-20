@@ -1,4 +1,6 @@
 /* global $ */
+import 'slick-carousel'
+
 $(document).ready(function () {
   $('.carousel').slick({
     centerMode: false,
