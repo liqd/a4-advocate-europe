@@ -16,7 +16,6 @@
     "@fortawesome/fontawesome-free": "5.7.2",
     "jquery": "3.3.1",
     "js-cookie": "2.2.0",
-    "mini-css-extract-plugin": "0.4.3",
     "node-sass": "4.11.0",
     "postcss-loader": "2.1.6",
     "react": "16.8.2",
@@ -26,8 +25,7 @@
     "sass-loader": "7.1.0",
     "slick-carousel": "1.8.1",
     "style-loader": "0.23.1",
-    "webpack": "4.25.1",
-    "webpack-cli": "3.2.3",
+    "webpack": "3.12.0",
     "webpack-merge": "4.2.1"
   },
   "devDependencies": {
@@ -37,9 +35,9 @@
   },
   "license": "AGPL-3.0+",
   "scripts": {
-    "build": "webpack --config ./webpack.prod.js --mode production",
-    "build:dev": "webpack --config ./webpack.dev.js --progress --mode development",
-    "watch": "webpack --config ./webpack.dev.js --progress --colors --watch --mode development",
+    "build": "webpack --config ./webpack.prod.js",
+    "build:dev": "webpack --config ./webpack.dev.js --progress",
+    "watch": "webpack --config ./webpack.dev.js --progress --colors --watch",
     "lint": "standard '{apps,cms,advocate_europe}/**/*.{js,jsx}' && stylelint 'advocate_europe/assets/scss/**/*.scss' --syntax scss"
   },
   "husky": {
