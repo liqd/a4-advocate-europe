@@ -1,4 +1,4 @@
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var MiniCssExtractPlugin = require('mini-css-extract-plugin')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var path = require('path')
 var webpack = require('webpack');
@@ -53,7 +53,7 @@ module.exports = {
     'django': 'django'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules\/(?!adhocracy4)/,  // exclude all dependencies but adhocracy4
@@ -64,29 +64,31 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            'css-loader',
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                plugins: (loader) => [
-                  autoprefixer({browsers: ['last 3 versions', 'ie >= 10']})
-                ]
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: (loader) => [
+                autoprefixer({browsers: ['last 3 versions', 'ie >= 10']})
+              ]
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
                 includePaths: [
                   path.resolve('./node_modules/bootstrap-sass/assets/stylesheets')
                 ]
               }
-            }
-          ]
-        })
+          }
+        ]
       },
       {
         test: /fonts\/.*\.(svg|woff2?|ttf|eot)(\?.*)?$/,
@@ -107,8 +109,11 @@ module.exports = {
     modules: [path.resolve('./node_modules')]
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.js'}),
-    new ExtractTextPlugin('[name].css'),
+    new webpack.optimize.SplitChunksPlugin({ name: 'vendor', filename: 'vendor.js'}),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    }),
     new CopyWebpackPlugin([
       {
         from: './advocate_europe/assets/images/**/*',
