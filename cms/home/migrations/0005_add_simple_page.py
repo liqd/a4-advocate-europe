@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SimplePage',
             fields=[
-                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, serialize=False, to='wagtailcore.Page', primary_key=True)),
+                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, serialize=False, to='wagtailcore.Page', primary_key=True, on_delete=models.CASCADE)),
                 ('title_en', models.CharField(verbose_name='Title', max_length=255)),
                 ('title_de', models.CharField(verbose_name='Title', max_length=255, blank=True)),
                 ('body_en', wagtail.core.fields.StreamField((('text', wagtail.core.blocks.RichTextBlock()),), null=True)),

@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=100)),
                 ('category', models.CharField(choices=[('ir', 'Road to impact'), ('he', 'Heroines and heroes'), ('is', 'Impact Story'), ('id', 'Take this idea!'), ('su', 'Success'), ('fa', 'Failing forward'), ('jo', 'Join forces!'), ('an', 'Anything else?')], max_length=2)),
                 ('text', ckeditor.fields.RichTextField()),
-                ('creator', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('creator', models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,

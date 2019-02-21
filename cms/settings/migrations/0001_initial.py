@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('twitter', models.CharField(max_length=255, help_text='Your twitter username, without the @', blank=True)),
                 ('flickr', models.URLField(help_text='Your flickr page URL', blank=True)),
                 ('youtube', models.URLField(help_text='Your YouTube channel or user account URL', blank=True)),
-                ('site', models.OneToOneField(editable=False, to='wagtailcore.Site')),
+                ('site', models.OneToOneField(editable=False, to='wagtailcore.Site', on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,
