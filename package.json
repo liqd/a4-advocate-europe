@@ -16,7 +16,7 @@
     "@fortawesome/fontawesome-free": "5.7.2",
     "jquery": "3.3.1",
     "js-cookie": "2.2.0",
-    "mini-css-extract-plugin": "0.4.3",
+    "mini-css-extract-plugin": "0.5.0",
     "node-sass": "4.11.0",
     "postcss-loader": "2.1.6",
     "react": "16.8.2",
