@@ -1,6 +1,7 @@
+from allauth import urls as allauth_urls
 from ckeditor_uploader import views as ck_views
 from django.conf import settings
-from django.conf.urls import include, url
+from django.conf.urls import i18n, include, url
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
@@ -45,7 +46,7 @@ sitemaps = {
 }
 
 urlpatterns = [
-    url(r'^django-admin/', include(admin.site.urls)),
+    url(r'^django-admin/', admin.site.urls),
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
     url(r'^api/', include(router.urls)),
@@ -57,14 +58,14 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    url(r'^accounts/', include('allauth.urls')),
+    url(r'^accounts/', include(allauth_urls)),
     url(r'', include(user_urls)),
     url(r'^ideas/', include(idea_urls)),
     url(r'^invites/', include(invite_urls)),
     url(r'^journeys/', include(journey_urls)),
     url(r'^jsi18n/$', javascript_catalog,
         js_info_dict, name='javascript-catalog'),
-    url(r'^i18n/', include('django.conf.urls.i18n')),
+    url(r'^i18n/', include(i18n)),
 
     url(r'^sitemap\.xml$', wagtail_sitemap_views.index,
         {'sitemaps': sitemaps, 'sitemap_url_name': 'sitemaps'}),
