@@ -17,7 +17,7 @@ django-formtools==2.1
 django-multiselectfield==0.1.8
 django-sites==0.10
 django-widget-tweaks==1.4.3
-djangorestframework==3.8.2
+djangorestframework==3.9.1
 easy-thumbnails==2.6
 feedparser==5.2.1
 html5lib==1.0.1
