@@ -1,7 +1,15 @@
 {
   "name": "advocate_europe",
+  "version": "0.9.0-release.1",
+  "license": "AGPL-3.0+",
+  "description": "Frontend for Advocate Europe",
+  "author": {
+    "name": "Liquid Democracy e.V.",
+    "email": "info@liqd.de",
+    "url": "https://liqd.net"
+  },
   "dependencies": {
-    "adhocracy4": "liqd/adhocracy4#44b104bbeff2400e62f5e9033cd217ec7757d493",
+    "adhocracy4": "liqd/adhocracy4#ae-v0.9",
     "autoprefixer": "9.4.8",
     "babel-core": "6.26.3",
     "babel-loader": "7.1.5",

@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='BlogIndexPage',
             fields=[
-                ('page_ptr', models.OneToOneField(to='wagtailcore.Page', serialize=False, primary_key=True, parent_link=True, auto_created=True)),
+                ('page_ptr', models.OneToOneField(to='wagtailcore.Page', serialize=False, primary_key=True, parent_link=True, auto_created=True, on_delete=models.CASCADE)),
                 ('title_blog_index', models.CharField(verbose_name='Blog Index Title', blank=True, max_length=255)),
             ],
             options={
@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='BlogPage',
             fields=[
-                ('page_ptr', models.OneToOneField(to='wagtailcore.Page', serialize=False, primary_key=True, parent_link=True, auto_created=True)),
+                ('page_ptr', models.OneToOneField(to='wagtailcore.Page', serialize=False, primary_key=True, parent_link=True, auto_created=True, on_delete=models.CASCADE)),
                 ('title_blog', models.CharField(verbose_name='Blog Title', blank=True, max_length=255)),
                 ('teasertext', models.TextField(null=True, blank=True, verbose_name='Blog Teaser Text')),
                 ('author', models.CharField(verbose_name='Author Name', blank=True, max_length=255)),

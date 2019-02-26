@@ -292,7 +292,10 @@ class ProposalCreateWizard(PermissionRequiredMixin,
             value = getattr(self.idea.ideasketch, field.name)
             if field.many_to_many or field.one_to_many:
                 value = value.all()
-                setattr(archive, field.name, value)
+                if field.name == 'co_workers':
+                    archive.co_workers.set(value)
+                else:
+                    setattr(archive, field.name, value)
 
         archive.save()
 

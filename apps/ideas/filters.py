@@ -79,7 +79,7 @@ class IdeaFilterSet(DefaultsFilterSet):
     )
 
     project = django_filters.ModelChoiceFilter(
-        name='module__project__name',
+        field_name='module__project__name',
         queryset=Project.objects.all(),
         widget=ProjectFilterWidget,
     )
@@ -93,7 +93,7 @@ class IdeaFilterSet(DefaultsFilterSet):
         )
 
     country = django_filters.CharFilter(
-        name='',
+        field_name='',
         method='organisation_countries',
         widget=CountryFilterWidget,
     )

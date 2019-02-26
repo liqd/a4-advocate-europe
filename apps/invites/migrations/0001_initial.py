@@ -23,8 +23,8 @@ class Migration(migrations.Migration):
                 ('modified', models.DateTimeField(editable=False, blank=True, null=True)),
                 ('email', models.EmailField(max_length=254)),
                 ('token', models.UUIDField(default=uuid.uuid4, unique=True)),
-                ('creator', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
-                ('subject', models.ForeignKey(to='advocate_europe_ideas.Idea')),
+                ('creator', models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
+                ('subject', models.ForeignKey(to='advocate_europe_ideas.Idea', on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,

@@ -82,7 +82,7 @@ def test_journey_rules(admin, user, proposal_factory):
     creator = UserFactory()
     proposal.creator = creator
     co_worker = UserFactory()
-    proposal.co_workers = [co_worker]
+    proposal.co_workers.set([co_worker])
 
     # proposal not winner
     assert not rules.has_perm('advocate_europe_ideas.add_journey',

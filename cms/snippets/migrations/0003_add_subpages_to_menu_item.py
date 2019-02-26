@@ -21,6 +21,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='menuitem',
             name='link_page',
-            field=models.ForeignKey(help_text='Leave empty if you add subpages', related_name='+', null=True, to='wagtailcore.Page', blank=True),
+            field=models.ForeignKey(help_text='Leave empty if you add subpages', related_name='+', null=True, to='wagtailcore.Page', blank=True, on_delete=models.CASCADE),
         ),
     ]

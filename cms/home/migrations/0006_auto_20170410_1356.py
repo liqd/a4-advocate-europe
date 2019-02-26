@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='StructuredTextPage',
             fields=[
-                ('page_ptr', models.OneToOneField(to='wagtailcore.Page', parent_link=True, auto_created=True, serialize=False, primary_key=True)),
+                ('page_ptr', models.OneToOneField(to='wagtailcore.Page', parent_link=True, auto_created=True, serialize=False, primary_key=True, on_delete=models.CASCADE)),
                 ('title_en', models.CharField(verbose_name='Title', max_length=255)),
                 ('title_de', models.CharField(blank=True, verbose_name='Title', max_length=255)),
                 ('body_en', wagtail.core.fields.StreamField((('section', wagtail.core.blocks.StreamBlock((('text', wagtail.core.blocks.RichTextBlock()), ('FAQs', wagtail.core.blocks.StructBlock((('title', wagtail.core.blocks.CharBlock(required=False)), ('faqs', wagtail.core.blocks.ListBlock(cms.home.blocks.QuestionAnswerBlock)))))))),), null=True)),

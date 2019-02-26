@@ -1,9 +1,9 @@
+from django.contrib.auth import mixins
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.views import generic
-from rules.compat import access_mixins as mixins
 
 from adhocracy4.filters import views as filter_views
 from apps.ideas import mixins as idea_mixins

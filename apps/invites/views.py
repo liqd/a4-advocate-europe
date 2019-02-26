@@ -1,7 +1,7 @@
+from django.contrib.auth import mixins
 from django.http.response import Http404
 from django.shortcuts import redirect, render
 from django.views import generic
-from rules.compat import access_mixins as mixins
 
 from . import forms, models
 
