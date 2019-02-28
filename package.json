@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "adhocracy4": "liqd/adhocracy4#ae-v0.9",
-    "autoprefixer": "9.4.8",
+    "autoprefixer": "9.4.9",
     "babel-core": "6.26.3",
     "babel-loader": "7.1.5",
     "babel-preset-env": "1.7.0",
