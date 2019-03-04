@@ -5,7 +5,7 @@ wagtail==2.4
 appdirs==1.4.3
 bcrypt==3.1.6
 bleach==3.1.0
-django-allauth==0.38.0
+django-allauth==0.39.1
 django-autofixture==0.12.1
 django-autoslug==1.9.4
 django-ckeditor==5.6.1
