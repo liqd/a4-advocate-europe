@@ -32,12 +32,12 @@ js_info_dict = {
 }
 
 router = routers.DefaultRouter()
-router.register(r'reports', ReportViewSet, base_name='reports')
-router.register(r'follows', FollowViewSet, base_name='follows')
+router.register(r'reports', ReportViewSet, basename='reports')
+router.register(r'follows', FollowViewSet, basename='follows')
 
 ct_router = a4routers.ContentTypeDefaultRouter()
-ct_router.register(r'comments', CommentViewSet, base_name='comments')
-ct_router.register(r'ratings', RatingViewSet, base_name='ratings')
+ct_router.register(r'comments', CommentViewSet, basename='comments')
+ct_router.register(r'ratings', RatingViewSet, basename='ratings')
 
 sitemaps = {
     'adhocracy4': Adhocracy4Sitemap,
