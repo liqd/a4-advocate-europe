@@ -6,26 +6,25 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from adhocracy4.models.base import UserGeneratedContentModel
 from adhocracy4.comments import models as comment_models
 from adhocracy4.models import query
+from adhocracy4.models.base import UserGeneratedContentModel
 from adhocracy4.modules.models import Item
 from adhocracy4.ratings import models as rating_models
-
 from apps.follows import register_follow
 
 from .abstracts.applicant_section import AbstractApplicantSection
-from .abstracts.idea_challenge_camp_section import \
-    AbstractIdeaChallengeCampSection
 from .abstracts.community_section import AbstractCommunitySection
 from .abstracts.finances_duration_section import \
     AbstractFinanceAndDurationSection
+from .abstracts.idea_challenge_camp_section import \
+    AbstractIdeaChallengeCampSection
 from .abstracts.idea_section import AbstractIdeaSection
 from .abstracts.impact_section import AbstractImpactSection
+from .abstracts.network_section import AbstractNetworkSection
 from .abstracts.partners_section import AbstractPartnersSection
 from .abstracts.selection_criteria_section import \
     AbstractSelectionCriteriaSection
-from .abstracts.network_section import AbstractNetworkSection
 
 
 class IdeaQuerySet(query.RateableQuerySet, query.CommentableQuerySet):
