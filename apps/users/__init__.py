@@ -1,4 +1,4 @@
-from django.core.urlresolvers import resolve, Resolver404
+from django.core.urlresolvers import Resolver404, resolve
 from django.utils.http import is_safe_url
 from django.utils.translation import ugettext_lazy as _
 

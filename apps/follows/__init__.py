@@ -1,7 +1,6 @@
 from django.db import models
 from django.db.models.base import ModelBase
 
-
 default_app_config = 'apps.follows.apps.Config'
 
 
