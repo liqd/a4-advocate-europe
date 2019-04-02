@@ -376,3 +376,9 @@ A4_ACTIONABLES = (
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CRISPY_FAIL_SILENTLY = False
+
+WAGTAILADMIN_RICH_TEXT_EDITORS = {
+    'default': {
+        'WIDGET': 'wagtail.admin.rich_text.HalloRichTextArea'
+    }
+}
