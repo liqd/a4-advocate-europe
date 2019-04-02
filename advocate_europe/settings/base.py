@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     'adhocracy4.ckeditor',
     'adhocracy4.administrative_districts',
 
+    'cms.contrib',
     'cms.home',
     'cms.settings',
     'cms.snippets',
