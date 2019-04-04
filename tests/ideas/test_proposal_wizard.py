@@ -1,5 +1,5 @@
 import pytest
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from apps.ideas.models import IdeaSketch, IdeaSketchArchived, Proposal
 from apps.ideas.phases import FullProposalPhase
@@ -27,7 +27,7 @@ def test_proposal_random_user_cannot_create_wizard(client, user,
     with active_phase(idea_sketch.module, FullProposalPhase):
         response = client.get(url)
 
-    assert response.status_code == 302
+    assert response.status_code == 403
 
 
 @pytest.mark.django_db
@@ -43,7 +43,7 @@ def test_proposal_no_camp_cannot_create_wizard(client, user,
     with active_phase(idea_sketch.module, FullProposalPhase):
         response = client.get(url)
 
-    assert response.status_code == 302
+    assert response.status_code == 403
 
 
 @pytest.mark.django_db
@@ -57,7 +57,7 @@ def test_proposal_no_phase_cannot_create_wizard(client, user,
                   kwargs={'slug': idea_sketch.slug})
 
     response = client.get(url)
-    assert response.status_code == 302
+    assert response.status_code == 403
 
 
 @pytest.mark.django_db

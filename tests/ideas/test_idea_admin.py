@@ -1,5 +1,5 @@
 import pytest
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from apps.ideas.phases import InterimShortlistPublicationPhase
 from tests.helpers import active_phase, intercept_emails
