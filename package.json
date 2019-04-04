@@ -48,8 +48,8 @@
     "stylelint": "9.10.1"
   },
   "scripts": {
-    "build": "webpack --config ./webpack.prod.js --mode production",
-    "build:dev": "webpack --config ./webpack.dev.js --progress --mode development",
+    "build:prod": "webpack --config ./webpack.prod.js --mode production",
+    "build": "webpack --config ./webpack.dev.js --progress --mode development",
     "watch": "webpack --config ./webpack.dev.js --progress --colors --watch --mode development",
     "lint": "standard '{apps,cms,advocate_europe}/**/*.{js,jsx}' && stylelint 'advocate_europe/assets/scss/**/*.scss' --syntax scss"
   },
