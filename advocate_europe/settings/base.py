@@ -373,7 +373,6 @@ A4_ACTIONABLES = (
     ('advocate_europe_ideas', 'ideafollow')
 )
 
-
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CRISPY_FAIL_SILENTLY = False
 
