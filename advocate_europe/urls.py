@@ -6,7 +6,7 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
-from django.views.i18n import javascript_catalog
+from django.views.i18n import JavaScriptCatalog
 from rest_framework import routers
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.contrib.sitemaps import views as wagtail_sitemap_views
@@ -63,8 +63,7 @@ urlpatterns += [
     url(r'^ideas/', include(idea_urls)),
     url(r'^invites/', include(invite_urls)),
     url(r'^journeys/', include(journey_urls)),
-    url(r'^jsi18n/$', javascript_catalog,
-        js_info_dict, name='javascript-catalog'),
+    url(r'^jsi18n/$', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     url(r'^i18n/', include(i18n)),
 
     url(r'^sitemap\.xml$', wagtail_sitemap_views.index,
