@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'formtools',
-    'autofixture',
     'rules.apps.AutodiscoverRulesConfig',
     'allauth',
     'allauth.account',
