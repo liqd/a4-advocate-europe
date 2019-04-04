@@ -19,7 +19,8 @@ class Registry:
     @classmethod
     def _create_follow_class(cls, name, target_model):
         attrs = {
-            'followable': models.ForeignKey(target_model, editable=False),
+            'followable': models.ForeignKey(target_model, editable=False,
+                                            on_delete=models.CASCADE),
             '__module__': target_model.__module__,
             'model': target_model,
         }

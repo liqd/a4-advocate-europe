@@ -1,4 +1,4 @@
-from django.core.urlresolvers import Resolver404, resolve
+from django.urls import Resolver404, resolve
 from django.utils.http import is_safe_url
 from django.utils.translation import ugettext_lazy as _
 
@@ -27,7 +27,10 @@ def sanatize_next(request):
 
     if url_name in _get_account_url_names():
         nextparam = request.GET.get('next') or request.POST.get('next') or '/'
-        next = nextparam if is_safe_url(nextparam) else '/'
+        if is_safe_url(nextparam, allowed_hosts={request.get_host()}):
+            next = nextparam
+        else:
+            next = '/'
     else:
         next = request.get_full_path()
     return next

@@ -1,7 +1,7 @@
 from django.contrib.auth import mixins
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views import generic
 

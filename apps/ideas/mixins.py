@@ -58,7 +58,11 @@ class MultiFormEditMixin():
 
     def get_success_url(self):
         next = self.request.POST.get('next')
-        if (next and is_safe_url(next)):
+
+        # only allow same host as request
+        allowed_hosts = {self.request.get_host()}
+
+        if next and is_safe_url(next, allowed_hosts=allowed_hosts):
             return next
         else:
             return self.request.path

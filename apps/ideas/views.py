@@ -321,7 +321,8 @@ class ProposalCreateWizard(PermissionRequiredMixin,
         proposal.save()
 
         for field in Idea._meta.concrete_fields:
-            if field.name not in data:
+            # FIXME: Item doesn't have item_ptr? Something's wrong here
+            if field.name not in data and field.name != 'item_ptr':
                 setattr(proposal, field.name, getattr(self.idea, field.name))
 
         if not proposal.idea_image:
