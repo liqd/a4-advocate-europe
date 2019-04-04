@@ -10,10 +10,11 @@ from adhocracy4.test import helpers
 from . import factories
 
 register(factories.UserFactory)
+register(factories.OrganisationFactory)
 register(factories.UserFactory, 'user2')
 register(factories.AdminFactory, 'admin')
 
-register(a4factories.OrganisationFactory)
+register(a4factories.GroupFactory)
 register(a4factories.ProjectFactory)
 register(a4factories.ModuleFactory)
 register(a4factories.PhaseFactory)
