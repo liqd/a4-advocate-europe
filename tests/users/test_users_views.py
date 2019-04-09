@@ -1,5 +1,5 @@
 import pytest
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from faker import Faker
 
 from apps.users.forms import UserProfileForm

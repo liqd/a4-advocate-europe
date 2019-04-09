@@ -1,6 +1,6 @@
 {
   "name": "advocate_europe",
-  "version": "0.9.0-release.1",
+  "version": "0.10.0-release.1",
   "license": "AGPL-3.0+",
   "description": "Frontend for Advocate Europe",
   "author": {
@@ -16,7 +16,7 @@
     "@babel/preset-react": "7.0.0",
     "@babel/runtime": "7.4.3",
     "@fortawesome/fontawesome-free": "5.8.1",
-    "adhocracy4": "github:liqd/adhocracy4#ae-v0.9",
+    "adhocracy4": "github:liqd/adhocracy4#ae-v0.10",
     "autoprefixer": "9.5.0",
     "babel-loader": "8.0.5",
     "bootstrap-sass": "3.4.1",
@@ -48,8 +48,8 @@
     "stylelint": "9.10.1"
   },
   "scripts": {
-    "build": "webpack --config ./webpack.prod.js --mode production",
-    "build:dev": "webpack --config ./webpack.dev.js --progress --mode development",
+    "build:prod": "webpack --config ./webpack.prod.js --mode production",
+    "build": "webpack --config ./webpack.dev.js --progress --mode development",
     "watch": "webpack --config ./webpack.dev.js --progress --colors --watch --mode development",
     "lint": "standard '{apps,cms,advocate_europe}/**/*.{js,jsx}' && stylelint 'advocate_europe/assets/scss/**/*.scss' --syntax scss"
   },

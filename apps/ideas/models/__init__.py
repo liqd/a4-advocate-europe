@@ -2,8 +2,8 @@ from autoslug import AutoSlugField
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.urlresolvers import reverse
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from adhocracy4.comments import models as comment_models
@@ -104,7 +104,8 @@ class IdeaSketchArchived(
         AbstractIdeaChallengeCampSection,
         AbstractIdea,
 ):
-    idea = models.OneToOneField(Idea, related_name='idea_sketch_archived')
+    idea = models.OneToOneField(Idea, related_name='idea_sketch_archived',
+                                on_delete=models.CASCADE)
 
     @property
     def idea_sketch_archived(self):

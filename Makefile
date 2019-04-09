@@ -48,7 +48,7 @@ fixtures:
 	$(VIRTUAL_ENV)/bin/python3 manage.py loaddata advocate_europe/fixtures/site-dev.json
 	$(VIRTUAL_ENV)/bin/python3 manage.py loaddata advocate_europe/fixtures/users-dev.json
 	$(VIRTUAL_ENV)/bin/python3 manage.py loaddata advocate_europe/fixtures/projects-dev.json
-	$(VIRTUAL_ENV)/bin/python3 manage.py loadtestdata advocate_europe_ideas.IdeaSketch:7
+	$(VIRTUAL_ENV)/bin/python3 manage.py loaddata advocate_europe/fixtures/ideas-dev.json
 
 .PHONY: server
 server:
@@ -114,7 +114,7 @@ mo:
 release: export DJANGO_SETTINGS_MODULE ?= advocate_europe.settings.build
 release:
 	npm install --silent
-	npm run build
+	npm run build:prod
 	$(VIRTUAL_ENV)/bin/python3 -m pip install -r requirements.txt -q
 	$(VIRTUAL_ENV)/bin/python3 manage.py collectstatic --noinput -v0
 

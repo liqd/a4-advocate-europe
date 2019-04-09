@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'formtools',
-    'autofixture',
     'rules.apps.AutodiscoverRulesConfig',
     'allauth',
     'allauth.account',
@@ -100,7 +99,6 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'wagtail.core.middleware.SiteMiddleware',
@@ -373,12 +371,5 @@ A4_ACTIONABLES = (
     ('advocate_europe_ideas', 'ideafollow')
 )
 
-
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CRISPY_FAIL_SILENTLY = False
-
-WAGTAILADMIN_RICH_TEXT_EDITORS = {
-    'default': {
-        'WIDGET': 'wagtail.admin.rich_text.HalloRichTextArea'
-    }
-}

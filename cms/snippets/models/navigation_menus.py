@@ -1,6 +1,6 @@
 from django.core.exceptions import ValidationError
-from django.core.urlresolvers import reverse
 from django.db import models
+from django.urls import reverse
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 from wagtail.admin import edit_handlers
@@ -25,7 +25,8 @@ class MenuItem(models.Model):
         help_text=(
             'Creates a link to a single wagtail page. '
             'Leave empty if you add subpages or a link view'
-        )
+        ),
+        on_delete=models.CASCADE
     )
 
     allowed_views = (

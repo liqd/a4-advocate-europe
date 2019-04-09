@@ -3,6 +3,15 @@ from django.conf import settings
 from django.contrib.auth.hashers import make_password
 
 
+class OrganisationFactory(factory.django.DjangoModelFactory):
+
+    class Meta:
+        model = 'a4organisations.Organisation'
+        django_get_or_create = ('name',)
+
+    name = factory.Faker('company')
+
+
 class UserFactory(factory.django.DjangoModelFactory):
 
     class Meta:

@@ -1,9 +1,9 @@
 from django.contrib.auth import models as auth_models
 from django.core import validators
-from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
 from django.templatetags.static import static
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from easy_thumbnails.files import get_thumbnailer
