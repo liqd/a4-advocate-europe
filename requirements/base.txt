@@ -28,7 +28,7 @@ python-magic==0.4.15
 raven==6.10.0
 rules==2.0.1
 whitenoise==4.1.2
-XlsxWriter==1.1.5
+XlsxWriter==1.1.6
 
 # django micawber (released version 0.3.4 has no support for django 1.11)
 git+git://github.com/coleifer/micawber.git@9e3f0169a1e9ac80a5e481155abf7658af507c24
