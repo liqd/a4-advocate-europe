@@ -18,7 +18,7 @@
     "@fortawesome/fontawesome-free": "5.8.2",
     "adhocracy4": "github:liqd/adhocracy4#ae-v0.10",
     "autoprefixer": "9.5.1",
-    "babel-loader": "8.0.5",
+    "babel-loader": "8.0.6",
     "bootstrap-sass": "3.4.1",
     "classnames": "2.2.6",
     "copy-webpack-plugin": "5.0.3",
