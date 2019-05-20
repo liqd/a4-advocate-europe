@@ -1,6 +1,6 @@
 git+git://github.com/liqd/adhocracy4.git@ae-v0.10#egg=adhocracy4
 Django==2.2.1
-wagtail==2.5
+wagtail==2.5.1
 
 appdirs==1.4.3
 bcrypt==3.1.6
