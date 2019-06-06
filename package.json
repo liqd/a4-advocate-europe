@@ -17,7 +17,7 @@
     "@babel/runtime": "7.4.5",
     "@fortawesome/fontawesome-free": "5.9.0",
     "adhocracy4": "github:liqd/adhocracy4#6888ecaf2a424c32cc5fb0230ff30868f4110fcc",
-    "autoprefixer": "9.5.1",
+    "autoprefixer": "9.6.0",
     "babel-loader": "8.0.6",
     "bootstrap-sass": "3.4.1",
     "classnames": "2.2.6",
