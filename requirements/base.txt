@@ -32,7 +32,7 @@ jsonfield==2.0.2
 python-dateutil==2.8.0
 python-magic==0.4.15
 rules==2.1
-XlsxWriter==1.1.6
+XlsxWriter==1.1.8
 
 # django multiform (released version 0.1 was too old).
 # 2019-04: This is seriously outdated. We should maybe see if there's an alternative
