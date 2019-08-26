@@ -2,7 +2,7 @@ git+git://github.com/liqd/adhocracy4.git@6888ecaf2a424c32cc5fb0230ff30868f4110fc
 
 # Additional requirements
 appdirs==1.4.3
-bcrypt==3.1.6
+bcrypt==3.1.7
 django-crispy-forms==1.7.2
 django-cloudflare-push==0.2.0
 django-formtools==2.1
