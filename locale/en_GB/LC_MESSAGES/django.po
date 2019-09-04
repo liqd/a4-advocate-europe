@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-21 10:58+0000\n"
+"POT-Creation-Date: 2019-10-08 16:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,462 +17,2740 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: adhocracy4.js/images/templates/a4images/image_upload_widget.html.py:8
-#: adhocracy4.py/images/templates/a4images/image_upload_widget.html.py:8
+#: adhocracy4/categories/templates/a4categories/includes/module_categories_form.html:3
+msgid ""
+"In this section, you can create\n"
+"categories. If you create any, each contribution has to be assigned\n"
+"to one of them. This way, content can be classified."
+msgstr ""
+"In this section, you can create\n"
+"categories. If you create any, each contribution has to be assigned\n"
+"to one of them. This way, content can be classified."
+
+#: adhocracy4/categories/templates/a4categories/includes/module_categories_form.html:21
+msgid "Add category"
+msgstr "Add category"
+
+#: adhocracy4/dashboard/templates/a4dashboard/base_dashboard.html:4
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: adhocracy4/dashboard/templates/a4dashboard/base_dashboard_project.html:5
+msgid "Project Settings"
+msgstr "Project Settings"
+
+#: adhocracy4/dashboard/templates/a4dashboard/base_dashboard_project.html:15
+#: adhocracy4/dashboard/templates/a4dashboard/base_dashboard_project.html:33
+msgid "Missing fields for publication"
+msgstr "Missing fields for publication"
+
+#: adhocracy4/dashboard/templates/a4dashboard/base_form_module.html:18
+#: adhocracy4/dashboard/templates/a4dashboard/base_form_project.html:18
+msgid "Save"
+msgstr "Save"
+
+#: adhocracy4/dashboard/templates/a4dashboard/blueprint_list.html:4
+#: adhocracy4/dashboard/templates/a4dashboard/blueprint_list.html:7
+#: adhocracy4/dashboard/templates/a4dashboard/project_list.html:9
+msgid "New Project"
+msgstr "New Project"
+
+#: adhocracy4/dashboard/templates/a4dashboard/blueprint_list.html:17
+msgid "Phase"
+msgstr "Phase"
+
+#: adhocracy4/dashboard/templates/a4dashboard/blueprint_list.html:23
+msgid "Select"
+msgstr "Select"
+
+#: adhocracy4/dashboard/templates/a4dashboard/includes/form_field.html:6
+msgid "Missing field for publication"
+msgstr "Missing field for publication"
+
+#: adhocracy4/dashboard/templates/a4dashboard/includes/preview.html:7
+#: adhocracy4/dashboard/templates/a4dashboard/project_list.html:36
+msgid "Preview"
+msgstr "Preview"
+
+#: adhocracy4/dashboard/templates/a4dashboard/includes/preview.html:9
+#: adhocracy4/dashboard/templates/a4dashboard/project_list.html:38
+msgid "View"
+msgstr "View"
+
+#: adhocracy4/dashboard/templates/a4dashboard/includes/progress.html:16
+#, python-format
+msgid "%(value)s from %(max)s"
+msgstr "%(value)s from %(max)s"
+
+#: adhocracy4/dashboard/templates/a4dashboard/includes/progress.html:17
+msgid "required fields for publication"
+msgstr "required fields for publication"
+
+#: adhocracy4/dashboard/templates/a4dashboard/includes/progress.html:27
+#: apps/journeys/templates/advocate_europe_journeys/journey_entry_form.html:27
+msgid "Publish"
+msgstr "Publish"
+
+#: adhocracy4/dashboard/templates/a4dashboard/includes/progress.html:31
+msgid "Unpublish"
+msgstr "Unpublish"
+
+#: adhocracy4/dashboard/templates/a4dashboard/project_create_form.html:4
+#: adhocracy4/dashboard/templates/a4dashboard/project_create_form.html:7
+msgid "Create project based on"
+msgstr "Create project based on"
+
+#: adhocracy4/dashboard/templates/a4dashboard/project_create_form.html:23
+msgid ""
+"After saving the draft project you can further customize and edit your "
+"project and eventually publish it."
+msgstr ""
+"After saving the draft project you can further customize and edit your "
+"project and eventually publish it."
+
+#: adhocracy4/dashboard/templates/a4dashboard/project_create_form.html:25
+msgid "Create draft"
+msgstr "Create draft"
+
+#: adhocracy4/dashboard/templates/a4dashboard/project_create_form.html:27
+msgid "Cancel"
+msgstr "Cancel"
+
+#: adhocracy4/dashboard/templates/a4dashboard/project_list.html:4
+#: adhocracy4/dashboard/templates/a4dashboard/project_list.html:7
+msgid "Projects"
+msgstr "Projects"
+
+#: adhocracy4/dashboard/templates/a4dashboard/project_list.html:24
+msgid "Finished"
+msgstr "Finished"
+
+#: adhocracy4/dashboard/templates/a4dashboard/project_list.html:27
+msgid "private"
+msgstr "private"
+
+#: adhocracy4/dashboard/templates/a4dashboard/project_list.html:45
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_tab_journey.html:22
+msgid "Edit"
+msgstr "Edit"
+
+#: adhocracy4/dashboard/templates/a4dashboard/project_list.html:54
+msgid "Duplicate"
+msgstr "Duplicate"
+
+#: adhocracy4/dashboard/templates/a4dashboard/project_list.html:62
+msgid "We could not find any projects."
+msgstr "We could not find any projects."
+
+#: adhocracy4/filters/templates/a4filters/widgets/free_text_filter.html:15
+#: adhocracy4/dashboard/filter.py:11 apps/ideas/filters.py:66
+msgid "Search"
+msgstr "Search"
+
+#: adhocracy4/forms/templates/a4forms/includes/form_field.html:5
+msgid "This field is required"
+msgstr "This field is required"
+
+#: adhocracy4/forms/templates/a4forms/includes/inline_form.html:14
+#: adhocracy4/forms/templates/a4forms/includes/inline_form.html:15
+#: adhocracy4/forms/templates/a4forms/includes/inline_form.html:18
+#: adhocracy4/forms/templates/a4forms/includes/inline_form.html:19
+msgid "Remove category"
+msgstr "Remove category"
+
+#: adhocracy4/images/templates/a4images/image_upload_widget.html:8
 msgid "Remove the picture"
-msgstr ""
+msgstr "Remove the picture"
 
-#: adhocracy4.js/images/templates/a4images/image_upload_widget.html.py:12
-#: adhocracy4.py/images/templates/a4images/image_upload_widget.html.py:12
+#: adhocracy4/images/templates/a4images/image_upload_widget.html:12
 msgid "Upload a picture"
-msgstr ""
+msgstr "Upload a picture"
 
-#: adhocracy4.js/images/templates/a4images/image_upload_widget.html.py:19
-#: adhocracy4.py/images/templates/a4images/image_upload_widget.html.py:19
+#: adhocracy4/images/templates/a4images/image_upload_widget.html:19
 msgid ""
 "\n"
 "            Your image will be uploaded/removed once you save your changes\n"
 "            at the end of this page.\n"
 "            "
 msgstr ""
+"\n"
+"            Your image will be uploaded/removed once you save your changes\n"
+"            at the end of this page.\n"
+"            "
 
-#: adhocracy4.py/comments/models.py:35
+#: adhocracy4/labels/templates/a4labels/includes/module_labels_form.html:3
+msgid ""
+"In this section, you can create\n"
+"labels. If you create any, each contribution can be assigned\n"
+"to one or more of them. This way, content can be classified."
+msgstr ""
+"In this section, you can create\n"
+"labels. If you create any, each contribution can be assigned\n"
+"to one or more of them. This way, content can be classified."
+
+#: adhocracy4/labels/templates/a4labels/includes/module_labels_form.html:21
+msgid "Add label"
+msgstr "Add label"
+
+#: adhocracy4/polls/templates/a4polls/poll_404.html:8
+msgid ""
+"Participation is not possible at the moment. The poll has not been set up "
+"yet."
+msgstr ""
+"Participation is not possible at the moment. The poll has not been set up "
+"yet."
+
+#: adhocracy4/polls/templates/a4polls/poll_404.html:15
+msgid "Setup the poll by adding questions and answers in the dashboard."
+msgstr "Setup the poll by adding questions and answers in the dashboard."
+
+#: adhocracy4/polls/templates/a4polls/poll_dashboard.html:5
+msgid "Edit poll"
+msgstr "Edit poll"
+
+#: adhocracy4/categories/dashboard.py:12
+#: cms/blog/templates/cms_blog/includes/blog_index_category_buttons.html:3
+msgid "Categories"
+msgstr "Categories"
+
+#: adhocracy4/categories/dashboard.py:14
+msgid "Edit categories"
+msgstr "Edit categories"
+
+#: adhocracy4/categories/fields.py:12 adhocracy4/categories/filters.py:14
+#: adhocracy4/categories/forms.py:45 adhocracy4/exports/mixins.py:150
+msgid "Category"
+msgstr "Category"
+
+#: adhocracy4/categories/forms.py:38 adhocracy4/labels/forms.py:14
+msgid "Category name"
+msgstr "Category name"
+
+#: adhocracy4/categories/forms.py:39
+msgid "Category icon"
+msgstr "Category icon"
+
+#: adhocracy4/comments/models.py:52
 msgid "Comment"
-msgstr ""
+msgstr "Comment"
 
-#: adhocracy4.py/comments/models.py:36
+#: adhocracy4/comments/models.py:53 adhocracy4/exports/mixins.py:122
 msgid "Comments"
-msgstr ""
+msgstr "Comments"
 
-#: adhocracy4.py/comments/serializers.py:24
+#: adhocracy4/comments/models.py:73
+msgid "deleted by creator"
+msgstr "deleted by creator"
+
+#: adhocracy4/comments/models.py:76
+msgid "deleted by moderator"
+msgstr "deleted by moderator"
+
+#: adhocracy4/comments/serializers.py:51
+msgid "Please choose a category"
+msgstr "Please choose a category"
+
+#: adhocracy4/comments/serializers.py:60
 msgid "unknown user"
-msgstr ""
+msgstr "unknown user"
 
-#: adhocracy4.py/images/fields.py:60
+#: adhocracy4/dashboard/components/forms/views.py:22
+msgid "Project successfully updated."
+msgstr "Project successfully updated."
+
+#: adhocracy4/dashboard/components/forms/views.py:47
+msgid "Module successfully updated."
+msgstr "Module successfully updated."
+
+#: adhocracy4/dashboard/dashboard.py:13
+msgid "Basic settings"
+msgstr "Basic settings"
+
+#: adhocracy4/dashboard/dashboard.py:15
+msgid "Edit basic settings"
+msgstr "Edit basic settings"
+
+#: adhocracy4/dashboard/dashboard.py:23
+msgid "Information"
+msgstr "Information"
+
+#: adhocracy4/dashboard/dashboard.py:25
+msgid "Edit project information"
+msgstr "Edit project information"
+
+#: adhocracy4/dashboard/dashboard.py:33
+msgid "Result"
+msgstr "Result"
+
+#: adhocracy4/dashboard/dashboard.py:35
+msgid "Edit project result"
+msgstr "Edit project result"
+
+#: adhocracy4/dashboard/dashboard.py:43
+msgid "Basic information"
+msgstr "Basic information"
+
+#: adhocracy4/dashboard/dashboard.py:45
+msgid "Edit basic module information"
+msgstr "Edit basic module information"
+
+#: adhocracy4/dashboard/dashboard.py:53
+msgid "Phases"
+msgstr "Phases"
+
+#: adhocracy4/dashboard/dashboard.py:55
+msgid "Edit phases information"
+msgstr "Edit phases information"
+
+#: adhocracy4/dashboard/dashboard.py:64
+msgid "Areasettings"
+msgstr "Areasettings"
+
+#: adhocracy4/dashboard/dashboard.py:65
+msgid "Edit areasettings"
+msgstr "Edit areasettings"
+
+#: adhocracy4/dashboard/filter.py:15
+msgid "Archived"
+msgstr "Archived"
+
+#: adhocracy4/dashboard/filter.py:19 adhocracy4/filters/widgets.py:32
+#: apps/ideas/filters.py:41 apps/ideas/filters.py:56
+msgid "All"
+msgstr "All"
+
+#: adhocracy4/dashboard/filter.py:20
+msgid "No"
+msgstr "No"
+
+#: adhocracy4/dashboard/filter.py:21
+msgid "Yes"
+msgstr "Yes"
+
+#: adhocracy4/dashboard/forms.py:70
+msgid "All users can participate (public)."
+msgstr "All users can participate (public)."
+
+#: adhocracy4/dashboard/forms.py:71
+msgid "Only invited users can participate (private)."
+msgstr "Only invited users can participate (private)."
+
+#: adhocracy4/dashboard/forms.py:79
+msgid "Contact for questions"
+msgstr "Contact for questions"
+
+#: adhocracy4/dashboard/forms.py:80
+msgid ""
+"Please name a contact person. The user will then know who is carrying out "
+"this project and to whom they can address possible questions. The contact "
+"person will be shown in the information tab on the project page."
+msgstr ""
+"Please name a contact person. The user will then know who is carrying out "
+"this project and to whom they can address possible questions. The contact "
+"person will be shown in the information tab on the project page."
+
+#: adhocracy4/dashboard/forms.py:85
+msgid "More contact possibilities"
+msgstr "More contact possibilities"
+
+#: adhocracy4/dashboard/forms.py:98 adhocracy4/phases/models.py:67
+msgid "Name"
+msgstr "Name"
+
+#: adhocracy4/dashboard/forms.py:100
+msgid "Address"
+msgstr "Address"
+
+#: adhocracy4/dashboard/forms.py:103
+msgid "Telephone"
+msgstr "Telephone"
+
+#: adhocracy4/dashboard/forms.py:105
+#: advocate_europe/templates/account/password_reset.html:25
+msgid "Email"
+msgstr "Email"
+
+#: adhocracy4/dashboard/forms.py:107
+#: apps/ideas/models/abstracts/community_section.py:16 apps/users/models.py:98
+#: apps/users/templates/advocate_europe_users/profile.html:100
+msgid "Website"
+msgstr "Website"
+
+#: adhocracy4/dashboard/forms.py:135 adhocracy4/phases/models.py:75
+msgid "End date"
+msgstr "End date"
+
+#: adhocracy4/dashboard/forms.py:135
+msgid "End time"
+msgstr "End time"
+
+#: adhocracy4/dashboard/forms.py:141 adhocracy4/phases/models.py:73
+msgid "Start date"
+msgstr "Start date"
+
+#: adhocracy4/dashboard/forms.py:141
+msgid "Start time"
+msgstr "Start time"
+
+#: adhocracy4/dashboard/mixins.py:199
+msgid "Project successfully duplicated."
+msgstr "Project successfully duplicated."
+
+#: adhocracy4/dashboard/views.py:69
+msgid "Project successfully created."
+msgstr "Project successfully created."
+
+#: adhocracy4/dashboard/views.py:154
+msgid "Invalid action"
+msgstr "Invalid action"
+
+#: adhocracy4/dashboard/views.py:171
+msgid "Project is already published"
+msgstr "Project is already published"
+
+#: adhocracy4/dashboard/views.py:181
+msgid "Project cannot be published. Required fields are missing."
+msgstr "Project cannot be published. Required fields are missing."
+
+#: adhocracy4/dashboard/views.py:190
+msgid "Project cannot be published."
+msgstr "Project cannot be published."
+
+#: adhocracy4/dashboard/views.py:201
+msgid "Project successfully published."
+msgstr "Project successfully published."
+
+#: adhocracy4/dashboard/views.py:206
+msgid "Project is already unpublished"
+msgstr "Project is already unpublished"
+
+#: adhocracy4/dashboard/views.py:215
+msgid "Project successfully unpublished."
+msgstr "Project successfully unpublished."
+
+#: adhocracy4/exports/mixins.py:18
+msgid "Link"
+msgstr "Link"
+
+#: adhocracy4/exports/mixins.py:63
+msgid "Positive ratings"
+msgstr "Positive ratings"
+
+#: adhocracy4/exports/mixins.py:65
+msgid "Negative ratings"
+msgstr "Negative ratings"
+
+#: adhocracy4/exports/mixins.py:98
+msgid "Comment count"
+msgstr "Comment count"
+
+#: adhocracy4/exports/mixins.py:163 adhocracy4/labels/dashboard.py:12
+msgid "Labels"
+msgstr "Labels"
+
+#: adhocracy4/exports/mixins.py:175
+msgid "Location (Longitude)"
+msgstr "Location (Longitude)"
+
+#: adhocracy4/exports/mixins.py:177
+msgid "Location (Latitude)"
+msgstr "Location (Latitude)"
+
+#: adhocracy4/exports/mixins.py:179
+msgid "Location label"
+msgstr "Location label"
+
+#: adhocracy4/forms/fields.py:18
+#, python-format
+msgid "Time of %(date_label)s"
+msgstr "Time of %(date_label)s"
+
+#: adhocracy4/images/fields.py:70
 #, python-brace-format
 msgid ""
 "{help_prefix} It must be min. {min_resolution[0]} pixel wide and "
 "{min_resolution[1]} pixel tall. Allowed file formats are {fileformats_str}. "
 "The file size should be max. {max_size_mb} MB."
 msgstr ""
+"{help_prefix} It must be min. {min_resolution[0]} pixel wide and "
+"{min_resolution[1]} pixel tall. Allowed file formats are {fileformats_str}. "
+"The file size should be max. {max_size_mb} MB."
 
-#: adhocracy4.py/images/validators.py:19
+#: adhocracy4/images/fields.py:90
+#, python-brace-format
+msgid "{image_name} copyright"
+msgstr "{image_name} copyright"
+
+#: adhocracy4/images/fields.py:93
+#, python-brace-format
+msgid "Copyright shown in the {image_name}."
+msgstr "Copyright shown in the {image_name}."
+
+#: adhocracy4/images/validators.py:20
 msgid "Unsupported file format. Supported formats are {}."
-msgstr ""
+msgstr "Unsupported file format. Supported formats are {}."
 
-#: adhocracy4.py/images/validators.py:25
+#: adhocracy4/images/validators.py:27
 #, python-brace-format
 msgid "Image should be at most {max_size} MB"
-msgstr ""
+msgstr "Image should be at most {max_size} MB"
 
-#: adhocracy4.py/images/validators.py:28
+#: adhocracy4/images/validators.py:30
 #, python-brace-format
 msgid "Image must be at least {min_width} pixels wide"
-msgstr ""
+msgstr "Image must be at least {min_width} pixels wide"
 
-#: adhocracy4.py/images/validators.py:31
+#: adhocracy4/images/validators.py:33
 #, python-brace-format
 msgid "Image must be at least {min_height} pixels high"
-msgstr ""
+msgstr "Image must be at least {min_height} pixels high"
 
-#: adhocracy4.py/images/validators.py:41
+#: adhocracy4/images/validators.py:43
 #, python-brace-format
 msgid "Image aspect ratio should be {aspect_width}:{aspect_height}"
-msgstr ""
+msgstr "Image aspect ratio should be {aspect_width}:{aspect_height}"
 
-#: adhocracy4.py/images/widgets.py:27
+#: adhocracy4/images/widgets.py:25
 msgid "Select a picture from your local folder."
-msgstr ""
+msgstr "Select a picture from your local folder."
 
-#: adhocracy4.py/phases/models.py:56
+#: adhocracy4/labels/dashboard.py:14
+msgid "Edit labels"
+msgstr "Edit labels"
+
+#: adhocracy4/labels/forms.py:17
+msgid "Label"
+msgstr "Label"
+
+#: adhocracy4/maps/admin.py:14 adhocracy4/maps/models.py:11
+msgid "Polygon"
+msgstr "Polygon"
+
+#: adhocracy4/maps/admin.py:16
+msgid ""
+"Enter a valid GeoJSON object. To initialize a new areasetting enter the "
+"string \"false\" without quotation marks."
+msgstr ""
+"Enter a valid GeoJSON object. To initialize a new areasetting enter the "
+"string \"false\" without quotation marks."
+
+#: adhocracy4/maps/fields.py:16
+msgid "Geometry as GeoJSON"
+msgstr "Geometry as GeoJSON"
+
+#: adhocracy4/maps/fields.py:34
+msgid "Please add a Marker on the map"
+msgstr "Please add a Marker on the map"
+
+#: adhocracy4/maps/fields.py:39
+msgid "Please draw a Polygon on the map"
+msgstr "Please draw a Polygon on the map"
+
+#: adhocracy4/maps/models.py:12
+msgid "Please draw an area on the map."
+msgstr "Please draw an area on the map."
+
+#: adhocracy4/modules/models.py:63
+msgid "Title of the module"
+msgstr "Title of the module"
+
+#: adhocracy4/modules/models.py:64
+msgid ""
+"This title will appear in the timeline and the header on the module and "
+"project detail pages. It should be max. 512 characters long"
+msgstr ""
+"This title will appear in the timeline and the header on the module and "
+"project detail pages. It should be max. 512 characters long"
+
+#: adhocracy4/modules/models.py:72
+msgid "Short description of the module"
+msgstr "Short description of the module"
+
+#: adhocracy4/modules/models.py:73
+msgid ""
+"This short description will appear on the header of the module and project "
+"detail pages. It should briefly state the goal of the module in max. 512 "
+"chars."
+msgstr ""
+"This short description will appear on the header of the module and project "
+"detail pages. It should briefly state the goal of the module in max. 512 "
+"chars."
+
+#: adhocracy4/modules/models.py:191 adhocracy4/projects/models.py:411
+msgid "day"
+msgstr "day"
+
+#: adhocracy4/modules/models.py:191 adhocracy4/projects/models.py:411
+msgid "days"
+msgstr "days"
+
+#: adhocracy4/modules/models.py:192 adhocracy4/projects/models.py:412
+msgid "hour"
+msgstr "hour"
+
+#: adhocracy4/modules/models.py:192 adhocracy4/projects/models.py:412
+msgid "hours"
+msgstr "hours"
+
+#: adhocracy4/modules/models.py:193 adhocracy4/projects/models.py:413
+msgid "minute"
+msgstr "minute"
+
+#: adhocracy4/modules/models.py:193 adhocracy4/projects/models.py:413
+msgid "minutes"
+msgstr "minutes"
+
+#: adhocracy4/modules/models.py:194
+msgid "second"
+msgstr "second"
+
+#: adhocracy4/modules/models.py:194
+msgid "seconds"
+msgstr "seconds"
+
+#: adhocracy4/phases/models.py:69
+msgid "Description"
+msgstr "Description"
+
+#: adhocracy4/phases/models.py:93
 msgid "End date can not be smallerthan the start date."
-msgstr ""
+msgstr "End date can not be smallerthan the start date."
 
-#: adhocracy4.py/projects/models.py:27
+#: adhocracy4/polls/dashboard.py:14
+msgid "Poll"
+msgstr "Poll"
+
+#: adhocracy4/polls/phases.py:15
+msgid "Voting phase"
+msgstr "Voting phase"
+
+#: adhocracy4/polls/phases.py:16
+msgid "Cast votes and discuss the poll."
+msgstr "Cast votes and discuss the poll."
+
+#: adhocracy4/polls/phases.py:17
+msgid "polls"
+msgstr "polls"
+
+#: adhocracy4/polls/validators.py:15
+#, python-format
+msgid "Item of type %(item)s for that module already exists"
+msgstr "Item of type %(item)s for that module already exists"
+
+#: adhocracy4/polls/validators.py:38
+msgid "Only one vote per question is allowed per user."
+msgstr "Only one vote per question is allowed per user."
+
+#: adhocracy4/polls/validators.py:47
+msgid "Choice has to belong to the question set in the url."
+msgstr "Choice has to belong to the question set in the url."
+
+#: adhocracy4/projects/admin.py:8
+msgid "Project"
+msgstr "Project"
+
+#: adhocracy4/projects/admin.py:47
+msgid "Information and result"
+msgstr "Information and result"
+
+#: adhocracy4/projects/admin.py:50
+msgid "Settings"
+msgstr "Settings"
+
+#: adhocracy4/projects/admin.py:55
+msgid "Images"
+msgstr "Images"
+
+#: adhocracy4/projects/admin.py:60
+msgid "Contact"
+msgstr "Contact"
+
+#: adhocracy4/projects/models.py:42
+msgid ""
+"Phone numbers can only contain digits, spaces and the following characters: "
+"-, +, (, ). It has to be between 8 and 20 characters long."
+msgstr ""
+"Phone numbers can only contain digits, spaces and the following characters: "
+"-, +, (, ). It has to be between 8 and 20 characters long."
+
+#: adhocracy4/projects/models.py:48
+msgid "Postal address"
+msgstr "Postal address"
+
+#: adhocracy4/projects/models.py:57
+msgid "Contact person"
+msgstr "Contact person"
+
+#: adhocracy4/projects/models.py:77
+msgid "Can your project be located on the map?"
+msgstr "Can your project be located on the map?"
+
+#: adhocracy4/projects/models.py:78
+msgid ""
+"Locate your project. Click inside the marked area or type in an address to "
+"set the marker. A set marker can be dragged when pressed."
+msgstr ""
+"Locate your project. Click inside the marked area or type in an address to "
+"set the marker. A set marker can be dragged when pressed."
+
+#: adhocracy4/projects/models.py:89
+msgid "Administrative district"
+msgstr "Administrative district"
+
+#: adhocracy4/projects/models.py:173
 msgid "Title of your project"
-msgstr ""
+msgstr "Title of your project"
 
-#: adhocracy4.py/projects/models.py:28
+#: adhocracy4/projects/models.py:174
 msgid ""
 "This title will appear on the teaser card and on top of the project detail "
 "page. It should be max. 120 characters long"
 msgstr ""
+"This title will appear on the teaser card and on top of the project detail "
+"page. It should be max. 120 characters long"
 
-#: adhocracy4.py/projects/models.py:37
+#: adhocracy4/projects/models.py:190
 msgid "Short description of your project"
-msgstr ""
+msgstr "Short description of your project"
 
-#: adhocracy4.py/projects/models.py:38
+#: adhocracy4/projects/models.py:191
 msgid ""
 "This short description will appear on the header of the project and in the "
 "teaser. It should briefly state the goal of the project in max. 250 chars."
 msgstr ""
+"This short description will appear on the header of the project and in the "
+"teaser. It should briefly state the goal of the project in max. 250 chars."
 
-#: adhocracy4.py/projects/models.py:45
+#: adhocracy4/projects/models.py:199
 msgid "Description of your project"
-msgstr ""
+msgstr "Description of your project"
 
-#: adhocracy4.py/projects/models.py:46
+#: adhocracy4/projects/models.py:200
 msgid ""
 "This description should tell participants what the goal of the project is, "
 "how the project’s participation will look like. It will be always visible in "
 "the „Info“ tab on your project’s page."
 msgstr ""
+"This description should tell participants what the goal of the project is, "
+"how the project’s participation will look like. It will be always visible in "
+"the „Info“ tab on your project’s page."
 
-#: adhocracy4.py/projects/models.py:54
+#: adhocracy4/projects/models.py:208
+msgid "Results of your project"
+msgstr "Results of your project"
+
+#: adhocracy4/projects/models.py:209
 msgid ""
 "Here you should explain what the expected outcome of the project will be and "
 "how you are planning to use the results. If the project is finished you "
 "should add a summary of the results."
 msgstr ""
+"Here you should explain what the expected outcome of the project will be and "
+"how you are planning to use the results. If the project is finished you "
+"should add a summary of the results."
 
-#: adhocracy4.py/projects/models.py:61
+#: adhocracy4/projects/models.py:216
 msgid "Access to the project"
-msgstr ""
+msgstr "Access to the project"
 
-#: adhocracy4.py/projects/models.py:62
+#: adhocracy4/projects/models.py:217
 msgid ""
-"Please indicate who should be able to participate in your project. Teasers "
-"for your project including title and short description will always be "
-"visible to everyone"
+"Please indicate whether this project should be public or restricted to "
+"invited users. Teasers for your project including title and short "
+"description will always be visible to everyone"
 msgstr ""
+"Please indicate whether this project should be public or restricted to "
+"invited users. Teasers for your project including title and short "
+"description will always be visible to everyone"
 
-#: adhocracy4.py/projects/models.py:69
+#: adhocracy4/projects/models.py:225 adhocracy4/projects/models.py:231
 msgid "Header image"
-msgstr ""
+msgstr "Header image"
 
-#: adhocracy4.py/projects/models.py:71
+#: adhocracy4/projects/models.py:227
 msgid "The image will be shown as a decorative background image."
-msgstr ""
+msgstr "The image will be shown as a decorative background image."
 
-#: adhocracy4.py/projects/models.py:87
+#: adhocracy4/projects/models.py:234 adhocracy4/projects/models.py:241
+msgid "Tile image"
+msgstr "Tile image"
+
+#: adhocracy4/projects/models.py:236
+msgid "The image will be shown in the project tile."
+msgstr "The image will be shown in the project tile."
+
+#: adhocracy4/projects/models.py:254
 msgid "Project is archived"
-msgstr ""
+msgstr "Project is archived"
 
-#: adhocracy4.py/projects/models.py:88
-msgid "Set to archive the project"
+#: adhocracy4/projects/models.py:255
+msgid ""
+"Exclude this project from all listings by default. You can still access this "
+"project by using filters."
 msgstr ""
+"Exclude this project from all listings by default. You can still access this "
+"project by using filters."
 
-#: adhocracy4.py/projects/models.py:92
-msgid "Type of the project"
-msgstr ""
+#: adhocracy4/projects/models.py:259
+msgid "Project topics"
+msgstr "Project topics"
 
-#: adhocracy4.py/projects/templatetags/project_tags.py:12
+#: adhocracy4/projects/models.py:260
+msgid "Add topics to your project."
+msgstr "Add topics to your project."
+
+#: adhocracy4/projects/templatetags/project_tags.py:12
 #, python-format
 msgid "%(number)d day left"
 msgid_plural "%(number)d days left"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(number)d day left"
+msgstr[1] "%(number)d days left"
 
-#: adhocracy4.py/projects/templatetags/project_tags.py:19
+#: adhocracy4/projects/templatetags/project_tags.py:19
 msgid "a few hours left"
-msgstr ""
+msgstr "a few hours left"
 
-#: apps/users/__init__.py:6
+#: adhocracy4/projects/utils.py:44
+msgid "{}. Online Participation"
+msgstr "{}. Online Participation"
+
+#: adhocracy4/projects/utils.py:53
+msgid "Online Participation"
+msgstr "Online Participation"
+
+#: adhocracy4/reports/templatetags/react_reports.py:30
+msgid "Report"
+msgstr "Report"
+
+#: apps/contrib/templates/advocate_europe_contrib/delete_modal.html:4
+msgid "Are you sure you want to delete"
+msgstr "Are you sure you want to delete"
+
+#: apps/contrib/templates/advocate_europe_contrib/delete_modal.html:21
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_tab_journey.html:23
+msgid "Delete"
+msgstr "Delete"
+
+#: apps/contrib/templates/advocate_europe_contrib/delete_modal.html:25
+msgid "Abort"
+msgstr "Abort"
+
+#: apps/ideas/countries.py:11
+msgid "Kosovo"
+msgstr "Kosovo"
+
+#: apps/ideas/filters.py:15 apps/ideas/views.py:99
+msgid "Idea Sketch"
+msgstr "Idea Sketch"
+
+#: apps/ideas/filters.py:16
+msgid "Community Award Winner"
+msgstr "Community Award Winner"
+
+#: apps/ideas/filters.py:17
+msgid "Shortlist"
+msgstr "Shortlist"
+
+#: apps/ideas/filters.py:18
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_tab_idea.html:19
+#: apps/ideas/views.py:263
+msgid "Proposal"
+msgstr "Proposal"
+
+#: apps/ideas/filters.py:19
+msgid "Winner"
+msgstr "Winner"
+
+#: apps/ideas/filters.py:23
+msgid "Most Recent"
+msgstr "Most Recent"
+
+#: apps/ideas/filters.py:24
+msgid "Most Comments"
+msgstr "Most Comments"
+
+#: apps/ideas/filters.py:25
+msgid "Most Support"
+msgstr "Most Support"
+
+#: apps/ideas/filters.py:26 apps/users/filters.py:85
+msgid "Alphabetical"
+msgstr "Alphabetical"
+
+#: apps/ideas/filters.py:34
+msgid "Status"
+msgstr "Status"
+
+#: apps/ideas/filters.py:38 apps/ideas/models/abstracts/idea_section.py:83
+msgid "Topic"
+msgstr "Topic"
+
+#: apps/ideas/filters.py:49
+msgid "Year"
+msgstr "Year"
+
+#: apps/ideas/filters.py:53
+msgid "Organisation Country"
+msgstr "Organisation Country"
+
+#: apps/ideas/filters.py:62
+msgid "Sorting"
+msgstr "Sorting"
+
+#: apps/ideas/forms.py:25
+msgid ""
+"I hereby confirm and agree that my idea will be public once published. I "
+"confirm that I have the right to share the idea and the visual material used "
+"in this proposal."
+msgstr ""
+"I hereby confirm and agree that my idea will be public once published. I "
+"confirm that I have the right to share the idea and the visual material used "
+"in this proposal."
+
+#: apps/ideas/forms.py:30
+msgid ""
+"I hereby agree to the {}terms and conditions{} of the Advocate Europe idea "
+"challenge."
+msgstr ""
+"I hereby agree to the {}terms and conditions{} of the Advocate Europe idea "
+"challenge."
+
+#: apps/ideas/forms.py:33
+msgid ""
+"If selected, a representative of my project will commit to joining the Idea "
+"Challenge Camp from {} to {}."
+msgstr ""
+"If selected, a representative of my project will commit to joining the Idea "
+"Challenge Camp from {} to {}."
+
+#: apps/ideas/forms.py:37
+msgid ""
+"If selected, a representative of my project will commit to joining the Idea "
+"Challenge Camp at the end of April 2018."
+msgstr ""
+"If selected, a representative of my project will commit to joining the Idea "
+"Challenge Camp at the end of April 2018."
+
+#: apps/ideas/forms.py:42
+msgid "Please add your team members here."
+msgstr "Please add your team members here."
+
+#: apps/ideas/forms.py:43
+msgid ""
+"Here you can insert the email addresses of up to 5 team members. They will "
+"receive an email inviting them to register on the Advocate Europe website. "
+"After registering they will appear with their user name on your idea page "
+"and will be able to edit your idea. "
+msgstr ""
+"Here you can insert the email addresses of up to 5 team members. They will "
+"receive an email inviting them to register on the Advocate Europe website. "
+"After registering they will appear with their user name on your idea page "
+"and will be able to edit your idea. "
+
+#: apps/ideas/forms.py:50
+msgid "Your team members"
+msgstr "Your team members"
+
+#: apps/ideas/forms.py:52
+msgid ""
+"More information about the {}Idea Challenge Camp{}. (max. 150 characters)"
+msgstr ""
+"More information about the {}Idea Challenge Camp{}. (max. 150 characters)"
+
+#: apps/ideas/forms.py:81
+msgid "Invalid email address"
+msgstr "Invalid email address"
+
+#: apps/ideas/forms.py:89
+msgid "Duplicate email address"
+msgstr "Duplicate email address"
+
+#: apps/ideas/forms.py:103
+msgid "About You"
+msgstr "About You"
+
+#: apps/ideas/forms.py:140
+msgid ""
+"Applications may be submitted, in English only, until {}. After publishing, "
+"you can continue to edit all the fields of your application right up to {}."
+msgstr ""
+"Applications may be submitted, in English only, until {}. After publishing, "
+"you can continue to edit all the fields of your application right up to {}."
+
+#: apps/ideas/forms.py:150
+msgid "Partners"
+msgstr "Partners"
+
+#: apps/ideas/forms.py:151
+msgid ""
+"Please share the names of your partner organisations here. If you do not "
+"have any partner organisations, leave the fields empty. You can update these "
+"fields any time before the application deadline."
+msgstr ""
+"Please share the names of your partner organisations here. If you do not "
+"have any partner organisations, leave the fields empty. You can update these "
+"fields any time before the application deadline."
+
+#: apps/ideas/forms.py:158
+msgid "Partner Organisation 1"
+msgstr "Partner Organisation 1"
+
+#: apps/ideas/forms.py:159
+msgid "Partner Organisation 2"
+msgstr "Partner Organisation 2"
+
+#: apps/ideas/forms.py:160
+msgid "Partner Organisation 3"
+msgstr "Partner Organisation 3"
+
+#: apps/ideas/forms.py:192
+#: apps/ideas/templates/advocate_europe_ideas/idea_detail.html:63
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_tab_idea.html:21
+msgid "Idea"
+msgstr "Idea"
+
+#: apps/ideas/forms.py:217
+msgid ""
+"You indicated that your idea links to the Ruhr area of Germany. Please "
+"specify."
+msgstr ""
+"You indicated that your idea links to the Ruhr area of Germany. Please "
+"specify."
+
+#: apps/ideas/forms.py:224
+msgid ""
+"You indicated that your idea will take place in a city, country and/or "
+"region. Please specify."
+msgstr ""
+"You indicated that your idea will take place in a city, country and/or "
+"region. Please specify."
+
+#: apps/ideas/forms.py:231
+msgid "Road to Impact"
+msgstr "Road to Impact"
+
+#: apps/ideas/forms.py:252
+msgid "Idea Challenge Camp"
+msgstr "Idea Challenge Camp"
+
+#: apps/ideas/forms.py:273 apps/ideas/forms.py:374
+msgid "Community"
+msgstr "Community"
+
+#: apps/ideas/forms.py:311 apps/ideas/forms.py:474
+msgid "Maximum 5 team members allowed"
+msgstr "Maximum 5 team members allowed"
+
+#: apps/ideas/forms.py:317
+msgid "Outreach and indicators"
+msgstr "Outreach and indicators"
+
+#: apps/ideas/forms.py:329
+msgid "Network"
+msgstr "Network"
+
+#: apps/ideas/forms.py:339
+msgid "Finances"
+msgstr "Finances"
+
+#: apps/ideas/forms.py:369
+msgid "The requested budget can't be higher than the total budget"
+msgstr "The requested budget can't be higher than the total budget"
+
+#: apps/ideas/forms.py:404 apps/ideas/forms.py:415
+msgid "remove"
+msgstr "remove"
+
+#: apps/ideas/forms.py:405 apps/ideas/forms.py:416
+msgid "will be removed on save"
+msgstr "will be removed on save"
+
+#: apps/ideas/forms.py:414
+msgid "Invitation pending"
+msgstr "Invitation pending"
+
+#: apps/ideas/forms.py:460
+#, python-brace-format
+msgid "You already invited {email}"
+msgstr "You already invited {email}"
+
+#: apps/ideas/forms.py:505
+msgid "Submit and publish"
+msgstr "Submit and publish"
+
+#: apps/ideas/models/__init__.py:78
+msgid "winner"
+msgstr "winner"
+
+#: apps/ideas/models/__init__.py:80
+msgid "community award"
+msgstr "community award"
+
+#: apps/ideas/models/__init__.py:82
+msgid "shortlist"
+msgstr "shortlist"
+
+#: apps/ideas/models/abstracts/applicant_section.py:7
+msgid ""
+"Your first name and last name will be published together with the proposal."
+msgstr ""
+"Your first name and last name will be published together with the proposal."
+
+#: apps/ideas/models/abstracts/applicant_section.py:12
+msgid ""
+"I am applying on behalf of a registered non-profit organisation, e.g. NGO"
+msgstr ""
+"I am applying on behalf of a registered non-profit organisation, e.g. NGO"
+
+#: apps/ideas/models/abstracts/applicant_section.py:15
+msgid ""
+"Registration as a non-profit organisation is planned or is already underway"
+msgstr ""
+"Registration as a non-profit organisation is planned or is already underway"
+
+#: apps/ideas/models/abstracts/applicant_section.py:18
+msgid ""
+"I have a really good idea, but will need help to register a non-profit "
+"organisation"
+msgstr ""
+"I have a really good idea, but will need help to register a non-profit "
+"organisation"
+
+#: apps/ideas/models/abstracts/applicant_section.py:21
+#: apps/ideas/models/abstracts/community_section.py:20
+#: apps/ideas/models/abstracts/idea_section.py:88
+msgid "Other"
+msgstr "Other"
+
+#: apps/ideas/models/abstracts/applicant_section.py:23
+msgid ""
+"Please provide details about your current status, especially if you selected "
+"\"Other\" (max. 200 characters)"
+msgstr ""
+"Please provide details about your current status, especially if you selected "
+"\"Other\" (max. 200 characters)"
+
+#: apps/ideas/models/abstracts/applicant_section.py:27
+msgid ""
+"If you do not yet have a registered organisation, please write the name of "
+"your initiative or planned  organisation here."
+msgstr ""
+"If you do not yet have a registered organisation, please write the name of "
+"your initiative or planned  organisation here."
+
+#: apps/ideas/models/abstracts/applicant_section.py:42
+msgid "Organisation details"
+msgstr "Organisation details"
+
+#: apps/ideas/models/abstracts/applicant_section.py:57
+msgid "Organisation email"
+msgstr "Organisation email"
+
+#: apps/ideas/models/abstracts/community_section.py:4
+msgid ""
+"Reach out – get feedback, ideas and inspiration from the Advocate Europe "
+"online Community!"
+msgstr ""
+"Reach out – get feedback, ideas and inspiration from the Advocate Europe "
+"online Community!"
+
+#: apps/ideas/models/abstracts/community_section.py:8
+msgid ""
+"What kind of advice, comments or feedback would you like to receive about "
+"your idea from others on the platform? (max. 300 characters)"
+msgstr ""
+"What kind of advice, comments or feedback would you like to receive about "
+"your idea from others on the platform? (max. 300 characters)"
+
+#: apps/ideas/models/abstracts/community_section.py:12
+msgid "How did you hear about Advocate Europe?"
+msgstr "How did you hear about Advocate Europe?"
+
+#: apps/ideas/models/abstracts/community_section.py:15
+msgid "Personal contact"
+msgstr "Personal contact"
+
+#: apps/ideas/models/abstracts/community_section.py:17
+msgid "Facebook"
+msgstr "Facebook"
+
+#: apps/ideas/models/abstracts/community_section.py:18
+msgid "Twitter"
+msgstr "Twitter"
+
+#: apps/ideas/models/abstracts/community_section.py:19
+msgid "Newsletter"
+msgstr "Newsletter"
+
+#: apps/ideas/models/abstracts/finances_duration_section.py:4
+msgid "Total Budget"
+msgstr "Total Budget"
+
+#: apps/ideas/models/abstracts/finances_duration_section.py:5
+msgid ""
+"Please indicate your overall budget. The total budget may (but does not have "
+"to) include the applicant’s own contribution and/or external sources of "
+"funding."
+msgstr ""
+"Please indicate your overall budget. The total budget may (but does not have "
+"to) include the applicant’s own contribution and/or external sources of "
+"funding."
+
+#: apps/ideas/models/abstracts/finances_duration_section.py:9
+#: apps/ideas/views.py:210
+msgid "Funding requested from Advocate Europe"
+msgstr "Funding requested from Advocate Europe"
+
+#: apps/ideas/models/abstracts/finances_duration_section.py:10
+msgid ""
+"Funding requested from Advocate Europe can range from 1 to 50,000 EUR. "
+"Depending on your planning, the amount entered here can be the same as the "
+"“total budget” figure entered above."
+msgstr ""
+"Funding requested from Advocate Europe can range from 1 to 50,000 EUR. "
+"Depending on your planning, the amount entered here can be the same as the "
+"“total budget” figure entered above."
+
+#: apps/ideas/models/abstracts/finances_duration_section.py:15
+#: apps/ideas/views.py:202
+msgid "Major expenses"
+msgstr "Major expenses"
+
+#: apps/ideas/models/abstracts/finances_duration_section.py:16
+msgid ""
+"Which are the major expenses you foresee for the implementation of your "
+"idea? Please share a rough estimate by cost category (e.g. office expenses "
+"1000 EUR, travel and accommodation costs 3000 EUR, public relations 2000 "
+"EUR, personnel costs etc.)"
+msgstr ""
+"Which are the major expenses you foresee for the implementation of your "
+"idea? Please share a rough estimate by cost category (e.g. office expenses "
+"1000 EUR, travel and accommodation costs 3000 EUR, public relations 2000 "
+"EUR, personnel costs etc.)"
+
+#: apps/ideas/models/abstracts/finances_duration_section.py:22
+msgid "Other sources of income"
+msgstr "Other sources of income"
+
+#: apps/ideas/models/abstracts/finances_duration_section.py:23
+msgid ""
+"This will not be published and will only be seen by the Advocate Europe team "
+"and the jury. Do you anticipate receiving funding for your activity or "
+"initiative from other sources (e.g. own contribution, other grants or "
+"financial aid)?"
+msgstr ""
+"This will not be published and will only be seen by the Advocate Europe team "
+"and the jury. Do you anticipate receiving funding for your activity or "
+"initiative from other sources (e.g. own contribution, other grants or "
+"financial aid)?"
+
+#: apps/ideas/models/abstracts/finances_duration_section.py:29
+msgid "Are these financial sources secured? Yes/no"
+msgstr "Are these financial sources secured? Yes/no"
+
+#: apps/ideas/models/abstracts/finances_duration_section.py:30
+msgid "If yes, have these already been secured?"
+msgstr "If yes, have these already been secured?"
+
+#: apps/ideas/models/abstracts/finances_duration_section.py:31
+msgid "Duration of project (number of months)"
+msgstr "Duration of project (number of months)"
+
+#: apps/ideas/models/abstracts/finances_duration_section.py:32
+msgid "How many months will it take to implement your project?"
+msgstr "How many months will it take to implement your project?"
+
+#: apps/ideas/models/abstracts/idea_challenge_camp_section.py:4
+msgid "Choose one of the following options."
+msgstr "Choose one of the following options."
+
+#: apps/ideas/models/abstracts/idea_challenge_camp_section.py:5
+msgid "Who will represent your idea at the Idea Challenge Camp and why?"
+msgstr "Who will represent your idea at the Idea Challenge Camp and why?"
+
+#: apps/ideas/models/abstracts/idea_challenge_camp_section.py:7
+msgid "Specify one person only."
+msgstr "Specify one person only."
+
+#: apps/ideas/models/abstracts/idea_challenge_camp_section.py:8
+msgid ""
+"How could you contribute to and benefit from participating in the Idea "
+"Challenge Camp?"
+msgstr ""
+"How could you contribute to and benefit from participating in the Idea "
+"Challenge Camp?"
+
+#: apps/ideas/models/abstracts/idea_challenge_camp_section.py:11
+msgid ""
+"Tell us about your expectations. Think about your skills, resources, "
+"networks and partners when describing what you could offer and what you "
+"would like to take away. (max. 300 characters)"
+msgstr ""
+"Tell us about your expectations. Think about your skills, resources, "
+"networks and partners when describing what you could offer and what you "
+"would like to take away. (max. 300 characters)"
+
+#: apps/ideas/models/abstracts/idea_section.py:7
+msgid "Give your idea a short and meaningful title. (max. 50 characters)"
+msgstr "Give your idea a short and meaningful title. (max. 50 characters)"
+
+#: apps/ideas/models/abstracts/idea_section.py:10
+msgid ""
+"Present your idea in max. 500 characters. Share a concise and appealing text "
+"that makes the reader curious. Try to pitch your main challenge, objective, "
+"method and target group in 3-5 sentences."
+msgstr ""
+"Present your idea in max. 500 characters. Share a concise and appealing text "
+"that makes the reader curious. Try to pitch your main challenge, objective, "
+"method and target group in 3-5 sentences."
+
+#: apps/ideas/models/abstracts/idea_section.py:15
+msgid ""
+"Upload a photo or illustration that visually supports or explains your idea. "
+"Make sure that you have the property rights to share this picture. You can "
+"upload a .jpg, .png or .gif of up to 3 MB in size. The image should be in "
+"landscape (not portrait) format and have a width of at least 400 pixels."
+msgstr ""
+"Upload a photo or illustration that visually supports or explains your idea. "
+"Make sure that you have the property rights to share this picture. You can "
+"upload a .jpg, .png or .gif of up to 3 MB in size. The image should be in "
+"landscape (not portrait) format and have a width of at least 400 pixels."
+
+#: apps/ideas/models/abstracts/idea_section.py:23
+msgid "Democracy and participation"
+msgstr "Democracy and participation"
+
+#: apps/ideas/models/abstracts/idea_section.py:24
+msgid "Arts and cultural activities"
+msgstr "Arts and cultural activities"
+
+#: apps/ideas/models/abstracts/idea_section.py:25
+msgid "Environment"
+msgstr "Environment"
+
+#: apps/ideas/models/abstracts/idea_section.py:26
+msgid "Social inclusion"
+msgstr "Social inclusion"
+
+#: apps/ideas/models/abstracts/idea_section.py:27
+msgid "Migration"
+msgstr "Migration"
+
+#: apps/ideas/models/abstracts/idea_section.py:28
+msgid "Communities"
+msgstr "Communities"
+
+#: apps/ideas/models/abstracts/idea_section.py:29
+msgid "Urban development"
+msgstr "Urban development"
+
+#: apps/ideas/models/abstracts/idea_section.py:30
+msgid "Education"
+msgstr "Education"
+
+#: apps/ideas/models/abstracts/idea_section.py:33
+msgid ""
+"Choose 1-2 topics that describe your idea. Your answer to this question does "
+"not influence the selection process. It helps us to get a better overview of "
+"the proposals we receive."
+msgstr ""
+"Choose 1-2 topics that describe your idea. Your answer to this question does "
+"not influence the selection process. It helps us to get a better overview of "
+"the proposals we receive."
+
+#: apps/ideas/models/abstracts/idea_section.py:41
+msgid "City, country or region (please specify below)"
+msgstr "City, country or region (please specify below)"
+
+#: apps/ideas/models/abstracts/idea_section.py:42
+msgid "Online"
+msgstr "Online"
+
+#: apps/ideas/models/abstracts/idea_section.py:43
+msgid "Links to the Ruhr area of Germany"
+msgstr "Links to the Ruhr area of Germany"
+
+#: apps/ideas/models/abstracts/idea_section.py:47
+msgid ""
+"Where will your idea take place? Choose all options that apply. 1-3 choices "
+"possible."
+msgstr ""
+"Where will your idea take place? Choose all options that apply. 1-3 choices "
+"possible."
+
+#: apps/ideas/models/abstracts/idea_section.py:51
+msgid ""
+"Please specify the city, country and/or region, e.g. Berlin, Germany. (max. "
+"100 characters)"
+msgstr ""
+"Please specify the city, country and/or region, e.g. Berlin, Germany. (max. "
+"100 characters)"
+
+#: apps/ideas/models/abstracts/idea_section.py:55
+msgid ""
+"Is your project connected to the Ruhr area of Germany through project "
+"partners or audiences? Please provide further details. (max. 500 characters)"
+msgstr ""
+"Is your project connected to the Ruhr area of Germany through project "
+"partners or audiences? Please provide further details. (max. 500 characters)"
+
+#: apps/ideas/models/abstracts/idea_section.py:65
+msgid "(max. 200 characters)"
+msgstr "(max. 200 characters)"
+
+#: apps/ideas/models/abstracts/idea_section.py:75
+msgid "Visualise your idea"
+msgstr "Visualise your idea"
+
+#: apps/ideas/models/abstracts/idea_section.py:89
+msgid "Please specify. (max 250 characters)"
+msgstr "Please specify. (max 250 characters)"
+
+#: apps/ideas/models/abstracts/idea_section.py:92
+msgid "Location"
+msgstr "Location"
+
+#: apps/ideas/models/abstracts/idea_section.py:99
+msgid "Location details"
+msgstr "Location details"
+
+#: apps/ideas/models/abstracts/idea_section.py:104
+msgid "Links to the Ruhr area"
+msgstr "Links to the Ruhr area"
+
+#: apps/ideas/models/abstracts/impact_section.py:4
+msgid "How will your idea strengthen democracy in Europe?"
+msgstr "How will your idea strengthen democracy in Europe?"
+
+#: apps/ideas/models/abstracts/impact_section.py:5
+msgid ""
+"How does your idea address the challenges of democracy in Europe today? How "
+"does it suit our 2017-2018 call for ideas for democracy in Europe? (max. 800 "
+"characters)"
+msgstr ""
+"How does your idea address the challenges of democracy in Europe today? How "
+"does it suit our 2017-2018 call for ideas for democracy in Europe? (max. 800 "
+"characters)"
+
+#: apps/ideas/models/abstracts/impact_section.py:8
+msgid "What would be a successful outcome for your idea?"
+msgstr "What would be a successful outcome for your idea?"
+
+#: apps/ideas/models/abstracts/impact_section.py:9
+msgid ""
+"If your idea is selected, what will be different a year from now? What will "
+"have changed? (max. 800 characters)"
+msgstr ""
+"If your idea is selected, what will be different a year from now? What will "
+"have changed? (max. 800 characters)"
+
+#: apps/ideas/models/abstracts/impact_section.py:12
+msgid "How do you plan to get there?"
+msgstr "How do you plan to get there?"
+
+#: apps/ideas/models/abstracts/impact_section.py:13
+msgid ""
+"Describe as concretely as possible the approach and/or the method you will "
+"use when implementing your idea. What are the steps you plan to take? (max. "
+"800 characters)"
+msgstr ""
+"Describe as concretely as possible the approach and/or the method you will "
+"use when implementing your idea. What are the steps you plan to take? (max. "
+"800 characters)"
+
+#: apps/ideas/models/abstracts/impact_section.py:18
+msgid "Why is this idea important to you?"
+msgstr "Why is this idea important to you?"
+
+#: apps/ideas/models/abstracts/impact_section.py:19
+msgid ""
+"What motivates you to bring this idea to life? What is your story? What is "
+"your connection and mission behind the idea? (max. 800 characters)"
+msgstr ""
+"What motivates you to bring this idea to life? What is your story? What is "
+"your connection and mission behind the idea? (max. 800 characters)"
+
+#: apps/ideas/models/abstracts/impact_section.py:23
+msgid "Who are you doing it for and/or with?"
+msgstr "Who are you doing it for and/or with?"
+
+#: apps/ideas/models/abstracts/impact_section.py:24
+msgid ""
+"Which target groups, stakeholders, beneficiaries or audiences are at the "
+"centre of your idea? (max. 800 characters)"
+msgstr ""
+"Which target groups, stakeholders, beneficiaries or audiences are at the "
+"centre of your idea? (max. 800 characters)"
+
+#: apps/ideas/models/abstracts/impact_section.py:27
+msgid "Who is in your project team?"
+msgstr "Who is in your project team?"
+
+#: apps/ideas/models/abstracts/impact_section.py:28
+msgid ""
+"Please introduce us to the main members of your project team and briefly "
+"summarise their experience and skills. (max. 800 characters)"
+msgstr ""
+"Please introduce us to the main members of your project team and briefly "
+"summarise their experience and skills. (max. 800 characters)"
+
+#: apps/ideas/models/abstracts/network_section.py:4
+msgid ""
+"How will you contribute to and benefit from the Advocate Europe network?"
+msgstr ""
+"How will you contribute to and benefit from the Advocate Europe network?"
+
+#: apps/ideas/models/abstracts/network_section.py:7
+msgid ""
+"The Advocate Europe network includes all previous winning projects, jury "
+"members, the online community, the partner organisations Stiftung Mercator, "
+"MitOst e.V. and Liquid Democracy e.V. and the Advocate Europe team. Winning "
+"projects meet at least one time per year in network meetings. Tell us about "
+"your expectations. Think about your skills, resources, networks and partners "
+"when describing what you could offer and what you would like to take away. "
+"(max. 800 characters)"
+msgstr ""
+"The Advocate Europe network includes all previous winning projects, jury "
+"members, the online community, the partner organisations Stiftung Mercator, "
+"MitOst e.V. and Liquid Democracy e.V. and the Advocate Europe team. Winning "
+"projects meet at least one time per year in network meetings. Tell us about "
+"your expectations. Think about your skills, resources, networks and partners "
+"when describing what you could offer and what you would like to take away. "
+"(max. 800 characters)"
+
+#: apps/ideas/models/abstracts/partners_section.py:7
+msgid ""
+"Please use this field if you have more than 3 partner organisations or if "
+"you want to tell us more about your proposed partnership arrangements (max. "
+"200 characters)."
+msgstr ""
+"Please use this field if you have more than 3 partner organisations or if "
+"you want to tell us more about your proposed partnership arrangements (max. "
+"200 characters)."
+
+#: apps/ideas/models/abstracts/partners_section.py:13
+msgid "Organisation Name"
+msgstr "Organisation Name"
+
+#: apps/ideas/models/abstracts/partners_section.py:14
+msgid "website"
+msgstr "website"
+
+#: apps/ideas/models/abstracts/partners_section.py:15
+msgid "country"
+msgstr "country"
+
+#: apps/ideas/models/abstracts/selection_criteria_section.py:4
+msgid "How will your idea strengthen connection and cohesion in Europe?"
+msgstr "How will your idea strengthen connection and cohesion in Europe?"
+
+#: apps/ideas/models/abstracts/selection_criteria_section.py:7
+#: apps/ideas/views.py:200
+msgid "What makes your idea stand apart?"
+msgstr "What makes your idea stand apart?"
+
+#: apps/ideas/models/abstracts/selection_criteria_section.py:9
+msgid ""
+"What is surprising or unconventional about your idea? What is special about "
+"it? (max. 800 characters)"
+msgstr ""
+"What is surprising or unconventional about your idea? What is special about "
+"it? (max. 800 characters)"
+
+#: apps/ideas/models/abstracts/selection_criteria_section.py:13
+msgid ""
+"What is the practical relevance of your idea to people’s everyday lives?"
+msgstr ""
+"What is the practical relevance of your idea to people’s everyday lives?"
+
+#: apps/ideas/models/abstracts/selection_criteria_section.py:16
+msgid "How will your project connect to, or influence, people’s daily lives?"
+msgstr "How will your project connect to, or influence, people’s daily lives?"
+
+#: apps/ideas/models/abstracts/selection_criteria_section.py:18
+msgid "How will you be reaching out to others and advocating your idea?"
+msgstr "How will you be reaching out to others and advocating your idea?"
+
+#: apps/ideas/models/abstracts/selection_criteria_section.py:20
+msgid ""
+"Through what actions, measures or channels will you be reaching out to your "
+"key target groups and others to whom your idea is relevant? (max. 800 "
+"characters)"
+msgstr ""
+"Through what actions, measures or channels will you be reaching out to your "
+"key target groups and others to whom your idea is relevant? (max. 800 "
+"characters)"
+
+#: apps/ideas/models/abstracts/selection_criteria_section.py:26
+msgid "Key Indicators"
+msgstr "Key Indicators"
+
+#: apps/ideas/models/abstracts/selection_criteria_section.py:27
+msgid ""
+"What are the key indicators of success of your endeavour in the first year? "
+"What are key indicators for failure in the first year? If successful, how "
+"will you amplify your successes? If you should fail, how will you recover? "
+"(max. 800 characters)"
+msgstr ""
+"What are the key indicators of success of your endeavour in the first year? "
+"What are key indicators for failure in the first year? If successful, how "
+"will you amplify your successes? If you should fail, how will you recover? "
+"(max. 800 characters)"
+
+#: apps/ideas/phases.py:14 apps/ideas/phases.py:46 apps/ideas/phases.py:85
+#: apps/ideas/phases.py:138
+msgid "Advocate Europe"
+msgstr "Advocate Europe"
+
+#: apps/ideas/phases.py:25
+msgid "Pre call phase"
+msgstr "Pre call phase"
+
+#: apps/ideas/phases.py:27
+msgid "look at previous ideas, get an idea how the idea challenge is run"
+msgstr "look at previous ideas, get an idea how the idea challenge is run"
+
+#: apps/ideas/phases.py:42
+msgid "Idea sketch phase"
+msgstr "Idea sketch phase"
+
+#: apps/ideas/phases.py:44
+msgid "issue and edit idea sketches, but also collect some early feedback"
+msgstr "issue and edit idea sketches, but also collect some early feedback"
+
+#: apps/ideas/phases.py:65
+msgid "Interim post sketch phase"
+msgstr "Interim post sketch phase"
+
+#: apps/ideas/phases.py:67
+msgid "submitting of idea sketches is closed"
+msgstr "submitting of idea sketches is closed"
+
+#: apps/ideas/phases.py:83
+msgid "Community award rating"
+msgstr "Community award rating"
+
+#: apps/ideas/phases.py:84
+msgid "submit your rating for the community award"
+msgstr "submit your rating for the community award"
+
+#: apps/ideas/phases.py:105
+msgid "Interim shortlist selection phase"
+msgstr "Interim shortlist selection phase"
+
+#: apps/ideas/phases.py:106
+msgid "ideas for the shortlist are chosen by the jury"
+msgstr "ideas for the shortlist are chosen by the jury"
+
+#: apps/ideas/phases.py:121
+msgid "Interim shortlist publication phase"
+msgstr "Interim shortlist publication phase"
+
+#: apps/ideas/phases.py:122
+msgid "the shortlist is published"
+msgstr "the shortlist is published"
+
+#: apps/ideas/phases.py:136
+msgid "Full proposal phase"
+msgstr "Full proposal phase"
+
+#: apps/ideas/phases.py:137
+msgid "extend idea sketches to a full proposals"
+msgstr "extend idea sketches to a full proposals"
+
+#: apps/ideas/phases.py:157
+msgid "Interim winners selection phase"
+msgstr "Interim winners selection phase"
+
+#: apps/ideas/phases.py:158
+msgid "winning ideas are chosen by the jury"
+msgstr "winning ideas are chosen by the jury"
+
+#: apps/ideas/phases.py:173
+msgid "Interim winners phase"
+msgstr "Interim winners phase"
+
+#: apps/ideas/phases.py:174
+msgid "winning ideas are from the current idea challenge are shown"
+msgstr "winning ideas are from the current idea challenge are shown"
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_detail.html:59
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_tab_info.html:5
+msgid "Creators"
+msgstr "Creators"
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_detail.html:68
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_tab_journey.html:5
+msgid "Project Journey"
+msgstr "Project Journey"
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_detail.html:93
+msgid "Why this idea?"
+msgstr "Why this idea?"
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_detail.html:100
+msgid "Team"
+msgstr "Team"
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_detail.html:118
+msgid "Idea created on"
+msgstr "Idea created on"
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_detail.html:122
+msgid "Last edit on"
+msgstr "Last edit on"
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_detail.html:131
+msgid "Write comment"
+msgstr "Write comment"
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_list.html:5
+#: apps/ideas/templates/advocate_europe_ideas/idea_list.html:12
+msgid "All ideas"
+msgstr "All ideas"
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_list.html:17
+msgid "Ideas from past idea challenges"
+msgstr "Ideas from past idea challenges"
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_list.html:42
+msgid "Filters"
+msgstr "Filters"
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_list.html:64
+msgid "export"
+msgstr "export"
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_list.html:70
+msgid "Sorry, no ideas exist for the chosen filters."
+msgstr "Sorry, no ideas exist for the chosen filters."
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_list.html:90
+#, python-format
+msgid ""
+"\n"
+"                        <p>One idea found</p>\n"
+"                        "
+msgid_plural ""
+"\n"
+"                        <p>%(ideacount)s Ideas found</p>\n"
+"                    "
+msgstr[0] ""
+"\n"
+"                        <p>One idea found</p>\n"
+"                        "
+msgstr[1] ""
+"\n"
+"                        <p>%(ideacount)s Ideas found</p>\n"
+"                    "
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_update_form.html:4
+msgid "update idea"
+msgstr "update idea"
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_update_form.html:11
+#: apps/journeys/templates/advocate_europe_journeys/journey_entry_form.html:11
+msgid "Back to idea"
+msgstr "Back to idea"
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_update_form.html:37
+msgid "You have unsaved changes"
+msgstr "You have unsaved changes"
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_update_form.html:40
+msgid "discard"
+msgstr "discard"
+
+#: apps/ideas/templates/advocate_europe_ideas/idea_update_form.html:41
+#: apps/ideas/templates/advocate_europe_ideas/idea_update_form.html:54
+msgid "save"
+msgstr "save"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/call_to_action_tile.html:11
+msgid "Got an idea? Share it!"
+msgstr "Got an idea? Share it!"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/call_to_action_tile.html:12
+msgid "Apply now and get funding for your project!"
+msgstr "Apply now and get funding for your project!"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/call_to_action_tile.html:14
+msgid "Read about the criteria"
+msgstr "Read about the criteria"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/call_to_action_tile.html:18
+msgid "Create your idea sketch!"
+msgstr "Create your idea sketch!"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_header.html:8
+msgid "Idea Space"
+msgstr "Idea Space"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_tab_info.html:8
+msgid "Who is behind this?"
+msgstr "Who is behind this?"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_tab_info.html:27
+msgid "Who is joining forces?"
+msgstr "Who is joining forces?"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_tab_journey.html:9
+#: apps/journeys/templates/advocate_europe_journeys/journey_entry_form.html:15
+msgid "New entry"
+msgstr "New entry"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_tab_journey.html:19
+#: cms/blog/templates/cms_blog/blog_index_page.html:71
+#: cms/blog/templates/cms_blog/blog_page.html:53
+#: cms/blog/templates/cms_blog/includes/blog_index_featured_item.html:30
+msgid "on"
+msgstr "on"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_tab_journey.html:30
+msgid "No entries yet"
+msgstr "No entries yet"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_watch_btns.html:15
+#: cms/home/templates/cms_home/blocks/blog_block.html:48
+msgid "More"
+msgstr "More"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_watch_btns.html:19
+msgid "edit ideasketch"
+msgstr "edit ideasketch"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_watch_btns.html:21
+msgid "edit proposal"
+msgstr "edit proposal"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_watch_btns.html:24
+msgid "add full proposal"
+msgstr "add full proposal"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_watch_btns.html:34
+msgid "Share"
+msgstr "Share"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_watch_btns.html:38
+msgid "Share on Twitter"
+msgstr "Share on Twitter"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_watch_btns.html:41
+msgid "Share on Facebook"
+msgstr "Share on Facebook"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_watch_btns.html:44
+msgid "Share on Google+"
+msgstr "Share on Google+"
+
+#: apps/ideas/templates/advocate_europe_ideas/includes/idea_detail_watch_btns.html:59
+msgid "Watch"
+msgstr "Watch"
+
+#: apps/ideas/views.py:100 apps/ideas/views.py:264
+msgid ""
+"As soon as you have submitted your application, it will be published online "
+"in the idea space."
+msgstr ""
+"As soon as you have submitted your application, it will be published online "
+"in the idea space."
+
+#: apps/ideas/views.py:102
+msgid "Submit your idea"
+msgstr "Submit your idea"
+
+#: apps/ideas/views.py:156
+msgid "Idea Sketch saved"
+msgstr "Idea Sketch saved"
+
+#: apps/ideas/views.py:158
+msgid "Update Idea Sketch"
+msgstr "Update Idea Sketch"
+
+#: apps/ideas/views.py:187
+msgid "Idea pitch"
+msgstr "Idea pitch"
+
+#: apps/ideas/views.py:189
+msgid "Where will your idea take place?"
+msgstr "Where will your idea take place?"
+
+#: apps/ideas/views.py:191
+msgid "Why does Europe need your idea?"
+msgstr "Why does Europe need your idea?"
+
+#: apps/ideas/views.py:193
+msgid "What is your impact?"
+msgstr "What is your impact?"
+
+#: apps/ideas/views.py:194
+msgid "How do you get there?"
+msgstr "How do you get there?"
+
+#: apps/ideas/views.py:195
+msgid "What is your story?"
+msgstr "What is your story?"
+
+#: apps/ideas/views.py:196
+msgid "Who are you doing it for?"
+msgstr "Who are you doing it for?"
+
+#: apps/ideas/views.py:206
+msgid "What do you need from the Advocate Europe community?"
+msgstr "What do you need from the Advocate Europe community?"
+
+#: apps/ideas/views.py:212
+msgid "Total budget"
+msgstr "Total budget"
+
+#: apps/ideas/views.py:215
+msgid "Funding granted from Advocate Europe"
+msgstr "Funding granted from Advocate Europe"
+
+#: apps/ideas/views.py:267
+msgid "Submit your idea!"
+msgstr "Submit your idea!"
+
+#: apps/ideas/views.py:345
+msgid "Proposal saved"
+msgstr "Proposal saved"
+
+#: apps/ideas/views.py:347
+msgid "Update proposal"
+msgstr "Update proposal"
+
+#: apps/invites/templates/advocate_europe_invites/invite_404.html:4
+#: apps/invites/templates/advocate_europe_invites/invite_base.html:4
+msgid "Invitation to collaborate"
+msgstr "Invitation to collaborate"
+
+#: apps/invites/templates/advocate_europe_invites/invite_404.html:10
+msgid " Your invitation is not valid. "
+msgstr " Your invitation is not valid. "
+
+#: apps/invites/templates/advocate_europe_invites/invite_404.html:12
+msgid ""
+"You either already accepted or declined the invitation or you were uninvited."
+msgstr ""
+"You either already accepted or declined the invitation or you were uninvited."
+
+#: apps/invites/templates/advocate_europe_invites/invite_base.html:10
+#, python-format
+msgid " Do you want to collaborate on \"%(object)s\"?"
+msgstr " Do you want to collaborate on \"%(object)s\"?"
+
+#: apps/invites/templates/advocate_europe_invites/invite_base.html:13
+msgid ""
+"If you accept you will be able to edit the idea and appear as a team member "
+"in the proposal. You can edit the text altogether until the application "
+"deadline."
+msgstr ""
+"If you accept you will be able to edit the idea and appear as a team member "
+"in the proposal. You can edit the text altogether until the application "
+"deadline."
+
+#: apps/invites/templates/advocate_europe_invites/invite_detail.html:4
+msgid "Proceed to login"
+msgstr "Proceed to login"
+
+#: apps/invites/templates/advocate_europe_invites/invite_form.html:6
+msgid "Accept"
+msgstr "Accept"
+
+#: apps/invites/templates/advocate_europe_invites/invite_form.html:7
+msgid "Decline"
+msgstr "Decline"
+
+#: apps/journeys/models.py:11
+msgid ""
+"To add content from Vimeo, Youtube, Facebook, flickr, soundcloud or "
+"instagram just paste the url into the text."
+msgstr ""
+"To add content from Vimeo, Youtube, Facebook, flickr, soundcloud or "
+"instagram just paste the url into the text."
+
+#: apps/journeys/models.py:28
+msgid "Road to impact"
+msgstr "Road to impact"
+
+#: apps/journeys/models.py:29
+msgid "Heroines and heroes"
+msgstr "Heroines and heroes"
+
+#: apps/journeys/models.py:30
+msgid "Impact Story"
+msgstr "Impact Story"
+
+#: apps/journeys/models.py:31
+msgid "Take this idea!"
+msgstr "Take this idea!"
+
+#: apps/journeys/models.py:32
+msgid "Success"
+msgstr "Success"
+
+#: apps/journeys/models.py:33
+msgid "Failing forward"
+msgstr "Failing forward"
+
+#: apps/journeys/models.py:34
+msgid "Join forces!"
+msgstr "Join forces!"
+
+#: apps/journeys/models.py:35
+msgid "Anything else?"
+msgstr "Anything else?"
+
+#: apps/journeys/templates/advocate_europe_journeys/journey_entry_form.html:4
+msgid "journey entry"
+msgstr "journey entry"
+
+#: apps/journeys/templates/advocate_europe_journeys/journey_entry_form.html:18
+msgid "Update entry"
+msgstr "Update entry"
+
+#: apps/journeys/views.py:53
+msgid "Your Journey entry has been deleted"
+msgstr "Your Journey entry has been deleted"
+
+#: apps/notifications/templates/admin/notify_followers_confirm.html:6
+msgid "Home"
+msgstr "Home"
+
+#: apps/notifications/templates/admin/notify_followers_confirm.html:9
+msgid "Send notification"
+msgstr "Send notification"
+
+#: apps/users/__init__.py:8
 msgid ""
 "Enter a valid username. This value may contain only letters, digits, spaces "
 "and @/./+/-/_ characters. It must start with a digit or a letter."
 msgstr ""
+"Enter a valid username. This value may contain only letters, digits, spaces "
+"and @/./+/-/_ characters. It must start with a digit or a letter."
 
 #: apps/users/admin.py:10
 msgid "Permissions"
-msgstr ""
+msgstr "Permissions"
 
-#: apps/users/admin.py:11
+#: apps/users/admin.py:15
 msgid "Important dates"
-msgstr ""
+msgstr "Important dates"
 
-#: apps/users/models.py:12
+#: apps/users/admin.py:16
+msgid "Profile data"
+msgstr "Profile data"
+
+#: apps/users/filters.py:70
+msgid "Submitted"
+msgstr "Submitted"
+
+#: apps/users/filters.py:71
+msgid "Watching"
+msgstr "Watching"
+
+#: apps/users/filters.py:72
+msgid "Supporting"
+msgstr "Supporting"
+
+#: apps/users/filters.py:84
+msgid "Newest"
+msgstr "Newest"
+
+#: apps/users/forms.py:12
+msgid "I accept the terms of use."
+msgstr "I accept the terms of use."
+
+#: apps/users/forms.py:29
+#: apps/users/templates/advocate_europe_users/base_accounts_settings_form.html:15
+msgid "Your Profile"
+msgstr "Your Profile"
+
+#: apps/users/forms.py:35
+msgid "Social Media"
+msgstr "Social Media"
+
+#: apps/users/forms.py:66
+#: apps/users/templates/advocate_europe_users/base_accounts_settings_form.html:47
+msgid "Newsletter & Notifications"
+msgstr "Newsletter & Notifications"
+
+#: apps/users/models.py:19
 msgid "username"
-msgstr ""
+msgstr "username"
 
-#: apps/users/models.py:16
+#: apps/users/models.py:23
 msgid ""
 "Required. 60 characters or fewer. Letters, digits, spaces and @/./+/-/_ only."
 msgstr ""
-
-#: apps/users/models.py:22
-msgid "A user with that username already exists."
-msgstr ""
-
-#: apps/users/models.py:26
-msgid "email address"
-msgstr ""
+"Required. 60 characters or fewer. Letters, digits, spaces and @/./+/-/_ only."
 
 #: apps/users/models.py:29
-msgid "A user with that email address already exists."
-msgstr ""
+msgid "A user with that username already exists."
+msgstr "A user with that username already exists."
 
 #: apps/users/models.py:33
-msgid "staff status"
-msgstr ""
+msgid "email address"
+msgstr "email address"
 
 #: apps/users/models.py:36
-msgid "Designates whether the user can log into this admin site."
-msgstr ""
+msgid "A user with that email address already exists."
+msgstr "A user with that email address already exists."
 
 #: apps/users/models.py:40
-msgid "active"
-msgstr ""
+msgid "staff status"
+msgstr "staff status"
 
 #: apps/users/models.py:43
+msgid "Designates whether the user can log into this admin site."
+msgstr "Designates whether the user can log into this admin site."
+
+#: apps/users/models.py:47
+msgid "active"
+msgstr "active"
+
+#: apps/users/models.py:50
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
 
-#: apps/users/templates/advocate_europe_users/indicator_menu.html.py:10
+#: apps/users/models.py:58
+msgid "Profile picture"
+msgstr "Profile picture"
+
+#: apps/users/models.py:59
+msgid ""
+"Please upload a squared image, at least 340x340 px. Allowed formats are jpg, "
+"gif and png."
+msgstr ""
+"Please upload a squared image, at least 340x340 px. Allowed formats are jpg, "
+"gif and png."
+
+#: apps/users/models.py:72
+msgid "Your interest in Europe"
+msgstr "Your interest in Europe"
+
+#: apps/users/models.py:73
+msgid ""
+"Why do you care about Europe? Where do you try to make a change? (max. 200 "
+"characters)"
+msgstr ""
+"Why do you care about Europe? Where do you try to make a change? (max. 200 "
+"characters)"
+
+#: apps/users/models.py:81
+msgid "Twitter name"
+msgstr "Twitter name"
+
+#: apps/users/models.py:87
+msgid "Facebook name"
+msgstr "Facebook name"
+
+#: apps/users/models.py:93
+msgid "Instagram name"
+msgstr "Instagram name"
+
+#: apps/users/models.py:99
+msgid "Plase add either https:// or http:// to the front of your URL."
+msgstr "Plase add either https:// or http:// to the front of your URL."
+
+#: apps/users/models.py:104
+msgid "my own ideas and ideas that I'm watching"
+msgstr "my own ideas and ideas that I'm watching"
+
+#: apps/users/models.py:109
+msgid "Send me Advocate Europe news."
+msgstr "Send me Advocate Europe news."
+
+#: apps/users/templates/advocate_europe_users/base_accounts_settings_form.html:9
+msgid "Account settings"
+msgstr "Account settings"
+
+#: apps/users/templates/advocate_europe_users/base_accounts_settings_form.html:23
+#: advocate_europe/templates/account/password_change.html:5
+#: advocate_europe/templates/account/password_change.html:43
+#: advocate_europe/templates/account/password_set.html:5
+#: advocate_europe/templates/account/password_set.html:40
+msgid "Change Password"
+msgstr "Change Password"
+
+#: apps/users/templates/advocate_europe_users/base_accounts_settings_form.html:25
+msgid "Set Password"
+msgstr "Set Password"
+
+#: apps/users/templates/advocate_europe_users/base_accounts_settings_form.html:33
+msgid "Mail adresses"
+msgstr "Mail adresses"
+
+#: apps/users/templates/advocate_europe_users/base_accounts_settings_form.html:40
+msgid "Account Connections"
+msgstr "Account Connections"
+
+#: apps/users/templates/advocate_europe_users/includes/activity_list.html:14
+#, python-format
+msgid ""
+"\n"
+"            <a href=\"%(url)s\">%(name)s</a>\n"
+"            commented: %(comment)s\n"
+"            "
+msgstr ""
+"\n"
+"            <a href=\"%(url)s\">%(name)s</a>\n"
+"            commented: %(comment)s\n"
+"            "
+
+#: apps/users/templates/advocate_europe_users/includes/activity_list.html:20
+#, python-format
+msgid ""
+"\n"
+"            <a href=\"%(url)s\">%(name)s</a>\n"
+"            updated comment: %(comment)s\n"
+"            "
+msgstr ""
+"\n"
+"            <a href=\"%(url)s\">%(name)s</a>\n"
+"            updated comment: %(comment)s\n"
+"            "
+
+#: apps/users/templates/advocate_europe_users/includes/activity_list.html:26
+#: apps/users/templates/advocate_europe_users/includes/activity_list.html:54
+#, python-format
+msgid ""
+"\n"
+"            <a href=\"%(url)s\">%(name)s</a>\n"
+"            added a new %(item)s\n"
+"            <a href=\"%(item_url)s\">%(item_title)s</a>\n"
+"            "
+msgstr ""
+"\n"
+"            <a href=\"%(url)s\">%(name)s</a>\n"
+"            added a new %(item)s\n"
+"            <a href=\"%(item_url)s\">%(item_title)s</a>\n"
+"            "
+
+#: apps/users/templates/advocate_europe_users/includes/activity_list.html:33
+#, python-format
+msgid ""
+"\n"
+"            <a href=\"%(url)s\">%(name)s</a>\n"
+"            updated the %(item)s\n"
+"            <a href=\"%(item_url)s\">%(item_title)s</a>\n"
+"            "
+msgstr ""
+"\n"
+"            <a href=\"%(url)s\">%(name)s</a>\n"
+"            updated the %(item)s\n"
+"            <a href=\"%(item_url)s\">%(item_title)s</a>\n"
+"            "
+
+#: apps/users/templates/advocate_europe_users/includes/activity_list.html:40
+#, python-format
+msgid ""
+"\n"
+"            <a href=\"%(url)s\">%(name)s</a>\n"
+"            added new blog entry:\n"
+"            <a href=\"%(item_url)s\">%(item)s</a>\n"
+"            "
+msgstr ""
+"\n"
+"            <a href=\"%(url)s\">%(name)s</a>\n"
+"            added new blog entry:\n"
+"            <a href=\"%(item_url)s\">%(item)s</a>\n"
+"            "
+
+#: apps/users/templates/advocate_europe_users/includes/activity_list.html:47
+msgid "New participation started"
+msgstr "New participation started"
+
+#: apps/users/templates/advocate_europe_users/includes/activity_list.html:50
+msgid "Participation phase will end soon:"
+msgstr "Participation phase will end soon:"
+
+#: apps/users/templates/advocate_europe_users/includes/activity_list.html:61
+#, python-format
+msgid ""
+"\n"
+"                <a href=\"%(url)s\">%(name)s</a>\n"
+"                now watches %(item)s\n"
+"                <a href=\"%(item_url)s\">\"%(item_title)s\"</a>\n"
+"                "
+msgstr ""
+"\n"
+"                <a href=\"%(url)s\">%(name)s</a>\n"
+"                now watches %(item)s\n"
+"                <a href=\"%(item_url)s\">\"%(item_title)s\"</a>\n"
+"                "
+
+#: apps/users/templates/advocate_europe_users/includes/activity_list.html:72
+#, python-format
+msgid ""
+"\n"
+"                on <a href=\"%(url)s\">%(name)s</a>\n"
+"                "
+msgstr ""
+"\n"
+"                on <a href=\"%(url)s\">%(name)s</a>\n"
+"                "
+
+#: apps/users/templates/advocate_europe_users/includes/activity_list.html:78
+#, python-format
+msgid ""
+"\n"
+"                to <a href=\"%(idea_list)s?project=%(project_pk)s\">"
+"%(project)s</a>\n"
+"                "
+msgstr ""
+"\n"
+"                to <a href=\"%(idea_list)s?project=%(project_pk)s\">"
+"%(project)s</a>\n"
+"                "
+
+#: apps/users/templates/advocate_europe_users/includes/activity_list.html:83
+#, python-format
+msgid ""
+"\n"
+"                to the idea <a href=\"%(url)s\">%(idea)s</a>\n"
+"                "
+msgstr ""
+"\n"
+"                to the idea <a href=\"%(url)s\">%(idea)s</a>\n"
+"                "
+
+#: apps/users/templates/advocate_europe_users/indicator_menu.html:10
 msgid "toggle user menu"
-msgstr ""
+msgstr "toggle user menu"
 
-#: apps/users/templates/advocate_europe_users/indicator_menu.html.py:16
+#: apps/users/templates/advocate_europe_users/indicator_menu.html:17
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
-#: apps/users/templates/advocate_europe_users/indicator_menu.html.py:23
+#: apps/users/templates/advocate_europe_users/indicator_menu.html:21
+msgid "Account Settings"
+msgstr "Account Settings"
+
+#: apps/users/templates/advocate_europe_users/indicator_menu.html:29
+msgid "add idea sketch"
+msgstr "add idea sketch"
+
+#: apps/users/templates/advocate_europe_users/indicator_menu.html:39
 msgid "logout"
-msgstr ""
+msgstr "logout"
 
-#: apps/users/templates/advocate_europe_users/indicator_menu.html.py:29
-msgid "Login / Register"
-msgstr ""
-
-#: apps/users/templates/advocate_europe_users/indicator_menu.html.py:33
-#: a4_advocate_europe/templates/account/login.html.py:15
-#: a4_advocate_europe/templates/account/login.html.py:57
-#: a4_advocate_europe/templates/account/signup.html.py:11
+#: apps/users/templates/advocate_europe_users/indicator_menu.html:49
+#: advocate_europe/templates/account/advocate_europe/includes/header.html:8
+#: advocate_europe/templates/account/login.html:46
 msgid "login"
-msgstr ""
+msgstr "login"
 
-#: apps/users/templates/advocate_europe_users/indicator_menu.html.py:36
-#: a4_advocate_europe/templates/account/login.html.py:16
-#: a4_advocate_europe/templates/account/signup.html.py:12
-#: a4_advocate_europe/templates/account/signup.html.py:88
+#: apps/users/templates/advocate_europe_users/indicator_menu.html:50
+#: advocate_europe/templates/account/advocate_europe/includes/header.html:11
+#: advocate_europe/templates/account/signup.html:76
 msgid "register"
-msgstr ""
+msgstr "register"
 
-#: cms/home/templates/cms_home/includes/home_hero_unit.html.py:23
+#: apps/users/templates/advocate_europe_users/notifications_form.html:5
+msgid "Newsletters & Notifications"
+msgstr "Newsletters & Notifications"
+
+#: apps/users/templates/advocate_europe_users/profile.html:5
+msgid "Profile"
+msgstr "Profile"
+
+#: apps/users/templates/advocate_europe_users/profile.html:37
+msgid "Info"
+msgstr "Info"
+
+#: apps/users/templates/advocate_europe_users/profile.html:42
+msgid "Ideas"
+msgstr "Ideas"
+
+#: apps/users/templates/advocate_europe_users/profile.html:47
+msgid "Activity"
+msgstr "Activity"
+
+#: apps/users/templates/advocate_europe_users/profile_form.html:5
+msgid "Edit Profile"
+msgstr "Edit Profile"
+
+#: apps/users/views.py:54
+msgid "Your profile has been updated"
+msgstr "Your profile has been updated"
+
+#: apps/users/views.py:73
+msgid "Your notification settings have been updated"
+msgstr "Your notification settings have been updated"
+
+#: apps/wizards/mixins.py:24
+msgid "ManagementForm data is missing or has been tampered."
+msgstr "ManagementForm data is missing or has been tampered."
+
+#: cms/blog/templates/cms_blog/blog_index_page.html:80
+msgid "Sorry, no blog entries exist for the chosen category."
+msgstr "Sorry, no blog entries exist for the chosen category."
+
+#: cms/blog/templates/cms_blog/blog_page.html:42
+msgid "To overview"
+msgstr "To overview"
+
+#: cms/blog/templates/cms_blog/blog_page.html:53
+msgid "by"
+msgstr "by"
+
+#: cms/blog/templates/cms_blog/includes/blog_index_category_buttons.html:6
+msgid "Remove category filter"
+msgstr "Remove category filter"
+
+#: cms/blog/templates/cms_blog/includes/blog_index_category_buttons.html:11
+msgid "Filter for category"
+msgstr "Filter for category"
+
+#: cms/contrib/helpers.py:7
+msgid "Please look {}here{} for more information."
+msgstr "Please look {}here{} for more information."
+
+#: cms/home/blocks.py:24
+msgid "External Link"
+msgstr "External Link"
+
+#: cms/home/blocks.py:25
+msgid ""
+"The external link overwrites the link to a local page. It also requires a "
+"link text."
+msgstr ""
+"The external link overwrites the link to a local page. It also requires a "
+"link text."
+
+#: cms/home/blocks.py:31
+msgid ""
+"Text to be displayed on the link-button.Should be quite short! If not given, "
+"the title of the linked page will be used."
+msgstr ""
+"Text to be displayed on the link-button.Should be quite short! If not given, "
+"the title of the linked page will be used."
+
+#: cms/home/blocks.py:50
+msgid "External links require a link text."
+msgstr "External links require a link text."
+
+#: cms/home/templates/cms_home/includes/home_hero_unit.html:26
 msgid "video"
-msgstr ""
+msgstr "video"
 
-#: cms/home/templates/cms_home/includes/home_hero_unit.html.py:26
+#: cms/home/templates/cms_home/includes/home_hero_unit.html:29
 msgid "close"
-msgstr ""
+msgstr "close"
 
-#: a4_advocate_europe/settings/base.py:175
+#: advocate_europe/settings/base.py:262
 msgid "English"
-msgstr ""
+msgstr "English"
 
-#: a4_advocate_europe/settings/base.py:176
+#: advocate_europe/settings/base.py:263
 msgid "German"
-msgstr ""
+msgstr "German"
 
-#: a4_advocate_europe/templates/account/account_inactive.html.py:5
-#: a4_advocate_europe/templates/account/account_inactive.html.py:9
+#: advocate_europe/templates/403.html:6
+msgid "You are not allowed to access this page."
+msgstr "You are not allowed to access this page."
+
+#: advocate_europe/templates/404.html:6
+msgid "This page couldn’t be found."
+msgstr "This page couldn’t be found."
+
+#: advocate_europe/templates/500.html:9
+#: advocate_europe/templates/includes/top_menu.html:4
+msgid "main menu"
+msgstr "main menu"
+
+#: advocate_europe/templates/500.html:30
+#: advocate_europe/templates/base_errors.html:16
+msgid "Sorry, something went wrong."
+msgstr "Sorry, something went wrong."
+
+#: advocate_europe/templates/500.html:31
+msgid "Internal server error."
+msgstr "Internal server error."
+
+#: advocate_europe/templates/500.html:32
+#: advocate_europe/templates/base_errors.html:18
+msgid "Back to Advocate Europe"
+msgstr "Back to Advocate Europe"
+
+#: advocate_europe/templates/account/account_inactive.html:5
+#: advocate_europe/templates/account/account_inactive.html:9
 msgid "Account Inactive"
-msgstr ""
+msgstr "Account Inactive"
 
-#: a4_advocate_europe/templates/account/account_inactive.html.py:10
+#: advocate_europe/templates/account/account_inactive.html:10
 msgid "This account is inactive."
-msgstr ""
+msgstr "This account is inactive."
 
-#: a4_advocate_europe/templates/account/email.html.py:6
-#: a4_advocate_europe/templates/account/email.html.py:10
+#: advocate_europe/templates/account/advocate_europe/base_form.html:18
+msgid "or use your social media account"
+msgstr "or use your social media account"
+
+#: advocate_europe/templates/account/email.html:5
 msgid "E-mail Addresses"
-msgstr ""
+msgstr "E-mail Addresses"
 
-#: a4_advocate_europe/templates/account/email.html.py:22
+#: advocate_europe/templates/account/email.html:12
+msgid "E-mail Adresses"
+msgstr "E-mail Adresses"
+
+#: advocate_europe/templates/account/email.html:21
 msgid "Primary"
-msgstr ""
+msgstr "Primary"
 
-#: a4_advocate_europe/templates/account/email.html.py:25
+#: advocate_europe/templates/account/email.html:24
 msgid "Verified"
-msgstr ""
+msgstr "Verified"
 
-#: a4_advocate_europe/templates/account/email.html.py:27
+#: advocate_europe/templates/account/email.html:26
 msgid "Unverified"
-msgstr ""
+msgstr "Unverified"
 
-#: a4_advocate_europe/templates/account/email.html.py:32
+#: advocate_europe/templates/account/email.html:31
 msgid "Make Primary"
-msgstr ""
+msgstr "Make Primary"
 
-#: a4_advocate_europe/templates/account/email.html.py:33
+#: advocate_europe/templates/account/email.html:32
 msgid "Re-send Verification"
-msgstr ""
+msgstr "Re-send Verification"
 
-#: a4_advocate_europe/templates/account/email.html.py:34
+#: advocate_europe/templates/account/email.html:33
+#: advocate_europe/templates/socialaccount/connections.html:35
 msgid "Remove"
-msgstr ""
+msgstr "Remove"
 
-#: a4_advocate_europe/templates/account/email.html.py:48
-msgid "Add another Email"
-msgstr ""
+#: advocate_europe/templates/account/email.html:48
+msgid "Add another E-mail"
+msgstr "Add another E-mail"
 
-#: a4_advocate_europe/templates/account/email.html.py:52
-msgid "Add Email"
-msgstr ""
+#: advocate_europe/templates/account/email.html:52
+msgid "Add E-mail"
+msgstr "Add E-mail"
 
-#: a4_advocate_europe/templates/account/email.html.py:61
+#: advocate_europe/templates/account/email.html:60
 msgid "Do you really want to remove the selected e-mail address?"
-msgstr ""
+msgstr "Do you really want to remove the selected e-mail address?"
 
-#: a4_advocate_europe/templates/account/email_confirm.html.py:6
+#: advocate_europe/templates/account/email_confirm.html:6
 msgid "Activate your account"
-msgstr ""
+msgstr "Activate your account"
 
-#: a4_advocate_europe/templates/account/email_confirm.html.py:14
-#: a4_advocate_europe/templates/account/email_confirm.html.py:26
+#: advocate_europe/templates/account/email_confirm.html:14
+#: advocate_europe/templates/account/email_confirm.html:26
 msgid "Welcome to Advocate Europe!"
-msgstr ""
+msgstr "Welcome to Advocate Europe!"
 
-#: a4_advocate_europe/templates/account/email_confirm.html.py:15
+#: advocate_europe/templates/account/email_confirm.html:15
 #, python-format
 msgid ""
 "Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
 "address for user %(user_display)s."
 msgstr ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
+"address for user %(user_display)s."
 
-#: a4_advocate_europe/templates/account/email_confirm.html.py:23
+#: advocate_europe/templates/account/email_confirm.html:23
 msgid "Activate account"
-msgstr ""
+msgstr "Activate account"
 
-#: a4_advocate_europe/templates/account/email_confirm.html.py:28
+#: advocate_europe/templates/account/email_confirm.html:28
 #, python-format
 msgid ""
 "This e-mail confirmation link expired or is invalid. Please <a href="
 "\"%(email_url)s\">issue a new e-mail confirmation request</a>."
 msgstr ""
+"This e-mail confirmation link expired or is invalid. Please <a href="
+"\"%(email_url)s\">issue a new e-mail confirmation request</a>."
 
-#: a4_advocate_europe/templates/account/login.html.py:8
+#: advocate_europe/templates/account/login.html:5
 msgid "Login"
-msgstr ""
+msgstr "Login"
 
-#: a4_advocate_europe/templates/account/login.html.py:35
-#: a4_advocate_europe/templates/account/password_reset.html.py:24
-msgid "Email"
-msgstr ""
+#: advocate_europe/templates/account/login.html:24
+msgid "E-mail"
+msgstr "E-mail"
 
-#: a4_advocate_europe/templates/account/login.html.py:44
-#: a4_advocate_europe/templates/account/password_change.html.py:27
-#: a4_advocate_europe/templates/account/password_change.html.py:34
-#: a4_advocate_europe/templates/account/password_reset_from_key.html.py:33
+#: advocate_europe/templates/account/login.html:33
+#: advocate_europe/templates/account/password_reset_from_key.html:34
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
-#: a4_advocate_europe/templates/account/login.html.py:54
+#: advocate_europe/templates/account/login.html:42
 msgid "reset password"
-msgstr ""
+msgstr "reset password"
 
-#: a4_advocate_europe/templates/account/login.html.py:62
-#: a4_advocate_europe/templates/account/signup.html.py:94
-msgid "Login with social account"
-msgstr ""
+#: advocate_europe/templates/account/password_change.html:13
+#: advocate_europe/templates/account/password_reset_from_key.html:48
+#: advocate_europe/templates/account/password_reset_from_key_done.html:5
+#: advocate_europe/templates/account/password_reset_from_key_done.html:9
+msgid "Change password"
+msgstr "Change password"
 
-#: a4_advocate_europe/templates/account/login.html.py:72
-#, python-format
-msgid "You are already logged in as %(user_display)s."
-msgstr ""
+#: advocate_europe/templates/account/password_change.html:25
+msgid "Old password"
+msgstr "Old password"
 
-#: a4_advocate_europe/templates/account/password_change.html.py:6
-#: a4_advocate_europe/templates/account/password_change.html.py:45
-msgid "Change Password"
-msgstr ""
+#: advocate_europe/templates/account/password_change.html:32
+#: advocate_europe/templates/account/password_set.html:29
+msgid "New password"
+msgstr "New password"
 
-#: a4_advocate_europe/templates/account/password_change.html.py:10
-msgid "Change your password"
-msgstr ""
+#: advocate_europe/templates/account/password_change.html:39
+#: advocate_europe/templates/account/password_set.html:36
+msgid "Repeat new password"
+msgstr "Repeat new password"
 
-#: a4_advocate_europe/templates/account/password_change.html.py:41
-#: a4_advocate_europe/templates/account/password_reset_from_key.html.py:39
-msgid "Repeat password"
-msgstr ""
-
-#: a4_advocate_europe/templates/account/password_reset.html.py:7
-#: a4_advocate_europe/templates/account/password_reset_from_key.html.py:6
+#: advocate_europe/templates/account/password_reset.html:7
+#: advocate_europe/templates/account/password_reset.html:12
+#: advocate_europe/templates/account/password_reset_from_key.html:6
+#: advocate_europe/templates/account/password_reset_from_key.html:19
 msgid "Reset your password"
-msgstr ""
+msgstr "Reset your password"
 
-#: a4_advocate_europe/templates/account/password_reset.html.py:12
+#: advocate_europe/templates/account/password_reset.html:13
 msgid ""
 "Enter your e-mail address below, and we'll send you an e-mail allowing you "
 "to reset your password."
 msgstr ""
+"Enter your e-mail address below, and we'll send you an e-mail allowing you "
+"to reset your password."
 
-#: a4_advocate_europe/templates/account/password_reset.html.py:28
+#: advocate_europe/templates/account/password_reset.html:29
 msgid "Reset"
-msgstr ""
+msgstr "Reset"
 
-#: a4_advocate_europe/templates/account/password_reset_done.html.py:6
-#: a4_advocate_europe/templates/account/password_reset_done.html.py:10
+#: advocate_europe/templates/account/password_reset_done.html:6
+#: advocate_europe/templates/account/password_reset_done.html:10
 msgid "Password reset"
-msgstr ""
+msgstr "Password reset"
 
-#: a4_advocate_europe/templates/account/password_reset_done.html.py:11
+#: advocate_europe/templates/account/password_reset_done.html:11
 msgid ""
 "We have sent you an e-mail. Please contact us if you do not receive it "
 "within a few minutes."
 msgstr ""
+"We have sent you an e-mail. Please contact us if you do not receive it "
+"within a few minutes."
 
-#: a4_advocate_europe/templates/account/password_reset_from_key.html.py:11
+#: advocate_europe/templates/account/password_reset_from_key.html:11
 msgid "Bad Token"
-msgstr ""
+msgstr "Bad Token"
 
-#: a4_advocate_europe/templates/account/password_reset_from_key.html.py:14
+#: advocate_europe/templates/account/password_reset_from_key.html:14
 #, python-format
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
 "a>."
 msgstr ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
+"a>."
 
-#: a4_advocate_europe/templates/account/password_reset_from_key.html.py:44
+#: advocate_europe/templates/account/password_reset_from_key.html:40
+msgid "Repeat password"
+msgstr "Repeat password"
+
+#: advocate_europe/templates/account/password_reset_from_key.html:45
 msgid "Reset password"
-msgstr ""
+msgstr "Reset password"
 
-#: a4_advocate_europe/templates/account/password_reset_from_key.html.py:47
-#: a4_advocate_europe/templates/account/password_reset_from_key_done.html.py:5
-#: a4_advocate_europe/templates/account/password_reset_from_key_done.html.py:9
-#: a4_advocate_europe/templates/account/password_set.html.py:5
-#: a4_advocate_europe/templates/account/password_set.html.py:9
-msgid "Change password"
-msgstr ""
-
-#: a4_advocate_europe/templates/account/password_reset_from_key.html.py:48
-#: a4_advocate_europe/templates/account/password_reset_from_key_done.html.py:10
-#: a4_advocate_europe/templates/account/password_set.html.py:10
+#: advocate_europe/templates/account/password_reset_from_key.html:49
+#: advocate_europe/templates/account/password_reset_from_key_done.html:10
 msgid "Your password is now changed."
-msgstr ""
+msgstr "Your password is now changed."
 
-#: a4_advocate_europe/templates/account/signup.html.py:5
-msgid "Register an account"
-msgstr ""
+#: advocate_europe/templates/account/password_set.html:13
+msgid "set password"
+msgstr "set password"
 
-#: a4_advocate_europe/templates/account/signup.html.py:81
-#, python-format
+#: advocate_europe/templates/account/password_set.html:16
 msgid ""
-"\n"
-"                I accept the <a href=\"%(terms_of_use_url)s\" target=\"blank"
-"\">terms of use</a>.\n"
-"                "
+"You logged in with a social account. If you want to be able to also login "
+"with email and password, you can set a password for your advocate europe "
+"account here."
 msgstr ""
+"You logged in with a social account. If you want to be able to also login "
+"with email and password, you can set a password for your advocate europe "
+"account here."
 
-#: a4_advocate_europe/templates/account/verification_sent.html.py:5
-#: a4_advocate_europe/templates/account/verification_sent.html.py:9
+#: advocate_europe/templates/account/signup.html:5
+msgid "Register an account"
+msgstr "Register an account"
+
+#: advocate_europe/templates/account/verification_sent.html:5
+#: advocate_europe/templates/account/verification_sent.html:9
 msgid "Verify Your E-mail Address"
-msgstr ""
+msgstr "Verify Your E-mail Address"
 
-#: a4_advocate_europe/templates/account/verification_sent.html.py:10
+#: advocate_europe/templates/account/verification_sent.html:10
 msgid ""
 "We have sent an e-mail to you for verification. Follow the link provided to "
 "finalize the signup process. Please contact us if you do not receive it "
 "within a few minutes."
 msgstr ""
+"We have sent an e-mail to you for verification. Follow the link provided to "
+"finalize the signup process. Please contact us if you do not receive it "
+"within a few minutes."
 
-#: a4_advocate_europe/templates/includes/top_menu.html.py:4
-msgid "main menu"
+#: advocate_europe/templates/formtools/wizard/wizard_form.html:52
+msgid "Back"
+msgstr "Back"
+
+#: advocate_europe/templates/formtools/wizard/wizard_form.html:60
+msgid "Continue"
+msgstr "Continue"
+
+#: advocate_europe/templates/formtools/wizard/wizard_form.html:64
+msgid "Almost finished!"
+msgstr "Almost finished!"
+
+#: advocate_europe/templates/formtools/wizard/wizard_form.html:67
+msgid ""
+"You and your team members can edit all the fields of your idea sketch until "
 msgstr ""
+"You and your team members can edit all the fields of your idea sketch until "
 
-#: a4_advocate_europe/templates/includes/top_menu.html.py:8
+#: advocate_europe/templates/includes/top_menu.html:16
 msgid "navigation on/off"
+msgstr "navigation on/off"
+
+#: advocate_europe/templates/socialaccount/connections.html:5
+#: advocate_europe/templates/socialaccount/connections.html:11
+msgid "Social Connections"
+msgstr "Social Connections"
+
+#: advocate_europe/templates/socialaccount/connections.html:13
+msgid ""
+"You can sign in to your account using any of the following third party\n"
+"                    accounts:"
 msgstr ""
+"You can sign in to your account using any of the following third party\n"
+"                    accounts:"
+
+#: advocate_europe/templates/socialaccount/connections.html:42
+msgid ""
+"You currently have no social network accounts connected to this account."
+msgstr ""
+"You currently have no social network accounts connected to this account."
+
+#: advocate_europe/templates/socialaccount/connections.html:45
+msgid "Add a 3rd Party Account"
+msgstr "Add a 3rd Party Account"
+
+#: advocate_europe/templates/socialaccount/snippets/provider_list.html:20
+#: advocate_europe/templates/socialaccount/snippets/provider_list.html:22
+msgid "Login with "
+msgstr "Login with "
+
+#~ msgid ""
+#~ "You selected 'other' as organisation status. Please provide more "
+#~ "information about your current status."
+#~ msgstr ""
+#~ "You selected 'other' as organisation status. Please provide more "
+#~ "information about your current status."
