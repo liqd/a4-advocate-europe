@@ -53,6 +53,7 @@
     "watch": "webpack --config ./webpack.dev.js --progress --colors --watch --mode development",
     "lint": "standard '{apps,cms,advocate_europe}/**/*.{js,jsx}' && stylelint 'advocate_europe/assets/scss/**/*.scss' --syntax scss"
   },
+  "browserslist": "last 3 versions, ie >= 11",
   "husky": {
     "hooks": {
       "pre-commit": "make lint"
