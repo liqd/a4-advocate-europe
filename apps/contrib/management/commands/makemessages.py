@@ -6,10 +6,7 @@ from django.core.management.commands import makemessages
 
 def get_module_dir(name):
     module = __import__(name)
-    if hasattr(module, '__file__'):
-        return path.dirname(module.__file__)
-    else:
-        return module.__path__._path[0]
+    return path.dirname(module.__file__)
 
 
 class Command(makemessages.Command):
