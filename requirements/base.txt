@@ -1,8 +1,10 @@
-git+git://github.com/liqd/adhocracy4.git@6888ecaf2a424c32cc5fb0230ff30868f4110fcc#egg=adhocracy4
+# A4
+git+git://github.com/liqd/adhocracy4.git@449faea1a5#egg=adhocracy4
 
 # Additional requirements
 appdirs==1.4.3
-bcrypt==3.1.6
+bcrypt==3.1.7
+brotli==1.0.7
 django-crispy-forms==1.7.2
 django-cloudflare-push==0.2.0
 django-formtools==2.1
@@ -11,28 +13,29 @@ feedparser==5.2.1
 micawber==0.4.0
 packaging==19.0
 raven==6.10.0
-wagtail==2.5.1
-whitenoise==4.1.2
+wagtail==2.6.2
+whitenoise==4.1.4
 
 # Inherited a4-core requirements
 bleach==3.1.0
-Django==2.2.2 # pyup: <2.3
-django-allauth==0.39.1
-django-autoslug==1.9.4
+Django==2.2.6 # pyup: <2.3
+django-allauth==0.40.0
+django-autoslug==1.9.6
 django-background-tasks==1.2.0
 django-ckeditor==5.7.1
 django-countries==5.3.3
-django-filter==2.1.0
-django-multiselectfield==0.1.8
-django-widget-tweaks==1.4.3
-djangorestframework==3.9.4
+django-filter==2.2.0
+django-multiselectfield==0.1.9
+django-widget-tweaks==1.4.5
+djangorestframework==3.10.3
 easy-thumbnails==2.6
 html5lib==1.0.1
 jsonfield==2.0.2
+psycopg2-binary==2.8.3
 python-dateutil==2.8.0
 python-magic==0.4.15
-rules==2.0.1
-XlsxWriter==1.1.6
+rules==2.1
+XlsxWriter==1.2.1
 
 # django multiform (released version 0.1 was too old).
 # 2019-04: This is seriously outdated. We should maybe see if there's an alternative
