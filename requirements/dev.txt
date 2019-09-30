@@ -7,6 +7,6 @@ pytest==5.2.0
 pytest-django==3.5.1
 pytest-cov==2.7.1
 pytest-factoryboy==2.0.3
-Faker==1.0.4
+Faker==2.0.2
 django-debug-toolbar==1.11
 transifex-client==0.13.6
