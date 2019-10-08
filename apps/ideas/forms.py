@@ -125,10 +125,10 @@ class ApplicantSectionForm(BaseForm):
         if organisation_status and organisation_status == 'other':
             if not organisation_status_extra:
                 self.add_error('organisation_status_extra',
-                               _("You selected 'other' as "
-                                 "organisation status. "
-                                 "Please provide more information "
-                                 "about your current status."))
+                               ("You selected 'other' as "
+                                "organisation status. "
+                                "Please provide more information "
+                                "about your current status."))
 
     def __init__(self, *args, **kwargs):
         if 'end_date' in kwargs:
@@ -183,7 +183,7 @@ class PartnersSectionForm(BaseForm):
                     'partner_organisation_{}_website'.format(index),
                     'partner_organisation_{}_country'.format(index)
                 ) for index, heading in enumerate(self.accordions, 1)
-                ]
+            ]
         )
         return helper
 
@@ -397,7 +397,7 @@ class CommunitySectionEditForm(CoWorkersEmailsFormMixin, BaseForm):
                     label=COWORKERS_EDIT_TITLE,
                     choices=[
                         (
-                            'c:'+c.username,
+                            'c:' + c.username,
                             {
                                 'username': c.username,
                                 'avatar': c.avatar_or_fallback_url,
@@ -405,9 +405,9 @@ class CommunitySectionEditForm(CoWorkersEmailsFormMixin, BaseForm):
                                 'cta_unchecked': _('will be removed on save')
                             }
                         ) for c in co_workers
-                        ] + [
+                    ] + [
                         (
-                            'i:'+i.email,
+                            'i:' + i.email,
                             {
                                 'username': i.email,
                                 'avatar': self.fallback_avatar(i.email),
@@ -416,9 +416,9 @@ class CommunitySectionEditForm(CoWorkersEmailsFormMixin, BaseForm):
                                 'cta_unchecked': _('will be removed on save')
                             }
                         ) for i in invites
-                        ],
-                    initial=['c:'+c.username for c in co_workers] +
-                            ['i:'+i.email for i in invites],
+                    ],
+                    initial=['c:' + c.username for c in co_workers] +
+                            ['i:' + i.email for i in invites],
                     widget=forms.CheckboxSelectMultiple
                 )
                 self.fields.move_to_end('co_workers', last=False)

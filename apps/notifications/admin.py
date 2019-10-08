@@ -41,9 +41,7 @@ class NotifyMixin:
 
     @property
     def latest_module(self):
-        phase = phase_models.Phase.objects\
-                                 .past_and_active_phases()\
-                                 .last()
+        phase = phase_models.Phase.objects.past_and_active_phases().last()
         if phase:
             return phase.module
 

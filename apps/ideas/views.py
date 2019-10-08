@@ -128,7 +128,7 @@ class IdeaSketchCreateWizard(PermissionRequiredMixin,
             **{
                 field: value for field, value in data.items()
                 if field not in special_fields
-                }
+            }
         )
 
         for name, email in data['co_workers_emails']:

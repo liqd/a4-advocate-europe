@@ -84,8 +84,8 @@ if settings.DEBUG:
     import debug_toolbar
 
     urlpatterns = [
-                      url(r'^__debug__/', include(debug_toolbar.urls)),
-                  ] + urlpatterns
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
 
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
