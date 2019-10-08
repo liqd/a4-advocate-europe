@@ -38,10 +38,18 @@ def test_idea_add_rule(admin, user, module):
     assert rules.has_perm('advocate_europe_ideas.add_ideasketch',
                           admin,
                           module)
+
+
+@pytest.mark.django_db
+def test_idea_add_rule_idea_sketch_phase(user, module):
     with active_phase(module, phases.IdeaSketchPhase):
         assert rules.has_perm('advocate_europe_ideas.add_ideasketch',
                               user,
                               module)
+
+
+@pytest.mark.django_db
+def test_idea_add_rule_idea_community_rating_phase(user, module):
     with active_phase(module, phases.CommunityAwardRatingPhase):
         assert not rules.has_perm('advocate_europe_ideas.add_ideasketch',
                                   user,
