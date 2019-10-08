@@ -61,7 +61,7 @@ def test_submit_form_with_next(rf, test_edit_view):
         'next': '/form/1',
         'number': 'invalid_number'
     }
-    response = view(rf.post('/form/0',  data))
+    response = view(rf.post('/form/0', data))
     assert response.status_code == 200
     assert response.context_data['form'].errors
     assert response.context_data['form'].__class__ == form_classes[0]
@@ -70,14 +70,14 @@ def test_submit_form_with_next(rf, test_edit_view):
         'next': '/form/1',
         'number': '1'
     }
-    response = view(rf.post('/form/0',  data))
+    response = view(rf.post('/form/0', data))
     assert response.status_code == 302
     assert response['location'] == '/form/1'
 
     data = {
         'number': '1'
     }
-    response = view(rf.post('/form/0',  data))
+    response = view(rf.post('/form/0', data))
     assert response.status_code == 302
     assert response['location'] == '/form/0'
 

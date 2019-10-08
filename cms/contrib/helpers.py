@@ -20,8 +20,7 @@ def add_link_to_helptext(help_text, help_page_name, link_text=None):
             link_text = LINK_TEXT
         link_text = link_text \
             .format('<a href="' + url + '" target="_blank">', '</a>')
-        return '{} {}'.format(
-                help_text, mark_safe(link_text))
+        return '{} {}'.format(help_text, mark_safe(link_text))
 
     return help_text
 
