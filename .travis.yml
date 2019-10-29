@@ -1,28 +1,28 @@
 language: python
-dist: xenial
+dist: bionic
 python:
-  - "3.6"
+- '3.6'
 cache:
   pip: true
   directories:
-    - node_modules
+  - node_modules
 install:
-  - nvm install 8
-  - npm install
-  - npm run build
-  - pip install -r requirements/dev.txt
-  - pip install coveralls
+- nvm install 8
+- npm install
+- npm run build
+- pip install -r requirements/dev.txt
+- pip install coveralls
 script:
-  - python manage.py collectstatic > /dev/null
-  - py.test --cov
-  - python manage.py makemigrations --dry-run --check --noinput
+- python manage.py collectstatic > /dev/null
+- py.test --cov
+- python manage.py makemigrations --dry-run --check --noinput
 after_success:
-  - coveralls
+- coveralls
 deploy:
-  - provider: script
-    script: scripts/deploy.sh
-    on:
-      branch: master
+- provider: script
+  script: scripts/deploy.sh
+  on:
+    branch: master
 env:
   global:
-    secure: Uv859f1F+sRrCISFJUtWQcxFh935sV6wj1U5B86Pyd1/z8Azby2vNfo+imQMRtpg7HxVDTg0mOcawwEuQ/7D/BiUffPHMvg9KqunRs3ZjLeywK+aGSDhGSlDanPU13e3a3Y/iccxSRC3j9D7O6HX+kZ54c3q2/pDF0BR8/7aUdqER4SyKd6UrxJlwOso+IpjATx67DqHvOiAl4Y8ED+EHwWOL8I3ruJamj/2x4EL7vY1vRzQjJr/15SjghQTnM3bY3YNw9NQnFlEjroAzCa59B8PNjBu0v00uGaSG5N5VPp6VHsEIAcLvX0lmIrlXp+grCS+jH2WO8OMgTTl7ztl/vS1gJOAt8e179INaKDBfz1D3HzEY5EzK62dKVxWFHjfBzJiBwe74JiVNHtj+pCZH8ayDwk1cCPWWPO6NxW8yR0LtytHEamnPJEdP7hVAasafk60HIMr2cALD1aQthZ7RWFOp9pUQ0whxL/i/BqhkXdIfheEOgyAkztI07rPc8AU8OrqCuY0esh3VVBL/kg401qyzMXFhr0G4La8vcw5IO9bETaUO30tD+8wHyadCrmZ9qmcFFdGtspE1r1Tmre7SRNgjiZqt/eLXYAPY5WKUb8LLJRnBfcHsrwSaSkz2uT4quTLLs9tCRmyajP/j5gUftL8SQTDYdnmw4jsj6rexd8=
+    secure: Y5JfQMPHxfkKndOoOEyAhW2G5ixnBFkiMCrRWoPtY8pG94bLGgfNsdLrZLiPyC1z6jZ2ILVsSMIpsUkjSRleVLCWIdLGD3N03xAz0jgJsNu6IeGChieTSQyoH2uKd9ajHoGUda0EyX/yUATS4VgUh5AYFcfqzrRNKorN4jdLNnKrnIkaypbEoXN3zOE/xCIyVEJU5Ty25mfGTuGhM79p7xFTgOzHEAXKlDoOJz8qIwIGbQM0TAfM59AmbMuujUs9MNthoMiuM50Yc9D8au5G0r8lCAcpiCtjSjTvE0lWo+JMkpRZzspX4dKmPCRWn6HO4fF8n2VimN3fjol2QPxi0VZLN7PNZOM0VSS1TUZAjy5RDtk9JrMh4/xuCwMrE7JT+CmyKSYqy5oBJ0fI3jGifCUa55KY9+Gmmziy0J8FM7zwUkPVL+l+jYwn/qEMTM3RBEPkYSCwU4Q1AYGNMpUb3vNBkJgPzehXLPiyLqu8zg3tt2sY3/2bYdd3YYpv32r1hX0sOrzP4A07OrG6Czq7SAP/yOrfbPKxdmdeb+kZFZJ3RrbUaK/B2MqzbqatyIW4MRNY+lhK+4s7gi4b5VnDv9jtA1GuPlkEEmVirb/CLHxxKysGcDf0P5aKbV4bt/V9wtNVEoOqeBuOOE15HUUttf1g/jyLuNSuFn/qvX9DvqA=
